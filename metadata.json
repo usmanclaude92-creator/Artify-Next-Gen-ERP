@@ -1,0 +1,6 @@
+{
+  "name": "Artify ERP — Future Generation Enterprise System",
+  "description": "Enterprise ERP platform featuring Module 01 System Management, Module 02 Business Intelligence & Reporting, and Module 03 Administration & General Business Management with office administration, correspondence tracking, document version archiving, internal requests & approvals, tasks & activity tracking, meeting management & MoM, travel & transportation logistics, and general business services.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
