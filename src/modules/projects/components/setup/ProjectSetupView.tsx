@@ -112,10 +112,10 @@ export const ProjectSetupView: React.FC = () => {
 
   const handleAddActivity = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!selectedPhaseIdForActivity && selectedProject.phases[0]) {
-      selectedPhaseIdForActivity = selectedProject.phases[0].id;
+    const targetPhaseId = selectedPhaseIdForActivity || selectedProject.phases[0]?.id;
+    if (targetPhaseId) {
+      addActivity(selectedProject.id, targetPhaseId, newActivityForm);
     }
-    addActivity(selectedProject.id, selectedPhaseIdForActivity || selectedProject.phases[0]?.id, newActivityForm);
     setShowNewActivityModal(false);
   };
 

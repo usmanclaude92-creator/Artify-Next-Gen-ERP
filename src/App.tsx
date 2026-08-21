@@ -42,6 +42,13 @@ import { InventoryModuleRunner } from './modules/inventory/InventoryModuleRunner
 import { ManufacturingModuleRunner } from './modules/manufacturing/ManufacturingModuleRunner';
 import { HrModuleRunner } from './modules/hr/HrModuleRunner';
 import { ProjectManagementModuleRunner } from './modules/projects/ProjectManagementModuleRunner';
+import { BudgetingModuleRunner } from './modules/budgeting/BudgetingModuleRunner';
+import { ScmModuleRunner } from './modules/scm/ScmModuleRunner';
+import { AssetModuleRunner } from './modules/assets/AssetModuleRunner';
+import { QualityModuleRunner } from './modules/quality/QualityModuleRunner';
+import { ConstructionModuleRunner } from './modules/construction/ConstructionModuleRunner';
+import { FinanceModuleRunner } from './modules/finance/FinanceModuleRunner';
+import { ComplianceModuleRunner } from './modules/compliance/ComplianceModuleRunner';
 
 export default function App() {
   const [routeState, setRouteState] = useState<ERPRouteState>({ view: 'dashboard' });
@@ -411,6 +418,118 @@ export default function App() {
                   }
                   activeRole={activeRole}
                 />
+              ) : activeModule.id === 'budgeting' ? (
+                <BudgetingModuleRunner
+                  module={activeModule}
+                  onNavigate={navigateTo}
+                  isFavorite={isCurrentModuleFavorited}
+                  onToggleFavorite={() =>
+                    toggleFavorite({
+                      id: `fav-mod-${activeModule.id}`,
+                      title: `${activeModule.code} — ${activeModule.name}`,
+                      subtitle: activeModule.category,
+                      route: { view: 'module', moduleId: activeModule.id },
+                      type: 'module'
+                    })
+                  }
+                  activeRole={activeRole}
+                />
+              ) : activeModule.id === 'scm' ? (
+                <ScmModuleRunner
+                  module={activeModule}
+                  onNavigate={navigateTo}
+                  isFavorite={isCurrentModuleFavorited}
+                  onToggleFavorite={() =>
+                    toggleFavorite({
+                      id: `fav-mod-${activeModule.id}`,
+                      title: `${activeModule.code} — ${activeModule.name}`,
+                      subtitle: activeModule.category,
+                      route: { view: 'module', moduleId: activeModule.id },
+                      type: 'module'
+                    })
+                  }
+                  activeRole={activeRole}
+                />
+              ) : activeModule.id === 'assets' ? (
+                <AssetModuleRunner
+                  module={activeModule}
+                  onNavigate={navigateTo}
+                  isFavorite={isCurrentModuleFavorited}
+                  onToggleFavorite={() =>
+                    toggleFavorite({
+                      id: `fav-mod-${activeModule.id}`,
+                      title: `${activeModule.code} — ${activeModule.name}`,
+                      subtitle: activeModule.category,
+                      route: { view: 'module', moduleId: activeModule.id },
+                      type: 'module'
+                    })
+                  }
+                  activeRole={activeRole}
+                />
+              ) : activeModule.id === 'quality' ? (
+                <QualityModuleRunner
+                  module={activeModule}
+                  onNavigate={navigateTo}
+                  isFavorite={isCurrentModuleFavorited}
+                  onToggleFavorite={() =>
+                    toggleFavorite({
+                      id: `fav-mod-${activeModule.id}`,
+                      title: `${activeModule.code} — ${activeModule.name}`,
+                      subtitle: activeModule.category,
+                      route: { view: 'module', moduleId: activeModule.id },
+                      type: 'module'
+                    })
+                  }
+                  activeRole={activeRole}
+                />
+              ) : activeModule.id === 'construction' ? (
+                <ConstructionModuleRunner
+                  module={activeModule}
+                  onNavigate={navigateTo}
+                  isFavorite={isCurrentModuleFavorited}
+                  onToggleFavorite={() =>
+                    toggleFavorite({
+                      id: `fav-mod-${activeModule.id}`,
+                      title: `${activeModule.code} — ${activeModule.name}`,
+                      subtitle: activeModule.category,
+                      route: { view: 'module', moduleId: activeModule.id },
+                      type: 'module'
+                    })
+                  }
+                  activeRole={activeRole}
+                />
+              ) : activeModule.id === 'financial-accounting' ? (
+                <FinanceModuleRunner
+                  module={activeModule}
+                  onNavigate={navigateTo}
+                  isFavorite={isCurrentModuleFavorited}
+                  onToggleFavorite={() =>
+                    toggleFavorite({
+                      id: `fav-mod-${activeModule.id}`,
+                      title: `${activeModule.code} — ${activeModule.name}`,
+                      subtitle: activeModule.category,
+                      route: { view: 'module', moduleId: activeModule.id },
+                      type: 'module'
+                    })
+                  }
+                  activeRole={activeRole}
+                />
+              ) : activeModule.id === 'compliance-risk-audit' ? (
+                <ComplianceModuleRunner
+                  module={activeModule}
+                  onNavigate={navigateTo}
+                  isFavorite={isCurrentModuleFavorited}
+                  onToggleFavorite={() =>
+                    toggleFavorite({
+                      id: `fav-mod-${activeModule.id}`,
+                      title: `${activeModule.code} — ${activeModule.name}`,
+                      subtitle: activeModule.category,
+                      route: { view: 'module', moduleId: activeModule.id },
+                      type: 'module'
+                    })
+                  }
+                  activeRole={activeRole}
+                />
               ) : (
                 <ModuleLandingView
                   module={activeModule}
@@ -622,6 +741,153 @@ export default function App() {
                 />
               ) : activeModule.id === 'projects' ? (
                 <ProjectManagementModuleRunner
+                  module={activeModule}
+                  functionalArea={activeFA}
+                  onNavigate={navigateTo}
+                  isFavorite={isCurrentFaFavorited}
+                  onToggleFavorite={() =>
+                    toggleFavorite({
+                      id: `fav-fa-${activeFA.id}`,
+                      title: `${activeFA.code} ${activeFA.name}`,
+                      subtitle: activeModule.shortName,
+                      route: {
+                        view: 'functional_area',
+                        moduleId: activeModule.id,
+                        functionalAreaId: activeFA.id
+                      },
+                      type: 'functional_area'
+                    })
+                  }
+                  activeRole={activeRole}
+                />
+              ) : activeModule.id === 'budgeting' ? (
+                <BudgetingModuleRunner
+                  module={activeModule}
+                  functionalArea={activeFA}
+                  onNavigate={navigateTo}
+                  isFavorite={isCurrentFaFavorited}
+                  onToggleFavorite={() =>
+                    toggleFavorite({
+                      id: `fav-fa-${activeFA.id}`,
+                      title: `${activeFA.code} ${activeFA.name}`,
+                      subtitle: activeModule.shortName,
+                      route: {
+                        view: 'functional_area',
+                        moduleId: activeModule.id,
+                        functionalAreaId: activeFA.id
+                      },
+                      type: 'functional_area'
+                    })
+                  }
+                  activeRole={activeRole}
+                />
+              ) : activeModule.id === 'scm' ? (
+                <ScmModuleRunner
+                  module={activeModule}
+                  functionalArea={activeFA}
+                  onNavigate={navigateTo}
+                  isFavorite={isCurrentFaFavorited}
+                  onToggleFavorite={() =>
+                    toggleFavorite({
+                      id: `fav-fa-${activeFA.id}`,
+                      title: `${activeFA.code} ${activeFA.name}`,
+                      subtitle: activeModule.shortName,
+                      route: {
+                        view: 'functional_area',
+                        moduleId: activeModule.id,
+                        functionalAreaId: activeFA.id
+                      },
+                      type: 'functional_area'
+                    })
+                  }
+                  activeRole={activeRole}
+                />
+              ) : activeModule.id === 'assets' ? (
+                <AssetModuleRunner
+                  module={activeModule}
+                  functionalArea={activeFA}
+                  onNavigate={navigateTo}
+                  isFavorite={isCurrentFaFavorited}
+                  onToggleFavorite={() =>
+                    toggleFavorite({
+                      id: `fav-fa-${activeFA.id}`,
+                      title: `${activeFA.code} ${activeFA.name}`,
+                      subtitle: activeModule.shortName,
+                      route: {
+                        view: 'functional_area',
+                        moduleId: activeModule.id,
+                        functionalAreaId: activeFA.id
+                      },
+                      type: 'functional_area'
+                    })
+                  }
+                  activeRole={activeRole}
+                />
+              ) : activeModule.id === 'quality' ? (
+                <QualityModuleRunner
+                  module={activeModule}
+                  functionalArea={activeFA}
+                  onNavigate={navigateTo}
+                  isFavorite={isCurrentFaFavorited}
+                  onToggleFavorite={() =>
+                    toggleFavorite({
+                      id: `fav-fa-${activeFA.id}`,
+                      title: `${activeFA.code} ${activeFA.name}`,
+                      subtitle: activeModule.shortName,
+                      route: {
+                        view: 'functional_area',
+                        moduleId: activeModule.id,
+                        functionalAreaId: activeFA.id
+                      },
+                      type: 'functional_area'
+                    })
+                  }
+                  activeRole={activeRole}
+                />
+              ) : activeModule.id === 'construction' ? (
+                <ConstructionModuleRunner
+                  module={activeModule}
+                  functionalArea={activeFA}
+                  onNavigate={navigateTo}
+                  isFavorite={isCurrentFaFavorited}
+                  onToggleFavorite={() =>
+                    toggleFavorite({
+                      id: `fav-fa-${activeFA.id}`,
+                      title: `${activeFA.code} ${activeFA.name}`,
+                      subtitle: activeModule.shortName,
+                      route: {
+                        view: 'functional_area',
+                        moduleId: activeModule.id,
+                        functionalAreaId: activeFA.id
+                      },
+                      type: 'functional_area'
+                    })
+                  }
+                  activeRole={activeRole}
+                />
+              ) : activeModule.id === 'financial-accounting' ? (
+                <FinanceModuleRunner
+                  module={activeModule}
+                  functionalArea={activeFA}
+                  onNavigate={navigateTo}
+                  isFavorite={isCurrentFaFavorited}
+                  onToggleFavorite={() =>
+                    toggleFavorite({
+                      id: `fav-fa-${activeFA.id}`,
+                      title: `${activeFA.code} ${activeFA.name}`,
+                      subtitle: activeModule.shortName,
+                      route: {
+                        view: 'functional_area',
+                        moduleId: activeModule.id,
+                        functionalAreaId: activeFA.id
+                      },
+                      type: 'functional_area'
+                    })
+                  }
+                  activeRole={activeRole}
+                />
+              ) : activeModule.id === 'compliance-risk-audit' ? (
+                <ComplianceModuleRunner
                   module={activeModule}
                   functionalArea={activeFA}
                   onNavigate={navigateTo}
@@ -875,6 +1141,167 @@ export default function App() {
                 />
               ) : activeModule.id === 'projects' ? (
                 <ProjectManagementModuleRunner
+                  module={activeModule}
+                  functionalArea={activeFA}
+                  process={activeProcess}
+                  onNavigate={navigateTo}
+                  isFavorite={isCurrentProcessFavorited}
+                  onToggleFavorite={() =>
+                    toggleFavorite({
+                      id: `fav-proc-${activeProcess.id}`,
+                      title: `${activeProcess.code} ${activeProcess.name}`,
+                      subtitle: `${activeModule.shortName} › ${activeFA.name}`,
+                      route: {
+                        view: 'process',
+                        moduleId: activeModule.id,
+                        functionalAreaId: activeFA.id,
+                        processId: activeProcess.id
+                      },
+                      type: 'process'
+                    })
+                  }
+                  activeRole={activeRole}
+                />
+              ) : activeModule.id === 'budgeting' ? (
+                <BudgetingModuleRunner
+                  module={activeModule}
+                  functionalArea={activeFA}
+                  process={activeProcess}
+                  onNavigate={navigateTo}
+                  isFavorite={isCurrentProcessFavorited}
+                  onToggleFavorite={() =>
+                    toggleFavorite({
+                      id: `fav-proc-${activeProcess.id}`,
+                      title: `${activeProcess.code} ${activeProcess.name}`,
+                      subtitle: `${activeModule.shortName} › ${activeFA.name}`,
+                      route: {
+                        view: 'process',
+                        moduleId: activeModule.id,
+                        functionalAreaId: activeFA.id,
+                        processId: activeProcess.id
+                      },
+                      type: 'process'
+                    })
+                  }
+                  activeRole={activeRole}
+                />
+              ) : activeModule.id === 'scm' ? (
+                <ScmModuleRunner
+                  module={activeModule}
+                  functionalArea={activeFA}
+                  process={activeProcess}
+                  onNavigate={navigateTo}
+                  isFavorite={isCurrentProcessFavorited}
+                  onToggleFavorite={() =>
+                    toggleFavorite({
+                      id: `fav-proc-${activeProcess.id}`,
+                      title: `${activeProcess.code} ${activeProcess.name}`,
+                      subtitle: `${activeModule.shortName} › ${activeFA.name}`,
+                      route: {
+                        view: 'process',
+                        moduleId: activeModule.id,
+                        functionalAreaId: activeFA.id,
+                        processId: activeProcess.id
+                      },
+                      type: 'process'
+                    })
+                  }
+                  activeRole={activeRole}
+                />
+              ) : activeModule.id === 'assets' ? (
+                <AssetModuleRunner
+                  module={activeModule}
+                  functionalArea={activeFA}
+                  process={activeProcess}
+                  onNavigate={navigateTo}
+                  isFavorite={isCurrentProcessFavorited}
+                  onToggleFavorite={() =>
+                    toggleFavorite({
+                      id: `fav-proc-${activeProcess.id}`,
+                      title: `${activeProcess.code} ${activeProcess.name}`,
+                      subtitle: `${activeModule.shortName} › ${activeFA.name}`,
+                      route: {
+                        view: 'process',
+                        moduleId: activeModule.id,
+                        functionalAreaId: activeFA.id,
+                        processId: activeProcess.id
+                      },
+                      type: 'process'
+                    })
+                  }
+                  activeRole={activeRole}
+                />
+              ) : activeModule.id === 'quality' ? (
+                <QualityModuleRunner
+                  module={activeModule}
+                  functionalArea={activeFA}
+                  process={activeProcess}
+                  onNavigate={navigateTo}
+                  isFavorite={isCurrentProcessFavorited}
+                  onToggleFavorite={() =>
+                    toggleFavorite({
+                      id: `fav-proc-${activeProcess.id}`,
+                      title: `${activeProcess.code} ${activeProcess.name}`,
+                      subtitle: `${activeModule.shortName} › ${activeFA.name}`,
+                      route: {
+                        view: 'process',
+                        moduleId: activeModule.id,
+                        functionalAreaId: activeFA.id,
+                        processId: activeProcess.id
+                      },
+                      type: 'process'
+                    })
+                  }
+                  activeRole={activeRole}
+                />
+              ) : activeModule.id === 'construction' ? (
+                <ConstructionModuleRunner
+                  module={activeModule}
+                  functionalArea={activeFA}
+                  process={activeProcess}
+                  onNavigate={navigateTo}
+                  isFavorite={isCurrentProcessFavorited}
+                  onToggleFavorite={() =>
+                    toggleFavorite({
+                      id: `fav-proc-${activeProcess.id}`,
+                      title: `${activeProcess.code} ${activeProcess.name}`,
+                      subtitle: `${activeModule.shortName} › ${activeFA.name}`,
+                      route: {
+                        view: 'process',
+                        moduleId: activeModule.id,
+                        functionalAreaId: activeFA.id,
+                        processId: activeProcess.id
+                      },
+                      type: 'process'
+                    })
+                  }
+                  activeRole={activeRole}
+                />
+              ) : activeModule.id === 'financial-accounting' ? (
+                <FinanceModuleRunner
+                  module={activeModule}
+                  functionalArea={activeFA}
+                  process={activeProcess}
+                  onNavigate={navigateTo}
+                  isFavorite={isCurrentProcessFavorited}
+                  onToggleFavorite={() =>
+                    toggleFavorite({
+                      id: `fav-proc-${activeProcess.id}`,
+                      title: `${activeProcess.code} ${activeProcess.name}`,
+                      subtitle: `${activeModule.shortName} › ${activeFA.name}`,
+                      route: {
+                        view: 'process',
+                        moduleId: activeModule.id,
+                        functionalAreaId: activeFA.id,
+                        processId: activeProcess.id
+                      },
+                      type: 'process'
+                    })
+                  }
+                  activeRole={activeRole}
+                />
+              ) : activeModule.id === 'compliance-risk-audit' ? (
+                <ComplianceModuleRunner
                   module={activeModule}
                   functionalArea={activeFA}
                   process={activeProcess}
@@ -1150,6 +1577,181 @@ export default function App() {
                 />
               ) : activeModule.id === 'projects' ? (
                 <ProjectManagementModuleRunner
+                  module={activeModule}
+                  functionalArea={activeFA}
+                  process={activeProcess}
+                  transaction={activeTransaction}
+                  onNavigate={navigateTo}
+                  isFavorite={isCurrentTxFavorited}
+                  onToggleFavorite={() =>
+                    toggleFavorite({
+                      id: `fav-tx-${activeTransaction.id}`,
+                      title: `${activeTransaction.code} — ${activeTransaction.name}`,
+                      subtitle: `${activeModule.shortName} › ${activeProcess.name}`,
+                      route: {
+                        view: 'transaction',
+                        moduleId: activeModule.id,
+                        functionalAreaId: activeFA.id,
+                        processId: activeProcess.id,
+                        transactionId: activeTransaction.id
+                      },
+                      type: 'transaction'
+                    })
+                  }
+                  activeRole={activeRole}
+                />
+              ) : activeModule.id === 'budgeting' ? (
+                <BudgetingModuleRunner
+                  module={activeModule}
+                  functionalArea={activeFA}
+                  process={activeProcess}
+                  transaction={activeTransaction}
+                  onNavigate={navigateTo}
+                  isFavorite={isCurrentTxFavorited}
+                  onToggleFavorite={() =>
+                    toggleFavorite({
+                      id: `fav-tx-${activeTransaction.id}`,
+                      title: `${activeTransaction.code} — ${activeTransaction.name}`,
+                      subtitle: `${activeModule.shortName} › ${activeProcess.name}`,
+                      route: {
+                        view: 'transaction',
+                        moduleId: activeModule.id,
+                        functionalAreaId: activeFA.id,
+                        processId: activeProcess.id,
+                        transactionId: activeTransaction.id
+                      },
+                      type: 'transaction'
+                    })
+                  }
+                  activeRole={activeRole}
+                />
+              ) : activeModule.id === 'scm' ? (
+                <ScmModuleRunner
+                  module={activeModule}
+                  functionalArea={activeFA}
+                  process={activeProcess}
+                  transaction={activeTransaction}
+                  onNavigate={navigateTo}
+                  isFavorite={isCurrentTxFavorited}
+                  onToggleFavorite={() =>
+                    toggleFavorite({
+                      id: `fav-tx-${activeTransaction.id}`,
+                      title: `${activeTransaction.code} — ${activeTransaction.name}`,
+                      subtitle: `${activeModule.shortName} › ${activeProcess.name}`,
+                      route: {
+                        view: 'transaction',
+                        moduleId: activeModule.id,
+                        functionalAreaId: activeFA.id,
+                        processId: activeProcess.id,
+                        transactionId: activeTransaction.id
+                      },
+                      type: 'transaction'
+                    })
+                  }
+                  activeRole={activeRole}
+                />
+              ) : activeModule.id === 'assets' ? (
+                <AssetModuleRunner
+                  module={activeModule}
+                  functionalArea={activeFA}
+                  process={activeProcess}
+                  transaction={activeTransaction}
+                  onNavigate={navigateTo}
+                  isFavorite={isCurrentTxFavorited}
+                  onToggleFavorite={() =>
+                    toggleFavorite({
+                      id: `fav-tx-${activeTransaction.id}`,
+                      title: `${activeTransaction.code} — ${activeTransaction.name}`,
+                      subtitle: `${activeModule.shortName} › ${activeProcess.name}`,
+                      route: {
+                        view: 'transaction',
+                        moduleId: activeModule.id,
+                        functionalAreaId: activeFA.id,
+                        processId: activeProcess.id,
+                        transactionId: activeTransaction.id
+                      },
+                      type: 'transaction'
+                    })
+                  }
+                  activeRole={activeRole}
+                />
+              ) : activeModule.id === 'quality' ? (
+                <QualityModuleRunner
+                  module={activeModule}
+                  functionalArea={activeFA}
+                  process={activeProcess}
+                  transaction={activeTransaction}
+                  onNavigate={navigateTo}
+                  isFavorite={isCurrentTxFavorited}
+                  onToggleFavorite={() =>
+                    toggleFavorite({
+                      id: `fav-tx-${activeTransaction.id}`,
+                      title: `${activeTransaction.code} — ${activeTransaction.name}`,
+                      subtitle: `${activeModule.shortName} › ${activeProcess.name}`,
+                      route: {
+                        view: 'transaction',
+                        moduleId: activeModule.id,
+                        functionalAreaId: activeFA.id,
+                        processId: activeProcess.id,
+                        transactionId: activeTransaction.id
+                      },
+                      type: 'transaction'
+                    })
+                  }
+                  activeRole={activeRole}
+                />
+              ) : activeModule.id === 'construction' ? (
+                <ConstructionModuleRunner
+                  module={activeModule}
+                  functionalArea={activeFA}
+                  process={activeProcess}
+                  transaction={activeTransaction}
+                  onNavigate={navigateTo}
+                  isFavorite={isCurrentTxFavorited}
+                  onToggleFavorite={() =>
+                    toggleFavorite({
+                      id: `fav-tx-${activeTransaction.id}`,
+                      title: `${activeTransaction.code} — ${activeTransaction.name}`,
+                      subtitle: `${activeModule.shortName} › ${activeProcess.name}`,
+                      route: {
+                        view: 'transaction',
+                        moduleId: activeModule.id,
+                        functionalAreaId: activeFA.id,
+                        processId: activeProcess.id,
+                        transactionId: activeTransaction.id
+                      },
+                      type: 'transaction'
+                    })
+                  }
+                  activeRole={activeRole}
+                />
+              ) : activeModule.id === 'financial-accounting' ? (
+                <FinanceModuleRunner
+                  module={activeModule}
+                  functionalArea={activeFA}
+                  process={activeProcess}
+                  transaction={activeTransaction}
+                  onNavigate={navigateTo}
+                  isFavorite={isCurrentTxFavorited}
+                  onToggleFavorite={() =>
+                    toggleFavorite({
+                      id: `fav-tx-${activeTransaction.id}`,
+                      title: `${activeTransaction.code} — ${activeTransaction.name}`,
+                      subtitle: `${activeModule.shortName} › ${activeProcess.name}`,
+                      route: {
+                        view: 'transaction',
+                        moduleId: activeModule.id,
+                        functionalAreaId: activeFA.id,
+                        processId: activeProcess.id,
+                        transactionId: activeTransaction.id
+                      },
+                      type: 'transaction'
+                    })
+                  }
+                  activeRole={activeRole}
+                />
+              ) : activeModule.id === 'compliance-risk-audit' ? (
+                <ComplianceModuleRunner
                   module={activeModule}
                   functionalArea={activeFA}
                   process={activeProcess}

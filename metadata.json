@@ -1,6 +1,6 @@
 {
   "name": "Artify ERP — Future Generation Enterprise System",
-  "description": "Enterprise ERP platform featuring Module 01 System Management, Module 02 Business Intelligence, Module 03 Administration, Module 04 Banking & Treasury, Module 05 Procurement, Module 06 Sales & CRM, Module 07 Inventory & Warehouse Management, and Module 08 Manufacturing & Production with multi-level BOMs, MPS/MRP planning, finite capacity scheduling, shop floor work order travelers, OEE machine tracking, production receipts, defect scrap RCA, and standard-to-actual variance cost sheets.",
+  "description": "Enterprise ERP platform featuring Core Operations, Manufacturing & Engineering, Projects & Services, Human Capital Management, Budgeting & Financial Planning, Supply Chain Management (SCM), Fixed Asset Management, Quality Management (Module 14 QMS), Construction & Contract Management (Module 15 FIDIC & BOQ), Financial Accounting & Reporting (Module 16), and Compliance, Risk & Audit (Module 17: Statutory Oman Regulatory Compliance, VAT & Tax Audit Defense, COSO & SoD Internal Controls, Enterprise Risk Matrix & Heatmaps, 5C Internal Audit Workpapers, Big-4 External Audit PBC Tracker, CAPA Remediation Lifecycle, and AI Fraud Anomaly Telemetry with Benford's Law).",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }
