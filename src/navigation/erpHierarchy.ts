@@ -129,6 +129,16 @@ export function findProcessById(moduleId?: string, faId?: string, procId?: strin
   if (procId === '01.01.05') {
     return fa.processes.find(p => p.id === 'posting-periods' || p.code === '01.01.05');
   }
+  if (
+    procId === 'group-holding-hierarchy' ||
+    procId === 'hierarchy' ||
+    procId === 'manage-hierarchy' ||
+    procId === 'group-holding' ||
+    procId === 'group-hierarchy' ||
+    procId === '01.01.06'
+  ) {
+    return fa.processes.find(p => p.id === 'group-holding-hierarchy' || p.code === '01.01.06') || fa.processes[0];
+  }
   return undefined;
 }
 

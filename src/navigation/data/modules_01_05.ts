@@ -98,6 +98,19 @@ export const MODULES_01_05: ERPModule[] = [
               { id: 'tx-period-closing', code: '01.01.05.03', name: 'Period Closing', description: 'Perform month-end sub-ledger cutoffs and period closing routines.', phase: 'Phase 2 — System Management', actionType: 'transaction', requiredPermissions: ['VIEW', 'POST', 'ADMIN'] },
               { id: 'tx-period-locking', code: '01.01.05.04', name: 'Period Locking', description: 'Sub-ledger lock matrix (GL, AP, AR, Inventory, Fixed Assets, Payroll) with emergency unlock.', phase: 'Phase 2 — System Management', actionType: 'transaction', requiredPermissions: ['VIEW', 'POST', 'ADMIN'] }
             ]
+          },
+          {
+            id: 'group-holding-hierarchy',
+            code: '01.01.06',
+            name: 'Group & Holding Hierarchy',
+            description: 'Manage corporate group holding structures, apex entities, parent-subsidiary relationships, and consolidation ownership percentages.',
+            phase: 'Phase 2 — System Management',
+            transactions: [
+              { id: 'tx-group-creation', code: '01.01.06.01', name: 'Group Entity Creation', description: 'Incorporate corporate groups and define apex parent holding entities.', phase: 'Phase 2 — System Management', actionType: 'master', requiredPermissions: ['VIEW', 'CREATE', 'ADMIN'] },
+              { id: 'tx-group-members', code: '01.01.06.02', name: 'Subsidiary & Member Mapping', description: 'Assign operating subsidiaries, equity shares, and voting control.', phase: 'Phase 2 — System Management', actionType: 'configuration', requiredPermissions: ['VIEW', 'EDIT', 'ADMIN'] },
+              { id: 'tx-hierarchy-tree', code: '01.01.06.03', name: 'Multi-Tier Organogram Tree', description: 'Interactive visual parent-subsidiary hierarchy and ownership graph.', phase: 'Phase 2 — System Management', actionType: 'configuration', requiredPermissions: ['VIEW'] },
+              { id: 'tx-group-consolidation', code: '01.01.06.04', name: 'Consolidation & Ownership Rules', description: 'IFRS 10 consolidation treatment, equity accounting, and non-controlling interest.', phase: 'Phase 2 — System Management', actionType: 'configuration', requiredPermissions: ['VIEW', 'EDIT', 'ADMIN'] }
+            ]
           }
         ]
       },

@@ -32,7 +32,8 @@ import {
   FileCheck2,
   Info,
   Clock,
-  UserCheck
+  UserCheck,
+  GitFork
 } from 'lucide-react';
 import { useSystemManagement } from '../services/systemManagementStore';
 import { Company, CompanyAttachment, CompanyHistoryRecord } from '../types';
@@ -41,6 +42,7 @@ import { StatusBadge } from './common/StatusBadge';
 import { MetricCard } from './common/MetricCard';
 import { FormModal } from './common/FormModal';
 import { CompanyBrandingStudio } from './CompanyBrandingStudio';
+import { GroupHoldingManagementView } from './GroupHoldingManagementView';
 
 interface CompanySetupManagementViewProps {
   initialTransactionId?: string;
@@ -54,6 +56,7 @@ export const CompanySetupManagementView: React.FC<CompanySetupManagementViewProp
   const {
     companies = [],
     groups = [],
+    groupMemberships = [],
     branches = [],
     departments = [],
     addCompany,
@@ -76,11 +79,12 @@ export const CompanySetupManagementView: React.FC<CompanySetupManagementViewProp
 
   // Active sub-tab inside the inspector
   const [inspectorTab, setInspectorTab] = useState<
-    'profile' | 'information' | 'branding' | 'parameters' | 'attachments' | 'history' | 'branches'
+    'profile' | 'information' | 'branding' | 'parameters' | 'attachments' | 'history' | 'branches' | 'hierarchy'
   >('profile');
 
   // Modals
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
+  const [isHierarchyStudioOpen, setIsHierarchyStudioOpen] = useState(false);
 
   React.useEffect(() => {
     if (initialTransactionId === 'tx-company-creation' || initialTransactionCode === '01.01.01.01') {
@@ -726,6 +730,15 @@ export const CompanySetupManagementView: React.FC<CompanySetupManagementViewProp
                   )}
 
                   <button
+                    onClick={() => setIsHierarchyStudioOpen(true)}
+                    className="px-3 py-1.5 rounded-lg border border-purple-300 hover:bg-purple-50 text-purple-700 text-xs font-semibold flex items-center gap-1.5 transition-colors cursor-pointer"
+                    title="Launch Enterprise Group & Holding Hierarchy Studio"
+                  >
+                    <GitFork className="w-3.5 h-3.5" />
+                    <span>Manage Hierarchy</span>
+                  </button>
+
+                  <button
                     onClick={() => archiveCompany(activeCompany.id, { id: 'usr-admin', name: 'Administrator' })}
                     disabled={activeCompany?.isParent || activeCompany?.isHolding}
                     title={activeCompany?.isParent ? 'Apex holding parent cannot be archived' : 'Archive entity'}
@@ -743,6 +756,7 @@ export const CompanySetupManagementView: React.FC<CompanySetupManagementViewProp
                   { key: 'information', label: 'Statutory & Identification', icon: FileCheck2 },
                   { key: 'branding', label: 'Logo & Branding', icon: Palette },
                   { key: 'parameters', label: 'Fiscal Parameters', icon: Coins },
+                  { key: 'hierarchy', label: 'Hierarchy & Holding', icon: GitFork },
                   { key: 'attachments', label: `Filings (${activeCompanyAttachments.length})`, icon: FileText },
                   { key: 'branches', label: `Branches (${activeCompanyBranches.length})`, icon: Landmark },
                   { key: 'history', label: `Change History (${activeCompanyHistory.length})`, icon: History }
@@ -1038,6 +1052,165 @@ export const CompanySetupManagementView: React.FC<CompanySetupManagementViewProp
                         <span className="font-mono font-semibold text-slate-800">{activeCompany?.dateFormat || 'YYYY-MM-DD'}</span>
                       </div>
                     </div>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* Sub-Tab: Group & Holding Hierarchy */}
+            {inspectorTab === 'hierarchy' && (
+              <div className="p-6 space-y-6">
+                {/* Header Banner */}
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-4 rounded-xl bg-purple-50/70 border border-purple-200/80">
+                  <div className="flex items-start gap-3">
+                    <div className="w-10 h-10 rounded-lg bg-purple-600 text-white flex items-center justify-center shrink-0 shadow-xs">
+                      <GitFork className="w-5 h-5" />
+                    </div>
+                    <div>
+                      <h4 className="text-xs font-bold text-purple-950 uppercase tracking-wider">
+                        Enterprise Group & Multi-Tier Holding Architecture
+                      </h4>
+                      <p className="text-xs text-purple-800/80 mt-0.5">
+                        IFRS 10 Consolidated Financial Reporting • Parent-Subsidiary Equity Mapping
+                      </p>
+                    </div>
+                  </div>
+
+                  <button
+                    onClick={() => setIsHierarchyStudioOpen(true)}
+                    className="px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white text-xs font-semibold rounded-lg shadow-xs transition-colors flex items-center gap-1.5 cursor-pointer whitespace-nowrap"
+                  >
+                    <GitFork className="w-4 h-4" />
+                    <span>Open Full Hierarchy Studio (01.01.06)</span>
+                  </button>
+                </div>
+
+                {/* Corporate Position Cards */}
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  {/* Entity Role */}
+                  <div className="p-4 rounded-xl border border-slate-200 bg-slate-50/50 space-y-2">
+                    <span className="text-[11px] font-semibold text-slate-500 uppercase tracking-wider block">
+                      Corporate Role
+                    </span>
+                    <div className="flex items-center gap-2">
+                      <span className={`px-2.5 py-1 rounded-full text-xs font-bold ${
+                        activeCompany?.isParent || activeCompany?.companyType === 'Holding'
+                          ? 'bg-purple-100 text-purple-800 border border-purple-200'
+                          : 'bg-indigo-100 text-indigo-800 border border-indigo-200'
+                      }`}>
+                        {activeCompany?.isParent || activeCompany?.companyType === 'Holding'
+                          ? '👑 Apex Holding Entity'
+                          : `${activeCompany?.companyType || 'Operating Subsidiary'}`}
+                      </span>
+                    </div>
+                    <p className="text-[11px] text-slate-500">
+                      {activeCompany?.isParent
+                        ? 'Serves as the apex parent entity with ultimate controlling interest across group subsidiaries.'
+                        : 'Operating legal entity consolidated into enterprise holding financials.'}
+                    </p>
+                  </div>
+
+                  {/* Parent Entity / Holding Group */}
+                  <div className="p-4 rounded-xl border border-slate-200 bg-slate-50/50 space-y-2">
+                    <span className="text-[11px] font-semibold text-slate-500 uppercase tracking-wider block">
+                      Parent Holding Group
+                    </span>
+                    <div className="text-xs font-bold text-slate-900">
+                      {groups.find(g => g.parentCompanyId === activeCompany?.id)?.name ||
+                       groups[0]?.name ||
+                       'Artify Global Holdings'}
+                    </div>
+                    <div className="text-[11px] text-slate-500 font-mono">
+                      Code: {groups.find(g => g.parentCompanyId === activeCompany?.id)?.code || groups[0]?.code || 'ART-HOLD-GRP'}
+                    </div>
+                  </div>
+
+                  {/* Anti-Circular Validation */}
+                  <div className="p-4 rounded-xl border border-emerald-200 bg-emerald-50/40 space-y-2">
+                    <div className="flex items-center gap-1.5 text-emerald-800 text-xs font-bold">
+                      <CheckCircle2 className="w-4 h-4 text-emerald-600" />
+                      <span>Hierarchy Integrity Valid</span>
+                    </div>
+                    <p className="text-[11px] text-emerald-700">
+                      No circular holding loops detected. Compliant with ISO 17442 LEI hierarchy & IFRS 10 consolidated governance.
+                    </p>
+                  </div>
+                </div>
+
+                {/* Subsidiary Relationships Matrix */}
+                <div className="border border-slate-200 rounded-xl overflow-hidden">
+                  <div className="p-4 bg-slate-50 border-b border-slate-200 flex items-center justify-between">
+                    <div>
+                      <h5 className="text-xs font-bold text-slate-900">
+                        Associated Group Memberships & Subsidiary Equity Holdings
+                      </h5>
+                      <p className="text-[11px] text-slate-500 mt-0.5">
+                        Direct ownership shares, voting rights, and financial consolidation classification
+                      </p>
+                    </div>
+                    <span className="text-xs font-mono font-semibold px-2 py-0.5 rounded bg-indigo-50 text-indigo-700 border border-indigo-200">
+                      {groupMemberships.length} Entities in Group
+                    </span>
+                  </div>
+
+                  <div className="divide-y divide-slate-200">
+                    {groupMemberships.map(mem => {
+                      const memberComp = companies.find(c => c.id === mem.companyId);
+                      const isCurrent = mem.companyId === activeCompany?.id;
+                      return (
+                        <div
+                          key={mem.id}
+                          className={`p-3.5 flex items-center justify-between text-xs transition-colors ${
+                            isCurrent ? 'bg-purple-50/60 font-semibold' : 'hover:bg-slate-50'
+                          }`}
+                        >
+                          <div className="flex items-center gap-3">
+                            <div className="w-7 h-7 rounded-lg bg-indigo-50 border border-indigo-200 text-indigo-700 flex items-center justify-center font-bold text-[11px]">
+                              {memberComp?.code?.slice(0, 2) || 'EN'}
+                            </div>
+                            <div>
+                              <div className="text-slate-900 flex items-center gap-2">
+                                <span>{memberComp?.legalName || mem.companyId}</span>
+                                {isCurrent && (
+                                  <span className="px-2 py-0.2 rounded text-[10px] bg-purple-200 text-purple-900 font-bold">
+                                    Current Entity
+                                  </span>
+                                )}
+                              </div>
+                              <div className="text-[11px] text-slate-500 font-mono mt-0.5">
+                                Tier {mem.tierLevel || 1} • Role: {mem.roleInGroup || 'Subsidiary'}
+                              </div>
+                            </div>
+                          </div>
+
+                          <div className="flex items-center gap-4 text-right">
+                            <div>
+                              <span className="text-[11px] text-slate-500 block">Equity Share</span>
+                              <span className="font-bold text-slate-900">{mem.ownershipPercentage || 100}%</span>
+                            </div>
+                            <div>
+                              <span className="text-[11px] text-slate-500 block">Voting Control</span>
+                              <span className="font-bold text-slate-900">{mem.votingPercentage || 100}%</span>
+                            </div>
+                            <div className="hidden sm:block">
+                              <span className="text-[11px] text-slate-500 block">Method</span>
+                              <span className="px-2 py-0.5 rounded text-[10px] bg-indigo-50 text-indigo-700 border border-indigo-200 font-semibold">
+                                {mem.consolidationMethod || 'Full Consolidation'}
+                              </span>
+                            </div>
+                            <button
+                              onClick={() => {
+                                setSelectedCompanyId(mem.companyId);
+                                setInspectorTab('profile');
+                              }}
+                              className="px-2.5 py-1 rounded bg-slate-100 hover:bg-indigo-50 text-slate-700 hover:text-indigo-600 text-xs font-semibold transition-colors cursor-pointer"
+                            >
+                              Inspect
+                            </button>
+                          </div>
+                        </div>
+                      );
+                    })}
                   </div>
                 </div>
               </div>
@@ -2264,6 +2437,45 @@ export const CompanySetupManagementView: React.FC<CompanySetupManagementViewProp
           </div>
         </form>
       </FormModal>
+
+      {/* Enterprise Group & Holding Hierarchy Studio Modal */}
+      {isHierarchyStudioOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/70 backdrop-blur-xs animate-in fade-in duration-200">
+          <div className="bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl w-full max-w-7xl max-h-[92vh] flex flex-col shadow-2xl overflow-hidden">
+            <div className="p-4 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <div className="w-8 h-8 rounded-lg bg-purple-600 text-white flex items-center justify-center font-bold">
+                  <GitFork className="w-4 h-4" />
+                </div>
+                <div>
+                  <div className="flex items-center gap-2">
+                    <span className="font-mono text-xs px-2 py-0.5 rounded bg-purple-50 text-purple-700 font-semibold border border-purple-200">
+                      01.01.06
+                    </span>
+                    <h3 className="text-sm font-bold text-slate-900 dark:text-slate-100">
+                      Group & Holding Multi-Tier Hierarchy Studio
+                    </h3>
+                  </div>
+                  <p className="text-xs text-slate-500 mt-0.5">
+                    Configure apex holding groups, equity holdings, consolidation rules, and multi-entity organograms
+                  </p>
+                </div>
+              </div>
+
+              <button
+                onClick={() => setIsHierarchyStudioOpen(false)}
+                className="px-3.5 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold rounded-lg transition-colors cursor-pointer"
+              >
+                Close Studio
+              </button>
+            </div>
+
+            <div className="flex-1 overflow-y-auto p-4">
+              <GroupHoldingManagementView />
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

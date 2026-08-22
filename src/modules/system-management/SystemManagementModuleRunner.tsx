@@ -15,6 +15,7 @@ import { BranchLocationSetupView } from './components/BranchLocationSetupView';
 import { OrganizationalStructureView } from './components/OrganizationalStructureView';
 import { FiscalYearSetupView } from './components/FiscalYearSetupView';
 import { PostingPeriodsSetupView } from './components/PostingPeriodsSetupView';
+import { GroupHoldingManagementView } from './components/GroupHoldingManagementView';
 import { OrganizationManagementView } from './components/OrganizationManagementView';
 import { UserAccessManagementView } from './components/UserAccessManagementView';
 import { WorkflowApprovalManagementView } from './components/WorkflowApprovalManagementView';
@@ -133,6 +134,13 @@ export const SystemManagementModuleRunner: React.FC<SystemManagementModuleRunner
                 initialTransactionCode={transaction?.code}
               />
             );
+          case 'group-holding-hierarchy':
+          case 'group-holding':
+          case 'group-hierarchy':
+          case 'hierarchy':
+          case 'manage-hierarchy':
+          case '01.01.06':
+            return <GroupHoldingManagementView />;
           default:
             return <CompanyOrganizationLandingView onNavigate={onNavigate} />;
         }
