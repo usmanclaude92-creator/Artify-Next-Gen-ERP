@@ -1026,6 +1026,7 @@ interface ConstructionStoreContextType {
   retentionReleases: RetentionReleaseRecord[];
   closeouts: ContractCloseoutFormalRecord[];
   kpis: ConstructionModuleKPIs;
+  kpiMetrics: ConstructionModuleKPIs;
   selectedContractId: string;
   setSelectedContractId: (id: string) => void;
   currency: string;
@@ -1263,6 +1264,7 @@ export const ConstructionProvider: React.FC<{ children: React.ReactNode }> = ({ 
         retentionReleases,
         closeouts,
         kpis,
+        kpiMetrics: kpis,
         selectedContractId,
         setSelectedContractId,
         currency,

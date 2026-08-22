@@ -26,26 +26,77 @@ export const MODULES_01_05: ERPModule[] = [
     ],
     functionalAreas: [
       {
-        id: 'org-company-setup',
+        id: 'company-organization-setup',
         code: '01.01',
-        name: 'Organization & Company Setup',
-        description: 'Multi-entity corporate hierarchy, legal entities, branches, operational units, and regional tax boundaries.',
+        name: 'Company & Organization Setup',
+        description: 'Manage companies, branches, locations, organizational structures, fiscal years and posting periods.',
         icon: 'Building2',
         phase: 'Phase 2 — System Management',
         processes: [
           {
-            id: 'company-master',
+            id: 'company-setup',
             code: '01.01.01',
-            name: 'Company Master',
-            description: 'Global legal entity definitions, corporate identifiers, registration records, and tax registration details.',
+            name: 'Company Setup',
+            description: 'Create and manage companies and company configuration.',
             phase: 'Phase 2 — System Management',
             transactions: [
-              { id: 'tx-company-master', code: '01.01.01.01', name: 'Company Master', description: 'Maintain parent and subsidiary legal entities with statutory credentials.', phase: 'Phase 2 — System Management', actionType: 'master', requiredPermissions: ['VIEW', 'EDIT', 'ADMIN'] },
-              { id: 'tx-holding-company', code: '01.01.01.02', name: 'Group / Holding Company', description: 'Configure group consolidation structure and inter-entity relationships.', phase: 'Phase 2 — System Management', actionType: 'master', requiredPermissions: ['VIEW', 'ADMIN'] },
-              { id: 'tx-branch-setup', code: '01.01.01.03', name: 'Branch Setup', description: 'Define operational branches, tax branches, and geographical service hubs.', phase: 'Phase 2 — System Management', actionType: 'configuration', requiredPermissions: ['VIEW', 'CREATE', 'EDIT'] },
-              { id: 'tx-dept-setup', code: '01.01.01.04', name: 'Department Setup', description: 'Organizational cost centers, functional divisions, and reporting lines.', phase: 'Phase 2 — System Management', actionType: 'configuration', requiredPermissions: ['VIEW', 'CREATE', 'EDIT'] },
-              { id: 'tx-location-setup', code: '01.01.01.05', name: 'Location Setup', description: 'Physical operational locations, office sites, yards, and dispatch zones.', phase: 'Phase 2 — System Management', actionType: 'configuration', requiredPermissions: ['VIEW', 'CREATE'] },
-              { id: 'tx-operating-units', code: '01.01.01.06', name: 'Operating Units', description: 'Autonomous profit/loss operational units and business division boundaries.', phase: 'Phase 2 — System Management', actionType: 'configuration', requiredPermissions: ['VIEW', 'EDIT'] }
+              { id: 'tx-company-creation', code: '01.01.01.01', name: 'Company Creation', description: 'Incorporate and register new legal entities in the ERP master registry.', phase: 'Phase 2 — System Management', actionType: 'master', requiredPermissions: ['VIEW', 'CREATE', 'ADMIN'] },
+              { id: 'tx-company-profile', code: '01.01.01.02', name: 'Company Profile', description: 'Maintain trade names, commercial registration (CR), and legal structure.', phase: 'Phase 2 — System Management', actionType: 'master', requiredPermissions: ['VIEW', 'EDIT', 'ADMIN'] },
+              { id: 'tx-company-info', code: '01.01.01.03', name: 'Company Information', description: 'Statutory address, corporate tax ID, TRN, contact details, and executive leadership.', phase: 'Phase 2 — System Management', actionType: 'master', requiredPermissions: ['VIEW', 'EDIT'] },
+              { id: 'tx-company-branding', code: '01.01.01.04', name: 'Company Logo & Branding', description: 'Brand assets, high-res corporate logos, theme colors, and statutory letterheads.', phase: 'Phase 2 — System Management', actionType: 'configuration', requiredPermissions: ['VIEW', 'EDIT', 'ADMIN'] },
+              { id: 'tx-company-params', code: '01.01.01.05', name: 'Company Parameters', description: 'Base functional currency, decimal precision, tax scheme, and fiscal start parameters.', phase: 'Phase 2 — System Management', actionType: 'configuration', requiredPermissions: ['VIEW', 'EDIT', 'ADMIN'] }
+            ]
+          },
+          {
+            id: 'branch-location-setup',
+            code: '01.01.02',
+            name: 'Branch & Location Setup',
+            description: 'Manage branches, locations and sites.',
+            phase: 'Phase 2 — System Management',
+            transactions: [
+              { id: 'tx-branch-creation', code: '01.01.02.01', name: 'Branch Creation', description: 'Define operational branches, commercial offices, and regional service hubs.', phase: 'Phase 2 — System Management', actionType: 'master', requiredPermissions: ['VIEW', 'CREATE', 'EDIT'] },
+              { id: 'tx-location-creation', code: '01.01.02.02', name: 'Location Creation', description: 'Physical corporate locations, GPS coordinates, facilities, and regional zones.', phase: 'Phase 2 — System Management', actionType: 'configuration', requiredPermissions: ['VIEW', 'CREATE', 'EDIT'] },
+              { id: 'tx-site-creation', code: '01.01.02.03', name: 'Site Creation', description: 'Industrial plants, project construction sites, storage yards, and depots.', phase: 'Phase 2 — System Management', actionType: 'configuration', requiredPermissions: ['VIEW', 'CREATE', 'EDIT'] },
+              { id: 'tx-branch-location-assign', code: '01.01.02.04', name: 'Branch/Location Assignment', description: 'Cross-assign operational locations and facility hubs to legal branches.', phase: 'Phase 2 — System Management', actionType: 'configuration', requiredPermissions: ['VIEW', 'EDIT', 'ADMIN'] }
+            ]
+          },
+          {
+            id: 'org-structure',
+            code: '01.01.03',
+            name: 'Organizational Structure',
+            description: 'Manage divisions, departments and sections.',
+            phase: 'Phase 2 — System Management',
+            transactions: [
+              { id: 'tx-dept-setup', code: '01.01.03.01', name: 'Department Setup', description: 'Cost centers, functional departments, and operational teams.', phase: 'Phase 2 — System Management', actionType: 'configuration', requiredPermissions: ['VIEW', 'CREATE', 'EDIT'] },
+              { id: 'tx-division-setup', code: '01.01.03.02', name: 'Division Setup', description: 'Strategic business divisions and segmental P&L reporting units.', phase: 'Phase 2 — System Management', actionType: 'configuration', requiredPermissions: ['VIEW', 'CREATE', 'EDIT'] },
+              { id: 'tx-section-setup', code: '01.01.03.03', name: 'Section Setup', description: 'Sub-department functional sections, project squads, and operational cells.', phase: 'Phase 2 — System Management', actionType: 'configuration', requiredPermissions: ['VIEW', 'CREATE', 'EDIT'] },
+              { id: 'tx-reporting-structure', code: '01.01.03.04', name: 'Reporting Structure', description: 'Hierarchical organogram, reporting matrix, and line-manager escalation chains.', phase: 'Phase 2 — System Management', actionType: 'configuration', requiredPermissions: ['VIEW', 'EDIT', 'ADMIN'] }
+            ]
+          },
+          {
+            id: 'fiscal-year',
+            code: '01.01.04',
+            name: 'Fiscal Year',
+            description: 'Manage fiscal years and year-end settings.',
+            phase: 'Phase 2 — System Management',
+            transactions: [
+              { id: 'tx-fy-creation', code: '01.01.04.01', name: 'Fiscal Year Creation', description: 'Create and define statutory accounting years for each legal entity.', phase: 'Phase 2 — System Management', actionType: 'configuration', requiredPermissions: ['VIEW', 'CREATE', 'ADMIN'] },
+              { id: 'tx-fy-opening', code: '01.01.04.02', name: 'Fiscal Year Opening', description: 'Initialize beginning ledger balances and open new accounting calendar.', phase: 'Phase 2 — System Management', actionType: 'transaction', requiredPermissions: ['VIEW', 'POST', 'ADMIN'] },
+              { id: 'tx-fy-closing', code: '01.01.04.03', name: 'Fiscal Year Closing', description: 'Year-end financial close, audit adjustments, and retained earnings rollover.', phase: 'Phase 2 — System Management', actionType: 'transaction', requiredPermissions: ['VIEW', 'ADMIN'] },
+              { id: 'tx-ye-config', code: '01.01.04.04', name: 'Year-End Configuration', description: 'GL retained earnings mapping, depreciation auto-run, and P13 adjustment setup.', phase: 'Phase 2 — System Management', actionType: 'configuration', requiredPermissions: ['VIEW', 'EDIT', 'ADMIN'] }
+            ]
+          },
+          {
+            id: 'posting-periods',
+            code: '01.01.05',
+            name: 'Posting Periods',
+            description: 'Manage financial posting periods.',
+            phase: 'Phase 2 — System Management',
+            transactions: [
+              { id: 'tx-period-creation', code: '01.01.05.01', name: 'Period Creation', description: 'Generate monthly accounting periods (P01–P12 + Special Closing P13).', phase: 'Phase 2 — System Management', actionType: 'configuration', requiredPermissions: ['VIEW', 'CREATE', 'ADMIN'] },
+              { id: 'tx-period-opening', code: '01.01.05.02', name: 'Period Opening', description: 'Authorize and open posting periods across company sub-ledgers.', phase: 'Phase 2 — System Management', actionType: 'transaction', requiredPermissions: ['VIEW', 'POST', 'ADMIN'] },
+              { id: 'tx-period-closing', code: '01.01.05.03', name: 'Period Closing', description: 'Perform month-end sub-ledger cutoffs and period closing routines.', phase: 'Phase 2 — System Management', actionType: 'transaction', requiredPermissions: ['VIEW', 'POST', 'ADMIN'] },
+              { id: 'tx-period-locking', code: '01.01.05.04', name: 'Period Locking', description: 'Sub-ledger lock matrix (GL, AP, AR, Inventory, Fixed Assets, Payroll) with emergency unlock.', phase: 'Phase 2 — System Management', actionType: 'transaction', requiredPermissions: ['VIEW', 'POST', 'ADMIN'] }
             ]
           }
         ]

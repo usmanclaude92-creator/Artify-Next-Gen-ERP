@@ -26,7 +26,7 @@ interface Props {
 }
 
 export const ConstructionAICopilotModal: React.FC<Props> = ({ isOpen, onClose }) => {
-  const { selectedContractId, contracts, ipcs, variations, claims, eotRecords, currency } = useConstructionStore();
+  const { selectedContractId, contracts, ipcs, variations, claims, eots, currency } = useConstructionStore();
   const selectedContract = contracts.find(c => c.id === selectedContractId) || contracts[0];
 
   const [messages, setMessages] = useState<{ sender: 'ai' | 'user'; text: string; time: string }[]>([

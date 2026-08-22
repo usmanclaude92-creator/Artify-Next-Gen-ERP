@@ -240,8 +240,8 @@ export default function App() {
         </div>
 
         {/* Dynamic Viewport Container */}
-        <main className="flex-1 overflow-y-auto p-4 sm:p-6 lg:p-8">
-          <div className="max-w-7xl mx-auto">
+        <main className="flex-1 overflow-y-auto py-6 sm:py-8">
+          <div className="w-[90%] mx-auto">
             {/* View 1: Executive Dashboard */}
             {routeState.view === 'dashboard' && (
               <DashboardView

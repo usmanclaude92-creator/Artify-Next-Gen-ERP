@@ -94,13 +94,42 @@ export function findModuleById(id?: string): ERPModule | undefined {
 export function findFunctionalAreaById(moduleId?: string, faId?: string) {
   const mod = findModuleById(moduleId);
   if (!mod || !faId) return undefined;
-  return mod.functionalAreas.find(fa => fa.id === faId);
+  
+  // Direct match
+  const direct = mod.functionalAreas.find(fa => fa.id === faId || fa.code === faId);
+  if (direct) return direct;
+
+  // Alias support for legacy or alternative IDs
+  if (faId === 'org-company-setup' || faId === 'org-setup' || faId === '01.01') {
+    return mod.functionalAreas.find(fa => fa.id === 'company-organization-setup' || fa.code === '01.01');
+  }
+  return undefined;
 }
 
 export function findProcessById(moduleId?: string, faId?: string, procId?: string) {
   const fa = findFunctionalAreaById(moduleId, faId);
   if (!fa || !procId) return undefined;
-  return fa.processes.find(p => p.id === procId);
+
+  const direct = fa.processes.find(p => p.id === procId || p.code === procId);
+  if (direct) return direct;
+
+  // Alias support for legacy or alternative process IDs
+  if (procId === 'company-master' || procId === '01.01.01') {
+    return fa.processes.find(p => p.id === 'company-setup' || p.code === '01.01.01');
+  }
+  if (procId === 'branch-setup' || procId === '01.01.02') {
+    return fa.processes.find(p => p.id === 'branch-location-setup' || p.code === '01.01.02');
+  }
+  if (procId === 'dept-setup' || procId === '01.01.03') {
+    return fa.processes.find(p => p.id === 'org-structure' || p.code === '01.01.03');
+  }
+  if (procId === '01.01.04') {
+    return fa.processes.find(p => p.id === 'fiscal-year' || p.code === '01.01.04');
+  }
+  if (procId === '01.01.05') {
+    return fa.processes.find(p => p.id === 'posting-periods' || p.code === '01.01.05');
+  }
+  return undefined;
 }
 
 export function findTransactionById(moduleId?: string, faId?: string, procId?: string, txId?: string) {

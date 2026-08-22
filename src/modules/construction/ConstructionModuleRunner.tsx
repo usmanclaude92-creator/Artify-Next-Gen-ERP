@@ -43,7 +43,7 @@ const ConstructionDashboardContent: React.FC<{ activeSection?: string }> = ({ ac
     selectedContractId,
     setSelectedContractId,
     currency,
-    kpiMetrics
+    kpis
   } = useConstructionStore();
 
   const [selectedSection, setSelectedSection] = useState<string>(activeSection);
@@ -166,25 +166,25 @@ const ConstructionDashboardContent: React.FC<{ activeSection?: string }> = ({ ac
           <div className="space-y-0.5">
             <span className="text-[10px] text-slate-400 font-semibold uppercase tracking-wider">Total Active Portfolio Value</span>
             <div className="text-xl font-black font-mono text-white">
-              {currency} {(kpiMetrics.totalActiveContractValue / 1000000).toFixed(1)}M
+              {currency} {((kpis?.totalPortfolioContractValue || 0) / 1000000).toFixed(1)}M
             </div>
           </div>
           <div className="space-y-0.5">
             <span className="text-[10px] text-slate-400 font-semibold uppercase tracking-wider">Certified Work Executed</span>
             <div className="text-xl font-black font-mono text-emerald-400">
-              {currency} {(kpiMetrics.totalCertifiedWorkExecuted / 1000000).toFixed(1)}M
+              {currency} {((kpis?.totalCertifiedWipThisMonth || 0) / 1000000).toFixed(1)}M
             </div>
           </div>
           <div className="space-y-0.5">
             <span className="text-[10px] text-slate-400 font-semibold uppercase tracking-wider">Retention Withheld in Escrow</span>
             <div className="text-xl font-black font-mono text-amber-400">
-              {currency} {(kpiMetrics.totalRetentionWithheld / 1000000).toFixed(2)}M
+              {currency} {((kpis?.cumulativeRetentionHeldInPortfolio || 0) / 1000000).toFixed(2)}M
             </div>
           </div>
           <div className="space-y-0.5">
             <span className="text-[10px] text-slate-400 font-semibold uppercase tracking-wider">Active Performance Bonds</span>
             <div className="text-xl font-black font-mono text-indigo-400">
-              {currency} {(kpiMetrics.totalPerformanceBondsActive / 1000000).toFixed(2)}M
+              {currency} {((kpis?.activeBondsExposureValue || 0) / 1000000).toFixed(2)}M
             </div>
           </div>
         </div>

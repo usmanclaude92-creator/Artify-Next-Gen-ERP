@@ -7,3 +7,34 @@
     transition: background-color 0.2s ease, color 0.2s ease;
   }
 }
+
+/* Dedicated Slim Scrollbar for ERP Module Navigation Area */
+.erp-module-scroll-area {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(100, 116, 139, 0.4) transparent;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.erp-module-scroll-area::-webkit-scrollbar {
+  width: 5px;
+}
+
+.erp-module-scroll-area::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.erp-module-scroll-area::-webkit-scrollbar-thumb {
+  background: rgba(100, 116, 139, 0.35);
+  border-radius: 9999px;
+  transition: background-color 0.2s ease;
+}
+
+.erp-module-scroll-area:hover::-webkit-scrollbar-thumb {
+  background: rgba(129, 140, 248, 0.6);
+}
+
+.erp-module-scroll-area::-webkit-scrollbar-thumb:hover {
+  background: rgba(99, 102, 241, 0.9);
+}
+

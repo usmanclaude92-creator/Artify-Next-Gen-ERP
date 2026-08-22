@@ -1,42 +1,249 @@
+export interface CompanyAttachment {
+  id: string;
+  name: string;
+  type: string;
+  size: string;
+  uploadedAt: string;
+  uploadedBy: string;
+  category: 'Commercial Registration (CR)' | 'Tax / VAT Certificate' | 'Chamber of Commerce' | 'Municipality Permit' | 'Articles of Association' | 'Audited Financials' | 'Board Resolution' | 'Other';
+  fileUrl?: string;
+  documentNumber?: string;
+  expiryDate?: string;
+}
+
+export interface CompanyHistoryRecord {
+  id: string;
+  companyId: string;
+  fieldChanged: string;
+  oldValue: string;
+  newValue: string;
+  changeReason: string;
+  changedBy: string;
+  timestamp: string;
+  documentRef?: string;
+}
+
 export interface Company {
   id: string;
   code: string;
   legalName: string;
   tradingName: string;
+  shortName?: string;
   companyType: 'Holding' | 'Subsidiary' | 'Joint Venture' | 'Branch' | 'Associate';
-  registrationNumber: string;
-  taxNumber: string;
+  legalStructure?: 'Public Joint Stock Company (SAOG)' | 'Closed Joint Stock Company (SAOC)' | 'Limited Liability Company (LLC)' | 'Sole Proprietorship (SPC)' | 'Branch of Foreign Entity' | 'Free Zone Entity (FZE/FZ-LLC)' | 'Holding Company' | 'Other';
+  industrySegment?: string;
+  
+  // Registration & Statutory Identification
+  registrationNumber: string; // CR Number
+  registrationDate?: string;
+  registrationExpiryDate?: string;
+  taxNumber: string; // VAT TRN
+  taxAuthority?: string;
+  commercialRegistryOffice?: string;
+  chamberOfCommerceNumber?: string;
+  municipalLicenseNumber?: string;
+
+  // Capital Structure & Financials
+  capitalAuthorized?: number;
+  capitalPaidUp?: number;
+  parValuePerShare?: number;
+  totalShares?: number;
+
+  // Address & Geography
   country: string;
-  state: string;
+  state: string; // Governorate / Province / Emirate
   city: string;
   address: string;
   postalCode: string;
+  poBox?: string;
+  buildingNumber?: string;
+  wayStreet?: string;
+
+  // Contact Details & Leadership
   phone: string;
   email: string;
   website: string;
-  currency: string;
-  fiscalYearStart: string;
+  contactPerson?: string;
+  managingDirectorName?: string;
+  cfoName?: string;
+  statutoryAuditor?: string;
+
+  // Financial, Fiscal & System Parameters
+  currency: string; // Base currency (e.g. OMR, AED, SAR, USD)
+  secondaryCurrency?: string;
+  fiscalYearStart: string; // YYYY-MM-DD
+  fiscalYearStartMonth?: number; // 1-12
   timeZone: string;
   dateFormat: string;
-  status: 'Active' | 'Inactive' | 'Draft' | 'Archived';
-  isParent: boolean;
-  parentId?: string;
-  ownershipPercentage?: number;
+  numberFormat?: string;
+  decimalPrecision?: number; // 2 or 3
+  defaultRoundingMethod?: 'Round Half Up' | 'Round Down' | 'Round Up';
+  taxScheme?: 'Standard VAT 5%' | 'VAT 15%' | 'Zero-Rated / Exempt' | 'Corporate Tax 15%' | 'Free Zone Tax Exempt';
+  corporateTaxRate?: number;
+  vatRate?: number;
+
+  // Branding, Logo & Template Identity
   logo?: string;
+  logoUrl?: string;
+  brandLogoDark?: string;
+  brandColor?: string;
+  brandSecondaryColor?: string;
+  watermarkText?: string;
+  watermarkEnabled?: boolean;
+  watermarkOpacity?: number;
+  watermarkAngle?: number;
+  letterheadTemplate?: 'Default Standard' | 'Modern Minimalist' | 'Executive Classic' | 'Bilingual English/Arabic' | 'Centered Official';
+  letterheadHeaderHtml?: string;
+  letterheadFooterHtml?: string;
+  headerTagline?: string;
+  footerBankDetails?: string;
+  arabicLegalName?: string;
+  arabicAddress?: string;
+  signatureStampUrl?: string;
+  stampEnabled?: boolean;
+  signatureOfficerName?: string;
+  signatureOfficerTitle?: string;
+
+  // Status, Lifecycle & Workflow
+  status: 'Active' | 'Inactive' | 'Draft' | 'Pending Approval' | 'Suspended' | 'Archived';
+  isParent: boolean;
+  isHolding?: boolean;
+  parentId?: string;
+  parentEntityId?: string;
+  ownershipPercentage?: number;
+  version?: number;
+  
+  // Attachments & History
+  attachments?: CompanyAttachment[];
+  history?: CompanyHistoryRecord[];
+
+  // Workflow tracking
+  submittedAt?: string;
+  submittedBy?: string;
+  approvedAt?: string;
+  approvedBy?: string;
+  rejectionReason?: string;
+  approvalComments?: string;
+
   createdAt: string;
   updatedAt: string;
 }
 
-export interface CompanyGroup {
+export interface CurrencyDefinition {
   id: string;
-  name: string;
   code: string;
-  holdingCompanyId: string;
-  currency: string;
-  description: string;
-  subsidiaryIds: string[];
+  name: string;
+  symbol: string;
+  decimalPlaces: number;
+  exchangeRate: number; // vs base currency
+  isBase: boolean;
   status: 'Active' | 'Inactive';
 }
+
+export interface GroupAttachment {
+  id: string;
+  name: string;
+  type: string;
+  size: string;
+  uploadedAt: string;
+  uploadedBy: string;
+  category: 'Shareholding Agreement' | 'Articles of Association' | 'Commercial Registry' | 'Tax Clearance' | 'Board Resolution' | 'Other';
+  fileUrl?: string;
+}
+
+export interface GroupMaster {
+  id: string;
+  code: string;
+  name: string;
+  shortName: string;
+  groupType: 'Holding Group' | 'Corporate Group' | 'Investment Group' | 'Parent-Subsidiary Group' | 'Consolidation Group' | 'Other Group';
+  parentCompanyId: string; // References Company.id (Authoritative Company Master)
+  currency: string; // Base consolidation currency (e.g. OMR, AED, USD, SAR)
+  description: string;
+  status: 'Draft' | 'Pending Approval' | 'Active' | 'Inactive' | 'Suspended' | 'Archived';
+  effectiveFrom: string;
+  effectiveTo?: string;
+  consolidationMethod?: 'Full Consolidation (IFRS 10)' | 'Proportional Consolidation' | 'Equity Method (IAS 28)' | 'Cost Method (IFRS 9)';
+  fiscalYearStartMonth?: number;
+  attachments?: GroupAttachment[];
+  createdBy: string;
+  createdAt: string;
+  updatedBy: string;
+  updatedAt: string;
+  version: number;
+  // Workflow attributes
+  submittedAt?: string;
+  submittedBy?: string;
+  approvedAt?: string;
+  approvedBy?: string;
+  rejectionReason?: string;
+  approvalComments?: string;
+}
+
+export type RelationshipType =
+  | 'Parent'
+  | 'Subsidiary'
+  | 'Wholly Owned Subsidiary'
+  | 'Associate'
+  | 'Joint Venture'
+  | 'Affiliate'
+  | 'Related Company'
+  | 'Investment'
+  | 'Other';
+
+export type ControlType =
+  | 'Direct Control (>50%)'
+  | 'Wholly Owned (100%)'
+  | 'Joint Control (50/50)'
+  | 'Significant Influence (20-50%)'
+  | 'Minority Interest (<20%)'
+  | 'Statutory Control';
+
+export interface GroupMembership {
+  id: string;
+  groupId: string; // References GroupMaster.id
+  companyId: string; // References Company.id
+  companyCode?: string;
+  companyName?: string;
+  relationshipType: RelationshipType;
+  ownershipPercentage: number; // 0.00 to 100.00 %
+  votingPercentage: number; // 0.00 to 100.00 %
+  acquisitionDate: string;
+  effectiveFrom: string;
+  effectiveTo?: string;
+  controlType: ControlType;
+  consolidationTreatment: 'Consolidated' | 'Equity Accounting' | 'Fair Value' | 'Exempt';
+  status: 'Active' | 'Inactive' | 'Draft' | 'Pending Approval' | 'Suspended' | 'Archived';
+  notes?: string;
+  createdBy: string;
+  createdAt: string;
+  updatedBy: string;
+  updatedAt: string;
+  version: number;
+}
+
+export interface RelationshipHistoryRecord {
+  id: string;
+  groupId: string;
+  groupName?: string;
+  companyId: string;
+  companyName: string;
+  companyCode: string;
+  previousOwnership: number;
+  newOwnership: number;
+  previousVoting?: number;
+  newVoting?: number;
+  previousRelationshipType?: string;
+  newRelationshipType: string;
+  changeReason: string;
+  effectiveDate: string;
+  changedBy: string;
+  timestamp: string;
+  documentRef?: string;
+}
+
+// Backwards-compatible alias for existing imports
+export type CompanyGroup = GroupMaster;
 
 export interface Branch {
   id: string;

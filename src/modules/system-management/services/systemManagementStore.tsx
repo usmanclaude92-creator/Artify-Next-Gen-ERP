@@ -1,7 +1,14 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import {
   Company,
+  CurrencyDefinition,
+  CompanyAttachment,
+  CompanyHistoryRecord,
   CompanyGroup,
+  GroupMaster,
+  GroupMembership,
+  RelationshipHistoryRecord,
+  GroupAttachment,
   Branch,
   Department,
   Location,
@@ -44,7 +51,11 @@ import {
 
 import {
   INITIAL_COMPANIES,
+  INITIAL_CURRENCIES,
   INITIAL_COMPANY_GROUP,
+  INITIAL_GROUPS,
+  INITIAL_GROUP_MEMBERSHIPS,
+  INITIAL_RELATIONSHIP_HISTORY,
   INITIAL_BRANCHES,
   INITIAL_DEPARTMENTS,
   INITIAL_LOCATIONS,
@@ -85,16 +96,60 @@ import {
 } from '../config/initialData';
 
 interface SystemManagementContextType {
-  // 01.01 Org
+  // 01.01 Org & 01.01.02 Group / Holding Master Data
   companies: Company[];
+  currencies: CurrencyDefinition[];
+  groups: GroupMaster[];
+  groupMemberships: GroupMembership[];
+  relationshipHistory: RelationshipHistoryRecord[];
   companyGroup: CompanyGroup;
+  selectedGroupId: string;
+  setSelectedGroupId: (id: string) => void;
   branches: Branch[];
   departments: Department[];
   locations: Location[];
   operatingUnits: OperatingUnit[];
-  addCompany: (comp: Omit<Company, 'id' | 'createdAt' | 'updatedAt'>) => void;
-  updateCompany: (id: string, comp: Partial<Company>) => void;
-  archiveCompany: (id: string) => void;
+
+  addCurrency: (currency: Omit<CurrencyDefinition, 'id'>) => { success: boolean; id?: string; error?: string };
+  updateCurrency: (id: string, patch: Partial<CurrencyDefinition>) => { success: boolean; error?: string };
+
+  addCompany: (comp: Omit<Company, 'id' | 'createdAt' | 'updatedAt' | 'version'>, user?: { id: string; name: string; role?: string }) => { success: boolean; id?: string; error?: string };
+  updateCompany: (id: string, comp: Partial<Company>, reason?: string, user?: { id: string; name: string; role?: string }) => { success: boolean; error?: string };
+  archiveCompany: (id: string, user?: { id: string; name: string }) => { success: boolean; error?: string };
+  submitCompanyForApproval: (id: string, user: { id: string; name: string; role: string }) => { success: boolean; error?: string };
+  approveCompany: (id: string, approver: { id: string; name: string; role: string }, comments?: string) => { success: boolean; error?: string };
+  rejectCompany: (id: string, rejector: { id: string; name: string; role: string }, reason: string) => { success: boolean; error?: string };
+  toggleCompanyStatus: (id: string, newStatus: Company['status'], user?: { id: string; name: string }) => { success: boolean; error?: string };
+  addCompanyAttachment: (companyId: string, attachment: Omit<CompanyAttachment, 'id' | 'uploadedAt'>, user?: { id: string; name: string }) => { success: boolean; error?: string };
+  removeCompanyAttachment: (companyId: string, attachmentId: string, user?: { id: string; name: string }) => { success: boolean; error?: string };
+  checkDuplicateCompany: (field: 'code' | 'taxNumber' | 'registrationNumber' | 'legalName', value: string, excludeCompanyId?: string) => { isDuplicate: boolean; matchedCompany?: Company };
+  extractCompanyWithAI: (rawTextOrDocument: string) => Promise<Partial<Company>>;
+  generateCompanyProfileSummaryAI: (companyId: string) => Promise<string>;
+
+  // 01.01.02 Group / Holding Company Operations
+  addGroup: (group: Omit<GroupMaster, 'id' | 'createdAt' | 'updatedAt' | 'version'>, user?: { id: string; name: string; role?: string }) => { success: boolean; id?: string; error?: string };
+  updateGroup: (id: string, patch: Partial<GroupMaster>, user?: { id: string; name: string }) => { success: boolean; error?: string };
+  archiveGroup: (id: string, user?: { id: string; name: string }) => { success: boolean; error?: string };
+  submitGroupForApproval: (id: string, user: { id: string; name: string; role: string }) => { success: boolean; error?: string };
+  approveGroup: (id: string, approver: { id: string; name: string; role: string }, comments?: string) => { success: boolean; error?: string };
+  rejectGroup: (id: string, rejector: { id: string; name: string; role: string }, reason: string) => { success: boolean; error?: string };
+  toggleGroupStatus: (id: string, newStatus: GroupMaster['status']) => void;
+  addGroupAttachment: (groupId: string, attachment: Omit<GroupAttachment, 'id' | 'uploadedAt'>) => void;
+
+  // Group Memberships
+  addGroupMember: (member: Omit<GroupMembership, 'id' | 'createdAt' | 'updatedAt' | 'version'>, user?: { id: string; name: string }) => { success: boolean; id?: string; error?: string };
+  updateGroupMember: (id: string, patch: Partial<GroupMembership>, reason?: string, changedBy?: string) => { success: boolean; error?: string };
+  removeGroupMember: (id: string, reason?: string, removedBy?: string) => { success: boolean; error?: string };
+
+  // Validation & Graph Analysis
+  checkCircularRelationship: (parentCompanyId: string, targetCompanyId: string, excludeMembershipId?: string) => { isCircular: boolean; path: string[]; message?: string };
+  checkDuplicateMembership: (groupId: string, companyId: string, excludeMembershipId?: string) => boolean;
+
+  // AI Assistance for Corporate Structures
+  extractCorporateStructureWithAI: (docTextOrMetadata: string) => Promise<any>;
+  generateStructureExplanationAI: (groupId: string) => Promise<string>;
+  validateStructureWithAI: (groupId: string) => Promise<{ score: number; recommendations: string[]; anomalies: string[] }>;
+
   addBranch: (br: Omit<Branch, 'id' | 'createdAt'>) => void;
   updateBranch: (id: string, br: Partial<Branch>) => void;
   addDepartment: (dept: Omit<Department, 'id'>) => void;
@@ -214,12 +269,56 @@ interface SystemManagementContextType {
 const SystemManagementContext = createContext<SystemManagementContextType | undefined>(undefined);
 
 export const SystemManagementProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  // 01.01
+  // 01.01 Organization Setup & 01.01.02 Group / Holding Master Data
   const [companies, setCompanies] = useState<Company[]>(() => {
     const saved = localStorage.getItem('artify_sm_companies');
     return saved ? JSON.parse(saved) : INITIAL_COMPANIES;
   });
-  const [companyGroup] = useState<CompanyGroup>(INITIAL_COMPANY_GROUP);
+
+  const [currencies, setCurrencies] = useState<CurrencyDefinition[]>(() => {
+    const saved = localStorage.getItem('artify_sm_currencies');
+    return saved ? JSON.parse(saved) : INITIAL_CURRENCIES;
+  });
+
+  useEffect(() => {
+    localStorage.setItem('artify_sm_currencies', JSON.stringify(currencies));
+  }, [currencies]);
+
+  const addCurrency = (currData: Omit<CurrencyDefinition, 'id'>) => {
+    const newCurr: CurrencyDefinition = {
+      ...currData,
+      id: `curr-${Date.now()}`
+    };
+    setCurrencies(prev => [...prev, newCurr]);
+    return { success: true, id: newCurr.id };
+  };
+
+  const updateCurrency = (id: string, patch: Partial<CurrencyDefinition>) => {
+    setCurrencies(prev => prev.map(c => c.id === id ? { ...c, ...patch } : c));
+    return { success: true };
+  };
+
+  const [groups, setGroups] = useState<GroupMaster[]>(() => {
+    const saved = localStorage.getItem('artify_sm_groups');
+    return saved ? JSON.parse(saved) : INITIAL_GROUPS;
+  });
+
+  const [groupMemberships, setGroupMemberships] = useState<GroupMembership[]>(() => {
+    const saved = localStorage.getItem('artify_sm_group_memberships');
+    return saved ? JSON.parse(saved) : INITIAL_GROUP_MEMBERSHIPS;
+  });
+
+  const [relationshipHistory, setRelationshipHistory] = useState<RelationshipHistoryRecord[]>(() => {
+    const saved = localStorage.getItem('artify_sm_rel_history');
+    return saved ? JSON.parse(saved) : INITIAL_RELATIONSHIP_HISTORY;
+  });
+
+  const [selectedGroupId, setSelectedGroupId] = useState<string>(() => {
+    return (INITIAL_GROUPS[0] && INITIAL_GROUPS[0].id) || 'grp-1';
+  });
+
+  const companyGroup = groups.find(g => g.id === selectedGroupId) || groups[0] || INITIAL_COMPANY_GROUP;
+
   const [branches, setBranches] = useState<Branch[]>(INITIAL_BRANCHES);
   const [departments, setDepartments] = useState<Department[]>(INITIAL_DEPARTMENTS);
   const [locations, setLocations] = useState<Location[]>(INITIAL_LOCATIONS);
@@ -287,10 +386,22 @@ export const SystemManagementProvider: React.FC<{ children: React.ReactNode }> =
     }, 6000);
   };
 
-  // Sync companies to storage
+  // Sync to local storage
   useEffect(() => {
     localStorage.setItem('artify_sm_companies', JSON.stringify(companies));
   }, [companies]);
+
+  useEffect(() => {
+    localStorage.setItem('artify_sm_groups', JSON.stringify(groups));
+  }, [groups]);
+
+  useEffect(() => {
+    localStorage.setItem('artify_sm_group_memberships', JSON.stringify(groupMemberships));
+  }, [groupMemberships]);
+
+  useEffect(() => {
+    localStorage.setItem('artify_sm_rel_history', JSON.stringify(relationshipHistory));
+  }, [relationshipHistory]);
 
   // Central audit event appender
   const logAuditEvent = (event: Omit<AuditEvent, 'id' | 'timestamp' | 'userAgent' | 'ipAddress'>) => {
@@ -304,75 +415,1389 @@ export const SystemManagementProvider: React.FC<{ children: React.ReactNode }> =
     setAuditTrail(prev => [newEntry, ...prev]);
   };
 
-  // 01.01 Handlers
-  const addCompany = (comp: Omit<Company, 'id' | 'createdAt' | 'updatedAt'>) => {
-    const newId = `comp-${companies.length + 1}`;
+  // ─────────────────────────────────────────────────────────────
+  // 01.01.02 Graph & Circular Relationship Engine
+  // ─────────────────────────────────────────────────────────────
+  const checkCircularRelationship = (
+    parentCompanyId: string,
+    targetCompanyId: string,
+    excludeMembershipId?: string
+  ): { isCircular: boolean; path: string[]; message?: string } => {
+    if (!parentCompanyId || !targetCompanyId) {
+      return { isCircular: false, path: [] };
+    }
+
+    if (parentCompanyId === targetCompanyId) {
+      const compName = companies.find(c => c.id === parentCompanyId)?.legalName || parentCompanyId;
+      return {
+        isCircular: true,
+        path: [compName, compName],
+        message: `Self-referential validation failure: Entity "${compName}" cannot hold or be a subsidiary of itself.`
+      };
+    }
+
+    // Build directed ownership graph: child company -> parent companies
+    const ownershipGraph = new Map<string, string[]>();
+
+    // Add company master parent relationships
+    companies.forEach(c => {
+      if (c.parentId) {
+        const parents = ownershipGraph.get(c.id) || [];
+        if (!parents.includes(c.parentId)) {
+          parents.push(c.parentId);
+          ownershipGraph.set(c.id, parents);
+        }
+      }
+    });
+
+    // Add group memberships: member company is owned by group's parentCompanyId
+    groupMemberships.forEach(gm => {
+      if (excludeMembershipId && gm.id === excludeMembershipId) return;
+      if (gm.status === 'Archived' || gm.status === 'Inactive') return;
+
+      const grp = groups.find(g => g.id === gm.groupId);
+      if (grp && grp.parentCompanyId && grp.parentCompanyId !== gm.companyId) {
+        const parents = ownershipGraph.get(gm.companyId) || [];
+        if (!parents.includes(grp.parentCompanyId)) {
+          parents.push(grp.parentCompanyId);
+          ownershipGraph.set(gm.companyId, parents);
+        }
+      }
+    });
+
+    // Check if targetCompanyId is an upstream ancestor of parentCompanyId
+    const queue: { current: string; path: string[] }[] = [{ current: parentCompanyId, path: [parentCompanyId] }];
+    const visited = new Set<string>();
+
+    while (queue.length > 0) {
+      const { current, path } = queue.shift()!;
+      if (current === targetCompanyId) {
+        const namedPath = path.map(id => companies.find(c => c.id === id)?.legalName || id);
+        return {
+          isCircular: true,
+          path: namedPath,
+          message: `Circular ownership loop blocked! "${companies.find(c => c.id === targetCompanyId)?.legalName || targetCompanyId}" is already an upstream holding entity of "${companies.find(c => c.id === parentCompanyId)?.legalName || parentCompanyId}". Cycle path: ${namedPath.join(' → ')}`
+        };
+      }
+
+      if (!visited.has(current)) {
+        visited.add(current);
+        const directParents = ownershipGraph.get(current) || [];
+        for (const p of directParents) {
+          queue.push({ current: p, path: [...path, p] });
+        }
+      }
+    }
+
+    return { isCircular: false, path: [] };
+  };
+
+  const checkDuplicateMembership = (
+    groupId: string,
+    companyId: string,
+    excludeMembershipId?: string
+  ): boolean => {
+    return groupMemberships.some(
+      gm =>
+        gm.groupId === groupId &&
+        gm.companyId === companyId &&
+        gm.id !== excludeMembershipId &&
+        gm.status !== 'Archived'
+    );
+  };
+
+  // ─────────────────────────────────────────────────────────────
+  // 01.01.02 Group / Holding Master Operations
+  // ─────────────────────────────────────────────────────────────
+  const addGroup = (
+    groupData: Omit<GroupMaster, 'id' | 'createdAt' | 'updatedAt' | 'version'>,
+    user?: { id: string; name: string; role?: string }
+  ): { success: boolean; id?: string; error?: string } => {
+    const trimmedCode = groupData.code.trim().toUpperCase();
+    if (groups.some(g => g.code.toUpperCase() === trimmedCode)) {
+      return { success: false, error: `Group code "${trimmedCode}" already exists. Must be unique across all corporate groups.` };
+    }
+
+    const parentComp = companies.find(c => c.id === groupData.parentCompanyId);
+    if (!parentComp) {
+      return { success: false, error: `Selected Parent Holding Company is invalid or does not exist in authoritative Company Master.` };
+    }
+
+    const newId = `grp-${Date.now().toString().slice(-4)}`;
     const dateStr = new Date().toISOString().split('T')[0];
-    const newComp: Company = {
-      ...comp,
+    const newGroup: GroupMaster = {
+      ...groupData,
       id: newId,
+      code: trimmedCode,
+      version: 1,
       createdAt: dateStr,
-      updatedAt: dateStr
+      updatedAt: dateStr,
+      createdBy: user?.name || 'usr-admin',
+      updatedBy: user?.name || 'usr-admin'
     };
-    setCompanies(prev => [...prev, newComp]);
+
+    setGroups(prev => [...prev, newGroup]);
+    setSelectedGroupId(newId);
+
+    // Auto-create Parent membership record
+    const parentMemId = `gmem-${Date.now().toString().slice(-4)}`;
+    const parentMembership: GroupMembership = {
+      id: parentMemId,
+      groupId: newId,
+      companyId: parentComp.id,
+      companyCode: parentComp.code,
+      companyName: parentComp.legalName,
+      relationshipType: 'Parent',
+      ownershipPercentage: 100.0,
+      votingPercentage: 100.0,
+      acquisitionDate: groupData.effectiveFrom || dateStr,
+      effectiveFrom: groupData.effectiveFrom || dateStr,
+      controlType: 'Wholly Owned (100%)',
+      consolidationTreatment: 'Consolidated',
+      status: 'Active',
+      notes: `Designated ultimate parent holding entity for ${newGroup.name}.`,
+      createdBy: user?.name || 'usr-admin',
+      createdAt: dateStr,
+      updatedBy: user?.name || 'usr-admin',
+      updatedAt: dateStr,
+      version: 1
+    };
+    setGroupMemberships(prev => [...prev, parentMembership]);
+
+    logAuditEvent({
+      userId: user?.id || 'usr-admin',
+      userName: user?.name || 'Administrator',
+      userRole: user?.role || 'Super Admin',
+      action: 'CREATE',
+      module: '01.01.02 Group / Holding Master',
+      entity: 'GroupMaster',
+      recordId: newId,
+      newValue: `${newGroup.code} (${newGroup.name})`,
+      result: 'SUCCESS',
+      details: `Created new Group / Holding structure ${newGroup.code} under parent ${parentComp.code}`
+    });
+
+    setBanner(`Corporate Group "${newGroup.name}" (${newGroup.code}) created successfully.`);
+    return { success: true, id: newId };
+  };
+
+  const updateGroup = (
+    id: string,
+    patch: Partial<GroupMaster>,
+    user?: { id: string; name: string }
+  ): { success: boolean; error?: string } => {
+    const existing = groups.find(g => g.id === id);
+    if (!existing) return { success: false, error: 'Group record not found.' };
+
+    if (patch.code && patch.code.toUpperCase() !== existing.code.toUpperCase()) {
+      const trimmedCode = patch.code.trim().toUpperCase();
+      if (groups.some(g => g.id !== id && g.code.toUpperCase() === trimmedCode)) {
+        return { success: false, error: `Group code "${trimmedCode}" is already in use by another group.` };
+      }
+    }
+
+    const dateStr = new Date().toISOString().split('T')[0];
+    const updatedGroup: GroupMaster = {
+      ...existing,
+      ...patch,
+      version: (existing.version || 1) + 1,
+      updatedAt: dateStr,
+      updatedBy: user?.name || 'usr-admin'
+    };
+
+    setGroups(prev => prev.map(g => (g.id === id ? updatedGroup : g)));
+
+    logAuditEvent({
+      userId: user?.id || 'usr-admin',
+      userName: user?.name || 'Administrator',
+      userRole: 'Super Admin',
+      action: 'UPDATE',
+      module: '01.01.02 Group / Holding Master',
+      entity: 'GroupMaster',
+      recordId: id,
+      previousValue: JSON.stringify({ name: existing.name, status: existing.status, parentCompanyId: existing.parentCompanyId }),
+      newValue: JSON.stringify({ name: updatedGroup.name, status: updatedGroup.status, parentCompanyId: updatedGroup.parentCompanyId }),
+      result: 'SUCCESS',
+      details: `Updated Group / Holding Master attributes for ${existing.code}`
+    });
+
+    setBanner(`Group master record "${updatedGroup.name}" updated.`);
+    return { success: true };
+  };
+
+  const archiveGroup = (id: string, user?: { id: string; name: string }): { success: boolean; error?: string } => {
+    const target = groups.find(g => g.id === id);
+    if (!target) return { success: false, error: 'Group not found.' };
+
+    setGroups(prev =>
+      prev.map(g => (g.id === id ? { ...g, status: 'Archived', updatedAt: new Date().toISOString().split('T')[0] } : g))
+    );
+
+    logAuditEvent({
+      userId: user?.id || 'usr-admin',
+      userName: user?.name || 'Administrator',
+      userRole: 'Super Admin',
+      action: 'UPDATE',
+      module: '01.01.02 Group / Holding Master',
+      entity: 'GroupMaster',
+      recordId: id,
+      newValue: 'status: Archived',
+      result: 'SUCCESS',
+      details: `Archived Corporate Group ${target.code}`
+    });
+
+    setBanner(`Corporate Group ${target.code} marked as Archived.`);
+    return { success: true };
+  };
+
+  const submitGroupForApproval = (
+    id: string,
+    user: { id: string; name: string; role: string }
+  ): { success: boolean; error?: string } => {
+    const group = groups.find(g => g.id === id);
+    if (!group) return { success: false, error: 'Group record not found.' };
+
+    const members = groupMemberships.filter(m => m.groupId === id && m.status !== 'Archived');
+    if (members.length === 0) {
+      return { success: false, error: 'Cannot submit group for approval: At least one member entity must be defined in the hierarchy.' };
+    }
+
+    const timestamp = new Date().toISOString().replace('T', ' ').slice(0, 19) + ' UTC';
+    const updated: GroupMaster = {
+      ...group,
+      status: 'Pending Approval',
+      submittedAt: timestamp,
+      submittedBy: user.name,
+      rejectionReason: undefined,
+      updatedAt: new Date().toISOString().split('T')[0],
+      updatedBy: user.name
+    };
+
+    setGroups(prev => prev.map(g => (g.id === id ? updated : g)));
+
+    // Emit in-app alert for Approvers
+    const newAlert: SystemAlertItem = {
+      id: `alt-grp-${Date.now().toString().slice(-4)}`,
+      title: `Group Hierarchy Approval Required: ${group.name}`,
+      type: 'approval',
+      priority: 'medium',
+      message: `Corporate Group "${group.name}" (${group.code}) was submitted for governance approval by ${user.name}.`,
+      timestamp: 'Just now',
+      read: false,
+      moduleRef: '01.01 Organization Setup',
+      actionUrl: '/system-management/org-setup'
+    };
+    setAlerts(prev => [newAlert, ...prev]);
+
+    logAuditEvent({
+      userId: user.id,
+      userName: user.name,
+      userRole: user.role,
+      action: 'CONFIG_CHANGE',
+      module: '01.01.02 Group / Holding Master',
+      entity: 'GroupMaster',
+      recordId: id,
+      newValue: 'status: Pending Approval',
+      result: 'SUCCESS',
+      details: `Submitted corporate group structure ${group.code} for executive board/governance approval.`
+    });
+
+    setBanner(`Corporate Group "${group.name}" submitted for approval.`);
+    return { success: true };
+  };
+
+  const approveGroup = (
+    id: string,
+    approver: { id: string; name: string; role: string },
+    comments?: string
+  ): { success: boolean; error?: string } => {
+    const group = groups.find(g => g.id === id);
+    if (!group) return { success: false, error: 'Group record not found.' };
+
+    // Segregation of Duties (SoD) Enforcement: Submitter cannot approve their own group submission
+    if (group.submittedBy && group.submittedBy.toLowerCase() === approver.name.toLowerCase()) {
+      return {
+        success: false,
+        error: `Segregation of Duties (SoD) Violation: Submitter (${group.submittedBy}) cannot approve their own corporate group structure.`
+      };
+    }
+
+    const timestamp = new Date().toISOString().replace('T', ' ').slice(0, 19) + ' UTC';
+    const updated: GroupMaster = {
+      ...group,
+      status: 'Active',
+      approvedAt: timestamp,
+      approvedBy: approver.name,
+      approvalComments: comments || 'Approved in compliance with Corporate Governance and Consolidation Standards.',
+      updatedAt: new Date().toISOString().split('T')[0],
+      updatedBy: approver.name
+    };
+
+    setGroups(prev => prev.map(g => (g.id === id ? updated : g)));
+
+    logAuditEvent({
+      userId: approver.id,
+      userName: approver.name,
+      userRole: approver.role,
+      action: 'APPROVE',
+      module: '01.01.02 Group / Holding Master',
+      entity: 'GroupMaster',
+      recordId: id,
+      newValue: 'status: Active (Approved)',
+      result: 'SUCCESS',
+      details: `Approved corporate group ${group.code}. Comments: ${comments || 'None'}`
+    });
+
+    setBanner(`Corporate Group "${group.name}" has been Approved and Activated.`);
+    return { success: true };
+  };
+
+  const rejectGroup = (
+    id: string,
+    rejector: { id: string; name: string; role: string },
+    reason: string
+  ): { success: boolean; error?: string } => {
+    const group = groups.find(g => g.id === id);
+    if (!group) return { success: false, error: 'Group record not found.' };
+
+    if (!reason || reason.trim().length === 0) {
+      return { success: false, error: 'A specific rejection reason must be provided.' };
+    }
+
+    const updated: GroupMaster = {
+      ...group,
+      status: 'Draft',
+      rejectionReason: reason,
+      updatedAt: new Date().toISOString().split('T')[0],
+      updatedBy: rejector.name
+    };
+
+    setGroups(prev => prev.map(g => (g.id === id ? updated : g)));
+
+    logAuditEvent({
+      userId: rejector.id,
+      userName: rejector.name,
+      userRole: rejector.role,
+      action: 'REJECT',
+      module: '01.01.02 Group / Holding Master',
+      entity: 'GroupMaster',
+      recordId: id,
+      newValue: `status: Draft (Rejected: ${reason})`,
+      result: 'SUCCESS',
+      details: `Rejected corporate group submission ${group.code}. Reason: ${reason}`
+    });
+
+    setBanner(`Corporate Group "${group.name}" was returned to Draft with feedback.`, 'warning');
+    return { success: true };
+  };
+
+  const toggleGroupStatus = (id: string, newStatus: GroupMaster['status']) => {
+    setGroups(prev =>
+      prev.map(g => (g.id === id ? { ...g, status: newStatus, updatedAt: new Date().toISOString().split('T')[0] } : g))
+    );
+    setBanner(`Group status updated to ${newStatus}.`);
+  };
+
+  const addGroupAttachment = (groupId: string, attachment: Omit<GroupAttachment, 'id' | 'uploadedAt'>) => {
+    const attId = `att-${Date.now().toString().slice(-4)}`;
+    const fullAttachment: GroupAttachment = {
+      ...attachment,
+      id: attId,
+      uploadedAt: new Date().toISOString().split('T')[0]
+    };
+
+    setGroups(prev =>
+      prev.map(g => {
+        if (g.id === groupId) {
+          const currentAtts = g.attachments || [];
+          return { ...g, attachments: [...currentAtts, fullAttachment] };
+        }
+        return g;
+      })
+    );
+
     logAuditEvent({
       userId: 'usr-admin',
       userName: 'Administrator',
       userRole: 'Super Admin',
       action: 'CREATE',
-      module: '01.01 Organization Setup',
-      entity: 'Company',
-      recordId: newId,
-      newValue: `${newComp.code} (${newComp.legalName})`,
+      module: '01.01.02 Group / Holding Master',
+      entity: 'GroupAttachment',
+      recordId: attId,
+      newValue: fullAttachment.name,
       result: 'SUCCESS',
-      details: `Created new legal entity ${newComp.code} - ${newComp.legalName}`
+      details: `Attached governance document "${fullAttachment.name}" (${fullAttachment.category}) to Group ${groupId}`
     });
-    setBanner(`Legal entity "${newComp.legalName}" (${newComp.code}) registered successfully.`);
+
+    setBanner(`Document "${fullAttachment.name}" attached successfully.`);
   };
 
-  const updateCompany = (id: string, patch: Partial<Company>) => {
-    setCompanies(prev =>
-      prev.map(c => {
-        if (c.id === id) {
-          const updated = { ...c, ...patch, updatedAt: new Date().toISOString().split('T')[0] };
-          logAuditEvent({
-            userId: 'usr-admin',
-            userName: 'Administrator',
-            userRole: 'Super Admin',
-            action: 'UPDATE',
-            module: '01.01 Organization Setup',
-            entity: 'Company',
-            recordId: id,
-            previousValue: JSON.stringify({ code: c.code, status: c.status, taxNumber: c.taxNumber }),
-            newValue: JSON.stringify({ code: updated.code, status: updated.status, taxNumber: updated.taxNumber }),
-            result: 'SUCCESS',
-            details: `Updated company master attributes for ${c.code}`
-          });
-          return updated;
-        }
-        return c;
-      })
-    );
-    setBanner(`Company master record updated.`);
+  // ─────────────────────────────────────────────────────────────
+  // 01.01.02 Group Memberships & Shareholding Management
+  // ─────────────────────────────────────────────────────────────
+  const addGroupMember = (
+    memberData: Omit<GroupMembership, 'id' | 'createdAt' | 'updatedAt' | 'version'>,
+    user?: { id: string; name: string }
+  ): { success: boolean; id?: string; error?: string } => {
+    const group = groups.find(g => g.id === memberData.groupId);
+    if (!group) return { success: false, error: 'Group record not found.' };
+
+    const comp = companies.find(c => c.id === memberData.companyId);
+    if (!comp) return { success: false, error: 'Selected Legal Entity does not exist in authoritative Company Master.' };
+
+    // Duplicate membership check
+    if (checkDuplicateMembership(memberData.groupId, memberData.companyId)) {
+      return {
+        success: false,
+        error: `Entity "${comp.legalName}" (${comp.code}) is already an active member of Group "${group.name}".`
+      };
+    }
+
+    // Ownership percentage check
+    if (memberData.ownershipPercentage < 0 || memberData.ownershipPercentage > 100) {
+      return { success: false, error: 'Ownership percentage must be between 0.00% and 100.00%.' };
+    }
+    if (memberData.votingPercentage < 0 || memberData.votingPercentage > 100) {
+      return { success: false, error: 'Voting rights percentage must be between 0.00% and 100.00%.' };
+    }
+
+    // Circular relationship check
+    const circularCheck = checkCircularRelationship(group.parentCompanyId, memberData.companyId);
+    if (circularCheck.isCircular) {
+      return { success: false, error: circularCheck.message };
+    }
+
+    const newId = `gmem-${Date.now().toString().slice(-4)}`;
+    const dateStr = new Date().toISOString().split('T')[0];
+    const newMembership: GroupMembership = {
+      ...memberData,
+      id: newId,
+      companyCode: comp.code,
+      companyName: comp.legalName,
+      version: 1,
+      createdAt: dateStr,
+      updatedAt: dateStr,
+      createdBy: user?.name || 'usr-admin',
+      updatedBy: user?.name || 'usr-admin'
+    };
+
+    setGroupMemberships(prev => [...prev, newMembership]);
+
+    // Record initial history snapshot
+    const histId = `rhist-${Date.now().toString().slice(-4)}`;
+    const historyEntry: RelationshipHistoryRecord = {
+      id: histId,
+      groupId: group.id,
+      groupName: group.name,
+      companyId: comp.id,
+      companyName: comp.legalName,
+      companyCode: comp.code,
+      previousOwnership: 0,
+      newOwnership: memberData.ownershipPercentage,
+      previousVoting: 0,
+      newVoting: memberData.votingPercentage,
+      previousRelationshipType: 'None',
+      newRelationshipType: memberData.relationshipType,
+      changeReason: memberData.notes || 'Initial entity induction into corporate group structure.',
+      effectiveDate: memberData.effectiveFrom || dateStr,
+      changedBy: user?.name || 'Administrator',
+      timestamp: new Date().toISOString().replace('T', ' ').slice(0, 19) + ' UTC'
+    };
+    setRelationshipHistory(prev => [historyEntry, ...prev]);
+
+    logAuditEvent({
+      userId: user?.id || 'usr-admin',
+      userName: user?.name || 'Administrator',
+      userRole: 'Super Admin',
+      action: 'CREATE',
+      module: '01.01.02 Group / Holding Master',
+      entity: 'GroupMembership',
+      recordId: newId,
+      newValue: `${comp.code} (${memberData.relationshipType} - ${memberData.ownershipPercentage}%)`,
+      result: 'SUCCESS',
+      details: `Added ${comp.code} to Group ${group.code} with ${memberData.ownershipPercentage}% equity shareholding.`
+    });
+
+    setBanner(`Entity "${comp.legalName}" added to Group structure.`);
+    return { success: true, id: newId };
   };
 
-  const archiveCompany = (id: string) => {
-    setCompanies(prev =>
-      prev.map(c => (c.id === id ? { ...c, status: 'Archived', updatedAt: new Date().toISOString().split('T')[0] } : c))
-    );
+  const updateGroupMember = (
+    id: string,
+    patch: Partial<GroupMembership>,
+    reason?: string,
+    changedBy?: string
+  ): { success: boolean; error?: string } => {
+    const existing = groupMemberships.find(m => m.id === id);
+    if (!existing) return { success: false, error: 'Membership record not found.' };
+
+    const group = groups.find(g => g.id === existing.groupId);
+    const comp = companies.find(c => c.id === existing.companyId);
+
+    if (patch.ownershipPercentage !== undefined) {
+      if (patch.ownershipPercentage < 0 || patch.ownershipPercentage > 100) {
+        return { success: false, error: 'Ownership percentage must be between 0.00% and 100.00%.' };
+      }
+    }
+    if (patch.votingPercentage !== undefined) {
+      if (patch.votingPercentage < 0 || patch.votingPercentage > 100) {
+        return { success: false, error: 'Voting rights percentage must be between 0.00% and 100.00%.' };
+      }
+    }
+
+    const dateStr = new Date().toISOString().split('T')[0];
+    const updatedMember: GroupMembership = {
+      ...existing,
+      ...patch,
+      version: (existing.version || 1) + 1,
+      updatedAt: dateStr,
+      updatedBy: changedBy || 'Administrator'
+    };
+
+    setGroupMemberships(prev => prev.map(m => (m.id === id ? updatedMember : m)));
+
+    // Track ownership or relationship change history
+    const ownershipChanged = patch.ownershipPercentage !== undefined && patch.ownershipPercentage !== existing.ownershipPercentage;
+    const typeChanged = patch.relationshipType !== undefined && patch.relationshipType !== existing.relationshipType;
+
+    if (ownershipChanged || typeChanged) {
+      const histId = `rhist-${Date.now().toString().slice(-4)}`;
+      const historyEntry: RelationshipHistoryRecord = {
+        id: histId,
+        groupId: existing.groupId,
+        groupName: group?.name || 'Group',
+        companyId: existing.companyId,
+        companyName: comp?.legalName || existing.companyName || 'Company',
+        companyCode: comp?.code || existing.companyCode || 'COMP',
+        previousOwnership: existing.ownershipPercentage,
+        newOwnership: patch.ownershipPercentage ?? existing.ownershipPercentage,
+        previousVoting: existing.votingPercentage,
+        newVoting: patch.votingPercentage ?? existing.votingPercentage,
+        previousRelationshipType: existing.relationshipType,
+        newRelationshipType: patch.relationshipType ?? existing.relationshipType,
+        changeReason: reason || 'Shareholding / equity structure adjustment.',
+        effectiveDate: patch.effectiveFrom || dateStr,
+        changedBy: changedBy || 'Administrator',
+        timestamp: new Date().toISOString().replace('T', ' ').slice(0, 19) + ' UTC'
+      };
+      setRelationshipHistory(prev => [historyEntry, ...prev]);
+    }
+
     logAuditEvent({
       userId: 'usr-admin',
-      userName: 'Administrator',
+      userName: changedBy || 'Administrator',
       userRole: 'Super Admin',
       action: 'UPDATE',
-      module: '01.01 Organization Setup',
+      module: '01.01.02 Group / Holding Master',
+      entity: 'GroupMembership',
+      recordId: id,
+      previousValue: JSON.stringify({ ownership: existing.ownershipPercentage, type: existing.relationshipType }),
+      newValue: JSON.stringify({ ownership: updatedMember.ownershipPercentage, type: updatedMember.relationshipType }),
+      result: 'SUCCESS',
+      details: `Updated shareholding parameters for entity ${existing.companyCode} in Group ${group?.code}`
+    });
+
+    setBanner(`Membership and shareholding parameters updated.`);
+    return { success: true };
+  };
+
+  const removeGroupMember = (id: string, reason?: string, removedBy?: string): { success: boolean; error?: string } => {
+    const existing = groupMemberships.find(m => m.id === id);
+    if (!existing) return { success: false, error: 'Membership record not found.' };
+
+    if (existing.relationshipType === 'Parent') {
+      return { success: false, error: 'Cannot remove the primary Parent / Holding Entity from the group. Reassign parentage first.' };
+    }
+
+    const group = groups.find(g => g.id === existing.groupId);
+    const comp = companies.find(c => c.id === existing.companyId);
+    const dateStr = new Date().toISOString().split('T')[0];
+
+    // Log history record of divestment/removal
+    const histId = `rhist-${Date.now().toString().slice(-4)}`;
+    const historyEntry: RelationshipHistoryRecord = {
+      id: histId,
+      groupId: existing.groupId,
+      groupName: group?.name || 'Group',
+      companyId: existing.companyId,
+      companyName: comp?.legalName || existing.companyName || 'Company',
+      companyCode: comp?.code || existing.companyCode || 'COMP',
+      previousOwnership: existing.ownershipPercentage,
+      newOwnership: 0,
+      previousVoting: existing.votingPercentage,
+      newVoting: 0,
+      previousRelationshipType: existing.relationshipType,
+      newRelationshipType: 'Divested / Removed',
+      changeReason: reason || 'Entity divested or unlinked from corporate group.',
+      effectiveDate: dateStr,
+      changedBy: removedBy || 'Administrator',
+      timestamp: new Date().toISOString().replace('T', ' ').slice(0, 19) + ' UTC'
+    };
+    setRelationshipHistory(prev => [historyEntry, ...prev]);
+
+    setGroupMemberships(prev => prev.filter(m => m.id !== id));
+
+    logAuditEvent({
+      userId: 'usr-admin',
+      userName: removedBy || 'Administrator',
+      userRole: 'Super Admin',
+      action: 'DELETE',
+      module: '01.01.02 Group / Holding Master',
+      entity: 'GroupMembership',
+      recordId: id,
+      newValue: 'REMOVED',
+      result: 'SUCCESS',
+      details: `Removed entity ${existing.companyCode} from Group ${group?.code}. Reason: ${reason || 'Divestment'}`
+    });
+
+    setBanner(`Entity removed from group structure.`);
+    return { success: true };
+  };
+
+  // ─────────────────────────────────────────────────────────────
+  // AI Assistive Intelligence for Corporate Holding Master
+  // ─────────────────────────────────────────────────────────────
+  const extractCorporateStructureWithAI = async (docTextOrMetadata: string): Promise<any> => {
+    // Grounded mock parser for corporate charters, articles of association, or shareholder resolutions
+    await new Promise(r => setTimeout(r, 900));
+    return {
+      extractedGroupName: 'Gulf Horizon Holdings PJSC',
+      suggestedCode: 'GRP-GH-HOLD',
+      detectedType: 'Holding Group',
+      baseCurrency: 'AED',
+      consolidationStandard: 'Full Consolidation (IFRS 10)',
+      entities: [
+        { code: 'GH-ENERGY', name: 'Gulf Horizon Clean Energy LLC', role: 'Subsidiary', ownership: 80.0, control: 'Direct Control (>50%)' },
+        { code: 'GH-LOGIST', name: 'Horizon Supply Chain Logistics FZE', role: 'Subsidiary', ownership: 100.0, control: 'Wholly Owned (100%)' },
+        { code: 'GH-TECH', name: 'Horizon AI Ventures LLC', role: 'Associate', ownership: 35.0, control: 'Significant Influence (20-50%)' }
+      ],
+      legalComplianceNote: 'Entity structure compliant with GCC Commercial Companies Law.'
+    };
+  };
+
+  const generateStructureExplanationAI = async (groupId: string): Promise<string> => {
+    const targetGroup = groups.find(g => g.id === groupId) || groups[0];
+    const members = groupMemberships.filter(m => m.groupId === targetGroup.id && m.status !== 'Archived');
+    const parentComp = companies.find(c => c.id === targetGroup.parentCompanyId);
+
+    const subsidiaries = members.filter(m => m.relationshipType === 'Subsidiary' || m.relationshipType === 'Wholly Owned Subsidiary');
+    const associates = members.filter(m => m.relationshipType === 'Associate');
+    const jvs = members.filter(m => m.relationshipType === 'Joint Venture');
+
+    let explanation = `**Executive Governance & Consolidation Summary for ${targetGroup.name} (${targetGroup.code})**:\n\n`;
+    explanation += `• **Ultimate Holding Entity**: **${parentComp?.legalName || 'N/A'}** (${parentComp?.code || 'N/A'}) incorporated in ${parentComp?.country || 'GCC'} operates as the apex entity.\n`;
+    explanation += `• **Consolidation Framework**: Governed under **${targetGroup.consolidationMethod || 'Full Consolidation (IFRS 10)'}** with consolidated base currency **${targetGroup.currency}**.\n`;
+    explanation += `• **Direct Subsidiaries (${subsidiaries.length})**: ${subsidiaries.map(s => `${s.companyName} (${s.ownershipPercentage}%)`).join(', ') || 'None'}.\n`;
+    if (associates.length > 0) {
+      explanation += `• **Associates (${associates.length})**: ${associates.map(a => `${a.companyName} (${a.ownershipPercentage}% - IAS 28 Equity Method)`).join(', ')}.\n`;
+    }
+    if (jvs.length > 0) {
+      explanation += `• **Joint Ventures (${jvs.length})**: ${jvs.map(j => `${j.companyName} (${j.ownershipPercentage}%)`).join(', ')}.\n`;
+    }
+    explanation += `• **Governance Status**: Current status is **${targetGroup.status}** with version **${targetGroup.version || 1}**. Total active corporate entities linked: **${members.length}**.`;
+
+    return explanation;
+  };
+
+  const validateStructureWithAI = async (groupId: string): Promise<{ score: number; recommendations: string[]; anomalies: string[] }> => {
+    const targetGroup = groups.find(g => g.id === groupId) || groups[0];
+    const members = groupMemberships.filter(m => m.groupId === targetGroup.id && m.status !== 'Archived');
+
+    const anomalies: string[] = [];
+    const recommendations: string[] = [];
+
+    // Check parent presence
+    const hasParent = members.some(m => m.relationshipType === 'Parent');
+    if (!hasParent) {
+      anomalies.push('Missing explicit Parent holding entity definition in group membership list.');
+    }
+
+    // Check ownership vs voting rights variance
+    members.forEach(m => {
+      if (m.votingPercentage !== m.ownershipPercentage) {
+        recommendations.push(`Dual-class share structure detected for ${m.companyName}: Ownership is ${m.ownershipPercentage}% while Voting Rights are ${m.votingPercentage}%. Ensure disclosure under IFRS 12.`);
+      }
+      if (m.ownershipPercentage < 50 && (m.relationshipType === 'Subsidiary' || m.relationshipType === 'Wholly Owned Subsidiary')) {
+        anomalies.push(`Classification anomaly: ${m.companyName} is designated as "${m.relationshipType}" but holds only ${m.ownershipPercentage}% equity. Confirm de facto control under IFRS 10.`);
+      }
+    });
+
+    if (targetGroup.status === 'Draft') {
+      recommendations.push('Structure is currently in Draft state. Submit for Board Governance approval once final shareholding audits are completed.');
+    }
+
+    const score = anomalies.length === 0 ? 98 : Math.max(70, 98 - anomalies.length * 12);
+
+    return {
+      score,
+      anomalies,
+      recommendations: recommendations.length > 0 ? recommendations : ['Structure conforms strictly to IFRS 10, IAS 28, and regional GCC corporate registries.']
+    };
+  };
+
+  // ─────────────────────────────────────────────────────────────
+  // 01.01.01 Company Setup & Legal Entity Master Operations
+  // ─────────────────────────────────────────────────────────────
+  const checkDuplicateCompany = (
+    field: 'code' | 'taxNumber' | 'registrationNumber' | 'legalName',
+    value: string,
+    excludeCompanyId?: string
+  ): { isDuplicate: boolean; matchedCompany?: Company } => {
+    if (!value || !value.trim()) return { isDuplicate: false };
+    const normalized = value.trim().toLowerCase();
+
+    const matched = companies.find(c => {
+      if (excludeCompanyId && c.id === excludeCompanyId) return false;
+      if (field === 'code') return c.code.toLowerCase() === normalized;
+      if (field === 'taxNumber') return c.taxNumber && c.taxNumber.toLowerCase() === normalized;
+      if (field === 'registrationNumber') return c.registrationNumber && c.registrationNumber.toLowerCase() === normalized;
+      if (field === 'legalName') return c.legalName.toLowerCase() === normalized;
+      return false;
+    });
+
+    return {
+      isDuplicate: !!matched,
+      matchedCompany: matched
+    };
+  };
+
+  const addCompany = (
+    compData: Omit<Company, 'id' | 'createdAt' | 'updatedAt' | 'version'>,
+    user?: { id: string; name: string; role?: string }
+  ): { success: boolean; id?: string; error?: string } => {
+    // 1. Mandatory Code validation
+    if (!compData.code || !compData.code.trim()) {
+      return { success: false, error: 'Company Code is required.' };
+    }
+    const cleanCode = compData.code.trim().toUpperCase();
+
+    // 2. Uniqueness check for Company Code
+    const dupCode = checkDuplicateCompany('code', cleanCode);
+    if (dupCode.isDuplicate) {
+      return { success: false, error: `Company Code "${cleanCode}" is already in use by "${dupCode.matchedCompany?.legalName}".` };
+    }
+
+    // 3. Legal Name validation & duplicate warning check
+    if (!compData.legalName || !compData.legalName.trim()) {
+      return { success: false, error: 'Legal Entity Name is mandatory.' };
+    }
+    const dupName = checkDuplicateCompany('legalName', compData.legalName);
+    if (dupName.isDuplicate) {
+      return { success: false, error: `A legal entity with the name "${compData.legalName}" is already registered (${dupName.matchedCompany?.code}).` };
+    }
+
+    // 4. Registration Number (CR) uniqueness check
+    if (compData.registrationNumber && compData.registrationNumber.trim()) {
+      const dupCR = checkDuplicateCompany('registrationNumber', compData.registrationNumber);
+      if (dupCR.isDuplicate) {
+        return { success: false, error: `Commercial Registration number "${compData.registrationNumber}" is already registered to "${dupCR.matchedCompany?.legalName}" (${dupCR.matchedCompany?.code}).` };
+      }
+    }
+
+    // 5. Tax Identification / VAT TRN check
+    if (compData.taxNumber && compData.taxNumber.trim()) {
+      const dupTax = checkDuplicateCompany('taxNumber', compData.taxNumber);
+      if (dupTax.isDuplicate) {
+        return { success: false, error: `Tax Registration Number (TRN) "${compData.taxNumber}" is already assigned to "${dupTax.matchedCompany?.legalName}".` };
+      }
+    }
+
+    // 6. Financial & Capital constraints
+    if (compData.capitalAuthorized && compData.capitalPaidUp && compData.capitalPaidUp > compData.capitalAuthorized) {
+      return { success: false, error: 'Paid-up Capital cannot exceed Authorized Share Capital.' };
+    }
+
+    const newId = `comp-${Date.now().toString().slice(-4)}`;
+    const dateStr = new Date().toISOString().split('T')[0];
+
+    const initialHistory: CompanyHistoryRecord[] = [
+      {
+        id: `hist-${Date.now().toString().slice(-4)}-1`,
+        companyId: newId,
+        fieldChanged: 'Entity Inception',
+        oldValue: 'None',
+        newValue: `${cleanCode} - ${compData.legalName}`,
+        changeReason: 'Initial statutory company incorporation in ERP master',
+        changedBy: user?.name || 'Administrator',
+        timestamp: new Date().toISOString().replace('T', ' ').slice(0, 19) + ' UTC',
+        documentRef: compData.registrationNumber || 'INCORP-INIT'
+      }
+    ];
+
+    const newCompany: Company = {
+      ...compData,
+      id: newId,
+      code: cleanCode,
+      version: 1,
+      history: initialHistory,
+      attachments: compData.attachments || [],
+      status: compData.status || 'Active',
+      createdAt: dateStr,
+      updatedAt: dateStr
+    };
+
+    setCompanies(prev => [...prev, newCompany]);
+
+    logAuditEvent({
+      userId: user?.id || 'usr-admin',
+      userName: user?.name || 'Administrator',
+      userRole: user?.role || 'Super Admin',
+      action: 'CREATE',
+      module: '01.01.01 Company Setup',
+      entity: 'Company',
+      recordId: newId,
+      newValue: `${newCompany.code} (${newCompany.legalName}) [${newCompany.country}]`,
+      result: 'SUCCESS',
+      details: `Registered legal entity ${newCompany.code} (${newCompany.companyType}, ${newCompany.currency}, CR: ${newCompany.registrationNumber || 'N/A'})`
+    });
+
+    setBanner(`Legal Entity "${newCompany.legalName}" (${newCompany.code}) registered successfully.`);
+    return { success: true, id: newId };
+  };
+
+  const updateCompany = (
+    id: string,
+    patch: Partial<Company>,
+    reason?: string,
+    user?: { id: string; name: string; role?: string }
+  ): { success: boolean; error?: string } => {
+    const existing = companies.find(c => c.id === id);
+    if (!existing) return { success: false, error: 'Company record not found.' };
+
+    // Code change check
+    if (patch.code && patch.code.trim().toUpperCase() !== existing.code.toUpperCase()) {
+      const cleanCode = patch.code.trim().toUpperCase();
+      const dupCode = checkDuplicateCompany('code', cleanCode, id);
+      if (dupCode.isDuplicate) {
+        return { success: false, error: `Company Code "${cleanCode}" is already in use by "${dupCode.matchedCompany?.legalName}".` };
+      }
+    }
+
+    // CR Number duplicate check
+    if (patch.registrationNumber && patch.registrationNumber.trim() !== existing.registrationNumber) {
+      const dupCR = checkDuplicateCompany('registrationNumber', patch.registrationNumber, id);
+      if (dupCR.isDuplicate) {
+        return { success: false, error: `Commercial Registration "${patch.registrationNumber}" is already in use by "${dupCR.matchedCompany?.legalName}".` };
+      }
+    }
+
+    // Tax Number duplicate check
+    if (patch.taxNumber && patch.taxNumber.trim() !== existing.taxNumber) {
+      const dupTax = checkDuplicateCompany('taxNumber', patch.taxNumber, id);
+      if (dupTax.isDuplicate) {
+        return { success: false, error: `Tax Number "${patch.taxNumber}" is already in use by "${dupTax.matchedCompany?.legalName}".` };
+      }
+    }
+
+    // Capital check
+    const newAuthCap = patch.capitalAuthorized !== undefined ? patch.capitalAuthorized : existing.capitalAuthorized;
+    const newPaidCap = patch.capitalPaidUp !== undefined ? patch.capitalPaidUp : existing.capitalPaidUp;
+    if (newAuthCap && newPaidCap && newPaidCap > newAuthCap) {
+      return { success: false, error: 'Paid-up capital cannot exceed authorized capital.' };
+    }
+
+    const dateStr = new Date().toISOString().split('T')[0];
+    const timestampStr = new Date().toISOString().replace('T', ' ').slice(0, 19) + ' UTC';
+
+    // Generate history records for critical fields
+    const historyDeltas: CompanyHistoryRecord[] = [];
+    const fieldsToTrack: (keyof Company)[] = [
+      'legalName',
+      'tradingName',
+      'registrationNumber',
+      'taxNumber',
+      'currency',
+      'fiscalYearStartMonth',
+      'capitalAuthorized',
+      'capitalPaidUp',
+      'statutoryAuditor',
+      'taxScheme',
+      'brandColor',
+      'status'
+    ];
+
+    fieldsToTrack.forEach(field => {
+      if (patch[field] !== undefined && patch[field] !== existing[field]) {
+        historyDeltas.push({
+          id: `hist-${Date.now().toString().slice(-4)}-${Math.floor(Math.random() * 900 + 100)}`,
+          companyId: id,
+          fieldChanged: String(field),
+          oldValue: String(existing[field] || 'None'),
+          newValue: String(patch[field] || 'None'),
+          changeReason: reason || 'Statutory/Operational update via Company Setup master console',
+          changedBy: user?.name || 'Administrator',
+          timestamp: timestampStr
+        });
+      }
+    });
+
+    const updatedCompany: Company = {
+      ...existing,
+      ...patch,
+      code: patch.code ? patch.code.trim().toUpperCase() : existing.code,
+      version: (existing.version || 1) + 1,
+      history: [...historyDeltas, ...(existing.history || [])],
+      updatedAt: dateStr
+    };
+
+    setCompanies(prev => prev.map(c => (c.id === id ? updatedCompany : c)));
+
+    logAuditEvent({
+      userId: user?.id || 'usr-admin',
+      userName: user?.name || 'Administrator',
+      userRole: user?.role || 'Super Admin',
+      action: 'UPDATE',
+      module: '01.01.01 Company Setup',
+      entity: 'Company',
+      recordId: id,
+      previousValue: JSON.stringify({ legalName: existing.legalName, code: existing.code, status: existing.status, currency: existing.currency }),
+      newValue: JSON.stringify({ legalName: updatedCompany.legalName, code: updatedCompany.code, status: updatedCompany.status, currency: updatedCompany.currency }),
+      result: 'SUCCESS',
+      details: `Updated company master attributes for ${existing.code} (${historyDeltas.length} tracked fields updated)`
+    });
+
+    setBanner(`Legal entity "${updatedCompany.legalName}" (${updatedCompany.code}) updated.`);
+    return { success: true };
+  };
+
+  const archiveCompany = (id: string, user?: { id: string; name: string }): { success: boolean; error?: string } => {
+    const comp = companies.find(c => c.id === id);
+    if (!comp) return { success: false, error: 'Company not found.' };
+
+    if (comp.isParent || comp.isHolding) {
+      return { success: false, error: 'Apex Holding entity cannot be archived while holding group is active.' };
+    }
+
+    // Check if company has active branches
+    const activeBranches = branches.filter(b => b.companyId === id && b.status === 'Active');
+    if (activeBranches.length > 0) {
+      return { success: false, error: `Cannot archive entity "${comp.code}" with ${activeBranches.length} active operational branches. Deactivate branches first.` };
+    }
+
+    const dateStr = new Date().toISOString().split('T')[0];
+    const timestampStr = new Date().toISOString().replace('T', ' ').slice(0, 19) + ' UTC';
+
+    const archiveHistory: CompanyHistoryRecord = {
+      id: `hist-${Date.now().toString().slice(-4)}-arch`,
+      companyId: id,
+      fieldChanged: 'status',
+      oldValue: comp.status,
+      newValue: 'Archived',
+      changeReason: 'Entity formally marked as Archived / Decommissioned',
+      changedBy: user?.name || 'Administrator',
+      timestamp: timestampStr
+    };
+
+    setCompanies(prev =>
+      prev.map(c =>
+        c.id === id
+          ? {
+              ...c,
+              status: 'Archived',
+              version: (c.version || 1) + 1,
+              history: [archiveHistory, ...(c.history || [])],
+              updatedAt: dateStr
+            }
+          : c
+      )
+    );
+
+    logAuditEvent({
+      userId: user?.id || 'usr-admin',
+      userName: user?.name || 'Administrator',
+      userRole: 'Super Admin',
+      action: 'UPDATE',
+      module: '01.01.01 Company Setup',
       entity: 'Company',
       recordId: id,
       newValue: 'status: Archived',
       result: 'SUCCESS',
-      details: `Archived company record ${id}`
+      details: `Archived company record ${comp.code} - ${comp.legalName}`
     });
-    setBanner(`Company ${id} marked as Archived.`);
+
+    setBanner(`Legal entity "${comp.legalName}" marked as Archived.`);
+    return { success: true };
+  };
+
+  const submitCompanyForApproval = (
+    id: string,
+    user: { id: string; name: string; role: string }
+  ): { success: boolean; error?: string } => {
+    const comp = companies.find(c => c.id === id);
+    if (!comp) return { success: false, error: 'Company not found.' };
+
+    if (comp.status !== 'Draft') {
+      return { success: false, error: `Only Draft legal entities can be submitted for approval. Current status is ${comp.status}.` };
+    }
+
+    const dateStr = new Date().toISOString().split('T')[0];
+    const timestampStr = new Date().toISOString().replace('T', ' ').slice(0, 19) + ' UTC';
+
+    const submitHistory: CompanyHistoryRecord = {
+      id: `hist-${Date.now().toString().slice(-4)}-sub`,
+      companyId: id,
+      fieldChanged: 'status',
+      oldValue: 'Draft',
+      newValue: 'Pending Approval',
+      changeReason: 'Submitted for Corporate Board / Statutory Officer Review',
+      changedBy: user.name,
+      timestamp: timestampStr
+    };
+
+    setCompanies(prev =>
+      prev.map(c =>
+        c.id === id
+          ? {
+              ...c,
+              status: 'Pending Approval',
+              submittedAt: dateStr,
+              submittedBy: user.name,
+              history: [submitHistory, ...(c.history || [])],
+              updatedAt: dateStr
+            }
+          : c
+      )
+    );
+
+    logAuditEvent({
+      userId: user.id,
+      userName: user.name,
+      userRole: user.role,
+      action: 'UPDATE',
+      module: '01.01.01 Company Setup',
+      entity: 'Company',
+      recordId: id,
+      newValue: 'status: Pending Approval',
+      result: 'SUCCESS',
+      details: `Submitted legal entity registration ${comp.code} for statutory approval`
+    });
+
+    setBanner(`Company "${comp.legalName}" submitted for governance approval.`);
+    return { success: true };
+  };
+
+  const approveCompany = (
+    id: string,
+    approver: { id: string; name: string; role: string },
+    comments?: string
+  ): { success: boolean; error?: string } => {
+    const comp = companies.find(c => c.id === id);
+    if (!comp) return { success: false, error: 'Company not found.' };
+
+    // Segregation of Duties (SoD) check: submitter cannot self-approve
+    if (comp.submittedBy && comp.submittedBy.toLowerCase() === approver.name.toLowerCase()) {
+      return {
+        success: false,
+        error: 'Segregation of Duties (SoD) Violation: The user who submitted the company setup cannot approve it. A separate compliance or financial officer must approve.'
+      };
+    }
+
+    const dateStr = new Date().toISOString().split('T')[0];
+    const timestampStr = new Date().toISOString().replace('T', ' ').slice(0, 19) + ' UTC';
+
+    const approveHistory: CompanyHistoryRecord = {
+      id: `hist-${Date.now().toString().slice(-4)}-appr`,
+      companyId: id,
+      fieldChanged: 'status',
+      oldValue: comp.status,
+      newValue: 'Active',
+      changeReason: `Statutory approval granted: ${comments || 'Commercial registration & tax parameters validated.'}`,
+      changedBy: approver.name,
+      timestamp: timestampStr
+    };
+
+    setCompanies(prev =>
+      prev.map(c =>
+        c.id === id
+          ? {
+              ...c,
+              status: 'Active',
+              approvedAt: dateStr,
+              approvedBy: approver.name,
+              approvalComments: comments || 'Approved',
+              rejectionReason: undefined,
+              history: [approveHistory, ...(c.history || [])],
+              updatedAt: dateStr
+            }
+          : c
+      )
+    );
+
+    logAuditEvent({
+      userId: approver.id,
+      userName: approver.name,
+      userRole: approver.role,
+      action: 'APPROVE',
+      module: '01.01.01 Company Setup',
+      entity: 'Company',
+      recordId: id,
+      newValue: 'status: Active (Approved)',
+      result: 'SUCCESS',
+      details: `Approved company master ${comp.code} (${comp.legalName}). Comments: ${comments || 'None'}`
+    });
+
+    setBanner(`Legal entity "${comp.legalName}" (${comp.code}) has been approved and activated.`);
+    return { success: true };
+  };
+
+  const rejectCompany = (
+    id: string,
+    rejector: { id: string; name: string; role: string },
+    reason: string
+  ): { success: boolean; error?: string } => {
+    const comp = companies.find(c => c.id === id);
+    if (!comp) return { success: false, error: 'Company not found.' };
+
+    if (!reason || !reason.trim()) {
+      return { success: false, error: 'Rejection reason is mandatory.' };
+    }
+
+    const dateStr = new Date().toISOString().split('T')[0];
+    const timestampStr = new Date().toISOString().replace('T', ' ').slice(0, 19) + ' UTC';
+
+    const rejectHistory: CompanyHistoryRecord = {
+      id: `hist-${Date.now().toString().slice(-4)}-rej`,
+      companyId: id,
+      fieldChanged: 'status',
+      oldValue: comp.status,
+      newValue: 'Draft (Returned)',
+      changeReason: `Submission rejected: ${reason}`,
+      changedBy: rejector.name,
+      timestamp: timestampStr
+    };
+
+    setCompanies(prev =>
+      prev.map(c =>
+        c.id === id
+          ? {
+              ...c,
+              status: 'Draft',
+              rejectionReason: reason,
+              history: [rejectHistory, ...(c.history || [])],
+              updatedAt: dateStr
+            }
+          : c
+      )
+    );
+
+    logAuditEvent({
+      userId: rejector.id,
+      userName: rejector.name,
+      userRole: rejector.role,
+      action: 'REJECT',
+      module: '01.01.01 Company Setup',
+      entity: 'Company',
+      recordId: id,
+      newValue: `status: Draft (Rejected: ${reason})`,
+      result: 'SUCCESS',
+      details: `Returned company submission ${comp.code} to Draft. Reason: ${reason}`
+    });
+
+    setBanner(`Company submission "${comp.legalName}" returned to Draft with feedback.`, 'warning');
+    return { success: true };
+  };
+
+  const toggleCompanyStatus = (
+    id: string,
+    newStatus: Company['status'],
+    user?: { id: string; name: string }
+  ): { success: boolean; error?: string } => {
+    const comp = companies.find(c => c.id === id);
+    if (!comp) return { success: false, error: 'Company not found.' };
+
+    const dateStr = new Date().toISOString().split('T')[0];
+    const timestampStr = new Date().toISOString().replace('T', ' ').slice(0, 19) + ' UTC';
+
+    const statusHistory: CompanyHistoryRecord = {
+      id: `hist-${Date.now().toString().slice(-4)}-st`,
+      companyId: id,
+      fieldChanged: 'status',
+      oldValue: comp.status,
+      newValue: newStatus,
+      changeReason: `Status toggled to ${newStatus}`,
+      changedBy: user?.name || 'Administrator',
+      timestamp: timestampStr
+    };
+
+    setCompanies(prev =>
+      prev.map(c =>
+        c.id === id
+          ? {
+              ...c,
+              status: newStatus,
+              history: [statusHistory, ...(c.history || [])],
+              updatedAt: dateStr
+            }
+          : c
+      )
+    );
+
+    logAuditEvent({
+      userId: user?.id || 'usr-admin',
+      userName: user?.name || 'Administrator',
+      userRole: 'Super Admin',
+      action: 'UPDATE',
+      module: '01.01.01 Company Setup',
+      entity: 'Company',
+      recordId: id,
+      previousValue: `status: ${comp.status}`,
+      newValue: `status: ${newStatus}`,
+      result: 'SUCCESS',
+      details: `Changed status of ${comp.code} from ${comp.status} to ${newStatus}`
+    });
+
+    setBanner(`Company "${comp.legalName}" status updated to ${newStatus}.`);
+    return { success: true };
+  };
+
+  const addCompanyAttachment = (
+    companyId: string,
+    attachment: Omit<CompanyAttachment, 'id' | 'uploadedAt'>,
+    user?: { id: string; name: string }
+  ): { success: boolean; error?: string } => {
+    const comp = companies.find(c => c.id === companyId);
+    if (!comp) return { success: false, error: 'Company not found.' };
+
+    const attId = `att-${Date.now().toString().slice(-4)}`;
+    const dateStr = new Date().toISOString().split('T')[0];
+
+    const fullAttachment: CompanyAttachment = {
+      ...attachment,
+      id: attId,
+      uploadedAt: dateStr,
+      uploadedBy: user?.name || attachment.uploadedBy || 'Administrator'
+    };
+
+    setCompanies(prev =>
+      prev.map(c => {
+        if (c.id === companyId) {
+          const current = c.attachments || [];
+          return {
+            ...c,
+            attachments: [...current, fullAttachment],
+            updatedAt: dateStr
+          };
+        }
+        return c;
+      })
+    );
+
+    logAuditEvent({
+      userId: user?.id || 'usr-admin',
+      userName: user?.name || 'Administrator',
+      userRole: 'Super Admin',
+      action: 'CREATE',
+      module: '01.01.01 Company Setup',
+      entity: 'CompanyAttachment',
+      recordId: attId,
+      newValue: fullAttachment.name,
+      result: 'SUCCESS',
+      details: `Uploaded filing document "${fullAttachment.name}" (${fullAttachment.category}) for ${comp.code}`
+    });
+
+    setBanner(`Document "${fullAttachment.name}" attached successfully.`);
+    return { success: true };
+  };
+
+  const removeCompanyAttachment = (
+    companyId: string,
+    attachmentId: string,
+    user?: { id: string; name: string }
+  ): { success: boolean; error?: string } => {
+    const comp = companies.find(c => c.id === companyId);
+    if (!comp) return { success: false, error: 'Company not found.' };
+
+    const targetAtt = (comp.attachments || []).find(a => a.id === attachmentId);
+
+    setCompanies(prev =>
+      prev.map(c => {
+        if (c.id === companyId) {
+          return {
+            ...c,
+            attachments: (c.attachments || []).filter(a => a.id !== attachmentId),
+            updatedAt: new Date().toISOString().split('T')[0]
+          };
+        }
+        return c;
+      })
+    );
+
+    logAuditEvent({
+      userId: user?.id || 'usr-admin',
+      userName: user?.name || 'Administrator',
+      userRole: 'Super Admin',
+      action: 'DELETE',
+      module: '01.01.01 Company Setup',
+      entity: 'CompanyAttachment',
+      recordId: attachmentId,
+      newValue: 'REMOVED',
+      result: 'SUCCESS',
+      details: `Removed filing document "${targetAtt?.name || attachmentId}" from ${comp.code}`
+    });
+
+    setBanner(`Document removed.`);
+    return { success: true };
+  };
+
+  const extractCompanyWithAI = async (rawTextOrDocument: string): Promise<Partial<Company>> => {
+    await new Promise(r => setTimeout(r, 800));
+    return {
+      code: 'GH-CLEAN-ENERGY',
+      legalName: 'Gulf Horizon Clean Energy SAOC',
+      tradingName: 'Horizon Clean Energy',
+      shortName: 'Horizon Energy',
+      companyType: 'Subsidiary',
+      legalStructure: 'Closed Joint Stock Company (SAOC)',
+      industrySegment: 'Renewable Power & Clean Utility Solutions',
+      registrationNumber: 'CR-4829103',
+      registrationDate: '2023-01-10',
+      taxNumber: 'OM-VAT-40082910',
+      taxAuthority: 'Oman Tax Authority (OTA)',
+      commercialRegistryOffice: 'MOCIIP Muscat Office',
+      chamberOfCommerceNumber: 'OCCI-MUS-5820',
+      capitalAuthorized: 15000000,
+      capitalPaidUp: 15000000,
+      parValuePerShare: 1.000,
+      totalShares: 15000000,
+      country: 'Oman',
+      state: 'Muscat Governorate',
+      city: 'Muscat',
+      address: 'Way 2110, Knowledge Oasis Muscat (KOM 4), Office 204',
+      postalCode: 'PC 130',
+      phone: '+968 2415 6700',
+      email: 'info@horizon-energy.om',
+      website: 'https://cleanenergy.horizon.om',
+      currency: 'OMR',
+      secondaryCurrency: 'USD',
+      fiscalYearStart: '2026-01-01',
+      fiscalYearStartMonth: 1,
+      timeZone: 'Asia/Muscat (GMT+4)',
+      dateFormat: 'YYYY-MM-DD',
+      taxScheme: 'Standard VAT 5%',
+      corporateTaxRate: 15,
+      vatRate: 5,
+      managingDirectorName: 'Eng. Badar Al-Kiyumi',
+      cfoName: 'Huda Al-Mamari',
+      statutoryAuditor: 'Ernst & Young (EY Oman)',
+      brandColor: '#059669',
+      brandSecondaryColor: '#10b981'
+    };
+  };
+
+  const generateCompanyProfileSummaryAI = async (companyId: string): Promise<string> => {
+    const comp = companies.find(c => c.id === companyId) || companies[0];
+    const compBranches = branches.filter(b => b.companyId === comp.id);
+    const compDepts = departments.filter(d => d.companyId === comp.id);
+
+    let summary = `**Executive Profile & Statutory Master Briefing: ${comp.legalName} (${comp.code})**\n\n`;
+    summary += `• **Statutory Identity**: Registered under **${comp.legalStructure || comp.companyType}** with CR Number **${comp.registrationNumber}** (${comp.taxAuthority || 'Tax Authority'}). Tax TRN is **${comp.taxNumber}**.\n`;
+    summary += `• **Capital Structure**: Authorized Share Capital of **${comp.capitalAuthorized ? comp.capitalAuthorized.toLocaleString() : 'N/A'} ${comp.currency}** (Paid-up: ${comp.capitalPaidUp ? comp.capitalPaidUp.toLocaleString() : 'N/A'} ${comp.currency} across ${comp.totalShares ? comp.totalShares.toLocaleString() : 'N/A'} shares @ ${comp.parValuePerShare || 1} ${comp.currency}/share).\n`;
+    summary += `• **Financial & Fiscal Regimen**: Base Operating Currency **${comp.currency}** (Secondary: ${comp.secondaryCurrency || 'USD'}). Fiscal calendar begins month **${comp.fiscalYearStartMonth || 1}** with **${comp.taxScheme || 'Standard VAT 5%'}** (Corporate Tax: ${comp.corporateTaxRate || 15}%, VAT: ${comp.vatRate || 5}%).\n`;
+    summary += `• **Operational Footprint**: **${compBranches.length} Active Branches** (${compBranches.map(b => b.name).join(', ') || 'Head Office only'}) and **${compDepts.length} Segment Cost Center Departments**.\n`;
+    summary += `• **Governance & Leadership**: Managing Director: **${comp.managingDirectorName || 'Executive Board'}**, CFO: **${comp.cfoName || 'Unassigned'}**, Independent Statutory Auditor: **${comp.statutoryAuditor || 'Appointed Auditor'}**.\n`;
+    summary += `• **Lifecycle Status**: Currently **${comp.status}** (Version ${comp.version || 1}). ${comp.attachments?.length || 0} statutory regulatory filings archived.`;
+
+    return summary;
   };
 
   const addBranch = (br: Omit<Branch, 'id' | 'createdAt'>) => {
@@ -1270,14 +2695,50 @@ export const SystemManagementProvider: React.FC<{ children: React.ReactNode }> =
     <SystemManagementContext.Provider
       value={{
         companies,
+        currencies,
+        groups,
+        groupMemberships,
+        relationshipHistory,
         companyGroup,
+        selectedGroupId,
+        setSelectedGroupId,
         branches,
         departments,
         locations,
         operatingUnits,
+        addCurrency,
+        updateCurrency,
         addCompany,
         updateCompany,
         archiveCompany,
+        submitCompanyForApproval,
+        approveCompany,
+        rejectCompany,
+        toggleCompanyStatus,
+        addCompanyAttachment,
+        removeCompanyAttachment,
+        checkDuplicateCompany,
+        extractCompanyWithAI,
+        generateCompanyProfileSummaryAI,
+
+        // 01.01.02 Group / Holding Master Operations
+        addGroup,
+        updateGroup,
+        archiveGroup,
+        submitGroupForApproval,
+        approveGroup,
+        rejectGroup,
+        toggleGroupStatus,
+        addGroupAttachment,
+        addGroupMember,
+        updateGroupMember,
+        removeGroupMember,
+        checkCircularRelationship,
+        checkDuplicateMembership,
+        extractCorporateStructureWithAI,
+        generateStructureExplanationAI,
+        validateStructureWithAI,
+
         addBranch,
         updateBranch,
         addDepartment,

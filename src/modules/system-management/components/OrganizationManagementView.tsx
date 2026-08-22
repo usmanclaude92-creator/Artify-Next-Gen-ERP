@@ -21,11 +21,14 @@ import { DataTable, ColumnDef } from './common/DataTable';
 import { StatusBadge } from './common/StatusBadge';
 import { MetricCard } from './common/MetricCard';
 import { FormModal } from './common/FormModal';
+import { GroupHoldingManagementView } from './GroupHoldingManagementView';
+import { CompanySetupManagementView } from './CompanySetupManagementView';
 import { Company, Branch, Department, Location, OperatingUnit } from '../types';
 
-export const OrganizationManagementView: React.FC<{ activeTab?: string }> = ({ activeTab: initialTab = 'companies' }) => {
+export const OrganizationManagementView: React.FC<{ activeTab?: string }> = ({ activeTab: initialTab = 'groups' }) => {
   const {
     companies,
+    groups,
     companyGroup,
     branches,
     departments,
@@ -44,8 +47,8 @@ export const OrganizationManagementView: React.FC<{ activeTab?: string }> = ({ a
     updateOperatingUnit
   } = useSystemManagement();
 
-  const [activeTab, setActiveTab] = useState<'companies' | 'hierarchy' | 'branches' | 'departments' | 'locations' | 'operating-units'>(
-    (initialTab as any) || 'companies'
+  const [activeTab, setActiveTab] = useState<'groups' | 'companies' | 'hierarchy' | 'branches' | 'departments' | 'locations' | 'operating-units'>(
+    (initialTab as any) || 'groups'
   );
 
   // Modal states
@@ -313,6 +316,18 @@ export const OrganizationManagementView: React.FC<{ activeTab?: string }> = ({ a
       {/* Tabs Bar */}
       <div className="flex items-center gap-2 border-b border-slate-200 overflow-x-auto pb-1">
         <button
+          onClick={() => setActiveTab('groups')}
+          className={`flex items-center gap-2 px-4 py-2.5 rounded-lg text-xs font-semibold whitespace-nowrap transition-colors cursor-pointer ${
+            activeTab === 'groups'
+              ? 'bg-indigo-600 text-white shadow-xs'
+              : 'text-slate-600 hover:bg-slate-100'
+          }`}
+        >
+          <GitFork className="w-4 h-4" />
+          <span>Corporate Groups & Holding ({groups.length})</span>
+        </button>
+
+        <button
           onClick={() => setActiveTab('companies')}
           className={`flex items-center gap-2 px-4 py-2.5 rounded-lg text-xs font-semibold whitespace-nowrap transition-colors cursor-pointer ${
             activeTab === 'companies'
@@ -321,19 +336,7 @@ export const OrganizationManagementView: React.FC<{ activeTab?: string }> = ({ a
           }`}
         >
           <Building2 className="w-4 h-4" />
-          <span>Legal Entities ({companies.length})</span>
-        </button>
-
-        <button
-          onClick={() => setActiveTab('hierarchy')}
-          className={`flex items-center gap-2 px-4 py-2.5 rounded-lg text-xs font-semibold whitespace-nowrap transition-colors cursor-pointer ${
-            activeTab === 'hierarchy'
-              ? 'bg-indigo-600 text-white shadow-xs'
-              : 'text-slate-600 hover:bg-slate-100'
-          }`}
-        >
-          <GitFork className="w-4 h-4" />
-          <span>Organization Hierarchy Tree</span>
+          <span>Legal Entities Master ({companies.length})</span>
         </button>
 
         <button
@@ -371,71 +374,25 @@ export const OrganizationManagementView: React.FC<{ activeTab?: string }> = ({ a
           <TrendingUp className="w-4 h-4" />
           <span>Operating Units & P&L</span>
         </button>
+
+        <button
+          onClick={() => setActiveTab('hierarchy')}
+          className={`flex items-center gap-2 px-4 py-2.5 rounded-lg text-xs font-semibold whitespace-nowrap transition-colors cursor-pointer ${
+            activeTab === 'hierarchy'
+              ? 'bg-indigo-600 text-white shadow-xs'
+              : 'text-slate-600 hover:bg-slate-100'
+          }`}
+        >
+          <Compass className="w-4 h-4" />
+          <span>Entity-Branch Network Map</span>
+        </button>
       </div>
 
-      {/* Tab 1: Companies */}
-      {activeTab === 'companies' && (
-        <DataTable
-          title="Corporate Legal Entities Master"
-          subtitle="Multi-entity corporate registry with autonomous fiscal calendars, statutory tax IDs, and reporting currencies"
-          data={companies}
-          columns={companyColumns}
-          keyExtractor={item => item.id}
-          onAddClick={() => setIsCompanyModalOpen(true)}
-          addLabel="Register Legal Entity"
-          searchPlaceholder="Search legal name, code, tax number, country..."
-          exportFileName="artify-companies-master"
-          filterOptions={[
-            {
-              key: 'status',
-              label: 'Status',
-              options: [
-                { value: 'Active', label: 'Active' },
-                { value: 'Inactive', label: 'Inactive' },
-                { value: 'Archived', label: 'Archived' }
-              ],
-              filterFn: (item, val) => item.status === val
-            },
-            {
-              key: 'country',
-              label: 'Country',
-              options: [
-                { value: 'Oman', label: 'Oman' },
-                { value: 'United Arab Emirates', label: 'United Arab Emirates' },
-                { value: 'Saudi Arabia', label: 'Saudi Arabia' }
-              ],
-              filterFn: (item, val) => item.country === val
-            }
-          ]}
-          actionRenderer={item => (
-            <div className="flex items-center justify-end gap-1.5">
-              <button
-                onClick={() => {
-                  setSelectedCompany(item);
-                  updateCompany(item.id, {
-                    status: item.status === 'Active' ? 'Inactive' : 'Active'
-                  });
-                }}
-                className={`px-2.5 py-1 rounded text-xs font-medium border cursor-pointer ${
-                  item.status === 'Active'
-                    ? 'border-amber-300 text-amber-700 hover:bg-amber-50'
-                    : 'border-emerald-300 text-emerald-700 hover:bg-emerald-50'
-                }`}
-              >
-                {item.status === 'Active' ? 'Deactivate' : 'Activate'}
-              </button>
-              <button
-                onClick={() => archiveCompany(item.id)}
-                disabled={item.isParent}
-                title={item.isParent ? 'Holding parent entity cannot be archived' : 'Archive entity'}
-                className="p-1 text-slate-400 hover:text-rose-600 disabled:opacity-30 disabled:cursor-not-allowed rounded"
-              >
-                <Archive className="w-4 h-4" />
-              </button>
-            </div>
-          )}
-        />
-      )}
+      {/* Tab 0: Corporate Groups & Holding Master Setup (01.01.02) */}
+      {activeTab === 'groups' && <GroupHoldingManagementView />}
+
+      {/* Tab 1: 01.01.01 Company Setup & Legal Entity Master */}
+      {activeTab === 'companies' && <CompanySetupManagementView />}
 
       {/* Tab 2: Hierarchy Tree */}
       {activeTab === 'hierarchy' && (

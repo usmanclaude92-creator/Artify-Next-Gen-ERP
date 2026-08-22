@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import {
   Home,
   Sparkles,
@@ -46,6 +46,33 @@ export const Sidebar: React.FC<SidebarProps> = ({
   });
   const [filterQuery, setFilterQuery] = useState('');
   const [activeSection, setActiveSection] = useState<'all' | 'favorites' | 'recents'>('all');
+  const moduleScrollRef = useRef<HTMLDivElement>(null);
+
+  // Keep the current active module expanded and revealed in viewport
+  useEffect(() => {
+    if (currentRoute.moduleId) {
+      setExpandedModules(prev => ({
+        ...prev,
+        [currentRoute.moduleId!]: true
+      }));
+
+      if (!isCollapsed) {
+        const timer = setTimeout(() => {
+          const activeEl = document.getElementById(`nav-module-${currentRoute.moduleId}`);
+          if (activeEl && moduleScrollRef.current) {
+            const container = moduleScrollRef.current;
+            const containerRect = container.getBoundingClientRect();
+            const activeRect = activeEl.getBoundingClientRect();
+
+            if (activeRect.top < containerRect.top || activeRect.bottom > containerRect.bottom) {
+              activeEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }
+          }
+        }, 120);
+        return () => clearTimeout(timer);
+      }
+    }
+  }, [currentRoute.moduleId, currentRoute.functionalAreaId, isCollapsed]);
 
   const toggleModuleExpand = (modId: string) => {
     setExpandedModules(prev => ({
@@ -70,12 +97,12 @@ export const Sidebar: React.FC<SidebarProps> = ({
 
   return (
     <aside
-      className={`bg-slate-900 text-slate-300 flex flex-col shrink-0 border-r border-slate-800 transition-all duration-200 z-40 select-none ${
+      className={`bg-slate-900 text-slate-300 flex flex-col shrink-0 border-r border-slate-800 transition-all duration-200 z-40 select-none h-screen sticky top-0 overflow-hidden ${
         isCollapsed ? 'w-18' : 'w-72'
       }`}
     >
-      {/* Brand Header */}
-      <div className="h-16 border-b border-slate-800/80 px-4 flex items-center justify-between">
+      {/* 1. FIXED TOP HEADER */}
+      <div className="h-16 shrink-0 border-b border-slate-800/80 px-4 flex items-center justify-between">
         {!isCollapsed && (
           <div
             onClick={() => onNavigate({ view: 'dashboard' })}
@@ -108,7 +135,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
         <button
           onClick={onToggleCollapse}
           title={isCollapsed ? 'Expand Navigation' : 'Collapse Navigation'}
-          className={`p-1.5 text-slate-400 hover:text-white hover:bg-slate-800 rounded-lg transition-colors ${
+          className={`p-1.5 text-slate-400 hover:text-white hover:bg-slate-800 rounded-lg transition-colors cursor-pointer ${
             isCollapsed ? 'hidden' : 'block'
           }`}
         >
@@ -116,109 +143,150 @@ export const Sidebar: React.FC<SidebarProps> = ({
         </button>
       </div>
 
-      {/* Navigation Search (Expanded Only) */}
-      {!isCollapsed && (
-        <div className="p-3 border-b border-slate-800/50">
-          <div className="relative">
-            <Search className="w-3.5 h-3.5 text-slate-500 absolute left-2.5 top-2.5" />
-            <input
-              type="text"
-              placeholder="Filter 17 modules..."
-              value={filterQuery}
-              onChange={e => setFilterQuery(e.target.value)}
-              className="w-full pl-8 pr-3 py-1.5 bg-slate-950/60 border border-slate-800 rounded-lg text-xs text-slate-200 placeholder-slate-500 focus:outline-none focus:border-indigo-500/60"
-            />
+      {/* 2. FIXED NAVIGATION / QUICK ACCESS AREA */}
+      <div className="shrink-0 border-b border-slate-800/60 bg-slate-900">
+        {/* Navigation Search (Expanded Only) */}
+        {!isCollapsed && (
+          <div className="p-3 pb-2 border-b border-slate-800/50">
+            <div className="relative">
+              <Search className="w-3.5 h-3.5 text-slate-500 absolute left-2.5 top-2.5" />
+              <input
+                type="text"
+                placeholder="Filter 17 modules..."
+                value={filterQuery}
+                onChange={e => setFilterQuery(e.target.value)}
+                className="w-full pl-8 pr-3 py-1.5 bg-slate-950/60 border border-slate-800 rounded-lg text-xs text-slate-200 placeholder-slate-500 focus:outline-none focus:border-indigo-500/60"
+              />
+            </div>
           </div>
-        </div>
-      )}
+        )}
 
-      {/* Core Quick Links (Home, AI, Favorites, Recents) */}
-      <div className="p-2 space-y-1 border-b border-slate-800/60">
-        <button
-          onClick={() => onNavigate({ view: 'dashboard' })}
-          className={`w-full flex items-center gap-3 px-3 py-2 rounded-lg text-xs font-semibold transition-all ${
-            currentRoute.view === 'dashboard'
-              ? 'bg-indigo-600 text-white shadow-xs'
-              : 'text-slate-300 hover:bg-slate-800/80 hover:text-white'
-          }`}
-        >
-          <Home className="w-4 h-4 shrink-0" />
-          {!isCollapsed && <span>Executive Dashboard</span>}
-        </button>
+        {/* Core Quick Links (Home, AI, Favorites, Recents) */}
+        <div className="p-2 space-y-1">
+          <button
+            onClick={() => onNavigate({ view: 'dashboard' })}
+            className={`w-full flex items-center gap-3 px-3 py-2 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
+              currentRoute.view === 'dashboard'
+                ? 'bg-indigo-600 text-white shadow-xs'
+                : 'text-slate-300 hover:bg-slate-800/80 hover:text-white'
+            }`}
+          >
+            <Home className="w-4 h-4 shrink-0" />
+            {!isCollapsed && <span>Executive Dashboard</span>}
+          </button>
 
-        <button
-          onClick={() => onNavigate({ view: 'ai' })}
-          className={`w-full flex items-center gap-3 px-3 py-2 rounded-lg text-xs font-semibold transition-all ${
-            currentRoute.view === 'ai'
-              ? 'bg-indigo-600 text-white shadow-xs'
-              : 'text-slate-300 hover:bg-slate-800/80 hover:text-white'
-          }`}
-        >
-          <Sparkles className="w-4 h-4 text-indigo-400 shrink-0" />
+          <button
+            onClick={() => onNavigate({ view: 'ai' })}
+            className={`w-full flex items-center gap-3 px-3 py-2 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
+              currentRoute.view === 'ai'
+                ? 'bg-indigo-600 text-white shadow-xs'
+                : 'text-slate-300 hover:bg-slate-800/80 hover:text-white'
+            }`}
+          >
+            <Sparkles className="w-4 h-4 text-indigo-400 shrink-0" />
+            {!isCollapsed && (
+              <div className="flex items-center justify-between w-full">
+                <span>AI Command Center</span>
+                <span className="text-[9px] font-bold bg-indigo-500/30 text-indigo-300 px-1.5 py-0.5 rounded border border-indigo-400/30">
+                  PROMPT
+                </span>
+              </div>
+            )}
+          </button>
+
+          {/* Favorites Section Switcher (Expanded) */}
           {!isCollapsed && (
-            <div className="flex items-center justify-between w-full">
-              <span>AI Command Center</span>
-              <span className="text-[9px] font-bold bg-indigo-500/30 text-indigo-300 px-1.5 py-0.5 rounded border border-indigo-400/30">
-                PROMPT
-              </span>
+            <div className="flex items-center gap-1 pt-1">
+              <button
+                onClick={() => setActiveSection(activeSection === 'favorites' ? 'all' : 'favorites')}
+                className={`flex-1 flex items-center justify-between px-2.5 py-1 rounded-md text-[11px] font-medium transition-colors cursor-pointer ${
+                  activeSection === 'favorites'
+                    ? 'bg-amber-500/20 text-amber-300 border border-amber-500/30'
+                    : 'text-slate-400 hover:bg-slate-800/60 hover:text-slate-200'
+                }`}
+              >
+                <span className="flex items-center gap-1.5">
+                  <Star className="w-3 h-3 text-amber-400 fill-amber-400/30" />
+                  <span>Favorites</span>
+                </span>
+                <span className="text-[10px] font-mono bg-slate-800 px-1 py-0.2 rounded text-slate-300">
+                  {favorites.length}
+                </span>
+              </button>
+
+              <button
+                onClick={() => setActiveSection(activeSection === 'recents' ? 'all' : 'recents')}
+                className={`flex-1 flex items-center justify-between px-2.5 py-1 rounded-md text-[11px] font-medium transition-colors cursor-pointer ${
+                  activeSection === 'recents'
+                    ? 'bg-blue-500/20 text-blue-300 border border-blue-500/30'
+                    : 'text-slate-400 hover:bg-slate-800/60 hover:text-slate-200'
+                }`}
+              >
+                <span className="flex items-center gap-1.5">
+                  <Clock className="w-3 h-3 text-blue-400" />
+                  <span>Recent</span>
+                </span>
+                <span className="text-[10px] font-mono bg-slate-800 px-1 py-0.2 rounded text-slate-300">
+                  {recents.length}
+                </span>
+              </button>
             </div>
           )}
-        </button>
+        </div>
 
-        {/* Favorites Section Switcher (Expanded) */}
-        {!isCollapsed && (
-          <div className="flex items-center gap-1 pt-1.5">
+        {/* Fixed Section Heading Above Scrollable Module List */}
+        {!isCollapsed && activeSection === 'all' && (
+          <div className="px-3 py-1.5 bg-slate-950/40 border-t border-slate-800/40 flex items-center justify-between text-[10px] font-bold uppercase tracking-wider text-slate-400">
+            <span className="flex items-center gap-1.5">
+              <Layers className="w-3 h-3 text-indigo-400" />
+              <span>ERP Architecture (17 Modules)</span>
+            </span>
+            <span className="font-mono text-[9px] bg-slate-800 px-1 py-0.2 rounded text-slate-400">
+              L1 to L4
+            </span>
+          </div>
+        )}
+
+        {!isCollapsed && activeSection === 'favorites' && (
+          <div className="px-3 py-1.5 bg-slate-950/40 border-t border-slate-800/40 flex items-center justify-between text-[10px] font-bold uppercase tracking-wider text-amber-400">
+            <span className="flex items-center gap-1.5">
+              <Star className="w-3 h-3 text-amber-400 fill-amber-400/30" />
+              <span>Pinned Favorites ({favorites.length})</span>
+            </span>
             <button
-              onClick={() => setActiveSection(activeSection === 'favorites' ? 'all' : 'favorites')}
-              className={`flex-1 flex items-center justify-between px-2.5 py-1 rounded-md text-[11px] font-medium transition-colors ${
-                activeSection === 'favorites'
-                  ? 'bg-amber-500/20 text-amber-300 border border-amber-500/30'
-                  : 'text-slate-400 hover:bg-slate-800/60 hover:text-slate-200'
-              }`}
+              onClick={() => setActiveSection('all')}
+              className="text-[10px] text-slate-400 hover:text-white font-medium cursor-pointer"
             >
-              <span className="flex items-center gap-1.5">
-                <Star className="w-3 h-3 text-amber-400 fill-amber-400/30" />
-                <span>Favorites</span>
-              </span>
-              <span className="text-[10px] font-mono bg-slate-800 px-1 py-0.2 rounded text-slate-300">
-                {favorites.length}
-              </span>
+              Show All
             </button>
+          </div>
+        )}
 
+        {!isCollapsed && activeSection === 'recents' && (
+          <div className="px-3 py-1.5 bg-slate-950/40 border-t border-slate-800/40 flex items-center justify-between text-[10px] font-bold uppercase tracking-wider text-blue-400">
+            <span className="flex items-center gap-1.5">
+              <Clock className="w-3 h-3 text-blue-400" />
+              <span>Recently Visited ({recents.length})</span>
+            </span>
             <button
-              onClick={() => setActiveSection(activeSection === 'recents' ? 'all' : 'recents')}
-              className={`flex-1 flex items-center justify-between px-2.5 py-1 rounded-md text-[11px] font-medium transition-colors ${
-                activeSection === 'recents'
-                  ? 'bg-blue-500/20 text-blue-300 border border-blue-500/30'
-                  : 'text-slate-400 hover:bg-slate-800/60 hover:text-slate-200'
-              }`}
+              onClick={() => setActiveSection('all')}
+              className="text-[10px] text-slate-400 hover:text-white font-medium cursor-pointer"
             >
-              <span className="flex items-center gap-1.5">
-                <Clock className="w-3 h-3 text-blue-400" />
-                <span>Recent</span>
-              </span>
-              <span className="text-[10px] font-mono bg-slate-800 px-1 py-0.2 rounded text-slate-300">
-                {recents.length}
-              </span>
+              Show All
             </button>
           </div>
         )}
       </div>
 
-      {/* Main Module List / Favorites / Recents List */}
-      <div className="flex-1 overflow-y-auto px-2 py-3 space-y-1.5 scrollbar-thin scrollbar-thumb-slate-800">
+      {/* 3. INDEPENDENT ERP MODULE SCROLL AREA */}
+      <div
+        id="erp-module-scroll-container"
+        ref={moduleScrollRef}
+        className="flex-1 min-h-0 erp-module-scroll-area px-2 py-2 space-y-1.5 overscroll-contain"
+      >
         {/* Favorites View Mode */}
         {activeSection === 'favorites' && !isCollapsed && (
           <div className="space-y-1 animate-in fade-in">
-            <div className="px-2 pb-1 text-[10px] font-bold uppercase tracking-wider text-amber-400 flex items-center justify-between">
-              <span>Pinned Favorites ({favorites.length})</span>
-              <button
-                onClick={() => setActiveSection('all')}
-                className="text-[10px] text-slate-400 hover:text-white"
-              >
-                Show All
-              </button>
-            </div>
             {favorites.length === 0 ? (
               <p className="text-xs text-slate-500 px-2 py-4 text-center italic">
                 No favorites pinned yet. Click the star icon on any module, area, or voucher.
@@ -228,7 +296,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
                 <button
                   key={fav.id}
                   onClick={() => onNavigate(fav.route)}
-                  className="w-full text-left p-2 rounded-lg bg-slate-950/40 hover:bg-slate-800 border border-slate-800/80 text-xs flex items-center justify-between group transition-colors"
+                  className="w-full text-left p-2 rounded-lg bg-slate-950/40 hover:bg-slate-800 border border-slate-800/80 text-xs flex items-center justify-between group transition-colors cursor-pointer"
                 >
                   <div className="min-w-0">
                     <p className="font-semibold text-slate-200 truncate group-hover:text-amber-300">
@@ -246,15 +314,6 @@ export const Sidebar: React.FC<SidebarProps> = ({
         {/* Recents View Mode */}
         {activeSection === 'recents' && !isCollapsed && (
           <div className="space-y-1 animate-in fade-in">
-            <div className="px-2 pb-1 text-[10px] font-bold uppercase tracking-wider text-blue-400 flex items-center justify-between">
-              <span>Recently Visited ({recents.length})</span>
-              <button
-                onClick={() => setActiveSection('all')}
-                className="text-[10px] text-slate-400 hover:text-white"
-              >
-                Show All
-              </button>
-            </div>
             {recents.length === 0 ? (
               <p className="text-xs text-slate-500 px-2 py-4 text-center italic">
                 Navigate to any module to log recent activities.
@@ -264,7 +323,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
                 <button
                   key={`${rec.id}-${idx}`}
                   onClick={() => onNavigate(rec.route)}
-                  className="w-full text-left p-2 rounded-lg bg-slate-950/40 hover:bg-slate-800 border border-slate-800/80 text-xs flex items-center justify-between group transition-colors"
+                  className="w-full text-left p-2 rounded-lg bg-slate-950/40 hover:bg-slate-800 border border-slate-800/80 text-xs flex items-center justify-between group transition-colors cursor-pointer"
                 >
                   <div className="min-w-0">
                     <p className="font-semibold text-slate-200 truncate group-hover:text-blue-300">
@@ -282,15 +341,6 @@ export const Sidebar: React.FC<SidebarProps> = ({
         {/* All 17 ERP Modules Hierarchy */}
         {activeSection === 'all' && (
           <div className="space-y-1">
-            {!isCollapsed && (
-              <div className="px-2 pb-1 text-[10px] font-bold uppercase tracking-wider text-slate-500 flex items-center justify-between">
-                <span>ERP Architecture (17 Modules)</span>
-                <span className="font-mono text-[9px] bg-slate-800 px-1 py-0.2 rounded text-slate-400">
-                  L1 to L4
-                </span>
-              </div>
-            )}
-
             {filteredModules.map(mod => {
               const isModuleActive = currentRoute.moduleId === mod.id;
               const isExpanded = !!expandedModules[mod.id];
@@ -299,9 +349,10 @@ export const Sidebar: React.FC<SidebarProps> = ({
                 return (
                   <button
                     key={mod.id}
+                    id={`nav-module-${mod.id}`}
                     onClick={() => onNavigate({ view: 'module', moduleId: mod.id })}
                     title={`${mod.code} — ${mod.name}`}
-                    className={`w-10 h-10 mx-auto rounded-xl flex items-center justify-center transition-all ${
+                    className={`w-10 h-10 mx-auto rounded-xl flex items-center justify-center transition-all cursor-pointer ${
                       isModuleActive
                         ? 'bg-indigo-600 text-white shadow-md'
                         : 'text-slate-400 hover:bg-slate-800 hover:text-white'
@@ -313,7 +364,11 @@ export const Sidebar: React.FC<SidebarProps> = ({
               }
 
               return (
-                <div key={mod.id} className="rounded-xl overflow-hidden bg-slate-950/30 border border-slate-800/40">
+                <div
+                  key={mod.id}
+                  id={`nav-module-${mod.id}`}
+                  className="rounded-xl overflow-hidden bg-slate-950/30 border border-slate-800/40 transition-colors"
+                >
                   {/* Module Header Button */}
                   <div
                     className={`flex items-center justify-between px-2.5 py-2 cursor-pointer transition-all ${
@@ -326,7 +381,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
                   >
                     <button
                       onClick={() => onNavigate({ view: 'module', moduleId: mod.id })}
-                      className="flex items-center gap-2.5 min-w-0 flex-1 text-left"
+                      className="flex items-center gap-2.5 min-w-0 flex-1 text-left cursor-pointer"
                     >
                       <div className="w-6 h-6 rounded-md bg-slate-800 flex items-center justify-center shrink-0 text-slate-300">
                         <IconRenderer name={mod.icon} className="w-3.5 h-3.5" />
@@ -348,7 +403,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
                         e.stopPropagation();
                         toggleModuleExpand(mod.id);
                       }}
-                      className="p-1 text-slate-500 hover:text-slate-200 rounded shrink-0"
+                      className="p-1 text-slate-500 hover:text-slate-200 rounded shrink-0 cursor-pointer"
                     >
                       {isExpanded ? (
                         <ChevronDown className="w-3.5 h-3.5" />
@@ -375,7 +430,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
                                 functionalAreaId: fa.id
                               })
                             }
-                            className={`w-full text-left px-2 py-1.5 rounded-lg text-xs flex items-center justify-between transition-colors ${
+                            className={`w-full text-left px-2 py-1.5 rounded-lg text-xs flex items-center justify-between transition-colors cursor-pointer ${
                               isFaActive
                                 ? 'bg-indigo-600/30 text-indigo-200 font-semibold border border-indigo-500/30'
                                 : 'text-slate-400 hover:bg-slate-800/50 hover:text-slate-200'
@@ -400,13 +455,13 @@ export const Sidebar: React.FC<SidebarProps> = ({
         )}
       </div>
 
-      {/* Sidebar Footer: Permissions Inspector & Expand Toggle */}
-      <div className="p-3 border-t border-slate-800 bg-slate-950/80 text-xs">
+      {/* 4. FIXED SIDEBAR FOOTER: Permissions Inspector & Expand Toggle */}
+      <div className="shrink-0 p-3 border-t border-slate-800 bg-slate-950/80 text-xs">
         {!isCollapsed ? (
           <div className="space-y-2">
             <button
               onClick={onOpenPermissionsModal}
-              className="w-full flex items-center justify-between px-2.5 py-1.5 rounded-lg bg-slate-900 hover:bg-slate-800 border border-slate-800 text-slate-300 text-xs font-medium transition-colors"
+              className="w-full flex items-center justify-between px-2.5 py-1.5 rounded-lg bg-slate-900 hover:bg-slate-800 border border-slate-800 text-slate-300 text-xs font-medium transition-colors cursor-pointer"
             >
               <span className="flex items-center gap-2">
                 <Lock className="w-3.5 h-3.5 text-indigo-400" />
@@ -428,7 +483,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
           <button
             onClick={onToggleCollapse}
             title="Expand Sidebar"
-            className="w-9 h-9 mx-auto rounded-lg bg-slate-800 flex items-center justify-center text-slate-300 hover:text-white"
+            className="w-9 h-9 mx-auto rounded-lg bg-slate-800 flex items-center justify-center text-slate-300 hover:text-white cursor-pointer"
           >
             <PanelLeft className="w-4 h-4" />
           </button>
@@ -437,3 +492,4 @@ export const Sidebar: React.FC<SidebarProps> = ({
     </aside>
   );
 };
+
