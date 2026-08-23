@@ -48,13 +48,12 @@ export const Sidebar: React.FC<SidebarProps> = ({
   const [activeSection, setActiveSection] = useState<'all' | 'favorites' | 'recents'>('all');
   const moduleScrollRef = useRef<HTMLDivElement>(null);
 
-  // Keep the current active module expanded and revealed in viewport
+  // Keep only the current active module expanded (collapsing others) and revealed in viewport
   useEffect(() => {
     if (currentRoute.moduleId) {
-      setExpandedModules(prev => ({
-        ...prev,
-        [currentRoute.moduleId!]: true
-      }));
+      setExpandedModules({
+        [currentRoute.moduleId]: true
+      });
 
       if (!isCollapsed) {
         const timer = setTimeout(() => {
@@ -75,10 +74,14 @@ export const Sidebar: React.FC<SidebarProps> = ({
   }, [currentRoute.moduleId, currentRoute.functionalAreaId, isCollapsed]);
 
   const toggleModuleExpand = (modId: string) => {
-    setExpandedModules(prev => ({
-      ...prev,
-      [modId]: !prev[modId]
-    }));
+    setExpandedModules(prev => {
+      // Accordion mode: If clicked module is already expanded, collapse it.
+      // Otherwise, expand ONLY this module and collapse all other modules.
+      if (prev[modId]) {
+        return {};
+      }
+      return { [modId]: true };
+    });
   };
 
   const filteredModules = ERP_MODULES.filter(mod => {
