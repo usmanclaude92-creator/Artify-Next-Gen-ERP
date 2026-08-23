@@ -72,8 +72,11 @@ export interface ProjectMaster {
   projectClassificationId: string;
   projectManager: string;
   siteEngineer: string;
+  company?: string; // Enterprise Company Master
+  branch: string; // Regional Branch Master
+  department?: string; // Operating Department Master
+  costCenter?: string; // Cost Center Master
   location: string;
-  branch: string;
   startDate: string;
   targetCompletionDate: string;
   revisedCompletionDate?: string;
@@ -454,3 +457,6 @@ export interface ProjectCashFlowStatement {
   netOperatingCashFlow: number;
   cumulativeProjectLiquidity: number;
 }
+
+// Re-export backend database schema models and DDL definitions
+export * from '../db/schema';

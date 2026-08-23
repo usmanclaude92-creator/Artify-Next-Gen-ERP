@@ -91,12 +91,15 @@ const initialProjects: ProjectMaster[] = [
     contractNumber: 'ONPC-EPC-2025-992',
     contractValue: 4850000,
     currency: 'OMR',
+    company: 'Oman Heavy Industries SAOC',
+    department: 'EPC Project Delivery Directorate',
+    costCenter: 'CC-PRJ-SOHAR-01 (EPC Sohar)',
     projectType: 'OIL_GAS_FACILITY',
     projectClassificationId: 'class-01',
     projectManager: 'Dr. Tarek Al-Ghamdi',
     siteEngineer: 'Eng. Salem Al-Maamari',
     location: 'Sohar Industrial Free Zone, Quay 4',
-    branch: 'Sohar Regional Office',
+    branch: 'Sohar Industrial Port Regional Office',
     startDate: '2025-11-01',
     targetCompletionDate: '2026-12-31',
     status: 'ACTIVE_IN_PROGRESS',
@@ -169,19 +172,22 @@ const initialProjects: ProjectMaster[] = [
     id: 'PRJ-002',
     projectCode: 'PRJ-2026-DXB-008',
     projectName: 'Dubai Maritime City — Marine Shipyard Erection & Gantry Rails',
-    clientEntity: 'Dubai Drydocks World',
+    clientEntity: 'Salalah Port Authority SAOC',
     clientContactPerson: 'Capt. Mansoor Al-Ketbi',
-    clientEmail: 'm.ketbi@drydocksworld.ae',
-    clientPhone: '+971 4 345 5500',
-    contractNumber: 'DDW-MAR-2026-112',
+    clientEmail: 'm.ketbi@portauthority.om',
+    clientPhone: '+968 2321 5500',
+    contractNumber: 'SPA-MAR-2026-112',
     contractValue: 7200000,
-    currency: 'AED',
+    currency: 'OMR',
+    company: 'Gulf Marine & Industrial Contracting WLL',
+    department: 'Civil & Marine Infrastructure',
+    costCenter: 'CC-MAR-SALALAH-04 (Salalah Marine Port)',
     projectType: 'INFRASTRUCTURE',
     projectClassificationId: 'class-02',
-    projectManager: 'Eng. Zaid Al-Harbi',
-    siteEngineer: 'Eng. Fadi Haddad',
-    location: 'Dubai Maritime City, Dock 3',
-    branch: 'Dubai Commercial Branch',
+    projectManager: 'Eng. Tariq Al-Sabahi',
+    siteEngineer: 'Eng. Amur Al-Habsi',
+    location: 'Salalah Freezone Marine Port, Berth 7',
+    branch: 'Salalah Freezone Marine Office',
     startDate: '2026-01-15',
     targetCompletionDate: '2027-03-30',
     status: 'ACTIVE_IN_PROGRESS',
@@ -209,7 +215,7 @@ const initialProjects: ProjectMaster[] = [
         completionPercent: 75,
         status: 'ACTIVE',
         activities: [
-          { id: 'act-0201', wbsCode: '2.1.01', activityName: 'Quayside Dredging & Sheet Piling', phaseId: 'ph-0201', description: 'Marine dredging and AZ-38 sheet pile wall installation.', durationDays: 75, startDate: '2026-01-15', endDate: '2026-03-30', plannedCost: 1100000, actualCost: 980000, progressPercent: 100, assignedTeamLeader: 'Eng. Fadi Haddad', status: 'COMPLETED', isCriticalPath: true },
+          { id: 'act-0201', wbsCode: '2.1.01', activityName: 'Quayside Dredging & Sheet Piling', phaseId: 'ph-0201', description: 'Marine dredging and AZ-38 sheet pile wall installation.', durationDays: 75, startDate: '2026-01-15', endDate: '2026-03-30', plannedCost: 1100000, actualCost: 980000, progressPercent: 100, assignedTeamLeader: 'Eng. Amur Al-Habsi', status: 'COMPLETED', isCriticalPath: true },
           { id: 'act-0202', wbsCode: '2.1.02', activityName: 'Mass Concrete Rail Beam Construction', phaseId: 'ph-0201', description: 'Grade C50 concrete casting for 450-meter gantry rail foundation.', durationDays: 60, startDate: '2026-04-01', endDate: '2026-05-30', plannedCost: 1300000, actualCost: 270000, progressPercent: 50, assignedTeamLeader: 'Foreman Najeeb', status: 'IN_PROGRESS', isCriticalPath: true }
         ]
       }
@@ -217,34 +223,212 @@ const initialProjects: ProjectMaster[] = [
   },
   {
     id: 'PRJ-003',
-    projectCode: 'PRJ-2026-KSA-014',
-    projectName: 'NEOM Sindalah Island — Offshore Water Desalination Substation',
-    clientEntity: 'NEOM Green Hydrogen Infrastructure Company',
+    projectCode: 'PRJ-2026-OM-003',
+    projectName: 'Duqm Special Economic Zone — Seawater Reverse Osmosis Substation',
+    clientEntity: 'Duqm Refinery & Petrochemical Industries (OQ8)',
     clientContactPerson: 'Dr. Sultan Al-Otaibi',
-    clientEmail: 'sultan.otaibi@neom.sa',
-    clientPhone: '+966 11 888 2323',
-    contractNumber: 'NEOM-SWRO-2026-09',
-    contractValue: 12500000,
-    currency: 'SAR',
+    clientEmail: 'sultan.otaibi@oq8.om',
+    clientPhone: '+968 2560 2323',
+    contractNumber: 'OQ8-SWRO-2026-09',
+    contractValue: 6500000,
+    currency: 'OMR',
+    company: 'Petrochemical Infrastructure Services SAOC',
+    department: 'Piping & Cryogenic Mechanical Works',
+    costCenter: 'CC-PRJ-DUQM-02 (Duqm Refinery Hub)',
     projectType: 'EPC_COMMERCIAL',
     projectClassificationId: 'class-01',
-    projectManager: 'Eng. Tariq Al-Hassan',
-    siteEngineer: 'Eng. Omar Al-Ghamdi',
-    location: 'Sindalah Offshore Terminal, Red Sea',
-    branch: 'Riyadh EPC Division',
+    projectManager: 'Eng. Fahad Al-Busaidi (E&I Commissioning Lead)',
+    siteEngineer: 'Eng. Khalid Al-Shibli',
+    location: 'Duqm SEZAD Industrial Area, Plot 14',
+    branch: 'Duqm Special Economic Zone Hub (SEZAD)',
     startDate: '2026-03-01',
     targetCompletionDate: '2027-08-15',
     status: 'ACTIVE_IN_PROGRESS',
     priority: 'HIGH',
     billingMethod: 'PROGRESS_PERCENT_COMPLETION',
-    totalBudget: 10200000,
-    totalCommitted: 6400000,
+    totalBudget: 5200000,
+    totalCommitted: 3400000,
     totalActualCost: 1800000,
     totalBilledAmount: 2500000,
     totalReceivedAmount: 2250000,
     retentionWithheldPercent: 10,
     overallProgressPercent: 21.5,
-    customTags: ['SWRO Desalination', 'NEOM', 'Titanium Piping', 'Zero Liquid Discharge'],
+    customTags: ['SWRO Desalination', 'Duqm', 'Titanium Piping', 'Zero Liquid Discharge'],
+    phases: []
+  },
+  {
+    id: 'PRJ-004',
+    projectCode: 'PRJ-2026-OM-004',
+    projectName: 'Sohar Steel Mill — Heavy Coke Drum Modular Skid Fabrication',
+    clientEntity: 'Petroleum Development Oman (PDO)',
+    clientContactPerson: 'Eng. Hilal Al-Hinai',
+    clientEmail: 'h.hinai@pdo.co.om',
+    clientPhone: '+968 2467 1122',
+    contractNumber: 'PDO-FAB-2026-441',
+    contractValue: 3100000,
+    currency: 'OMR',
+    company: 'Sohar Steel & EPC Fabrication LLC',
+    department: 'Heavy Structural Steel Fabrication',
+    costCenter: 'CC-PRJ-SOHAR-01 (EPC Sohar)',
+    projectType: 'INDUSTRIAL_FABRICATION',
+    projectClassificationId: 'class-01',
+    projectManager: 'Eng. Salem Al-Maamari (Lead Structural)',
+    siteEngineer: 'Eng. Sarah Al-Harthy',
+    location: 'Sohar Industrial Workshop Yard 2',
+    branch: 'Sohar Industrial Port Regional Office',
+    startDate: '2026-04-01',
+    targetCompletionDate: '2026-11-30',
+    status: 'PLANNING',
+    priority: 'MEDIUM',
+    billingMethod: 'MILESTONE_DELIVERABLE',
+    totalBudget: 2450000,
+    totalCommitted: 1100000,
+    totalActualCost: 320000,
+    totalBilledAmount: 450000,
+    totalReceivedAmount: 450000,
+    retentionWithheldPercent: 10,
+    overallProgressPercent: 12.0,
+    customTags: ['Modular Skid', 'ASME VIII', 'Stress Relieving', 'Heavy Erection'],
+    phases: []
+  },
+  {
+    id: 'PRJ-005',
+    projectCode: 'PRJ-2026-OM-005',
+    projectName: 'Muscat Madinat Al Irfan — Sustainable Commercial Headquarters Tower',
+    clientEntity: 'Muscat Municipal Infrastructure Council',
+    clientContactPerson: 'Arch. Muna Al-Lawati',
+    clientEmail: 'm.lawati@muscat.gov.om',
+    clientPhone: '+968 2477 9900',
+    contractNumber: 'MMC-IRF-2024-88',
+    contractValue: 8900000,
+    currency: 'OMR',
+    company: 'Oman Heavy Industries SAOC',
+    department: 'Civil & Marine Infrastructure',
+    costCenter: 'CC-HQ-OPS-03 (Corporate Project Operations)',
+    projectType: 'RESIDENTIAL_COMPLEX',
+    projectClassificationId: 'class-03',
+    projectManager: 'Eng. Sarah Al-Harthy (Senior Project Engineer)',
+    siteEngineer: 'Eng. Salim Balushi',
+    location: 'Madinat Al Irfan Urban Center, Plot 5B',
+    branch: 'Muscat Corporate HQ (Madinat Al Irfan)',
+    startDate: '2024-09-01',
+    targetCompletionDate: '2026-07-31',
+    status: 'SUBSTANTIALLY_COMPLETE',
+    priority: 'HIGH',
+    billingMethod: 'PROGRESS_PERCENT_COMPLETION',
+    totalBudget: 7400000,
+    totalCommitted: 7350000,
+    totalActualCost: 7120000,
+    totalBilledAmount: 8450000,
+    totalReceivedAmount: 7605000,
+    retentionWithheldPercent: 10,
+    overallProgressPercent: 94.8,
+    customTags: ['LEED Platinum', 'Curtain Wall', 'Smart BMS', 'Muscat HQ'],
+    phases: []
+  },
+  {
+    id: 'PRJ-006',
+    projectCode: 'PRJ-2026-OM-006',
+    projectName: 'Sur LNG Train 4 — Flare Header Replacement & Turnaround Shutdown',
+    clientEntity: 'Oman LNG LLC',
+    clientContactPerson: 'Eng. Ahmed Al-Araimi',
+    clientEmail: 'a.araimi@omanlng.co.om',
+    clientPhone: '+968 2554 1100',
+    contractNumber: 'OLNG-TA-2026-03',
+    contractValue: 1850000,
+    currency: 'OMR',
+    company: 'Petrochemical Infrastructure Services SAOC',
+    department: 'Site Safety, Quality & Environmental (QHSE)',
+    costCenter: 'CC-HQ-OPS-03 (Corporate Project Operations)',
+    projectType: 'MAINTENANCE_SHUTDOWN',
+    projectClassificationId: 'class-01',
+    projectManager: 'Dr. Tarek Al-Ghamdi (PMP, EPC Director)',
+    siteEngineer: 'Eng. Khalid Al-Shibli',
+    location: 'Qalhat LNG Complex, Sur',
+    branch: 'Muscat Corporate HQ (Madinat Al Irfan)',
+    startDate: '2026-08-01',
+    targetCompletionDate: '2026-09-15',
+    status: 'PROPOSED',
+    priority: 'CRITICAL_FAST_TRACK',
+    billingMethod: 'FIXED_LUMP_SUM',
+    totalBudget: 1400000,
+    totalCommitted: 200000,
+    totalActualCost: 0,
+    totalBilledAmount: 0,
+    totalReceivedAmount: 0,
+    retentionWithheldPercent: 5,
+    overallProgressPercent: 0,
+    customTags: ['Turnaround', 'Hot Tapping', 'Flaring', 'Cryogenic Isolation'],
+    phases: []
+  },
+  {
+    id: 'PRJ-007',
+    projectCode: 'PRJ-2026-OM-007',
+    projectName: 'Salalah Port — Offshore Breakwater Extension & Armoring',
+    clientEntity: 'Salalah Port Authority SAOC',
+    clientContactPerson: 'Eng. Bader Al-Shanfari',
+    clientEmail: 'b.shanfari@salalahport.com',
+    clientPhone: '+968 2321 9911',
+    contractNumber: 'SPA-BW-2025-19',
+    contractValue: 5400000,
+    currency: 'OMR',
+    company: 'Gulf Marine & Industrial Contracting WLL',
+    department: 'Civil & Marine Infrastructure',
+    costCenter: 'CC-MAR-SALALAH-04 (Salalah Marine Port)',
+    projectType: 'INFRASTRUCTURE',
+    projectClassificationId: 'class-02',
+    projectManager: 'Eng. Tariq Al-Sabahi (Marine Works Specialist)',
+    siteEngineer: 'Eng. Amur Al-Habsi',
+    location: 'Salalah Port Outer Breakwater',
+    branch: 'Salalah Freezone Marine Office',
+    startDate: '2025-06-01',
+    targetCompletionDate: '2026-10-30',
+    status: 'ON_HOLD',
+    priority: 'MEDIUM',
+    billingMethod: 'MILESTONE_DELIVERABLE',
+    totalBudget: 4600000,
+    totalCommitted: 3100000,
+    totalActualCost: 2400000,
+    totalBilledAmount: 2700000,
+    totalReceivedAmount: 2430000,
+    retentionWithheldPercent: 10,
+    overallProgressPercent: 44.0,
+    customTags: ['Accropode Blocks', 'Rock Armor', 'Marine Dredging', 'Bathymetry'],
+    phases: []
+  },
+  {
+    id: 'PRJ-008',
+    projectCode: 'PRJ-2026-OM-008',
+    projectName: 'Nizwa Industrial Estate — Structural Pre-Engineered Warehouse Complex',
+    clientEntity: 'Muscat Municipal Infrastructure Council',
+    clientContactPerson: 'Eng. Nasser Al-Kharusi',
+    clientEmail: 'n.kharusi@madayn.om',
+    clientPhone: '+968 2541 3344',
+    contractNumber: 'MAD-NIZ-2024-05',
+    contractValue: 1600000,
+    currency: 'OMR',
+    company: 'Sohar Steel & EPC Fabrication LLC',
+    department: 'Heavy Structural Steel Fabrication',
+    costCenter: 'CC-HQ-OPS-03 (Corporate Project Operations)',
+    projectType: 'INDUSTRIAL_FABRICATION',
+    projectClassificationId: 'class-03',
+    projectManager: 'Eng. Salem Al-Maamari (Lead Structural)',
+    siteEngineer: 'Eng. Sarah Al-Harthy',
+    location: 'Nizwa Industrial City, Phase 3',
+    branch: 'Muscat Corporate HQ (Madinat Al Irfan)',
+    startDate: '2024-11-01',
+    targetCompletionDate: '2025-12-15',
+    status: 'CLOSED',
+    priority: 'LOW',
+    billingMethod: 'FIXED_LUMP_SUM',
+    totalBudget: 1250000,
+    totalCommitted: 1240000,
+    totalActualCost: 1215000,
+    totalBilledAmount: 1600000,
+    totalReceivedAmount: 1600000,
+    retentionWithheldPercent: 0,
+    overallProgressPercent: 100,
+    customTags: ['PEB Building', 'Logistics Warehouse', 'Overhead Cranes'],
     phases: []
   }
 ];
@@ -414,6 +598,16 @@ const initialCustomerInvoices: ProjectCustomerInvoice[] = [
 // ==========================================
 
 interface ProjectStoreContextType {
+  // Enterprise Organizational Masters Reference
+  companies: string[];
+  branches: string[];
+  departments: string[];
+  costCenters: string[];
+  clientEntities: string[];
+  projectManagers: string[];
+  siteEngineers: string[];
+  currencies: string[];
+
   // Master & Setup
   projects: ProjectMaster[];
   classifications: ProjectClassification[];
@@ -421,8 +615,20 @@ interface ProjectStoreContextType {
   setSelectedProject: (proj: ProjectMaster) => void;
   createProject: (newProject: Omit<ProjectMaster, 'id' | 'projectCode' | 'totalCommitted' | 'totalActualCost' | 'totalBilledAmount' | 'totalReceivedAmount' | 'overallProgressPercent' | 'phases'>) => void;
   updateProject: (id: string, patch: Partial<ProjectMaster>) => void;
+  deleteProject: (id: string) => void;
+
+  // Classification CRUD
+  createClassification: (cls: Omit<ProjectClassification, 'id'>) => void;
+  updateClassification: (id: string, patch: Partial<ProjectClassification>) => void;
+  deleteClassification: (id: string) => void;
+
+  // Phases & Activities CRUD
   addPhase: (projectId: string, phase: Omit<ProjectPhase, 'id' | 'actualSpent' | 'completionPercent' | 'activities'>) => void;
+  updatePhase: (projectId: string, phaseId: string, patch: Partial<ProjectPhase>) => void;
+  deletePhase: (projectId: string, phaseId: string) => void;
   addActivity: (projectId: string, phaseId: string, activity: Omit<ProjectActivity, 'id' | 'actualCost' | 'progressPercent' | 'status'>) => void;
+  updateActivity: (projectId: string, phaseId: string, activityId: string, patch: Partial<ProjectActivity>) => void;
+  deleteActivity: (projectId: string, phaseId: string, activityId: string) => void;
   updateActivityProgress: (projectId: string, phaseId: string, activityId: string, progress: number, status: ProjectActivity['status']) => void;
 
   // Planning & Schedules
@@ -468,28 +674,252 @@ interface ProjectStoreContextType {
 
 const ProjectStoreContext = createContext<ProjectStoreContextType | undefined>(undefined);
 
+const STORAGE_KEY = 'artify_erp_projects_master_state_v2';
+
 export const ProjectProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [projects, setProjects] = useState<ProjectMaster[]>(initialProjects);
-  const [selectedProjectId, setSelectedProjectId] = useState<string>(initialProjects[0].id);
-  const [classifications] = useState<ProjectClassification[]>(initialClassifications);
-  const [costCodes, setCostCodes] = useState<CostCode[]>(initialCostCodes);
-  const [budgetLines, setBudgetLines] = useState<ProjectBudgetLine[]>(initialBudgets);
+  // Enterprise Organizational Masters Reference Data
+  const companies = [
+    'Oman Heavy Industries SAOC',
+    'Sohar Steel & EPC Fabrication LLC',
+    'Gulf Marine & Industrial Contracting WLL',
+    'Petrochemical Infrastructure Services SAOC'
+  ];
+
+  const branches = [
+    'Sohar Industrial Port Regional Office',
+    'Muscat Corporate HQ (Madinat Al Irfan)',
+    'Salalah Freezone Marine Office',
+    'Duqm Special Economic Zone Hub (SEZAD)'
+  ];
+
+  const departments = [
+    'EPC Project Delivery Directorate',
+    'Civil & Marine Infrastructure',
+    'Heavy Structural Steel Fabrication',
+    'Piping & Cryogenic Mechanical Works',
+    'Electrical, Instrumentation & Telecom (E&I)',
+    'Site Safety, Quality & Environmental (QHSE)'
+  ];
+
+  const costCenters = [
+    'CC-PRJ-SOHAR-01 (EPC Sohar)',
+    'CC-PRJ-DUQM-02 (Duqm Refinery Hub)',
+    'CC-HQ-OPS-03 (Corporate Project Operations)',
+    'CC-MAR-SALALAH-04 (Salalah Marine Port)'
+  ];
+
+  const clientEntities = [
+    'Oman National Petrochemicals Corp (ONPC)',
+    'Duqm Refinery & Petrochemical Industries (OQ8)',
+    'Salalah Port Authority SAOC',
+    'Oman LNG LLC',
+    'Muscat Municipal Infrastructure Council',
+    'Petroleum Development Oman (PDO)'
+  ];
+
+  const projectManagers = [
+    'Dr. Tarek Al-Ghamdi (PMP, EPC Director)',
+    'Eng. Salem Al-Maamari (Lead Structural)',
+    'Eng. Sarah Al-Harthy (Senior Project Engineer)',
+    'Eng. Salim Balushi (Geotech Lead)',
+    'Eng. Tariq Al-Sabahi (Marine Works Specialist)',
+    'Eng. Fahad Al-Busaidi (E&I Commissioning Lead)'
+  ];
+
+  const siteEngineers = [
+    'Eng. Salem Al-Maamari',
+    'Eng. Sarah Al-Harthy',
+    'Eng. Tariq Al-Sabahi',
+    'Eng. Salim Balushi',
+    'Eng. Amur Al-Habsi',
+    'Eng. Khalid Al-Shibli'
+  ];
+
+  const currencies = ['OMR', 'USD', 'SAR', 'AED', 'EUR'];
+
+  // Initialize from localStorage or seed
+  const [projects, setProjects] = useState<ProjectMaster[]>(() => {
+    try {
+      const saved = localStorage.getItem(`${STORAGE_KEY}_projects`);
+      if (saved) return JSON.parse(saved);
+    } catch (e) {
+      console.error(e);
+    }
+    return initialProjects;
+  });
+
+  const [selectedProjectId, setSelectedProjectId] = useState<string>(() => {
+    return initialProjects[0]?.id || '';
+  });
+
+  const [classifications, setClassifications] = useState<ProjectClassification[]>(() => {
+    try {
+      const saved = localStorage.getItem(`${STORAGE_KEY}_classifications`);
+      if (saved) return JSON.parse(saved);
+    } catch (e) {
+      console.error(e);
+    }
+    return initialClassifications;
+  });
+
+  const [costCodes, setCostCodes] = useState<CostCode[]>(() => {
+    try {
+      const saved = localStorage.getItem(`${STORAGE_KEY}_costCodes`);
+      if (saved) return JSON.parse(saved);
+    } catch (e) {
+      console.error(e);
+    }
+    return initialCostCodes;
+  });
+
+  const [budgetLines, setBudgetLines] = useState<ProjectBudgetLine[]>(() => {
+    try {
+      const saved = localStorage.getItem(`${STORAGE_KEY}_budgetLines`);
+      if (saved) return JSON.parse(saved);
+    } catch (e) {
+      console.error(e);
+    }
+    return initialBudgets;
+  });
+
   const [resourceAllocations, setResourceAllocations] = useState<ResourceAllocation[]>([
     { id: 'res-01', projectId: 'PRJ-001', resourceName: 'Eng. Sarah Al-Harthy', resourceRole: 'PROJECT_ENGINEER', resourceType: 'INTERNAL_STAFF', allocatedDailyHours: 8, hourlyBillingRate: 45, hourlyCostRate: 25, assignedWbsActivities: ['1.2.02'], startDate: '2026-05-01', endDate: '2026-07-31', utilizationPercent: 95 },
     { id: 'res-02', projectId: 'PRJ-001', resourceName: 'Lead Welder Arshad Mehmood', resourceRole: 'CERTIFIED_WELDER', resourceType: 'SITE_DIRECT_HIRE', allocatedDailyHours: 10, hourlyBillingRate: 28, hourlyCostRate: 16, assignedWbsActivities: ['1.2.02'], startDate: '2026-05-01', endDate: '2026-07-31', utilizationPercent: 100 }
   ]);
-  const [materialCosts, setMaterialCosts] = useState<MaterialCostEntry[]>(initialMaterialCosts);
-  const [laborCosts, setLaborCosts] = useState<LaborCostEntry[]>(initialLaborCosts);
-  const [equipmentCosts, setEquipmentCosts] = useState<EquipmentCostEntry[]>(initialEquipmentCosts);
-  const [purchaseRequisitions, setPurchaseRequisitions] = useState<ProjectPurchaseRequisition[]>(initialRequisitions);
-  const [purchaseOrders, setPurchaseOrders] = useState<ProjectPurchaseOrder[]>(initialPurchaseOrders);
-  const [siteInventory] = useState<ProjectSiteMaterialInventory[]>(initialSiteInventory);
-  const [subcontracts, setSubcontracts] = useState<SubcontractorContract[]>(initialSubcontracts);
-  const [revenueRecognitions, setRevenueRecognitions] = useState<RevenueRecognitionSchedule[]>(initialRevenueRecognitions);
-  const [paymentCertificates, setPaymentCertificates] = useState<ProgressPaymentCertificate[]>(initialPaymentCertificates);
-  const [customerInvoices, setCustomerInvoices] = useState<ProjectCustomerInvoice[]>(initialCustomerInvoices);
 
-  const selectedProject = projects.find(p => p.id === selectedProjectId) || projects[0];
+  const [materialCosts, setMaterialCosts] = useState<MaterialCostEntry[]>(() => {
+    try {
+      const saved = localStorage.getItem(`${STORAGE_KEY}_materialCosts`);
+      if (saved) return JSON.parse(saved);
+    } catch (e) {
+      console.error(e);
+    }
+    return initialMaterialCosts;
+  });
+
+  const [laborCosts, setLaborCosts] = useState<LaborCostEntry[]>(() => {
+    try {
+      const saved = localStorage.getItem(`${STORAGE_KEY}_laborCosts`);
+      if (saved) return JSON.parse(saved);
+    } catch (e) {
+      console.error(e);
+    }
+    return initialLaborCosts;
+  });
+
+  const [equipmentCosts, setEquipmentCosts] = useState<EquipmentCostEntry[]>(() => {
+    try {
+      const saved = localStorage.getItem(`${STORAGE_KEY}_equipmentCosts`);
+      if (saved) return JSON.parse(saved);
+    } catch (e) {
+      console.error(e);
+    }
+    return initialEquipmentCosts;
+  });
+
+  const [purchaseRequisitions, setPurchaseRequisitions] = useState<ProjectPurchaseRequisition[]>(() => {
+    try {
+      const saved = localStorage.getItem(`${STORAGE_KEY}_purchaseRequisitions`);
+      if (saved) return JSON.parse(saved);
+    } catch (e) {
+      console.error(e);
+    }
+    return initialRequisitions;
+  });
+
+  const [purchaseOrders, setPurchaseOrders] = useState<ProjectPurchaseOrder[]>(() => {
+    try {
+      const saved = localStorage.getItem(`${STORAGE_KEY}_purchaseOrders`);
+      if (saved) return JSON.parse(saved);
+    } catch (e) {
+      console.error(e);
+    }
+    return initialPurchaseOrders;
+  });
+
+  const [siteInventory] = useState<ProjectSiteMaterialInventory[]>(initialSiteInventory);
+
+  const [subcontracts, setSubcontracts] = useState<SubcontractorContract[]>(() => {
+    try {
+      const saved = localStorage.getItem(`${STORAGE_KEY}_subcontracts`);
+      if (saved) return JSON.parse(saved);
+    } catch (e) {
+      console.error(e);
+    }
+    return initialSubcontracts;
+  });
+
+  const [revenueRecognitions, setRevenueRecognitions] = useState<RevenueRecognitionSchedule[]>(initialRevenueRecognitions);
+
+  const [paymentCertificates, setPaymentCertificates] = useState<ProgressPaymentCertificate[]>(() => {
+    try {
+      const saved = localStorage.getItem(`${STORAGE_KEY}_paymentCertificates`);
+      if (saved) return JSON.parse(saved);
+    } catch (e) {
+      console.error(e);
+    }
+    return initialPaymentCertificates;
+  });
+
+  const [customerInvoices, setCustomerInvoices] = useState<ProjectCustomerInvoice[]>(() => {
+    try {
+      const saved = localStorage.getItem(`${STORAGE_KEY}_customerInvoices`);
+      if (saved) return JSON.parse(saved);
+    } catch (e) {
+      console.error(e);
+    }
+    return initialCustomerInvoices;
+  });
+
+  // Sync to localStorage on state changes
+  useEffect(() => {
+    try {
+      localStorage.setItem(`${STORAGE_KEY}_projects`, JSON.stringify(projects));
+    } catch (e) {
+      console.error('Failed to sync projects to localStorage', e);
+    }
+  }, [projects]);
+
+  useEffect(() => {
+    try {
+      localStorage.setItem(`${STORAGE_KEY}_classifications`, JSON.stringify(classifications));
+    } catch (e) {
+      console.error('Failed to sync classifications to localStorage', e);
+    }
+  }, [classifications]);
+
+  useEffect(() => {
+    try {
+      localStorage.setItem(`${STORAGE_KEY}_costCodes`, JSON.stringify(costCodes));
+    } catch (e) {
+      console.error('Failed to sync costCodes to localStorage', e);
+    }
+  }, [costCodes]);
+
+  useEffect(() => {
+    try {
+      localStorage.setItem(`${STORAGE_KEY}_budgetLines`, JSON.stringify(budgetLines));
+    } catch (e) {
+      console.error('Failed to sync budgetLines to localStorage', e);
+    }
+  }, [budgetLines]);
+
+  useEffect(() => {
+    try {
+      localStorage.setItem(`${STORAGE_KEY}_materialCosts`, JSON.stringify(materialCosts));
+      localStorage.setItem(`${STORAGE_KEY}_laborCosts`, JSON.stringify(laborCosts));
+      localStorage.setItem(`${STORAGE_KEY}_equipmentCosts`, JSON.stringify(equipmentCosts));
+      localStorage.setItem(`${STORAGE_KEY}_purchaseRequisitions`, JSON.stringify(purchaseRequisitions));
+      localStorage.setItem(`${STORAGE_KEY}_purchaseOrders`, JSON.stringify(purchaseOrders));
+      localStorage.setItem(`${STORAGE_KEY}_subcontracts`, JSON.stringify(subcontracts));
+      localStorage.setItem(`${STORAGE_KEY}_paymentCertificates`, JSON.stringify(paymentCertificates));
+      localStorage.setItem(`${STORAGE_KEY}_customerInvoices`, JSON.stringify(customerInvoices));
+    } catch (e) {
+      console.error('Failed to sync transactions to localStorage', e);
+    }
+  }, [materialCosts, laborCosts, equipmentCosts, purchaseRequisitions, purchaseOrders, subcontracts, paymentCertificates, customerInvoices]);
+
+  const selectedProject = projects.find(p => p.id === selectedProjectId) || projects[0] || initialProjects[0];
 
   const setSelectedProject = (proj: ProjectMaster) => {
     setSelectedProjectId(proj.id);
@@ -503,6 +933,9 @@ export const ProjectProvider: React.FC<{ children: React.ReactNode }> = ({ child
       ...newProject,
       id: `PRJ-00${seq}`,
       projectCode,
+      company: newProject.company || companies[0],
+      department: newProject.department || departments[0],
+      costCenter: newProject.costCenter || costCenters[0],
       totalCommitted: 0,
       totalActualCost: 0,
       totalBilledAmount: 0,
@@ -518,6 +951,34 @@ export const ProjectProvider: React.FC<{ children: React.ReactNode }> = ({ child
     setProjects(prev => prev.map(p => p.id === id ? { ...p, ...patch } : p));
   };
 
+  const deleteProject = (id: string) => {
+    setProjects(prev => {
+      const remaining = prev.filter(p => p.id !== id);
+      if (selectedProjectId === id && remaining.length > 0) {
+        setSelectedProjectId(remaining[0].id);
+      }
+      return remaining;
+    });
+  };
+
+  // Classifications CRUD
+  const createClassification = (cls: Omit<ProjectClassification, 'id'>) => {
+    const newCls: ProjectClassification = {
+      ...cls,
+      id: `class-${Date.now()}`
+    };
+    setClassifications(prev => [...prev, newCls]);
+  };
+
+  const updateClassification = (id: string, patch: Partial<ProjectClassification>) => {
+    setClassifications(prev => prev.map(c => c.id === id ? { ...c, ...patch } : c));
+  };
+
+  const deleteClassification = (id: string) => {
+    setClassifications(prev => prev.filter(c => c.id !== id));
+  };
+
+  // Phases CRUD
   const addPhase = (projectId: string, phaseData: Omit<ProjectPhase, 'id' | 'actualSpent' | 'completionPercent' | 'activities'>) => {
     setProjects(prev => prev.map(p => {
       if (p.id !== projectId) return p;
@@ -535,6 +996,23 @@ export const ProjectProvider: React.FC<{ children: React.ReactNode }> = ({ child
     }));
   };
 
+  const updatePhase = (projectId: string, phaseId: string, patch: Partial<ProjectPhase>) => {
+    setProjects(prev => prev.map(p => {
+      if (p.id !== projectId) return p;
+      const updatedPhases = p.phases.map(ph => ph.id === phaseId ? { ...ph, ...patch } : ph);
+      return { ...p, phases: updatedPhases };
+    }));
+  };
+
+  const deletePhase = (projectId: string, phaseId: string) => {
+    setProjects(prev => prev.map(p => {
+      if (p.id !== projectId) return p;
+      const updatedPhases = p.phases.filter(ph => ph.id !== phaseId);
+      return { ...p, phases: updatedPhases };
+    }));
+  };
+
+  // Activities CRUD
   const addActivity = (projectId: string, phaseId: string, actData: Omit<ProjectActivity, 'id' | 'actualCost' | 'progressPercent' | 'status'>) => {
     setProjects(prev => prev.map(p => {
       if (p.id !== projectId) return p;
@@ -556,6 +1034,30 @@ export const ProjectProvider: React.FC<{ children: React.ReactNode }> = ({ child
         ...p,
         phases: updatedPhases
       };
+    }));
+  };
+
+  const updateActivity = (projectId: string, phaseId: string, activityId: string, patch: Partial<ProjectActivity>) => {
+    setProjects(prev => prev.map(p => {
+      if (p.id !== projectId) return p;
+      const updatedPhases = p.phases.map(ph => {
+        if (ph.id !== phaseId) return ph;
+        const updatedActs = ph.activities.map(act => act.id === activityId ? { ...act, ...patch } : act);
+        return { ...ph, activities: updatedActs };
+      });
+      return { ...p, phases: updatedPhases };
+    }));
+  };
+
+  const deleteActivity = (projectId: string, phaseId: string, activityId: string) => {
+    setProjects(prev => prev.map(p => {
+      if (p.id !== projectId) return p;
+      const updatedPhases = p.phases.map(ph => {
+        if (ph.id !== phaseId) return ph;
+        const updatedActs = ph.activities.filter(act => act.id !== activityId);
+        return { ...ph, activities: updatedActs };
+      });
+      return { ...p, phases: updatedPhases };
     }));
   };
 
