@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useAdmin } from '../../services/administrationStore';
 import { GeneralServiceRequest, ServiceVendorRecord, OfficeAssetRecord } from '../../types';
 import {
@@ -20,7 +20,11 @@ import {
   ChevronRight
 } from 'lucide-react';
 
-export const GeneralBusinessServicesView: React.FC = () => {
+interface GeneralBusinessServicesViewProps {
+  activeTab?: string;
+}
+
+export const GeneralBusinessServicesView: React.FC<GeneralBusinessServicesViewProps> = ({ activeTab: initialTab }) => {
   const {
     generalServices,
     addGeneralService,
@@ -32,6 +36,13 @@ export const GeneralBusinessServicesView: React.FC = () => {
   } = useAdmin();
 
   const [activeTab, setActiveTab] = useState<'services' | 'vendors' | 'assets'>('services');
+
+  useEffect(() => {
+    if (initialTab && ['services', 'vendors', 'assets'].includes(initialTab)) {
+      setActiveTab(initialTab as 'services' | 'vendors' | 'assets');
+    }
+  }, [initialTab]);
+
   const [searchTerm, setSearchTerm] = useState('');
 
   // Modals

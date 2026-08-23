@@ -75,6 +75,16 @@ export interface StationeryRequest {
   totalCostOMR: number;
   purpose: string;
   status: WorkflowStatus;
+  currentApprovalLevel?: number;
+  totalApprovalLevels?: number;
+  approvers?: {
+    level: number;
+    role: string;
+    approverName: string;
+    status: 'Pending' | 'Approved' | 'Rejected' | 'Waiting' | 'Skipped';
+    decisionDate?: string;
+    comments?: string;
+  }[];
   approvedBy?: string;
   issuedBy?: string;
   issuedAt?: string;
@@ -225,7 +235,7 @@ export interface InternalRequestRecord {
     level: number;
     role: string;
     approverName: string;
-    status: 'Pending' | 'Approved' | 'Rejected' | 'Skipped';
+    status: 'Pending' | 'Approved' | 'Rejected' | 'Waiting' | 'Skipped';
     decisionDate?: string;
     comments?: string;
   }[];
@@ -354,6 +364,16 @@ export interface TravelRequestRecord {
   perDiemAllowanceOMR: number;
   totalEstimatedCostOMR: number;
   status: WorkflowStatus;
+  currentApprovalLevel?: number;
+  totalApprovalLevels?: number;
+  approvers?: {
+    level: number;
+    role: string;
+    approverName: string;
+    status: 'Pending' | 'Approved' | 'Rejected' | 'Waiting' | 'Skipped';
+    decisionDate?: string;
+    comments?: string;
+  }[];
   approvedBy?: string;
   bookingRef?: string;
   justification: string;
@@ -417,6 +437,16 @@ export interface GeneralServiceRequest {
   estimatedBudgetOMR: number;
   actualCostOMR?: number;
   status: WorkflowStatus;
+  currentApprovalLevel?: number;
+  totalApprovalLevels?: number;
+  approvers?: {
+    level: number;
+    role: string;
+    approverName: string;
+    status: 'Pending' | 'Approved' | 'Rejected' | 'Waiting' | 'Skipped';
+    decisionDate?: string;
+    comments?: string;
+  }[];
   completionSignOffBy?: string;
   createdAt: string;
 }

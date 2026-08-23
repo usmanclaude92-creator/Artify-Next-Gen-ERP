@@ -619,7 +619,13 @@ export const MOCK_TRAVEL_REQUESTS: TravelRequestRecord[] = [
     perDiemAllowanceOMR: 150.000,
     totalEstimatedCostOMR: 790.000,
     status: 'Approved',
-    approvedBy: 'Eng. Khalid Al-Amri',
+    currentApprovalLevel: 2,
+    totalApprovalLevels: 2,
+    approvers: [
+      { level: 1, role: 'Line Manager', approverName: 'Eng. Khalid Al-Amri', status: 'Approved', decisionDate: '2026-08-17 11:30', comments: 'Budget verified against client EPC project contract.' },
+      { level: 2, role: 'Director of Corporate Administration', approverName: 'Tariq Al-Lawati', status: 'Approved', decisionDate: '2026-08-17 14:00', comments: 'Approved under executive travel policy.' }
+    ],
+    approvedBy: 'Tariq Al-Lawati',
     bookingRef: 'QR-89104-MCT',
     justification: 'Finalize bilateral JV technical agreement with Qatar Industrial Consortium for cross-border solar infrastructure.',
     createdAt: '2026-08-17'
@@ -644,6 +650,11 @@ export const MOCK_TRAVEL_REQUESTS: TravelRequestRecord[] = [
     perDiemAllowanceOMR: 60.000,
     totalEstimatedCostOMR: 225.000,
     status: 'Pending Approval',
+    currentApprovalLevel: 1,
+    totalApprovalLevels: 1,
+    approvers: [
+      { level: 1, role: 'Department Head / Line Manager', approverName: 'Eng. Khalid Al-Amri', status: 'Pending' }
+    ],
     justification: 'Conduct structural stress testing and warranty audit on Salalah Port container handling gantry crane.',
     createdAt: '2026-08-19'
   }

@@ -39,22 +39,41 @@ import {
   MOCK_SERVICE_VENDORS,
   MOCK_OFFICE_ASSETS
 } from '../data/mockAdministrationData';
+import {
+  WorkflowEngineService,
+  UserContext,
+  ENTERPRISE_ACTORS
+} from './workflowEngineService';
+
+export interface WorkflowNotificationBanner {
+  message: string;
+  type: 'success' | 'error' | 'warning' | 'info';
+  violationCode?: string;
+}
 
 interface AdministrationContextType {
+  // Enterprise User & SoD Simulation
+  activeActor: UserContext;
+  setActiveActor: (actor: UserContext) => void;
+  enterpriseActors: UserContext[];
+  workflowBanner: WorkflowNotificationBanner | null;
+  setWorkflowBanner: (banner: WorkflowNotificationBanner | null) => void;
+  clearWorkflowBanner: () => void;
+
   // 03.01 Office Administration
   notices: OfficeNotice[];
   addNotice: (notice: Partial<OfficeNotice>) => void;
   deleteNotice: (id: string) => void;
   officeServices: OfficeServiceOrder[];
-  addOfficeService: (order: Partial<OfficeServiceOrder>) => void;
+  addOfficeService: (order: Partial<OfficeServiceOrder>) => { success: boolean; error?: string };
   updateOfficeServiceStatus: (id: string, status: WorkflowStatus) => void;
   stationeryItems: StationeryItem[];
   stationeryRequests: StationeryRequest[];
-  addStationeryRequest: (req: Partial<StationeryRequest>) => void;
-  approveStationeryRequest: (id: string, approverName: string) => void;
-  issueStationeryRequest: (id: string, issuerName: string) => void;
+  addStationeryRequest: (req: Partial<StationeryRequest>) => { success: boolean; error?: string };
+  approveStationeryRequest: (id: string, approverOverride?: UserContext | string) => { success: boolean; error?: string };
+  issueStationeryRequest: (id: string, issuerOverride?: UserContext | string) => { success: boolean; error?: string };
   facilityWorkOrders: FacilityWorkOrder[];
-  addFacilityWorkOrder: (order: Partial<FacilityWorkOrder>) => void;
+  addFacilityWorkOrder: (order: Partial<FacilityWorkOrder>) => { success: boolean; error?: string };
   updateFacilityWorkOrderStatus: (id: string, status: WorkflowStatus, resolutionNotes?: string) => void;
 
   // 03.02 Correspondence Management
@@ -73,9 +92,9 @@ interface AdministrationContextType {
 
   // 03.04 Internal Requests
   internalRequests: InternalRequestRecord[];
-  addInternalRequest: (req: Partial<InternalRequestRecord>) => void;
-  approveInternalRequest: (id: string, approverName: string, comments?: string) => void;
-  rejectInternalRequest: (id: string, approverName: string, comments: string) => void;
+  addInternalRequest: (req: Partial<InternalRequestRecord>) => { success: boolean; error?: string };
+  approveInternalRequest: (id: string, approverOverride?: UserContext | string, comments?: string) => { success: boolean; error?: string };
+  rejectInternalRequest: (id: string, approverOverride?: UserContext | string, comments?: string) => { success: boolean; error?: string };
   completeInternalRequest: (id: string, resolutionNotes?: string) => void;
 
   // 03.05 Task & Activity Management
@@ -94,17 +113,19 @@ interface AdministrationContextType {
 
   // 03.07 Travel & Transportation
   travelRequests: TravelRequestRecord[];
-  addTravelRequest: (trv: Partial<TravelRequestRecord>) => void;
-  approveTravelRequest: (id: string, approverName: string) => void;
-  rejectTravelRequest: (id: string, approverName: string) => void;
+  addTravelRequest: (trv: Partial<TravelRequestRecord>) => { success: boolean; error?: string };
+  approveTravelRequest: (id: string, approverOverride?: UserContext | string, comments?: string) => { success: boolean; error?: string };
+  rejectTravelRequest: (id: string, approverOverride?: UserContext | string, comments?: string) => { success: boolean; error?: string };
   fleetVehicles: FleetVehicleRecord[];
   vehicleBookings: VehicleBookingRecord[];
-  addVehicleBooking: (booking: Partial<VehicleBookingRecord>) => void;
+  addVehicleBooking: (booking: Partial<VehicleBookingRecord>) => { success: boolean; error?: string };
   updateFleetVehicleStatus: (id: string, status: FleetVehicleRecord['currentStatus']) => void;
 
   // 03.08 General Business Services
   generalServices: GeneralServiceRequest[];
-  addGeneralService: (req: Partial<GeneralServiceRequest>) => void;
+  addGeneralService: (req: Partial<GeneralServiceRequest>) => { success: boolean; error?: string };
+  approveGeneralService: (id: string, approverOverride?: UserContext | string, comments?: string) => { success: boolean; error?: string };
+  rejectGeneralService: (id: string, approverOverride?: UserContext | string, comments?: string) => { success: boolean; error?: string };
   updateGeneralServiceStatus: (id: string, status: WorkflowStatus) => void;
   serviceVendors: ServiceVendorRecord[];
   officeAssets: OfficeAssetRecord[];
@@ -121,6 +142,52 @@ const AdministrationContext = createContext<AdministrationContextType | undefine
 const LOCAL_STORAGE_PREFIX = 'artify_erp_admin_';
 
 export const AdministrationProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  // Active Simulated Enterprise User (Defaults to Line Manager Eng. Khalid Al-Amri)
+  const [activeActor, setActiveActorState] = useState<UserContext>(() => {
+    try {
+      const saved = localStorage.getItem('artify_erp_active_actor');
+      return saved ? JSON.parse(saved) : ENTERPRISE_ACTORS[2]; // Eng. Khalid Al-Amri
+    } catch {
+      return ENTERPRISE_ACTORS[2];
+    }
+  });
+
+  const setActiveActor = (actor: UserContext) => {
+    setActiveActorState(actor);
+    try {
+      localStorage.setItem('artify_erp_active_actor', JSON.stringify(actor));
+    } catch (e) {
+      console.warn('Failed to persist active actor', e);
+    }
+  };
+
+  const [workflowBanner, setWorkflowBanner] = useState<WorkflowNotificationBanner | null>(null);
+  const clearWorkflowBanner = () => setWorkflowBanner(null);
+
+  // Helper to resolve approver context from input parameter
+  const resolveActor = (approverOverride?: UserContext | string): UserContext => {
+    if (!approverOverride) return activeActor;
+    if (typeof approverOverride === 'object' && approverOverride.name) {
+      return approverOverride;
+    }
+    if (typeof approverOverride === 'string') {
+      const matched = ENTERPRISE_ACTORS.find(
+        a => a.name.toLowerCase() === approverOverride.toLowerCase() || a.userId === approverOverride
+      );
+      if (matched) return matched;
+      return {
+        id: 'usr-custom',
+        userId: 'U-CUST',
+        name: approverOverride,
+        email: `${approverOverride.toLowerCase().replace(/\s+/g, '.')}@artify-group.com`,
+        role: 'Authorized Management Approver',
+        department: 'Operations & Administration',
+        approvalLimitOMR: 5000
+      };
+    }
+    return activeActor;
+  };
+
   // Helper to load persisted state or fallback
   const loadState = <T,>(key: string, defaultVal: T): T => {
     try {
@@ -192,26 +259,63 @@ export const AdministrationProvider: React.FC<{ children: React.ReactNode }> = (
       targetAudience: item.targetAudience || 'All Employees',
       publishedDate: new Date().toISOString().split('T')[0],
       expiryDate: item.expiryDate || '2026-12-31',
-      publishedBy: item.publishedBy || 'Corporate Administration',
+      publishedBy: item.publishedBy || activeActor.name,
       priority: item.priority || 'Normal',
       isPinned: !!item.isPinned,
       status: 'Active'
     };
     setNotices(prev => [newNotice, ...prev]);
+
+    WorkflowEngineService.logAuditEvent({
+      action: 'CREATE',
+      module: 'Administration',
+      entity: 'Office Notice',
+      recordId: newNotice.noticeNumber,
+      details: `Published corporate notice: "${newNotice.title}" for audience "${newNotice.targetAudience}"`,
+      actor: activeActor,
+      result: 'SUCCESS'
+    });
   };
 
   const deleteNotice = (id: string) => {
+    const target = notices.find(n => n.id === id);
     setNotices(prev => prev.filter(n => n.id !== id));
+    if (target) {
+      WorkflowEngineService.logAuditEvent({
+        action: 'CREATE',
+        module: 'Administration',
+        entity: 'Office Notice',
+        recordId: target.noticeNumber,
+        details: `Deleted notice "${target.title}"`,
+        actor: activeActor,
+        result: 'SUCCESS'
+      });
+    }
   };
 
-  const addOfficeService = (item: Partial<OfficeServiceOrder>) => {
+  const addOfficeService = (item: Partial<OfficeServiceOrder>): { success: boolean; error?: string } => {
+    const validation = WorkflowEngineService.validateSubmission({
+      title: item.title,
+      requestedBy: item.requestedBy || activeActor.name,
+      status: item.status
+    });
+
+    if (!validation.isValid) {
+      setWorkflowBanner({
+        message: validation.error!,
+        type: 'error',
+        violationCode: 'SEC-DIRECT-SUBMISSION-REJECTED'
+      });
+      return { success: false, error: validation.error };
+    }
+
     const newService: OfficeServiceOrder = {
       id: `srv-${Date.now()}`,
       orderNumber: `SRV-2026-${String(officeServices.length + 1).padStart(3, '0')}`,
       serviceType: item.serviceType || 'Visitor Security Pass',
       title: item.title || 'Office Service Request',
-      requestedBy: item.requestedBy || 'Current User',
-      department: item.department || 'Administration',
+      requestedBy: item.requestedBy || activeActor.name,
+      department: item.department || activeActor.department,
       location: item.location || 'Muscat HQ',
       scheduledDate: item.scheduledDate || new Date().toISOString().split('T')[0],
       details: item.details || '',
@@ -220,36 +324,200 @@ export const AdministrationProvider: React.FC<{ children: React.ReactNode }> = (
       status: 'Submitted',
       createdAt: new Date().toISOString().split('T')[0]
     };
+
     setOfficeServices(prev => [newService, ...prev]);
+
+    WorkflowEngineService.logAuditEvent({
+      action: 'SUBMIT',
+      module: 'Administration',
+      entity: 'Office Service Order',
+      recordId: newService.orderNumber,
+      details: `Submitted service order for "${newService.serviceType}" (${newService.title})`,
+      actor: activeActor,
+      result: 'SUCCESS'
+    });
+
+    setWorkflowBanner({
+      message: `Office Service Order ${newService.orderNumber} successfully registered and queued for logistics fulfillment.`,
+      type: 'success'
+    });
+
+    return { success: true };
   };
 
   const updateOfficeServiceStatus = (id: string, status: WorkflowStatus) => {
     setOfficeServices(prev => prev.map(s => s.id === id ? { ...s, status } : s));
   };
 
-  const addStationeryRequest = (item: Partial<StationeryRequest>) => {
+  const addStationeryRequest = (item: Partial<StationeryRequest>): { success: boolean; error?: string } => {
+    const validation = WorkflowEngineService.validateSubmission({
+      requestedBy: item.requesterName || activeActor.name,
+      status: item.status
+    });
+
+    if (!validation.isValid) {
+      setWorkflowBanner({
+        message: validation.error!,
+        type: 'error',
+        violationCode: 'SEC-DIRECT-SUBMISSION-REJECTED'
+      });
+      return { success: false, error: validation.error };
+    }
+
+    const wfEval = WorkflowEngineService.evaluateWorkflowTiers(
+      'StationeryRequest',
+      'Consumables Requisition',
+      item.totalCostOMR || 0,
+      'Medium',
+      item.department || activeActor.department
+    );
+
     const newReq: StationeryRequest = {
       id: `str-${Date.now()}`,
       requestNumber: `REQ-STA-2026-${String(stationeryRequests.length + 1).padStart(3, '0')}`,
-      requesterName: item.requesterName || 'Current User',
-      department: item.department || 'Operations',
+      requesterName: item.requesterName || activeActor.name,
+      department: item.department || activeActor.department,
       requestDate: new Date().toISOString().split('T')[0],
       items: item.items || [],
       totalCostOMR: item.totalCostOMR || 0,
       purpose: item.purpose || 'Daily departmental administrative activities.',
-      status: 'Pending Approval'
+      status: 'Pending Approval',
+      currentApprovalLevel: 1,
+      totalApprovalLevels: wfEval.totalLevels,
+      approvers: wfEval.stages
     };
+
     setStationeryRequests(prev => [newReq, ...prev]);
+
+    WorkflowEngineService.logAuditEvent({
+      action: 'SUBMIT',
+      module: 'Administration',
+      entity: 'Stationery Request',
+      recordId: newReq.requestNumber,
+      details: `Requisition submitted by ${newReq.requesterName} for ${newReq.items.length} items (Total: OMR ${newReq.totalCostOMR.toFixed(3)})`,
+      actor: activeActor,
+      result: 'SUCCESS'
+    });
+
+    WorkflowEngineService.dispatchAlert({
+      title: `Stationery Requisition Pending: ${newReq.requestNumber}`,
+      message: `${newReq.requesterName} has requested stationery consumables requiring authorization.`,
+      severity: 'info',
+      linkModule: '03.01 Office Administration'
+    });
+
+    setWorkflowBanner({
+      message: `Stationery Requisition ${newReq.requestNumber} queued in Workflow ${wfEval.workflowCode}. Level 1 Line Manager review required.`,
+      type: 'info'
+    });
+
+    return { success: true };
   };
 
-  const approveStationeryRequest = (id: string, approverName: string) => {
-    setStationeryRequests(prev => prev.map(r => r.id === id ? { ...r, status: 'Approved', approvedBy: approverName } : r));
-  };
+  const approveStationeryRequest = (id: string, approverOverride?: UserContext | string): { success: boolean; error?: string } => {
+    const actor = resolveActor(approverOverride);
+    const target = stationeryRequests.find(r => r.id === id);
 
-  const issueStationeryRequest = (id: string, issuerName: string) => {
+    if (!target) return { success: false, error: 'Requisition not found.' };
+
+    const authCheck = WorkflowEngineService.validateApprovalAuthority(
+      {
+        requestedBy: target.requesterName,
+        currentApprovalLevel: target.currentApprovalLevel || 1,
+        totalApprovalLevels: target.totalApprovalLevels || 1,
+        approvers: target.approvers,
+        totalCostOMR: target.totalCostOMR
+      },
+      actor
+    );
+
+    if (!authCheck.isAuthorized) {
+      WorkflowEngineService.logAuditEvent({
+        action: 'SOD_VIOLATION_BLOCKED',
+        module: 'Administration',
+        entity: 'Stationery Request',
+        recordId: target.requestNumber,
+        details: `Unauthorized stationery approval attempt: ${authCheck.error}`,
+        actor,
+        result: 'BLOCKED_SOD_VIOLATION'
+      });
+
+      setWorkflowBanner({
+        message: authCheck.error!,
+        type: 'error',
+        violationCode: authCheck.violationCode
+      });
+
+      return { success: false, error: authCheck.error };
+    }
+
     setStationeryRequests(prev => prev.map(r => {
       if (r.id === id) {
-        // deduct stock
+        return {
+          ...r,
+          status: 'Approved',
+          approvedBy: actor.name,
+          currentApprovalLevel: 1,
+          approvers: (r.approvers || []).map(a => ({
+            ...a,
+            status: 'Approved',
+            decisionDate: new Date().toISOString().replace('T', ' ').substring(0, 16),
+            comments: `Authorized by ${actor.name} (${actor.role})`
+          }))
+        };
+      }
+      return r;
+    }));
+
+    WorkflowEngineService.logAuditEvent({
+      action: 'APPROVE',
+      module: 'Administration',
+      entity: 'Stationery Request',
+      recordId: target.requestNumber,
+      details: `Approved stationery requisition for OMR ${target.totalCostOMR.toFixed(3)} by ${actor.name}`,
+      actor,
+      result: 'SUCCESS'
+    });
+
+    setWorkflowBanner({
+      message: `Stationery Requisition ${target.requestNumber} approved by ${actor.name}. Central Store issuance unlocked.`,
+      type: 'success'
+    });
+
+    return { success: true };
+  };
+
+  const issueStationeryRequest = (id: string, issuerOverride?: UserContext | string): { success: boolean; error?: string } => {
+    const actor = resolveActor(issuerOverride);
+    const target = stationeryRequests.find(r => r.id === id);
+
+    if (!target) return { success: false, error: 'Requisition not found.' };
+
+    if (target.status !== 'Approved') {
+      const err = `Stock Issuance Blocked: Requisition ${target.requestNumber} must be in "Approved" status before store issuance.`;
+      setWorkflowBanner({ message: err, type: 'error' });
+      return { success: false, error: err };
+    }
+
+    // SOD-ADM-02: Requester cannot act as store custodian to issue items to self
+    if (target.requesterName.trim().toLowerCase() === actor.name.trim().toLowerCase()) {
+      const err = `Segregation of Duties Violation (SOD-ADM-02): Requester "${actor.name}" cannot act as Warehouse Store Custodian to issue physical inventory to themselves. A certified Store Officer must perform stock release.`;
+      WorkflowEngineService.logAuditEvent({
+        action: 'SOD_VIOLATION_BLOCKED',
+        module: 'Administration',
+        entity: 'Stationery Request',
+        recordId: target.requestNumber,
+        details: err,
+        actor,
+        result: 'BLOCKED_SOD_VIOLATION'
+      });
+      setWorkflowBanner({ message: err, type: 'error', violationCode: 'SOD-ADM-02' });
+      return { success: false, error: err };
+    }
+
+    setStationeryRequests(prev => prev.map(r => {
+      if (r.id === id) {
+        // deduct stock from inventory
         r.items.forEach(reqItem => {
           setStationeryItems(items => items.map(it => {
             if (it.id === reqItem.itemId) {
@@ -261,24 +529,52 @@ export const AdministrationProvider: React.FC<{ children: React.ReactNode }> = (
         return {
           ...r,
           status: 'Completed',
-          issuedBy: issuerName,
+          issuedBy: actor.name,
           issuedAt: new Date().toISOString().split('T')[0],
           items: r.items.map(it => ({ ...it, quantityIssued: it.quantityRequested }))
         };
       }
       return r;
     }));
+
+    WorkflowEngineService.logAuditEvent({
+      action: 'COMPLETE',
+      module: 'Administration',
+      entity: 'Stationery Request',
+      recordId: target.requestNumber,
+      details: `Inventory issued and stock balance deducted by store custodian ${actor.name}`,
+      actor,
+      result: 'SUCCESS'
+    });
+
+    setWorkflowBanner({
+      message: `Stationery items released and inventory balances updated by ${actor.name}.`,
+      type: 'success'
+    });
+
+    return { success: true };
   };
 
-  const addFacilityWorkOrder = (item: Partial<FacilityWorkOrder>) => {
+  const addFacilityWorkOrder = (item: Partial<FacilityWorkOrder>): { success: boolean; error?: string } => {
+    const validation = WorkflowEngineService.validateSubmission({
+      title: item.title,
+      requestedBy: item.requestedBy || activeActor.name,
+      status: item.status
+    });
+
+    if (!validation.isValid) {
+      setWorkflowBanner({ message: validation.error!, type: 'error' });
+      return { success: false, error: validation.error };
+    }
+
     const newOrder: FacilityWorkOrder = {
       id: `fac-${Date.now()}`,
       workOrderNumber: `FAC-WO-2026-${String(facilityWorkOrders.length + 1).padStart(3, '0')}`,
       title: item.title || 'Facility Work Order',
       category: item.category || 'Workstation & Furniture',
       facilityLocation: item.facilityLocation || 'Muscat HQ',
-      requestedBy: item.requestedBy || 'Current User',
-      department: item.department || 'Office Administration',
+      requestedBy: item.requestedBy || activeActor.name,
+      department: item.department || activeActor.department,
       priority: item.priority || 'Medium',
       description: item.description || '',
       assignedTechnician: item.assignedTechnician || 'Salim Al-Busaidi',
@@ -289,16 +585,50 @@ export const AdministrationProvider: React.FC<{ children: React.ReactNode }> = (
       createdAt: new Date().toISOString().split('T')[0],
       updatedAt: new Date().toISOString().split('T')[0]
     };
+
     setFacilityWorkOrders(prev => [newOrder, ...prev]);
+
+    WorkflowEngineService.logAuditEvent({
+      action: 'SUBMIT',
+      module: 'Administration',
+      entity: 'Facility Work Order',
+      recordId: newOrder.workOrderNumber,
+      details: `Created maintenance work order for ${newOrder.category} at ${newOrder.facilityLocation}`,
+      actor: activeActor,
+      result: 'SUCCESS'
+    });
+
+    setWorkflowBanner({
+      message: `Work Order ${newOrder.workOrderNumber} submitted and assigned to technician ${newOrder.assignedTechnician}.`,
+      type: 'success'
+    });
+
+    return { success: true };
   };
 
   const updateFacilityWorkOrderStatus = (id: string, status: WorkflowStatus, resolutionNotes?: string) => {
-    setFacilityWorkOrders(prev => prev.map(f => f.id === id ? {
-      ...f,
-      status,
-      resolutionNotes: resolutionNotes || f.resolutionNotes,
-      updatedAt: new Date().toISOString().split('T')[0]
-    } : f));
+    setFacilityWorkOrders(prev => prev.map(f => {
+      if (f.id === id) {
+        WorkflowEngineService.logAuditEvent({
+          action: status === 'Completed' ? 'COMPLETE' : 'APPROVE',
+          module: 'Administration',
+          entity: 'Facility Work Order',
+          recordId: f.workOrderNumber,
+          details: `Transitioned work order status to "${status}". Notes: ${resolutionNotes || 'None'}`,
+          actor: activeActor,
+          previousValue: f.status,
+          newValue: status,
+          result: 'SUCCESS'
+        });
+        return {
+          ...f,
+          status,
+          resolutionNotes: resolutionNotes || f.resolutionNotes,
+          updatedAt: new Date().toISOString().split('T')[0]
+        };
+      }
+      return f;
+    }));
   };
 
   // -------------------------------------------------------------
@@ -323,7 +653,7 @@ export const AdministrationProvider: React.FC<{ children: React.ReactNode }> = (
       category: item.category || 'Commercial Contract',
       summary: item.summary || item.subject || '',
       fullBody: item.fullBody,
-      assignedOwner: item.assignedOwner || 'Eng. Khalid Al-Amri',
+      assignedOwner: item.assignedOwner || activeActor.name,
       attachments: item.attachments || [],
       tags: item.tags || ['Administrative'],
       requiresResponse: !!item.requiresResponse,
@@ -334,11 +664,22 @@ export const AdministrationProvider: React.FC<{ children: React.ReactNode }> = (
           id: `tl-${Date.now()}`,
           timestamp: `${new Date().toISOString().split('T')[0]} 09:00`,
           action: 'Registered into Enterprise Mailroom & OCR Archive',
-          actor: 'Current User'
+          actor: activeActor.name
         }
       ]
     };
+
     setCorrespondenceList(prev => [newCor, ...prev]);
+
+    WorkflowEngineService.logAuditEvent({
+      action: 'CREATE',
+      module: 'Administration',
+      entity: 'Correspondence',
+      recordId: newCor.referenceNumber,
+      details: `Registered ${newCor.type} correspondence from "${newCor.senderEntity}" regarding "${newCor.subject}"`,
+      actor: activeActor,
+      result: 'SUCCESS'
+    });
   };
 
   const updateCorrespondenceStatus = (id: string, status: CorrespondenceRecord['status']) => {
@@ -354,7 +695,7 @@ export const AdministrationProvider: React.FC<{ children: React.ReactNode }> = (
               id: `tl-${Date.now()}`,
               timestamp: `${new Date().toISOString().split('T')[0]} ${new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`,
               action: `Status transitioned to ${status}`,
-              actor: 'Current User'
+              actor: activeActor.name
             }
           ]
         };
@@ -406,8 +747,8 @@ export const AdministrationProvider: React.FC<{ children: React.ReactNode }> = (
       documentNumber: `DOC-2026-${String(documents.length + 1).padStart(3, '0')}`,
       title: item.title || 'Untitled Document',
       category: item.category || 'Policy & SOP',
-      ownerName: item.ownerName || 'Current User',
-      department: item.department || 'Administration',
+      ownerName: item.ownerName || activeActor.name,
+      department: item.department || activeActor.department,
       classification: item.classification || 'Internal Use',
       currentVersion: 'v1.0',
       fileType: item.fileType || 'PDF',
@@ -420,7 +761,7 @@ export const AdministrationProvider: React.FC<{ children: React.ReactNode }> = (
         {
           version: 'v1.0',
           fileSize: item.fileSize || '2.5 MB',
-          uploadedBy: item.ownerName || 'Current User',
+          uploadedBy: item.ownerName || activeActor.name,
           uploadedAt: new Date().toISOString().split('T')[0],
           changeSummary: 'Initial document registration.'
         }
@@ -434,13 +775,23 @@ export const AdministrationProvider: React.FC<{ children: React.ReactNode }> = (
       accessCount: 1
     };
     setDocuments(prev => [newDoc, ...prev]);
+
+    WorkflowEngineService.logAuditEvent({
+      action: 'CREATE',
+      module: 'Administration',
+      entity: 'Electronic Document',
+      recordId: newDoc.documentNumber,
+      details: `Registered controlled document "${newDoc.title}" (${newDoc.classification})`,
+      actor: activeActor,
+      result: 'SUCCESS'
+    });
   };
 
   const checkoutDocument = (id: string, userName: string) => {
     setDocuments(prev => prev.map(d => d.id === id ? {
       ...d,
       isCheckedOut: true,
-      checkedOutBy: userName,
+      checkedOutBy: userName || activeActor.name,
       checkedOutAt: new Date().toISOString().replace('T', ' ').substring(0, 16)
     } : d));
   };
@@ -450,17 +801,17 @@ export const AdministrationProvider: React.FC<{ children: React.ReactNode }> = (
       if (d.id === id) {
         const newVer: DocumentVersion = {
           version: versionNumber,
-          fileSize: d.fileSize,
-          uploadedBy: userName,
+          fileSize: '3.1 MB',
+          uploadedBy: userName || activeActor.name,
           uploadedAt: new Date().toISOString().split('T')[0],
           changeSummary
         };
         return {
           ...d,
-          currentVersion: versionNumber,
           isCheckedOut: false,
           checkedOutBy: undefined,
           checkedOutAt: undefined,
+          currentVersion: versionNumber,
           lastModifiedDate: new Date().toISOString().split('T')[0],
           versions: [newVer, ...d.versions]
         };
@@ -486,79 +837,283 @@ export const AdministrationProvider: React.FC<{ children: React.ReactNode }> = (
   };
 
   // -------------------------------------------------------------
-  // 03.04 Internal Requests Methods
+  // 03.04 Internal Requests Methods (Multi-Tier & SoD Enforced)
   // -------------------------------------------------------------
-  const addInternalRequest = (item: Partial<InternalRequestRecord>) => {
+  const addInternalRequest = (item: Partial<InternalRequestRecord>): { success: boolean; error?: string } => {
+    const requesterName = item.requestedBy || activeActor.name;
+    const requesterRef = item.employeeId || activeActor.employeeRef || 'EMP-9901';
+
+    const validation = WorkflowEngineService.validateSubmission({
+      title: item.title,
+      requestedBy: requesterName,
+      status: item.status
+    });
+
+    if (!validation.isValid) {
+      WorkflowEngineService.logAuditEvent({
+        action: 'SUBMIT',
+        module: 'Administration',
+        entity: 'Internal Request',
+        recordId: 'UNAUTHORIZED_DIRECT_SUBMISSION',
+        details: validation.error!,
+        actor: activeActor,
+        result: 'REJECTED_UNAUTHORIZED'
+      });
+      setWorkflowBanner({ message: validation.error!, type: 'error', violationCode: 'SEC-AUTH-04' });
+      return { success: false, error: validation.error };
+    }
+
+    const priority = item.priority || 'Medium';
+    const wfEval = WorkflowEngineService.evaluateWorkflowTiers(
+      'InternalRequest',
+      item.category || item.title || 'General Requisition',
+      0,
+      priority,
+      item.department || activeActor.department
+    );
+
     const newReq: InternalRequestRecord = {
       id: `req-${Date.now()}`,
       ticketNumber: `REQ-${(item.requestType || 'EMP').substring(0, 3).toUpperCase()}-2026-${String(internalRequests.length + 1).padStart(4, '0')}`,
       requestType: item.requestType || 'Employee',
       category: item.category || 'Salary Certificate',
       title: item.title || 'Internal Service Requisition',
-      requestedBy: item.requestedBy || 'Current User',
-      employeeId: item.employeeId || 'EMP-9901',
-      department: item.department || 'Operations',
+      requestedBy: requesterName,
+      employeeId: requesterRef,
+      department: item.department || activeActor.department,
       branch: item.branch || 'Muscat HQ',
       requestDate: new Date().toISOString().split('T')[0],
       requiredByDate: item.requiredByDate || new Date(Date.now() + 86400000 * 4).toISOString().split('T')[0],
-      priority: item.priority || 'Medium',
-      justification: item.justification || '',
+      priority,
+      justification: item.justification || 'Official departmental requirement.',
       status: 'Pending Approval',
       currentApprovalLevel: 1,
-      totalApprovalLevels: item.requestType === 'Department' ? 2 : 1,
-      approvers: [
-        {
-          level: 1,
-          role: 'Line Manager / Dept Head',
-          approverName: 'Eng. Khalid Al-Amri',
-          status: 'Pending'
-        }
-      ]
+      totalApprovalLevels: wfEval.totalLevels,
+      approvers: wfEval.stages
     };
+
     setInternalRequests(prev => [newReq, ...prev]);
+
+    WorkflowEngineService.logAuditEvent({
+      action: 'SUBMIT',
+      module: 'Administration',
+      entity: 'Internal Request',
+      recordId: newReq.ticketNumber,
+      details: `New request submitted by ${newReq.requestedBy} (${newReq.category}). Initialized workflow ${wfEval.workflowCode} with ${wfEval.totalLevels} approval tiers.`,
+      actor: activeActor,
+      result: 'SUCCESS'
+    });
+
+    const level1Approver = wfEval.stages[0]?.approverName || 'Line Management';
+    WorkflowEngineService.dispatchAlert({
+      title: `Approval Required: ${newReq.ticketNumber}`,
+      message: `${newReq.requestedBy} submitted a ${newReq.priority} priority request for ${newReq.category}. Awaiting Level 1 review.`,
+      severity: newReq.priority === 'Urgent' ? 'warning' : 'info',
+      linkModule: '03.04 Internal Requests',
+      targetRole: level1Approver
+    });
+
+    setWorkflowBanner({
+      message: `Request ${newReq.ticketNumber} created and routed to ${level1Approver} for Tier-1 verification.`,
+      type: 'info'
+    });
+
+    return { success: true };
   };
 
-  const approveInternalRequest = (id: string, approverName: string, comments?: string) => {
+  const approveInternalRequest = (
+    id: string,
+    approverOverride?: UserContext | string,
+    comments?: string
+  ): { success: boolean; error?: string } => {
+    const actor = resolveActor(approverOverride);
+    const target = internalRequests.find(r => r.id === id);
+
+    if (!target) {
+      return { success: false, error: 'Request record not found in system repository.' };
+    }
+
+    // Backend-validated authorization & Segregation of Duties (SoD) check
+    const authCheck = WorkflowEngineService.validateApprovalAuthority(
+      {
+        requestedBy: target.requestedBy,
+        employeeId: target.employeeId,
+        currentApprovalLevel: target.currentApprovalLevel,
+        totalApprovalLevels: target.totalApprovalLevels,
+        approvers: target.approvers
+      },
+      actor
+    );
+
+    if (!authCheck.isAuthorized) {
+      WorkflowEngineService.logAuditEvent({
+        action: 'SOD_VIOLATION_BLOCKED',
+        module: 'Administration',
+        entity: 'Internal Request',
+        recordId: target.ticketNumber,
+        details: `Rejected approval execution: ${authCheck.error}`,
+        actor,
+        result: 'BLOCKED_SOD_VIOLATION'
+      });
+
+      setWorkflowBanner({
+        message: authCheck.error!,
+        type: 'error',
+        violationCode: authCheck.violationCode
+      });
+
+      return { success: false, error: authCheck.error };
+    }
+
+    // Process Level Progression
+    const currentLevel = target.currentApprovalLevel;
+    const isLastLevel = currentLevel >= target.totalApprovalLevels;
+    const nextLevel = currentLevel + 1;
+
     setInternalRequests(prev => prev.map(r => {
       if (r.id === id) {
-        const nextLevel = r.currentApprovalLevel + 1;
-        const isFullyApproved = nextLevel > r.totalApprovalLevels;
+        const updatedStages = (r.approvers || []).map(a => {
+          if (a.level === currentLevel) {
+            return {
+              ...a,
+              status: 'Approved' as const,
+              approverName: actor.name,
+              decisionDate: new Date().toISOString().replace('T', ' ').substring(0, 16),
+              comments: comments || `Verified and approved by ${actor.name} (${actor.role})`
+            };
+          }
+          if (a.level === nextLevel) {
+            return {
+              ...a,
+              status: 'Pending' as const
+            };
+          }
+          return a;
+        });
+
         return {
           ...r,
-          status: isFullyApproved ? 'Approved' : 'Pending Approval',
-          currentApprovalLevel: isFullyApproved ? r.totalApprovalLevels : nextLevel,
-          approvers: r.approvers.map(a => a.level === r.currentApprovalLevel ? {
+          status: isLastLevel ? 'Approved' : 'Pending Approval',
+          currentApprovalLevel: isLastLevel ? target.totalApprovalLevels : nextLevel,
+          approvers: updatedStages
+        };
+      }
+      return r;
+    }));
+
+    WorkflowEngineService.logAuditEvent({
+      action: 'APPROVE',
+      module: 'Administration',
+      entity: 'Internal Request',
+      recordId: target.ticketNumber,
+      details: isLastLevel
+        ? `Final approval granted by ${actor.name} (${actor.role}). Request is now fully authorized for administrative fulfillment.`
+        : `Tier ${currentLevel} approval granted by ${actor.name}. Escalated to Tier ${nextLevel}.`,
+      actor,
+      result: 'SUCCESS'
+    });
+
+    if (isLastLevel) {
+      WorkflowEngineService.dispatchAlert({
+        title: `Request Approved: ${target.ticketNumber}`,
+        message: `Your requisition "${target.title}" has been authorized and forwarded for processing.`,
+        severity: 'info',
+        linkModule: '03.04 Internal Requests'
+      });
+
+      setWorkflowBanner({
+        message: `Request ${target.ticketNumber} is now fully Approved with digital management seal. Ready for fulfillment.`,
+        type: 'success'
+      });
+    } else {
+      setWorkflowBanner({
+        message: `Tier ${currentLevel} approval logged by ${actor.name}. Request escalated to Level ${nextLevel}.`,
+        type: 'info'
+      });
+    }
+
+    return { success: true };
+  };
+
+  const rejectInternalRequest = (
+    id: string,
+    approverOverride?: UserContext | string,
+    comments?: string
+  ): { success: boolean; error?: string } => {
+    const actor = resolveActor(approverOverride);
+    const target = internalRequests.find(r => r.id === id);
+
+    if (!target) return { success: false, error: 'Request not found.' };
+
+    const reason = comments || 'Rejected as per departmental policy limits.';
+
+    setInternalRequests(prev => prev.map(r => {
+      if (r.id === id) {
+        return {
+          ...r,
+          status: 'Rejected',
+          approvers: (r.approvers || []).map(a => a.level === r.currentApprovalLevel ? {
             ...a,
-            status: 'Approved',
+            status: 'Rejected',
+            approverName: actor.name,
             decisionDate: new Date().toISOString().replace('T', ' ').substring(0, 16),
-            comments
+            comments: reason
           } : a)
         };
       }
       return r;
     }));
-  };
 
-  const rejectInternalRequest = (id: string, approverName: string, comments: string) => {
-    setInternalRequests(prev => prev.map(r => r.id === id ? {
-      ...r,
-      status: 'Rejected',
-      approvers: r.approvers.map(a => a.level === r.currentApprovalLevel ? {
-        ...a,
-        status: 'Rejected',
-        decisionDate: new Date().toISOString().replace('T', ' ').substring(0, 16),
-        comments
-      } : a)
-    } : r));
+    WorkflowEngineService.logAuditEvent({
+      action: 'REJECT',
+      module: 'Administration',
+      entity: 'Internal Request',
+      recordId: target.ticketNumber,
+      details: `Requisition rejected at Tier ${target.currentApprovalLevel} by ${actor.name}. Reason: ${reason}`,
+      actor,
+      result: 'SUCCESS'
+    });
+
+    WorkflowEngineService.dispatchAlert({
+      title: `Request Rejected: ${target.ticketNumber}`,
+      message: `Your request was rejected by ${actor.name}. Comments: ${reason}`,
+      severity: 'warning',
+      linkModule: '03.04 Internal Requests'
+    });
+
+    setWorkflowBanner({
+      message: `Request ${target.ticketNumber} rejected by ${actor.name}. Audit entry recorded.`,
+      type: 'warning'
+    });
+
+    return { success: true };
   };
 
   const completeInternalRequest = (id: string, resolutionNotes?: string) => {
+    const target = internalRequests.find(r => r.id === id);
+    if (!target) return;
+
     setInternalRequests(prev => prev.map(r => r.id === id ? {
       ...r,
       status: 'Completed',
-      resolutionNotes: resolutionNotes || 'Processed and fulfilled by Administration.',
+      resolutionNotes: resolutionNotes || 'Processed and fulfilled by Corporate Administration.',
       completedAt: new Date().toISOString().split('T')[0]
     } : r));
+
+    WorkflowEngineService.logAuditEvent({
+      action: 'COMPLETE',
+      module: 'Administration',
+      entity: 'Internal Request',
+      recordId: target.ticketNumber,
+      details: `Completed and closed ticket. Notes: ${resolutionNotes || 'Fulfilled.'}`,
+      actor: activeActor,
+      result: 'SUCCESS'
+    });
+
+    setWorkflowBanner({
+      message: `Ticket ${target.ticketNumber} marked as Completed.`,
+      type: 'success'
+    });
   };
 
   // -------------------------------------------------------------
@@ -570,8 +1125,8 @@ export const AdministrationProvider: React.FC<{ children: React.ReactNode }> = (
       taskNumber: `TSK-2026-${String(tasks.length + 1).padStart(4, '0')}`,
       title: item.title || 'Untitled Task',
       description: item.description || '',
-      department: item.department || 'Office Administration',
-      assigneeName: item.assigneeName || 'Current User',
+      department: item.department || activeActor.department,
+      assigneeName: item.assigneeName || activeActor.name,
       reporterName: item.reporterName || 'Eng. Khalid Al-Amri',
       priority: item.priority || 'Medium',
       status: item.status || 'Todo',
@@ -586,12 +1141,22 @@ export const AdministrationProvider: React.FC<{ children: React.ReactNode }> = (
         {
           id: `act-${Date.now()}`,
           timestamp: new Date().toISOString().replace('T', ' ').substring(0, 16),
-          userName: 'Current User',
+          userName: activeActor.name,
           action: 'Task created.'
         }
       ]
     };
     setTasks(prev => [newTask, ...prev]);
+
+    WorkflowEngineService.logAuditEvent({
+      action: 'CREATE',
+      module: 'Administration',
+      entity: 'Task',
+      recordId: newTask.taskNumber,
+      details: `Assigned task "${newTask.title}" to ${newTask.assigneeName} with due date ${newTask.dueDate}`,
+      actor: activeActor,
+      result: 'SUCCESS'
+    });
   };
 
   const updateTaskStatus = (id: string, status: TaskStatus) => {
@@ -602,14 +1167,14 @@ export const AdministrationProvider: React.FC<{ children: React.ReactNode }> = (
           ...t,
           status,
           progressPercent: progress,
-          completedAt: status === 'Completed' ? new Date().toISOString().split('T')[0] : t.completedAt,
+          completedAt: status === 'Completed' ? new Date().toISOString().split('T')[0] : undefined,
           activityLogs: [
             ...t.activityLogs,
             {
               id: `act-${Date.now()}`,
               timestamp: new Date().toISOString().replace('T', ' ').substring(0, 16),
-              userName: 'Current User',
-              action: `Status moved to ${status}`
+              userName: activeActor.name,
+              action: `Status updated to ${status}`
             }
           ]
         };
@@ -618,13 +1183,28 @@ export const AdministrationProvider: React.FC<{ children: React.ReactNode }> = (
     }));
   };
 
-  const updateTaskProgress = (id: string, progressPercent: number) => {
-    setTasks(prev => prev.map(t => t.id === id ? {
-      ...t,
-      progressPercent,
-      status: progressPercent === 100 ? 'Completed' : progressPercent > 0 ? 'In Progress' : 'Todo',
-      completedAt: progressPercent === 100 ? new Date().toISOString().split('T')[0] : undefined
-    } : t));
+  const updateTaskProgress = (id: string, progress: number) => {
+    setTasks(prev => prev.map(t => {
+      if (t.id === id) {
+        const clamped = Math.min(100, Math.max(0, progress));
+        const autoStatus: TaskStatus = clamped === 100 ? 'Completed' : clamped > 0 ? 'In Progress' : 'Todo';
+        return {
+          ...t,
+          progressPercent: clamped,
+          status: autoStatus,
+          activityLogs: [
+            ...t.activityLogs,
+            {
+              id: `act-${Date.now()}`,
+              timestamp: new Date().toISOString().replace('T', ' ').substring(0, 16),
+              userName: activeActor.name,
+              action: `Progress updated to ${clamped}%`
+            }
+          ]
+        };
+      }
+      return t;
+    }));
   };
 
   const toggleChecklistItem = (taskId: string, checkId: string) => {
@@ -655,7 +1235,7 @@ export const AdministrationProvider: React.FC<{ children: React.ReactNode }> = (
         {
           id: `act-${Date.now()}`,
           timestamp: new Date().toISOString().replace('T', ' ').substring(0, 16),
-          userName: 'Current User',
+          userName: activeActor.name,
           action: `Completed with sign-off: ${notes || 'Deliverables verified.'}`
         }
       ]
@@ -671,7 +1251,7 @@ export const AdministrationProvider: React.FC<{ children: React.ReactNode }> = (
       meetingNumber: `MTG-2026-${String(meetings.length + 1).padStart(3, '0')}`,
       title: item.title || 'Corporate Meeting',
       meetingType: item.meetingType || 'Department Operational',
-      organizerName: item.organizerName || 'Current User',
+      organizerName: item.organizerName || activeActor.name,
       locationOrRoom: item.locationOrRoom || 'Muscat HQ — Meeting Room A',
       isVirtual: !!item.isVirtual,
       meetingLink: item.meetingLink,
@@ -686,6 +1266,16 @@ export const AdministrationProvider: React.FC<{ children: React.ReactNode }> = (
       attachments: item.attachments || []
     };
     setMeetings(prev => [newMtg, ...prev]);
+
+    WorkflowEngineService.logAuditEvent({
+      action: 'CREATE',
+      module: 'Administration',
+      entity: 'Corporate Meeting',
+      recordId: newMtg.meetingNumber,
+      details: `Scheduled ${newMtg.meetingType} on ${newMtg.meetingDate} (${newMtg.title})`,
+      actor: activeActor,
+      result: 'SUCCESS'
+    });
   };
 
   const updateMeetingMoM = (id: string, minutesOfMeeting: string, decisions: string[], actionItems: any[]) => {
@@ -704,7 +1294,6 @@ export const AdministrationProvider: React.FC<{ children: React.ReactNode }> = (
     const act = mtg.actionItems.find(a => a.id === actionId);
     if (!act) return;
 
-    // Create a new task linked to this action item
     const createdTask: EnterpriseTask = {
       id: `tsk-${Date.now()}`,
       taskNumber: `TSK-2026-${String(tasks.length + 1).padStart(4, '0')}`,
@@ -732,14 +1321,13 @@ export const AdministrationProvider: React.FC<{ children: React.ReactNode }> = (
           id: `act-${Date.now()}`,
           timestamp: new Date().toISOString().replace('T', ' ').substring(0, 16),
           userName: 'System',
-          action: `Auto-generated task from meeting action item.`
+          action: 'Auto-generated task from meeting action item.'
         }
       ]
     };
 
     setTasks(prev => [createdTask, ...prev]);
 
-    // Update meeting action status
     setMeetings(prev => prev.map(m => {
       if (m.id === meetingId) {
         return {
@@ -753,23 +1341,64 @@ export const AdministrationProvider: React.FC<{ children: React.ReactNode }> = (
       }
       return m;
     }));
+
+    WorkflowEngineService.logAuditEvent({
+      action: 'CREATE',
+      module: 'Administration',
+      entity: 'Task',
+      recordId: createdTask.taskNumber,
+      details: `Generated actionable task from Meeting ${mtg.meetingNumber} action item`,
+      actor: activeActor,
+      result: 'SUCCESS'
+    });
   };
 
   // -------------------------------------------------------------
-  // 03.07 Travel & Transportation Methods
+  // 03.07 Travel & Transportation Methods (Multi-Tier & SoD Enforced)
   // -------------------------------------------------------------
-  const addTravelRequest = (item: Partial<TravelRequestRecord>) => {
+  const addTravelRequest = (item: Partial<TravelRequestRecord>): { success: boolean; error?: string } => {
     const flight = item.estimatedFlightCostOMR || 120;
     const hotel = item.estimatedHotelCostOMR || 180;
     const perDiem = item.perDiemAllowanceOMR || 90;
     const total = flight + hotel + perDiem;
 
+    const travelerName = item.travelerName || activeActor.name;
+    const employeeCode = item.employeeCode || activeActor.employeeRef || 'EMP-1024';
+
+    const validation = WorkflowEngineService.validateSubmission({
+      travelerName,
+      status: item.status,
+      totalEstimatedCostOMR: total
+    });
+
+    if (!validation.isValid) {
+      WorkflowEngineService.logAuditEvent({
+        action: 'SUBMIT',
+        module: 'Administration',
+        entity: 'Travel Request',
+        recordId: 'UNAUTHORIZED_DIRECT_SUBMISSION',
+        details: validation.error!,
+        actor: activeActor,
+        result: 'REJECTED_UNAUTHORIZED'
+      });
+      setWorkflowBanner({ message: validation.error!, type: 'error', violationCode: 'SEC-AUTH-04' });
+      return { success: false, error: validation.error };
+    }
+
+    const wfEval = WorkflowEngineService.evaluateWorkflowTiers(
+      'TravelRequest',
+      item.travelPurpose || 'Corporate Travel',
+      total,
+      'Medium',
+      item.department || activeActor.department
+    );
+
     const newTrv: TravelRequestRecord = {
       id: `trv-${Date.now()}`,
       travelNumber: `TRV-2026-${String(travelRequests.length + 1).padStart(4, '0')}`,
-      travelerName: item.travelerName || 'Current User',
-      employeeCode: item.employeeCode || 'EMP-1024',
-      department: item.department || 'Corporate Management',
+      travelerName,
+      employeeCode,
+      department: item.department || activeActor.department,
       travelPurpose: item.travelPurpose || 'Project Site Inspection',
       destinationCity: item.destinationCity || 'Salalah',
       destinationCountry: item.destinationCountry || 'Oman',
@@ -784,31 +1413,219 @@ export const AdministrationProvider: React.FC<{ children: React.ReactNode }> = (
       perDiemAllowanceOMR: perDiem,
       totalEstimatedCostOMR: total,
       status: 'Pending Approval',
+      currentApprovalLevel: 1,
+      totalApprovalLevels: wfEval.totalLevels,
+      approvers: wfEval.stages,
       justification: item.justification || 'Official corporate business trip.',
       createdAt: new Date().toISOString().split('T')[0]
     };
+
     setTravelRequests(prev => [newTrv, ...prev]);
+
+    WorkflowEngineService.logAuditEvent({
+      action: 'SUBMIT',
+      module: 'Administration',
+      entity: 'Travel Request',
+      recordId: newTrv.travelNumber,
+      details: `Travel authorization requested by ${travelerName} to ${newTrv.destinationCity} (Est: OMR ${total.toFixed(3)}). Routed into ${wfEval.workflowCode} (${wfEval.totalLevels} levels).`,
+      actor: activeActor,
+      result: 'SUCCESS'
+    });
+
+    WorkflowEngineService.dispatchAlert({
+      title: `Travel Approval Required: ${newTrv.travelNumber}`,
+      message: `${travelerName} requested business travel to ${newTrv.destinationCity}, ${newTrv.destinationCountry} (Total: OMR ${total.toFixed(3)}).`,
+      severity: total > 1500 ? 'warning' : 'info',
+      linkModule: '03.07 Travel & Transportation'
+    });
+
+    setWorkflowBanner({
+      message: `Travel Request ${newTrv.travelNumber} submitted. Requires ${wfEval.totalLevels} sequential authorization tiers as per corporate travel policy.`,
+      type: 'info'
+    });
+
+    return { success: true };
   };
 
-  const approveTravelRequest = (id: string, approverName: string) => {
-    setTravelRequests(prev => prev.map(t => t.id === id ? {
-      ...t,
-      status: 'Approved',
-      approvedBy: approverName,
-      bookingRef: `TKT-ART-${Math.floor(10000 + Math.random() * 90000)}`
-    } : t));
+  const approveTravelRequest = (
+    id: string,
+    approverOverride?: UserContext | string,
+    comments?: string
+  ): { success: boolean; error?: string } => {
+    const actor = resolveActor(approverOverride);
+    const target = travelRequests.find(t => t.id === id);
+
+    if (!target) return { success: false, error: 'Travel record not found.' };
+
+    const currentLevel = target.currentApprovalLevel || 1;
+    const totalLevels = target.totalApprovalLevels || 1;
+
+    // Validate Segregation of Duties & Delegation of Authority limits
+    const authCheck = WorkflowEngineService.validateApprovalAuthority(
+      {
+        travelerName: target.travelerName,
+        employeeCode: target.employeeCode,
+        currentApprovalLevel: currentLevel,
+        totalApprovalLevels: totalLevels,
+        approvers: target.approvers,
+        totalEstimatedCostOMR: target.totalEstimatedCostOMR
+      },
+      actor
+    );
+
+    if (!authCheck.isAuthorized) {
+      WorkflowEngineService.logAuditEvent({
+        action: 'SOD_VIOLATION_BLOCKED',
+        module: 'Administration',
+        entity: 'Travel Request',
+        recordId: target.travelNumber,
+        details: `Unauthorized travel approval: ${authCheck.error}`,
+        actor,
+        result: 'BLOCKED_SOD_VIOLATION'
+      });
+
+      setWorkflowBanner({
+        message: authCheck.error!,
+        type: 'error',
+        violationCode: authCheck.violationCode
+      });
+
+      return { success: false, error: authCheck.error };
+    }
+
+    const isLastLevel = currentLevel >= totalLevels;
+    const nextLevel = currentLevel + 1;
+
+    setTravelRequests(prev => prev.map(t => {
+      if (t.id === id) {
+        const updatedStages = (t.approvers || []).map(a => {
+          if (a.level === currentLevel) {
+            return {
+              ...a,
+              status: 'Approved' as const,
+              approverName: actor.name,
+              decisionDate: new Date().toISOString().replace('T', ' ').substring(0, 16),
+              comments: comments || `Authorized by ${actor.name} (${actor.role})`
+            };
+          }
+          if (a.level === nextLevel) {
+            return {
+              ...a,
+              status: 'Pending' as const
+            };
+          }
+          return a;
+        });
+
+        return {
+          ...t,
+          status: isLastLevel ? 'Approved' : 'Pending Approval',
+          currentApprovalLevel: isLastLevel ? totalLevels : nextLevel,
+          approvedBy: isLastLevel ? actor.name : t.approvedBy,
+          bookingRef: isLastLevel ? `TKT-ART-${Math.floor(10000 + Math.random() * 90000)}` : t.bookingRef,
+          approvers: updatedStages
+        };
+      }
+      return t;
+    }));
+
+    WorkflowEngineService.logAuditEvent({
+      action: 'APPROVE',
+      module: 'Administration',
+      entity: 'Travel Request',
+      recordId: target.travelNumber,
+      details: isLastLevel
+        ? `Final travel authorization issued by ${actor.name}. Corporate ticket booking reference generated.`
+        : `Tier ${currentLevel} travel approval stamped by ${actor.name}. Escalated to Tier ${nextLevel}.`,
+      actor,
+      result: 'SUCCESS'
+    });
+
+    if (isLastLevel) {
+      WorkflowEngineService.dispatchAlert({
+        title: `Travel Authorized: ${target.travelNumber}`,
+        message: `Your travel request to ${target.destinationCity} has completed all approval tiers and is now Approved.`,
+        severity: 'info',
+        linkModule: '03.07 Travel & Transportation'
+      });
+
+      setWorkflowBanner({
+        message: `Travel Request ${target.travelNumber} fully approved by ${actor.name}. Travel desk dispatch authorized.`,
+        type: 'success'
+      });
+    } else {
+      setWorkflowBanner({
+        message: `Tier ${currentLevel} approval logged by ${actor.name}. Request escalated to Level ${nextLevel}.`,
+        type: 'info'
+      });
+    }
+
+    return { success: true };
   };
 
-  const rejectTravelRequest = (id: string, approverName: string) => {
-    setTravelRequests(prev => prev.map(t => t.id === id ? { ...t, status: 'Rejected' } : t));
+  const rejectTravelRequest = (
+    id: string,
+    approverOverride?: UserContext | string,
+    comments?: string
+  ): { success: boolean; error?: string } => {
+    const actor = resolveActor(approverOverride);
+    const target = travelRequests.find(t => t.id === id);
+
+    if (!target) return { success: false, error: 'Travel request not found.' };
+
+    const reason = comments || 'Travel budget exceeded or mission objectives declined by management.';
+
+    setTravelRequests(prev => prev.map(t => {
+      if (t.id === id) {
+        return {
+          ...t,
+          status: 'Rejected',
+          approvers: (t.approvers || []).map(a => a.level === t.currentApprovalLevel ? {
+            ...a,
+            status: 'Rejected',
+            approverName: actor.name,
+            decisionDate: new Date().toISOString().replace('T', ' ').substring(0, 16),
+            comments: reason
+          } : a)
+        };
+      }
+      return t;
+    }));
+
+    WorkflowEngineService.logAuditEvent({
+      action: 'REJECT',
+      module: 'Administration',
+      entity: 'Travel Request',
+      recordId: target.travelNumber,
+      details: `Travel authorization rejected at Tier ${target.currentApprovalLevel} by ${actor.name}. Reason: ${reason}`,
+      actor,
+      result: 'SUCCESS'
+    });
+
+    setWorkflowBanner({
+      message: `Travel Request ${target.travelNumber} marked as Rejected by ${actor.name}.`,
+      type: 'warning'
+    });
+
+    return { success: true };
   };
 
-  const addVehicleBooking = (item: Partial<VehicleBookingRecord>) => {
+  const addVehicleBooking = (item: Partial<VehicleBookingRecord>): { success: boolean; error?: string } => {
+    const validation = WorkflowEngineService.validateSubmission({
+      requestedBy: item.requestedBy || activeActor.name,
+      status: item.status
+    });
+
+    if (!validation.isValid) {
+      setWorkflowBanner({ message: validation.error!, type: 'error' });
+      return { success: false, error: validation.error };
+    }
+
     const newBooking: VehicleBookingRecord = {
       id: `vbk-${Date.now()}`,
       bookingNumber: `VEH-BK-2026-${String(vehicleBookings.length + 1).padStart(3, '0')}`,
-      requestedBy: item.requestedBy || 'Current User',
-      department: item.department || 'Operations',
+      requestedBy: item.requestedBy || activeActor.name,
+      department: item.department || activeActor.department,
       purpose: item.purpose || 'Client site meeting',
       vehicleAssigned: item.vehicleAssigned || 'Toyota Land Cruiser VXR (9042-AA)',
       plateNumber: item.plateNumber || '9042-AA',
@@ -824,7 +1641,25 @@ export const AdministrationProvider: React.FC<{ children: React.ReactNode }> = (
       status: 'Approved',
       createdAt: new Date().toISOString().split('T')[0]
     };
+
     setVehicleBookings(prev => [newBooking, ...prev]);
+
+    WorkflowEngineService.logAuditEvent({
+      action: 'SUBMIT',
+      module: 'Administration',
+      entity: 'Vehicle Booking',
+      recordId: newBooking.bookingNumber,
+      details: `Dispatched pool vehicle ${newBooking.plateNumber} to ${newBooking.dropoffLocation} for ${newBooking.requestedBy}`,
+      actor: activeActor,
+      result: 'SUCCESS'
+    });
+
+    setWorkflowBanner({
+      message: `Vehicle booking ${newBooking.bookingNumber} confirmed and scheduled with Fleet Coordinator.`,
+      type: 'success'
+    });
+
+    return { success: true };
   };
 
   const updateFleetVehicleStatus = (id: string, status: FleetVehicleRecord['currentStatus']) => {
@@ -832,25 +1667,224 @@ export const AdministrationProvider: React.FC<{ children: React.ReactNode }> = (
   };
 
   // -------------------------------------------------------------
-  // 03.08 General Business Services Methods
+  // 03.08 General Business Services Methods (Multi-Tier & SoD Enforced)
   // -------------------------------------------------------------
-  const addGeneralService = (item: Partial<GeneralServiceRequest>) => {
+  const addGeneralService = (item: Partial<GeneralServiceRequest>): { success: boolean; error?: string } => {
+    const requesterName = item.requestedBy || activeActor.name;
+    const budget = item.estimatedBudgetOMR || 250;
+
+    const validation = WorkflowEngineService.validateSubmission({
+      title: item.title,
+      requestedBy: requesterName,
+      status: item.status
+    });
+
+    if (!validation.isValid) {
+      WorkflowEngineService.logAuditEvent({
+        action: 'SUBMIT',
+        module: 'Administration',
+        entity: 'General Service Request',
+        recordId: 'UNAUTHORIZED_DIRECT_SUBMISSION',
+        details: validation.error!,
+        actor: activeActor,
+        result: 'REJECTED_UNAUTHORIZED'
+      });
+      setWorkflowBanner({ message: validation.error!, type: 'error', violationCode: 'SEC-AUTH-04' });
+      return { success: false, error: validation.error };
+    }
+
+    const wfEval = WorkflowEngineService.evaluateWorkflowTiers(
+      'GeneralService',
+      item.serviceCategory || 'Facilities Requisition',
+      budget,
+      'Medium',
+      item.department || activeActor.department
+    );
+
     const newGSR: GeneralServiceRequest = {
       id: `gsr-${Date.now()}`,
       serviceRequestNumber: `GSR-2026-${String(generalServices.length + 1).padStart(3, '0')}`,
       serviceCategory: item.serviceCategory || 'Office Interior & Relocation',
       title: item.title || 'General Business Service Requisition',
-      requestedBy: item.requestedBy || 'Current User',
-      department: item.department || 'Administration',
+      requestedBy: requesterName,
+      department: item.department || activeActor.department,
       location: item.location || 'Muscat HQ',
       scheduledDate: item.scheduledDate || new Date().toISOString().split('T')[0],
-      scopeOfWork: item.scopeOfWork || '',
+      scopeOfWork: item.scopeOfWork || 'General administrative facility maintenance.',
       vendorAssigned: item.vendorAssigned,
-      estimatedBudgetOMR: item.estimatedBudgetOMR || 250,
-      status: 'Approved',
+      estimatedBudgetOMR: budget,
+      status: 'Pending Approval',
+      currentApprovalLevel: 1,
+      totalApprovalLevels: wfEval.totalLevels,
+      approvers: wfEval.stages,
       createdAt: new Date().toISOString().split('T')[0]
     };
+
     setGeneralServices(prev => [newGSR, ...prev]);
+
+    WorkflowEngineService.logAuditEvent({
+      action: 'SUBMIT',
+      module: 'Administration',
+      entity: 'General Service Request',
+      recordId: newGSR.serviceRequestNumber,
+      details: `Service requisition submitted by ${requesterName} (Est. OMR ${budget.toFixed(3)}). Enrolled in ${wfEval.workflowCode}.`,
+      actor: activeActor,
+      result: 'SUCCESS'
+    });
+
+    setWorkflowBanner({
+      message: `Service Requisition ${newGSR.serviceRequestNumber} created and awaiting Level 1 management approval.`,
+      type: 'info'
+    });
+
+    return { success: true };
+  };
+
+  const approveGeneralService = (
+    id: string,
+    approverOverride?: UserContext | string,
+    comments?: string
+  ): { success: boolean; error?: string } => {
+    const actor = resolveActor(approverOverride);
+    const target = generalServices.find(g => g.id === id);
+
+    if (!target) return { success: false, error: 'Service request not found.' };
+
+    const currentLevel = target.currentApprovalLevel || 1;
+    const totalLevels = target.totalApprovalLevels || 1;
+
+    const authCheck = WorkflowEngineService.validateApprovalAuthority(
+      {
+        requestedBy: target.requestedBy,
+        currentApprovalLevel: currentLevel,
+        totalApprovalLevels: totalLevels,
+        approvers: target.approvers,
+        estimatedBudgetOMR: target.estimatedBudgetOMR
+      },
+      actor
+    );
+
+    if (!authCheck.isAuthorized) {
+      WorkflowEngineService.logAuditEvent({
+        action: 'SOD_VIOLATION_BLOCKED',
+        module: 'Administration',
+        entity: 'General Service Request',
+        recordId: target.serviceRequestNumber,
+        details: `Blocked unauthorized approval: ${authCheck.error}`,
+        actor,
+        result: 'BLOCKED_SOD_VIOLATION'
+      });
+
+      setWorkflowBanner({
+        message: authCheck.error!,
+        type: 'error',
+        violationCode: authCheck.violationCode
+      });
+
+      return { success: false, error: authCheck.error };
+    }
+
+    const isLastLevel = currentLevel >= totalLevels;
+    const nextLevel = currentLevel + 1;
+
+    setGeneralServices(prev => prev.map(g => {
+      if (g.id === id) {
+        const updatedStages = (g.approvers || []).map(a => {
+          if (a.level === currentLevel) {
+            return {
+              ...a,
+              status: 'Approved' as const,
+              approverName: actor.name,
+              decisionDate: new Date().toISOString().replace('T', ' ').substring(0, 16),
+              comments: comments || `Approved by ${actor.name} (${actor.role})`
+            };
+          }
+          if (a.level === nextLevel) {
+            return {
+              ...a,
+              status: 'Pending' as const
+            };
+          }
+          return a;
+        });
+
+        return {
+          ...g,
+          status: isLastLevel ? 'Approved' : 'Pending Approval',
+          currentApprovalLevel: isLastLevel ? totalLevels : nextLevel,
+          approvers: updatedStages
+        };
+      }
+      return g;
+    }));
+
+    WorkflowEngineService.logAuditEvent({
+      action: 'APPROVE',
+      module: 'Administration',
+      entity: 'General Service Request',
+      recordId: target.serviceRequestNumber,
+      details: isLastLevel
+        ? `Fully authorized service contract by ${actor.name}. Dispatched to vendor.`
+        : `Tier ${currentLevel} signed off by ${actor.name}. Escalated to Tier ${nextLevel}.`,
+      actor,
+      result: 'SUCCESS'
+    });
+
+    setWorkflowBanner({
+      message: isLastLevel
+        ? `Service Requisition ${target.serviceRequestNumber} fully Approved by ${actor.name}.`
+        : `Tier ${currentLevel} approval registered. Escalated to Tier ${nextLevel}.`,
+      type: 'success'
+    });
+
+    return { success: true };
+  };
+
+  const rejectGeneralService = (
+    id: string,
+    approverOverride?: UserContext | string,
+    comments?: string
+  ): { success: boolean; error?: string } => {
+    const actor = resolveActor(approverOverride);
+    const target = generalServices.find(g => g.id === id);
+
+    if (!target) return { success: false, error: 'Service request not found.' };
+
+    const reason = comments || 'Budget denied by administration.';
+
+    setGeneralServices(prev => prev.map(g => {
+      if (g.id === id) {
+        return {
+          ...g,
+          status: 'Rejected',
+          approvers: (g.approvers || []).map(a => a.level === g.currentApprovalLevel ? {
+            ...a,
+            status: 'Rejected',
+            approverName: actor.name,
+            decisionDate: new Date().toISOString().replace('T', ' ').substring(0, 16),
+            comments: reason
+          } : a)
+        };
+      }
+      return g;
+    }));
+
+    WorkflowEngineService.logAuditEvent({
+      action: 'REJECT',
+      module: 'Administration',
+      entity: 'General Service Request',
+      recordId: target.serviceRequestNumber,
+      details: `Service requisition rejected by ${actor.name}. Reason: ${reason}`,
+      actor,
+      result: 'SUCCESS'
+    });
+
+    setWorkflowBanner({
+      message: `Service Requisition ${target.serviceRequestNumber} marked as Rejected.`,
+      type: 'warning'
+    });
+
+    return { success: true };
   };
 
   const updateGeneralServiceStatus = (id: string, status: WorkflowStatus) => {
@@ -865,7 +1899,7 @@ export const AdministrationProvider: React.FC<{ children: React.ReactNode }> = (
       category: item.category || 'Office Furniture',
       locationRoom: item.locationRoom || 'Muscat HQ — Floor 3',
       branch: item.branch || 'Muscat HQ',
-      custodianEmployee: item.custodianEmployee || 'Current User',
+      custodianEmployee: item.custodianEmployee || activeActor.name,
       purchaseDate: item.purchaseDate || new Date().toISOString().split('T')[0],
       purchaseValueOMR: item.purchaseValueOMR || 150,
       condition: item.condition || 'Good',
@@ -873,6 +1907,16 @@ export const AdministrationProvider: React.FC<{ children: React.ReactNode }> = (
       status: 'In Service'
     };
     setOfficeAssets(prev => [newAsset, ...prev]);
+
+    WorkflowEngineService.logAuditEvent({
+      action: 'CREATE',
+      module: 'Administration',
+      entity: 'Office Asset',
+      recordId: newAsset.assetTag,
+      details: `Tagged and registered office physical asset "${newAsset.itemName}" (${newAsset.locationRoom})`,
+      actor: activeActor,
+      result: 'SUCCESS'
+    });
   };
 
   // -------------------------------------------------------------
@@ -884,7 +1928,8 @@ export const AdministrationProvider: React.FC<{ children: React.ReactNode }> = (
       officeServices.filter(s => s.status === 'Submitted' || s.status === 'In Progress').length,
     pendingApprovalsCount: internalRequests.filter(r => r.status === 'Pending Approval').length +
       travelRequests.filter(t => t.status === 'Pending Approval').length +
-      stationeryRequests.filter(s => s.status === 'Pending Approval').length,
+      stationeryRequests.filter(s => s.status === 'Pending Approval').length +
+      generalServices.filter(g => g.status === 'Pending Approval').length,
     activeDocumentsCount: documents.filter(d => !d.isArchived).length,
     archivedDocumentsCount: documents.filter(d => d.isArchived).length,
     totalIncomingMailThisMonth: correspondenceList.filter(c => c.type === 'incoming').length,
@@ -906,6 +1951,12 @@ export const AdministrationProvider: React.FC<{ children: React.ReactNode }> = (
   return (
     <AdministrationContext.Provider
       value={{
+        activeActor,
+        setActiveActor,
+        enterpriseActors: ENTERPRISE_ACTORS,
+        workflowBanner,
+        setWorkflowBanner,
+        clearWorkflowBanner,
         notices,
         addNotice,
         deleteNotice,
@@ -955,6 +2006,8 @@ export const AdministrationProvider: React.FC<{ children: React.ReactNode }> = (
         updateFleetVehicleStatus,
         generalServices,
         addGeneralService,
+        approveGeneralService,
+        rejectGeneralService,
         updateGeneralServiceStatus,
         serviceVendors,
         officeAssets,

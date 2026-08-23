@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useAdmin } from '../../services/administrationStore';
 import { DocumentRecord, DocumentVersion } from '../../types';
 import {
@@ -23,7 +23,11 @@ import {
   Sparkles
 } from 'lucide-react';
 
-export const DocumentManagementView: React.FC = () => {
+interface DocumentManagementViewProps {
+  activeTab?: string;
+}
+
+export const DocumentManagementView: React.FC<DocumentManagementViewProps> = ({ activeTab: initialTab }) => {
   const {
     documents,
     addDocument,
@@ -34,6 +38,13 @@ export const DocumentManagementView: React.FC = () => {
   } = useAdmin();
 
   const [activeTab, setActiveTab] = useState<'active' | 'archived' | 'checkout'>('active');
+
+  useEffect(() => {
+    if (initialTab && ['active', 'archived', 'checkout'].includes(initialTab)) {
+      setActiveTab(initialTab as 'active' | 'archived' | 'checkout');
+    }
+  }, [initialTab]);
+
   const [searchTerm, setSearchTerm] = useState('');
   const [categoryFilter, setCategoryFilter] = useState('all');
   const [selectedDoc, setSelectedDoc] = useState<DocumentRecord | null>(null);

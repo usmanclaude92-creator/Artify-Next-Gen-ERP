@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useAdmin } from '../../services/administrationStore';
 import { TravelRequestRecord, VehicleBookingRecord, FleetVehicleRecord } from '../../types';
+import { ActorSimulationBar } from '../common/ActorSimulationBar';
+import { WorkflowBannerAlert } from '../common/WorkflowBannerAlert';
 import {
   Plane,
   Car,
@@ -19,11 +21,17 @@ import {
   ShieldCheck,
   CreditCard,
   ChevronRight,
-  Layers
+  Layers,
+  GitBranch
 } from 'lucide-react';
 
-export const TravelTransportationView: React.FC = () => {
+interface TravelTransportationViewProps {
+  activeTab?: string;
+}
+
+export const TravelTransportationView: React.FC<TravelTransportationViewProps> = ({ activeTab: initialTab }) => {
   const {
+    activeActor,
     travelRequests,
     addTravelRequest,
     approveTravelRequest,
@@ -36,6 +44,13 @@ export const TravelTransportationView: React.FC = () => {
   } = useAdmin();
 
   const [activeTab, setActiveTab] = useState<'travel' | 'fleet' | 'bookings'>('travel');
+
+  useEffect(() => {
+    if (initialTab && ['travel', 'fleet', 'bookings'].includes(initialTab)) {
+      setActiveTab(initialTab as 'travel' | 'fleet' | 'bookings');
+    }
+  }, [initialTab]);
+
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedTravel, setSelectedTravel] = useState<TravelRequestRecord | null>(null);
 
@@ -43,18 +58,23 @@ export const TravelTransportationView: React.FC = () => {
   const [showTravelModal, setShowTravelModal] = useState(false);
   const [showBookingModal, setShowBookingModal] = useState(false);
 
-  // Travel Form
-  const [travelerName, setTravelerName] = useState('Eng. Khalid Al-Amri');
+  // Travel Form initialized from activeActor
+  const [travelerName, setTravelerName] = useState(activeActor.name);
   const [destinationCity, setDestinationCity] = useState('Salalah');
   const [destinationCountry, setDestinationCountry] = useState('Oman');
   const [travelPurpose, setTravelPurpose] = useState('EPC Project Site Inspection & Client Review');
   const [departureDate, setDepartureDate] = useState(new Date(Date.now() + 86400000 * 3).toISOString().split('T')[0]);
   const [returnDate, setReturnDate] = useState(new Date(Date.now() + 86400000 * 6).toISOString().split('T')[0]);
-  const [travelClass, setTravelClass] = useState<any>('Business');
+  const [travelClass, setTravelClass] = useState<'Economy' | 'Business' | 'First'>('Business');
   const [flightCost, setFlightCost] = useState(140);
   const [hotelCost, setHotelCost] = useState(210);
   const [perDiem, setPerDiem] = useState(105);
   const [hotelRequired, setHotelRequired] = useState(true);
+
+  // Synchronize defaults when active actor switches
+  useEffect(() => {
+    setTravelerName(activeActor.name);
+  }, [activeActor]);
 
   // Vehicle Booking Form
   const [bookingPurpose, setBookingPurpose] = useState('');
@@ -66,7 +86,7 @@ export const TravelTransportationView: React.FC = () => {
 
   const handleCreateTravel = (e: React.FormEvent) => {
     e.preventDefault();
-    addTravelRequest({
+    const res = addTravelRequest({
       travelerName,
       destinationCity,
       destinationCountry,
@@ -79,7 +99,9 @@ export const TravelTransportationView: React.FC = () => {
       estimatedHotelCostOMR: hotelCost,
       perDiemAllowanceOMR: perDiem
     });
-    setShowTravelModal(false);
+    if (res.success) {
+      setShowTravelModal(false);
+    }
   };
 
   const handleCreateBooking = (e: React.FormEvent) => {
@@ -100,6 +122,14 @@ export const TravelTransportationView: React.FC = () => {
     setBookingPurpose('');
   };
 
+  const handleAuthorizeTravel = (travelId: string) => {
+    approveTravelRequest(travelId, activeActor);
+  };
+
+  const handleRejectTravel = (travelId: string) => {
+    rejectTravelRequest(travelId, activeActor);
+  };
+
   const filteredTravel = travelRequests.filter(t =>
     t.travelNumber.toLowerCase().includes(searchTerm.toLowerCase()) ||
     t.travelerName.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -118,6 +148,12 @@ export const TravelTransportationView: React.FC = () => {
 
   return (
     <div className="space-y-6">
+      {/* Simulation Bar */}
+      <ActorSimulationBar />
+
+      {/* Workflow Notification Banner */}
+      <WorkflowBannerAlert />
+
       {/* Top Banner */}
       <div className="bg-white rounded-2xl p-5 border border-slate-200 shadow-2xs">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
@@ -168,7 +204,7 @@ export const TravelTransportationView: React.FC = () => {
                 className="px-3.5 py-1.5 rounded-lg bg-slate-900 hover:bg-slate-800 text-white text-xs font-semibold flex items-center gap-1.5 cursor-pointer shadow-xs"
               >
                 <Plus className="w-3.5 h-3.5" />
-                <span>Request Travel</span>
+                <span>New Travel Authorization</span>
               </button>
             )}
             {activeTab === 'bookings' && (
@@ -208,8 +244,8 @@ export const TravelTransportationView: React.FC = () => {
                   <th className="p-3.5">Travel Ref #</th>
                   <th className="p-3.5">Traveler & Dept</th>
                   <th className="p-3.5">Destination & Dates</th>
-                  <th className="p-3.5">Class / Stay</th>
-                  <th className="p-3.5">Total Budget (OMR)</th>
+                  <th className="p-3.5">Workflow Pipeline</th>
+                  <th className="p-3.5">Total Budget</th>
                   <th className="p-3.5">Status</th>
                   <th className="p-3.5 text-right">Approval Actions</th>
                 </tr>
@@ -232,8 +268,11 @@ export const TravelTransportationView: React.FC = () => {
                       <div className="text-[11px] text-slate-500">{trv.departureDate} → {trv.returnDate}</div>
                     </td>
                     <td className="p-3.5">
-                      <span className="font-semibold text-slate-800">{trv.travelClass} Class</span>
-                      <div className="text-[10px] text-slate-500">{trv.hotelRequired ? 'Hotel Included' : 'No Hotel'}</div>
+                      <div className="flex items-center gap-1 text-[11px] font-semibold text-slate-800">
+                        <GitBranch className="w-3 h-3 text-indigo-600" />
+                        <span>Tier {trv.currentApprovalLevel || 1} / {trv.totalApprovalLevels || 1}</span>
+                      </div>
+                      <div className="text-[10px] text-slate-500">{trv.travelClass} Class • {trv.hotelRequired ? 'Hotel' : 'Flight Only'}</div>
                     </td>
                     <td className="p-3.5 font-mono font-bold text-slate-900">
                       {formatCurrency(trv.totalEstimatedCostOMR)}
@@ -251,20 +290,23 @@ export const TravelTransportationView: React.FC = () => {
                       {trv.status === 'Pending Approval' ? (
                         <div className="flex items-center justify-end gap-1.5">
                           <button
-                            onClick={() => approveTravelRequest(trv.id, 'Eng. Khalid Al-Amri')}
-                            className="px-2.5 py-1 bg-emerald-600 hover:bg-emerald-700 text-white rounded text-[11px] font-semibold cursor-pointer"
+                            onClick={() => handleAuthorizeTravel(trv.id)}
+                            className="px-2.5 py-1 bg-emerald-600 hover:bg-emerald-700 text-white rounded text-[11px] font-semibold cursor-pointer shadow-2xs"
+                            title={`Authorize as ${activeActor.name}`}
                           >
-                            Authorize
+                            Authorize (Tier {trv.currentApprovalLevel || 1})
                           </button>
                           <button
-                            onClick={() => rejectTravelRequest(trv.id, 'Eng. Khalid Al-Amri')}
+                            onClick={() => handleRejectTravel(trv.id)}
                             className="px-2 py-1 bg-rose-100 hover:bg-rose-200 text-rose-700 rounded text-[11px] font-semibold cursor-pointer"
                           >
                             Reject
                           </button>
                         </div>
                       ) : (
-                        <span className="text-[11px] text-slate-400">Approved by {trv.approvedBy}</span>
+                        <span className="text-[11px] text-slate-400">
+                          {trv.approvedBy ? `Approved by ${trv.approvedBy}` : trv.status}
+                        </span>
                       )}
                     </td>
                   </tr>
@@ -288,23 +330,24 @@ export const TravelTransportationView: React.FC = () => {
                   <span className={`px-2 py-0.5 rounded text-[10px] font-bold ${
                     veh.currentStatus === 'Available' ? 'bg-emerald-100 text-emerald-800' :
                     veh.currentStatus === 'On Mission' ? 'bg-blue-100 text-blue-800' :
-                    'bg-amber-100 text-amber-800'
+                    veh.currentStatus === 'Scheduled Maintenance' ? 'bg-amber-100 text-amber-800' :
+                    'bg-slate-100 text-slate-800'
                   }`}>
                     {veh.currentStatus}
                   </span>
                 </div>
 
-                <h3 className="text-sm font-bold text-slate-900 mb-1">{veh.makeModel}</h3>
-                <p className="text-[11px] text-slate-500">{veh.vehicleType} • {veh.assignedBranch}</p>
+                <h3 className="font-bold text-slate-900 text-sm">{veh.makeModel}</h3>
+                <p className="text-[11px] text-slate-500">{veh.vehicleType} • Code: {veh.vehicleCode}</p>
 
-                <div className="grid grid-cols-2 gap-2 mt-4 pt-3 border-t border-slate-100 text-[11px]">
+                <div className="grid grid-cols-2 gap-2 mt-4 text-[11px] pt-3 border-t border-slate-100">
                   <div>
                     <span className="text-slate-400 block">Odometer</span>
-                    <span className="font-bold text-slate-800">{veh.currentOdometerKm.toLocaleString()} KM</span>
+                    <span className="font-mono font-bold text-slate-800">{veh.currentOdometerKm.toLocaleString()} KM</span>
                   </div>
                   <div>
-                    <span className="text-slate-400 block">Fuel Card #</span>
-                    <span className="font-mono text-slate-800">{veh.fuelCardNumber}</span>
+                    <span className="text-slate-400 block">Assigned Pool</span>
+                    <span className="font-medium text-slate-800">{veh.assignedBranch}</span>
                   </div>
                   <div>
                     <span className="text-slate-400 block">Last Service</span>
@@ -419,67 +462,70 @@ export const TravelTransportationView: React.FC = () => {
                   <label className="block text-slate-700 font-semibold mb-1">Departure Date</label>
                   <input
                     type="date"
+                    required
                     value={departureDate}
                     onChange={e => setDepartureDate(e.target.value)}
-                    className="w-full p-2 rounded-lg border border-slate-300 focus:outline-none"
+                    className="w-full p-2.5 rounded-lg border border-slate-300 focus:outline-none"
                   />
                 </div>
                 <div>
                   <label className="block text-slate-700 font-semibold mb-1">Return Date</label>
                   <input
                     type="date"
+                    required
                     value={returnDate}
                     onChange={e => setReturnDate(e.target.value)}
-                    className="w-full p-2 rounded-lg border border-slate-300 focus:outline-none"
+                    className="w-full p-2.5 rounded-lg border border-slate-300 focus:outline-none"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block text-slate-700 font-semibold mb-1">Business Purpose</label>
+                <label className="block text-slate-700 font-semibold mb-1">Purpose of Mission</label>
                 <textarea
                   rows={2}
+                  required
                   value={travelPurpose}
                   onChange={e => setTravelPurpose(e.target.value)}
                   className="w-full p-2.5 rounded-lg border border-slate-300 focus:outline-none"
                 />
               </div>
 
-              {/* Budget Breakdown */}
-              <div className="p-3 bg-slate-50 rounded-xl border border-slate-200 space-y-2">
-                <span className="font-bold text-slate-900">Estimated Travel Costing (OMR)</span>
-                <div className="grid grid-cols-3 gap-2">
-                  <div>
-                    <label className="text-[10px] text-slate-500 block">Flight</label>
-                    <input
-                      type="number"
-                      value={flightCost}
-                      onChange={e => setFlightCost(parseFloat(e.target.value) || 0)}
-                      className="w-full p-1.5 rounded border border-slate-300 font-mono"
-                    />
-                  </div>
-                  <div>
-                    <label className="text-[10px] text-slate-500 block">Hotel</label>
-                    <input
-                      type="number"
-                      value={hotelCost}
-                      onChange={e => setHotelCost(parseFloat(e.target.value) || 0)}
-                      className="w-full p-1.5 rounded border border-slate-300 font-mono"
-                    />
-                  </div>
-                  <div>
-                    <label className="text-[10px] text-slate-500 block">Per Diem</label>
-                    <input
-                      type="number"
-                      value={perDiem}
-                      onChange={e => setPerDiem(parseFloat(e.target.value) || 0)}
-                      className="w-full p-1.5 rounded border border-slate-300 font-mono"
-                    />
-                  </div>
+              <div className="grid grid-cols-3 gap-2">
+                <div>
+                  <label className="block text-slate-700 font-semibold mb-1">Flight (OMR)</label>
+                  <input
+                    type="number"
+                    value={flightCost}
+                    onChange={e => setFlightCost(Number(e.target.value))}
+                    className="w-full p-2 rounded-lg border border-slate-300 focus:outline-none"
+                  />
                 </div>
-                <div className="text-right text-xs font-bold text-slate-900 pt-1">
-                  Total: {formatCurrency(flightCost + hotelCost + perDiem)}
+                <div>
+                  <label className="block text-slate-700 font-semibold mb-1">Hotel (OMR)</label>
+                  <input
+                    type="number"
+                    value={hotelCost}
+                    onChange={e => setHotelCost(Number(e.target.value))}
+                    className="w-full p-2 rounded-lg border border-slate-300 focus:outline-none"
+                  />
                 </div>
+                <div>
+                  <label className="block text-slate-700 font-semibold mb-1">Per Diem (OMR)</label>
+                  <input
+                    type="number"
+                    value={perDiem}
+                    onChange={e => setPerDiem(Number(e.target.value))}
+                    className="w-full p-2 rounded-lg border border-slate-300 focus:outline-none"
+                  />
+                </div>
+              </div>
+
+              <div className="p-3 bg-slate-50 rounded-xl border border-slate-200 flex justify-between items-center">
+                <span className="font-bold text-slate-800">Total Estimated Budget:</span>
+                <span className="font-mono font-bold text-sm text-indigo-700">
+                  {formatCurrency(flightCost + hotelCost + perDiem)}
+                </span>
               </div>
 
               <div className="flex justify-end gap-2 pt-4 border-t border-slate-100">
@@ -505,24 +551,9 @@ export const TravelTransportationView: React.FC = () => {
       {/* Book Vehicle Modal */}
       {showBookingModal && (
         <div className="fixed inset-0 bg-black/40 backdrop-blur-xs flex items-center justify-center p-4 z-50 animate-in fade-in">
-          <div className="bg-white rounded-2xl p-6 w-full max-w-md shadow-xl border border-slate-200">
-            <h3 className="text-base font-bold text-slate-900 mb-4">Book Fleet Vehicle</h3>
+          <div className="bg-white rounded-2xl p-6 w-full max-w-lg shadow-xl border border-slate-200">
+            <h3 className="text-base font-bold text-slate-900 mb-4">Book Motor Pool Vehicle</h3>
             <form onSubmit={handleCreateBooking} className="space-y-4 text-xs">
-              <div>
-                <label className="block text-slate-700 font-semibold mb-1">Select Available Fleet Vehicle</label>
-                <select
-                  value={selectedVehicle}
-                  onChange={e => setSelectedVehicle(e.target.value)}
-                  className="w-full p-2.5 rounded-lg border border-slate-300 focus:outline-none"
-                >
-                  {fleetVehicles.map(veh => (
-                    <option key={veh.id} value={veh.id}>
-                      {veh.makeModel} ({veh.plateNumber}) — {veh.currentStatus}
-                    </option>
-                  ))}
-                </select>
-              </div>
-
               <div>
                 <label className="block text-slate-700 font-semibold mb-1">Mission Purpose</label>
                 <input
@@ -530,9 +561,24 @@ export const TravelTransportationView: React.FC = () => {
                   required
                   value={bookingPurpose}
                   onChange={e => setBookingPurpose(e.target.value)}
-                  placeholder="e.g. Client commercial review meeting in Sohar"
+                  placeholder="e.g. VIP Client Escort from MCT Airport to HQ"
                   className="w-full p-2.5 rounded-lg border border-slate-300 focus:outline-none"
                 />
+              </div>
+
+              <div>
+                <label className="block text-slate-700 font-semibold mb-1">Select Available Fleet Vehicle</label>
+                <select
+                  value={selectedVehicle}
+                  onChange={e => setSelectedVehicle(e.target.value)}
+                  className="w-full p-2.5 rounded-lg border border-slate-300 focus:outline-none"
+                >
+                  {fleetVehicles.filter(v => v.currentStatus === 'Available').map(v => (
+                    <option key={v.id} value={v.id}>
+                      {v.makeModel} ({v.plateNumber}) • {v.vehicleType}
+                    </option>
+                  ))}
+                </select>
               </div>
 
               <div className="grid grid-cols-2 gap-3">
@@ -540,33 +586,46 @@ export const TravelTransportationView: React.FC = () => {
                   <label className="block text-slate-700 font-semibold mb-1">Pickup Location</label>
                   <input
                     type="text"
+                    required
                     value={pickupLoc}
                     onChange={e => setPickupLoc(e.target.value)}
-                    className="w-full p-2 rounded-lg border border-slate-300 focus:outline-none"
+                    className="w-full p-2.5 rounded-lg border border-slate-300 focus:outline-none"
                   />
                 </div>
                 <div>
                   <label className="block text-slate-700 font-semibold mb-1">Dropoff Location</label>
                   <input
                     type="text"
+                    required
                     value={dropoffLoc}
                     onChange={e => setDropoffLoc(e.target.value)}
-                    className="w-full p-2 rounded-lg border border-slate-300 focus:outline-none"
+                    className="w-full p-2.5 rounded-lg border border-slate-300 focus:outline-none"
                   />
                 </div>
               </div>
 
-              <div className="flex items-center gap-2">
-                <input
-                  type="checkbox"
-                  id="driverCheck"
-                  checked={requiresChauffeur}
-                  onChange={e => setRequiresChauffeur(e.target.checked)}
-                  className="rounded border-slate-300"
-                />
-                <label htmlFor="driverCheck" className="text-slate-700 font-medium cursor-pointer">
-                  Assign Corporate Chauffeur
-                </label>
+              <div className="grid grid-cols-2 gap-3 items-center">
+                <div>
+                  <label className="block text-slate-700 font-semibold mb-1">Trip Date</label>
+                  <input
+                    type="date"
+                    required
+                    value={tripDate}
+                    onChange={e => setTripDate(e.target.value)}
+                    className="w-full p-2.5 rounded-lg border border-slate-300 focus:outline-none"
+                  />
+                </div>
+                <div className="pt-4">
+                  <label className="flex items-center gap-2 cursor-pointer">
+                    <input
+                      type="checkbox"
+                      checked={requiresChauffeur}
+                      onChange={e => setRequiresChauffeur(e.target.checked)}
+                      className="rounded text-slate-900 focus:ring-slate-900"
+                    />
+                    <span className="font-semibold text-slate-800">Assign Company Driver</span>
+                  </label>
+                </div>
               </div>
 
               <div className="flex justify-end gap-2 pt-4 border-t border-slate-100">
@@ -581,7 +640,7 @@ export const TravelTransportationView: React.FC = () => {
                   type="submit"
                   className="px-4 py-2 bg-slate-900 hover:bg-slate-800 text-white rounded-lg font-semibold cursor-pointer"
                 >
-                  Confirm Vehicle Booking
+                  Confirm Booking
                 </button>
               </div>
             </form>

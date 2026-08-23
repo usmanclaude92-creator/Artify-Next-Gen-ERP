@@ -78,21 +78,67 @@ export const AdministrationModuleRunner: React.FC<AdministrationModuleRunnerProp
 
     switch (functionalArea.id) {
       case 'office-admin':
-        return <OfficeAdministrationView />;
+      case '03.01': {
+        let activeTab: string | undefined = undefined;
+        if (transaction?.id === 'tx-facility-requests') activeTab = 'facilities';
+        else if (transaction?.id === 'tx-stationery-mgmt') activeTab = 'stationery';
+        else if (transaction?.id === 'tx-office-services') activeTab = 'services';
+        else if (transaction?.id === 'tx-gen-admin') activeTab = 'notices';
+        return <OfficeAdministrationView activeTab={activeTab} />;
+      }
       case 'correspondence-mgmt':
-        return <CorrespondenceManagementView />;
+      case '03.02': {
+        let activeTab: string | undefined = undefined;
+        if (transaction?.id === 'tx-incoming-corresp') activeTab = 'incoming';
+        else if (transaction?.id === 'tx-outgoing-corresp') activeTab = 'outgoing';
+        else if (transaction?.id === 'tx-internal-corresp') activeTab = 'internal';
+        else if (transaction?.id === 'tx-corresp-tracking') activeTab = 'tracking';
+        return <CorrespondenceManagementView activeTab={activeTab} />;
+      }
       case 'document-mgmt':
-        return <DocumentManagementView />;
+      case '03.03': {
+        let activeTab: string | undefined = undefined;
+        if (transaction?.id === 'tx-doc-archiving') activeTab = 'archived';
+        else if (transaction?.id === 'tx-doc-control') activeTab = 'checkout';
+        else if (transaction?.id === 'tx-doc-reg' || transaction?.id === 'tx-doc-versioning') activeTab = 'active';
+        return <DocumentManagementView activeTab={activeTab} />;
+      }
       case 'internal-requests':
-        return <InternalRequestsView />;
+      case '03.04': {
+        let activeTab: string | undefined = undefined;
+        if (transaction?.id === 'tx-employee-req') activeTab = 'Employee';
+        else if (transaction?.id === 'tx-dept-req') activeTab = 'Department';
+        else if (transaction?.id === 'tx-admin-requests') activeTab = 'Administrative';
+        else if (transaction?.id === 'tx-request-approvals') activeTab = 'pending';
+        return <InternalRequestsView activeTab={activeTab} />;
+      }
       case 'task-activity-mgmt':
-        return <TaskActivityView />;
+      case '03.05': {
+        let activeTab: string | undefined = undefined;
+        if (transaction?.id === 'tx-task-completion') activeTab = 'list';
+        else if (transaction?.id === 'tx-task-create' || transaction?.id === 'tx-task-assign' || transaction?.id === 'tx-task-tracking') activeTab = 'kanban';
+        return <TaskActivityView activeTab={activeTab} />;
+      }
       case 'meeting-mgmt':
+      case '03.06': {
         return <MeetingManagementView />;
+      }
       case 'travel-transport-admin':
-        return <TravelTransportationView />;
+      case '03.07': {
+        let activeTab: string | undefined = undefined;
+        if (transaction?.id === 'tx-vehicle-requests') activeTab = 'bookings';
+        else if (transaction?.id === 'tx-transport-mgmt') activeTab = 'fleet';
+        else if (transaction?.id === 'tx-travel-requests' || transaction?.id === 'tx-travel-approvals') activeTab = 'travel';
+        return <TravelTransportationView activeTab={activeTab} />;
+      }
       case 'general-business-services':
-        return <GeneralBusinessServicesView />;
+      case '03.08': {
+        let activeTab: string | undefined = undefined;
+        if (transaction?.id === 'tx-service-requests' || transaction?.id === 'tx-office-cleaning') activeTab = 'services';
+        else if (transaction?.id === 'tx-vendor-services' || transaction?.id === 'tx-catering-services') activeTab = 'vendors';
+        else if (transaction?.id === 'tx-office-assets' || transaction?.id === 'tx-security-services') activeTab = 'assets';
+        return <GeneralBusinessServicesView activeTab={activeTab} />;
+      }
       default:
         return <AdministrationDashboardView onNavigateToSubView={handleAreaNavigate} />;
     }

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useAdmin } from '../../services/administrationStore';
 import { CorrespondenceRecord, CorrespondenceType, RequestPriority } from '../../types';
 import {
@@ -22,7 +22,11 @@ import {
   FileCheck
 } from 'lucide-react';
 
-export const CorrespondenceManagementView: React.FC = () => {
+interface CorrespondenceManagementViewProps {
+  activeTab?: string;
+}
+
+export const CorrespondenceManagementView: React.FC<CorrespondenceManagementViewProps> = ({ activeTab: initialTab }) => {
   const {
     correspondenceList,
     addCorrespondence,
@@ -31,6 +35,13 @@ export const CorrespondenceManagementView: React.FC = () => {
   } = useAdmin();
 
   const [activeTab, setActiveTab] = useState<CorrespondenceType | 'all' | 'tracking'>('all');
+
+  useEffect(() => {
+    if (initialTab && ['incoming', 'outgoing', 'internal', 'all', 'tracking'].includes(initialTab)) {
+      setActiveTab(initialTab as CorrespondenceType | 'all' | 'tracking');
+    }
+  }, [initialTab]);
+
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedRecord, setSelectedRecord] = useState<CorrespondenceRecord | null>(null);
 

@@ -1,14 +1,96 @@
 export type CurrencyCode = 'OMR' | 'USD' | 'AED' | 'SAR' | 'EUR' | 'GBP';
 
-export type PaymentMethod = 'Bank Transfer' | 'Cheque' | 'Electronic / WPS' | 'Direct Debit' | 'Corporate Card' | 'Letter of Credit';
+export type PaymentMethod = 'Bank Transfer' | 'Cheque' | 'Electronic / WPS' | 'Direct Debit' | 'Corporate Card' | 'Letter of Credit' | 'ACH / Local RTGS';
 
 export type TransactionStatus = 'Draft' | 'Submitted' | 'Pending Approval' | 'Approved' | 'Rejected' | 'Posted' | 'Cleared' | 'Voided' | 'Reconciled';
 
 export type PDCStatus = 'In Vault' | 'Deposited' | 'Cleared' | 'Bounced' | 'Returned' | 'Replaced' | 'Cancelled';
 
-export type FacilityType = 'Overdraft (OD)' | 'Letter of Credit (LC)' | 'Bank Guarantee (BG)' | 'Short-Term Loan (STL)' | 'Revolving Credit Line' | 'Bill Discounting';
+export type FacilityType = 'Overdraft (OD)' | 'Letter of Credit (LC)' | 'Bank Guarantee (BG)' | 'Short-Term Loan (STL)' | 'Revolving Credit Line' | 'Bill Discounting' | 'Letter of Credit (LC Line)';
 
 export type FacilityStatus = 'Active' | 'Under Review' | 'Expired' | 'Exceeded' | 'Closed';
+
+// -------------------------------------------------------------
+// Workflow Engine & Role Simulation Types
+// -------------------------------------------------------------
+export interface WorkflowApproverStage {
+  level: number;
+  role: string;
+  approverName: string;
+  approverUserId: string;
+  approvalLimitOMR: number;
+  status: 'Pending' | 'Approved' | 'Rejected' | 'Waiting' | 'Skipped';
+  decisionDate?: string;
+  decisionBy?: string;
+  comments?: string;
+  requiredSlaHours?: number;
+  signatoryTierRequired?: 'Category A (Executive)' | 'Category B (Senior Management)' | 'Category C (Operational Finance)';
+}
+
+export interface WorkflowEvaluationResult {
+  workflowCode: string;
+  workflowName: string;
+  totalLevels: number;
+  stages: WorkflowApproverStage[];
+  sodRulesApplied: string[];
+  requiresExecutiveSignoff: boolean;
+  requiresDualSignatory: boolean;
+}
+
+export interface UserContext {
+  id: string;
+  userId: string;
+  name: string;
+  email: string;
+  role: string;
+  department: string;
+  approvalLimitOMR: number;
+  signatoryTier?: 'Category A (Executive)' | 'Category B (Senior Management)' | 'Category C (Operational Finance)';
+  employeeRef?: string;
+  branch?: string;
+}
+
+export interface BankingGLJournalEntry {
+  id: string;
+  voucherNumber: string;
+  voucherDate: string;
+  postingDate: string;
+  sourceModule: '04-BANKING-TREASURY';
+  sourceTransactionRef: string;
+  sourceTransactionType: 'BANK_PAYMENT' | 'CUSTOMER_RECEIPT' | 'CASH_PAYMENT' | 'CASH_RECEIPT' | 'PDC_CLEARING' | 'RECON_ADJUSTMENT' | 'PETTY_CASH_SETTLE';
+  narration: string;
+  currency: CurrencyCode;
+  totalDebit: number;
+  totalCredit: number;
+  status: 'POSTED';
+  postedBy: string;
+  lines: {
+    id: string;
+    accountId: string;
+    accountCode: string;
+    accountName: string;
+    debit: number;
+    credit: number;
+    description: string;
+  }[];
+}
+
+export interface BankingAuditLogRecord {
+  id: string;
+  timestamp: string;
+  actorName: string;
+  actorRole: string;
+  actorUserId: string;
+  action: 'CREATE' | 'SUBMIT' | 'APPROVE_LEVEL' | 'FINAL_APPROVE' | 'REJECT' | 'POST_GL' | 'RECONCILE' | 'UNRECONCILE' | 'IMPORT_STATEMENT' | 'MATCH_STATEMENT' | 'ALLOCATE_RECEIPT' | 'DEPOSIT_PDC' | 'CLEAR_PDC' | 'SETTLE_PETTY_CASH' | 'UPDATE_FACILITY';
+  entityType: 'BANK_PAYMENT' | 'CHEQUE' | 'ELECTRONIC_BATCH' | 'CUSTOMER_RECEIPT' | 'CASH_VOUCHER' | 'STATEMENT_RECON' | 'PETTY_CASH' | 'PDC' | 'FACILITY';
+  entityId: string;
+  entityReference: string;
+  amountOMR?: number;
+  details: string;
+  statusBefore?: string;
+  statusAfter?: string;
+  violationCode?: string;
+}
 
 // -------------------------------------------------------------
 // 04.01 — Bank Management Types
@@ -183,12 +265,18 @@ export interface BankPaymentRecord {
   purposeOfRemittance: string;
   invoiceReferences: string[];
   preparedBy: string;
+  makerUserId?: string;
   firstApprover?: string;
   secondApprover?: string;
   status: TransactionStatus;
   valueDate: string;
   bankChargesBorneBy: 'OUR (Debtor)' | 'BEN (Creditor)' | 'SHA (Shared)';
   bankSwiftRefNumber?: string;
+  workflowStages?: WorkflowApproverStage[];
+  currentApprovalLevel?: number;
+  totalApprovalLevels?: number;
+  glVoucherId?: string;
+  rejectionReason?: string;
 }
 
 export interface ChequePaymentRecord {
@@ -208,9 +296,12 @@ export interface ChequePaymentRecord {
   purpose: string;
   status: 'Printed' | 'Signed' | 'Handed to Payee' | 'Presented & Cleared' | 'Stopped / Void' | 'Bounced';
   preparedBy: string;
+  makerUserId?: string;
   signatoryA: string;
   signatoryB?: string;
   handoverReceiptRef?: string;
+  workflowStages?: WorkflowApproverStage[];
+  glVoucherId?: string;
 }
 
 export interface ElectronicPaymentBatch {
@@ -218,15 +309,18 @@ export interface ElectronicPaymentBatch {
   batchNumber: string;
   bankAccountId: string;
   bankAccountName: string;
-  batchType: 'Oman WPS Payroll' | 'ISO 20022 pain.001' | 'Corporate Bulk Transfer' | 'Cross-Border SWIFT Batch';
+  batchType: 'Oman WPS Payroll' | 'ISO 20022 pain.001' | 'Corporate Bulk Transfer' | 'Cross-Border SWIFT Batch' | 'WPS Salary Transfer';
   totalTransactions: number;
   totalAmount: number;
   currency: CurrencyCode;
   creationDate: string;
   executionDate: string;
-  status: 'Draft' | 'Validating' | 'Pending Dual Sign-off' | 'Exported / Transmitted' | 'Bank Acknowledged' | 'Processed' | 'Rejected';
+  status: 'Draft' | 'Validating' | 'Pending Dual Sign-off' | 'Exported / Transmitted' | 'Bank Acknowledged' | 'Processed' | 'Rejected' | 'Approved';
   generatedFileFormat: 'WPS .SIF' | 'XML pain.001.001.03' | 'CSV Flat File';
   authorizedSignatories: string[];
+  workflowStages?: WorkflowApproverStage[];
+  currentApprovalLevel?: number;
+  totalApprovalLevels?: number;
 }
 
 export interface PaymentApprovalQueueItem {
@@ -237,7 +331,9 @@ export interface PaymentApprovalQueueItem {
   beneficiaryName: string;
   amount: number;
   currency: CurrencyCode;
+  amountInOMR?: number;
   submittedBy: string;
+  makerUserId?: string;
   submissionDate: string;
   requiredApprovalLevel: string; // e.g. "Level 2 (CEO + CFO)"
   currentStep: number;
@@ -246,6 +342,11 @@ export interface PaymentApprovalQueueItem {
   status: 'Pending' | 'Approved' | 'Rejected';
   complianceCheckPassed: boolean;
   sanctionsScreeningPassed: boolean;
+  approverStages?: WorkflowApproverStage[];
+  sodRulesApplied?: string[];
+  workflowCode?: string;
+  rejectionReason?: string;
+  glVoucherId?: string;
 }
 
 // -------------------------------------------------------------

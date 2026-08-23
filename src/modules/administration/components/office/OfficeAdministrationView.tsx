@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useAdmin } from '../../services/administrationStore';
 import { OfficeNotice, StationeryRequest, FacilityWorkOrder, OfficeServiceOrder } from '../../types';
 import {
@@ -23,7 +23,11 @@ import {
   PackageCheck
 } from 'lucide-react';
 
-export const OfficeAdministrationView: React.FC = () => {
+interface OfficeAdministrationViewProps {
+  activeTab?: string;
+}
+
+export const OfficeAdministrationView: React.FC<OfficeAdministrationViewProps> = ({ activeTab: initialTab }) => {
   const {
     notices,
     addNotice,
@@ -42,6 +46,13 @@ export const OfficeAdministrationView: React.FC = () => {
   } = useAdmin();
 
   const [activeTab, setActiveTab] = useState<'notices' | 'services' | 'stationery' | 'facilities'>('notices');
+
+  useEffect(() => {
+    if (initialTab && ['notices', 'services', 'stationery', 'facilities'].includes(initialTab)) {
+      setActiveTab(initialTab as 'notices' | 'services' | 'stationery' | 'facilities');
+    }
+  }, [initialTab]);
+
   const [searchTerm, setSearchTerm] = useState('');
 
   // Modals

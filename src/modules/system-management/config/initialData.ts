@@ -1248,6 +1248,48 @@ export const INITIAL_SOD_RULES: SoDRule[] = [
     status: 'Enforced',
     activeViolationsCount: 0,
     exceptions: []
+  },
+  {
+    id: 'sod-adm-1',
+    code: 'SOD-ADM-01',
+    title: 'Internal Request & Travel Requisition Self-Approval Prohibited',
+    description: 'Employees and department requesters are strictly prohibited from approving their own internal service requests, salary certificates, or business travel budgets.',
+    severity: 'Critical',
+    conflictingActionA: 'Request / Travel Submission (03.04.01.01 / 03.07.01.01)',
+    conflictingActionB: 'Request / Travel Authorization & Approval (03.04.01.02 / 03.07.01.02)',
+    moduleA: '03 — Administration & General Business Management',
+    moduleB: '03 — Administration & General Business Management',
+    status: 'Enforced',
+    activeViolationsCount: 0,
+    exceptions: []
+  },
+  {
+    id: 'sod-adm-2',
+    code: 'SOD-ADM-02',
+    title: 'Stationery Requisition vs. Warehouse Inventory Stock Issuance',
+    description: 'The requester of office stationery items cannot act as the warehouse store custodian who issues and writes off physical inventory balances.',
+    severity: 'High',
+    conflictingActionA: 'Stationery Requisition Creation (03.01.02.01)',
+    conflictingActionB: 'Stationery Stock Physical Issuance (03.01.02.02)',
+    moduleA: '03 — Administration & General Business Management',
+    moduleB: '03 — Administration & General Business Management',
+    status: 'Enforced',
+    activeViolationsCount: 0,
+    exceptions: []
+  },
+  {
+    id: 'sod-adm-3',
+    code: 'SOD-ADM-03',
+    title: 'Fleet Pool Vehicle Booking vs. Chauffeur & Dispatch Authorization',
+    description: 'Requesters cannot self-dispatch corporate motor pool vehicles without fleet coordinator signoff.',
+    severity: 'Medium',
+    conflictingActionA: 'Vehicle Booking Request (03.07.02.01)',
+    conflictingActionB: 'Fleet Dispatch & Odometer Release (03.07.02.02)',
+    moduleA: '03 — Administration & General Business Management',
+    moduleB: '03 — Administration & General Business Management',
+    status: 'Enforced',
+    activeViolationsCount: 0,
+    exceptions: []
   }
 ];
 
@@ -1363,10 +1405,120 @@ export const INITIAL_WORKFLOWS: ApprovalWorkflow[] = [
     status: 'Active',
     createdAt: '2023-01-10',
     updatedAt: '2026-07-15'
+  },
+  {
+    id: 'wf-adm-1',
+    code: 'WF-ADM-REQ-01',
+    name: 'Internal Service Requests & Attestations Workflow',
+    module: '03 — Administration & General Business Management',
+    process: '03.04 Internal Requests',
+    triggerEvent: 'Document Submit',
+    stages: [
+      {
+        stageNumber: 1,
+        name: 'Line Manager / Dept Head Verification',
+        approverType: 'Department Head',
+        approverValue: 'Line Manager / Operations Head',
+        approvalLimitOMR: 1500,
+        timeoutHours: 24,
+        allowDelegation: true
+      },
+      {
+        stageNumber: 2,
+        name: 'Director of Corporate Administration Sign-off',
+        approverType: 'Role',
+        approverValue: 'Director of Corporate Administration',
+        approvalLimitOMR: 10000,
+        timeoutHours: 48,
+        allowDelegation: true
+      }
+    ],
+    status: 'Active',
+    createdAt: '2023-05-15',
+    updatedAt: '2026-08-01'
+  },
+  {
+    id: 'wf-adm-2',
+    code: 'WF-ADM-TRV-02',
+    name: 'Corporate Business Travel & Transportation Pipeline',
+    module: '03 — Administration & General Business Management',
+    process: '03.07 Travel & Transportation',
+    triggerEvent: 'Document Submit',
+    stages: [
+      {
+        stageNumber: 1,
+        name: 'Department Line Manager Review',
+        approverType: 'Department Head',
+        approverValue: 'Line Manager / Operations Head',
+        approvalLimitOMR: 1500,
+        timeoutHours: 24,
+        allowDelegation: true
+      },
+      {
+        stageNumber: 2,
+        name: 'Administration Directorate Authorization',
+        approverType: 'Role',
+        approverValue: 'Director of Corporate Administration',
+        approvalLimitOMR: 10000,
+        timeoutHours: 48,
+        allowDelegation: true
+      },
+      {
+        stageNumber: 3,
+        name: 'Executive & CFO Sign-off (> 2,000 OMR)',
+        approverType: 'Role',
+        approverValue: 'CFO / Group Financial Officer',
+        approvalLimitOMR: 100000,
+        timeoutHours: 72,
+        allowDelegation: false
+      }
+    ],
+    status: 'Active',
+    createdAt: '2023-06-01',
+    updatedAt: '2026-08-01'
   }
 ];
 
 export const INITIAL_APPROVAL_MATRICES: ApprovalMatrixRule[] = [
+  {
+    id: 'am-adm-1',
+    companyId: 'comp-1',
+    departmentId: 'dept-adm',
+    module: '03 — Administration & General Business Management',
+    transactionType: 'Travel Authorization & Ticket Issuance',
+    minAmount: 0,
+    maxAmount: 600,
+    currency: 'OMR',
+    approvalLevels: ['Department Head / Line Manager (Tier 1)'],
+    effectiveDate: '2026-01-01',
+    status: 'Active'
+  },
+  {
+    id: 'am-adm-2',
+    companyId: 'comp-1',
+    departmentId: 'dept-adm',
+    module: '03 — Administration & General Business Management',
+    transactionType: 'Travel Authorization & Ticket Issuance',
+    minAmount: 601,
+    maxAmount: 2000,
+    currency: 'OMR',
+    approvalLevels: ['Department Head (Tier 1)', 'Director of Corporate Administration (Tier 2)'],
+    effectiveDate: '2026-01-01',
+    status: 'Active'
+  },
+  {
+    id: 'am-adm-3',
+    companyId: 'comp-1',
+    departmentId: 'dept-adm',
+    module: '03 — Administration & General Business Management',
+    transactionType: 'Travel Authorization & Ticket Issuance',
+    minAmount: 2001,
+    maxAmount: 999999,
+    currency: 'OMR',
+    approvalLevels: ['Department Head (Tier 1)', 'Director of Administration (Tier 2)', 'CFO / Group CEO (Tier 3)'],
+    effectiveDate: '2026-01-01',
+    status: 'Active'
+  },
   {
     id: 'am-1',
     companyId: 'comp-1',

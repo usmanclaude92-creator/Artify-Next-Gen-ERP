@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useAdmin } from '../../services/administrationStore';
 import { EnterpriseTask, TaskStatus, RequestPriority } from '../../types';
 import {
@@ -20,7 +20,11 @@ import {
   ChevronRight
 } from 'lucide-react';
 
-export const TaskActivityView: React.FC = () => {
+interface TaskActivityViewProps {
+  activeTab?: string;
+}
+
+export const TaskActivityView: React.FC<TaskActivityViewProps> = ({ activeTab: initialTab }) => {
   const {
     tasks,
     addTask,
@@ -31,6 +35,13 @@ export const TaskActivityView: React.FC = () => {
   } = useAdmin();
 
   const [viewMode, setViewMode] = useState<'kanban' | 'list'>('kanban');
+
+  useEffect(() => {
+    if (initialTab && ['kanban', 'list'].includes(initialTab)) {
+      setViewMode(initialTab as 'kanban' | 'list');
+    }
+  }, [initialTab]);
+
   const [searchTerm, setSearchTerm] = useState('');
   const [departmentFilter, setDepartmentFilter] = useState('all');
   const [priorityFilter, setPriorityFilter] = useState('all');

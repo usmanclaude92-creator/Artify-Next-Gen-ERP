@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useAdmin } from '../../services/administrationStore';
 import { InternalRequestRecord, WorkflowStatus } from '../../types';
+import { ActorSimulationBar } from '../common/ActorSimulationBar';
+import { WorkflowBannerAlert } from '../common/WorkflowBannerAlert';
 import {
   FileCheck2,
   CheckCircle2,
@@ -16,11 +18,18 @@ import {
   AlertCircle,
   BadgeCheck,
   Send,
-  MessageSquare
+  MessageSquare,
+  ShieldCheck,
+  GitBranch
 } from 'lucide-react';
 
-export const InternalRequestsView: React.FC = () => {
+interface InternalRequestsViewProps {
+  activeTab?: string;
+}
+
+export const InternalRequestsView: React.FC<InternalRequestsViewProps> = ({ activeTab: initialTab }) => {
   const {
+    activeActor,
     internalRequests,
     addInternalRequest,
     approveInternalRequest,
@@ -29,6 +38,13 @@ export const InternalRequestsView: React.FC = () => {
   } = useAdmin();
 
   const [activeTab, setActiveTab] = useState<InternalRequestRecord['requestType'] | 'all' | 'pending'>('all');
+
+  useEffect(() => {
+    if (initialTab && ['Employee', 'Department', 'Administrative', 'all', 'pending'].includes(initialTab)) {
+      setActiveTab(initialTab as InternalRequestRecord['requestType'] | 'all' | 'pending');
+    }
+  }, [initialTab]);
+
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedReq, setSelectedReq] = useState<InternalRequestRecord | null>(null);
 
@@ -38,22 +54,40 @@ export const InternalRequestsView: React.FC = () => {
   const [approvalDecision, setApprovalDecision] = useState<'Approve' | 'Reject'>('Approve');
   const [approvalComments, setApprovalComments] = useState('');
 
-  // Form State
+  // Form State initialized from activeActor
   const [newType, setNewType] = useState<InternalRequestRecord['requestType']>('Employee');
-  const [newCategory, setNewCategory] = useState<any>('Salary Certificate');
+  const [newCategory, setNewCategory] = useState<string>('Salary Certificate');
   const [newTitle, setNewTitle] = useState('');
-  const [newEmployeeName, setNewEmployeeName] = useState('Eng. Salim Al-Rawahi');
-  const [newEmployeeId, setNewEmployeeId] = useState('EMP-2041');
-  const [newDepartment, setNewDepartment] = useState('Operations & Projects');
-  const [newBranch, setNewBranch] = useState('Muscat HQ');
-  const [newPriority, setNewPriority] = useState<any>('Medium');
+  const [newEmployeeName, setNewEmployeeName] = useState(activeActor.name);
+  const [newEmployeeId, setNewEmployeeId] = useState(activeActor.employeeRef);
+  const [newDepartment, setNewDepartment] = useState(activeActor.department);
+  const [newBranch, setNewBranch] = useState(activeActor.branch);
+  const [newPriority, setNewPriority] = useState<'Low' | 'Medium' | 'High' | 'Urgent'>('Medium');
   const [newJustification, setNewJustification] = useState('');
+
+  // Synchronize defaults when active actor switches
+  useEffect(() => {
+    setNewEmployeeName(activeActor.name);
+    setNewEmployeeId(activeActor.employeeRef);
+    setNewDepartment(activeActor.department);
+    setNewBranch(activeActor.branch);
+  }, [activeActor]);
+
+  // Keep selected request synchronized when internalRequests list changes
+  useEffect(() => {
+    if (selectedReq) {
+      const refreshed = internalRequests.find(r => r.id === selectedReq.id);
+      if (refreshed) {
+        setSelectedReq(refreshed);
+      }
+    }
+  }, [internalRequests]);
 
   const handleCreateRequest = (e: React.FormEvent) => {
     e.preventDefault();
     if (!newTitle) return;
 
-    addInternalRequest({
+    const res = addInternalRequest({
       requestType: newType,
       category: newCategory,
       title: newTitle,
@@ -65,9 +99,11 @@ export const InternalRequestsView: React.FC = () => {
       justification: newJustification
     });
 
-    setShowCreateModal(false);
-    setNewTitle('');
-    setNewJustification('');
+    if (res.success) {
+      setShowCreateModal(false);
+      setNewTitle('');
+      setNewJustification('');
+    }
   };
 
   const handleProcessApproval = (e: React.FormEvent) => {
@@ -75,16 +111,13 @@ export const InternalRequestsView: React.FC = () => {
     if (!selectedReq) return;
 
     if (approvalDecision === 'Approve') {
-      approveInternalRequest(selectedReq.id, 'Eng. Khalid Al-Amri', approvalComments || 'Approved as per corporate entitlement.');
+      approveInternalRequest(selectedReq.id, activeActor, approvalComments || 'Approved in accordance with enterprise DoA.');
     } else {
-      rejectInternalRequest(selectedReq.id, 'Eng. Khalid Al-Amri', approvalComments || 'Disapproved due to missing documentation.');
+      rejectInternalRequest(selectedReq.id, activeActor, approvalComments || 'Disapproved due to missing documentation or non-compliance.');
     }
 
     setShowApprovalModal(false);
     setApprovalComments('');
-    // refresh selected req
-    const updated = internalRequests.find(r => r.id === selectedReq.id);
-    if (updated) setSelectedReq(updated);
   };
 
   const filteredRequests = internalRequests.filter(req => {
@@ -104,6 +137,12 @@ export const InternalRequestsView: React.FC = () => {
 
   return (
     <div className="space-y-6">
+      {/* Simulation Bar */}
+      <ActorSimulationBar />
+
+      {/* Workflow Notification Banner */}
+      <WorkflowBannerAlert />
+
       {/* Top Banner with Navigation Tabs */}
       <div className="bg-white rounded-2xl p-5 border border-slate-200 shadow-2xs">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
@@ -167,7 +206,7 @@ export const InternalRequestsView: React.FC = () => {
           </div>
         </div>
 
-        {/* Search Bar */}
+        {/* Search */}
         <div className="mt-4 pt-4 border-t border-slate-100 flex items-center justify-between gap-3">
           <div className="relative w-full sm:w-80">
             <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
@@ -175,29 +214,28 @@ export const InternalRequestsView: React.FC = () => {
               type="text"
               value={searchTerm}
               onChange={e => setSearchTerm(e.target.value)}
-              placeholder="Search ticket #, employee, or category..."
+              placeholder="Search ticket #, title, category, requester..."
               className="w-full pl-9 pr-3 py-1.5 rounded-lg border border-slate-200 text-xs focus:outline-none focus:ring-2 focus:ring-slate-900"
             />
-          </div>
-          <div className="text-xs text-slate-500 hidden sm:block">
-            {filteredRequests.length} requests in active view
           </div>
         </div>
       </div>
 
-      {/* Main Grid: Request List + Detail */}
+      {/* Main Grid: List Table & Approval Detail Drawer */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        {/* Left Table (2 cols) */}
         <div className="lg:col-span-2 bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-2xs">
           <div className="overflow-x-auto">
             <table className="w-full text-left text-xs text-slate-700">
               <thead className="bg-slate-50 text-slate-500 border-b border-slate-200 uppercase font-semibold text-[10px] tracking-wider">
                 <tr>
                   <th className="p-3.5">Ticket #</th>
-                  <th className="p-3.5">Category & Title</th>
-                  <th className="p-3.5">Requester</th>
-                  <th className="p-3.5">Approval Level</th>
+                  <th className="p-3.5">Subject & Category</th>
+                  <th className="p-3.5">Requester & Dept</th>
+                  <th className="p-3.5">Priority</th>
+                  <th className="p-3.5">Workflow Stage</th>
                   <th className="p-3.5">Status</th>
-                  <th className="p-3.5 text-right">Action</th>
+                  <th className="p-3.5 text-right">View</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-100">
@@ -205,26 +243,34 @@ export const InternalRequestsView: React.FC = () => {
                   <tr
                     key={req.id}
                     onClick={() => setSelectedReq(req)}
-                    className={`hover:bg-slate-50/70 cursor-pointer transition-colors ${
-                      selectedReq?.id === req.id ? 'bg-indigo-50/40' : ''
+                    className={`hover:bg-slate-50/80 cursor-pointer transition-colors ${
+                      selectedReq?.id === req.id ? 'bg-indigo-50/50' : ''
                     }`}
                   >
-                    <td className="p-3.5 font-mono font-bold text-indigo-700">
-                      <div>{req.ticketNumber}</div>
-                      <div className="text-[10px] text-slate-400 font-sans">{req.requestDate}</div>
-                    </td>
+                    <td className="p-3.5 font-mono font-bold text-indigo-700">{req.ticketNumber}</td>
                     <td className="p-3.5 max-w-xs">
                       <div className="font-bold text-slate-900 truncate">{req.title}</div>
-                      <div className="text-[11px] text-slate-500">{req.category} • {req.branch}</div>
+                      <div className="text-[11px] text-slate-500">{req.category}</div>
                     </td>
                     <td className="p-3.5">
                       <div className="font-medium text-slate-800">{req.requestedBy}</div>
-                      <div className="text-[10px] text-slate-400">{req.employeeId} ({req.department})</div>
+                      <div className="text-[11px] text-slate-500">{req.department}</div>
                     </td>
                     <td className="p-3.5">
-                      <span className="font-mono text-slate-800 font-semibold">
-                        L{req.currentApprovalLevel} / L{req.totalApprovalLevels}
+                      <span className={`px-2 py-0.5 rounded text-[10px] font-bold ${
+                        req.priority === 'Urgent' ? 'bg-rose-100 text-rose-800' :
+                        req.priority === 'High' ? 'bg-amber-100 text-amber-800' :
+                        req.priority === 'Medium' ? 'bg-blue-100 text-blue-800' :
+                        'bg-slate-100 text-slate-700'
+                      }`}>
+                        {req.priority}
                       </span>
+                    </td>
+                    <td className="p-3.5 font-medium">
+                      <div className="flex items-center gap-1 text-[11px] text-slate-700">
+                        <GitBranch className="w-3 h-3 text-indigo-500" />
+                        <span>Tier {req.currentApprovalLevel || 1} / {req.totalApprovalLevels || 1}</span>
+                      </div>
                     </td>
                     <td className="p-3.5">
                       <span className={`px-2 py-0.5 rounded text-[10px] font-bold ${
@@ -251,7 +297,10 @@ export const InternalRequestsView: React.FC = () => {
           {selectedReq ? (
             <div className="space-y-4 text-xs">
               <div className="flex items-center justify-between pb-3 border-b border-slate-100">
-                <span className="font-mono text-xs font-bold text-indigo-700">{selectedReq.ticketNumber}</span>
+                <div>
+                  <span className="font-mono text-xs font-bold text-indigo-700">{selectedReq.ticketNumber}</span>
+                  <div className="text-[10px] text-slate-400 mt-0.5">Category: {selectedReq.category}</div>
+                </div>
                 <span className={`px-2 py-0.5 rounded text-[10px] font-bold ${
                   selectedReq.status === 'Approved' || selectedReq.status === 'Completed' ? 'bg-emerald-100 text-emerald-800' :
                   selectedReq.status === 'Rejected' ? 'bg-rose-100 text-rose-800' :
@@ -272,10 +321,12 @@ export const InternalRequestsView: React.FC = () => {
                 <div>
                   <span className="text-slate-400 block">Requested By</span>
                   <span className="font-semibold text-slate-800">{selectedReq.requestedBy}</span>
+                  <div className="text-[10px] text-slate-400">{selectedReq.employeeId}</div>
                 </div>
                 <div>
                   <span className="text-slate-400 block">Department</span>
                   <span className="font-semibold text-slate-800">{selectedReq.department}</span>
+                  <div className="text-[10px] text-slate-400">{selectedReq.branch}</div>
                 </div>
                 <div>
                   <span className="text-slate-400 block">Required By Date</span>
@@ -289,12 +340,30 @@ export const InternalRequestsView: React.FC = () => {
 
               {/* Approval Hierarchy Chain */}
               <div>
-                <h4 className="text-[11px] font-bold text-slate-700 uppercase tracking-wider mb-2">Multi-Tier Approval Hierarchy</h4>
+                <div className="flex items-center justify-between mb-2">
+                  <h4 className="text-[11px] font-bold text-slate-700 uppercase tracking-wider">Multi-Tier Approval Pipeline</h4>
+                  <span className="text-[10px] font-semibold text-slate-500">
+                    Tier {selectedReq.currentApprovalLevel} of {selectedReq.totalApprovalLevels}
+                  </span>
+                </div>
                 <div className="space-y-2">
                   {selectedReq.approvers.map((appr, idx) => (
-                    <div key={idx} className="p-2.5 rounded-xl bg-slate-50 border border-slate-200">
+                    <div
+                      key={idx}
+                      className={`p-2.5 rounded-xl border transition-all ${
+                        appr.status === 'Approved'
+                          ? 'bg-emerald-50/60 border-emerald-200'
+                          : appr.status === 'Rejected'
+                          ? 'bg-rose-50/60 border-rose-200'
+                          : selectedReq.currentApprovalLevel === appr.level
+                          ? 'bg-indigo-50/80 border-indigo-300 ring-1 ring-indigo-200'
+                          : 'bg-slate-50 border-slate-200 opacity-70'
+                      }`}
+                    >
                       <div className="flex items-center justify-between">
-                        <span className="font-bold text-slate-800">Tier {appr.level}: {appr.role}</span>
+                        <span className="font-bold text-slate-800">
+                          Tier {appr.level}: {appr.role}
+                        </span>
                         <span className={`px-1.5 py-0.5 rounded text-[10px] font-bold ${
                           appr.status === 'Approved' ? 'bg-emerald-100 text-emerald-800' :
                           appr.status === 'Rejected' ? 'bg-rose-100 text-rose-800' :
@@ -303,11 +372,12 @@ export const InternalRequestsView: React.FC = () => {
                           {appr.status}
                         </span>
                       </div>
-                      <div className="text-[11px] text-slate-500 mt-1">
-                        Approver: {appr.approverName} {appr.decisionDate && `• ${appr.decisionDate}`}
+                      <div className="text-[11px] text-slate-500 mt-1 flex items-center justify-between flex-wrap gap-1">
+                        <span>Assigned: {appr.approverName}</span>
+                        {appr.decisionDate && <span>{appr.decisionDate}</span>}
                       </div>
                       {appr.comments && (
-                        <div className="text-[11px] text-slate-600 bg-white p-1.5 rounded border border-slate-200 mt-1.5 italic">
+                        <div className="text-[11px] text-slate-600 bg-white/90 p-1.5 rounded border border-slate-200 mt-1.5 italic">
                           "{appr.comments}"
                         </div>
                       )}
@@ -318,25 +388,31 @@ export const InternalRequestsView: React.FC = () => {
 
               {/* Action Buttons for Approver */}
               {selectedReq.status === 'Pending Approval' && (
-                <div className="pt-3 border-t border-slate-100 flex gap-2">
-                  <button
-                    onClick={() => {
-                      setApprovalDecision('Approve');
-                      setShowApprovalModal(true);
-                    }}
-                    className="flex-1 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg font-semibold cursor-pointer flex items-center justify-center gap-1"
-                  >
-                    <CheckCircle2 className="w-3.5 h-3.5" /> Approve Request
-                  </button>
-                  <button
-                    onClick={() => {
-                      setApprovalDecision('Reject');
-                      setShowApprovalModal(true);
-                    }}
-                    className="flex-1 py-2 bg-rose-600 hover:bg-rose-700 text-white rounded-lg font-semibold cursor-pointer flex items-center justify-center gap-1"
-                  >
-                    <XCircle className="w-3.5 h-3.5" /> Reject
-                  </button>
+                <div className="pt-3 border-t border-slate-100 space-y-2">
+                  <div className="text-[11px] text-slate-500 flex items-center gap-1.5">
+                    <ShieldCheck className="w-3.5 h-3.5 text-indigo-600" />
+                    <span>Operating as: <strong className="text-slate-800">{activeActor.name}</strong> ({activeActor.role})</span>
+                  </div>
+                  <div className="flex gap-2">
+                    <button
+                      onClick={() => {
+                        setApprovalDecision('Approve');
+                        setShowApprovalModal(true);
+                      }}
+                      className="flex-1 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg font-semibold cursor-pointer flex items-center justify-center gap-1"
+                    >
+                      <CheckCircle2 className="w-3.5 h-3.5" /> Approve Tier {selectedReq.currentApprovalLevel}
+                    </button>
+                    <button
+                      onClick={() => {
+                        setApprovalDecision('Reject');
+                        setShowApprovalModal(true);
+                      }}
+                      className="flex-1 py-2 bg-rose-600 hover:bg-rose-700 text-white rounded-lg font-semibold cursor-pointer flex items-center justify-center gap-1"
+                    >
+                      <XCircle className="w-3.5 h-3.5" /> Reject
+                    </button>
+                  </div>
                 </div>
               )}
 
@@ -436,7 +512,7 @@ export const InternalRequestsView: React.FC = () => {
                   <label className="block text-slate-700 font-semibold mb-1">Priority</label>
                   <select
                     value={newPriority}
-                    onChange={e => setNewPriority(e.target.value)}
+                    onChange={e => setNewPriority(e.target.value as any)}
                     className="w-full p-2.5 rounded-lg border border-slate-300 focus:outline-none"
                   >
                     <option value="Low">Low</option>
@@ -509,6 +585,12 @@ export const InternalRequestsView: React.FC = () => {
             <p className="text-xs text-slate-500 mb-4">
               Ticket: <strong className="text-slate-800">{selectedReq?.ticketNumber}</strong> ({selectedReq?.title})
             </p>
+
+            <div className="bg-slate-50 p-3 rounded-xl border border-slate-200 text-xs mb-4">
+              <div className="text-slate-500 font-semibold">Authorizing Identity:</div>
+              <div className="font-bold text-slate-900">{activeActor.name} ({activeActor.role})</div>
+              <div className="text-[11px] text-slate-500">Tier {selectedReq?.currentApprovalLevel} Review</div>
+            </div>
 
             <form onSubmit={handleProcessApproval} className="space-y-4 text-xs">
               <div>

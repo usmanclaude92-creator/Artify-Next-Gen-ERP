@@ -319,61 +319,71 @@ export const SystemManagementProvider: React.FC<{ children: React.ReactNode }> =
 
   const companyGroup = groups.find(g => g.id === selectedGroupId) || groups[0] || INITIAL_COMPANY_GROUP;
 
-  const [branches, setBranches] = useState<Branch[]>(INITIAL_BRANCHES);
-  const [departments, setDepartments] = useState<Department[]>(INITIAL_DEPARTMENTS);
-  const [locations, setLocations] = useState<Location[]>(INITIAL_LOCATIONS);
-  const [operatingUnits, setOperatingUnits] = useState<OperatingUnit[]>(INITIAL_OPERATING_UNITS);
+  // Safe storage helper
+  const loadStored = <T,>(key: string, fallback: T): T => {
+    try {
+      const saved = localStorage.getItem(key);
+      return saved ? JSON.parse(saved) : fallback;
+    } catch {
+      return fallback;
+    }
+  };
 
-  // 01.02
-  const [users, setUsers] = useState<UserAccount[]>(INITIAL_USERS);
-  const [userGroups, setUserGroups] = useState<UserGroup[]>(INITIAL_USER_GROUPS);
-  const [sodRules, setSodRules] = useState<SoDRule[]>(INITIAL_SOD_RULES);
-  const [accessRestrictions, setAccessRestrictions] = useState<AccessRestriction[]>(INITIAL_ACCESS_RESTRICTIONS);
+  const [branches, setBranches] = useState<Branch[]>(() => loadStored('artify_sm_branches', INITIAL_BRANCHES));
+  const [departments, setDepartments] = useState<Department[]>(() => loadStored('artify_sm_departments', INITIAL_DEPARTMENTS));
+  const [locations, setLocations] = useState<Location[]>(() => loadStored('artify_sm_locations', INITIAL_LOCATIONS));
+  const [operatingUnits, setOperatingUnits] = useState<OperatingUnit[]>(() => loadStored('artify_sm_operating_units', INITIAL_OPERATING_UNITS));
 
-  // 01.03
-  const [workflows, setWorkflows] = useState<ApprovalWorkflow[]>(INITIAL_WORKFLOWS);
-  const [approvalMatrices, setApprovalMatrices] = useState<ApprovalMatrixRule[]>(INITIAL_APPROVAL_MATRICES);
-  const [delegations, setDelegations] = useState<DelegationOfAuthority[]>(INITIAL_DELEGATIONS);
-  const [approvalLimits, setApprovalLimits] = useState<ApprovalLimit[]>(INITIAL_APPROVAL_LIMITS);
-  const [escalationRules, setEscalationRules] = useState<EscalationRule[]>(INITIAL_ESCALATION_RULES);
+  // 01.02 User & Access
+  const [users, setUsers] = useState<UserAccount[]>(() => loadStored('artify_sm_users', INITIAL_USERS));
+  const [userGroups, setUserGroups] = useState<UserGroup[]>(() => loadStored('artify_sm_user_groups', INITIAL_USER_GROUPS));
+  const [sodRules, setSodRules] = useState<SoDRule[]>(() => loadStored('artify_sm_sod_rules', INITIAL_SOD_RULES));
+  const [accessRestrictions, setAccessRestrictions] = useState<AccessRestriction[]>(() => loadStored('artify_sm_access_restrictions', INITIAL_ACCESS_RESTRICTIONS));
 
-  // 01.04
-  const [fiscalYears, setFiscalYears] = useState<FiscalYear[]>(INITIAL_FISCAL_YEARS);
-  const [postingPeriods, setPostingPeriods] = useState<PostingPeriod[]>(INITIAL_POSTING_PERIODS);
-  const [documentSequences, setDocumentSequences] = useState<DocumentSequence[]>(INITIAL_DOC_SEQUENCES);
-  const [postingControls, setPostingControls] = useState<PostingControl>(INITIAL_POSTING_CONTROLS);
-  const [periodLocks, setPeriodLocks] = useState<PeriodLockRecord[]>(INITIAL_PERIOD_LOCKS);
+  // 01.03 Workflow & Approval
+  const [workflows, setWorkflows] = useState<ApprovalWorkflow[]>(() => loadStored('artify_sm_workflows', INITIAL_WORKFLOWS));
+  const [approvalMatrices, setApprovalMatrices] = useState<ApprovalMatrixRule[]>(() => loadStored('artify_sm_approval_matrices', INITIAL_APPROVAL_MATRICES));
+  const [delegations, setDelegations] = useState<DelegationOfAuthority[]>(() => loadStored('artify_sm_delegations', INITIAL_DELEGATIONS));
+  const [approvalLimits, setApprovalLimits] = useState<ApprovalLimit[]>(() => loadStored('artify_sm_approval_limits', INITIAL_APPROVAL_LIMITS));
+  const [escalationRules, setEscalationRules] = useState<EscalationRule[]>(() => loadStored('artify_sm_escalation_rules', INITIAL_ESCALATION_RULES));
 
-  // 01.05
+  // 01.04 Financial & Period Controls
+  const [fiscalYears, setFiscalYears] = useState<FiscalYear[]>(() => loadStored('artify_sm_fiscal_years', INITIAL_FISCAL_YEARS));
+  const [postingPeriods, setPostingPeriods] = useState<PostingPeriod[]>(() => loadStored('artify_sm_posting_periods', INITIAL_POSTING_PERIODS));
+  const [documentSequences, setDocumentSequences] = useState<DocumentSequence[]>(() => loadStored('artify_sm_doc_sequences', INITIAL_DOC_SEQUENCES));
+  const [postingControls, setPostingControls] = useState<PostingControl>(() => loadStored('artify_sm_posting_controls', INITIAL_POSTING_CONTROLS));
+  const [periodLocks, setPeriodLocks] = useState<PeriodLockRecord[]>(() => loadStored('artify_sm_period_locks', INITIAL_PERIOD_LOCKS));
+
+  // 01.05 Master Data Management
   const [mdmDefinitions] = useState<MasterDataDefinition[]>(INITIAL_MDM_DEFINITIONS);
-  const [duplicateRules, setDuplicateRules] = useState<DuplicateRule[]>(INITIAL_DUPLICATE_RULES);
-  const [validationRules, setValidationRules] = useState<ValidationRule[]>(INITIAL_VALIDATION_RULES);
-  const [mdmApprovals, setMdmApprovals] = useState<MasterDataApprovalRequest[]>(INITIAL_MDM_APPROVALS);
+  const [duplicateRules, setDuplicateRules] = useState<DuplicateRule[]>(() => loadStored('artify_sm_duplicate_rules', INITIAL_DUPLICATE_RULES));
+  const [validationRules, setValidationRules] = useState<ValidationRule[]>(() => loadStored('artify_sm_validation_rules', INITIAL_VALIDATION_RULES));
+  const [mdmApprovals, setMdmApprovals] = useState<MasterDataApprovalRequest[]>(() => loadStored('artify_sm_mdm_approvals', INITIAL_MDM_APPROVALS));
 
-  // 01.06
-  const [notificationTemplates, setNotificationTemplates] = useState<NotificationTemplate[]>(INITIAL_NOTIF_TEMPLATES);
-  const [notificationRules, setNotificationRules] = useState<NotificationRule[]>(INITIAL_NOTIF_RULES);
-  const [alerts, setAlerts] = useState<SystemAlertItem[]>(INITIAL_ALERTS);
+  // 01.06 Notifications & Alerts
+  const [notificationTemplates, setNotificationTemplates] = useState<NotificationTemplate[]>(() => loadStored('artify_sm_notif_templates', INITIAL_NOTIF_TEMPLATES));
+  const [notificationRules, setNotificationRules] = useState<NotificationRule[]>(() => loadStored('artify_sm_notif_rules', INITIAL_NOTIF_RULES));
+  const [alerts, setAlerts] = useState<SystemAlertItem[]>(() => loadStored('artify_sm_alerts', INITIAL_ALERTS));
 
-  // 01.07
-  const [auditTrail, setAuditTrail] = useState<AuditEvent[]>(INITIAL_AUDIT_TRAIL);
+  // 01.07 Audit Trail & Monitoring
+  const [auditTrail, setAuditTrail] = useState<AuditEvent[]>(() => loadStored('artify_sm_audit_trail', INITIAL_AUDIT_TRAIL));
   const [loginHistory] = useState<LoginHistoryEvent[]>(INITIAL_LOGIN_HISTORY);
 
-  // 01.08
-  const [apiClients, setApiClients] = useState<ApiClient[]>(INITIAL_API_CLIENTS);
-  const [integrations, setIntegrations] = useState<ExternalIntegration[]>(INITIAL_INTEGRATIONS);
-  const [integrationLogs, setIntegrationLogs] = useState<IntegrationLog[]>(INITIAL_INTEGRATION_LOGS);
+  // 01.08 Integrations & API
+  const [apiClients, setApiClients] = useState<ApiClient[]>(() => loadStored('artify_sm_api_clients', INITIAL_API_CLIENTS));
+  const [integrations, setIntegrations] = useState<ExternalIntegration[]>(() => loadStored('artify_sm_integrations', INITIAL_INTEGRATIONS));
+  const [integrationLogs, setIntegrationLogs] = useState<IntegrationLog[]>(() => loadStored('artify_sm_integration_logs', INITIAL_INTEGRATION_LOGS));
 
-  // 01.09
-  const [backupConfig, setBackupConfig] = useState<BackupConfiguration>(INITIAL_BACKUP_CONFIG);
-  const [restorePoints, setRestorePoints] = useState<RestorePoint[]>(INITIAL_RESTORE_POINTS);
+  // 01.09 Backup & Recovery
+  const [backupConfig, setBackupConfig] = useState<BackupConfiguration>(() => loadStored('artify_sm_backup_config', INITIAL_BACKUP_CONFIG));
+  const [restorePoints, setRestorePoints] = useState<RestorePoint[]>(() => loadStored('artify_sm_restore_points', INITIAL_RESTORE_POINTS));
   const [drStatus] = useState<DisasterRecoveryStatus>(INITIAL_DR_STATUS);
 
-  // 01.10
-  const [securityPolicies, setSecurityPolicies] = useState<SecurityPolicy[]>(INITIAL_SECURITY_POLICIES);
-  const [passwordPolicy, setPasswordPolicy] = useState<PasswordPolicy>(INITIAL_PASSWORD_POLICY);
-  const [activeSessions, setActiveSessions] = useState<ActiveSession[]>(INITIAL_ACTIVE_SESSIONS);
-  const [securityEvents, setSecurityEvents] = useState<SecurityEvent[]>(INITIAL_SECURITY_EVENTS);
+  // 01.10 Security Management
+  const [securityPolicies, setSecurityPolicies] = useState<SecurityPolicy[]>(() => loadStored('artify_sm_security_policies', INITIAL_SECURITY_POLICIES));
+  const [passwordPolicy, setPasswordPolicy] = useState<PasswordPolicy>(() => loadStored('artify_sm_password_policy', INITIAL_PASSWORD_POLICY));
+  const [activeSessions, setActiveSessions] = useState<ActiveSession[]>(() => loadStored('artify_sm_active_sessions', INITIAL_ACTIVE_SESSIONS));
+  const [securityEvents, setSecurityEvents] = useState<SecurityEvent[]>(() => loadStored('artify_sm_security_events', INITIAL_SECURITY_EVENTS));
 
   // Banner
   const [bannerMessage, setBannerMessage] = useState<{ text: string; type: 'success' | 'info' | 'warning' | 'error' } | null>(null);
@@ -402,6 +412,142 @@ export const SystemManagementProvider: React.FC<{ children: React.ReactNode }> =
   useEffect(() => {
     localStorage.setItem('artify_sm_rel_history', JSON.stringify(relationshipHistory));
   }, [relationshipHistory]);
+
+  useEffect(() => {
+    localStorage.setItem('artify_sm_branches', JSON.stringify(branches));
+  }, [branches]);
+
+  useEffect(() => {
+    localStorage.setItem('artify_sm_departments', JSON.stringify(departments));
+  }, [departments]);
+
+  useEffect(() => {
+    localStorage.setItem('artify_sm_locations', JSON.stringify(locations));
+  }, [locations]);
+
+  useEffect(() => {
+    localStorage.setItem('artify_sm_operating_units', JSON.stringify(operatingUnits));
+  }, [operatingUnits]);
+
+  useEffect(() => {
+    localStorage.setItem('artify_sm_users', JSON.stringify(users));
+  }, [users]);
+
+  useEffect(() => {
+    localStorage.setItem('artify_sm_user_groups', JSON.stringify(userGroups));
+  }, [userGroups]);
+
+  useEffect(() => {
+    localStorage.setItem('artify_sm_sod_rules', JSON.stringify(sodRules));
+  }, [sodRules]);
+
+  useEffect(() => {
+    localStorage.setItem('artify_sm_access_restrictions', JSON.stringify(accessRestrictions));
+  }, [accessRestrictions]);
+
+  useEffect(() => {
+    localStorage.setItem('artify_sm_workflows', JSON.stringify(workflows));
+  }, [workflows]);
+
+  useEffect(() => {
+    localStorage.setItem('artify_sm_approval_matrices', JSON.stringify(approvalMatrices));
+  }, [approvalMatrices]);
+
+  useEffect(() => {
+    localStorage.setItem('artify_sm_delegations', JSON.stringify(delegations));
+  }, [delegations]);
+
+  useEffect(() => {
+    localStorage.setItem('artify_sm_approval_limits', JSON.stringify(approvalLimits));
+  }, [approvalLimits]);
+
+  useEffect(() => {
+    localStorage.setItem('artify_sm_escalation_rules', JSON.stringify(escalationRules));
+  }, [escalationRules]);
+
+  useEffect(() => {
+    localStorage.setItem('artify_sm_fiscal_years', JSON.stringify(fiscalYears));
+  }, [fiscalYears]);
+
+  useEffect(() => {
+    localStorage.setItem('artify_sm_posting_periods', JSON.stringify(postingPeriods));
+  }, [postingPeriods]);
+
+  useEffect(() => {
+    localStorage.setItem('artify_sm_doc_sequences', JSON.stringify(documentSequences));
+  }, [documentSequences]);
+
+  useEffect(() => {
+    localStorage.setItem('artify_sm_posting_controls', JSON.stringify(postingControls));
+  }, [postingControls]);
+
+  useEffect(() => {
+    localStorage.setItem('artify_sm_period_locks', JSON.stringify(periodLocks));
+  }, [periodLocks]);
+
+  useEffect(() => {
+    localStorage.setItem('artify_sm_duplicate_rules', JSON.stringify(duplicateRules));
+  }, [duplicateRules]);
+
+  useEffect(() => {
+    localStorage.setItem('artify_sm_validation_rules', JSON.stringify(validationRules));
+  }, [validationRules]);
+
+  useEffect(() => {
+    localStorage.setItem('artify_sm_mdm_approvals', JSON.stringify(mdmApprovals));
+  }, [mdmApprovals]);
+
+  useEffect(() => {
+    localStorage.setItem('artify_sm_notif_templates', JSON.stringify(notificationTemplates));
+  }, [notificationTemplates]);
+
+  useEffect(() => {
+    localStorage.setItem('artify_sm_notif_rules', JSON.stringify(notificationRules));
+  }, [notificationRules]);
+
+  useEffect(() => {
+    localStorage.setItem('artify_sm_alerts', JSON.stringify(alerts));
+  }, [alerts]);
+
+  useEffect(() => {
+    localStorage.setItem('artify_sm_audit_trail', JSON.stringify(auditTrail));
+  }, [auditTrail]);
+
+  useEffect(() => {
+    localStorage.setItem('artify_sm_api_clients', JSON.stringify(apiClients));
+  }, [apiClients]);
+
+  useEffect(() => {
+    localStorage.setItem('artify_sm_integrations', JSON.stringify(integrations));
+  }, [integrations]);
+
+  useEffect(() => {
+    localStorage.setItem('artify_sm_integration_logs', JSON.stringify(integrationLogs));
+  }, [integrationLogs]);
+
+  useEffect(() => {
+    localStorage.setItem('artify_sm_backup_config', JSON.stringify(backupConfig));
+  }, [backupConfig]);
+
+  useEffect(() => {
+    localStorage.setItem('artify_sm_restore_points', JSON.stringify(restorePoints));
+  }, [restorePoints]);
+
+  useEffect(() => {
+    localStorage.setItem('artify_sm_security_policies', JSON.stringify(securityPolicies));
+  }, [securityPolicies]);
+
+  useEffect(() => {
+    localStorage.setItem('artify_sm_password_policy', JSON.stringify(passwordPolicy));
+  }, [passwordPolicy]);
+
+  useEffect(() => {
+    localStorage.setItem('artify_sm_active_sessions', JSON.stringify(activeSessions));
+  }, [activeSessions]);
+
+  useEffect(() => {
+    localStorage.setItem('artify_sm_security_events', JSON.stringify(securityEvents));
+  }, [securityEvents]);
 
   // Central audit event appender
   const logAuditEvent = (event: Omit<AuditEvent, 'id' | 'timestamp' | 'userAgent' | 'ipAddress'>) => {
