@@ -6,6 +6,7 @@
 import React, { useState } from 'react';
 import { useScmStore } from '../../services/scmStore';
 import { FreightShipment, TransportMode, ShipmentTransitStatus } from '../../types';
+import { SupplyChainNetworkMap } from './SupplyChainNetworkMap';
 import {
   Navigation,
   Truck,
@@ -26,7 +27,9 @@ import {
   Shield,
   ArrowRight,
   ExternalLink,
-  RotateCcw
+  RotateCcw,
+  Network,
+  Share2
 } from 'lucide-react';
 
 export const LogisticsManagementView: React.FC = () => {
@@ -40,7 +43,7 @@ export const LogisticsManagementView: React.FC = () => {
     currency
   } = useScmStore();
 
-  const [activeSubTab, setActiveSubTab] = useState<'tracking' | 'planning' | 'transport'>('tracking');
+  const [activeSubTab, setActiveSubTab] = useState<'network' | 'tracking' | 'planning' | 'transport'>('network');
   const [showNewShipmentModal, setShowNewShipmentModal] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
   const [modeFilter, setModeFilter] = useState<string>('ALL');
@@ -122,7 +125,19 @@ export const LogisticsManagementView: React.FC = () => {
         </div>
 
         {/* Sub Tabs */}
-        <div className="flex items-center gap-2 mt-6 pt-4 border-t border-slate-800">
+        <div className="flex flex-wrap items-center gap-2 mt-6 pt-4 border-t border-slate-800">
+          <button
+            onClick={() => setActiveSubTab('network')}
+            className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
+              activeSubTab === 'network'
+                ? 'bg-sky-600 text-white shadow-lg shadow-sky-600/30'
+                : 'text-slate-400 hover:text-white hover:bg-slate-800'
+            }`}
+          >
+            <Network className="w-4 h-4 text-sky-300" />
+            <span>Supply Chain Network Topology (12.04.05 / 360°)</span>
+          </button>
+
           <button
             onClick={() => setActiveSubTab('tracking')}
             className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
@@ -160,6 +175,11 @@ export const LogisticsManagementView: React.FC = () => {
           </button>
         </div>
       </div>
+
+      {/* ----------------- SUB-TAB 0: SUPPLY CHAIN NETWORK TOPOLOGY VISUALIZATION ----------------- */}
+      {activeSubTab === 'network' && (
+        <SupplyChainNetworkMap />
+      )}
 
       {/* ----------------- SUB-TAB 1: LIVE SHIPMENT TRACKING & GPS ----------------- */}
       {activeSubTab === 'tracking' && activeShipment && (
@@ -269,6 +289,15 @@ export const LogisticsManagementView: React.FC = () => {
                 </div>
 
                 <div className="flex items-center gap-3">
+                  <button
+                    onClick={() => setActiveSubTab('network')}
+                    className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-sky-950/80 hover:bg-sky-900 text-sky-400 border border-sky-800 text-xs font-bold transition-all cursor-pointer"
+                    title="View live position in full supply chain network topology"
+                  >
+                    <Network className="w-3.5 h-3.5" />
+                    <span>View in Network Topology</span>
+                  </button>
+
                   <div className="text-right">
                     <span className="text-[10px] text-slate-500 uppercase font-bold">Demurrage Free Time</span>
                     <p className="text-sm font-mono font-black text-amber-400">
