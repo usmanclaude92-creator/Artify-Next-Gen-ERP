@@ -304,8 +304,8 @@ export const SecurityManagementView: React.FC<{ activeTab?: string }> = ({ activ
                 <div className="flex items-center gap-1.5">
                   <input
                     type="number"
-                    value={passwordPolicy.historyCountPrevent}
-                    onChange={e => updatePasswordPolicy({ historyCountPrevent: Number(e.target.value) })}
+                    value={passwordPolicy.preventHistoryCount}
+                    onChange={e => updatePasswordPolicy({ preventHistoryCount: Number(e.target.value) })}
                     className="w-16 px-2.5 py-1 bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-600 rounded font-mono font-bold text-center"
                   />
                   <span className="text-slate-500 dark:text-slate-400">histories</span>
@@ -322,8 +322,8 @@ export const SecurityManagementView: React.FC<{ activeTab?: string }> = ({ activ
                 <div className="flex items-center gap-1.5">
                   <input
                     type="number"
-                    value={passwordPolicy.maxFailedAttemptsBeforeLock}
-                    onChange={e => updatePasswordPolicy({ maxFailedAttemptsBeforeLock: Number(e.target.value) })}
+                    value={passwordPolicy.maxFailedAttempts}
+                    onChange={e => updatePasswordPolicy({ maxFailedAttempts: Number(e.target.value) })}
                     className="w-16 px-2.5 py-1 bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-600 rounded font-mono font-bold text-center"
                   />
                   <span className="text-slate-500 dark:text-slate-400">attempts</span>

@@ -469,7 +469,7 @@ export const SystemDashboardView: React.FC<SystemDashboardViewProps> = ({ onNavi
                 <div>
                   <div className="flex items-center gap-2">
                     <span className="font-bold text-slate-900 dark:text-slate-100">{alert.title}</span>
-                    <StatusBadge status={alert.severity} size="sm" />
+                    <StatusBadge status={alert.priority} size="sm" />
                   </div>
                   <p className="text-slate-600 dark:text-slate-400 mt-0.5 text-[11px]">{alert.message}</p>
                 </div>

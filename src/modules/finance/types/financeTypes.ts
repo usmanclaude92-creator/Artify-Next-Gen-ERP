@@ -18,6 +18,7 @@ export type AccountSubClass =
   | 'TAX_EXPENSE';
 
 export interface ChartOfAccount {
+
   id: string;
   code: string; // e.g., '1010', '2010', '4010'
   name: string;

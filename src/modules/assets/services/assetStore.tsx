@@ -1007,8 +1007,8 @@ interface AssetStoreContextType {
   assignAsset: (assignment: Omit<AssetAssignment, 'id' | 'assignmentNumber'>) => void;
   createTransferOrder: (order: Omit<AssetTransferOrder, 'id' | 'transferOrderNumber'>) => void;
   executeDepreciationRun: (fiscalYear: number, periodMonth: number, periodName: string) => DepreciationRun;
-  postRevaluation: (reval: Omit<AssetRevaluationRecord, 'id' | 'revaluationNumber'>) => void;
-  postImpairment: (test: Omit<AssetImpairmentTest, 'id' | 'testReference'>) => void;
+  postRevaluation: (reval: Partial<Omit<AssetRevaluationRecord, 'id' | 'revaluationNumber'>>) => void;
+  postImpairment: (test: Partial<Omit<AssetImpairmentTest, 'id' | 'testReference'>>) => void;
   createPMPlan: (plan: Omit<PreventiveMaintenancePlan, 'id' | 'planCode'>) => void;
   createWorkOrder: (wo: Omit<MaintenanceWorkOrder, 'id' | 'workOrderNumber' | 'totalCost'>) => void;
   completeWorkOrder: (woId: string, actionTaken: string, actualCost: number) => void;
@@ -1278,15 +1278,15 @@ export const AssetProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   };
 
   // Post Revaluation
-  const postRevaluation = (revalData: Omit<AssetRevaluationRecord, 'id' | 'revaluationNumber'>) => {
+  const postRevaluation = (revalData: Partial<Omit<AssetRevaluationRecord, 'id' | 'revaluationNumber'>>) => {
     const id = `rev-${Date.now().toString().slice(-4)}`;
     const revaluationNumber = `REV-${new Date().getFullYear()}-${Math.floor(1000 + mockRandom() * 9000)}`;
-    const newRecord: AssetRevaluationRecord = {
+    const newRecord = {
       ...revalData,
       id,
       revaluationNumber,
       status: 'POSTED_TO_RESERVES'
-    };
+    } as AssetRevaluationRecord;
     setRevaluations(prev => [newRecord, ...prev]);
 
     // Update Asset NBV & Revaluations total
@@ -1301,15 +1301,15 @@ export const AssetProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   };
 
   // Post Impairment
-  const postImpairment = (testData: Omit<AssetImpairmentTest, 'id' | 'testReference'>) => {
+  const postImpairment = (testData: Partial<Omit<AssetImpairmentTest, 'id' | 'testReference'>>) => {
     const id = `imp-${Date.now().toString().slice(-4)}`;
     const testReference = `IMP-${new Date().getFullYear()}-${Math.floor(1000 + mockRandom() * 9000)}`;
-    const newTest: AssetImpairmentTest = {
+    const newTest = {
       ...testData,
       id,
       testReference,
       status: 'POSTED_TO_P_AND_L'
-    };
+    } as AssetImpairmentTest;
     setImpairmentTests(prev => [newTest, ...prev]);
 
     // Update asset NBV

@@ -162,7 +162,7 @@ export const AuditTrailMonitoringView: React.FC<{ activeTab?: string }> = ({ act
         />
         <MetricCard
           label="Authentication Failures"
-          value={loginHistory.filter(l => l.status === 'Failed').length}
+          value={loginHistory.filter(l => l.result.startsWith('Failed')).length}
           status="warning"
           description="Suspicious Anomaly Flags"
           icon={<ShieldAlert className="w-5 h-5 text-rose-600 dark:text-rose-400" />}

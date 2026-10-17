@@ -58,7 +58,7 @@ export const GeneralBusinessServicesView: React.FC<GeneralBusinessServicesViewPr
 
   // Asset Form
   const [assetName, setAssetName] = useState('');
-  const [assetCategory, setAssetCategory] = useState('Office Furniture');
+  const [assetCategory, setAssetCategory] = useState<OfficeAssetRecord['category']>('Office Furniture');
   const [assetRoom, setAssetRoom] = useState('Muscat HQ — Executive Wing');
   const [assetCustodian, setAssetCustodian] = useState('Eng. Khalid Al-Amri');
   const [assetValue, setAssetValue] = useState(220);

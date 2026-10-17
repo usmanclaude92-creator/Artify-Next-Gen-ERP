@@ -73,7 +73,7 @@ export const BranchLocationSetupView: React.FC<BranchLocationSetupViewProps> = (
     email: '',
     currency: 'OMR',
     isTaxBranch: true,
-    status: 'Active' as const
+    status: 'Active' as 'Active' | 'Inactive'
   });
 
   // Location Modal State
@@ -89,7 +89,7 @@ export const BranchLocationSetupView: React.FC<BranchLocationSetupViewProps> = (
     city: 'Muscat',
     address: '',
     coordinates: '23.5880° N, 58.3829° E',
-    status: 'Active' as const
+    status: 'Active' as 'Active' | 'Inactive'
   });
 
   // Site Creation Modal State
@@ -104,7 +104,7 @@ export const BranchLocationSetupView: React.FC<BranchLocationSetupViewProps> = (
     city: 'Sohar',
     address: 'Sohar Industrial Port Zone, Plot 44B',
     coordinates: '24.3638° N, 56.7447° E',
-    status: 'Active' as const
+    status: 'Active' as 'Active' | 'Inactive'
   });
 
   const handleOpenNewBranch = () => {

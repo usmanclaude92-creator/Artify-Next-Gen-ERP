@@ -80,7 +80,29 @@ export const UserAccessManagementView: React.FC<{ activeTab?: string }> = ({ act
   const handleCreateUser = (e: React.FormEvent) => {
     e.preventDefault();
     if (!userForm.username || !userForm.fullName || !userForm.email) return;
-    addUser(userForm);
+    addUser({
+      userId: userForm.username,
+      username: userForm.username,
+      fullName: userForm.fullName,
+      email: userForm.email,
+      mobile: '',
+      employeeRef: '',
+      companyId: userForm.defaultCompanyId,
+      companyName: '',
+      branchId: '',
+      departmentId: '',
+      departmentName: '',
+      position: '',
+      roleId: userForm.roleId,
+      roleName: userForm.roleName,
+      userGroupId: '',
+      userGroupName: '',
+      status: userForm.status,
+      authMethod: 'SAML SSO',
+      mfaEnabled: userForm.mfaEnabled,
+      lastLogin: '—',
+      lastLoginIp: ''
+    });
     setIsUserModalOpen(false);
     setUserForm({
       username: '',
@@ -100,8 +122,13 @@ export const UserAccessManagementView: React.FC<{ activeTab?: string }> = ({ act
     e.preventDefault();
     if (!groupForm.name || !groupForm.code) return;
     addUserGroup({
-      ...groupForm,
-      membersCount: 0
+      code: groupForm.code,
+      name: groupForm.name,
+      description: groupForm.description,
+      memberCount: 0,
+      members: [],
+      assignedRoles: groupForm.rolesIncluded,
+      status: groupForm.status
     });
     setIsGroupModalOpen(false);
   };
@@ -477,7 +504,7 @@ export const UserAccessManagementView: React.FC<{ activeTab?: string }> = ({ act
                   >
                     <div>
                       <div className="font-semibold text-slate-900 dark:text-slate-100">
-                        {exc.userName} • <span className="font-mono text-indigo-700 dark:text-indigo-300">{r.code}</span> ({r.name})
+                        {exc.userName} • <span className="font-mono text-indigo-700 dark:text-indigo-300">{r.code}</span> ({r.title})
                       </div>
                       <div className="text-slate-600 dark:text-slate-400 mt-0.5">
                         <strong>Reason:</strong> {exc.reason}
@@ -509,11 +536,14 @@ export const UserAccessManagementView: React.FC<{ activeTab?: string }> = ({ act
             <button
               onClick={() => {
                 addAccessRestriction({
-                  policyName: 'Branch Office Subnet Gate',
-                  targetRoles: ['role-ap-clerk', 'role-gl-acc'],
-                  allowedIpRanges: ['185.190.24.0/24', '195.229.241.0/24'],
-                  allowedTimeWindows: ['08:00 - 18:00 (Sun-Thu)'],
-                  enforcement: 'Block'
+                  name: 'Branch Office Subnet Gate',
+                  type: 'IP Whitelist',
+                  targetType: 'Role',
+                  targetValue: 'role-ap-clerk, role-gl-acc',
+                  ruleValue: '185.190.24.0/24, 195.229.241.0/24',
+                  enforceMfa: false,
+                  status: 'Active',
+                  description: 'Restrict AP/GL transactions to branch office subnets (08:00 - 18:00 Sun-Thu)'
                 });
               }}
               className="inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg text-xs font-semibold cursor-pointer"
@@ -528,11 +558,11 @@ export const UserAccessManagementView: React.FC<{ activeTab?: string }> = ({ act
               <div key={ar.id} className="border border-slate-200 dark:border-slate-700 rounded-xl p-4 bg-slate-50/60 dark:bg-slate-800/60 shadow-xs space-y-3">
                 <div className="flex items-start justify-between">
                   <div>
-                    <h4 className="font-bold text-slate-900 dark:text-slate-100 text-sm">{ar.policyName}</h4>
+                    <h4 className="font-bold text-slate-900 dark:text-slate-100 text-sm">{ar.name}</h4>
                     <span className="text-[11px] text-slate-500 dark:text-slate-400 font-mono mt-0.5">ID: {ar.id}</span>
                   </div>
                   <span className="px-2.5 py-0.5 rounded-full text-xs font-bold bg-rose-50 dark:bg-rose-500/10 text-rose-700 dark:text-rose-300 border border-rose-200 dark:border-rose-500/30">
-                    Enforcement: {ar.enforcement}
+                    Enforcement: {ar.type}{ar.enforceMfa ? ' + MFA' : ''}
                   </span>
                 </div>
 
@@ -540,7 +570,7 @@ export const UserAccessManagementView: React.FC<{ activeTab?: string }> = ({ act
                   <div>
                     <span className="text-slate-500 dark:text-slate-400 font-medium">Applied Roles:</span>
                     <div className="flex gap-1 flex-wrap mt-1">
-                      {ar.targetRoles.map(r => (
+                      {ar.targetValue.split(',').map(r => r.trim()).map(r => (
                         <span key={r} className="px-2 py-0.5 rounded bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-indigo-700 dark:text-indigo-300 font-mono text-[10px]">
                           {r}
                         </span>
@@ -551,7 +581,7 @@ export const UserAccessManagementView: React.FC<{ activeTab?: string }> = ({ act
                   <div>
                     <span className="text-slate-500 dark:text-slate-400 font-medium">Permitted Subnets / IP Ranges:</span>
                     <div className="flex gap-1 flex-wrap mt-1">
-                      {ar.allowedIpRanges.map(ip => (
+                      {(ar.type === 'IP Whitelist' ? ar.ruleValue.split(',').map(x => x.trim()) : []).map(ip => (
                         <span key={ip} className="px-2 py-0.5 rounded bg-emerald-50 dark:bg-emerald-500/10 border border-emerald-200 dark:border-emerald-500/30 text-emerald-800 dark:text-emerald-200 font-mono text-[10px]">
                           {ip}
                         </span>
@@ -563,7 +593,7 @@ export const UserAccessManagementView: React.FC<{ activeTab?: string }> = ({ act
                     <span className="text-slate-500 dark:text-slate-400 font-medium">Time Window:</span>
                     <div className="mt-1 text-slate-700 dark:text-slate-300 font-semibold flex items-center gap-1.5">
                       <Clock className="w-3.5 h-3.5 text-slate-500 dark:text-slate-400" />
-                      <span>{ar.allowedTimeWindows.join(', ')}</span>
+                      <span>{ar.type === 'Time Window' ? ar.ruleValue : '—'}</span>
                     </div>
                   </div>
                 </div>

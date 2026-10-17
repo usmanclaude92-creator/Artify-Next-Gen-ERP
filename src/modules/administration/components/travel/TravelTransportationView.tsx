@@ -62,7 +62,7 @@ export const TravelTransportationView: React.FC<TravelTransportationViewProps> =
   const [travelerName, setTravelerName] = useState(activeActor.name);
   const [destinationCity, setDestinationCity] = useState('Salalah');
   const [destinationCountry, setDestinationCountry] = useState('Oman');
-  const [travelPurpose, setTravelPurpose] = useState('EPC Project Site Inspection & Client Review');
+  const [travelPurpose, setTravelPurpose] = useState<string>('Project Site Inspection');
   const [departureDate, setDepartureDate] = useState(new Date(Date.now() + 86400000 * 3).toISOString().split('T')[0]);
   const [returnDate, setReturnDate] = useState(new Date(Date.now() + 86400000 * 6).toISOString().split('T')[0]);
   const [travelClass, setTravelClass] = useState<'Economy' | 'Business' | 'First'>('Business');
@@ -90,10 +90,10 @@ export const TravelTransportationView: React.FC<TravelTransportationViewProps> =
       travelerName,
       destinationCity,
       destinationCountry,
-      travelPurpose,
+      travelPurpose: travelPurpose as TravelRequestRecord['travelPurpose'],
       departureDate,
       returnDate,
-      travelClass,
+      travelClass: travelClass === 'Economy' ? 'Economy' : 'Business Class',
       hotelRequired,
       estimatedFlightCostOMR: flightCost,
       estimatedHotelCostOMR: hotelCost,

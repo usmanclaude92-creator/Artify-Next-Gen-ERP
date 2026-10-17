@@ -408,7 +408,7 @@ export const OrganizationManagementView: React.FC<{ activeTab?: string }> = ({ a
               </h3>
               <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
                 Consolidated Group Currency: <strong>{companyGroup.currency}</strong> • Holding Entity ID:{' '}
-                {companyGroup.holdingCompanyId}
+                {companyGroup.parentCompanyId}
               </p>
             </div>
 
@@ -539,7 +539,7 @@ export const OrganizationManagementView: React.FC<{ activeTab?: string }> = ({ a
                 addOperatingUnit({
                   code: `OU-${operatingUnits.length + 1}`,
                   name: 'New Strategic Business Unit',
-                  type: 'Profit Center',
+                  unitType: 'Profit Center',
                   manager: 'General Manager',
                   status: 'Active'
                 });
@@ -569,7 +569,7 @@ export const OrganizationManagementView: React.FC<{ activeTab?: string }> = ({ a
                   <div className="mt-4 space-y-2 text-xs">
                     <div className="flex justify-between py-1 border-b border-slate-200/60 dark:border-slate-700/60">
                       <span className="text-slate-500 dark:text-slate-400">Classification:</span>
-                      <span className="font-semibold text-slate-800 dark:text-slate-200">{ou.type}</span>
+                      <span className="font-semibold text-slate-800 dark:text-slate-200">{ou.unitType}</span>
                     </div>
                     <div className="flex justify-between py-1 border-b border-slate-200/60 dark:border-slate-700/60">
                       <span className="text-slate-500 dark:text-slate-400">Business Head:</span>

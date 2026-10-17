@@ -85,7 +85,7 @@ export const TreasuryManagementView: React.FC = () => {
   const [auditTxnRef, setAuditTxnRef] = useState('TXN-WIRE-9921');
   const [auditCharged, setAuditCharged] = useState<number>(45.0);
   const [auditAgreed, setAuditAgreed] = useState<number>(20.0);
-  const [auditCat, setAuditCat] = useState('Outward SWIFT Wire Commission');
+  const [auditCat, setAuditCat] = useState<string>('SWIFT Wire Commission');
 
   // Form State: Post-Dated Cheque
   const [pdcDirection, setPdcDirection] = useState<PostDatedChequeRecord['direction']>('Receivable (Customer PDC)');
@@ -94,7 +94,7 @@ export const TreasuryManagementView: React.FC = () => {
   const [pdcDrawerPayee, setPdcDrawerPayee] = useState('');
   const [pdcAmount, setPdcAmount] = useState<number>(28500);
   const [pdcMaturity, setPdcMaturity] = useState(new Date(Date.now() + 15 * 86400000).toISOString().split('T')[0]);
-  const [pdcCustody, setPdcCustody] = useState('Treasury Fireproof Safe Box');
+  const [pdcCustody, setPdcCustody] = useState<string>('Treasury Safe Vault');
   const [pdcLinkedRef, setPdcLinkedRef] = useState('INV-2026-08-992');
 
   const formatCurrency = (val: number, curr = 'OMR') => {
@@ -122,15 +122,16 @@ export const TreasuryManagementView: React.FC = () => {
       bankName: facBankName,
       facilityNumber: facNumber,
       facilityType: facType,
-      currency: 'OMR',
       sanctionedLimitOMR: Number(facSanctioned),
       utilizedAmountOMR: Number(facUtilized),
       availableHeadroomOMR: avail,
-      interestOrCommissionRate: `${facInterest}% p.a.`,
+      marginDepositPercent: 0,
+      interestOrCommissionRate: Number(facInterest),
+      tenureStartDate: new Date().toISOString().split('T')[0],
       expiryDate: facExpiry,
-      securityOrCollateral: 'Corporate Guarantee & Assignment of Receivables',
-      covenantsDescription: facCovenants,
-      status: 'Active'
+      renewalStatus: 'Active & In-Good-Standing',
+      securityCollateralDetails: `Corporate Guarantee & Assignment of Receivables. ${facCovenants}`,
+      covenantDebtServiceCoverageRatio: 1.25
     });
     setShowAddFacilityModal(false);
     setFacNumber('');
@@ -142,15 +143,14 @@ export const TreasuryManagementView: React.FC = () => {
     const variance = Number(auditCharged) - Number(auditAgreed);
     recordBankChargeAudit({
       bankAccountId: auditBankAccId,
-      bankAccountName: acc?.accountName || 'Operating Account',
-      statementLineRef: auditTxnRef,
-      chargeDate: new Date().toISOString().split('T')[0],
-      chargeCategory: auditCat,
-      bankChargedAmountOMR: Number(auditCharged),
-      scheduledAgreedTariffOMR: Number(auditAgreed),
-      varianceOverchargedOMR: variance,
-      auditStatus: variance > 0 ? 'Disputed / Refund Requested' : 'Verified OK',
-      disputeNotes: variance > 0 ? `Overcharge of OMR ${variance.toFixed(3)} flagged vs SLA.` : 'Compliant'
+      bankName: acc?.bankName || 'Operating Bank',
+      billingMonth: new Date().toISOString().slice(0, 7),
+      chargeCategory: auditCat as BankChargeAuditRecord['chargeCategory'],
+      billedAmountOMR: Number(auditCharged),
+      contractAgreedAmountOMR: Number(auditAgreed),
+      varianceDiscrepancyOMR: variance,
+      auditConclusion: variance > 0 ? 'Disputed / Overcharged' : 'Accurate as per Schedule',
+      status: 'Audited'
     });
     setShowAddChargeAuditModal(false);
   };
@@ -168,7 +168,7 @@ export const TreasuryManagementView: React.FC = () => {
       amount: Number(pdcAmount),
       currency: 'OMR',
       amountInOMR: Number(pdcAmount),
-      custodyLocation: pdcCustody,
+      custodyLocation: pdcCustody as PostDatedChequeRecord['custodyLocation'],
       linkedInvoiceOrVoucherRef: pdcLinkedRef,
       clearingBankAccountId: bankAccounts[0]?.id || 'acct-01'
     });

@@ -9,8 +9,8 @@ export interface WorkflowApproverStage {
   level: number;
   role: string;
   approverName: string;
-  approverUserId: string;
-  approvalLimitOMR: number;
+  approverUserId?: string;
+  approvalLimitOMR?: number;
   status: 'Pending' | 'Approved' | 'Rejected' | 'Waiting' | 'Skipped';
   decisionDate?: string;
   comments?: string;

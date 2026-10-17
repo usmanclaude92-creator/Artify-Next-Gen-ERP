@@ -93,7 +93,22 @@ export const WorkflowApprovalManagementView: React.FC<{ activeTab?: string }> = 
   const handleCreateWorkflow = (e: React.FormEvent) => {
     e.preventDefault();
     if (!wfForm.code || !wfForm.name) return;
-    addWorkflow(wfForm);
+    addWorkflow({
+      code: wfForm.code,
+      name: wfForm.name,
+      module: wfForm.module,
+      process: wfForm.documentType,
+      triggerEvent: 'Document Submit',
+      status: wfForm.status,
+      stages: wfForm.stages.map((st, i) => ({
+        stageNumber: st.stageOrder ?? i + 1,
+        name: st.stageName,
+        approverType: 'Role' as const,
+        approverValue: st.approverRole,
+        timeoutHours: st.timeoutHours,
+        allowDelegation: true
+      }))
+    });
     setIsWfModalOpen(false);
   };
 
@@ -412,10 +427,15 @@ export const WorkflowApprovalManagementView: React.FC<{ activeTab?: string }> = 
             <button
               onClick={() => {
                 addEscalationRule({
-                  workflowCode: 'WF-CAPEX-01',
-                  triggerAfterHours: 36,
-                  escalationAction: 'Auto-Reassign to Deputy Head and notify CFO via priority SMS',
-                  targetEscalationRole: 'General Manager'
+                  workflowId: 'WF-CAPEX-01',
+                  workflowName: 'CAPEX Approval',
+                  stageNumber: 1,
+                  waitingHours: 36,
+                  escalationRecipient: 'General Manager',
+                  reminderFrequencyHours: 12,
+                  maxEscalations: 3,
+                  notifyMethod: 'SMS Urgent',
+                  status: 'Active'
                 });
               }}
               className="inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg text-xs font-semibold cursor-pointer"
@@ -430,9 +450,9 @@ export const WorkflowApprovalManagementView: React.FC<{ activeTab?: string }> = 
               <div key={esc.id} className="border border-slate-200 dark:border-slate-700 rounded-xl p-4 bg-slate-50/60 dark:bg-slate-800/60 shadow-xs space-y-3">
                 <div className="flex items-start justify-between">
                   <div>
-                    <span className="font-mono text-xs font-bold text-indigo-700 dark:text-indigo-300">{esc.workflowCode}</span>
+                    <span className="font-mono text-xs font-bold text-indigo-700 dark:text-indigo-300">{esc.workflowId}</span>
                     <h4 className="font-bold text-slate-900 dark:text-slate-100 text-sm mt-0.5">
-                      Trigger SLA: Exceeds {esc.triggerAfterHours} Hours
+                      Trigger SLA: Exceeds {esc.waitingHours} Hours
                     </h4>
                   </div>
                   <span className="px-2 py-0.5 rounded bg-amber-100 dark:bg-amber-500/20 text-amber-800 dark:text-amber-200 text-[11px] font-bold">
@@ -443,11 +463,11 @@ export const WorkflowApprovalManagementView: React.FC<{ activeTab?: string }> = 
                 <div className="text-xs space-y-2">
                   <div>
                     <span className="text-slate-500 dark:text-slate-400 font-medium">Automatic Remediation:</span>
-                    <div className="text-slate-800 dark:text-slate-200 font-semibold mt-0.5">{esc.escalationAction}</div>
+                    <div className="text-slate-800 dark:text-slate-200 font-semibold mt-0.5">{esc.notifyMethod}</div>
                   </div>
                   <div className="pt-2 border-t border-slate-200 dark:border-slate-700 flex justify-between">
                     <span className="text-slate-500 dark:text-slate-400">Escalates To:</span>
-                    <span className="font-mono font-bold text-slate-700 dark:text-slate-300">{esc.targetEscalationRole}</span>
+                    <span className="font-mono font-bold text-slate-700 dark:text-slate-300">{esc.escalationRecipient}</span>
                   </div>
                 </div>
               </div>

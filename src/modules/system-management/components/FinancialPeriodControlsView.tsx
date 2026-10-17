@@ -142,7 +142,7 @@ export const FinancialPeriodControlsView: React.FC<{ activeTab?: string }> = ({ 
         />
         <MetricCard
           label="Backdated Tolerance Window"
-          value={`${postingControls.backdatedPostingToleranceDays} Days`}
+          value={`${postingControls.allowedBackdatedDays} Days`}
           status="neutral"
           description="Max Posting Grace Window"
           icon={<Clock className="w-5 h-5 text-amber-600 dark:text-amber-400" />}
@@ -352,31 +352,31 @@ export const FinancialPeriodControlsView: React.FC<{ activeTab?: string }> = ({ 
                   <button
                     onClick={() =>
                       updatePostingControls({
-                        allowBackdatedPosting: !postingControls.allowBackdatedPosting
+                        allowedBackdatedDays: postingControls.allowedBackdatedDays > 0 ? 0 : 7
                       })
                     }
                     className={`relative inline-flex h-5 w-9 items-center rounded-full transition-colors ${
-                      postingControls.allowBackdatedPosting ? 'bg-indigo-600' : 'bg-slate-300 dark:bg-slate-600'
+                      postingControls.allowedBackdatedDays > 0 ? 'bg-indigo-600' : 'bg-slate-300 dark:bg-slate-600'
                     }`}
                   >
                     <span
                       className={`inline-block h-3.5 w-3.5 transform rounded-full bg-white dark:bg-slate-900 transition-transform ${
-                        postingControls.allowBackdatedPosting ? 'translate-x-4.5' : 'translate-x-1'
+                        postingControls.allowedBackdatedDays > 0 ? 'translate-x-4.5' : 'translate-x-1'
                       }`}
                     />
                   </button>
                 </div>
 
-                {postingControls.allowBackdatedPosting && (
+                {postingControls.allowedBackdatedDays > 0 && (
                   <div className="mt-3 pt-3 border-t border-slate-200 dark:border-slate-700 flex items-center justify-between text-xs">
                     <span className="text-slate-600 dark:text-slate-400 font-medium">Tolerance Window:</span>
                     <div className="flex items-center gap-2">
                       <input
                         type="number"
-                        value={postingControls.backdatedPostingToleranceDays}
+                        value={postingControls.allowedBackdatedDays}
                         onChange={e =>
                           updatePostingControls({
-                            backdatedPostingToleranceDays: Number(e.target.value)
+                            allowedBackdatedDays: Number(e.target.value)
                           })
                         }
                         className="w-16 px-2 py-1 border border-slate-300 dark:border-slate-600 rounded font-mono text-xs text-center"
@@ -398,16 +398,16 @@ export const FinancialPeriodControlsView: React.FC<{ activeTab?: string }> = ({ 
                   <button
                     onClick={() =>
                       updatePostingControls({
-                        allowFuturePosting: !postingControls.allowFuturePosting
+                        allowedFutureDays: postingControls.allowedFutureDays > 0 ? 0 : 3
                       })
                     }
                     className={`relative inline-flex h-5 w-9 items-center rounded-full transition-colors ${
-                      postingControls.allowFuturePosting ? 'bg-indigo-600' : 'bg-slate-300 dark:bg-slate-600'
+                      postingControls.allowedFutureDays > 0 ? 'bg-indigo-600' : 'bg-slate-300 dark:bg-slate-600'
                     }`}
                   >
                     <span
                       className={`inline-block h-3.5 w-3.5 transform rounded-full bg-white dark:bg-slate-900 transition-transform ${
-                        postingControls.allowFuturePosting ? 'translate-x-4.5' : 'translate-x-1'
+                        postingControls.allowedFutureDays > 0 ? 'translate-x-4.5' : 'translate-x-1'
                       }`}
                     />
                   </button>
@@ -439,7 +439,7 @@ export const FinancialPeriodControlsView: React.FC<{ activeTab?: string }> = ({ 
                     </p>
                   </div>
                   <div className="flex items-center gap-1.5 font-mono text-xs font-bold text-slate-800 dark:text-slate-200">
-                    <span>{postingControls.roundingToleranceOMR} OMR</span>
+                    <span>0.001 OMR</span>
                   </div>
                 </div>
               </div>

@@ -2113,7 +2113,7 @@ export const ProjectMasterView: React.FC<ProjectMasterViewProps> = ({
                     <button
                       type="button"
                       onClick={() => {
-                        const tabs: (typeof activeFormTab)[] = ['CHARTER', 'ORGANIZATION', 'COMMERCIAL', 'LEADERSHIP', 'TIMELINE', 'BUDGET'];
+                        const tabs: (typeof activeFormTab)[] = ['CHARTER', 'ORGANIZATION', 'COMMERCIAL', 'LEADERSHIP', 'TIMELINE'];
                         const nextIndex = tabs.indexOf(activeFormTab) + 1;
                         if (nextIndex < tabs.length) setActiveFormTab(tabs[nextIndex]);
                       }}

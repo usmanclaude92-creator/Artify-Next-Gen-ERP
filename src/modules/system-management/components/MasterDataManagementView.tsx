@@ -63,7 +63,15 @@ export const MasterDataManagementView: React.FC<{ activeTab?: string }> = ({ act
 
   const handleCreateValRule = (e: React.FormEvent) => {
     e.preventDefault();
-    addValidationRule(valForm);
+    addValidationRule({
+      entityType: valForm.entity,
+      fieldName: valForm.fieldName,
+      ruleType: 'Regex Format',
+      ruleExpression: valForm.ruleExpression,
+      errorMessage: valForm.errorMessage,
+      severity: 'Error',
+      status: valForm.status
+    });
     setIsValModalOpen(false);
   };
 
@@ -345,7 +353,7 @@ export const MasterDataManagementView: React.FC<{ activeTab?: string }> = ({ act
                 <div className="flex items-start justify-between">
                   <div>
                     <span className="font-mono text-xs font-bold text-indigo-700 dark:text-indigo-300">{vr.fieldName}</span>
-                    <h4 className="font-bold text-slate-900 dark:text-slate-100 text-sm mt-0.5">{vr.entity}</h4>
+                    <h4 className="font-bold text-slate-900 dark:text-slate-100 text-sm mt-0.5">{vr.entityType}</h4>
                   </div>
                   <span className="px-2 py-0.5 rounded bg-indigo-100 dark:bg-indigo-500/20 text-indigo-800 dark:text-indigo-200 text-[10px] font-mono font-bold">
                     {vr.ruleType}

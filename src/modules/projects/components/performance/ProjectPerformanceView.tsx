@@ -89,12 +89,12 @@ export const ProjectPerformanceView: React.FC = () => {
         <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-4 rounded-2xl">
           <div className="flex items-center justify-between">
             <span className="text-xs text-slate-600 dark:text-slate-400 font-semibold uppercase">Cost Performance Index (CPI)</span>
-            <span className={`text-xs font-bold font-mono ${evm.cpi >= 1.0 ? 'text-emerald-600 dark:text-emerald-400' : 'text-rose-600 dark:text-rose-400'}`}>
-              {evm.cpi >= 1.0 ? 'Under Budget' : 'Cost Overrun'}
+            <span className={`text-xs font-bold font-mono ${evm.costPerformanceIndex >= 1.0 ? 'text-emerald-600 dark:text-emerald-400' : 'text-rose-600 dark:text-rose-400'}`}>
+              {evm.costPerformanceIndex >= 1.0 ? 'Under Budget' : 'Cost Overrun'}
             </span>
           </div>
           <p className="text-2xl font-extrabold text-slate-900 dark:text-white font-mono mt-1">
-            {evm.cpi}
+            {evm.costPerformanceIndex}
           </p>
           <span className="text-[11px] text-slate-600 dark:text-slate-400">CPI = Earned Value (EV) / Actual Cost (AC)</span>
         </div>
@@ -102,12 +102,12 @@ export const ProjectPerformanceView: React.FC = () => {
         <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-4 rounded-2xl">
           <div className="flex items-center justify-between">
             <span className="text-xs text-slate-600 dark:text-slate-400 font-semibold uppercase">Schedule Performance Index (SPI)</span>
-            <span className={`text-xs font-bold font-mono ${evm.spi >= 1.0 ? 'text-emerald-600 dark:text-emerald-400' : 'text-amber-700 dark:text-amber-400'}`}>
-              {evm.spi >= 1.0 ? 'Ahead of Sched.' : 'Minor Delay'}
+            <span className={`text-xs font-bold font-mono ${evm.schedulePerformanceIndex >= 1.0 ? 'text-emerald-600 dark:text-emerald-400' : 'text-amber-700 dark:text-amber-400'}`}>
+              {evm.schedulePerformanceIndex >= 1.0 ? 'Ahead of Sched.' : 'Minor Delay'}
             </span>
           </div>
           <p className="text-2xl font-extrabold text-slate-900 dark:text-white font-mono mt-1">
-            {evm.spi}
+            {evm.schedulePerformanceIndex}
           </p>
           <span className="text-[11px] text-slate-600 dark:text-slate-400">SPI = Earned Value (EV) / Planned Value (PV)</span>
         </div>

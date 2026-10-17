@@ -1488,7 +1488,7 @@ interface ManufacturingContextType {
   // Actions
   addBom: (bom: Omit<BillOfMaterials, 'id' | 'createdAt' | 'updatedAt'>) => BillOfMaterials;
   updateBom: (id: string, updates: Partial<BillOfMaterials>) => void;
-  createWorkOrder: (order: Omit<WorkOrder, 'id' | 'orderNumber' | 'completedQuantity' | 'scrappedQuantity'>) => WorkOrder;
+  createWorkOrder: (order: Partial<Omit<WorkOrder, 'id' | 'orderNumber' | 'completedQuantity' | 'scrappedQuantity'>>) => WorkOrder;
   updateWorkOrderStatus: (id: string, status: WorkOrderStatus) => void;
   updateWorkOrderOperation: (workOrderId: string, stepNumber: number, updates: any) => void;
   issueMaterialsToWorkOrder: (issue: Omit<MaterialIssueVoucher, 'id' | 'voucherNumber'>) => MaterialIssueVoucher;
@@ -1656,20 +1656,20 @@ export const ManufacturingProvider: React.FC<{ children: React.ReactNode }> = ({
   };
 
   const createWorkOrder = (
-    orderData: Omit<WorkOrder, 'id' | 'orderNumber' | 'completedQuantity' | 'scrappedQuantity'>
+    orderData: Partial<Omit<WorkOrder, 'id' | 'orderNumber' | 'completedQuantity' | 'scrappedQuantity'>>
   ): WorkOrder => {
     const seq = workOrders.length + 85;
     const orderNumber = `WO-2026-00${seq}`;
     const id = `wo-${Date.now()}`;
 
-    const newOrder: WorkOrder = {
+    const newOrder = {
       ...orderData,
       id,
       orderNumber,
       completedQuantity: 0,
       scrappedQuantity: 0,
       totalActualWipCostOMR: 0
-    };
+    } as WorkOrder;
 
     setWorkOrders((prev) => [newOrder, ...prev]);
     return newOrder;

@@ -26,7 +26,7 @@ interface Props {
 }
 
 export const AssetAIAssistantModal: React.FC<Props> = ({ isOpen, onClose }) => {
-  const { aiInsights, currency, assets, categories, runAIDiagnostics } = useAssetStore();
+  const { aiInsights, currency, assets, categories, refreshAiInsights } = useAssetStore();
   const [promptInput, setPromptInput] = useState('');
   const [chatMessages, setChatMessages] = useState<Array<{ sender: 'ai' | 'user'; text: string; time: string }>>([
     {
@@ -98,7 +98,7 @@ export const AssetAIAssistantModal: React.FC<Props> = ({ isOpen, onClose }) => {
 
           <div className="flex items-center gap-2">
             <button
-              onClick={() => runAIDiagnostics()}
+              onClick={() => refreshAiInsights()}
               className="flex items-center gap-1.5 px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-amber-400 rounded-xl text-xs font-bold border border-slate-700 transition-colors cursor-pointer"
             >
               <Zap className="w-3.5 h-3.5" />
@@ -125,9 +125,9 @@ export const AssetAIAssistantModal: React.FC<Props> = ({ isOpen, onClose }) => {
             <div
               key={idx}
               className={`shrink-0 flex items-center gap-2 px-3 py-1 rounded-xl text-xs border ${
-                insight.type === 'ALERT'
+                insight.severity === 'HIGH'
                   ? 'bg-rose-50 dark:bg-rose-950/60 text-rose-700 dark:text-rose-300 border-rose-800/80'
-                  : insight.type === 'OPTIMIZATION'
+                  : insight.severity === 'MEDIUM'
                   ? 'bg-amber-50 dark:bg-amber-950/60 text-amber-800 dark:text-amber-300 border-amber-800/80'
                   : 'bg-cyan-50 dark:bg-cyan-950/60 text-cyan-700 dark:text-cyan-300 border-cyan-800/80'
               }`}

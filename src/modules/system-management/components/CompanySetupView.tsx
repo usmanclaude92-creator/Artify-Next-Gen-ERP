@@ -56,7 +56,7 @@ export const CompanySetupView: React.FC = () => {
     dateFormat: 'DD/MM/YYYY',
     postalCode: '100',
     website: 'https://al-arabiya-group.com',
-    status: 'Active' as const,
+    status: 'Active' as 'Active' | 'Draft' | 'Pending Approval' | 'Inactive' | 'Archived' | 'Suspended',
     contactPerson: '',
     email: '',
     phone: '',

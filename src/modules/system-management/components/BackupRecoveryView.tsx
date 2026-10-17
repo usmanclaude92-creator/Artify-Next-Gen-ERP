@@ -99,14 +99,14 @@ export const BackupRecoveryView: React.FC<{ activeTab?: string }> = ({ activeTab
           label="Current Recovery Point (RPO)"
           value={`${drStatus.currentRpoMinutes} Mins`}
           status="positive"
-          description={`Target SLA: ≤ ${drStatus.targetRpoMinutes} mins`}
+          description={`Target SLA: ≤ ${drStatus.rpoTargetMinutes} mins`}
           icon={<Clock className="w-5 h-5 text-indigo-600 dark:text-indigo-400" />}
         />
         <MetricCard
           label="Recovery Time Objective (RTO)"
           value={`${drStatus.currentRtoEstimateMinutes} Mins`}
           status="positive"
-          description={`Target SLA: ≤ ${drStatus.targetRtoMinutes} mins`}
+          description={`Target SLA: ≤ ${drStatus.rtoTargetMinutes} mins`}
           icon={<RotateCcw className="w-5 h-5 text-indigo-600 dark:text-indigo-400" />}
         />
         <MetricCard
@@ -190,7 +190,7 @@ export const BackupRecoveryView: React.FC<{ activeTab?: string }> = ({ activeTab
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
                   <Server className="w-5 h-5 text-indigo-700 dark:text-indigo-300" />
-                  <h4 className="font-bold text-slate-900 dark:text-slate-100 text-sm">{drStatus.primaryDataCenter}</h4>
+                  <h4 className="font-bold text-slate-900 dark:text-slate-100 text-sm">{drStatus.primaryRegion}</h4>
                 </div>
                 <span className="px-2.5 py-0.5 rounded-full text-xs font-bold bg-emerald-100 dark:bg-emerald-500/20 text-emerald-800 dark:text-emerald-200">
                   Active Primary
@@ -209,7 +209,7 @@ export const BackupRecoveryView: React.FC<{ activeTab?: string }> = ({ activeTab
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
                   <Cloud className="w-5 h-5 text-slate-700 dark:text-slate-300" />
-                  <h4 className="font-bold text-slate-900 dark:text-slate-100 text-sm">{drStatus.secondaryDataCenter}</h4>
+                  <h4 className="font-bold text-slate-900 dark:text-slate-100 text-sm">{drStatus.failoverRegion}</h4>
                 </div>
                 <span className="px-2.5 py-0.5 rounded-full text-xs font-bold bg-indigo-100 dark:bg-indigo-500/20 text-indigo-800 dark:text-indigo-200">
                   Hot Standby
@@ -229,10 +229,10 @@ export const BackupRecoveryView: React.FC<{ activeTab?: string }> = ({ activeTab
           <div className="p-4 border border-emerald-200 dark:border-emerald-500/30 bg-emerald-50/40 dark:bg-emerald-500/40 rounded-xl flex items-center justify-between">
             <div>
               <h4 className="text-xs font-bold text-emerald-900 dark:text-emerald-100">
-                Last Disaster Recovery Drill: {drStatus.lastDrillDate}
+                Last Disaster Recovery Drill: {drStatus.lastDrDrillDate}
               </h4>
               <p className="text-xs text-emerald-700 dark:text-emerald-300 mt-0.5">
-                Outcome: <strong>{drStatus.lastDrillOutcome}</strong>. Full database restoration completed in 18 minutes.
+                Outcome: <strong>{drStatus.clusterSyncStatus}</strong>. Full database restoration completed in 18 minutes.
               </p>
             </div>
             <button
@@ -263,7 +263,7 @@ export const BackupRecoveryView: React.FC<{ activeTab?: string }> = ({ activeTab
               </div>
               <div className="flex justify-between py-1 border-b border-slate-200/60 dark:border-slate-700/60">
                 <span className="text-slate-500 dark:text-slate-400">Scheduled Execution Window:</span>
-                <span className="font-mono font-bold text-indigo-700 dark:text-indigo-300">{backupConfig.scheduledTimeUtc}</span>
+                <span className="font-mono font-bold text-indigo-700 dark:text-indigo-300">{backupConfig.frequency}</span>
               </div>
               <div className="flex justify-between py-1 border-b border-slate-200/60 dark:border-slate-700/60">
                 <span className="text-slate-500 dark:text-slate-400">Retention Horizon:</span>
@@ -275,12 +275,12 @@ export const BackupRecoveryView: React.FC<{ activeTab?: string }> = ({ activeTab
               <div className="flex justify-between py-1 border-b border-slate-200/60 dark:border-slate-700/60">
                 <span className="text-slate-500 dark:text-slate-400">Encryption Standard:</span>
                 <span className="font-mono font-bold text-emerald-700 dark:text-emerald-300 flex items-center gap-1">
-                  <Lock className="w-3.5 h-3.5" /> {backupConfig.encryptionStandard}
+                  <Lock className="w-3.5 h-3.5" /> {backupConfig.encryptionAlgorithm}
                 </span>
               </div>
               <div className="flex justify-between py-1 border-b border-slate-200/60 dark:border-slate-700/60">
                 <span className="text-slate-500 dark:text-slate-400">Replication Vault:</span>
-                <span className="font-semibold text-slate-800 dark:text-slate-200">{backupConfig.storageLocation}</span>
+                <span className="font-semibold text-slate-800 dark:text-slate-200">{backupConfig.storageDestination}</span>
               </div>
               <div className="flex justify-between py-1 border-b border-slate-200/60 dark:border-slate-700/60">
                 <span className="text-slate-500 dark:text-slate-400">Automatic Checksum Validation:</span>

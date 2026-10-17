@@ -37,43 +37,46 @@ export const FinancialReportingView: React.FC<{ initialReport?: ReportId }> = ({
   const [reportPeriod, setReportPeriod] = useState('Q1-2026');
 
   // Calculations for Trial Balance
-  const totalDebit = chartOfAccounts.reduce((sum, a) => sum + a.currentDebit, 0);
-  const totalCredit = chartOfAccounts.reduce((sum, a) => sum + a.currentCredit, 0);
+  // Control accounts carry the roll-up of their children, so aggregate leaf accounts only
+  const leafAccounts = chartOfAccounts.filter(a => !chartOfAccounts.some(c => c.parentCode === a.code));
+
+  const totalDebit = leafAccounts.reduce((sum, a) => sum + a.currentDebit, 0);
+  const totalCredit = leafAccounts.reduce((sum, a) => sum + a.currentCredit, 0);
   const isTrialBalanceInSync = Math.abs(totalDebit - totalCredit) < 0.01;
 
   // Income Statement aggregations
-  const totalRevenue = chartOfAccounts
+  const totalRevenue = leafAccounts
     .filter(a => a.accountClass === 'REVENUE')
     .reduce((sum, a) => sum + a.currentCredit, 0);
-  const costOfSales = chartOfAccounts
-    .filter(a => a.accountClass === 'EXPENSES' && a.code.startsWith('5'))
+  const costOfSales = leafAccounts
+    .filter(a => a.accountClass === 'EXPENSE' && a.code.startsWith('5'))
     .reduce((sum, a) => sum + a.currentDebit, 0);
   const grossProfit = totalRevenue - costOfSales;
 
-  const operatingExpenses = chartOfAccounts
-    .filter(a => a.accountClass === 'EXPENSES' && a.code.startsWith('6'))
+  const operatingExpenses = leafAccounts
+    .filter(a => a.accountClass === 'EXPENSE' && a.code.startsWith('6'))
     .reduce((sum, a) => sum + a.currentDebit, 0);
   const operatingProfitEBITDA = grossProfit - operatingExpenses;
   const netIncome = operatingProfitEBITDA; // simplified pre-tax
 
   // Balance Sheet aggregations
-  const currentAssets = chartOfAccounts
-    .filter(a => a.accountClass === 'ASSETS' && a.accountSubGroup === 'CURRENT_ASSET')
+  const currentAssets = leafAccounts
+    .filter(a => a.accountClass === 'ASSET' && a.subClass === 'CURRENT_ASSET')
     .reduce((sum, a) => sum + (a.currentDebit - a.currentCredit), 0);
-  const nonCurrentAssets = chartOfAccounts
-    .filter(a => a.accountClass === 'ASSETS' && a.accountSubGroup === 'NON_CURRENT_ASSET')
+  const nonCurrentAssets = leafAccounts
+    .filter(a => a.accountClass === 'ASSET' && a.subClass === 'NON_CURRENT_ASSET')
     .reduce((sum, a) => sum + (a.currentDebit - a.currentCredit), 0);
   const totalAssets = currentAssets + nonCurrentAssets;
 
-  const currentLiabilities = chartOfAccounts
-    .filter(a => a.accountClass === 'LIABILITIES' && a.accountSubGroup === 'CURRENT_LIABILITY')
+  const currentLiabilities = leafAccounts
+    .filter(a => a.accountClass === 'LIABILITY' && a.subClass === 'CURRENT_LIABILITY')
     .reduce((sum, a) => sum + (a.currentCredit - a.currentDebit), 0);
-  const nonCurrentLiabilities = chartOfAccounts
-    .filter(a => a.accountClass === 'LIABILITIES' && a.accountSubGroup === 'NON_CURRENT_LIABILITY')
+  const nonCurrentLiabilities = leafAccounts
+    .filter(a => a.accountClass === 'LIABILITY' && a.subClass === 'NON_CURRENT_LIABILITY')
     .reduce((sum, a) => sum + (a.currentCredit - a.currentDebit), 0);
   const totalLiabilities = currentLiabilities + nonCurrentLiabilities;
 
-  const equityAccounts = chartOfAccounts
+  const equityAccounts = leafAccounts
     .filter(a => a.accountClass === 'EQUITY')
     .reduce((sum, a) => sum + (a.currentCredit - a.currentDebit), 0);
   const totalEquityAndLiabilities = totalLiabilities + equityAccounts + netIncome;

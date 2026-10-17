@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useAdmin } from '../../services/administrationStore';
-import { InternalRequestRecord, WorkflowStatus } from '../../types';
+import { InternalRequestRecord, InternalRequestCategory, WorkflowStatus } from '../../types';
 import { ActorSimulationBar } from '../common/ActorSimulationBar';
 import { WorkflowBannerAlert } from '../common/WorkflowBannerAlert';
 import {
@@ -89,7 +89,7 @@ export const InternalRequestsView: React.FC<InternalRequestsViewProps> = ({ acti
 
     const res = addInternalRequest({
       requestType: newType,
-      category: newCategory,
+      category: newCategory as InternalRequestCategory,
       title: newTitle,
       requestedBy: newEmployeeName,
       employeeId: newEmployeeId,

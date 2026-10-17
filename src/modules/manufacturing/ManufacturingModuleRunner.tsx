@@ -200,7 +200,7 @@ export const ManufacturingModuleRunner: React.FC<ManufacturingModuleRunnerProps>
             {/* Breadcrumb & Title */}
             <div className="flex items-center gap-3">
               <button
-                onClick={() => onNavigate({ view: 'module_overview', moduleId: 'manufacturing' })}
+                onClick={() => onNavigate({ view: 'module', moduleId: 'manufacturing' })}
                 className="p-2 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-all"
                 title="Back to Manufacturing Hub"
               >
@@ -259,7 +259,7 @@ export const ManufacturingModuleRunner: React.FC<ManufacturingModuleRunnerProps>
                   key={item.id}
                   onClick={() => {
                     if (item.isDashboard) {
-                      onNavigate({ view: 'module_overview', moduleId: 'manufacturing' });
+                      onNavigate({ view: 'module', moduleId: 'manufacturing' });
                     } else {
                       handleAreaNavigate(item.id);
                     }

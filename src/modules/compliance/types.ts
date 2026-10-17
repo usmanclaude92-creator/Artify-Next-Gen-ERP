@@ -342,6 +342,7 @@ export interface CorrectiveActionItem {
 // 17.08 FRAUD & COMPLIANCE MONITORING
 // ----------------------------------------------------
 export interface FraudRedFlagAlert {
+
   id: string;
   alertCode: string;
   alertType: RedFlagType;

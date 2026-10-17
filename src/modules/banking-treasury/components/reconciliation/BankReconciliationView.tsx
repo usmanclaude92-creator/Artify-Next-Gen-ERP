@@ -44,7 +44,7 @@ export const BankReconciliationView: React.FC = () => {
   const [showAdjustmentModal, setShowAdjustmentModal] = useState(false);
 
   // Form State: Statement Import
-  const [importFormat, setImportFormat] = useState<BankStatementImportRecord['importFormat']>('MT940 Swift Statement');
+  const [importFormat, setImportFormat] = useState<BankStatementImportRecord['importFormat']>('MT940 SWIFT');
   const [importFilename, setImportFilename] = useState('BMUS_STATEMENT_2026_08_20.STA');
   const [importLinesCount, setImportLinesCount] = useState(14);
 
@@ -77,16 +77,18 @@ export const BankReconciliationView: React.FC = () => {
     e.preventDefault();
     const acc = bankAccounts.find((b) => b.id === selectedAccountId);
     createReconciliationAdjustment({
-      statementImportId: 'stmt-01',
       bankAccountId: selectedAccountId,
       bankAccountName: acc?.accountName || 'Bank Muscat Operating',
+      statementLineId: '',
       adjustmentDate: new Date().toISOString().split('T')[0],
       adjustmentType: adjType,
-      amountOMR: Number(adjAmount),
-      glDebitAccountCode: adjGlDebit,
-      glCreditAccountCode: acc?.glAccountCode || '1010-01-001',
-      description: adjDesc,
-      approvedBy: 'Dr. Tariq Al-Habsi (Finance Director)'
+      amount: Number(adjAmount),
+      currency: 'OMR',
+      glOffsetAccount: adjGlDebit,
+      glOffsetAccountName: adjGlDebit,
+      narration: adjDesc,
+      taxAmountVAT: 0,
+      postedBy: 'Dr. Tariq Al-Habsi (Finance Director)'
     });
     setShowAdjustmentModal(false);
     setAdjAmount(35.5);
@@ -261,19 +263,19 @@ export const BankReconciliationView: React.FC = () => {
                   >
                     <td className="p-3.5 font-mono text-slate-700 dark:text-slate-300">{line.transactionDate}</td>
                     <td className="p-3.5">
-                      <div className="font-bold text-slate-900 dark:text-slate-100">{line.description}</div>
+                      <div className="font-bold text-slate-900 dark:text-slate-100">{line.narrativeDescription}</div>
                       <div className="font-mono text-[10px] text-slate-500 dark:text-slate-400">{line.bankReference}</div>
                     </td>
                     <td className="p-3.5 text-right font-bold text-rose-700 dark:text-rose-300">
-                      {line.debitAmountOMR > 0 ? formatCurrency(line.debitAmountOMR) : '—'}
+                      {line.transactionType === 'Debit' ? formatCurrency(line.amount) : '—'}
                     </td>
                     <td className="p-3.5 text-right font-bold text-emerald-700 dark:text-emerald-300">
-                      {line.creditAmountOMR > 0 ? formatCurrency(line.creditAmountOMR) : '—'}
+                      {line.transactionType === 'Credit' ? formatCurrency(line.amount) : '—'}
                     </td>
                     <td className="p-3.5">
-                      {line.matchedErpTransactionRef ? (
+                      {line.matchedVoucherRef ? (
                         <span className="font-mono text-[11px] font-bold text-slate-800 dark:text-slate-200 bg-slate-100 dark:bg-slate-800 px-2 py-0.5 rounded">
-                          {line.matchedErpTransactionRef}
+                          {line.matchedVoucherRef}
                         </span>
                       ) : (
                         <span className="text-[11px] text-amber-700 dark:text-amber-300 italic font-semibold">Unmatched in ERP</span>
@@ -377,7 +379,7 @@ export const BankReconciliationView: React.FC = () => {
                     </td>
                     <td className="p-3.5">
                       <div className="font-bold text-slate-900 dark:text-slate-100">{adj.bankAccountName}</div>
-                      <div className="text-[10px] text-slate-500 dark:text-slate-400">{adj.description}</div>
+                      <div className="text-[10px] text-slate-500 dark:text-slate-400">{adj.narration}</div>
                     </td>
                     <td className="p-3.5">
                       <span className="px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 font-semibold">
@@ -385,11 +387,11 @@ export const BankReconciliationView: React.FC = () => {
                       </span>
                     </td>
                     <td className="p-3.5">
-                      <div className="font-mono text-slate-700 dark:text-slate-300">Dr: {adj.glDebitAccountCode}</div>
-                      <div className="font-mono text-slate-500 dark:text-slate-400">Cr: {adj.glCreditAccountCode}</div>
+                      <div className="font-mono text-slate-700 dark:text-slate-300">Dr: {adj.glOffsetAccount}</div>
+                      <div className="font-mono text-slate-500 dark:text-slate-400">Cr: {adj.glOffsetAccountName}</div>
                     </td>
                     <td className="p-3.5 text-right font-bold text-rose-700 dark:text-rose-300 text-sm">
-                      {formatCurrency(adj.amountOMR)}
+                      {formatCurrency(adj.amount)}
                     </td>
                     <td className="p-3.5 text-center">
                       <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-100 dark:bg-emerald-500/20 text-emerald-800 dark:text-emerald-200">
@@ -433,7 +435,7 @@ export const BankReconciliationView: React.FC = () => {
                     onChange={(e) => setImportFormat(e.target.value as any)}
                     className="w-full text-xs p-2.5 border border-slate-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-slate-200 dark:focus:ring-slate-900 focus:outline-none"
                   >
-                    <option value="MT940 Swift Statement">SWIFT MT940 (.STA)</option>
+                    <option value="MT940 SWIFT">SWIFT MT940 (.STA)</option>
                     <option value="ISO 20022 CAMT.053 XML">ISO 20022 CAMT.053 XML</option>
                     <option value="CSV / Excel Bank Feed">CSV / Excel Bank Feed</option>
                     <option value="Direct Host-to-Host SFTP">Direct Host-to-Host (H2H)</option>

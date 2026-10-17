@@ -47,7 +47,16 @@ export const NotificationAlertsView: React.FC<{ activeTab?: string }> = ({ activ
   const handleCreateTemplate = (e: React.FormEvent) => {
     e.preventDefault();
     if (!tmplForm.code || !tmplForm.title) return;
-    addNotificationTemplate(tmplForm);
+    addNotificationTemplate({
+      code: tmplForm.code,
+      title: tmplForm.title,
+      channel: 'Email',
+      category: 'System',
+      subject: tmplForm.subjectTemplate,
+      bodyTemplate: tmplForm.bodyTemplate,
+      variables: Array.from(tmplForm.bodyTemplate.matchAll(/\{\{(\w+)\}\}/g)).map(m => m[1]),
+      status: tmplForm.status
+    });
     setIsTmplModalOpen(false);
   };
 
@@ -191,9 +200,9 @@ export const NotificationAlertsView: React.FC<{ activeTab?: string }> = ({ activ
                   <div className="flex items-start gap-3">
                     <div
                       className={`p-2 rounded-lg mt-0.5 ${
-                        alert.severity === 'Critical'
+                        alert.priority === 'critical'
                           ? 'bg-rose-100 dark:bg-rose-500/20 text-rose-700 dark:text-rose-300'
-                          : alert.severity === 'Warning'
+                          : alert.priority === 'high'
                           ? 'bg-amber-100 dark:bg-amber-500/20 text-amber-700 dark:text-amber-300'
                           : 'bg-indigo-100 dark:bg-indigo-500/20 text-indigo-700 dark:text-indigo-300'
                       }`}
@@ -206,11 +215,11 @@ export const NotificationAlertsView: React.FC<{ activeTab?: string }> = ({ activ
                         {!alert.read && (
                           <span className="w-2 h-2 rounded-full bg-indigo-600" />
                         )}
-                        <StatusBadge status={alert.severity} size="sm" />
+                        <StatusBadge status={alert.priority} size="sm" />
                       </div>
                       <p className="text-xs text-slate-600 dark:text-slate-400 mt-1 leading-relaxed">{alert.message}</p>
                       <div className="text-[11px] text-slate-500 dark:text-slate-400 font-mono mt-2">
-                        {alert.timestamp} • Category: {alert.category}
+                        {alert.timestamp} • Category: {alert.type}
                       </div>
                     </div>
                   </div>
@@ -272,11 +281,11 @@ export const NotificationAlertsView: React.FC<{ activeTab?: string }> = ({ activ
                 <div className="text-xs space-y-1.5">
                   <div className="flex justify-between py-1 border-b border-slate-200/60 dark:border-slate-700/60">
                     <span className="text-slate-500 dark:text-slate-400">Recipient Roles:</span>
-                    <span className="font-semibold text-slate-800 dark:text-slate-200">{rule.recipientRoles.join(', ')}</span>
+                    <span className="font-semibold text-slate-800 dark:text-slate-200">{rule.recipientGroup}</span>
                   </div>
                   <div className="flex justify-between py-1 border-b border-slate-200/60 dark:border-slate-700/60">
                     <span className="text-slate-500 dark:text-slate-400">Active Channels:</span>
-                    <span className="font-mono font-bold text-indigo-700 dark:text-indigo-300">{rule.channels.join(', ')}</span>
+                    <span className="font-mono font-bold text-indigo-700 dark:text-indigo-300">{rule.channel}</span>
                   </div>
                 </div>
               </div>

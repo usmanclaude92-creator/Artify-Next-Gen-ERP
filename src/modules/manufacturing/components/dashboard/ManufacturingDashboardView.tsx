@@ -320,7 +320,7 @@ export const ManufacturingDashboardView: React.FC<ManufacturingDashboardViewProp
                         <span>
                           Current Op:{' '}
                           <strong className="text-slate-800 dark:text-slate-200">
-                            {wo.operations.find((o) => o.status === 'RUNNING' || o.status === 'IN_PROGRESS')?.operationName ||
+                            {wo.operations.find((o) => o.status === 'RUNNING')?.operationName ||
                               'Final Assembly & Testing'}
                           </strong>
                         </span>

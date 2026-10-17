@@ -7,7 +7,7 @@ interface FormModalProps {
   title: string;
   subtitle?: string;
   children: React.ReactNode;
-  onSubmit: (e: React.FormEvent) => void;
+  onSubmit?: (e: React.FormEvent) => void;
   submitLabel?: string;
   cancelLabel?: string;
   isSubmitting?: boolean;
@@ -58,7 +58,7 @@ export const FormModal: React.FC<FormModalProps> = ({
         </div>
 
         {/* Form Body */}
-        <form onSubmit={onSubmit} className="flex flex-col">
+        <form onSubmit={onSubmit ?? (e => e.preventDefault())} className="flex flex-col">
           <div className="px-6 py-5 max-h-[70vh] overflow-y-auto space-y-4 text-xs">
             {children}
           </div>

@@ -1070,11 +1070,11 @@ interface QualityStoreContextType {
   addInspectionRecord: (record: Omit<InspectionRecord, 'id' | 'inspectionNumber'>) => void;
   addMaterialTestReport: (report: Omit<MaterialTestReport, 'id' | 'reportNumber'>) => void;
   addNCR: (ncr: Omit<NonConformanceReport, 'id' | 'ncrNumber'>) => void;
-  addNcr: (ncr: Omit<NonConformanceReport, 'id' | 'ncrNumber'>) => void;
+  addNcr: (ncr: Partial<Omit<NonConformanceReport, 'id' | 'ncrNumber'>>) => void;
   updateNCRStatus: (ncrId: string, status: NCRStatus, disposition?: MRBDisposition, mrbNotes?: string) => void;
   updateNcrDisposition: (ncrId: string, disposition: MRBDisposition, mrbNotes?: string) => void;
   addCAPA: (capa: Omit<CAPARecord, 'id' | 'capaNumber'>) => void;
-  addCapa: (capa: Omit<CAPARecord, 'id' | 'capaNumber'>) => void;
+  addCapa: (capa: Partial<Omit<CAPARecord, 'id' | 'capaNumber'>>) => void;
   updateCAPAStatus: (capaId: string, status: CAPAStatus) => void;
   toggleCAPAActionItem: (capaId: string, actionId: string) => void;
   addFmeaItem: (fmea: Omit<FMEARiskEntry, 'id' | 'calculatedRpn'>) => void;

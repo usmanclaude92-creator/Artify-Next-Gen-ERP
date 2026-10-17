@@ -403,6 +403,7 @@ export interface ProjectCustomerInvoice {
 // ==========================================
 
 export interface ProjectEarnedValueMetrics {
+
   projectId: string;
   projectCode: string;
   projectName: string;

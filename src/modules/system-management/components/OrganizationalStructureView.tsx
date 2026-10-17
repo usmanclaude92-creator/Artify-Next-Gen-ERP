@@ -71,7 +71,7 @@ export const OrganizationalStructureView: React.FC<OrganizationalStructureViewPr
     departmentHead: '',
     costCenterCode: 'CC-101',
     employeeCount: 12,
-    status: 'Active' as const
+    status: 'Active' as 'Active' | 'Inactive'
   });
 
   // Operating Unit / Division Modal
@@ -86,7 +86,7 @@ export const OrganizationalStructureView: React.FC<OrganizationalStructureViewPr
     locationId: 'loc-1',
     manager: '',
     unitType: 'Profit Center' as OperatingUnit['unitType'],
-    status: 'Active' as const
+    status: 'Active' as 'Active' | 'Inactive'
   });
 
   const handleOpenNewDept = () => {

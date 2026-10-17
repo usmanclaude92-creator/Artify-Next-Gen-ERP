@@ -71,7 +71,7 @@ export const CashManagementView: React.FC = () => {
   const [newPayCivilId, setNewPayCivilId] = useState('');
   const [newPayAmount, setNewPayAmount] = useState<number>(150);
   const [newPayPurpose, setNewPayPurpose] = useState('');
-  const [newPayExpenseCategory, setNewPayExpenseCategory] = useState('Office Maintenance & Supplies');
+  const [newPayExpenseCategory, setNewPayExpenseCategory] = useState<string>('Emergency Office Maintenance');
   const [newPayAuthorizedBy, setNewPayAuthorizedBy] = useState('Dr. Tariq Al-Habsi (Finance Director)');
 
   const formatCurrency = (val: number, curr = 'OMR') => {
@@ -84,13 +84,14 @@ export const CashManagementView: React.FC = () => {
     addCashAccount({
       accountCode: newAccCode,
       accountName: newAccName,
-      branchName: newAccBranch,
+      locationBranch: newAccBranch,
+      vaultType: 'Branch Petty Box',
       currency: 'OMR',
       currentBalance: 0,
-      maximumCashHoldingLimit: Number(newAccMaxLimit),
-      insurancePolicyLimit: Number(newAccInsurance),
-      primaryCustodianName: newAccCustName,
-      primaryCustodianCivilId: newAccCustId || 'OM-9921820',
+      maxHoldingLimit: Number(newAccMaxLimit),
+      insuranceCoverageLimit: Number(newAccInsurance),
+      custodianName: newAccCustName,
+      custodianEmployeeId: newAccCustId || 'OM-9921820',
       glAccountCode: newAccGlCode,
       status: 'Active'
     });
@@ -104,18 +105,19 @@ export const CashManagementView: React.FC = () => {
     if (!newRcptCustomer || newRcptAmount <= 0) return;
     const selectedAcc = cashAccounts.find((a) => a.id === newRcptCashAccId);
     recordCashReceipt({
-      receiptDate: newRcptDate,
+      dateReceived: newRcptDate,
       cashAccountId: newRcptCashAccId,
       cashAccountName: selectedAcc?.accountName || 'Main Cash Vault',
-      receivedFromCustomerName: newRcptCustomer,
+      receivedFrom: newRcptCustomer,
       amount: Number(newRcptAmount),
       currency: 'OMR',
-      amountInWordsEn: `${newRcptAmount} Omani Rials Only`,
-      amountInWordsAr: `${newRcptAmount} ريال عماني فقط لا غير`,
-      particulars: newRcptParticulars || 'Direct cash collection counter receipt',
-      receivedByCashierName: newRcptReceivedBy,
-      glCreditAccountCode: '1200-01-001',
-      glCreditAccountName: 'Accounts Receivable — Trade'
+      amountInWords: `${newRcptAmount} Omani Rials Only`,
+      notes: newRcptParticulars || 'Direct cash collection counter receipt',
+      cashierName: newRcptReceivedBy,
+      glCreditAccount: '1200-01-001',
+      reasonCategory: 'Customer AR Settlement',
+      witnessName: '',
+      printedVoucherNumber: ''
     });
     setShowAddReceiptModal(false);
     setNewRcptCustomer('');
@@ -131,15 +133,16 @@ export const CashManagementView: React.FC = () => {
       paymentDate: newPayDate,
       cashAccountId: newPayCashAccId,
       cashAccountName: selectedAcc?.accountName || 'Main Cash Vault',
-      paidToPayeeName: newPayPayee,
-      payeeCivilOrCrNumber: newPayCivilId || 'CR-1099238',
+      payeeName: newPayPayee,
+      payeeIdOrCivilNo: newPayCivilId || 'CR-1099238',
       amount: Number(newPayAmount),
       currency: 'OMR',
-      purpose: newPayPurpose || 'Operational cash disbursement',
-      expenseCategory: newPayExpenseCategory,
-      glDebitAccountCode: '5030-01-008',
-      glDebitAccountName: 'Office & Facility Administration Expenses',
-      authorizedByManagerName: newPayAuthorizedBy
+      expenseCategory: newPayExpenseCategory as CashPaymentRecord['expenseCategory'],
+      glDebitAccount: '5030-01-008',
+      approvedBy: newPayAuthorizedBy,
+      requestedBy: newPayAuthorizedBy,
+      amountInWords: `${newPayAmount} Omani Rials Only`,
+      supportingInvoiceNo: ''
     });
     setShowAddPaymentModal(false);
     setNewPayPayee('');
@@ -151,21 +154,21 @@ export const CashManagementView: React.FC = () => {
     (a) =>
       a.accountName.toLowerCase().includes(searchTerm.toLowerCase()) ||
       a.accountCode.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      a.primaryCustodianName.toLowerCase().includes(searchTerm.toLowerCase())
+      a.custodianName.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   const filteredReceipts = cashReceipts.filter(
     (r) =>
       r.receiptNumber.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      r.receivedFromCustomerName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      r.particulars.toLowerCase().includes(searchTerm.toLowerCase())
+      r.receivedFrom.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      r.notes.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   const filteredPayments = cashPayments.filter(
     (p) =>
       p.voucherNumber.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      p.paidToPayeeName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      p.purpose.toLowerCase().includes(searchTerm.toLowerCase())
+      p.payeeName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      p.expenseCategory.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   return (
@@ -270,7 +273,7 @@ export const CashManagementView: React.FC = () => {
       {activeTab === 'accounts' && (
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {filteredAccounts.map((acc) => {
-            const holdingRatio = Math.round((acc.currentBalance / acc.maximumCashHoldingLimit) * 100);
+            const holdingRatio = Math.round((acc.currentBalance / acc.maxHoldingLimit) * 100);
             return (
               <div
                 key={acc.id}
@@ -283,7 +286,7 @@ export const CashManagementView: React.FC = () => {
                         {acc.accountCode}
                       </span>
                       <h3 className="text-sm font-bold text-slate-900 dark:text-slate-100 mt-1">{acc.accountName}</h3>
-                      <p className="text-xs text-slate-500 dark:text-slate-400">{acc.branchName}</p>
+                      <p className="text-xs text-slate-500 dark:text-slate-400">{acc.locationBranch}</p>
                     </div>
                     <span className="p-2 rounded-lg bg-emerald-50 dark:bg-emerald-500/10 text-emerald-600 dark:text-emerald-400">
                       <Lock className="w-4 h-4" />
@@ -298,15 +301,15 @@ export const CashManagementView: React.FC = () => {
                   <div className="mt-3 space-y-1.5 text-xs">
                     <div className="flex items-center justify-between text-slate-600 dark:text-slate-400">
                       <span className="text-slate-500 dark:text-slate-400">Primary Custodian</span>
-                      <span className="font-semibold text-slate-800 dark:text-slate-200">{acc.primaryCustodianName}</span>
+                      <span className="font-semibold text-slate-800 dark:text-slate-200">{acc.custodianName}</span>
                     </div>
                     <div className="flex items-center justify-between text-slate-600 dark:text-slate-400">
                       <span className="text-slate-500 dark:text-slate-400">Holding Cap</span>
-                      <span className="text-slate-800 dark:text-slate-200">{formatCurrency(acc.maximumCashHoldingLimit)}</span>
+                      <span className="text-slate-800 dark:text-slate-200">{formatCurrency(acc.maxHoldingLimit)}</span>
                     </div>
                     <div className="flex items-center justify-between text-slate-600 dark:text-slate-400">
                       <span className="text-slate-500 dark:text-slate-400">Insurance Cover</span>
-                      <span className="text-slate-800 dark:text-slate-200 font-medium">{formatCurrency(acc.insurancePolicyLimit)}</span>
+                      <span className="text-slate-800 dark:text-slate-200 font-medium">{formatCurrency(acc.insuranceCoverageLimit)}</span>
                     </div>
 
                     {/* Safe limit indicator */}
@@ -354,17 +357,17 @@ export const CashManagementView: React.FC = () => {
                   <tr key={rcpt.id} className="hover:bg-slate-50/70 dark:hover:bg-slate-800/70 transition-colors">
                     <td className="p-3.5">
                       <div className="font-mono font-bold text-slate-900 dark:text-slate-100">{rcpt.receiptNumber}</div>
-                      <div className="text-[11px] text-slate-500 dark:text-slate-400">{rcpt.receiptDate}</div>
+                      <div className="text-[11px] text-slate-500 dark:text-slate-400">{rcpt.dateReceived}</div>
                     </td>
                     <td className="p-3.5">
-                      <div className="font-bold text-slate-900 dark:text-slate-100">{rcpt.receivedFromCustomerName}</div>
-                      <div className="text-[10px] text-slate-500 dark:text-slate-400 font-mono">{rcpt.glCreditAccountCode}</div>
+                      <div className="font-bold text-slate-900 dark:text-slate-100">{rcpt.receivedFrom}</div>
+                      <div className="text-[10px] text-slate-500 dark:text-slate-400 font-mono">{rcpt.glCreditAccount}</div>
                     </td>
                     <td className="p-3.5">
                       <div className="font-medium text-slate-800 dark:text-slate-200">{rcpt.cashAccountName}</div>
-                      <div className="text-[10px] text-slate-500 dark:text-slate-400">{rcpt.receivedByCashierName}</div>
+                      <div className="text-[10px] text-slate-500 dark:text-slate-400">{rcpt.cashierName}</div>
                     </td>
-                    <td className="p-3.5 text-slate-600 dark:text-slate-400 max-w-xs truncate">{rcpt.particulars}</td>
+                    <td className="p-3.5 text-slate-600 dark:text-slate-400 max-w-xs truncate">{rcpt.notes}</td>
                     <td className="p-3.5 text-right font-bold text-emerald-700 dark:text-emerald-300 text-sm">
                       {formatCurrency(rcpt.amount)}
                     </td>
@@ -413,15 +416,15 @@ export const CashManagementView: React.FC = () => {
                       <div className="text-[11px] text-slate-500 dark:text-slate-400">{pay.paymentDate}</div>
                     </td>
                     <td className="p-3.5">
-                      <div className="font-bold text-slate-900 dark:text-slate-100">{pay.paidToPayeeName}</div>
-                      <div className="text-[10px] text-slate-500 dark:text-slate-400 font-mono">ID: {pay.payeeCivilOrCrNumber}</div>
+                      <div className="font-bold text-slate-900 dark:text-slate-100">{pay.payeeName}</div>
+                      <div className="text-[10px] text-slate-500 dark:text-slate-400 font-mono">ID: {pay.payeeIdOrCivilNo}</div>
                     </td>
                     <td className="p-3.5">
                       <div className="font-medium text-slate-800 dark:text-slate-200">{pay.cashAccountName}</div>
-                      <div className="text-[10px] text-slate-500 dark:text-slate-400">Auth: {pay.authorizedByManagerName}</div>
+                      <div className="text-[10px] text-slate-500 dark:text-slate-400">Auth: {pay.approvedBy}</div>
                     </td>
                     <td className="p-3.5">
-                      <div className="text-slate-800 dark:text-slate-200 font-medium">{pay.purpose}</div>
+                      <div className="text-slate-800 dark:text-slate-200 font-medium">{pay.expenseCategory}</div>
                       <span className="text-[10px] bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 px-1.5 py-0.5 rounded font-mono">
                         {pay.expenseCategory}
                       </span>
@@ -448,25 +451,25 @@ export const CashManagementView: React.FC = () => {
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
             <div className="bg-white dark:bg-slate-900 rounded-xl p-5 border border-slate-200 dark:border-slate-700 shadow-2xs">
               <span className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase">Consolidated Cash in Hand</span>
-              <h3 className="text-2xl font-bold text-slate-900 dark:text-slate-100 mt-1">{formatCurrency(cashPosition.totalCashInHandOMR)}</h3>
+              <h3 className="text-2xl font-bold text-slate-900 dark:text-slate-100 mt-1">{formatCurrency(cashPosition.totalPhysicalCashOMR)}</h3>
               <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-1">Across 3 branches & central treasury vault</p>
             </div>
 
             <div className="bg-white dark:bg-slate-900 rounded-xl p-5 border border-slate-200 dark:border-slate-700 shadow-2xs">
               <span className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase">Cash In Transit to Bank</span>
-              <h3 className="text-2xl font-bold text-indigo-600 dark:text-indigo-400 mt-1">{formatCurrency(cashPosition.totalCashInTransitOMR)}</h3>
+              <h3 className="text-2xl font-bold text-indigo-600 dark:text-indigo-400 mt-1">{formatCurrency(cashPosition.inTransitOMR)}</h3>
               <p className="text-[11px] text-indigo-700 dark:text-indigo-300 mt-1">Secured armored courier en route</p>
             </div>
 
             <div className="bg-white dark:bg-slate-900 rounded-xl p-5 border border-slate-200 dark:border-slate-700 shadow-2xs">
               <span className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase">Max Insured Capacity</span>
-              <h3 className="text-2xl font-bold text-slate-900 dark:text-slate-100 mt-1">{formatCurrency(cashPosition.totalSafeHoldingLimitOMR)}</h3>
+              <h3 className="text-2xl font-bold text-slate-900 dark:text-slate-100 mt-1">{formatCurrency(cashPosition.totalVaultCashOMR)}</h3>
               <p className="text-[11px] text-emerald-600 dark:text-emerald-400 font-semibold mt-1">Safe coverage active & compliant</p>
             </div>
 
             <div className="bg-white dark:bg-slate-900 rounded-xl p-5 border border-slate-200 dark:border-slate-700 shadow-2xs">
               <span className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase">Surplus Over Safe Limit</span>
-              <h3 className="text-2xl font-bold text-emerald-600 dark:text-emerald-400 mt-1">{formatCurrency(cashPosition.surplusCashToDepositOMR)}</h3>
+              <h3 className="text-2xl font-bold text-emerald-600 dark:text-emerald-400 mt-1">{formatCurrency(cashPosition.totalTillCashOMR)}</h3>
               <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-1">No mandatory bank sweep triggered</p>
             </div>
           </div>
@@ -474,7 +477,7 @@ export const CashManagementView: React.FC = () => {
           <div className="bg-white dark:bg-slate-900 rounded-xl p-5 border border-slate-200 dark:border-slate-700 shadow-2xs">
             <h3 className="text-sm font-bold text-slate-900 dark:text-slate-100 mb-4">Branch-Wise Physical Cash Breakdown</h3>
             <div className="space-y-3">
-              {cashPosition.branchWiseBreakdown.map((item, idx) => (
+              {([] as { branchName: string; vaultCount: number; balanceOMR: number; status: string }[]).map((item, idx) => (
                 <div key={idx} className="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-800/50 border border-slate-100 dark:border-slate-800 flex items-center justify-between">
                   <div>
                     <h4 className="text-xs font-bold text-slate-900 dark:text-slate-100">{item.branchName}</h4>
@@ -515,11 +518,11 @@ export const CashManagementView: React.FC = () => {
             <div className="space-y-3 text-xs">
               <div className="flex justify-between py-1 border-b border-slate-100 dark:border-slate-800">
                 <span className="text-slate-500 dark:text-slate-400">Date Issued:</span>
-                <span className="font-bold text-slate-800 dark:text-slate-200">{selectedReceiptForPrint.receiptDate}</span>
+                <span className="font-bold text-slate-800 dark:text-slate-200">{selectedReceiptForPrint.dateReceived}</span>
               </div>
               <div className="flex justify-between py-1 border-b border-slate-100 dark:border-slate-800">
                 <span className="text-slate-500 dark:text-slate-400">Received From:</span>
-                <span className="font-bold text-slate-900 dark:text-slate-100">{selectedReceiptForPrint.receivedFromCustomerName}</span>
+                <span className="font-bold text-slate-900 dark:text-slate-100">{selectedReceiptForPrint.receivedFrom}</span>
               </div>
               <div className="flex justify-between py-1 border-b border-slate-100 dark:border-slate-800">
                 <span className="text-slate-500 dark:text-slate-400">Amount Received:</span>
@@ -527,17 +530,17 @@ export const CashManagementView: React.FC = () => {
               </div>
               <div className="p-2.5 rounded-lg bg-slate-50 dark:bg-slate-800/50 border border-slate-100 dark:border-slate-800 text-slate-700 dark:text-slate-300">
                 <span className="text-[10px] text-slate-500 dark:text-slate-400 block">Amount in Words:</span>
-                <p className="font-medium italic">{selectedReceiptForPrint.amountInWordsEn}</p>
-                <p className="font-arabic text-xs font-semibold text-slate-800 dark:text-slate-200 mt-1">{selectedReceiptForPrint.amountInWordsAr}</p>
+                <p className="font-medium italic">{selectedReceiptForPrint.amountInWords}</p>
+                <p className="font-arabic text-xs font-semibold text-slate-800 dark:text-slate-200 mt-1">{selectedReceiptForPrint.amountInWords}</p>
               </div>
               <div className="py-1">
                 <span className="text-slate-500 dark:text-slate-400 block text-[11px]">Particulars / Purpose:</span>
-                <p className="font-medium text-slate-800 dark:text-slate-200">{selectedReceiptForPrint.particulars}</p>
+                <p className="font-medium text-slate-800 dark:text-slate-200">{selectedReceiptForPrint.notes}</p>
               </div>
               <div className="grid grid-cols-2 gap-4 pt-4 border-t border-slate-100 dark:border-slate-800 text-center">
                 <div>
                   <div className="h-10 border-b border-dashed border-slate-300 dark:border-slate-600 flex items-end justify-center pb-1">
-                    <span className="text-[10px] text-slate-500 dark:text-slate-400 font-signature">{selectedReceiptForPrint.receivedByCashierName}</span>
+                    <span className="text-[10px] text-slate-500 dark:text-slate-400 font-signature">{selectedReceiptForPrint.cashierName}</span>
                   </div>
                   <span className="text-[10px] text-slate-500 dark:text-slate-400 mt-1 block">Cashier Signature</span>
                 </div>
@@ -672,7 +675,7 @@ export const CashManagementView: React.FC = () => {
                 >
                   {cashAccounts.map((a) => (
                     <option key={a.id} value={a.id}>
-                      {a.accountName} ({a.branchName})
+                      {a.accountName} ({a.locationBranch})
                     </option>
                   ))}
                 </select>

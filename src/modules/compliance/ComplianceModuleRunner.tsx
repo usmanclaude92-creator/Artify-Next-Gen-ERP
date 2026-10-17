@@ -178,8 +178,8 @@ const InnerComplianceRunner: React.FC<ComplianceModuleRunnerProps> = ({
 
   // Quick metrics
   const compliantReqCount = regulatoryRequirements.filter(r => r.status === 'COMPLIANT').length;
-  const openFindingsCount = auditFindings.filter(f => f.status !== 'CLOSED').length;
-  const openFraudCount = fraudAlerts.filter(a => a.status === 'NEW' || a.status === 'UNDER_INVESTIGATION').length;
+  const openFindingsCount = auditFindings.filter(f => f.status !== 'VERIFIED_CLOSED' && f.status !== 'MANAGEMENT_ACCEPTED').length;
+  const openFraudCount = fraudAlerts.filter(a => a.investigationStatus === 'NEW' || a.investigationStatus === 'UNDER_INVESTIGATION').length;
 
   return (
     <div className="space-y-6">

@@ -93,14 +93,15 @@ export const PettyCashView: React.FC = () => {
       fundCode: newFundCode,
       fundName: newFundName,
       custodianName: newCustodianName,
-      custodianCivilId: newCustodianId || 'OM-9921800',
-      locationOrDepartment: newLocation,
+      custodianEmail: '',
+      department: newLocation,
+      branch: newLocation,
       imprestLimitOMR: Number(newImprestLimit),
       currentAvailableCashOMR: Number(newImprestLimit),
       openAdvancesIOUOMR: 0,
       pendingUnclaimedExpensesOMR: 0,
       glAccountCode: '1030-01-005',
-      replenishmentThresholdOMR: Number(newImprestLimit) * 0.3,
+      reimbursementThresholdPercent: Number(newImprestLimit) * 0.3,
       status: 'Active'
     });
     setShowAddAccountModal(false);
@@ -117,13 +118,12 @@ export const PettyCashView: React.FC = () => {
       pettyCashAccountId: advAccountId,
       pettyCashAccountName: acc?.fundName || 'Main Petty Cash Float',
       employeeName: advEmpName,
-      employeeId: advEmpId || 'EMP-OM-992',
+      employeeCivilId: advEmpId || 'EMP-OM-992',
       department: advDept,
-      advanceDate: new Date().toISOString().split('T')[0],
+      issuedDate: new Date().toISOString().split('T')[0],
       settlementDueDate: advDueDate,
       advanceAmountOMR: Number(advAmount),
       purpose: advPurpose || 'Emergency site tools purchase',
-      issuedByCustodian: acc?.custodianName || 'Custodian'
     });
     setShowAdvanceModal(false);
     setAdvEmpName('');
@@ -148,15 +148,15 @@ export const PettyCashView: React.FC = () => {
       pettyCashAccountName: acc?.fundName || 'Main Float',
       expenseDate: new Date().toISOString().split('T')[0],
       payeeOrMerchant: expPayee,
-      taxInvoiceNumber: expTaxInv || 'TAX-INV-9921',
-      expenseCategory: expCategory,
+      billInvoiceNo: expTaxInv || 'TAX-INV-9921',
+      category: expCategory as PettyCashExpenseRecord['category'],
       netAmountOMR: net,
       vatAmountOMR: Number(expVat),
       grossAmountOMR: Number(expGross),
-      glAccountCode: expGlCode,
-      glAccountName: expCategory,
-      description: expDesc || 'Operational petty expense claim',
-      verifiedByCustodian: acc?.custodianName || 'Custodian'
+      glExpenseAccount: expGlCode,
+      glExpenseAccountName: expCategory,
+      claimedByEmployee: expDesc || 'Operational petty expense claim',
+      approvedByDeptHead: ''
     });
     setShowExpenseModal(false);
     setExpPayee('');
@@ -181,7 +181,7 @@ export const PettyCashView: React.FC = () => {
     (e) =>
       e.voucherNumber.toLowerCase().includes(searchTerm.toLowerCase()) ||
       e.payeeOrMerchant.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      e.description.toLowerCase().includes(searchTerm.toLowerCase())
+      e.payeeOrMerchant.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   return (
@@ -309,7 +309,7 @@ export const PettyCashView: React.FC = () => {
                         {acc.fundCode}
                       </span>
                       <h3 className="text-sm font-bold text-slate-900 dark:text-slate-100 mt-1">{acc.fundName}</h3>
-                      <p className="text-xs text-slate-500 dark:text-slate-400">{acc.locationOrDepartment}</p>
+                      <p className="text-xs text-slate-500 dark:text-slate-400">{acc.department}</p>
                     </div>
                     <span className="p-2 rounded-lg bg-orange-50 dark:bg-orange-500/10 text-orange-600 dark:text-orange-400">
                       <Coins className="w-4 h-4" />
@@ -350,7 +350,7 @@ export const PettyCashView: React.FC = () => {
                     </div>
                     <div className="flex justify-between text-[10px] text-slate-500 dark:text-slate-400">
                       <span>Available: {availRatio}%</span>
-                      <span>Threshold: {formatCurrency(acc.replenishmentThresholdOMR)}</span>
+                      <span>Threshold: {formatCurrency(acc.reimbursementThresholdPercent)}</span>
                     </div>
                   </div>
                 </div>
@@ -387,11 +387,11 @@ export const PettyCashView: React.FC = () => {
                   <tr key={adv.id} className="hover:bg-slate-50/70 dark:hover:bg-slate-800/70 transition-colors">
                     <td className="p-3.5">
                       <div className="font-mono font-bold text-slate-900 dark:text-slate-100">{adv.advanceNumber}</div>
-                      <div className="text-[11px] text-slate-500 dark:text-slate-400">{adv.advanceDate}</div>
+                      <div className="text-[11px] text-slate-500 dark:text-slate-400">{adv.issuedDate}</div>
                     </td>
                     <td className="p-3.5">
                       <div className="font-bold text-slate-900 dark:text-slate-100">{adv.employeeName}</div>
-                      <div className="text-[10px] text-slate-500 dark:text-slate-400 font-mono">{adv.employeeId}</div>
+                      <div className="text-[10px] text-slate-500 dark:text-slate-400 font-mono">{adv.employeeCivilId}</div>
                     </td>
                     <td className="p-3.5 text-slate-700 dark:text-slate-300">{adv.department}</td>
                     <td className="p-3.5 text-slate-700 dark:text-slate-300 max-w-xs truncate">{adv.purpose}</td>
@@ -460,12 +460,12 @@ export const PettyCashView: React.FC = () => {
                     </td>
                     <td className="p-3.5">
                       <div className="font-bold text-slate-900 dark:text-slate-100">{exp.payeeOrMerchant}</div>
-                      <div className="text-[10px] text-slate-500 dark:text-slate-400">{exp.description}</div>
+                      <div className="text-[10px] text-slate-500 dark:text-slate-400">{exp.billInvoiceNo}</div>
                     </td>
-                    <td className="p-3.5 font-mono text-slate-600 dark:text-slate-400">{exp.taxInvoiceNumber}</td>
+                    <td className="p-3.5 font-mono text-slate-600 dark:text-slate-400">{exp.billInvoiceNo}</td>
                     <td className="p-3.5">
-                      <div className="font-medium text-slate-800 dark:text-slate-200">{exp.expenseCategory}</div>
-                      <div className="text-[10px] text-slate-500 dark:text-slate-400 font-mono">{exp.glAccountCode}</div>
+                      <div className="font-medium text-slate-800 dark:text-slate-200">{exp.category}</div>
+                      <div className="text-[10px] text-slate-500 dark:text-slate-400 font-mono">{exp.glExpenseAccount}</div>
                     </td>
                     <td className="p-3.5 text-right font-medium text-slate-800 dark:text-slate-200">
                       {formatCurrency(exp.netAmountOMR)}

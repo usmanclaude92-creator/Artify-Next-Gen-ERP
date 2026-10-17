@@ -617,6 +617,7 @@ interface ProjectStoreContextType {
   createProject: (newProject: Omit<ProjectMaster, 'id' | 'projectCode' | 'totalCommitted' | 'totalActualCost' | 'totalBilledAmount' | 'totalReceivedAmount' | 'overallProgressPercent' | 'phases'>) => void;
   updateProject: (id: string, patch: Partial<ProjectMaster>) => void;
   deleteProject: (id: string) => void;
+  selectProject: (id: string) => void;
 
   // Classification CRUD
   createClassification: (cls: Omit<ProjectClassification, 'id'>) => void;
@@ -627,7 +628,7 @@ interface ProjectStoreContextType {
   addPhase: (projectId: string, phase: Omit<ProjectPhase, 'id' | 'actualSpent' | 'completionPercent' | 'activities'>) => void;
   updatePhase: (projectId: string, phaseId: string, patch: Partial<ProjectPhase>) => void;
   deletePhase: (projectId: string, phaseId: string) => void;
-  addActivity: (projectId: string, phaseId: string, activity: Omit<ProjectActivity, 'id' | 'actualCost' | 'progressPercent' | 'status'>) => void;
+  addActivity: (projectId: string, phaseId: string, activity: Omit<ProjectActivity, 'id' | 'actualCost' | 'progressPercent' | 'status' | 'phaseId'>) => void;
   updateActivity: (projectId: string, phaseId: string, activityId: string, patch: Partial<ProjectActivity>) => void;
   deleteActivity: (projectId: string, phaseId: string, activityId: string) => void;
   updateActivityProgress: (projectId: string, phaseId: string, activityId: string, progress: number, status: ProjectActivity['status']) => void;
@@ -662,7 +663,7 @@ interface ProjectStoreContextType {
   revenueRecognitions: RevenueRecognitionSchedule[];
   calculateRevenueRecognition: (projectId: string, period: string) => void;
   paymentCertificates: ProgressPaymentCertificate[];
-  submitPaymentCertificate: (cert: Omit<ProgressPaymentCertificate, 'id' | 'certificateNumber' | 'netPayableAmount' | 'vatTaxAmount' | 'totalClientPayable' | 'status'>) => void;
+  submitPaymentCertificate: (cert: Partial<Omit<ProgressPaymentCertificate, 'id' | 'certificateNumber' | 'netPayableAmount' | 'vatTaxAmount' | 'totalClientPayable' | 'status'>>) => void;
   certifyPaymentCertificate: (id: string, consultantName: string) => void;
   customerInvoices: ProjectCustomerInvoice[];
   generateInvoiceFromCertificate: (certificateId: string) => void;
@@ -1014,7 +1015,7 @@ export const ProjectProvider: React.FC<{ children: React.ReactNode }> = ({ child
   };
 
   // Activities CRUD
-  const addActivity = (projectId: string, phaseId: string, actData: Omit<ProjectActivity, 'id' | 'actualCost' | 'progressPercent' | 'status'>) => {
+  const addActivity = (projectId: string, phaseId: string, actData: Omit<ProjectActivity, 'id' | 'actualCost' | 'progressPercent' | 'status' | 'phaseId'>) => {
     setProjects(prev => prev.map(p => {
       if (p.id !== projectId) return p;
       const updatedPhases = p.phases.map(ph => {
@@ -1022,6 +1023,7 @@ export const ProjectProvider: React.FC<{ children: React.ReactNode }> = ({ child
         const newAct: ProjectActivity = {
           ...actData,
           id: `act-${Date.now()}`,
+          phaseId,
           actualCost: 0,
           progressPercent: 0,
           status: 'NOT_STARTED'
@@ -1081,7 +1083,7 @@ export const ProjectProvider: React.FC<{ children: React.ReactNode }> = ({ child
           ...ph,
           activities: updatedActivities,
           completionPercent: phaseAvg,
-          status: phaseAvg === 100 ? 'COMPLETED' : 'ACTIVE'
+          status: (phaseAvg === 100 ? 'COMPLETED' : 'ACTIVE') as typeof ph.status
         };
       });
 
@@ -1312,13 +1314,13 @@ export const ProjectProvider: React.FC<{ children: React.ReactNode }> = ({ child
     setRevenueRecognitions(prev => [newRev, ...prev]);
   };
 
-  const submitPaymentCertificate = (cert: Omit<ProgressPaymentCertificate, 'id' | 'certificateNumber' | 'netPayableAmount' | 'vatTaxAmount' | 'totalClientPayable' | 'status'>) => {
+  const submitPaymentCertificate = (cert: Partial<Omit<ProgressPaymentCertificate, 'id' | 'certificateNumber' | 'netPayableAmount' | 'vatTaxAmount' | 'totalClientPayable' | 'status'>>) => {
     const retention = (cert.certifiedWorkAmount * cert.retentionDeductionPercent) / 100;
     const netPayableAmount = cert.certifiedWorkAmount - retention - cert.mobilizationAdvanceRecoveryAmount + cert.materialOnSiteCertifiedAmount;
     const vatTaxAmount = netPayableAmount * 0.05;
     const totalClientPayable = netPayableAmount + vatTaxAmount;
 
-    const newIpc: ProgressPaymentCertificate = {
+    const newIpc = {
       ...cert,
       id: `ipc-${Date.now()}`,
       certificateNumber: `IPC-2026-${Math.floor(100 + mockRandom() * 900)}`,
@@ -1327,7 +1329,7 @@ export const ProjectProvider: React.FC<{ children: React.ReactNode }> = ({ child
       vatTaxAmount,
       totalClientPayable,
       status: 'SUBMITTED_TO_CLIENT'
-    };
+    } as ProgressPaymentCertificate;
 
     setPaymentCertificates(prev => [newIpc, ...prev]);
   };
@@ -1505,6 +1507,18 @@ export const ProjectProvider: React.FC<{ children: React.ReactNode }> = ({ child
   return (
     <ProjectStoreContext.Provider
       value={{
+        deleteProject,
+        createClassification,
+        updateClassification,
+        deleteClassification,
+        updatePhase,
+        deletePhase,
+        updateActivity,
+        deleteActivity,
+        selectProject: (id: string) => {
+          const target = projects.find((p) => p.id === id);
+          if (target) setSelectedProject(target);
+        },
         companies,
         branches,
         departments,

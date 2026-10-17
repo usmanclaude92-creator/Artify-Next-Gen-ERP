@@ -124,7 +124,7 @@ export const GroupHoldingManagementView: React.FC = () => {
     controlType: ControlType;
     consolidationTreatment: 'Consolidated' | 'Equity Accounting' | 'Fair Value' | 'Exempt';
     notes: string;
-    status: 'Active' | 'Draft' | 'Pending Approval' | 'Inactive';
+    status: 'Active' | 'Draft' | 'Pending Approval' | 'Inactive' | 'Suspended' | 'Archived';
   }>({
     companyId: companies[1]?.id || companies[0]?.id || '',
     relationshipType: 'Subsidiary',

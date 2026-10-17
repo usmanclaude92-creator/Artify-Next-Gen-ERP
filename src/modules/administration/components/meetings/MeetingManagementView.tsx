@@ -108,6 +108,7 @@ export const MeetingManagementView: React.FC = () => {
       agenda: newAgenda.filter(Boolean).map((title, i) => ({
         id: `ag-${i}`,
         orderNumber: i + 1,
+        presenterName: '',
         title,
         allocatedMinutes: 20
       }))

@@ -34,7 +34,7 @@ interface InventoryDashboardViewProps {
     processId?: string;
     transactionId?: string;
   }) => void;
-  activeRole?: string;
+  activeRole?: unknown;
 }
 
 export const InventoryDashboardView: React.FC<InventoryDashboardViewProps> = ({

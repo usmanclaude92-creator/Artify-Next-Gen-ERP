@@ -1179,7 +1179,7 @@ export const CompanySetupManagementView: React.FC<CompanySetupManagementViewProp
                                 )}
                               </div>
                               <div className="text-[11px] text-slate-500 dark:text-slate-400 font-mono mt-0.5">
-                                Tier {mem.tierLevel || 1} • Role: {mem.roleInGroup || 'Subsidiary'}
+                                Relationship: {mem.relationshipType} • Control: {mem.controlType}
                               </div>
                             </div>
                           </div>
@@ -1196,7 +1196,7 @@ export const CompanySetupManagementView: React.FC<CompanySetupManagementViewProp
                             <div className="hidden sm:block">
                               <span className="text-[11px] text-slate-500 dark:text-slate-400 block">Method</span>
                               <span className="px-2 py-0.5 rounded text-[10px] bg-indigo-50 dark:bg-indigo-500/10 text-indigo-700 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-500/30 font-semibold">
-                                {mem.consolidationMethod || 'Full Consolidation'}
+                                {mem.consolidationTreatment}
                               </span>
                             </div>
                             <button
@@ -1443,7 +1443,7 @@ export const CompanySetupManagementView: React.FC<CompanySetupManagementViewProp
         onClose={() => setIsCreateModalOpen(false)}
         title="Register New Legal Entity (01.01.01)"
         subtitle="Step-by-step corporate registration with real-time duplicate checks and AI statutory prefill"
-        size="2xl"
+        maxWidth="2xl"
       >
         <div className="space-y-5">
           {/* AI Pre-fill Action Banner */}
@@ -2066,7 +2066,7 @@ export const CompanySetupManagementView: React.FC<CompanySetupManagementViewProp
         onClose={() => setIsEditModalOpen(false)}
         title={`Edit Legal Entity Master: ${activeCompany?.legalName}`}
         subtitle="Update statutory parameters, contacts, branding, logo, watermark, and letterhead"
-        size="2xl"
+        maxWidth="2xl"
       >
         <div className="space-y-4">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -2261,7 +2261,7 @@ export const CompanySetupManagementView: React.FC<CompanySetupManagementViewProp
         onClose={() => setIsApprovalModalOpen(false)}
         title="Statutory Board & Governance Approval (01.01.01)"
         subtitle={`Approve legal entity registration for ${activeCompany?.legalName}`}
-        size="md"
+        maxWidth="md"
       >
         <div className="space-y-4 text-xs">
           <div className="p-3 bg-emerald-50 dark:bg-emerald-500/10 border border-emerald-200 dark:border-emerald-500/30 rounded-lg text-emerald-900 dark:text-emerald-100 space-y-1">
@@ -2320,7 +2320,7 @@ export const CompanySetupManagementView: React.FC<CompanySetupManagementViewProp
         onClose={() => setIsRejectModalOpen(false)}
         title="Return Submission to Draft"
         subtitle={`Provide feedback for returning ${activeCompany?.legalName}`}
-        size="md"
+        maxWidth="md"
       >
         <div className="space-y-4 text-xs">
           <div>
@@ -2370,7 +2370,7 @@ export const CompanySetupManagementView: React.FC<CompanySetupManagementViewProp
         onClose={() => setIsAttachmentModalOpen(false)}
         title="Upload Regulatory / Statutory Document"
         subtitle={`Attach official filing to ${activeCompany?.legalName}`}
-        size="md"
+        maxWidth="md"
       >
         <form onSubmit={handleAddAttachment} className="space-y-4 text-xs">
           <div>

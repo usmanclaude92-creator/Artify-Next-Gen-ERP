@@ -372,7 +372,7 @@ export const ProductionOrdersView: React.FC<ProductionOrdersViewProps> = ({
                             className={`w-8 h-8 rounded-lg flex items-center justify-center font-bold text-xs ${
                               op.status === 'COMPLETED'
                                 ? 'bg-emerald-500/20 text-emerald-700 dark:text-emerald-300'
-                                : op.status === 'IN_PROGRESS' || op.status === 'RUNNING'
+                                : op.status === 'RUNNING'
                                 ? 'bg-orange-500/20 text-orange-800 dark:text-orange-300 animate-pulse'
                                 : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400'
                             }`}

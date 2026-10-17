@@ -152,6 +152,7 @@ export interface GroupAttachment {
 }
 
 export interface GroupMaster {
+
   id: string;
   code: string;
   name: string;
@@ -200,6 +201,7 @@ export type ControlType =
   | 'Statutory Control';
 
 export interface GroupMembership {
+
   id: string;
   groupId: string; // References GroupMaster.id
   companyId: string; // References Company.id
@@ -296,6 +298,7 @@ export interface Location {
 }
 
 export interface OperatingUnit {
+
   id: string;
   code: string;
   name: string;
@@ -377,6 +380,7 @@ export interface UserGroup {
 }
 
 export interface SoDRule {
+
   id: string;
   code: string;
   title: string;
@@ -400,6 +404,7 @@ export interface SoDRule {
 }
 
 export interface AccessRestriction {
+
   id: string;
   name: string;
   type: 'IP Whitelist' | 'Time Window' | 'Device Binding' | 'Geofence' | 'Department Scope';
@@ -481,6 +486,7 @@ export interface ApprovalLimit {
 }
 
 export interface EscalationRule {
+
   id: string;
   workflowId: string;
   workflowName: string;
@@ -546,6 +552,7 @@ export interface DocumentSequence {
 }
 
 export interface PostingControl {
+
   id: string;
   companyId: string;
   companyName: string;
@@ -603,6 +610,7 @@ export interface DuplicateRule {
 }
 
 export interface ValidationRule {
+
   id: string;
   entityType: string;
   fieldName: string;
@@ -639,6 +647,7 @@ export interface NotificationTemplate {
 }
 
 export interface NotificationRule {
+
   id: string;
   name: string;
   triggerEvent: string;
@@ -650,6 +659,7 @@ export interface NotificationRule {
 }
 
 export interface SystemAlertItem {
+
   id: string;
   title: string;
   message: string;
@@ -681,6 +691,7 @@ export interface AuditEvent {
 }
 
 export interface LoginHistoryEvent {
+
   id: string;
   timestamp: string;
   username: string;
@@ -733,6 +744,7 @@ export interface IntegrationLog {
 
 // 01.09 Backup & Recovery Types
 export interface BackupConfiguration {
+
   id: string;
   backupType: 'Full Database' | 'Incremental Transaction Logs' | 'Configuration & Masters Only';
   frequency: 'Daily at 02:00 UTC' | 'Every 6 Hours' | 'Real-time WAL Stream';
@@ -757,6 +769,7 @@ export interface RestorePoint {
 }
 
 export interface DisasterRecoveryStatus {
+
   rpoTargetMinutes: number;
   currentRpoMinutes: number;
   rtoTargetMinutes: number;
@@ -780,6 +793,7 @@ export interface SecurityPolicy {
 }
 
 export interface PasswordPolicy {
+
   minLength: number;
   requireUppercase: boolean;
   requireLowercase: boolean;
