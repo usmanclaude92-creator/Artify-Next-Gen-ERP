@@ -22,6 +22,7 @@ import {
 import { useSalesCrm } from '../../services/salesCrmStore';
 import { Customer, CustomerContact, CustomerTier, CustomerCategory } from '../../types';
 import { ERPUserRole } from '../../../../types/erp';
+import { mockRandom } from '@/src/utils/mockRandom';
 
 interface CustomerManagementViewProps {
   activeTransactionId?: string;
@@ -87,7 +88,7 @@ export const CustomerManagementView: React.FC<CustomerManagementViewProps> = ({
       legalName,
       tradeName: legalName,
       commercialRegistrationNumber: crNumber,
-      taxIdentificationNumber: vatNumber || `OM-VAT-${Math.floor(10000000 + Math.random() * 90000000)}`,
+      taxIdentificationNumber: vatNumber || `OM-VAT-${Math.floor(10000000 + mockRandom() * 90000000)}`,
       category,
       tier,
       country: 'Sultanate of Oman',

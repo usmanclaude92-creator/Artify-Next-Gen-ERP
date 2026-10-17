@@ -13,6 +13,8 @@ import {
   Truck,
   ArrowRight
 } from 'lucide-react';
+import { notify } from '@/src/components/common/Feedback';
+import { mockRandom } from '@/src/utils/mockRandom';
 
 export const PurchaseReturnsView: React.FC = () => {
   const {
@@ -73,7 +75,7 @@ export const PurchaseReturnsView: React.FC = () => {
       reason: returnReason,
       currency: 'OMR',
       totalReturnValueOMR: Number(returnAmount),
-      rmaNumber: `RMA-${Math.floor(10000 + Math.random() * 90000)}`,
+      rmaNumber: `RMA-${Math.floor(10000 + mockRandom() * 90000)}`,
       status: 'Awaiting Dispatch',
       lines: returnLines,
       resolutionType: 'Supplier Debit Note',
@@ -159,7 +161,7 @@ export const PurchaseReturnsView: React.FC = () => {
                     <button
                       onClick={() => {
                         const dn = generateDebitNoteFromReturn(ret.id, 'Procurement Accounting');
-                        alert(`Debit Note Generated: ${dn.debitNoteNumber}`);
+                        notify(`Debit Note Generated: ${dn.debitNoteNumber}`);
                       }}
                       className="px-3 py-1.5 rounded-lg bg-rose-600 hover:bg-rose-700 text-white font-semibold shadow-xs cursor-pointer"
                     >

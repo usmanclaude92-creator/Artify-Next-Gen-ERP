@@ -14,6 +14,7 @@ import {
   Warehouse,
   Truck
 } from 'lucide-react';
+import { mockRandom } from '@/src/utils/mockRandom';
 
 export const PurchasingReceiptsView: React.FC = () => {
   const {
@@ -72,7 +73,7 @@ export const PurchasingReceiptsView: React.FC = () => {
       rejectedQuantity: 0,
       quarantineQuantity: 0,
       unitOfMeasure: l.unitOfMeasure,
-      batchOrLotNumber: `LOT-2026-${Math.floor(1000 + Math.random() * 9000)}`,
+      batchOrLotNumber: `LOT-2026-${Math.floor(1000 + mockRandom() * 9000)}`,
       warehouseLocationCode: warehouseLocation,
       qcInspectionStatus: 'Pending Inspection'
     }));
@@ -83,7 +84,7 @@ export const PurchasingReceiptsView: React.FC = () => {
       supplierId: po.supplierId,
       supplierName: po.supplierName,
       receiptDate: new Date().toISOString().split('T')[0],
-      deliveryNoteNumber: deliveryNoteNumber || `DN-${Math.floor(100000 + Math.random() * 900000)}`,
+      deliveryNoteNumber: deliveryNoteNumber || `DN-${Math.floor(100000 + mockRandom() * 900000)}`,
       carrierName,
       vehiclePlateNumber: vehiclePlate,
       receivedBy: 'Yahya Al-Maamari (Receiving Officer)',

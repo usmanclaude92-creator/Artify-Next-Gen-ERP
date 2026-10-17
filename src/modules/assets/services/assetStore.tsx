@@ -25,6 +25,7 @@ import {
   AssetInsurancePolicy,
   AssetAIInsight
 } from '../types';
+import { mockRandom } from '@/src/utils/mockRandom';
 
 // Seed Categories
 const INITIAL_CATEGORIES: AssetCategory[] = [
@@ -1114,7 +1115,7 @@ export const AssetProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     if (!project) return;
 
     const cat = categories.find(c => c.id === categoryId) || categories[0];
-    const newAssetTag = `AST-CWIP-${new Date().getFullYear()}-${Math.floor(1000 + Math.random() * 9000)}`;
+    const newAssetTag = `AST-CWIP-${new Date().getFullYear()}-${Math.floor(1000 + mockRandom() * 9000)}`;
 
     addAsset({
       assetTag: newAssetTag,
@@ -1125,7 +1126,7 @@ export const AssetProvider: React.FC<{ children: React.ReactNode }> = ({ childre
       classificationId: 'cls-1',
       classificationName: 'IAS 16 — Property, Plant & Equipment',
       serialNumber: project.completionCertificateNumber || `CWIP-CAP-${project.projectCode}`,
-      barcode: `890${Math.floor(100000000 + Math.random() * 900000000)}`,
+      barcode: `890${Math.floor(100000000 + mockRandom() * 900000000)}`,
       brand: 'Internal Capitalization',
       model: 'Commissioned Project',
       manufactureYear: new Date().getFullYear(),
@@ -1166,7 +1167,7 @@ export const AssetProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   // Assign Asset
   const assignAsset = (assignmentData: Omit<AssetAssignment, 'id' | 'assignmentNumber'>) => {
     const id = `asg-${Date.now().toString().slice(-4)}`;
-    const assignmentNumber = `ASG-${new Date().getFullYear()}-${Math.floor(1000 + Math.random() * 9000)}`;
+    const assignmentNumber = `ASG-${new Date().getFullYear()}-${Math.floor(1000 + mockRandom() * 9000)}`;
     const newAsg: AssetAssignment = {
       ...assignmentData,
       id,
@@ -1185,7 +1186,7 @@ export const AssetProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   // Create Transfer Order
   const createTransferOrder = (orderData: Omit<AssetTransferOrder, 'id' | 'transferOrderNumber'>) => {
     const id = `trf-${Date.now().toString().slice(-4)}`;
-    const transferOrderNumber = `TRF-${new Date().getFullYear()}-${Math.floor(1000 + Math.random() * 9000)}`;
+    const transferOrderNumber = `TRF-${new Date().getFullYear()}-${Math.floor(1000 + mockRandom() * 9000)}`;
     const newOrder: AssetTransferOrder = {
       ...orderData,
       id,
@@ -1259,7 +1260,7 @@ export const AssetProvider: React.FC<{ children: React.ReactNode }> = ({ childre
       totalAssetsDepreciated: assetsCount,
       totalDepreciationAmount: Math.round(totalRunAmount),
       status: 'POSTED',
-      glJournalVoucherNumber: `JV-DEP-${fiscalYear}-${Math.floor(1000 + Math.random() * 9000)}`,
+      glJournalVoucherNumber: `JV-DEP-${fiscalYear}-${Math.floor(1000 + mockRandom() * 9000)}`,
       executedBy: 'Senior Asset Controller',
       categoryBreakdown: categories.map(cat => {
         const catAssets = updatedAssets.filter(a => a.categoryId === cat.id);
@@ -1279,7 +1280,7 @@ export const AssetProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   // Post Revaluation
   const postRevaluation = (revalData: Omit<AssetRevaluationRecord, 'id' | 'revaluationNumber'>) => {
     const id = `rev-${Date.now().toString().slice(-4)}`;
-    const revaluationNumber = `REV-${new Date().getFullYear()}-${Math.floor(1000 + Math.random() * 9000)}`;
+    const revaluationNumber = `REV-${new Date().getFullYear()}-${Math.floor(1000 + mockRandom() * 9000)}`;
     const newRecord: AssetRevaluationRecord = {
       ...revalData,
       id,
@@ -1302,7 +1303,7 @@ export const AssetProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   // Post Impairment
   const postImpairment = (testData: Omit<AssetImpairmentTest, 'id' | 'testReference'>) => {
     const id = `imp-${Date.now().toString().slice(-4)}`;
-    const testReference = `IMP-${new Date().getFullYear()}-${Math.floor(1000 + Math.random() * 9000)}`;
+    const testReference = `IMP-${new Date().getFullYear()}-${Math.floor(1000 + mockRandom() * 9000)}`;
     const newTest: AssetImpairmentTest = {
       ...testData,
       id,
@@ -1337,7 +1338,7 @@ export const AssetProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   // Create Work Order
   const createWorkOrder = (woData: Omit<MaintenanceWorkOrder, 'id' | 'workOrderNumber' | 'totalCost'>) => {
     const id = `wo-${Date.now().toString().slice(-4)}`;
-    const workOrderNumber = `WO-${new Date().getFullYear()}-${Math.floor(1000 + Math.random() * 9000)}`;
+    const workOrderNumber = `WO-${new Date().getFullYear()}-${Math.floor(1000 + mockRandom() * 9000)}`;
     const totalCost = woData.sparePartsCost + woData.laborCost + (woData.vendorServiceCost || 0);
     const newWo: MaintenanceWorkOrder = {
       ...woData,
@@ -1373,7 +1374,7 @@ export const AssetProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   // Dispose Asset
   const disposeAsset = (dispData: Omit<AssetDisposalRecord, 'id' | 'disposalNumber'>) => {
     const id = `dsp-${Date.now().toString().slice(-4)}`;
-    const disposalNumber = `DSP-${new Date().getFullYear()}-${Math.floor(1000 + Math.random() * 9000)}`;
+    const disposalNumber = `DSP-${new Date().getFullYear()}-${Math.floor(1000 + mockRandom() * 9000)}`;
     const newDisposal: AssetDisposalRecord = {
       ...dispData,
       id,
@@ -1392,7 +1393,7 @@ export const AssetProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   // Record Asset Sale
   const recordAssetSale = (saleData: Omit<AssetSaleInvoice, 'id' | 'saleInvoiceNumber'>) => {
     const id = `sale-${Date.now().toString().slice(-4)}`;
-    const saleInvoiceNumber = `AST-INV-${new Date().getFullYear()}-${Math.floor(1000 + Math.random() * 9000)}`;
+    const saleInvoiceNumber = `AST-INV-${new Date().getFullYear()}-${Math.floor(1000 + mockRandom() * 9000)}`;
     const newSale: AssetSaleInvoice = {
       ...saleData,
       id,

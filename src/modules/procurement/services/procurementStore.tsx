@@ -37,6 +37,7 @@ import {
   initialContracts,
   initialEvaluations
 } from '../data/initialData';
+import { mockRandom } from '@/src/utils/mockRandom';
 
 interface ProcurementContextType {
   // 05.01 Planning
@@ -273,14 +274,14 @@ export const ProcurementProvider: React.FC<{ children: React.ReactNode }> = ({ c
     // Re-calculate AI forecast recommendations with small dynamic variation
     setForecasts((prev) =>
       prev.map((f) => {
-        const delta = Math.floor(Math.random() * 5) - 2;
+        const delta = Math.floor(mockRandom() * 5) - 2;
         const newRunRate = Math.max(1, f.historicalRunRateMonthly + delta);
         const newRec = Math.round(newRunRate * 3.2);
         return {
           ...f,
           historicalRunRateMonthly: newRunRate,
           recommendedOrderQty: newRec,
-          confidenceScore: Math.min(99, Math.max(88, f.confidenceScore + (Math.random() > 0.5 ? 1 : -1)))
+          confidenceScore: Math.min(99, Math.max(88, f.confidenceScore + (mockRandom() > 0.5 ? 1 : -1)))
         };
       })
     );

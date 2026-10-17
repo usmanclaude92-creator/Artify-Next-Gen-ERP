@@ -26,6 +26,7 @@ import {
   Check,
   Download
 } from 'lucide-react';
+import { notify } from '@/src/components/common/Feedback';
 
 export const InspectionTestingView: React.FC = () => {
   const { inspections, materialTests, addInspectionRecord, addMaterialTestReport } = useQualityStore();
@@ -538,7 +539,7 @@ export const InspectionTestingView: React.FC = () => {
             </div>
 
             <button
-              onClick={() => alert(`Certificate ${selectedInspection.coaNumber || 'COC-ART-2024'} sent to system printer!`)}
+              onClick={() => notify(`Certificate ${selectedInspection.coaNumber || 'COC-ART-2024'} sent to system printer!`)}
               className="flex items-center gap-1.5 px-4 py-2 bg-teal-600 hover:bg-teal-500 text-white text-xs font-bold rounded-xl shadow-lg shadow-teal-600/30 transition-all cursor-pointer"
             >
               <Printer className="w-4 h-4" />

@@ -1,3 +1,4 @@
+import { mockRandom } from '@/src/utils/mockRandom';
 // ============================================================================
 // Artify Financial Ecosystem (AFE) Enterprise Workflow Engine & Validation Service
 // Enforces Backend-Validated Approval Levels, Segregation of Duties (SoD),
@@ -465,7 +466,7 @@ export class WorkflowEngineService {
       const trail = existing ? JSON.parse(existing) : [];
 
       const newEntry = {
-        id: `aud-${Date.now().toString().slice(-6)}-${Math.random().toString(36).substr(2, 4)}`,
+        id: `aud-${Date.now().toString().slice(-6)}-${mockRandom().toString(36).substr(2, 4)}`,
         timestamp: new Date().toISOString().replace('T', ' ').slice(0, 19) + ' UTC',
         userId: event.actor.id,
         userName: event.actor.name,
@@ -504,7 +505,7 @@ export class WorkflowEngineService {
       const alerts = existing ? JSON.parse(existing) : [];
 
       const newAlert = {
-        id: `alt-${Date.now().toString().slice(-4)}-${Math.random().toString(36).substr(2, 3)}`,
+        id: `alt-${Date.now().toString().slice(-4)}-${mockRandom().toString(36).substr(2, 3)}`,
         title: alert.title,
         message: alert.message,
         severity: alert.severity,

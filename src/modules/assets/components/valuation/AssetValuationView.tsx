@@ -22,6 +22,7 @@ import {
   CheckCircle2,
   FileCheck
 } from 'lucide-react';
+import { notify } from '@/src/components/common/Feedback';
 
 export const AssetValuationView: React.FC = () => {
   const {
@@ -71,7 +72,7 @@ export const AssetValuationView: React.FC = () => {
       const periodName = `${monthNames[selectedPeriodMonth - 1]} ${selectedFiscalYear}`;
       executeDepreciationRun(selectedFiscalYear, selectedPeriodMonth, periodName);
       setIsExecuting(false);
-      alert(`Depreciation for ${periodName} executed and posted to General Ledger successfully!`);
+      notify(`Depreciation for ${periodName} executed and posted to General Ledger successfully!`);
     }, 600);
   };
 

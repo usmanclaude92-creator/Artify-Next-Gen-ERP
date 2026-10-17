@@ -44,6 +44,7 @@ import {
   UserContext,
   ENTERPRISE_ACTORS
 } from './workflowEngineService';
+import { mockRandom } from '@/src/utils/mockRandom';
 
 export interface WorkflowNotificationBanner {
   message: string;
@@ -1522,7 +1523,7 @@ export const AdministrationProvider: React.FC<{ children: React.ReactNode }> = (
           status: isLastLevel ? 'Approved' : 'Pending Approval',
           currentApprovalLevel: isLastLevel ? totalLevels : nextLevel,
           approvedBy: isLastLevel ? actor.name : t.approvedBy,
-          bookingRef: isLastLevel ? `TKT-ART-${Math.floor(10000 + Math.random() * 90000)}` : t.bookingRef,
+          bookingRef: isLastLevel ? `TKT-ART-${Math.floor(10000 + mockRandom() * 90000)}` : t.bookingRef,
           approvers: updatedStages
         };
       }

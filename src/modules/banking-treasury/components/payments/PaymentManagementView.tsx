@@ -34,6 +34,8 @@ import {
   X,
   BookOpen
 } from 'lucide-react';
+import { notify } from '@/src/components/common/Feedback';
+import { mockRandom } from '@/src/utils/mockRandom';
 
 export const PaymentManagementView: React.FC = () => {
   const {
@@ -120,13 +122,13 @@ export const PaymentManagementView: React.FC = () => {
       paymentDate: new Date().toISOString().split('T')[0],
       valueDate: new Date().toISOString().split('T')[0],
       purposeOfRemittance: wirePurpose || 'Commercial Supplier Settlement',
-      invoiceReferences: [`INV-2026-${Math.floor(Math.random() * 800) + 100}`],
+      invoiceReferences: [`INV-2026-${Math.floor(mockRandom() * 800) + 100}`],
       preparedBy: wirePreparedBy,
       bankChargesBorneBy: 'OUR (Debtor)'
     });
 
     if (!result.success) {
-      alert(result.error);
+      notify(result.error);
       return;
     }
 
@@ -161,7 +163,7 @@ export const PaymentManagementView: React.FC = () => {
     });
 
     if (!result.success) {
-      alert(result.error);
+      notify(result.error);
       return;
     }
 
@@ -189,7 +191,7 @@ export const PaymentManagementView: React.FC = () => {
     });
 
     if (!result.success) {
-      alert(result.error);
+      notify(result.error);
       return;
     }
 
@@ -736,7 +738,7 @@ export const PaymentManagementView: React.FC = () => {
                 <div className="mt-3 p-2.5 rounded-xl bg-indigo-50/60 border border-indigo-100 text-xs flex items-center justify-between">
                   <span className="text-indigo-900 font-medium">Format: {batch.generatedFileFormat}</span>
                   <button
-                    onClick={() => alert(`Simulated file export for ${batch.batchNumber} generated.`)}
+                    onClick={() => notify(`Simulated file export for ${batch.batchNumber} generated.`)}
                     className="text-indigo-700 hover:text-indigo-900 font-bold flex items-center gap-1 cursor-pointer"
                   >
                     <Download className="w-3.5 h-3.5" />

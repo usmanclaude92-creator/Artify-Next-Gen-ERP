@@ -21,6 +21,7 @@ import {
 } from 'lucide-react';
 import { useSystemManagement } from '../services/systemManagementStore';
 import { FiscalYear } from '../types';
+import { notify } from '@/src/components/common/Feedback';
 
 interface FiscalYearSetupViewProps {
   initialTransactionId?: string;
@@ -353,7 +354,7 @@ export const FiscalYearSetupView: React.FC<FiscalYearSetupViewProps> = ({
             </div>
 
             <button
-              onClick={() => alert('Fiscal Year 2027 opening routine initialized successfully!')}
+              onClick={() => notify('Fiscal Year 2027 opening routine initialized successfully!')}
               className="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-semibold rounded-lg shadow-xs transition-colors cursor-pointer"
             >
               Execute Opening Protocol

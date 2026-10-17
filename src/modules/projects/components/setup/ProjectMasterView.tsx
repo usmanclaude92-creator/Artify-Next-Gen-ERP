@@ -55,6 +55,8 @@ import {
   Compass,
   FileText
 } from 'lucide-react';
+import { confirmAction } from '@/src/components/common/Feedback';
+import { mockRandom } from '@/src/utils/mockRandom';
 
 interface ProjectMasterViewProps {
   onNavigateToPlanning?: (projectId: string) => void;
@@ -113,7 +115,7 @@ export const ProjectMasterView: React.FC<ProjectMasterViewProps> = ({
     clientContactPerson: 'Eng. Khalid Al-Rawahi',
     clientEmail: 'k.rawahi@onpc.om',
     clientPhone: '+968 2450 8899',
-    contractNumber: `ONPC-EPC-2026-${String(Math.floor(Math.random() * 900) + 100)}`,
+    contractNumber: `ONPC-EPC-2026-${String(Math.floor(mockRandom() * 900) + 100)}`,
     contractValue: 2500000,
     currency: currencies[0] || 'OMR',
     company: companies[0] || 'Oman Heavy Industries SAOC',
@@ -919,8 +921,8 @@ export const ProjectMasterView: React.FC<ProjectMasterViewProps> = ({
                 {selectedProjectIds.length} Selected
               </span>
               <button
-                onClick={() => {
-                  if (window.confirm(`Archive ${selectedProjectIds.length} selected projects?`)) {
+                onClick={async () => {
+                  if (await confirmAction(`Archive ${selectedProjectIds.length} selected projects?`)) {
                     selectedProjectIds.forEach(id => deleteProject(id));
                     setSelectedProjectIds([]);
                     showToast(`Archived ${selectedProjectIds.length} projects.`);
@@ -1194,8 +1196,8 @@ export const ProjectMasterView: React.FC<ProjectMasterViewProps> = ({
                             </button>
 
                             <button
-                              onClick={() => {
-                                if (window.confirm(`Archive Project Master ${project.projectCode}?`)) {
+                              onClick={async () => {
+                                if (await confirmAction(`Archive Project Master ${project.projectCode}?`)) {
                                   deleteProject(project.id);
                                   showToast(`Project ${project.projectCode} archived.`, 'info');
                                 }

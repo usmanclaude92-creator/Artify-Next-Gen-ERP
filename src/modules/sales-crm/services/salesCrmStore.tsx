@@ -16,6 +16,7 @@ import {
   CustomerFollowUpSurvey,
   SalesCrmStats
 } from '../types';
+import { mockRandom } from '@/src/utils/mockRandom';
 
 // ============================================================================
 // INITIAL MOCK DATA — OMANI & GCC ENTERPRISE ECOSYSTEM
@@ -1230,7 +1231,7 @@ export const SalesCrmProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     const newLead: Lead = {
       ...leadData,
       id: `lead-${Date.now()}`,
-      leadCode: `LED-2026-${Math.floor(1000 + Math.random() * 9000)}`,
+      leadCode: `LED-2026-${Math.floor(1000 + mockRandom() * 9000)}`,
       createdDate: new Date().toISOString().split('T')[0]
     };
     setLeads((prev) => [newLead, ...prev]);
@@ -1251,11 +1252,11 @@ export const SalesCrmProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     // 1. Create or Map Customer
     const newCustomer: Customer = {
       id: `cust-${Date.now()}`,
-      customerCode: `CUST-OM-${Math.floor(1000 + Math.random() * 9000)}`,
+      customerCode: `CUST-OM-${Math.floor(1000 + mockRandom() * 9000)}`,
       legalName: lead.companyName,
       tradeName: lead.companyName,
-      commercialRegistrationNumber: `CR-OM-${Math.floor(1000000 + Math.random() * 9000000)}`,
-      taxIdentificationNumber: `OM-VAT-${Math.floor(10000000 + Math.random() * 90000000)}`,
+      commercialRegistrationNumber: `CR-OM-${Math.floor(1000000 + mockRandom() * 9000000)}`,
+      taxIdentificationNumber: `OM-VAT-${Math.floor(10000000 + mockRandom() * 90000000)}`,
       category: 'Oil & Gas Upstream/Downstream',
       tier: 'Tier 2 — Enterprise Corporate',
       country: lead.country,
@@ -1300,7 +1301,7 @@ export const SalesCrmProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     // 2. Create Opportunity
     const newOpportunity: Opportunity = {
       id: `opp-${Date.now()}`,
-      opportunityCode: `OPP-2026-${Math.floor(1000 + Math.random() * 9000)}`,
+      opportunityCode: `OPP-2026-${Math.floor(1000 + mockRandom() * 9000)}`,
       title: `${lead.companyName} — ${lead.notes.slice(0, 45)}`,
       customerId: newCustomer.id,
       customerName: newCustomer.legalName,
@@ -1337,7 +1338,7 @@ export const SalesCrmProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     const newCustomer: Customer = {
       ...customerData,
       id: `cust-${Date.now()}`,
-      customerCode: `CUST-OM-${Math.floor(1000 + Math.random() * 9000)}`,
+      customerCode: `CUST-OM-${Math.floor(1000 + mockRandom() * 9000)}`,
       createdDate: new Date().toISOString().split('T')[0]
     };
     setCustomers((prev) => [newCustomer, ...prev]);
@@ -1382,7 +1383,7 @@ export const SalesCrmProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     const newOpp: Opportunity = {
       ...oppData,
       id: `opp-${Date.now()}`,
-      opportunityCode: `OPP-2026-${Math.floor(1000 + Math.random() * 9000)}`,
+      opportunityCode: `OPP-2026-${Math.floor(1000 + mockRandom() * 9000)}`,
       createdDate: new Date().toISOString().split('T')[0]
     };
     setOpportunities((prev) => [newOpp, ...prev]);
@@ -1424,7 +1425,7 @@ export const SalesCrmProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     const newAct: SalesActivity = {
       ...actData,
       id: `act-${Date.now()}`,
-      activityCode: `ACT-2026-${Math.floor(1000 + Math.random() * 9000)}`
+      activityCode: `ACT-2026-${Math.floor(1000 + mockRandom() * 9000)}`
     };
     setActivities((prev) => [newAct, ...prev]);
     return newAct;
@@ -1451,7 +1452,7 @@ export const SalesCrmProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     const newQuo: SalesQuotation = {
       ...quoData,
       id: `quo-${Date.now()}`,
-      quotationNumber: `QUO-2026-${Math.floor(10000 + Math.random() * 90000)}`,
+      quotationNumber: `QUO-2026-${Math.floor(10000 + mockRandom() * 90000)}`,
       revisionNumber: 0,
       status: quoData.requiresSpecialApproval ? 'Pending Approval' : 'Approved'
     };
@@ -1505,7 +1506,7 @@ export const SalesCrmProvider: React.FC<{ children: React.ReactNode }> = ({ chil
 
     const newSO: SalesOrder = {
       id: `so-${Date.now()}`,
-      soNumber: `SO-2026-${Math.floor(10000 + Math.random() * 90000)}`,
+      soNumber: `SO-2026-${Math.floor(10000 + mockRandom() * 90000)}`,
       customerPoNumber,
       quotationId: quote.id,
       quotationNumber: quote.quotationNumber,
@@ -1546,7 +1547,7 @@ export const SalesCrmProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     const newSO: SalesOrder = {
       ...soData,
       id: `so-${Date.now()}`,
-      soNumber: `SO-2026-${Math.floor(10000 + Math.random() * 90000)}`,
+      soNumber: `SO-2026-${Math.floor(10000 + mockRandom() * 90000)}`,
       createdDate: new Date().toISOString().split('T')[0]
     };
     setSalesOrders((prev) => [newSO, ...prev]);
@@ -1577,14 +1578,14 @@ export const SalesCrmProvider: React.FC<{ children: React.ReactNode }> = ({ chil
         itemDescription: soLine?.itemDescription || 'Dispatched Item',
         dispatchedQuantity: ld.dispatchedQty,
         unitOfMeasure: soLine?.unitOfMeasure || 'Units',
-        batchNumber: `LOT-2026-${Math.floor(1000 + Math.random() * 9000)}`,
+        batchNumber: `LOT-2026-${Math.floor(1000 + mockRandom() * 9000)}`,
         warehouseCode: 'WH-RUSAYL-MAIN'
       };
     });
 
     const newDN: DeliveryNote = {
       id: `dn-${Date.now()}`,
-      dnNumber: `DN-2026-${Math.floor(10000 + Math.random() * 90000)}`,
+      dnNumber: `DN-2026-${Math.floor(10000 + mockRandom() * 90000)}`,
       soId: so.id,
       soNumber: so.soNumber,
       customerPoNumber: so.customerPoNumber,
@@ -1593,7 +1594,7 @@ export const SalesCrmProvider: React.FC<{ children: React.ReactNode }> = ({ chil
       dispatchDate: new Date().toISOString().split('T')[0],
       driverName,
       vehicleRegistration: vehicleNo,
-      gatePassNumber: `GP-RUS-${Math.floor(1000 + Math.random() * 9000)}`,
+      gatePassNumber: `GP-RUS-${Math.floor(1000 + mockRandom() * 9000)}`,
       deliveryAddress: so.shippingAddress,
       status: 'Ready for Dispatch',
       lines: dnLines,
@@ -1666,7 +1667,7 @@ export const SalesCrmProvider: React.FC<{ children: React.ReactNode }> = ({ chil
 
     const newInv: ARInvoice = {
       id: `inv-${Date.now()}`,
-      invoiceNumber: `INV-2026-${Math.floor(10000 + Math.random() * 90000)}`,
+      invoiceNumber: `INV-2026-${Math.floor(10000 + mockRandom() * 90000)}`,
       soId: dn.soId,
       soNumber: dn.soNumber,
       dnId: dn.id,
@@ -1714,7 +1715,7 @@ export const SalesCrmProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     const newInv: ARInvoice = {
       ...invData,
       id: `inv-${Date.now()}`,
-      invoiceNumber: `INV-2026-${Math.floor(10000 + Math.random() * 90000)}`
+      invoiceNumber: `INV-2026-${Math.floor(10000 + mockRandom() * 90000)}`
     };
     setArInvoices((prev) => [newInv, ...prev]);
     return newInv;
@@ -1724,7 +1725,7 @@ export const SalesCrmProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     const newCN: CustomerCreditNote = {
       ...cnData,
       id: `cn-${Date.now()}`,
-      creditNoteNumber: `CN-2026-${Math.floor(10000 + Math.random() * 90000)}`
+      creditNoteNumber: `CN-2026-${Math.floor(10000 + mockRandom() * 90000)}`
     };
     setCreditNotes((prev) => [newCN, ...prev]);
     return newCN;
@@ -1736,7 +1737,7 @@ export const SalesCrmProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     const newAdv: CustomerAdvanceDeposit = {
       ...advData,
       id: `adv-${Date.now()}`,
-      advanceReceiptNumber: `ADV-2026-${Math.floor(10000 + Math.random() * 90000)}`
+      advanceReceiptNumber: `ADV-2026-${Math.floor(10000 + mockRandom() * 90000)}`
     };
     setAdvances((prev) => [newAdv, ...prev]);
     return newAdv;
@@ -1748,7 +1749,7 @@ export const SalesCrmProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     const newComp: CustomerComplaint = {
       ...compData,
       id: `comp-${Date.now()}`,
-      ticketNumber: `SR-2026-${Math.floor(10000 + Math.random() * 90000)}`,
+      ticketNumber: `SR-2026-${Math.floor(10000 + mockRandom() * 90000)}`,
       loggedDate: new Date().toISOString().split('T')[0],
       status: 'Open / Logged'
     };
@@ -1776,7 +1777,7 @@ export const SalesCrmProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     const newReq: FieldServiceRequest = {
       ...reqData,
       id: `fsr-${Date.now()}`,
-      requestNumber: `FSR-2026-${Math.floor(10000 + Math.random() * 90000)}`
+      requestNumber: `FSR-2026-${Math.floor(10000 + mockRandom() * 90000)}`
     };
     setServiceRequests((prev) => [newReq, ...prev]);
     return newReq;
@@ -1788,7 +1789,7 @@ export const SalesCrmProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     const newSurv: CustomerFollowUpSurvey = {
       ...survData,
       id: `surv-${Date.now()}`,
-      surveyNumber: `CSAT-2026-${Math.floor(10000 + Math.random() * 90000)}`,
+      surveyNumber: `CSAT-2026-${Math.floor(10000 + mockRandom() * 90000)}`,
       feedbackDate: new Date().toISOString().split('T')[0]
     };
     setFollowUps((prev) => [newSurv, ...prev]);

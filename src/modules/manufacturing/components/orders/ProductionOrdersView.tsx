@@ -26,6 +26,7 @@ import {
   Clock,
   CheckSquare
 } from 'lucide-react';
+import { mockRandom } from '@/src/utils/mockRandom';
 
 interface ProductionOrdersViewProps {
   initialTab?: 'orders' | 'traveler' | 'issue' | 'return';
@@ -98,7 +99,7 @@ export const ProductionOrdersView: React.FC<ProductionOrdersViewProps> = ({
       supervisor,
       scheduledStartDate: startDate,
       scheduledEndDate: endDate,
-      targetLotNumber: `LOT-2026-${bom.productSku.slice(-6)}-${Math.floor(Math.random() * 900) + 100}`,
+      targetLotNumber: `LOT-2026-${bom.productSku.slice(-6)}-${Math.floor(mockRandom() * 900) + 100}`,
       totalStandardCostOMR: bom.totalStandardCostOMR * Number(plannedQty),
       materialRequirements: bom.components.map((c) => ({
         id: `mr-${Date.now()}-${c.itemCode}`,
@@ -153,7 +154,7 @@ export const ProductionOrdersView: React.FC<ProductionOrdersViewProps> = ({
         issuedQty: m.requiredQty - m.issuedQty,
         unitCostOMR: m.unitCostOMR,
         totalCostOMR: (m.requiredQty - m.issuedQty) * m.unitCostOMR,
-        batchNumber: `BATCH-RAW-${Math.floor(Math.random() * 8000) + 1000}`,
+        batchNumber: `BATCH-RAW-${Math.floor(mockRandom() * 8000) + 1000}`,
         binLocation: 'BIN-SOHAR-A01'
       })),
       totalValueOMR: selectedOrder.materialRequirements.reduce(

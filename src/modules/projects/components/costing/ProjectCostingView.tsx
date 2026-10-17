@@ -21,6 +21,7 @@ import {
   ArrowRight,
   TrendingDown
 } from 'lucide-react';
+import { mockRandom } from '@/src/utils/mockRandom';
 
 export const ProjectCostingView: React.FC = () => {
   const {
@@ -63,7 +64,7 @@ export const ProjectCostingView: React.FC = () => {
     unitCost: 4500,
     currency: selectedProject.currency,
     warehouseLocation: 'Sohar Central Yard Laydown A',
-    issueDocReference: `DN-SOH-2026-${Math.floor(100 + Math.random() * 900)}`,
+    issueDocReference: `DN-SOH-2026-${Math.floor(100 + mockRandom() * 900)}`,
     issuedBy: 'Storekeeper Murugan',
     receivedBySiteStaff: 'Lead Welder Arshad Mehmood'
   });
@@ -82,7 +83,7 @@ export const ProjectCostingView: React.FC = () => {
     overtimeHourlyRate: 21,
     currency: selectedProject.currency,
     approvedBySiteForeman: 'Eng. Salem Al-Maamari',
-    glPostingReference: `JV-LAB-2026-${Math.floor(10 + Math.random() * 90)}`
+    glPostingReference: `JV-LAB-2026-${Math.floor(10 + mockRandom() * 90)}`
   });
 
   const [equipmentForm, setEquipmentForm] = useState({

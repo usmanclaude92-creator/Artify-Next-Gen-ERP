@@ -24,6 +24,7 @@ import {
   X,
   UserCheck
 } from 'lucide-react';
+import { notify } from '@/src/components/common/Feedback';
 
 export const QualityAuditView: React.FC = () => {
   const { audits, supplierScorecards, certificates, kpiMetrics, addAudit, addSupplierScorecard } = useQualityStore();
@@ -383,7 +384,7 @@ export const QualityAuditView: React.FC = () => {
                     </td>
                     <td className="py-3 px-3 text-right">
                       <button
-                        onClick={() => alert(`Downloading certificate document: ${cert.certificateNumber}`)}
+                        onClick={() => notify(`Downloading certificate document: ${cert.certificateNumber}`)}
                         className="p-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-teal-400 hover:text-white transition-colors cursor-pointer"
                         title="Download file"
                       >

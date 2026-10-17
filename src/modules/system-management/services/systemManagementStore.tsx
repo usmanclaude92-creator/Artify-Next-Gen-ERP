@@ -94,6 +94,7 @@ import {
   INITIAL_ACTIVE_SESSIONS,
   INITIAL_SECURITY_EVENTS
 } from '../config/initialData';
+import { mockRandom } from '@/src/utils/mockRandom';
 
 interface SystemManagementContextType {
   // 01.01 Org & 01.01.02 Group / Holding Master Data
@@ -1465,7 +1466,7 @@ export const SystemManagementProvider: React.FC<{ children: React.ReactNode }> =
     fieldsToTrack.forEach(field => {
       if (patch[field] !== undefined && patch[field] !== existing[field]) {
         historyDeltas.push({
-          id: `hist-${Date.now().toString().slice(-4)}-${Math.floor(Math.random() * 900 + 100)}`,
+          id: `hist-${Date.now().toString().slice(-4)}-${Math.floor(mockRandom() * 900 + 100)}`,
           companyId: id,
           fieldChanged: String(field),
           oldValue: String(existing[field] || 'None'),
@@ -2557,7 +2558,7 @@ export const SystemManagementProvider: React.FC<{ children: React.ReactNode }> =
     const newClient: ApiClient = {
       ...client,
       id: newId,
-      maskedSecret: 'sec_live_' + Math.random().toString(36).substring(2, 8) + '*****************' + Math.random().toString(36).substring(2, 6),
+      maskedSecret: 'sec_live_' + mockRandom().toString(36).substring(2, 8) + '*****************' + mockRandom().toString(36).substring(2, 6),
       dailyRequestCount: 0,
       createdAt: new Date().toISOString().split('T')[0]
     };
@@ -2612,7 +2613,7 @@ export const SystemManagementProvider: React.FC<{ children: React.ReactNode }> =
       endpoint: target.endpoint.replace('https://', '/api/'),
       method: 'POST',
       statusCode: 200,
-      durationMs: Math.floor(Math.random() * 120) + 40,
+      durationMs: Math.floor(mockRandom() * 120) + 40,
       status: 'Success'
     };
     setIntegrationLogs(prev => [newLog, ...prev]);

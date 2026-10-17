@@ -24,6 +24,7 @@ import {
   Receipt,
   DollarSign
 } from 'lucide-react';
+import { mockRandom } from '@/src/utils/mockRandom';
 
 export const AccountsPayableView: React.FC = () => {
   const {
@@ -41,7 +42,7 @@ export const AccountsPayableView: React.FC = () => {
 
   // Form State for new Supplier Invoice
   const [vendorName, setVendorName] = useState('');
-  const [vendorVatNo, setVendorVatNo] = useState('OM1100' + Math.floor(100000 + Math.random() * 900000));
+  const [vendorVatNo, setVendorVatNo] = useState('OM1100' + Math.floor(100000 + mockRandom() * 900000));
   const [invoiceNumber, setInvoiceNumber] = useState('');
   const [poNumber, setPoNumber] = useState('');
   const [grnNumber, setGrnNumber] = useState('');
@@ -59,7 +60,7 @@ export const AccountsPayableView: React.FC = () => {
     e.preventDefault();
     addSupplierInvoice({
       invoiceNumber,
-      vendorId: `VEND-${Math.floor(100 + Math.random() * 900)}`,
+      vendorId: `VEND-${Math.floor(100 + mockRandom() * 900)}`,
       vendorName,
       vendorVatNo,
       poNumber: poNumber || undefined,

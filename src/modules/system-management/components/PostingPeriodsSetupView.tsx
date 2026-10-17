@@ -21,6 +21,7 @@ import {
 } from 'lucide-react';
 import { useSystemManagement } from '../services/systemManagementStore';
 import { PostingPeriod } from '../types';
+import { notify } from '@/src/components/common/Feedback';
 
 interface PostingPeriodsSetupViewProps {
   initialTransactionId?: string;
@@ -154,7 +155,7 @@ export const PostingPeriodsSetupView: React.FC<PostingPeriodsSetupViewProps> = (
 
           <div className="flex items-center gap-2.5">
             <button
-              onClick={() => alert('Generated standard 12-month posting calendar for active fiscal years.')}
+              onClick={() => notify('Generated standard 12-month posting calendar for active fiscal years.')}
               className="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-semibold rounded-lg shadow-xs transition-colors flex items-center gap-2 cursor-pointer"
             >
               <Plus className="w-4 h-4" />

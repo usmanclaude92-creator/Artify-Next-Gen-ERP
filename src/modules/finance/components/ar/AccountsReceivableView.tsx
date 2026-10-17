@@ -26,6 +26,7 @@ import {
   PieChart,
   UserCheck
 } from 'lucide-react';
+import { mockRandom } from '@/src/utils/mockRandom';
 
 export const AccountsReceivableView: React.FC = () => {
   const {
@@ -43,7 +44,7 @@ export const AccountsReceivableView: React.FC = () => {
 
   // Form State for Customer Invoice
   const [customerName, setCustomerName] = useState('');
-  const [customerVatNo, setCustomerVatNo] = useState('OM1200' + Math.floor(100000 + Math.random() * 900000));
+  const [customerVatNo, setCustomerVatNo] = useState('OM1200' + Math.floor(100000 + mockRandom() * 900000));
   const [invoiceDate, setInvoiceDate] = useState(new Date().toISOString().slice(0, 10));
   const [dueDate, setDueDate] = useState(new Date(Date.now() + 30 * 86400000).toISOString().slice(0, 10));
   const [subTotal, setSubTotal] = useState<number>(250000);
@@ -57,7 +58,7 @@ export const AccountsReceivableView: React.FC = () => {
   const [receiptCustomerName, setReceiptCustomerName] = useState('');
   const [receiptAmount, setReceiptAmount] = useState<number>(500000);
   const [paymentMethod, setPaymentMethod] = useState<CustomerReceipt['paymentMethod']>('BANK_TRANSFER');
-  const [referenceNumber, setReferenceNumber] = useState('FT-BM-' + Math.floor(1000000 + Math.random() * 9000000));
+  const [referenceNumber, setReferenceNumber] = useState('FT-BM-' + Math.floor(1000000 + mockRandom() * 9000000));
   const [selectedInvoiceForAlloc, setSelectedInvoiceForAlloc] = useState<string>(customerInvoices[0]?.id || '');
 
   const handleCreateInvoice = (e: React.FormEvent) => {
@@ -65,7 +66,7 @@ export const AccountsReceivableView: React.FC = () => {
     const invNumber = `AR-INV-2026-${String(customerInvoices.length + 143).padStart(4, '0')}`;
     addCustomerInvoice({
       invoiceNumber: invNumber,
-      customerId: `CUST-${Math.floor(100 + Math.random() * 900)}`,
+      customerId: `CUST-${Math.floor(100 + mockRandom() * 900)}`,
       customerName,
       customerVatNo,
       invoiceDate,

@@ -22,6 +22,8 @@ import {
   PlayCircle,
   FileText
 } from 'lucide-react';
+import { notify } from '@/src/components/common/Feedback';
+import { mockRandom } from '@/src/utils/mockRandom';
 
 export const AssetMaintenanceView: React.FC = () => {
   const {
@@ -57,7 +59,7 @@ export const AssetMaintenanceView: React.FC = () => {
   // PM Plan Form
   const [pmForm, setPmForm] = useState({
     assetId: assets[0]?.id || '',
-    planCode: `PM-PLAN-${Math.floor(100 + Math.random() * 900)}`,
+    planCode: `PM-PLAN-${Math.floor(100 + mockRandom() * 900)}`,
     title: '',
     frequency: 'MONTHLY' as any,
     serviceIntervalHours: 250,
@@ -221,7 +223,7 @@ export const AssetMaintenanceView: React.FC = () => {
                     <button
                       onClick={() => {
                         completeWorkOrder(wo.id, 3.5);
-                        alert(`Work order ${wo.workOrderNumber} marked as completed and asset restored to IN_SERVICE!`);
+                        notify(`Work order ${wo.workOrderNumber} marked as completed and asset restored to IN_SERVICE!`);
                       }}
                       className="flex items-center gap-1.5 px-3 py-1 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl text-xs font-bold transition-colors cursor-pointer"
                     >

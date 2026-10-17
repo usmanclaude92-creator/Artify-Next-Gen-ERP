@@ -22,6 +22,8 @@ import {
 import { useSalesCrm } from '../../services/salesCrmStore';
 import { Quotation, QuotationLineItem, QuotationStatus } from '../../types';
 import { ERPUserRole } from '../../../../types/erp';
+import { notify } from '@/src/components/common/Feedback';
+import { mockRandom } from '@/src/utils/mockRandom';
 
 interface SalesQuotationsViewProps {
   activeTransactionId?: string;
@@ -117,7 +119,7 @@ export const SalesQuotationsView: React.FC<SalesQuotationsViewProps> = ({
       ...lineItems,
       {
         description: newItemDesc,
-        partNumber: `SKU-${Math.floor(1000 + Math.random() * 9000)}`,
+        partNumber: `SKU-${Math.floor(1000 + mockRandom() * 9000)}`,
         quantity: Number(newItemQty),
         unitPriceOMR: Number(newItemPrice),
         uom: 'EA'
@@ -192,7 +194,7 @@ export const SalesQuotationsView: React.FC<SalesQuotationsViewProps> = ({
       );
       setTimeout(() => setOrderCreatedMsg(null), 7000);
     } catch (err: any) {
-      alert(err.message);
+      notify(err.message);
     }
   };
 

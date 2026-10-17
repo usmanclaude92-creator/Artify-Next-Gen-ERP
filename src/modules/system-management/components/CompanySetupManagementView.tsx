@@ -43,6 +43,7 @@ import { MetricCard } from './common/MetricCard';
 import { FormModal } from './common/FormModal';
 import { CompanyBrandingStudio } from './CompanyBrandingStudio';
 import { GroupHoldingManagementView } from './GroupHoldingManagementView';
+import { notify } from '@/src/components/common/Feedback';
 
 interface CompanySetupManagementViewProps {
   initialTransactionId?: string;
@@ -1267,7 +1268,7 @@ export const CompanySetupManagementView: React.FC<CompanySetupManagementViewProp
 
                         <div className="flex items-center gap-2">
                           <button
-                            onClick={() => alert(`Simulated downloading document: ${att.name}`)}
+                            onClick={() => notify(`Simulated downloading document: ${att.name}`)}
                             className="p-1.5 rounded-lg hover:bg-slate-200 text-slate-600 transition-colors cursor-pointer"
                             title="Download Document"
                           >
@@ -2302,7 +2303,7 @@ export const CompanySetupManagementView: React.FC<CompanySetupManagementViewProp
                 if (res.success) {
                   setIsApprovalModalOpen(false);
                 } else if (res.error) {
-                  alert(res.error);
+                  notify(res.error);
                 }
               }}
               className="px-5 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-xs font-semibold shadow-xs cursor-pointer"

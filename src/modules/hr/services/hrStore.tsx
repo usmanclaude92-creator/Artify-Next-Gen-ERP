@@ -35,6 +35,7 @@ import {
   LeaveStatus,
   OnboardingStage
 } from '../types';
+import { mockRandom } from '@/src/utils/mockRandom';
 
 // ==========================================
 // SEED DATA GENERATORS
@@ -1750,7 +1751,7 @@ export const HrProvider: React.FC<{ children: React.ReactNode }> = ({ children }
     const newReq: JobRequisition = {
       ...req,
       id: newId,
-      reqNumber: `JR-${req.department.substring(0, 3).toUpperCase()}-${Math.floor(100 + Math.random() * 900)}`,
+      reqNumber: `JR-${req.department.substring(0, 3).toUpperCase()}-${Math.floor(100 + mockRandom() * 900)}`,
       filledCount: 0,
       applicationsCount: 0,
       createdAt: new Date().toISOString().split('T')[0]
@@ -1765,7 +1766,7 @@ export const HrProvider: React.FC<{ children: React.ReactNode }> = ({ children }
   const addCandidate = (cand: Omit<Candidate, 'id' | 'interviewsCount' | 'notes'>) => {
     const newCand: Candidate = {
       ...cand,
-      id: `CAN-${Math.floor(8000 + Math.random() * 2000)}`,
+      id: `CAN-${Math.floor(8000 + mockRandom() * 2000)}`,
       interviewsCount: 0,
       notes: []
     };
@@ -1790,7 +1791,7 @@ export const HrProvider: React.FC<{ children: React.ReactNode }> = ({ children }
     const newOffer: JobOffer = {
       ...offer,
       id: `OFF-${Date.now()}`,
-      offerNumber: `OFF-ART-2026-${Math.floor(100 + Math.random() * 900)}`
+      offerNumber: `OFF-ART-2026-${Math.floor(100 + mockRandom() * 900)}`
     };
     setJobOffers(prev => [newOffer, ...prev]);
     setCandidates(prev => prev.map(c => c.id === offer.candidateId ? { ...c, stage: 'OFFER_EXTENDED' } : c));
@@ -1902,7 +1903,7 @@ export const HrProvider: React.FC<{ children: React.ReactNode }> = ({ children }
     const newReq: LeaveRequest = {
       ...req,
       id: `LEV-${Date.now()}`,
-      requestNumber: `LR-2026-${Math.floor(100 + Math.random() * 900)}`,
+      requestNumber: `LR-2026-${Math.floor(100 + mockRandom() * 900)}`,
       appliedDate: new Date().toISOString().split('T')[0],
       status: 'PENDING_APPROVAL'
     };
@@ -1940,7 +1941,7 @@ export const HrProvider: React.FC<{ children: React.ReactNode }> = ({ children }
     const newClaim: OvertimeClaim = {
       ...claim,
       id: `OT-${Date.now()}`,
-      claimNumber: `OTC-2026-${Math.floor(100 + Math.random() * 900)}`,
+      claimNumber: `OTC-2026-${Math.floor(100 + mockRandom() * 900)}`,
       status: 'PENDING_SUPERVISOR'
     };
     setOvertimeClaims(prev => [newClaim, ...prev]);
@@ -1955,7 +1956,7 @@ export const HrProvider: React.FC<{ children: React.ReactNode }> = ({ children }
     const newLoan: EmployeeLoan = {
       ...loan,
       id: `LN-${Date.now()}`,
-      loanNumber: `LOAN-2026-${Math.floor(100 + Math.random() * 900)}`,
+      loanNumber: `LOAN-2026-${Math.floor(100 + mockRandom() * 900)}`,
       repaidAmount: 0,
       remainingBalance: loan.principalAmount,
       status: 'SUBMITTED'
@@ -1989,8 +1990,8 @@ export const HrProvider: React.FC<{ children: React.ReactNode }> = ({ children }
     const newAdv: SalaryAdvance = {
       ...advance,
       id: `ADV-${Date.now()}`,
-      advanceNumber: `ADV-2026-${Math.floor(100 + Math.random() * 900)}`,
-      requestNumber: `ADV-2026-${Math.floor(100 + Math.random() * 900)}`,
+      advanceNumber: `ADV-2026-${Math.floor(100 + mockRandom() * 900)}`,
+      requestNumber: `ADV-2026-${Math.floor(100 + mockRandom() * 900)}`,
       requestDate: new Date().toISOString().split('T')[0],
       status: 'PENDING_APPROVAL'
     };
@@ -2021,7 +2022,7 @@ export const HrProvider: React.FC<{ children: React.ReactNode }> = ({ children }
     const newRev: PerformanceReview = {
       ...review,
       id: `REV-${Date.now()}`,
-      reviewNumber: `APR-2026-${Math.floor(100 + Math.random() * 900)}`
+      reviewNumber: `APR-2026-${Math.floor(100 + mockRandom() * 900)}`
     };
     setPerformanceReviews(prev => [newRev, ...prev]);
   };
@@ -2080,7 +2081,7 @@ export const HrProvider: React.FC<{ children: React.ReactNode }> = ({ children }
     const newTrf: EmployeeTransfer = {
       ...transfer,
       id: `TRF-${Date.now()}`,
-      transferNumber: `TRF-ART-2026-${Math.floor(100 + Math.random() * 900)}`,
+      transferNumber: `TRF-ART-2026-${Math.floor(100 + mockRandom() * 900)}`,
       status: 'REQUESTED'
     };
     setTransfers(prev => [newTrf, ...prev]);
@@ -2112,7 +2113,7 @@ export const HrProvider: React.FC<{ children: React.ReactNode }> = ({ children }
     const newPrm: EmployeePromotion = {
       ...promotion,
       id: `PRM-${Date.now()}`,
-      promotionNumber: `PRM-ART-2026-${Math.floor(100 + Math.random() * 900)}`,
+      promotionNumber: `PRM-ART-2026-${Math.floor(100 + mockRandom() * 900)}`,
       status: 'PROPOSED'
     };
     setPromotions(prev => [newPrm, ...prev]);
@@ -2150,7 +2151,7 @@ export const HrProvider: React.FC<{ children: React.ReactNode }> = ({ children }
     const newDisc: DisciplinaryIncident = {
       ...incident,
       id: `DISC-${Date.now()}`,
-      caseNumber: `DISC-CASE-2026-${Math.floor(100 + Math.random() * 900)}`,
+      caseNumber: `DISC-CASE-2026-${Math.floor(100 + mockRandom() * 900)}`,
       status: 'UNDER_INVESTIGATION'
     };
     setDisciplinaryIncidents(prev => [newDisc, ...prev]);
@@ -2175,7 +2176,7 @@ export const HrProvider: React.FC<{ children: React.ReactNode }> = ({ children }
   const initiateSeparation = (sep: any) => {
     const newSep: EmployeeSeparation = {
       id: `SEP-${Date.now()}`,
-      separationNumber: `SEP-ART-2026-${Math.floor(100 + Math.random() * 900)}`,
+      separationNumber: `SEP-ART-2026-${Math.floor(100 + mockRandom() * 900)}`,
       employeeId: sep.employeeId,
       employeeName: sep.employeeName,
       department: sep.department,
@@ -2236,7 +2237,7 @@ export const HrProvider: React.FC<{ children: React.ReactNode }> = ({ children }
     const newEosb: EndOfServiceSettlement = {
       ...eosb,
       id: `EOSB-${Date.now()}`,
-      settlementNumber: `EOSB-ART-2026-${Math.floor(100 + Math.random() * 900)}`,
+      settlementNumber: `EOSB-ART-2026-${Math.floor(100 + mockRandom() * 900)}`,
       status: 'AUDIT_APPROVED',
       approvedBy: 'Jean-Luc Moreau (Financial Controller)'
     };

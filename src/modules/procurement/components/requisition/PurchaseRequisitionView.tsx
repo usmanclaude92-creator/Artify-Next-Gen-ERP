@@ -16,6 +16,7 @@ import {
   AlertTriangle,
   ArrowRight
 } from 'lucide-react';
+import { notify } from '@/src/components/common/Feedback';
 
 export const PurchaseRequisitionView: React.FC = () => {
   const {
@@ -396,7 +397,7 @@ export const PurchaseRequisitionView: React.FC = () => {
                     <button
                       onClick={() => {
                         const newRfq = convertPrToRfq(selectedPr.id, 'Senior Sourcing Specialist');
-                        alert(`Successfully converted PR to RFQ: ${newRfq.rfqNumber}`);
+                        notify(`Successfully converted PR to RFQ: ${newRfq.rfqNumber}`);
                         setSelectedPr(null);
                       }}
                       className="px-3 py-2 rounded-xl bg-cyan-600 hover:bg-cyan-700 text-white text-xs font-semibold transition-colors cursor-pointer"
@@ -407,7 +408,7 @@ export const PurchaseRequisitionView: React.FC = () => {
                       onClick={() => {
                         const targetSupplier = selectedPr.lines[0]?.preferredSupplierId || suppliers[0].id;
                         const newPo = convertPrToPo(selectedPr.id, targetSupplier, 'Fatma Al-Hasani (Lead Buyer)');
-                        alert(`Successfully converted PR to Purchase Order: ${newPo.poNumber}`);
+                        notify(`Successfully converted PR to Purchase Order: ${newPo.poNumber}`);
                         setSelectedPr(null);
                       }}
                       className="px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-semibold transition-colors cursor-pointer"

@@ -19,6 +19,7 @@ import { StatusBadge } from './common/StatusBadge';
 import { MetricCard } from './common/MetricCard';
 import { FormModal } from './common/FormModal';
 import { ApiClient, ExternalIntegration, IntegrationLog } from '../types';
+import { mockRandom } from '@/src/utils/mockRandom';
 
 export const IntegrationsApiView: React.FC<{ activeTab?: string }> = ({ activeTab: initialTab = 'integrations' }) => {
   const {
@@ -35,7 +36,7 @@ export const IntegrationsApiView: React.FC<{ activeTab?: string }> = ({ activeTa
 
   const [clientForm, setClientForm] = useState({
     name: '',
-    clientId: 'cli_live_' + Math.random().toString(36).substring(2, 10),
+    clientId: 'cli_live_' + mockRandom().toString(36).substring(2, 10),
     scopes: ['orders:read', 'inventory:write'],
     rateLimitPerMinute: 300,
     status: 'Active' as const

@@ -18,6 +18,7 @@ import {
 import { useSalesCrm } from '../../services/salesCrmStore';
 import { DeliveryNote, ARInvoice, CreditNote, CustomerAdvance } from '../../types';
 import { ERPUserRole } from '../../../../types/erp';
+import { notify } from '@/src/components/common/Feedback';
 
 interface DeliveryAndBillingViewProps {
   activeTransactionId?: string;
@@ -68,7 +69,7 @@ export const DeliveryAndBillingView: React.FC<DeliveryAndBillingViewProps> = ({
       );
       setTimeout(() => setBillingAlert(null), 7000);
     } catch (err: any) {
-      alert(err.message);
+      notify(err.message);
     }
   };
 

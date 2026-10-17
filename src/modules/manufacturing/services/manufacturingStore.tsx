@@ -27,6 +27,7 @@ import {
   WorkOrderPriority,
   ScrapReasonCode
 } from '../types';
+import { mockRandom } from '@/src/utils/mockRandom';
 
 // ==========================================
 // INITIAL REALISTIC INDUSTRIAL DATA (OMAN)
@@ -1692,7 +1693,7 @@ export const ManufacturingProvider: React.FC<{ children: React.ReactNode }> = ({
   };
 
   const issueMaterialsToWorkOrder = (issueData: Omit<MaterialIssueVoucher, 'id' | 'voucherNumber'>): MaterialIssueVoucher => {
-    const seq = Math.floor(Math.random() * 800) + 100;
+    const seq = Math.floor(mockRandom() * 800) + 100;
     const voucherNumber = `MIV-2026-0${seq}`;
     const voucher: MaterialIssueVoucher = {
       ...issueData,
@@ -1734,7 +1735,7 @@ export const ManufacturingProvider: React.FC<{ children: React.ReactNode }> = ({
   const returnMaterialsFromWorkOrder = (
     retData: Omit<MaterialReturnVoucher, 'id' | 'returnVoucherNumber'>
   ): MaterialReturnVoucher => {
-    const seq = Math.floor(Math.random() * 800) + 100;
+    const seq = Math.floor(mockRandom() * 800) + 100;
     const returnVoucherNumber = `MRV-2026-0${seq}`;
     const voucher: MaterialReturnVoucher = {
       ...retData,

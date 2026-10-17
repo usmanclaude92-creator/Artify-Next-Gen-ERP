@@ -28,6 +28,7 @@ import {
   ProjectPnLStatement,
   ProjectCashFlowStatement
 } from '../types';
+import { mockRandom } from '@/src/utils/mockRandom';
 
 // ==========================================
 // SEED DATA
@@ -1138,7 +1139,7 @@ export const ProjectProvider: React.FC<{ children: React.ReactNode }> = ({ child
     const newEntry: MaterialCostEntry = {
       ...entry,
       id: `mat-${Date.now()}`,
-      transactionNumber: `MTR-PRJ-2026-${Math.floor(100 + Math.random() * 900)}`,
+      transactionNumber: `MTR-PRJ-2026-${Math.floor(100 + mockRandom() * 900)}`,
       totalCost,
       status: 'POSTED_TO_JOB'
     };
@@ -1158,7 +1159,7 @@ export const ProjectProvider: React.FC<{ children: React.ReactNode }> = ({ child
     const newEntry: LaborCostEntry = {
       ...entry,
       id: `lab-${Date.now()}`,
-      timesheetNumber: `TS-2026-W${Math.floor(20 + Math.random() * 10)}-${Math.floor(1 + Math.random() * 9)}`,
+      timesheetNumber: `TS-2026-W${Math.floor(20 + mockRandom() * 10)}-${Math.floor(1 + mockRandom() * 9)}`,
       totalLaborCost,
       status: 'APPROVED_AND_POSTED'
     };
@@ -1177,7 +1178,7 @@ export const ProjectProvider: React.FC<{ children: React.ReactNode }> = ({ child
     const newEntry: EquipmentCostEntry = {
       ...entry,
       id: `eqp-${Date.now()}`,
-      equipmentLogNumber: `EQ-LOG-2026-${Math.floor(100 + Math.random() * 900)}`,
+      equipmentLogNumber: `EQ-LOG-2026-${Math.floor(100 + mockRandom() * 900)}`,
       totalCost,
       status: 'POSTED_TO_PROJECT'
     };
@@ -1197,7 +1198,7 @@ export const ProjectProvider: React.FC<{ children: React.ReactNode }> = ({ child
     const newPr: ProjectPurchaseRequisition = {
       ...req,
       id: `pr-${Date.now()}`,
-      prNumber: `PR-PRJ-2026-${Math.floor(100 + Math.random() * 900)}`,
+      prNumber: `PR-PRJ-2026-${Math.floor(100 + mockRandom() * 900)}`,
       totalEstimatedAmount,
       status: 'SUBMITTED_FOR_PM_APPROVAL'
     };
@@ -1228,7 +1229,7 @@ export const ProjectProvider: React.FC<{ children: React.ReactNode }> = ({ child
 
     const newPo: ProjectPurchaseOrder = {
       id: `po-${Date.now()}`,
-      poNumber: `PO-PRJ-2026-${Math.floor(100 + Math.random() * 900)}`,
+      poNumber: `PO-PRJ-2026-${Math.floor(100 + mockRandom() * 900)}`,
       projectId: matchedPr.projectId,
       projectName: matchedPr.projectName,
       vendorId,
@@ -1262,7 +1263,7 @@ export const ProjectProvider: React.FC<{ children: React.ReactNode }> = ({ child
     const newSub: SubcontractorContract = {
       ...sub,
       id: `sub-${Date.now()}`,
-      subcontractNumber: `SUB-2026-${Math.floor(100 + Math.random() * 900)}`,
+      subcontractNumber: `SUB-2026-${Math.floor(100 + mockRandom() * 900)}`,
       totalCertifiedWorkDone: 0,
       totalRetentionDeducted: 0,
       netBilledToDate: 0,
@@ -1320,7 +1321,7 @@ export const ProjectProvider: React.FC<{ children: React.ReactNode }> = ({ child
     const newIpc: ProgressPaymentCertificate = {
       ...cert,
       id: `ipc-${Date.now()}`,
-      certificateNumber: `IPC-2026-${Math.floor(100 + Math.random() * 900)}`,
+      certificateNumber: `IPC-2026-${Math.floor(100 + mockRandom() * 900)}`,
       retentionDeductionAmount: retention,
       netPayableAmount,
       vatTaxAmount,
@@ -1350,7 +1351,7 @@ export const ProjectProvider: React.FC<{ children: React.ReactNode }> = ({ child
     if (!ipc) return;
 
     const proj = projects.find(p => p.id === ipc.projectId);
-    const invoiceNumber = `INV-PRJ-2026-${Math.floor(100 + Math.random() * 900)}`;
+    const invoiceNumber = `INV-PRJ-2026-${Math.floor(100 + mockRandom() * 900)}`;
 
     const newInv: ProjectCustomerInvoice = {
       id: `inv-${Date.now()}`,
@@ -1504,6 +1505,14 @@ export const ProjectProvider: React.FC<{ children: React.ReactNode }> = ({ child
   return (
     <ProjectStoreContext.Provider
       value={{
+        companies,
+        branches,
+        departments,
+        costCenters,
+        clientEntities,
+        projectManagers,
+        siteEngineers,
+        currencies,
         projects,
         classifications,
         selectedProject,

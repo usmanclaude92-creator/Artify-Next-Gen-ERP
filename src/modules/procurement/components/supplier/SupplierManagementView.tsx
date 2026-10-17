@@ -18,6 +18,7 @@ import {
   Calendar,
   DollarSign
 } from 'lucide-react';
+import { mockRandom } from '@/src/utils/mockRandom';
 
 export const SupplierManagementView: React.FC = () => {
   const {
@@ -72,7 +73,7 @@ export const SupplierManagementView: React.FC = () => {
     addSupplier({
       name: suppName,
       tradeName: suppName,
-      commercialRegistrationNumber: `CR-OM-${Math.floor(1000000 + Math.random() * 9000000)}`,
+      commercialRegistrationNumber: `CR-OM-${Math.floor(1000000 + mockRandom() * 9000000)}`,
       taxIdentificationNumber: suppTaxId,
       category: suppCategory,
       tier: isSme ? 'Tier 3 (Emerging / SME)' : 'Tier 2 (Preferred)',

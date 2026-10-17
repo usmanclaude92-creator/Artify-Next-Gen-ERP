@@ -12,6 +12,7 @@ import {
   BankingGLJournalEntry,
   BankingAuditLogRecord
 } from '../types';
+import { mockRandom } from '@/src/utils/mockRandom';
 
 export const ENTERPRISE_BANKING_ACTORS: UserContext[] = [
   {
@@ -355,7 +356,7 @@ export class BankingWorkflowEngine {
       postedBy: string;
     }
   ): BankingGLJournalEntry {
-    const seq = Math.floor(Math.random() * 9000) + 1000;
+    const seq = Math.floor(mockRandom() * 9000) + 1000;
     const voucherNumber = `JV-BNK-2026-${seq}`;
     const today = new Date().toISOString().split('T')[0];
 
@@ -534,7 +535,7 @@ export class BankingWorkflowEngine {
     violationCode?: string;
   }): BankingAuditLogRecord {
     const record: BankingAuditLogRecord = {
-      id: `audit-${Date.now()}-${Math.floor(Math.random() * 1000)}`,
+      id: `audit-${Date.now()}-${Math.floor(mockRandom() * 1000)}`,
       timestamp: new Date().toISOString().replace('T', ' ').slice(0, 19),
       actorName: payload.actor.name,
       actorRole: payload.actor.role,

@@ -65,6 +65,7 @@ import {
   mockPostDatedCheques
 } from '../data/mockBankingTreasuryData';
 import { BankingWorkflowEngine, ENTERPRISE_BANKING_ACTORS } from './bankingWorkflowEngine';
+import { mockRandom } from '@/src/utils/mockRandom';
 
 const STORAGE_KEY = 'ARTIFY_ERP_BANKING_TREASURY_V2';
 
@@ -439,7 +440,7 @@ export const BankingTreasuryProvider: React.FC<{ children: React.ReactNode }> = 
   };
 
   const recordCashReceipt = (data: Omit<CashReceiptRecord, 'id' | 'receiptNumber' | 'status'>) => {
-    const seq = Math.floor(Math.random() * 900) + 100;
+    const seq = Math.floor(mockRandom() * 900) + 100;
     const newReceipt: CashReceiptRecord = {
       ...data,
       id: `cr-${Date.now().toString().slice(-4)}`,
@@ -491,7 +492,7 @@ export const BankingTreasuryProvider: React.FC<{ children: React.ReactNode }> = 
       return { success: false, error: validation.error };
     }
 
-    const seq = Math.floor(Math.random() * 900) + 100;
+    const seq = Math.floor(mockRandom() * 900) + 100;
     const newPayment: CashPaymentRecord = {
       ...data,
       id: `cp-${Date.now().toString().slice(-4)}`,
@@ -554,7 +555,7 @@ export const BankingTreasuryProvider: React.FC<{ children: React.ReactNode }> = 
       return { success: false, error: validation.error };
     }
 
-    const seq = Math.floor(Math.random() * 9000) + 1000;
+    const seq = Math.floor(mockRandom() * 9000) + 1000;
     const amountOMR = data.amountInOMR || data.amount;
     const isUrgent = amountOMR > 50000;
 
@@ -626,7 +627,7 @@ export const BankingTreasuryProvider: React.FC<{ children: React.ReactNode }> = 
   };
 
   const issueChequePayment = (data: Omit<ChequePaymentRecord, 'id' | 'status'>): { success: boolean; error?: string } => {
-    const seq = Math.floor(Math.random() * 900) + 100;
+    const seq = Math.floor(mockRandom() * 900) + 100;
     const newChq: ChequePaymentRecord = {
       ...data,
       id: `chq-${Date.now().toString().slice(-4)}`,
@@ -677,7 +678,7 @@ export const BankingTreasuryProvider: React.FC<{ children: React.ReactNode }> = 
   };
 
   const createElectronicBatch = (data: Omit<ElectronicPaymentBatch, 'id' | 'batchNumber' | 'status'>): { success: boolean; error?: string } => {
-    const seq = Math.floor(Math.random() * 900) + 100;
+    const seq = Math.floor(mockRandom() * 900) + 100;
     const wf = BankingWorkflowEngine.evaluatePaymentWorkflow(
       'Electronic Batch (WPS)',
       data.totalAmount,
@@ -1010,7 +1011,7 @@ export const BankingTreasuryProvider: React.FC<{ children: React.ReactNode }> = 
   // 04.04 Receipt Actions
   // -------------------------------------------------------------
   const recordCustomerReceipt = (data: Omit<CustomerReceiptRecord, 'id' | 'receiptNumber' | 'status' | 'allocatedAmount' | 'unallocatedAmount'>) => {
-    const seq = Math.floor(Math.random() * 900) + 100;
+    const seq = Math.floor(mockRandom() * 900) + 100;
     const newRcpt: CustomerReceiptRecord = {
       ...data,
       id: `rcpt-${Date.now().toString().slice(-4)}`,
@@ -1088,7 +1089,7 @@ export const BankingTreasuryProvider: React.FC<{ children: React.ReactNode }> = 
   };
 
   const recordOtherReceipt = (data: Omit<OtherReceiptRecord, 'id' | 'receiptNumber' | 'status'>) => {
-    const seq = Math.floor(Math.random() * 900) + 100;
+    const seq = Math.floor(mockRandom() * 900) + 100;
     const newOther: OtherReceiptRecord = {
       ...data,
       id: `orcpt-${Date.now().toString().slice(-4)}`,
@@ -1099,7 +1100,7 @@ export const BankingTreasuryProvider: React.FC<{ children: React.ReactNode }> = 
   };
 
   const generateDepositSlip = (data: Omit<BankDepositSlipRecord, 'id' | 'depositSlipNumber' | 'status'>) => {
-    const seq = Math.floor(Math.random() * 900) + 100;
+    const seq = Math.floor(mockRandom() * 900) + 100;
     const newSlip: BankDepositSlipRecord = {
       ...data,
       id: `dep-${Date.now().toString().slice(-4)}`,
@@ -1196,7 +1197,7 @@ export const BankingTreasuryProvider: React.FC<{ children: React.ReactNode }> = 
   };
 
   const createReconciliationAdjustment = (data: Omit<ReconciliationAdjustmentRecord, 'id' | 'adjustmentNumber' | 'status'>) => {
-    const seq = Math.floor(Math.random() * 900) + 100;
+    const seq = Math.floor(mockRandom() * 900) + 100;
     const newAdj: ReconciliationAdjustmentRecord = {
       ...data,
       id: `adj-${Date.now().toString().slice(-4)}`,
@@ -1259,7 +1260,7 @@ export const BankingTreasuryProvider: React.FC<{ children: React.ReactNode }> = 
   };
 
   const issuePettyCashAdvance = (data: Omit<PettyCashAdvanceRecord, 'id' | 'advanceNumber' | 'status'>) => {
-    const seq = Math.floor(Math.random() * 900) + 100;
+    const seq = Math.floor(mockRandom() * 900) + 100;
     const newAdv: PettyCashAdvanceRecord = {
       ...data,
       id: `pca-${Date.now().toString().slice(-4)}`,
@@ -1316,7 +1317,7 @@ export const BankingTreasuryProvider: React.FC<{ children: React.ReactNode }> = 
   };
 
   const submitPettyCashExpense = (data: Omit<PettyCashExpenseRecord, 'id' | 'voucherNumber' | 'status'>) => {
-    const seq = Math.floor(Math.random() * 900) + 100;
+    const seq = Math.floor(mockRandom() * 900) + 100;
     const newExp: PettyCashExpenseRecord = {
       ...data,
       id: `pce-${Date.now().toString().slice(-4)}`,
@@ -1395,7 +1396,7 @@ export const BankingTreasuryProvider: React.FC<{ children: React.ReactNode }> = 
   };
 
   const recordBankChargeAudit = (data: Omit<BankChargeAuditRecord, 'id' | 'auditRefNumber'>) => {
-    const seq = Math.floor(Math.random() * 900) + 100;
+    const seq = Math.floor(mockRandom() * 900) + 100;
     const newAudit: BankChargeAuditRecord = {
       ...data,
       id: `bca-${Date.now().toString().slice(-4)}`,
@@ -1405,7 +1406,7 @@ export const BankingTreasuryProvider: React.FC<{ children: React.ReactNode }> = 
   };
 
   const registerPostDatedCheque = (data: Omit<PostDatedChequeRecord, 'id' | 'pdcReference' | 'status' | 'daysUntilMaturity'>) => {
-    const seq = Math.floor(Math.random() * 900) + 100;
+    const seq = Math.floor(mockRandom() * 900) + 100;
     const days = Math.max(0, Math.ceil((new Date(data.maturityDate).getTime() - new Date().getTime()) / (1000 * 3600 * 24)));
     const newPdc: PostDatedChequeRecord = {
       ...data,

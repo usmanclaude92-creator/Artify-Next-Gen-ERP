@@ -27,6 +27,7 @@ import {
   ChevronRight,
   X
 } from 'lucide-react';
+import { notify } from '@/src/components/common/Feedback';
 
 interface PerformanceDevViewProps {
   initialTab?: 'reviews' | 'ninebox' | 'training' | 'succession';
@@ -319,7 +320,7 @@ export const PerformanceDevView: React.FC<PerformanceDevViewProps> = ({
                   <button
                     onClick={() => {
                       enrollInTraining(trn.id, employees[0]?.id || 'EMP-00101');
-                      alert(`Successfully enrolled employee into ${trn.title}`);
+                      notify(`Successfully enrolled employee into ${trn.title}`);
                     }}
                     className="px-3 py-1 bg-rose-600 hover:bg-rose-500 text-white rounded-lg font-bold"
                   >

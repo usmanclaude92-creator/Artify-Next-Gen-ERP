@@ -25,6 +25,7 @@ import {
   ShipmentTransitStatus,
   CustomsStatus
 } from '../types';
+import { mockRandom } from '@/src/utils/mockRandom';
 
 interface ScmStoreContextType {
   // State
@@ -1091,7 +1092,7 @@ export const ScmProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   };
 
   const convertConsolidationToPr = (batchId: string) => {
-    const prNumber = `PR-SCM-2026-${Math.floor(1000 + Math.random() * 9000)}`;
+    const prNumber = `PR-SCM-2026-${Math.floor(1000 + mockRandom() * 9000)}`;
     setConsolidationBatches(prev =>
       prev.map(b =>
         b.id === batchId
@@ -1136,7 +1137,7 @@ export const ScmProvider: React.FC<{ children: React.ReactNode }> = ({ children 
 
   // 12.03 Actions
   const generatePurchaseOrderFromMrp = (mrpId: string): string => {
-    const poNumber = `PO-2026-${Math.floor(10000 + Math.random() * 90000)}`;
+    const poNumber = `PO-2026-${Math.floor(10000 + mockRandom() * 90000)}`;
     setMrpRequirements(prev =>
       prev.map(item =>
         item.id === mrpId
@@ -1169,7 +1170,7 @@ export const ScmProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   // 12.04 Actions
   const createFreightShipment = (shipment: Omit<FreightShipment, 'id' | 'shipmentNumber' | 'milestones'>): FreightShipment => {
     const newId = `SHIP-${Date.now()}`;
-    const shpNumber = `SHP-${shipment.carrierName.split(' ')[0].toUpperCase()}-${Math.floor(10000 + Math.random() * 90000)}`;
+    const shpNumber = `SHP-${shipment.carrierName.split(' ')[0].toUpperCase()}-${Math.floor(10000 + mockRandom() * 90000)}`;
     const newShipment: FreightShipment = {
       ...shipment,
       id: newId,
@@ -1225,7 +1226,7 @@ export const ScmProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   // 12.05 Actions
   const createCustomsDeclaration = (dec: Omit<CustomsDeclaration, 'id' | 'declarationNumber' | 'submissionDate'>): CustomsDeclaration => {
     const newId = `DEC-${Date.now()}`;
-    const decNumber = `BAYAN-2026-OM-${Math.floor(100000 + Math.random() * 900000)}`;
+    const decNumber = `BAYAN-2026-OM-${Math.floor(100000 + mockRandom() * 900000)}`;
     const newDec: CustomsDeclaration = {
       ...dec,
       id: newId,
@@ -1243,7 +1244,7 @@ export const ScmProvider: React.FC<{ children: React.ReactNode }> = ({ children 
           ? {
               ...d,
               status,
-              dutyPaymentRef: status === 'Duty Paid' ? `EPAY-OM-CUSTOMS-${Math.floor(100000 + Math.random() * 900000)}` : d.dutyPaymentRef
+              dutyPaymentRef: status === 'Duty Paid' ? `EPAY-OM-CUSTOMS-${Math.floor(100000 + mockRandom() * 900000)}` : d.dutyPaymentRef
             }
           : d
       )
@@ -1269,7 +1270,7 @@ export const ScmProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   // 12.06 Actions
   const createReplenishmentOrder = (order: Omit<DistributionReplenishmentOrder, 'id' | 'replenishmentOrderNumber'>) => {
     const newId = `REPL-${Date.now()}`;
-    const refNum = `REP-${order.sourceHub.slice(0, 3).toUpperCase()}-${order.destinationDepot.slice(0, 3).toUpperCase()}-${Math.floor(1000 + Math.random() * 9000)}`;
+    const refNum = `REP-${order.sourceHub.slice(0, 3).toUpperCase()}-${order.destinationDepot.slice(0, 3).toUpperCase()}-${Math.floor(1000 + mockRandom() * 9000)}`;
     const newOrder: DistributionReplenishmentOrder = {
       ...order,
       id: newId,

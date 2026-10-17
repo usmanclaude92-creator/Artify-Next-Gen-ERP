@@ -22,6 +22,8 @@ import {
   ExternalLink,
   Printer
 } from 'lucide-react';
+import { notify } from '@/src/components/common/Feedback';
+import { mockRandom } from '@/src/utils/mockRandom';
 
 export const AssetTransferView: React.FC = () => {
   const {
@@ -62,7 +64,7 @@ export const AssetTransferView: React.FC = () => {
     toCustodian: 'Mubarak Al-Saadi',
     transferReason: 'Operational redeployment for Duqm Phase 2 marine works',
     requiresGatePass: true,
-    gatePassNumber: `GP-${Math.floor(10000 + Math.random() * 90000)}`
+    gatePassNumber: `GP-${Math.floor(10000 + mockRandom() * 90000)}`
   });
 
   const handleCreateAssignment = (e: React.FormEvent) => {
@@ -283,7 +285,7 @@ export const AssetTransferView: React.FC = () => {
                       {trf.status}
                     </span>
                     <button
-                      onClick={() => alert(`Printing Official Security Gate Pass #${trf.gatePassNumber} for vehicle release...`)}
+                      onClick={() => notify(`Printing Official Security Gate Pass #${trf.gatePassNumber} for vehicle release...`)}
                       className="flex items-center gap-1.5 px-3 py-1 bg-slate-800 hover:bg-slate-700 text-white rounded-lg text-xs font-bold border border-slate-700 cursor-pointer"
                     >
                       <Printer className="w-3.5 h-3.5 text-amber-400" />

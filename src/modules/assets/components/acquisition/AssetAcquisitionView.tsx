@@ -23,6 +23,8 @@ import {
   Download,
   FileSpreadsheet
 } from 'lucide-react';
+import { notify } from '@/src/components/common/Feedback';
+import { mockRandom } from '@/src/utils/mockRandom';
 
 export const AssetAcquisitionView: React.FC = () => {
   const {
@@ -39,7 +41,7 @@ export const AssetAcquisitionView: React.FC = () => {
   // CWIP Form
   const [showCwipModal, setShowCwipModal] = useState(false);
   const [cwipForm, setCwipForm] = useState({
-    projectCode: `CWIP-2026-${Math.floor(100 + Math.random() * 900)}`,
+    projectCode: `CWIP-2026-${Math.floor(100 + mockRandom() * 900)}`,
     projectName: '',
     targetAssetCategory: 'Plant & Heavy Machinery',
     costCenter: 'CC-PLANT-MFG',
@@ -112,7 +114,7 @@ export const AssetAcquisitionView: React.FC = () => {
     e.preventDefault();
     const totalAdditional = Number(purchaseForm.shippingFreightCost) + Number(purchaseForm.installationLaborCost) + Number(purchaseForm.customsDutyCost);
     const cat = categories.find(c => c.id === purchaseForm.categoryId) || categories[0];
-    const newTag = `AST-PO-${new Date().getFullYear()}-${Math.floor(1000 + Math.random() * 9000)}`;
+    const newTag = `AST-PO-${new Date().getFullYear()}-${Math.floor(1000 + mockRandom() * 9000)}`;
 
     addAsset({
       assetTag: newTag,
@@ -121,8 +123,8 @@ export const AssetAcquisitionView: React.FC = () => {
       categoryName: cat.name,
       classificationId: 'cls-1',
       classificationName: 'IAS 16 — Property, Plant & Equipment',
-      serialNumber: `SN-ACQ-${Math.floor(100000 + Math.random() * 900000)}`,
-      barcode: `890${Math.floor(100000000 + Math.random() * 900000000)}`,
+      serialNumber: `SN-ACQ-${Math.floor(100000 + mockRandom() * 900000)}`,
+      barcode: `890${Math.floor(100000000 + mockRandom() * 900000000)}`,
       brand: 'Imported Capital Asset',
       model: 'Model 2026',
       manufactureYear: 2026,
@@ -155,7 +157,7 @@ export const AssetAcquisitionView: React.FC = () => {
       isInsured: true
     });
 
-    alert(`Asset ${newTag} capitalized successfully with total cost basis of ${currency} ${(Number(purchaseForm.baseInvoiceCost) + totalAdditional).toLocaleString()}!`);
+    notify(`Asset ${newTag} capitalized successfully with total cost basis of ${currency} ${(Number(purchaseForm.baseInvoiceCost) + totalAdditional).toLocaleString()}!`);
   };
 
   return (
@@ -504,7 +506,7 @@ export const AssetAcquisitionView: React.FC = () => {
                   </td>
                   <td className="py-3.5 px-4 text-center">
                     <button
-                      onClick={() => alert('Direct capitalization wizard opened for PO-CAPEX-2026-091')}
+                      onClick={() => notify('Direct capitalization wizard opened for PO-CAPEX-2026-091')}
                       className="px-3 py-1 bg-amber-600 hover:bg-amber-500 text-white rounded-lg text-[11px] font-bold cursor-pointer"
                     >
                       Capitalize
@@ -526,7 +528,7 @@ export const AssetAcquisitionView: React.FC = () => {
               <p className="text-xs text-slate-400">Batch upload existing asset books with historical cost, placed in service dates, and accumulated depreciation layers.</p>
             </div>
             <button
-              onClick={() => alert('Downloading Excel Opening Balance Migration Template...')}
+              onClick={() => notify('Downloading Excel Opening Balance Migration Template...')}
               className="flex items-center gap-2 px-4 py-2 bg-slate-800 hover:bg-slate-700 text-white rounded-xl text-xs font-bold border border-slate-700 transition-colors cursor-pointer"
             >
               <Download className="w-4 h-4 text-amber-400" />
@@ -545,7 +547,7 @@ export const AssetAcquisitionView: React.FC = () => {
               </p>
             </div>
             <button
-              onClick={() => alert('Opening balance batch migration simulated: 420 legacy assets uploaded and reconciled successfully!')}
+              onClick={() => notify('Opening balance batch migration simulated: 420 legacy assets uploaded and reconciled successfully!')}
               className="px-6 py-2.5 bg-gradient-to-r from-amber-600 to-amber-700 hover:from-amber-500 hover:to-amber-600 text-white rounded-xl text-xs font-bold shadow-lg shadow-amber-600/30 transition-all cursor-pointer"
             >
               Simulate Excel Import & Validate GL Tie-out

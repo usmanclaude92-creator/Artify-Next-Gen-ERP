@@ -42,6 +42,7 @@ import {
   Copy,
   CheckCheck
 } from 'lucide-react';
+import { confirmAction } from '@/src/components/common/Feedback';
 
 export const ProjectSetupView: React.FC = () => {
   const {
@@ -190,8 +191,8 @@ export const ProjectSetupView: React.FC = () => {
     }
   };
 
-  const handleDeleteProject = (id: string) => {
-    if (window.confirm('Are you sure you want to archive/delete this Project Master record and its WBS hierarchy?')) {
+  const handleDeleteProject = async (id: string) => {
+    if (await confirmAction('Are you sure you want to archive/delete this Project Master record and its WBS hierarchy?')) {
       deleteProject(id);
       showToast('Project record removed from active project portfolio.');
     }
@@ -226,8 +227,8 @@ export const ProjectSetupView: React.FC = () => {
     }
   };
 
-  const handleDeletePhase = (phaseId: string) => {
-    if (window.confirm('Delete this phase and all associated WBS work packages?')) {
+  const handleDeletePhase = async (phaseId: string) => {
+    if (await confirmAction('Delete this phase and all associated WBS work packages?')) {
       deletePhase(selectedProject.id, phaseId);
       showToast('Phase removed from Project WBS.');
     }
@@ -257,8 +258,8 @@ export const ProjectSetupView: React.FC = () => {
     }
   };
 
-  const handleDeleteActivity = (phaseId: string, activityId: string) => {
-    if (window.confirm('Delete this WBS activity?')) {
+  const handleDeleteActivity = async (phaseId: string, activityId: string) => {
+    if (await confirmAction('Delete this WBS activity?')) {
       deleteActivity(selectedProject.id, phaseId, activityId);
       showToast('WBS activity deleted.');
     }
@@ -540,8 +541,8 @@ export const ProjectSetupView: React.FC = () => {
                   <div className="flex items-center justify-between pt-2 text-[11px] text-slate-500">
                     <span>Associated Projects: {projects.filter(p => p.projectClassificationId === c.id).length}</span>
                     <button
-                      onClick={() => {
-                        if (window.confirm(`Delete classification ${c.name}?`)) {
+                      onClick={async () => {
+                        if (await confirmAction(`Delete classification ${c.name}?`)) {
                           deleteClassification(c.id);
                           showToast('Classification deleted.');
                         }

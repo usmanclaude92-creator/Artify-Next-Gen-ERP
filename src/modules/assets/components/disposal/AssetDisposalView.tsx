@@ -21,6 +21,8 @@ import {
   Building,
   Printer
 } from 'lucide-react';
+import { notify } from '@/src/components/common/Feedback';
+import { mockRandom } from '@/src/utils/mockRandom';
 
 export const AssetDisposalView: React.FC = () => {
   const {
@@ -49,7 +51,7 @@ export const AssetDisposalView: React.FC = () => {
 
   // Insurance Form State
   const [insForm, setInsForm] = useState({
-    policyNumber: `POL-OMAN-2026-${Math.floor(100 + Math.random() * 900)}`,
+    policyNumber: `POL-OMAN-2026-${Math.floor(100 + mockRandom() * 900)}`,
     insurerName: 'Oman Qatar Insurance Company (OQIC)',
     coverageType: 'COMPREHENSIVE_ALL_RISKS',
     sumInsured: 2500000,
@@ -77,7 +79,7 @@ export const AssetDisposalView: React.FC = () => {
       proceedsAmount: Number(dispForm.proceedsAmount),
       gainLossAmount: gainOrLoss,
       buyerName: dispForm.buyerName,
-      salesInvoiceNumber: dispForm.disposalType === 'SALE' ? `INV-DISP-${Math.floor(1000 + Math.random() * 9000)}` : undefined,
+      salesInvoiceNumber: dispForm.disposalType === 'SALE' ? `INV-DISP-${Math.floor(1000 + mockRandom() * 9000)}` : undefined,
       reason: dispForm.reason,
       status: 'APPROVED',
       authorizedBy: dispForm.authorizedBy
@@ -268,7 +270,7 @@ export const AssetDisposalView: React.FC = () => {
                 </div>
 
                 <button
-                  onClick={() => alert(`Generating reconciliation adjustments for Audit ${audit.auditNumber}...`)}
+                  onClick={() => notify(`Generating reconciliation adjustments for Audit ${audit.auditNumber}...`)}
                   className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-amber-600 to-amber-700 hover:from-amber-500 hover:to-amber-600 text-white rounded-xl text-xs font-bold shadow-lg shadow-amber-600/20 transition-all cursor-pointer"
                 >
                   <FileCheck className="w-4 h-4" />
@@ -359,7 +361,7 @@ export const AssetDisposalView: React.FC = () => {
               <p className="text-xs text-slate-400">Oman Tax Authority compliant capital allowance pools and book-to-tax timing differences.</p>
             </div>
             <button
-              onClick={() => alert('Generating Statutory Tax Schedule PDF...')}
+              onClick={() => notify('Generating Statutory Tax Schedule PDF...')}
               className="flex items-center gap-2 px-4 py-2 bg-slate-800 hover:bg-slate-700 text-white rounded-xl text-xs font-bold border border-slate-700 transition-colors cursor-pointer"
             >
               <Download className="w-4 h-4 text-amber-400" />

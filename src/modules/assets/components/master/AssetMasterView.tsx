@@ -34,6 +34,8 @@ import {
   ShieldCheck,
   Sparkles
 } from 'lucide-react';
+import { notify } from '@/src/components/common/Feedback';
+import { mockRandom } from '@/src/utils/mockRandom';
 
 export const AssetMasterView: React.FC = () => {
   const {
@@ -97,7 +99,7 @@ export const AssetMasterView: React.FC = () => {
     e.preventDefault();
     const cat = categories.find(c => c.id === formData.categoryId) || categories[0];
     const cls = classifications.find(c => c.id === formData.classificationId) || classifications[0];
-    const newTag = `AST-OMN-${new Date().getFullYear()}-${Math.floor(1000 + Math.random() * 9000)}`;
+    const newTag = `AST-OMN-${new Date().getFullYear()}-${Math.floor(1000 + mockRandom() * 9000)}`;
 
     addAsset({
       assetTag: newTag,
@@ -106,9 +108,9 @@ export const AssetMasterView: React.FC = () => {
       categoryName: cat.name,
       classificationId: cls.id,
       classificationName: cls.name,
-      serialNumber: formData.serialNumber || `SN-${Math.floor(100000 + Math.random() * 900000)}`,
-      barcode: `890${Math.floor(100000000 + Math.random() * 900000000)}`,
-      rfidTag: `RFID-${Math.floor(1000 + Math.random() * 9000)}`,
+      serialNumber: formData.serialNumber || `SN-${Math.floor(100000 + mockRandom() * 900000)}`,
+      barcode: `890${Math.floor(100000000 + mockRandom() * 900000000)}`,
+      rfidTag: `RFID-${Math.floor(1000 + mockRandom() * 9000)}`,
       brand: formData.brand,
       model: formData.model,
       manufactureYear: Number(formData.manufactureYear),
@@ -416,7 +418,7 @@ export const AssetMasterView: React.FC = () => {
               <p className="text-xs text-slate-400">Comprehensive IFRS/IAS 16 audit schedule of Cost, Revaluations, Impairments, Accumulated Depreciation & Net Book Value.</p>
             </div>
             <button
-              onClick={() => alert('Exporting Official Fixed Asset Register to Excel/PDF schedule...')}
+              onClick={() => notify('Exporting Official Fixed Asset Register to Excel/PDF schedule...')}
               className="flex items-center gap-2 px-4 py-2 bg-slate-800 hover:bg-slate-700 text-white rounded-xl text-xs font-bold border border-slate-700 transition-colors cursor-pointer"
             >
               <Download className="w-4 h-4 text-amber-400" />
@@ -719,7 +721,7 @@ export const AssetMasterView: React.FC = () => {
 
             <div className="flex items-center justify-end gap-3 pt-2">
               <button
-                onClick={() => alert('Sending asset tag to thermal Zebra printer...')}
+                onClick={() => notify('Sending asset tag to thermal Zebra printer...')}
                 className="w-full py-2.5 bg-amber-600 hover:bg-amber-500 text-white rounded-xl text-xs font-bold transition-colors cursor-pointer"
               >
                 Print Thermal Asset Label

@@ -31,6 +31,7 @@ import {
   DocumentRetentionRule,
   ComplianceExecutiveMetrics
 } from '../types';
+import { mockRandom } from '@/src/utils/mockRandom';
 
 interface ComplianceContextType {
   // 17.01 Regulatory Compliance
@@ -1567,7 +1568,7 @@ export const ComplianceProvider: React.FC<{ children: React.ReactNode }> = ({ ch
       // Simulate real AI analysis finding an additional anomalous pattern
       const newAlert: FraudRedFlagAlert = {
         id: `ALERT-${Date.now().toString().slice(-4)}`,
-        alertCode: `RED-2026-${Math.floor(100 + Math.random() * 900)}`,
+        alertCode: `RED-2026-${Math.floor(100 + mockRandom() * 900)}`,
         alertType: 'BENFORD_ANOMALY',
         detectionTimestamp: new Date().toISOString().replace('T', ' ').slice(0, 19),
         severity: 'MEDIUM',

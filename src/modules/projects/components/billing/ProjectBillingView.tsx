@@ -21,6 +21,7 @@ import {
   Building2,
   TrendingUp
 } from 'lucide-react';
+import { mockRandom } from '@/src/utils/mockRandom';
 
 export const ProjectBillingView: React.FC = () => {
   const {
@@ -88,7 +89,7 @@ export const ProjectBillingView: React.FC = () => {
         <div className="flex items-center gap-2">
           {activeTab === 'REVENUE_RECOGNITION' && (
             <button
-              onClick={() => calculateRevenueRecognition(selectedProject.id, `2026-Q${Math.floor(Math.random()*4 + 1)} (Current)`)}
+              onClick={() => calculateRevenueRecognition(selectedProject.id, `2026-Q${Math.floor(mockRandom()*4 + 1)} (Current)`)}
               className="flex items-center gap-2 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white font-medium text-xs px-3.5 py-2 rounded-xl transition-all cursor-pointer"
             >
               <TrendingUp className="w-3.5 h-3.5" />

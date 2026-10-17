@@ -35,6 +35,7 @@ import { StatusBadge } from './common/StatusBadge';
 import { MetricCard } from './common/MetricCard';
 import { FormModal } from './common/FormModal';
 import { GroupMaster, GroupMembership, RelationshipType, ControlType, GroupAttachment } from '../types';
+import { confirmAction } from '@/src/components/common/Feedback';
 
 export const GroupHoldingManagementView: React.FC = () => {
   const {
@@ -932,8 +933,8 @@ export const GroupHoldingManagementView: React.FC = () => {
                             <Edit2 className="w-3.5 h-3.5" />
                           </button>
                           <button
-                            onClick={() => {
-                              if (confirm(`Remove ${member.companyName} from group?`)) {
+                            onClick={async () => {
+                              if (await confirmAction(`Remove ${member.companyName} from group?`)) {
                                 removeGroupMember(member.id, 'User removed from hierarchy view');
                               }
                             }}
@@ -1016,8 +1017,8 @@ export const GroupHoldingManagementView: React.FC = () => {
                 </button>
                 {item.relationshipType !== 'Parent' && (
                   <button
-                    onClick={() => {
-                      if (confirm(`Remove entity ${item.companyName} from group?`)) {
+                    onClick={async () => {
+                      if (await confirmAction(`Remove entity ${item.companyName} from group?`)) {
                         removeGroupMember(item.id, 'User removed from register');
                       }
                     }}

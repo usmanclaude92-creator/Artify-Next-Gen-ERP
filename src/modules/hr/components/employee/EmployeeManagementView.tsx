@@ -34,6 +34,8 @@ import {
   CreditCard,
   Briefcase
 } from 'lucide-react';
+import { notify } from '@/src/components/common/Feedback';
+import { mockRandom } from '@/src/utils/mockRandom';
 
 interface EmployeeManagementViewProps {
   initialTab?: 'master' | 'docs' | 'orgchart' | 'contracts';
@@ -368,7 +370,7 @@ export const EmployeeManagementView: React.FC<EmployeeManagementViewProps> = ({
                         </td>
                         <td className="py-3 px-3">
                           <button
-                            onClick={() => alert(`Simulating download of ${doc.fileName} (${doc.fileSize})`)}
+                            onClick={() => notify(`Simulating download of ${doc.fileName} (${doc.fileSize})`)}
                             className="p-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white transition-all"
                             title="Download PDF"
                           >
@@ -541,7 +543,7 @@ export const EmployeeManagementView: React.FC<EmployeeManagementViewProps> = ({
                 <div className="pt-2 border-t border-slate-700/60 flex items-center justify-between text-xs">
                   <span className="text-[11px] text-slate-400">Signed: {ctr.signedDate}</span>
                   <button
-                    onClick={() => alert(`Opening digital contract viewer for ${ctr.contractNumber}`)}
+                    onClick={() => notify(`Opening digital contract viewer for ${ctr.contractNumber}`)}
                     className="px-2.5 py-1 rounded-lg bg-slate-700 hover:bg-slate-600 text-white font-medium transition-all"
                   >
                     View Terms
@@ -838,7 +840,7 @@ export const EmployeeManagementView: React.FC<EmployeeManagementViewProps> = ({
                 addDocument({
                   employeeId: employees[0]?.id || 'EMP-00101',
                   documentType: 'PASSPORT',
-                  documentNumber: 'P-' + Math.floor(100000 + Math.random() * 900000),
+                  documentNumber: 'P-' + Math.floor(100000 + mockRandom() * 900000),
                   title: 'National Passport Renewal Scan',
                   issuingAuthority: 'Immigration & Civil Registry',
                   issueDate: new Date().toISOString().split('T')[0],

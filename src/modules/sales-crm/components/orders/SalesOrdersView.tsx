@@ -18,6 +18,7 @@ import {
 import { useSalesCrm } from '../../services/salesCrmStore';
 import { SalesOrder, SalesOrderStatus, FulfillmentStatus } from '../../types';
 import { ERPUserRole } from '../../../../types/erp';
+import { notify } from '@/src/components/common/Feedback';
 
 interface SalesOrdersViewProps {
   activeTransactionId?: string;
@@ -73,7 +74,7 @@ export const SalesOrdersView: React.FC<SalesOrdersViewProps> = ({
       );
       setTimeout(() => setDispatchAlertMsg(null), 7000);
     } catch (err: any) {
-      alert(err.message);
+      notify(err.message);
     }
   };
 

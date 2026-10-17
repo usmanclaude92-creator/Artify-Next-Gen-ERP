@@ -22,6 +22,7 @@ import {
   Sparkles,
   ClipboardList
 } from 'lucide-react';
+import { mockRandom } from '@/src/utils/mockRandom';
 
 interface ProductionOutputViewProps {
   initialTab?: 'receipts' | 'byproducts' | 'scrap' | 'closeout';
@@ -74,7 +75,7 @@ export const ProductionOutputView: React.FC<ProductionOutputViewProps> = ({
       targetWarehouseId: targetWarehouse,
       lotBatchNumber: selectedWo.targetLotNumber,
       qcInspectionStatus: 'APPROVED_AND_RELEASED',
-      qcCertificateNumber: `QC-PASS-2026-${Math.floor(Math.random() * 9000) + 1000}`,
+      qcCertificateNumber: `QC-PASS-2026-${Math.floor(mockRandom() * 9000) + 1000}`,
       inspectorName: inspector,
       unitCostOMR: selectedWo.totalStandardCostOMR / selectedWo.plannedQuantity,
       totalInventoryValuationOMR:

@@ -14,6 +14,7 @@ import {
   Sparkles,
   ArrowRight
 } from 'lucide-react';
+import { mockRandom } from '@/src/utils/mockRandom';
 
 export const PurchaseInvoiceView: React.FC = () => {
   const {
@@ -70,7 +71,7 @@ export const PurchaseInvoiceView: React.FC = () => {
     ];
 
     const newInv = createPurchaseInvoice({
-      supplierInvoiceNumber: invNumber || `INV-TAX-${Math.floor(100000 + Math.random() * 900000)}`,
+      supplierInvoiceNumber: invNumber || `INV-TAX-${Math.floor(100000 + mockRandom() * 900000)}`,
       poId: po.id,
       poNumber: po.poNumber,
       grnId: grn?.id,
