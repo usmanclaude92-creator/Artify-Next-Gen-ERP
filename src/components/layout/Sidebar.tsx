@@ -30,6 +30,8 @@ interface SidebarProps {
   favorites: FavoriteItem[];
   recents: RecentItem[];
   onOpenPermissionsModal: () => void;
+  isMobileOpen?: boolean;
+  onCloseMobile?: () => void;
 }
 
 export const Sidebar: React.FC<SidebarProps> = ({
@@ -39,7 +41,9 @@ export const Sidebar: React.FC<SidebarProps> = ({
   onNavigate,
   favorites,
   recents,
-  onOpenPermissionsModal
+  onOpenPermissionsModal,
+  isMobileOpen = false,
+  onCloseMobile
 }) => {
   const [expandedModules, setExpandedModules] = useState<Record<string, boolean>>({
     [currentRoute.moduleId || '']: true
@@ -100,9 +104,11 @@ export const Sidebar: React.FC<SidebarProps> = ({
 
   return (
     <aside
-      className={`bg-slate-900 text-slate-300 flex flex-col shrink-0 border-r border-slate-800 transition-all duration-200 z-40 select-none h-screen sticky top-0 overflow-hidden ${
-        isCollapsed ? 'w-18' : 'w-72'
-      }`}
+      id="app-sidebar"
+      aria-label="Primary navigation"
+      className={`bg-slate-900 text-slate-300 flex flex-col shrink-0 border-r border-slate-800 transition-all duration-200 z-50 lg:z-40 select-none h-screen w-72 max-w-[85vw] fixed inset-y-0 left-0 lg:sticky lg:top-0 lg:translate-x-0 overflow-hidden ${
+        isMobileOpen ? 'translate-x-0 shadow-2xl' : '-translate-x-full'
+      } ${isCollapsed ? 'lg:w-18' : 'lg:w-72'}`}
     >
       {/* 1. FIXED TOP HEADER */}
       <div className="h-16 shrink-0 border-b border-slate-800/80 px-4 flex items-center justify-between">
@@ -136,7 +142,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
         )}
 
         <button
-          onClick={onToggleCollapse}
+          onClick={() => (isMobileOpen && onCloseMobile ? onCloseMobile() : onToggleCollapse())}
           title={isCollapsed ? 'Expand Navigation' : 'Collapse Navigation'}
           className={`p-1.5 text-slate-400 hover:text-white hover:bg-slate-800 rounded-lg transition-colors cursor-pointer ${
             isCollapsed ? 'hidden' : 'block'

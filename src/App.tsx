@@ -22,6 +22,7 @@ import {
   MOCK_USER_ROLES
 } from './navigation/erpHierarchy';
 import { Sidebar } from './components/layout/Sidebar';
+import { useMediaQuery } from './hooks/useMediaQuery';
 import { TopBar } from './components/layout/TopBar';
 import { Breadcrumbs } from './components/navigation/Breadcrumbs';
 import { GlobalSearchModal } from './components/navigation/GlobalSearchModal';
@@ -56,6 +57,8 @@ export default function App() {
   const [selectedBranchId, setSelectedBranchId] = useState<string>(ENTERPRISE_BRANCHES[0].id);
   const [activeRole, setActiveRole] = useState<ERPUserRole>(MOCK_USER_ROLES[0]);
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState<boolean>(false);
+  const [isMobileNavOpen, setIsMobileNavOpen] = useState<boolean>(false);
+  const isDesktop = useMediaQuery('(min-width: 1024px)');
   const [isSearchModalOpen, setIsSearchModalOpen] = useState<boolean>(false);
   const [isPermissionsModalOpen, setIsPermissionsModalOpen] = useState<boolean>(false);
 
@@ -91,6 +94,13 @@ export default function App() {
   const [recents, setRecents] = useState<RecentItem[]>([]);
 
   // Register recent item on route change
+  useEffect(() => {
+    if (!isMobileNavOpen) return;
+    const onKey = (e: KeyboardEvent) => e.key === 'Escape' && setIsMobileNavOpen(false);
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [isMobileNavOpen]);
+
   const navigateTo = (newRoute: ERPRouteState) => {
     setRouteState(newRoute);
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -205,11 +215,23 @@ export default function App() {
   return (
     <div className="min-h-screen bg-slate-100 dark:bg-slate-950 text-slate-900 dark:text-slate-100 flex font-sans antialiased selection:bg-indigo-500 selection:text-white transition-colors">
       {/* Collapsible Left Navigation Sidebar */}
+      {isMobileNavOpen && !isDesktop && (
+        <div
+          className="fixed inset-0 z-40 bg-black/50 lg:hidden"
+          onClick={() => setIsMobileNavOpen(false)}
+          aria-hidden="true"
+        />
+      )}
       <Sidebar
-        isCollapsed={isSidebarCollapsed}
+        isCollapsed={isSidebarCollapsed && isDesktop}
+        isMobileOpen={isMobileNavOpen}
+        onCloseMobile={() => setIsMobileNavOpen(false)}
         onToggleCollapse={() => setIsSidebarCollapsed(!isSidebarCollapsed)}
         currentRoute={routeState}
-        onNavigate={navigateTo}
+        onNavigate={route => {
+          navigateTo(route);
+          setIsMobileNavOpen(false);
+        }}
         favorites={favorites}
         recents={recents}
         onOpenPermissionsModal={() => setIsPermissionsModalOpen(true)}
@@ -232,10 +254,11 @@ export default function App() {
           onOpenPermissionsModal={() => setIsPermissionsModalOpen(true)}
           isSidebarCollapsed={isSidebarCollapsed}
           onToggleSidebar={() => setIsSidebarCollapsed(!isSidebarCollapsed)}
+          onOpenMobileNav={() => setIsMobileNavOpen(true)}
         />
 
         {/* Breadcrumb Navigation Strip */}
-        <div className="bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 px-6 py-2 transition-colors">
+        <div className="bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 px-3 sm:px-6 py-2 overflow-x-auto transition-colors">
           <Breadcrumbs items={breadcrumbs} onNavigate={navigateTo} />
         </div>
 

@@ -18,7 +18,8 @@ import {
   Lock,
   Layers,
   Sun,
-  Moon
+  Moon,
+  Menu
 } from 'lucide-react';
 import { ERPRouteState, ERPUserRole, ERPNotification } from '../../types/erp';
 import { ENTERPRISE_COMPANIES, ENTERPRISE_BRANCHES, MOCK_USER_ROLES, MOCK_SYSTEM_NOTIFICATIONS } from '../../navigation/erpHierarchy';
@@ -38,6 +39,7 @@ interface TopBarProps {
   onOpenPermissionsModal: () => void;
   isSidebarCollapsed: boolean;
   onToggleSidebar: () => void;
+  onOpenMobileNav?: () => void;
 }
 
 export const TopBar: React.FC<TopBarProps> = ({
@@ -50,7 +52,8 @@ export const TopBar: React.FC<TopBarProps> = ({
   activeRole,
   onSelectRole,
   favoritesCount,
-  onOpenPermissionsModal
+  onOpenPermissionsModal,
+  onOpenMobileNav
 }) => {
   const { theme, toggleTheme } = useTheme();
   const [isCompanyDropdownOpen, setIsCompanyDropdownOpen] = useState(false);
@@ -70,9 +73,18 @@ export const TopBar: React.FC<TopBarProps> = ({
   };
 
   return (
-    <header className="h-16 border-b border-slate-200 dark:border-slate-800 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md sticky top-0 z-30 px-4 flex items-center justify-between gap-3 select-none transition-colors">
+    <header className="h-16 border-b border-slate-200 dark:border-slate-800 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md sticky top-0 z-30 px-3 sm:px-4 flex items-center justify-between gap-2 sm:gap-3 select-none transition-colors">
       {/* Left Section: Company & Branch Selectors + Fiscal Period Indicator */}
-      <div className="flex items-center gap-2 sm:gap-3 shrink-0">
+      <div className="flex items-center gap-2 sm:gap-3 min-w-0">
+        {/* Mobile navigation toggle */}
+        <button
+          onClick={onOpenMobileNav}
+          aria-label="Open navigation menu"
+          aria-controls="app-sidebar"
+          className="lg:hidden shrink-0 p-2 -ml-1 rounded-lg border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800"
+        >
+          <Menu className="w-4 h-4" />
+        </button>
         {/* Company Selector */}
         <div className="relative">
           <button
@@ -85,7 +97,7 @@ export const TopBar: React.FC<TopBarProps> = ({
             className="flex items-center gap-2 px-2.5 py-1.5 rounded-lg border border-slate-200 dark:border-slate-700 hover:border-slate-300 dark:hover:border-slate-600 bg-slate-50/70 dark:bg-slate-800/80 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all text-xs font-semibold text-slate-800 dark:text-slate-200"
           >
             <Building2 className="w-3.5 h-3.5 text-indigo-600 dark:text-indigo-400 shrink-0" />
-            <span className="max-w-[120px] sm:max-w-[160px] truncate">{activeCompany.name}</span>
+            <span className="hidden sm:inline max-w-[140px] xl:max-w-[160px] truncate">{activeCompany.name}</span>
             <ChevronDown className="w-3 h-3 text-slate-400 dark:text-slate-500" />
           </button>
 
@@ -125,7 +137,7 @@ export const TopBar: React.FC<TopBarProps> = ({
         </div>
 
         {/* Branch Selector */}
-        <div className="relative hidden md:block">
+        <div className="relative hidden xl:block">
           <button
             onClick={() => {
               setIsBranchDropdownOpen(!isBranchDropdownOpen);
@@ -171,7 +183,7 @@ export const TopBar: React.FC<TopBarProps> = ({
         </div>
 
         {/* Fiscal Period & Status Pills */}
-        <div className="hidden lg:flex items-center gap-2">
+        <div className="hidden 2xl:flex items-center gap-2">
           <div className="flex items-center gap-1.5 px-2.5 py-1 bg-slate-100/80 dark:bg-slate-800/80 border border-slate-200/80 dark:border-slate-700/80 rounded-md text-[11px] font-medium text-slate-700 dark:text-slate-300">
             <Calendar className="w-3 h-3 text-slate-500 dark:text-slate-400" />
             <span>{activeCompany.fiscalPeriod}</span>
@@ -186,16 +198,16 @@ export const TopBar: React.FC<TopBarProps> = ({
       </div>
 
       {/* Middle Section: Global Search Trigger */}
-      <div className="flex-1 max-w-lg mx-2">
+      <div className="flex-1 min-w-0 max-w-lg mx-1 sm:mx-2">
         <button
           onClick={onOpenSearch}
-          className="w-full flex items-center justify-between px-3 py-1.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-850 hover:bg-slate-100 dark:hover:bg-slate-800 hover:border-slate-300 dark:hover:border-slate-600 text-xs text-slate-500 dark:text-slate-400 transition-all shadow-2xs"
+          className="w-full min-w-0 overflow-hidden flex items-center justify-between gap-2 px-3 py-1.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-850 hover:bg-slate-100 dark:hover:bg-slate-800 hover:border-slate-300 dark:hover:border-slate-600 text-xs text-slate-500 dark:text-slate-400 transition-all shadow-2xs"
         >
           <div className="flex items-center gap-2 truncate">
             <Search className="w-4 h-4 text-slate-400 dark:text-slate-500 shrink-0" />
-            <span className="truncate">Search 17 Modules, Vouchers, Reports...</span>
+            <span className="truncate"><span className="hidden sm:inline">Search 17 Modules, Vouchers, Reports...</span><span className="sm:hidden">Search</span></span>
           </div>
-          <kbd className="hidden sm:inline-flex items-center gap-0.5 px-1.5 py-0.5 text-[10px] font-mono font-medium text-slate-500 dark:text-slate-400 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded">
+          <kbd className="hidden xl:inline-flex shrink-0 whitespace-nowrap items-center gap-0.5 px-1.5 py-0.5 text-[10px] font-mono font-medium text-slate-500 dark:text-slate-400 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded">
             ⌘K / Ctrl+K
           </kbd>
         </button>
@@ -222,14 +234,14 @@ export const TopBar: React.FC<TopBarProps> = ({
         {/* AI Command Center Launcher */}
         <button
           onClick={() => onNavigate({ view: 'ai' })}
-          className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-semibold shadow-xs transition-all cursor-pointer"
+          className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-semibold shadow-xs transition-all cursor-pointer"
         >
           <Sparkles className="w-3.5 h-3.5 text-indigo-200" />
-          <span className="hidden sm:inline">AI Command</span>
+          <span className="hidden xl:inline">AI Command</span>
         </button>
 
         {/* Approvals Quick Button */}
-        <div className="relative">
+        <div className="relative hidden sm:block">
           <button
             onClick={() => {
               setIsApprovalsOpen(!isApprovalsOpen);
