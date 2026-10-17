@@ -1,5 +1,5 @@
 // ==========================================
-// ARTIFY ERP — MODULE 09: HUMAN RESOURCES (HR)
+// ARTIFY FINANCIAL ECOSYSTEM (AFE) — MODULE 09: HUMAN RESOURCES (HR)
 // Main Module Runner & View Router
 // ==========================================
 

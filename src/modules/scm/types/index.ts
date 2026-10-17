@@ -1,5 +1,5 @@
 // ==========================================
-// ARTIFY ERP — MODULE 12: SUPPLY CHAIN MANAGEMENT (SCM)
+// ARTIFY FINANCIAL ECOSYSTEM (AFE) — MODULE 12: SUPPLY CHAIN MANAGEMENT (SCM)
 // Domain Types, Data Contracts & Master Interfaces
 // ==========================================
 

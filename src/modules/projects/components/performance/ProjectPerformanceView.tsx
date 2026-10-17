@@ -1,5 +1,5 @@
 // ==========================================
-// ARTIFY ERP — MODULE 10.06: PROJECT PERFORMANCE & EVA
+// ARTIFY FINANCIAL ECOSYSTEM (AFE) — MODULE 10.06: PROJECT PERFORMANCE & EVA
 // Earned Value Management (EVM), Profitability, P&L, Cash Flow, Commitments
 // ==========================================
 

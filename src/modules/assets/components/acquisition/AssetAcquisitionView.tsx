@@ -1,5 +1,5 @@
 // ==========================================
-// ARTIFY ERP — MODULE 13: ASSET MANAGEMENT
+// ARTIFY FINANCIAL ECOSYSTEM (AFE) — MODULE 13: ASSET MANAGEMENT
 // 13.02 Asset Acquisition, Capitalization, CWIP & Opening Balance
 // ==========================================
 

@@ -1,5 +1,5 @@
 // ==========================================
-// ARTIFY ERP — MODULE 10.03: PROJECT COSTING
+// ARTIFY FINANCIAL ECOSYSTEM (AFE) — MODULE 10.03: PROJECT COSTING
 // Cost Codes, Material Job Issues, Labor Timesheets, Equipment Plant Hire
 // ==========================================
 

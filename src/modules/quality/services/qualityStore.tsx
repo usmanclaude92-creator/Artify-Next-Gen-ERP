@@ -1,5 +1,5 @@
 // ==========================================
-// ARTIFY ERP — MODULE 14: QUALITY MANAGEMENT (QMS)
+// ARTIFY FINANCIAL ECOSYSTEM (AFE) — MODULE 14: QUALITY MANAGEMENT (QMS)
 // Central Store & React Context
 // ==========================================
 

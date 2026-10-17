@@ -1,5 +1,5 @@
 // ==========================================
-// ARTIFY ERP — MODULE 08: MANUFACTURING
+// ARTIFY FINANCIAL ECOSYSTEM (AFE) — MODULE 08: MANUFACTURING
 // Executive Dashboard & Plant Cockpit
 // ==========================================
 

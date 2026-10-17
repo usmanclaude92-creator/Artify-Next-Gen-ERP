@@ -1,5 +1,5 @@
 // ==========================================
-// ARTIFY ERP — MODULE 09: HUMAN RESOURCES (HR)
+// ARTIFY FINANCIAL ECOSYSTEM (AFE) — MODULE 09: HUMAN RESOURCES (HR)
 // 09.02: Recruitment & ATS View
 // (Job Requisitions, Applicant Tracking, Interviews, Offers)
 // ==========================================

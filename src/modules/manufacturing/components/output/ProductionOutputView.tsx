@@ -1,5 +1,5 @@
 // ==========================================
-// ARTIFY ERP — MODULE 08: MANUFACTURING
+// ARTIFY FINANCIAL ECOSYSTEM (AFE) — MODULE 08: MANUFACTURING
 // 08.05 — Production Output, Receipts & Scrap Management View
 // ==========================================
 

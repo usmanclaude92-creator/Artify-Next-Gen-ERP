@@ -1,5 +1,5 @@
 // ============================================================================
-// Artify ERP — Module 04: Banking & Treasury Management
+// Artify Financial Ecosystem (AFE) — Module 04: Banking & Treasury Management
 // Enterprise Workflow Engine, Segregation of Duties (SoD), Delegation of Authority (DoA)
 // Multi-Tier Sequential Approvals & Double-Entry Accounting GL Posting Engine
 // ============================================================================

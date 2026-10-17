@@ -1,5 +1,5 @@
 // ==========================================
-// ARTIFY ERP — MODULE 08: MANUFACTURING / PRODUCTION
+// ARTIFY FINANCIAL ECOSYSTEM (AFE) — MODULE 08: MANUFACTURING / PRODUCTION
 // Persistent Reactive State Store
 // ==========================================
 

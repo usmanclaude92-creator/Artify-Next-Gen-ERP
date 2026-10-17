@@ -1,5 +1,5 @@
 // ==========================================
-// ARTIFY ERP — MODULE 09: HUMAN RESOURCES (HR)
+// ARTIFY FINANCIAL ECOSYSTEM (AFE) — MODULE 09: HUMAN RESOURCES (HR)
 // 09.04: Attendance & Leave View
 // (Biometric Attendance, Leave Balances & Approvals, Holidays, Overtime)
 // ==========================================

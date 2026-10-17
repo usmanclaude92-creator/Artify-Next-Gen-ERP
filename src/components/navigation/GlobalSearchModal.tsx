@@ -101,7 +101,7 @@ export const GlobalSearchModal: React.FC<GlobalSearchModalProps> = ({ isOpen, on
           <Search className="w-5 h-5 text-indigo-600 shrink-0" />
           <input
             type="text"
-            placeholder="Search all 17 ERP modules, functional areas, processes, vouchers (e.g., 'GL', '16.02', 'Requisition', 'Asset')..."
+            placeholder="Search all 17 AFE modules, functional areas, processes, vouchers (e.g., 'GL', '16.02', 'Requisition', 'Asset')..."
             value={query}
             onChange={e => setQuery(e.target.value)}
             onKeyDown={handleKeyDownInInput}
@@ -155,7 +155,7 @@ export const GlobalSearchModal: React.FC<GlobalSearchModalProps> = ({ isOpen, on
           {filteredResults.length === 0 ? (
             <div className="py-12 text-center text-slate-400">
               <Layers className="w-10 h-10 mx-auto mb-2 text-slate-300 stroke-1" />
-              <p className="text-sm font-medium text-slate-600">No matching ERP navigation items found</p>
+              <p className="text-sm font-medium text-slate-600">No matching AFE navigation items found</p>
               <p className="text-xs text-slate-400 mt-1">Try searching by module code, process name, or keyword</p>
             </div>
           ) : (

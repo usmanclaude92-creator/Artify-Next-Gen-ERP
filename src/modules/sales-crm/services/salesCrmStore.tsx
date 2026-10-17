@@ -833,7 +833,7 @@ const INITIAL_AR_INVOICES: ARInvoice[] = [
     status: 'Posted',
     glAccountReceivable: '1200-01 Accounts Receivable — Trade Clients',
     paymentReceiptReferences: [],
-    qrCodeData: 'OM_TAX_AUTH|Artify_ERP|OM-VAT-9920192|2026-08-15|301245.00|14345.00',
+    qrCodeData: 'OM_TAX_AUTH|Artify_AFE|OM-VAT-9920192|2026-08-15|301245.00|14345.00',
     lines: [
       {
         id: 'invline-1',
@@ -1685,7 +1685,7 @@ export const SalesCrmProvider: React.FC<{ children: React.ReactNode }> = ({ chil
       status: 'Posted',
       glAccountReceivable: '1200-01 Accounts Receivable Trade',
       paymentReceiptReferences: [],
-      qrCodeData: `OM_TAX_AUTH|Artify_ERP|${customer?.taxIdentificationNumber}|${new Date().toISOString().split('T')[0]}|${grandTotal.toFixed(2)}|${vatTotal.toFixed(2)}`,
+      qrCodeData: `OM_TAX_AUTH|Artify_AFE|${customer?.taxIdentificationNumber}|${new Date().toISOString().split('T')[0]}|${grandTotal.toFixed(2)}|${vatTotal.toFixed(2)}`,
       lines: invLines
     };
 

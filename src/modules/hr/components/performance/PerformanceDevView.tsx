@@ -1,5 +1,5 @@
 // ==========================================
-// ARTIFY ERP — MODULE 09: HUMAN RESOURCES (HR)
+// ARTIFY FINANCIAL ECOSYSTEM (AFE) — MODULE 09: HUMAN RESOURCES (HR)
 // 09.06: Performance & Career Development View
 // (Performance Appraisals, 9-Box Talent Matrix, Training Programs, Succession)
 // ==========================================

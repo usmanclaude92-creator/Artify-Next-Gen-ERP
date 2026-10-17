@@ -1,5 +1,5 @@
 -- ============================================================================
--- ARTIFY ERP — MODULE 10: PROJECT MANAGEMENT & JOB COSTING
+-- ARTIFY FINANCIAL ECOSYSTEM (AFE) — MODULE 10: PROJECT MANAGEMENT & JOB COSTING
 -- MODULE 10.01: PROJECT SETUP & WBS HIERARCHY
 -- PRODUCTION RELATIONAL DATABASE DDL SCHEMA (POSTGRESQL / ANSI SQL COMPLIANT)
 -- ============================================================================

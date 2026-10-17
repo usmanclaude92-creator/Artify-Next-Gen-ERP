@@ -1,5 +1,5 @@
 // ==========================================
-// ARTIFY ERP — MODULE 11: BUDGETING & FINANCIAL PLANNING
+// ARTIFY FINANCIAL ECOSYSTEM (AFE) — MODULE 11: BUDGETING & FINANCIAL PLANNING
 // Budgeting AI Copilot & Financial Intelligence Advisor
 // ==========================================
 

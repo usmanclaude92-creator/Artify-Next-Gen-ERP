@@ -1,5 +1,5 @@
 // ==========================================
-// ARTIFY ERP — MODULE 16: FINANCIAL ACCOUNTING & REPORTING
+// ARTIFY FINANCIAL ECOSYSTEM (AFE) — MODULE 16: FINANCIAL ACCOUNTING & REPORTING
 // Master Module Runner (16.01 - 16.08)
 // ==========================================
 

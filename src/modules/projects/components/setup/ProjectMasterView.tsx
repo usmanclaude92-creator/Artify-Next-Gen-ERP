@@ -1,5 +1,5 @@
 // ==========================================
-// ARTIFY ERP — MODULE 10: PROJECT MANAGEMENT & JOB COSTING
+// ARTIFY FINANCIAL ECOSYSTEM (AFE) — MODULE 10: PROJECT MANAGEMENT & JOB COSTING
 // Transaction 10.01.01.01 — Project Master Management View
 // List View with Advanced Filters (Company/Status) & Detailed Data Entry Form
 // ==========================================
@@ -435,7 +435,7 @@ export const ProjectMasterView: React.FC<ProjectMasterViewProps> = ({
     const encodedUri = encodeURI(csvContent);
     const link = document.createElement('a');
     link.setAttribute('href', encodedUri);
-    link.setAttribute('download', `Artify_ERP_Project_Master_Export_${new Date().toISOString().split('T')[0]}.csv`);
+    link.setAttribute('download', `Artify_AFE_Project_Master_Export_${new Date().toISOString().split('T')[0]}.csv`);
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);

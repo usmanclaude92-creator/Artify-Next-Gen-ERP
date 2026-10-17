@@ -118,10 +118,10 @@ export const Sidebar: React.FC<SidebarProps> = ({
               <div className="flex items-center gap-1.5">
                 <span className="font-extrabold text-sm tracking-tight text-white">ARTIFY</span>
                 <span className="text-[10px] font-mono font-bold bg-indigo-500/30 text-indigo-300 px-1 py-0.2 rounded border border-indigo-400/30">
-                  ERP OS
+                  AFE
                 </span>
               </div>
-              <p className="text-[10px] text-slate-400 font-medium">Future Generation ERP</p>
+              <p className="text-[10px] text-slate-400 font-medium">Artify Financial Ecosystem</p>
             </div>
           </div>
         )}
@@ -242,7 +242,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
           <div className="px-3 py-1.5 bg-slate-950/40 border-t border-slate-800/40 flex items-center justify-between text-[10px] font-bold uppercase tracking-wider text-slate-400">
             <span className="flex items-center gap-1.5">
               <Layers className="w-3 h-3 text-indigo-400" />
-              <span>ERP Architecture (17 Modules)</span>
+              <span>AFE Architecture (17 Modules)</span>
             </span>
             <span className="font-mono text-[9px] bg-slate-800 px-1 py-0.2 rounded text-slate-400">
               L1 to L4

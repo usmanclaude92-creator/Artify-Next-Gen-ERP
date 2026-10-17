@@ -1,5 +1,5 @@
 // ==========================================
-// ARTIFY ERP — MODULE 09: HUMAN RESOURCES (HR)
+// ARTIFY FINANCIAL ECOSYSTEM (AFE) — MODULE 09: HUMAN RESOURCES (HR)
 // 09.03: Employee Onboarding View
 // (Joining Process, Document Collection, Induction, Asset Custody)
 // ==========================================

@@ -1,5 +1,5 @@
 // ==========================================
-// ARTIFY ERP — MODULE 10.05: PROJECT BILLING
+// ARTIFY FINANCIAL ECOSYSTEM (AFE) — MODULE 10.05: PROJECT BILLING
 // Revenue Recognition, Progress Billing, Interim Payment Certificates & Invoices
 // ==========================================
 

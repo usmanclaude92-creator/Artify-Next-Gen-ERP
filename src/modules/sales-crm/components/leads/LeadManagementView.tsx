@@ -106,7 +106,7 @@ export const LeadManagementView: React.FC<LeadManagementViewProps> = ({
         timelineDate: '2026-10-31',
         bantScore: 85
       },
-      notes: newNotes || 'Inbound prospect inquiry recorded in Artify ERP.'
+      notes: newNotes || 'Inbound prospect inquiry recorded in Artify Financial Ecosystem (AFE).'
     });
 
     setShowCaptureModal(false);

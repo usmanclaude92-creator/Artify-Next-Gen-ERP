@@ -1,5 +1,5 @@
 // ==========================================
-// ARTIFY ERP — MODULE 10.02: PROJECT PLANNING
+// ARTIFY FINANCIAL ECOSYSTEM (AFE) — MODULE 10.02: PROJECT PLANNING
 // Gantt Schedules, Resource Allocations, Baseline Budget & Cash Forecast
 // ==========================================
 

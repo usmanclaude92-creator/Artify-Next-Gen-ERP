@@ -1,5 +1,5 @@
 // ==========================================
-// ARTIFY ERP — MODULE 08: MANUFACTURING
+// ARTIFY FINANCIAL ECOSYSTEM (AFE) — MODULE 08: MANUFACTURING
 // 08.03 — Production Orders, Material Issue & Returns View
 // ==========================================
 

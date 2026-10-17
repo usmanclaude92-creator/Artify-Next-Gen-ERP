@@ -1,5 +1,5 @@
 // ==========================================
-// ARTIFY ERP — MODULE 09: HUMAN RESOURCES (HR)
+// ARTIFY FINANCIAL ECOSYSTEM (AFE) — MODULE 09: HUMAN RESOURCES (HR)
 // 09.07: Employee Lifecycle & Separation View
 // (Transfers, Promotions, Disciplinary Actions, Resignations, EOSB Gratuity)
 // ==========================================

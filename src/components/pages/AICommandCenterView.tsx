@@ -162,7 +162,7 @@ WHERE inv.status = 'APPROVED' AND inv.discount_expiry_date >= CURRENT_DATE;`,
       } else {
         setActiveResult({
           query: q,
-          intent: 'General ERP Multi-Entity Intelligence Scan',
+          intent: 'General AFE Multi-Entity Intelligence Scan',
           targetedModules: ['16 — FINANCIAL ACCOUNTING', '01 — SYSTEM MANAGEMENT'],
           sqlPlan: `SELECT * FROM erp_audit_logs WHERE event_date >= CURRENT_DATE - 7;`,
           insight: `AI Assistant synthesized real-time operational status for "${q}". All transactional journals, subledger postings, and audit trails are verified compliant.`,
@@ -192,14 +192,14 @@ WHERE inv.status = 'APPROVED' AND inv.discount_expiry_date >= CURRENT_DATE;`,
               <Sparkles className="w-4 h-4 text-indigo-300" />
             </div>
             <span className="font-mono text-xs font-bold text-indigo-300 tracking-wider uppercase">
-              Artify Future Generation AI Core
+              Artify AFE AI Core
             </span>
           </div>
           <h1 className="text-xl sm:text-2xl font-extrabold text-white">
-            Natural Language ERP Command Center
+            Natural Language AFE Command Center
           </h1>
           <p className="text-xs sm:text-sm text-slate-300 mt-1 max-w-2xl">
-            Query financial metrics, simulate treasury decisions, audit cost sheets, and orchestrate automated ERP transactions using plain business language.
+            Query financial metrics, simulate treasury decisions, audit cost sheets, and orchestrate automated AFE transactions using plain business language.
           </p>
         </div>
       </div>
@@ -269,7 +269,7 @@ WHERE inv.status = 'APPROVED' AND inv.discount_expiry_date >= CURRENT_DATE;`,
                 <Bot className="w-4 h-4" />
               </div>
               <div>
-                <h2 className="font-bold text-sm text-slate-900">Synthesized ERP Intelligence Report</h2>
+                <h2 className="font-bold text-sm text-slate-900">Synthesized AFE Intelligence Report</h2>
                 <p className="text-xs text-slate-500">Query Intent: {activeResult.intent}</p>
               </div>
             </div>

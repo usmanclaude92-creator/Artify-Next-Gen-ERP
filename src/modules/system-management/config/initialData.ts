@@ -2151,7 +2151,7 @@ export const INITIAL_NOTIF_TEMPLATES: NotificationTemplate[] = [
     channel: 'Email',
     category: 'Approval',
     subject: 'Action Required: Approval Request for {{documentType}} #{{documentNumber}} ({{amount}} {{currency}})',
-    bodyTemplate: '<p>Dear {{approverName}},</p><p>A new <strong>{{documentType}}</strong> (Ref: <strong>{{documentNumber}}</strong>) submitted by <strong>{{submitterName}}</strong> requires your review and approval.</p><p><strong>Total Amount:</strong> {{amount}} {{currency}}<br/><strong>Cost Center:</strong> {{costCenter}}</p><p>Please log in to Artify ERP to approve or return this document.</p>',
+    bodyTemplate: '<p>Dear {{approverName}},</p><p>A new <strong>{{documentType}}</strong> (Ref: <strong>{{documentNumber}}</strong>) submitted by <strong>{{submitterName}}</strong> requires your review and approval.</p><p><strong>Total Amount:</strong> {{amount}} {{currency}}<br/><strong>Cost Center:</strong> {{costCenter}}</p><p>Please log in to Artify Financial Ecosystem (AFE) to approve or return this document.</p>',
     variables: ['approverName', 'documentType', 'documentNumber', 'submitterName', 'amount', 'currency', 'costCenter'],
     status: 'Active'
   },

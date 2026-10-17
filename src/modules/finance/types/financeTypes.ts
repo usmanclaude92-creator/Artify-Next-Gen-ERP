@@ -1,5 +1,5 @@
 // ==========================================
-// ARTIFY ERP — MODULE 16: FINANCIAL ACCOUNTING & REPORTING
+// ARTIFY FINANCIAL ECOSYSTEM (AFE) — MODULE 16: FINANCIAL ACCOUNTING & REPORTING
 // Master TypeScript Definitions & Data Contracts
 // ==========================================
 

@@ -1,5 +1,5 @@
 // ==========================================
-// ARTIFY ERP — MODULE 13: ASSET MANAGEMENT
+// ARTIFY FINANCIAL ECOSYSTEM (AFE) — MODULE 13: ASSET MANAGEMENT
 // 13.04 Asset Valuation, Depreciation, Revaluation & Impairment
 // ==========================================
 

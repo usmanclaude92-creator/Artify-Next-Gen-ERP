@@ -1,5 +1,5 @@
 -- ============================================================================
--- ARTIFY ERP — MODULE 10: PROJECT MANAGEMENT & JOB COSTING
+-- ARTIFY FINANCIAL ECOSYSTEM (AFE) — MODULE 10: PROJECT MANAGEMENT & JOB COSTING
 -- MASTER DATABASE SCHEMA (POSTGRESQL / ANSI SQL COMPLIANT)
 -- ============================================================================
 

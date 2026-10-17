@@ -1,5 +1,5 @@
 // ==========================================
-// ARTIFY ERP — MODULE 10.04: PROJECT PROCUREMENT & SUBCONTRACTS
+// ARTIFY FINANCIAL ECOSYSTEM (AFE) — MODULE 10.04: PROJECT PROCUREMENT & SUBCONTRACTS
 // Requisitions, Project POs, Site Material Inventory, Subcontractor Packages
 // ==========================================
 

@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project purpose
 
-Artify ERP ("Future Generation Enterprise System") is a front-end prototype/demo of a full enterprise ERP suite — 17 modules covering Finance, Procurement, Sales/CRM, Inventory, Manufacturing, HR, Projects, Budgeting, SCM, Assets, Quality, Construction & Contracts (FIDIC/BOQ), Business Intelligence, Administration, Banking & Treasury, System Management, and Compliance/Risk/Audit (Oman regulatory focus: VAT, COSO/SoD, 5C audit workpapers, Benford's Law fraud analytics). It was scaffolded in Google AI Studio (see `metadata.json`). All data is mocked and held in-memory — there is no backend, database, or auth; nothing persists across a page reload except theme preference.
+Artify Financial Ecosystem, short name AFE (formerly "Artify Next Gen ERP") is a front-end prototype/demo of a full enterprise ERP suite — 17 modules covering Finance, Procurement, Sales/CRM, Inventory, Manufacturing, HR, Projects, Budgeting, SCM, Assets, Quality, Construction & Contracts (FIDIC/BOQ), Business Intelligence, Administration, Banking & Treasury, System Management, and Compliance/Risk/Audit (Oman regulatory focus: VAT, COSO/SoD, 5C audit workpapers, Benford's Law fraud analytics). It was scaffolded in Google AI Studio (see `metadata.json`). All data is mocked and held in-memory — there is no backend, database, or auth; nothing persists across a page reload except theme preference.
 
 ## Commands
 

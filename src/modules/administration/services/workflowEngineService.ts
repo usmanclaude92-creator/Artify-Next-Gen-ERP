@@ -1,5 +1,5 @@
 // ============================================================================
-// Artify ERP Enterprise Workflow Engine & Validation Service
+// Artify Financial Ecosystem (AFE) Enterprise Workflow Engine & Validation Service
 // Enforces Backend-Validated Approval Levels, Segregation of Duties (SoD),
 // Sequential Authorization Tiers, and Centralized Audit Logging for Module 03.
 // ============================================================================
@@ -479,7 +479,7 @@ export class WorkflowEngineService {
         result: event.result,
         details: event.details,
         ipAddress: '185.190.24.12 (Enterprise VPN)',
-        userAgent: 'Artify ERP Enterprise Client Engine'
+        userAgent: 'Artify Financial Ecosystem (AFE) Enterprise Client Engine'
       };
 
       localStorage.setItem(key, JSON.stringify([newEntry, ...trail]));

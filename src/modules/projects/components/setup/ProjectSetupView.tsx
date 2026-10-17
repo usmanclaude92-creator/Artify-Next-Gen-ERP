@@ -1,5 +1,5 @@
 // ==========================================
-// ARTIFY ERP — MODULE 10.01: PROJECT SETUP
+// ARTIFY FINANCIAL ECOSYSTEM (AFE) — MODULE 10.01: PROJECT SETUP
 // Master, Classification, Phases & WBS Activities
 // ==========================================
 
@@ -836,7 +836,7 @@ export const ProjectSetupView: React.FC = () => {
               <div className="flex items-center gap-2">
                 <button
                   onClick={() => {
-                    navigator.clipboard.writeText(`-- ARTIFY ERP MODULE 10.01 DDL\n-- Database tables: project_classifications, project_masters, project_phases, project_activities, project_activity_dependencies, project_audit_logs\n-- See /src/modules/projects/db/schema.sql`);
+                    navigator.clipboard.writeText(`-- ARTIFY FINANCIAL ECOSYSTEM (AFE) MODULE 10.01 DDL\n-- Database tables: project_classifications, project_masters, project_phases, project_activities, project_activity_dependencies, project_audit_logs\n-- See /src/modules/projects/db/schema.sql`);
                     setCopiedSql(true);
                     setTimeout(() => setCopiedSql(false), 2000);
                   }}

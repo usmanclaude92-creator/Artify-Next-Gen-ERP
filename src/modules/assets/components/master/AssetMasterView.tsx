@@ -1,5 +1,5 @@
 // ==========================================
-// ARTIFY ERP — MODULE 13: ASSET MANAGEMENT
+// ARTIFY FINANCIAL ECOSYSTEM (AFE) — MODULE 13: ASSET MANAGEMENT
 // 13.01 Asset Master, Categories, Register & Classification
 // ==========================================
 
@@ -677,7 +677,7 @@ export const AssetMasterView: React.FC = () => {
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-fadeIn">
           <div className="bg-slate-900 border border-slate-800 rounded-2xl w-full max-w-md p-6 shadow-2xl text-center space-y-4">
             <div className="flex items-center justify-between pb-2 border-b border-slate-800">
-              <span className="text-xs font-mono font-bold text-amber-400">ARTIFY ERP ASSET TAG</span>
+              <span className="text-xs font-mono font-bold text-amber-400">ARTIFY FINANCIAL ECOSYSTEM (AFE) ASSET TAG</span>
               <button
                 onClick={() => setSelectedAssetForTag(null)}
                 className="text-slate-400 hover:text-white text-xs font-bold cursor-pointer"

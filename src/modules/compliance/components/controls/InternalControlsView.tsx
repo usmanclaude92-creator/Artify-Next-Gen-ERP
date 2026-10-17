@@ -1,5 +1,5 @@
 // ==========================================
-// ARTIFY ERP — MODULE 17: COMPLIANCE, RISK & AUDIT
+// ARTIFY FINANCIAL ECOSYSTEM (AFE) — MODULE 17: COMPLIANCE, RISK & AUDIT
 // 17.03 — Internal Controls View (COSO & SoD)
 // ==========================================
 

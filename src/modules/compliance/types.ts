@@ -1,5 +1,5 @@
 // ==========================================
-// ARTIFY ERP — MODULE 17: COMPLIANCE, RISK & AUDIT
+// ARTIFY FINANCIAL ECOSYSTEM (AFE) — MODULE 17: COMPLIANCE, RISK & AUDIT
 // Type Definitions (17.01 - 17.08)
 // ==========================================
 

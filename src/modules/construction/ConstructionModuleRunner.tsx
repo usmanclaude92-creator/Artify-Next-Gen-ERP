@@ -1,5 +1,5 @@
 // ==========================================
-// ARTIFY ERP — MODULE 15: CONSTRUCTION & CONTRACT MANAGEMENT
+// ARTIFY FINANCIAL ECOSYSTEM (AFE) — MODULE 15: CONSTRUCTION & CONTRACT MANAGEMENT
 // Main Entry Module Runner
 // ==========================================
 

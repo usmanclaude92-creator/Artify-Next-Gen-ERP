@@ -1,5 +1,5 @@
 // ==========================================
-// ARTIFY ERP — MODULE 09: HUMAN RESOURCES (HR)
+// ARTIFY FINANCIAL ECOSYSTEM (AFE) — MODULE 09: HUMAN RESOURCES (HR)
 // 09.05: Benefits & Loans View
 // (Benefits Plans, Corporate Loans, Salary Advances, Health Insurance)
 // ==========================================

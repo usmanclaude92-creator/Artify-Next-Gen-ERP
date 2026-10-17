@@ -1,5 +1,5 @@
 // ==========================================
-// ARTIFY ERP — MODULE 11: BUDGETING & FINANCIAL PLANNING
+// ARTIFY FINANCIAL ECOSYSTEM (AFE) — MODULE 11: BUDGETING & FINANCIAL PLANNING
 // 11.03 — Capital & Cash Budget View (CAPEX, Cash Flow, Financing)
 // ==========================================
 

@@ -1,5 +1,5 @@
 // ==========================================
-// ARTIFY ERP — MODULE 17: COMPLIANCE, RISK & AUDIT
+// ARTIFY FINANCIAL ECOSYSTEM (AFE) — MODULE 17: COMPLIANCE, RISK & AUDIT
 // 17.04 — Risk Management View (ERM & 5x5 Heatmap)
 // ==========================================
 
