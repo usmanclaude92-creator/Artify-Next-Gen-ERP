@@ -656,6 +656,9 @@ interface FinanceContextType {
   lockFiscalPeriod: (periodId: string, subledger: 'gl' | 'ap' | 'ar' | 'all', lockType: 'SOFT_CLOSED' | 'HARD_CLOSED' | 'OPEN') => void;
   executeCostAllocation: (cycleId: string) => void;
   reconcileBankTransaction: (transactionId: string) => void;
+  reconcileIntercompanyTransaction: (id: string) => void;
+  eliminateIntercompanyTransaction: (id: string) => void;
+  updateCurrencyRate: (currencyCode: string, exchangeRateToBase: number) => void;
   triggerYearEndClosing: (fiscalYear: string) => void;
 }
 
@@ -993,6 +996,30 @@ export const FinanceProvider: React.FC<{ children: React.ReactNode }> = ({ child
     }));
   };
 
+  const reconcileIntercompanyTransaction = (id: string) => {
+    setIntercompanyTransactions(prev => prev.map(t =>
+      t.id === id && t.status === 'PENDING_MATCH' ? { ...t, isMatched: true, status: 'RECONCILED' } : t
+    ));
+  };
+
+  const eliminateIntercompanyTransaction = (id: string) => {
+    setIntercompanyTransactions(prev => prev.map(t =>
+      t.id === id && t.status === 'RECONCILED'
+        ? { ...t, status: 'ELIMINATED', eliminationVoucherId: t.eliminationVoucherId || `ELIM-JV-${String(prev.filter(x => x.eliminationVoucherId).length + 4).padStart(3, '0')}` }
+        : t
+    ));
+  };
+
+  const updateCurrencyRate = (currencyCode: string, exchangeRateToBase: number) => {
+    if (!(exchangeRateToBase > 0)) return;
+    const today = new Date().toISOString().slice(0, 10);
+    setCurrencyRates(prev => prev.map(r =>
+      r.currencyCode === currencyCode && !r.isBaseCurrency
+        ? { ...r, exchangeRateToBase, inverseRate: Number((1 / exchangeRateToBase).toFixed(4)), lastUpdated: today }
+        : r
+    ));
+  };
+
   const triggerYearEndClosing = (fiscalYear: string) => {
     // Calculate Net Profit to roll to Retained Earnings
     let totalRev = 0;
@@ -1044,6 +1071,9 @@ export const FinanceProvider: React.FC<{ children: React.ReactNode }> = ({ child
     vatSummary,
     intercompanyTransactions,
     currencyRates,
+    reconcileIntercompanyTransaction,
+    eliminateIntercompanyTransaction,
+    updateCurrencyRate,
     financialRatios,
     addJournalEntry,
     postJournalEntry,

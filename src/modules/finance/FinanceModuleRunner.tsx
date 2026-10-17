@@ -12,6 +12,7 @@ import { CashBankView } from './components/cashbank/CashBankView';
 import { FixedAssetsAccountingView } from './components/assets/FixedAssetsAccountingView';
 import { PeriodEndClosingView } from './components/periodend/PeriodEndClosingView';
 import { CostAccountingView } from './components/cost/CostAccountingView';
+import { IntercompanyFxView } from './components/intercompany/IntercompanyFxView';
 import { FinancialReportingView } from './components/reporting/FinancialReportingView';
 
 import {
@@ -23,6 +24,7 @@ import {
   CalendarCheck,
   PieChart,
   FileSpreadsheet,
+  Globe,
   Calculator,
   Layers,
   ChevronRight,
@@ -45,7 +47,8 @@ const FinanceDashboardContent: React.FC<FinanceDashboardContentProps> = ({
     customerInvoices,
     bankAccounts,
     fixedAssets,
-    fiscalPeriods
+    fiscalPeriods,
+    intercompanyTransactions
   } = useFinanceStore();
 
   const [selectedSection, setSelectedSection] = useState<string>(activeSection);
@@ -110,6 +113,20 @@ const FinanceDashboardContent: React.FC<FinanceDashboardContentProps> = ({
       id: '16.08',
       title: 'Financial Reporting',
       subtitle: 'IFRS Statements & 5% VAT Return',
+      icon: FileSpreadsheet,
+      count: '5 Statutory Statements'
+    },
+    {
+      id: '16.09',
+      title: 'Intercompany & FX',
+      subtitle: 'Group Matching & Currency Rates',
+      icon: Globe,
+      count: `${intercompanyTransactions.length} IC Transactions`
+    },
+    {
+      id: '16.10',
+      title: 'Financial Statements',
+      subtitle: 'Trial Balance & IFRS Statements',
       icon: FileSpreadsheet,
       count: '5 Statutory Statements'
     }
@@ -188,7 +205,9 @@ const FinanceDashboardContent: React.FC<FinanceDashboardContentProps> = ({
         {selectedSection === '16.05' && <FixedAssetsAccountingView />}
         {selectedSection === '16.06' && <PeriodEndClosingView />}
         {selectedSection === '16.07' && <CostAccountingView />}
-        {selectedSection === '16.08' && <FinancialReportingView />}
+        {selectedSection === '16.08' && <FinancialReportingView initialReport="vat-return" />}
+        {selectedSection === '16.09' && <IntercompanyFxView />}
+        {selectedSection === '16.10' && <FinancialReportingView initialReport="trial-balance" />}
       </div>
     </div>
   );
@@ -228,6 +247,8 @@ export const FinanceModuleRunner: React.FC<FinanceModuleRunnerProps> = ({
     else if (functionalArea.code.startsWith('16.06')) initialSection = '16.06';
     else if (functionalArea.code.startsWith('16.07')) initialSection = '16.07';
     else if (functionalArea.code.startsWith('16.08')) initialSection = '16.08';
+    else if (functionalArea.code.startsWith('16.09')) initialSection = '16.09';
+    else if (functionalArea.code.startsWith('16.10')) initialSection = '16.10';
   } else if (process?.code) {
     if (process.code.startsWith('16.01')) initialSection = '16.01';
     else if (process.code.startsWith('16.02')) initialSection = '16.02';
@@ -237,6 +258,8 @@ export const FinanceModuleRunner: React.FC<FinanceModuleRunnerProps> = ({
     else if (process.code.startsWith('16.06')) initialSection = '16.06';
     else if (process.code.startsWith('16.07')) initialSection = '16.07';
     else if (process.code.startsWith('16.08')) initialSection = '16.08';
+    else if (process.code.startsWith('16.09')) initialSection = '16.09';
+    else if (process.code.startsWith('16.10')) initialSection = '16.10';
   }
 
   return (

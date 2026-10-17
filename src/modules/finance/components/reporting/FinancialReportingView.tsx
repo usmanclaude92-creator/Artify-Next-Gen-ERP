@@ -23,7 +23,9 @@ import {
   Receipt
 } from 'lucide-react';
 
-export const FinancialReportingView: React.FC = () => {
+type ReportId = 'trial-balance' | 'income-statement' | 'balance-sheet' | 'cash-flow' | 'vat-return';
+
+export const FinancialReportingView: React.FC<{ initialReport?: ReportId }> = ({ initialReport = 'income-statement' }) => {
   const {
     currency,
     chartOfAccounts,
@@ -31,7 +33,7 @@ export const FinancialReportingView: React.FC = () => {
     customerInvoices
   } = useFinanceStore();
 
-  const [activeReport, setActiveReport] = useState<'trial-balance' | 'income-statement' | 'balance-sheet' | 'cash-flow' | 'vat-return'>('income-statement');
+  const [activeReport, setActiveReport] = useState<ReportId>(initialReport);
   const [reportPeriod, setReportPeriod] = useState('Q1-2026');
 
   // Calculations for Trial Balance
