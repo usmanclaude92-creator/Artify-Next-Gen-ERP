@@ -78,7 +78,7 @@ export const AssetAIAssistantModal: React.FC<Props> = ({ isOpen, onClose }) => {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-fadeIn">
-      <div className="bg-slate-900 border border-slate-800 rounded-3xl w-full max-w-3xl h-[85vh] flex flex-col shadow-2xl overflow-hidden">
+      <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl w-full max-w-3xl h-[85vh] flex flex-col shadow-2xl overflow-hidden">
         {/* Modal Header */}
         <div className="p-5 bg-gradient-to-r from-slate-950 via-slate-900 to-amber-950/40 border-b border-slate-800 flex items-center justify-between">
           <div className="flex items-center gap-3">
@@ -115,9 +115,9 @@ export const AssetAIAssistantModal: React.FC<Props> = ({ isOpen, onClose }) => {
         </div>
 
         {/* AI Proactive Insights Pill Section */}
-        <div className="px-5 py-3 bg-slate-950 border-b border-slate-800/80 flex items-center gap-3 overflow-x-auto">
-          <div className="flex items-center gap-1.5 text-[11px] font-bold text-slate-400 shrink-0">
-            <Lightbulb className="w-3.5 h-3.5 text-amber-400" />
+        <div className="px-5 py-3 bg-slate-50 dark:bg-slate-950 border-b border-slate-200/80 dark:border-slate-800/80 flex items-center gap-3 overflow-x-auto">
+          <div className="flex items-center gap-1.5 text-[11px] font-bold text-slate-600 dark:text-slate-400 shrink-0">
+            <Lightbulb className="w-3.5 h-3.5 text-amber-700 dark:text-amber-400" />
             <span>Active Diagnostics:</span>
           </div>
 
@@ -126,10 +126,10 @@ export const AssetAIAssistantModal: React.FC<Props> = ({ isOpen, onClose }) => {
               key={idx}
               className={`shrink-0 flex items-center gap-2 px-3 py-1 rounded-xl text-xs border ${
                 insight.type === 'ALERT'
-                  ? 'bg-rose-950/60 text-rose-300 border-rose-800/80'
+                  ? 'bg-rose-50 dark:bg-rose-950/60 text-rose-700 dark:text-rose-300 border-rose-800/80'
                   : insight.type === 'OPTIMIZATION'
-                  ? 'bg-amber-950/60 text-amber-300 border-amber-800/80'
-                  : 'bg-cyan-950/60 text-cyan-300 border-cyan-800/80'
+                  ? 'bg-amber-50 dark:bg-amber-950/60 text-amber-800 dark:text-amber-300 border-amber-800/80'
+                  : 'bg-cyan-50 dark:bg-cyan-950/60 text-cyan-700 dark:text-cyan-300 border-cyan-800/80'
               }`}
             >
               <span className="font-bold">{insight.title}:</span>
@@ -139,14 +139,14 @@ export const AssetAIAssistantModal: React.FC<Props> = ({ isOpen, onClose }) => {
         </div>
 
         {/* Chat History Messages */}
-        <div className="flex-1 p-5 overflow-y-auto space-y-4 bg-slate-900/60">
+        <div className="flex-1 p-5 overflow-y-auto space-y-4 bg-white/60 dark:bg-slate-900/60">
           {chatMessages.map((msg, index) => (
             <div
               key={index}
               className={`flex gap-3 ${msg.sender === 'user' ? 'justify-end' : 'justify-start'}`}
             >
               {msg.sender === 'ai' && (
-                <div className="w-8 h-8 rounded-xl bg-amber-600/20 text-amber-400 border border-amber-500/30 flex items-center justify-center shrink-0">
+                <div className="w-8 h-8 rounded-xl bg-amber-600/20 text-amber-700 dark:text-amber-400 border border-amber-500/30 flex items-center justify-center shrink-0">
                   <Bot className="w-4 h-4" />
                 </div>
               )}
@@ -155,7 +155,7 @@ export const AssetAIAssistantModal: React.FC<Props> = ({ isOpen, onClose }) => {
                 className={`max-w-[80%] rounded-2xl p-4 text-xs leading-relaxed space-y-1 ${
                   msg.sender === 'user'
                     ? 'bg-amber-600 text-white shadow-lg shadow-amber-600/20'
-                    : 'bg-slate-950 text-slate-200 border border-slate-800'
+                    : 'bg-slate-50 dark:bg-slate-950 text-slate-800 dark:text-slate-200 border border-slate-200 dark:border-slate-800'
                 }`}
               >
                 <div className="whitespace-pre-line">{msg.text}</div>
@@ -167,8 +167,8 @@ export const AssetAIAssistantModal: React.FC<Props> = ({ isOpen, onClose }) => {
           ))}
 
           {isThinking && (
-            <div className="flex gap-3 items-center text-slate-400 text-xs italic">
-              <div className="w-8 h-8 rounded-xl bg-amber-600/20 text-amber-400 flex items-center justify-center">
+            <div className="flex gap-3 items-center text-slate-600 dark:text-slate-400 text-xs italic">
+              <div className="w-8 h-8 rounded-xl bg-amber-600/20 text-amber-700 dark:text-amber-400 flex items-center justify-center">
                 <Bot className="w-4 h-4" />
               </div>
               <div className="flex items-center gap-1">
@@ -180,35 +180,35 @@ export const AssetAIAssistantModal: React.FC<Props> = ({ isOpen, onClose }) => {
         </div>
 
         {/* Quick Suggestion Chips */}
-        <div className="px-5 py-2.5 bg-slate-950/80 border-t border-slate-800/80 flex items-center gap-2 overflow-x-auto text-[11px]">
+        <div className="px-5 py-2.5 bg-slate-50/80 dark:bg-slate-950/80 border-t border-slate-200/80 dark:border-slate-800/80 flex items-center gap-2 overflow-x-auto text-[11px]">
           <button
             onClick={() => setPromptInput('Analyze IAS 36 impairment risk on marine dredging assets')}
-            className="px-3 py-1 rounded-lg bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-800 transition-colors whitespace-nowrap cursor-pointer"
+            className="px-3 py-1 rounded-lg bg-white dark:bg-slate-900 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-800 transition-colors whitespace-nowrap cursor-pointer"
           >
             🔍 IAS 36 Impairment Check
           </button>
           <button
             onClick={() => setPromptInput('Run predictive failure analysis on hydraulic machinery')}
-            className="px-3 py-1 rounded-lg bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-800 transition-colors whitespace-nowrap cursor-pointer"
+            className="px-3 py-1 rounded-lg bg-white dark:bg-slate-900 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-800 transition-colors whitespace-nowrap cursor-pointer"
           >
             ⚡ Predictive Equipment Health
           </button>
           <button
             onClick={() => setPromptInput('Calculate tax depreciation vs IFRS book differences')}
-            className="px-3 py-1 rounded-lg bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-800 transition-colors whitespace-nowrap cursor-pointer"
+            className="px-3 py-1 rounded-lg bg-white dark:bg-slate-900 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-800 transition-colors whitespace-nowrap cursor-pointer"
           >
             📊 Tax Depreciation Shield
           </button>
         </div>
 
         {/* Input Form */}
-        <form onSubmit={handleSendMessage} className="p-4 bg-slate-950 border-t border-slate-800 flex items-center gap-3">
+        <form onSubmit={handleSendMessage} className="p-4 bg-slate-50 dark:bg-slate-950 border-t border-slate-200 dark:border-slate-800 flex items-center gap-3">
           <input
             type="text"
             placeholder="Ask about asset depreciation, maintenance schedules, revaluations, or CWIP capitalization..."
             value={promptInput}
             onChange={e => setPromptInput(e.target.value)}
-            className="flex-1 bg-slate-900 border border-slate-800 rounded-xl px-4 py-2.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-amber-500"
+            className="flex-1 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl px-4 py-2.5 text-xs text-slate-900 dark:text-white placeholder-slate-500 focus:outline-none focus:border-amber-500"
           />
           <button
             type="submit"

@@ -9,27 +9,27 @@ interface DiffViewerProps {
 
 export const DiffViewer: React.FC<DiffViewerProps> = ({ previousValue, newValue, entityName }) => {
   return (
-    <div className="bg-slate-50 border border-slate-200 rounded-xl p-4 text-xs font-mono">
-      <div className="flex items-center gap-2 mb-3 text-slate-500 font-sans font-semibold">
-        <History className="w-4 h-4 text-indigo-600" />
+    <div className="bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-xl p-4 text-xs font-mono">
+      <div className="flex items-center gap-2 mb-3 text-slate-500 dark:text-slate-400 font-sans font-semibold">
+        <History className="w-4 h-4 text-indigo-600 dark:text-indigo-400" />
         <span>Attribute Modification Diff {entityName ? `(${entityName})` : ''}</span>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-        <div className="bg-rose-50/60 border border-rose-200 rounded-lg p-3">
-          <div className="text-[10px] font-bold text-rose-700 uppercase tracking-wider mb-1">
+        <div className="bg-rose-50/60 dark:bg-rose-500/60 border border-rose-200 dark:border-rose-500/30 rounded-lg p-3">
+          <div className="text-[10px] font-bold text-rose-700 dark:text-rose-300 uppercase tracking-wider mb-1">
             Previous State
           </div>
-          <pre className="text-rose-900 whitespace-pre-wrap break-all text-[11px] leading-relaxed">
+          <pre className="text-rose-900 dark:text-rose-100 whitespace-pre-wrap break-all text-[11px] leading-relaxed">
             {previousValue || '(None / Newly Initialized)'}
           </pre>
         </div>
 
-        <div className="bg-emerald-50/60 border border-emerald-200 rounded-lg p-3">
-          <div className="text-[10px] font-bold text-emerald-700 uppercase tracking-wider mb-1">
+        <div className="bg-emerald-50/60 dark:bg-emerald-500/60 border border-emerald-200 dark:border-emerald-500/30 rounded-lg p-3">
+          <div className="text-[10px] font-bold text-emerald-700 dark:text-emerald-300 uppercase tracking-wider mb-1">
             Committed State
           </div>
-          <pre className="text-emerald-900 whitespace-pre-wrap break-all text-[11px] leading-relaxed">
+          <pre className="text-emerald-900 dark:text-emerald-100 whitespace-pre-wrap break-all text-[11px] leading-relaxed">
             {newValue || '(Purged / Deleted)'}
           </pre>
         </div>

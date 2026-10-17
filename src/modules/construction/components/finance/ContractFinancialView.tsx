@@ -59,24 +59,24 @@ export const ContractFinancialView: React.FC = () => {
   return (
     <div className="space-y-6">
       {/* Top Banner */}
-      <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 text-white shadow-xl flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6">
+      <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 text-slate-900 dark:text-white shadow-xl flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6">
         <div className="space-y-2 max-w-2xl">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-400 text-xs font-semibold uppercase tracking-wider">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 text-xs font-semibold uppercase tracking-wider">
             <DollarSign className="w-3.5 h-3.5" />
             Module 15.05 — Contract Financial Management
           </div>
           <h2 className="text-2xl font-bold tracking-tight">Contract Costing, EVM & Margin Analytics</h2>
-          <p className="text-sm text-slate-400">
+          <p className="text-sm text-slate-600 dark:text-slate-400">
             Earned Value Management (EVM), cost & schedule performance indexes (CPI/SPI), retention escrow accounts, and advance payment recovery schedules.
           </p>
         </div>
 
-        <div className="bg-slate-800/80 border border-slate-700 p-4 rounded-xl text-right">
-          <span className="text-xs text-slate-400 font-medium">Forecasted Gross Margin</span>
-          <p className="text-2xl font-bold text-emerald-400 font-mono mt-0.5">
+        <div className="bg-slate-100/80 dark:bg-slate-800/80 border border-slate-300 dark:border-slate-700 p-4 rounded-xl text-right">
+          <span className="text-xs text-slate-600 dark:text-slate-400 font-medium">Forecasted Gross Margin</span>
+          <p className="text-2xl font-bold text-emerald-600 dark:text-emerald-400 font-mono mt-0.5">
             {forecastedMarginPct.toFixed(1)}%
           </p>
-          <p className="text-[11px] text-slate-400 font-mono">Profit: {currency} {(forecastedGrossProfit / 1000000).toFixed(2)}M</p>
+          <p className="text-[11px] text-slate-600 dark:text-slate-400 font-mono">Profit: {currency} {(forecastedGrossProfit / 1000000).toFixed(2)}M</p>
         </div>
       </div>
 
@@ -131,35 +131,35 @@ export const ContractFinancialView: React.FC = () => {
         <div className="space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
             <div className="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-1">
-              <span className="text-xs text-slate-500">Contract Final Revenue</span>
+              <span className="text-xs text-slate-500 dark:text-slate-400">Contract Final Revenue</span>
               <p className="text-xl font-bold font-mono text-slate-900 dark:text-white">
                 {currency} {revisedVal.toLocaleString()}
               </p>
-              <p className="text-[11px] text-slate-400 font-mono">Original: {currency} {originalVal.toLocaleString()}</p>
+              <p className="text-[11px] text-slate-600 dark:text-slate-400 font-mono">Original: {currency} {originalVal.toLocaleString()}</p>
             </div>
 
             <div className="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-1">
-              <span className="text-xs text-slate-500">Estimated Cost at Completion (EAC)</span>
-              <p className="text-xl font-bold font-mono text-blue-600">
+              <span className="text-xs text-slate-500 dark:text-slate-400">Estimated Cost at Completion (EAC)</span>
+              <p className="text-xl font-bold font-mono text-blue-600 dark:text-blue-400">
                 {currency} {Math.round(estimateAtCompletionEAC).toLocaleString()}
               </p>
-              <p className="text-[11px] text-emerald-600">Under original budget baseline</p>
+              <p className="text-[11px] text-emerald-600 dark:text-emerald-400">Under original budget baseline</p>
             </div>
 
             <div className="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-1">
-              <span className="text-xs text-slate-500">Forecasted Gross Profit</span>
+              <span className="text-xs text-slate-500 dark:text-slate-400">Forecasted Gross Profit</span>
               <p className="text-xl font-bold font-mono text-emerald-600 dark:text-emerald-400">
                 {currency} {Math.round(forecastedGrossProfit).toLocaleString()}
               </p>
-              <p className="text-[11px] text-slate-400">Target Margin: 12.0%</p>
+              <p className="text-[11px] text-slate-600 dark:text-slate-400">Target Margin: 12.0%</p>
             </div>
 
             <div className="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-1">
-              <span className="text-xs text-slate-500">Certified Billed to Date</span>
+              <span className="text-xs text-slate-500 dark:text-slate-400">Certified Billed to Date</span>
               <p className="text-xl font-bold font-mono text-slate-900 dark:text-white">
                 {currency} {ipcs[ipcs.length - 1]?.grossCertifiedCumulativeTotal.toLocaleString()}
               </p>
-              <p className="text-[11px] text-slate-400">Financial Progress: {selectedContract.progressFinancialPct}%</p>
+              <p className="text-[11px] text-slate-600 dark:text-slate-400">Financial Progress: {selectedContract.progressFinancialPct}%</p>
             </div>
           </div>
 
@@ -171,7 +171,7 @@ export const ContractFinancialView: React.FC = () => {
               <div>
                 <div className="flex justify-between font-semibold pb-1">
                   <span>Gross Profit Margin Allocation ({forecastedMarginPct.toFixed(1)}%)</span>
-                  <span className="text-emerald-600 font-mono">{currency} {Math.round(forecastedGrossProfit).toLocaleString()}</span>
+                  <span className="text-emerald-600 dark:text-emerald-400 font-mono">{currency} {Math.round(forecastedGrossProfit).toLocaleString()}</span>
                 </div>
                 <div className="w-full bg-slate-100 dark:bg-slate-800 h-3 rounded-full overflow-hidden flex">
                   <div className="bg-emerald-500 h-full" style={{ width: `${forecastedMarginPct}%` }} title="Gross Margin" />
@@ -188,28 +188,28 @@ export const ContractFinancialView: React.FC = () => {
         <div className="space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
             <div className="p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm">
-              <span className="text-xs text-slate-500">Cost Performance Index (CPI)</span>
-              <p className="text-2xl font-bold font-mono text-emerald-600 mt-1">{cpi.toFixed(2)}</p>
-              <p className="text-[11px] text-slate-400">&gt; 1.00 indicates under-budget performance</p>
+              <span className="text-xs text-slate-500 dark:text-slate-400">Cost Performance Index (CPI)</span>
+              <p className="text-2xl font-bold font-mono text-emerald-600 dark:text-emerald-400 mt-1">{cpi.toFixed(2)}</p>
+              <p className="text-[11px] text-slate-600 dark:text-slate-400">&gt; 1.00 indicates under-budget performance</p>
             </div>
             <div className="p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm">
-              <span className="text-xs text-slate-500">Schedule Performance Index (SPI)</span>
-              <p className="text-2xl font-bold font-mono text-amber-600 mt-1">{spi.toFixed(2)}</p>
-              <p className="text-[11px] text-slate-400">0.98 on critical path alignment</p>
+              <span className="text-xs text-slate-500 dark:text-slate-400">Schedule Performance Index (SPI)</span>
+              <p className="text-2xl font-bold font-mono text-amber-600 dark:text-amber-400 mt-1">{spi.toFixed(2)}</p>
+              <p className="text-[11px] text-slate-600 dark:text-slate-400">0.98 on critical path alignment</p>
             </div>
             <div className="p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm">
-              <span className="text-xs text-slate-500">Cost Variance (CV = EV - AC)</span>
-              <p className="text-2xl font-bold font-mono text-emerald-600 mt-1">
+              <span className="text-xs text-slate-500 dark:text-slate-400">Cost Variance (CV = EV - AC)</span>
+              <p className="text-2xl font-bold font-mono text-emerald-600 dark:text-emerald-400 mt-1">
                 +{currency} {(costVarianceCV / 1000).toFixed(0)}k
               </p>
-              <p className="text-[11px] text-emerald-600">Positive cost favorability</p>
+              <p className="text-[11px] text-emerald-600 dark:text-emerald-400">Positive cost favorability</p>
             </div>
             <div className="p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm">
-              <span className="text-xs text-slate-500">Schedule Variance (SV = EV - PV)</span>
-              <p className="text-2xl font-bold font-mono text-amber-600 mt-1">
+              <span className="text-xs text-slate-500 dark:text-slate-400">Schedule Variance (SV = EV - PV)</span>
+              <p className="text-2xl font-bold font-mono text-amber-600 dark:text-amber-400 mt-1">
                 -{currency} {Math.abs(scheduleVarianceSV / 1000).toFixed(0)}k
               </p>
-              <p className="text-[11px] text-amber-600">Recoverable via accelerated fitout</p>
+              <p className="text-[11px] text-amber-600 dark:text-amber-400">Recoverable via accelerated fitout</p>
             </div>
           </div>
 
@@ -217,7 +217,7 @@ export const ContractFinancialView: React.FC = () => {
             <h4 className="text-base font-bold text-slate-900 dark:text-white">Earned Value Table (EVM Standards)</h4>
             <div className="overflow-x-auto">
               <table className="w-full text-left text-xs">
-                <thead className="bg-slate-50 dark:bg-slate-800/60 text-slate-500 font-semibold border-b border-slate-200 dark:border-slate-800">
+                <thead className="bg-slate-50 dark:bg-slate-800/60 text-slate-500 dark:text-slate-400 font-semibold border-b border-slate-200 dark:border-slate-800">
                   <tr>
                     <th className="py-3 px-4">Metric</th>
                     <th className="py-3 px-4">Formula / Source</th>
@@ -228,21 +228,21 @@ export const ContractFinancialView: React.FC = () => {
                 <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
                   <tr>
                     <td className="py-3 px-4 font-semibold text-slate-900 dark:text-white">Planned Value (PV / BCWS)</td>
-                    <td className="py-3 px-4 font-mono text-slate-500">Baseline Target Progress (70%)</td>
+                    <td className="py-3 px-4 font-mono text-slate-500 dark:text-slate-400">Baseline Target Progress (70%)</td>
                     <td className="py-3 px-4 text-right font-mono font-bold">{plannedValuePV.toLocaleString()}</td>
-                    <td className="py-3 px-4 text-slate-500">Scheduled baseline work</td>
+                    <td className="py-3 px-4 text-slate-500 dark:text-slate-400">Scheduled baseline work</td>
                   </tr>
                   <tr>
                     <td className="py-3 px-4 font-semibold text-slate-900 dark:text-white">Earned Value (EV / BCWP)</td>
-                    <td className="py-3 px-4 font-mono text-slate-500">Actual Physical Progress (68.5%)</td>
-                    <td className="py-3 px-4 text-right font-mono font-bold text-blue-600">{earnedValueEV.toLocaleString()}</td>
-                    <td className="py-3 px-4 text-slate-500">Physical work certified</td>
+                    <td className="py-3 px-4 font-mono text-slate-500 dark:text-slate-400">Actual Physical Progress (68.5%)</td>
+                    <td className="py-3 px-4 text-right font-mono font-bold text-blue-600 dark:text-blue-400">{earnedValueEV.toLocaleString()}</td>
+                    <td className="py-3 px-4 text-slate-500 dark:text-slate-400">Physical work certified</td>
                   </tr>
                   <tr>
                     <td className="py-3 px-4 font-semibold text-slate-900 dark:text-white">Actual Cost (AC / ACWP)</td>
-                    <td className="py-3 px-4 font-mono text-slate-500">Incurred Cost Ledger</td>
+                    <td className="py-3 px-4 font-mono text-slate-500 dark:text-slate-400">Incurred Cost Ledger</td>
                     <td className="py-3 px-4 text-right font-mono font-bold text-slate-900 dark:text-white">{Math.round(actualCostAC).toLocaleString()}</td>
-                    <td className="py-3 px-4 text-emerald-600 font-semibold">Under Budget by OMR 1.15M</td>
+                    <td className="py-3 px-4 text-emerald-600 dark:text-emerald-400 font-semibold">Under Budget by OMR 1.15M</td>
                   </tr>
                 </tbody>
               </table>
@@ -256,25 +256,25 @@ export const ContractFinancialView: React.FC = () => {
         <div className="space-y-4">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div className="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-1">
-              <span className="text-xs text-slate-500">Total Retention Deductions Capped (5%)</span>
+              <span className="text-xs text-slate-500 dark:text-slate-400">Total Retention Deductions Capped (5%)</span>
               <p className="text-xl font-bold font-mono text-slate-900 dark:text-white">
                 {currency} {maxRetentionCap.toLocaleString()}
               </p>
-              <p className="text-[11px] text-slate-400">10% per IPC capped at 5% of Contract</p>
+              <p className="text-[11px] text-slate-600 dark:text-slate-400">10% per IPC capped at 5% of Contract</p>
             </div>
             <div className="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-1">
-              <span className="text-xs text-slate-500">Stage 1 Release (50% at TOC)</span>
-              <p className="text-xl font-bold font-mono text-blue-600">
+              <span className="text-xs text-slate-500 dark:text-slate-400">Stage 1 Release (50% at TOC)</span>
+              <p className="text-xl font-bold font-mono text-blue-600 dark:text-blue-400">
                 {currency} {(maxRetentionCap * 0.5).toLocaleString()}
               </p>
-              <p className="text-[11px] text-slate-400">Due upon Taking-Over Certificate</p>
+              <p className="text-[11px] text-slate-600 dark:text-slate-400">Due upon Taking-Over Certificate</p>
             </div>
             <div className="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-1">
-              <span className="text-xs text-slate-500">Stage 2 Final Release (50% at DLP)</span>
-              <p className="text-xl font-bold font-mono text-emerald-600">
+              <span className="text-xs text-slate-500 dark:text-slate-400">Stage 2 Final Release (50% at DLP)</span>
+              <p className="text-xl font-bold font-mono text-emerald-600 dark:text-emerald-400">
                 {currency} {(maxRetentionCap * 0.5).toLocaleString()}
               </p>
-              <p className="text-[11px] text-slate-400">Due after 24-month warranty</p>
+              <p className="text-[11px] text-slate-600 dark:text-slate-400">Due after 24-month warranty</p>
             </div>
           </div>
         </div>
@@ -285,25 +285,25 @@ export const ContractFinancialView: React.FC = () => {
         <div className="space-y-4">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div className="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-1">
-              <span className="text-xs text-slate-500">Total Mobilization Advance Received</span>
+              <span className="text-xs text-slate-500 dark:text-slate-400">Total Mobilization Advance Received</span>
               <p className="text-xl font-bold font-mono text-slate-900 dark:text-white">
                 {currency} {totalAdvancePaid.toLocaleString()}
               </p>
-              <p className="text-[11px] text-slate-400">10% secured by Bank Guarantee</p>
+              <p className="text-[11px] text-slate-600 dark:text-slate-400">10% secured by Bank Guarantee</p>
             </div>
             <div className="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-1">
-              <span className="text-xs text-slate-500">Cumulative Recovered from IPCs</span>
-              <p className="text-xl font-bold font-mono text-emerald-600">
+              <span className="text-xs text-slate-500 dark:text-slate-400">Cumulative Recovered from IPCs</span>
+              <p className="text-xl font-bold font-mono text-emerald-600 dark:text-emerald-400">
                 {currency} {cumulativeAdvanceRecovered.toLocaleString()}
               </p>
-              <p className="text-[11px] text-emerald-600">73.6% amortized</p>
+              <p className="text-[11px] text-emerald-600 dark:text-emerald-400">73.6% amortized</p>
             </div>
             <div className="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-1">
-              <span className="text-xs text-slate-500">Remaining Advance Balance</span>
-              <p className="text-xl font-bold font-mono text-amber-600">
+              <span className="text-xs text-slate-500 dark:text-slate-400">Remaining Advance Balance</span>
+              <p className="text-xl font-bold font-mono text-amber-600 dark:text-amber-400">
                 {currency} {remainingAdvance.toLocaleString()}
               </p>
-              <p className="text-[11px] text-slate-400">Full recovery targeted by IPC-12</p>
+              <p className="text-[11px] text-slate-600 dark:text-slate-400">Full recovery targeted by IPC-12</p>
             </div>
           </div>
         </div>

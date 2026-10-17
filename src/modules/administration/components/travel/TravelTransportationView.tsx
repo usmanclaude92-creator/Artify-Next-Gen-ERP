@@ -155,24 +155,24 @@ export const TravelTransportationView: React.FC<TravelTransportationViewProps> =
       <WorkflowBannerAlert />
 
       {/* Top Banner */}
-      <div className="bg-white rounded-2xl p-5 border border-slate-200 shadow-2xs">
+      <div className="bg-white dark:bg-slate-900 rounded-2xl p-5 border border-slate-200 dark:border-slate-700 shadow-2xs">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-xl bg-slate-900 text-white flex items-center justify-center font-bold text-sm">
               03.07
             </div>
             <div>
-              <h2 className="text-lg font-bold text-slate-900">Travel & Corporate Fleet Logistics</h2>
-              <p className="text-xs text-slate-500">Business travel authorizations, flight & hotel budgets, and motor pool bookings</p>
+              <h2 className="text-lg font-bold text-slate-900 dark:text-slate-100">Travel & Corporate Fleet Logistics</h2>
+              <p className="text-xs text-slate-500 dark:text-slate-400">Business travel authorizations, flight & hotel budgets, and motor pool bookings</p>
             </div>
           </div>
 
           <div className="flex items-center gap-2 flex-wrap">
-            <div className="flex bg-slate-100 p-1 rounded-xl">
+            <div className="flex bg-slate-100 dark:bg-slate-800 p-1 rounded-xl">
               <button
                 onClick={() => setActiveTab('travel')}
                 className={`px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-all cursor-pointer ${
-                  activeTab === 'travel' ? 'bg-white text-slate-900 shadow-xs' : 'text-slate-600 hover:text-slate-900'
+                  activeTab === 'travel' ? 'bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100 shadow-xs' : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100'
                 }`}
               >
                 <Plane className="w-3.5 h-3.5" />
@@ -181,7 +181,7 @@ export const TravelTransportationView: React.FC<TravelTransportationViewProps> =
               <button
                 onClick={() => setActiveTab('fleet')}
                 className={`px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-all cursor-pointer ${
-                  activeTab === 'fleet' ? 'bg-white text-slate-900 shadow-xs' : 'text-slate-600 hover:text-slate-900'
+                  activeTab === 'fleet' ? 'bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100 shadow-xs' : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100'
                 }`}
               >
                 <Car className="w-3.5 h-3.5" />
@@ -190,7 +190,7 @@ export const TravelTransportationView: React.FC<TravelTransportationViewProps> =
               <button
                 onClick={() => setActiveTab('bookings')}
                 className={`px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-all cursor-pointer ${
-                  activeTab === 'bookings' ? 'bg-white text-slate-900 shadow-xs' : 'text-slate-600 hover:text-slate-900'
+                  activeTab === 'bookings' ? 'bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100 shadow-xs' : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100'
                 }`}
               >
                 <Compass className="w-3.5 h-3.5" />
@@ -220,15 +220,15 @@ export const TravelTransportationView: React.FC<TravelTransportationViewProps> =
         </div>
 
         {/* Search */}
-        <div className="mt-4 pt-4 border-t border-slate-100 flex items-center justify-between gap-3">
+        <div className="mt-4 pt-4 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between gap-3">
           <div className="relative w-full sm:w-80">
-            <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
+            <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 dark:text-slate-400" />
             <input
               type="text"
               value={searchTerm}
               onChange={e => setSearchTerm(e.target.value)}
               placeholder="Search travel #, destination, vehicle plate..."
-              className="w-full pl-9 pr-3 py-1.5 rounded-lg border border-slate-200 text-xs focus:outline-none focus:ring-2 focus:ring-slate-900"
+              className="w-full pl-9 pr-3 py-1.5 rounded-lg border border-slate-200 dark:border-slate-700 text-xs focus:outline-none focus:ring-2 focus:ring-slate-200 dark:focus:ring-slate-900"
             />
           </div>
         </div>
@@ -236,10 +236,10 @@ export const TravelTransportationView: React.FC<TravelTransportationViewProps> =
 
       {/* Tab 1: Travel Requests */}
       {activeTab === 'travel' && (
-        <div className="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-2xs">
+        <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-700 overflow-hidden shadow-2xs">
           <div className="overflow-x-auto">
-            <table className="w-full text-left text-xs text-slate-700">
-              <thead className="bg-slate-50 text-slate-500 border-b border-slate-200 uppercase font-semibold text-[10px] tracking-wider">
+            <table className="w-full text-left text-xs text-slate-700 dark:text-slate-300">
+              <thead className="bg-slate-50 dark:bg-slate-800/50 text-slate-500 dark:text-slate-400 border-b border-slate-200 dark:border-slate-700 uppercase font-semibold text-[10px] tracking-wider">
                 <tr>
                   <th className="p-3.5">Travel Ref #</th>
                   <th className="p-3.5">Traveler & Dept</th>
@@ -250,38 +250,38 @@ export const TravelTransportationView: React.FC<TravelTransportationViewProps> =
                   <th className="p-3.5 text-right">Approval Actions</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-100">
+              <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
                 {filteredTravel.map(trv => (
-                  <tr key={trv.id} className="hover:bg-slate-50/70">
-                    <td className="p-3.5 font-mono font-bold text-indigo-700">
+                  <tr key={trv.id} className="hover:bg-slate-50/70 dark:hover:bg-slate-800/70">
+                    <td className="p-3.5 font-mono font-bold text-indigo-700 dark:text-indigo-300">
                       <div>{trv.travelNumber}</div>
-                      {trv.bookingRef && <div className="text-[10px] font-mono text-emerald-700">{trv.bookingRef}</div>}
+                      {trv.bookingRef && <div className="text-[10px] font-mono text-emerald-700 dark:text-emerald-300">{trv.bookingRef}</div>}
                     </td>
                     <td className="p-3.5">
-                      <div className="font-bold text-slate-900">{trv.travelerName}</div>
-                      <div className="text-[11px] text-slate-500">{trv.department}</div>
+                      <div className="font-bold text-slate-900 dark:text-slate-100">{trv.travelerName}</div>
+                      <div className="text-[11px] text-slate-500 dark:text-slate-400">{trv.department}</div>
                     </td>
                     <td className="p-3.5">
-                      <div className="font-bold text-slate-800 flex items-center gap-1">
-                        <MapPin className="w-3 h-3 text-slate-400" /> {trv.destinationCity}, {trv.destinationCountry}
+                      <div className="font-bold text-slate-800 dark:text-slate-200 flex items-center gap-1">
+                        <MapPin className="w-3 h-3 text-slate-500 dark:text-slate-400" /> {trv.destinationCity}, {trv.destinationCountry}
                       </div>
-                      <div className="text-[11px] text-slate-500">{trv.departureDate} → {trv.returnDate}</div>
+                      <div className="text-[11px] text-slate-500 dark:text-slate-400">{trv.departureDate} → {trv.returnDate}</div>
                     </td>
                     <td className="p-3.5">
-                      <div className="flex items-center gap-1 text-[11px] font-semibold text-slate-800">
-                        <GitBranch className="w-3 h-3 text-indigo-600" />
+                      <div className="flex items-center gap-1 text-[11px] font-semibold text-slate-800 dark:text-slate-200">
+                        <GitBranch className="w-3 h-3 text-indigo-600 dark:text-indigo-400" />
                         <span>Tier {trv.currentApprovalLevel || 1} / {trv.totalApprovalLevels || 1}</span>
                       </div>
-                      <div className="text-[10px] text-slate-500">{trv.travelClass} Class • {trv.hotelRequired ? 'Hotel' : 'Flight Only'}</div>
+                      <div className="text-[10px] text-slate-500 dark:text-slate-400">{trv.travelClass} Class • {trv.hotelRequired ? 'Hotel' : 'Flight Only'}</div>
                     </td>
-                    <td className="p-3.5 font-mono font-bold text-slate-900">
+                    <td className="p-3.5 font-mono font-bold text-slate-900 dark:text-slate-100">
                       {formatCurrency(trv.totalEstimatedCostOMR)}
                     </td>
                     <td className="p-3.5">
                       <span className={`px-2 py-0.5 rounded text-[10px] font-bold ${
-                        trv.status === 'Approved' ? 'bg-emerald-100 text-emerald-800' :
-                        trv.status === 'Rejected' ? 'bg-rose-100 text-rose-800' :
-                        'bg-amber-100 text-amber-800'
+                        trv.status === 'Approved' ? 'bg-emerald-100 dark:bg-emerald-500/20 text-emerald-800 dark:text-emerald-200' :
+                        trv.status === 'Rejected' ? 'bg-rose-100 dark:bg-rose-500/20 text-rose-800 dark:text-rose-200' :
+                        'bg-amber-100 dark:bg-amber-500/20 text-amber-800 dark:text-amber-200'
                       }`}>
                         {trv.status}
                       </span>
@@ -298,13 +298,13 @@ export const TravelTransportationView: React.FC<TravelTransportationViewProps> =
                           </button>
                           <button
                             onClick={() => handleRejectTravel(trv.id)}
-                            className="px-2 py-1 bg-rose-100 hover:bg-rose-200 text-rose-700 rounded text-[11px] font-semibold cursor-pointer"
+                            className="px-2 py-1 bg-rose-100 dark:bg-rose-500/20 hover:bg-rose-200 dark:hover:bg-rose-500/30 text-rose-700 dark:text-rose-300 rounded text-[11px] font-semibold cursor-pointer"
                           >
                             Reject
                           </button>
                         </div>
                       ) : (
-                        <span className="text-[11px] text-slate-400">
+                        <span className="text-[11px] text-slate-500 dark:text-slate-400">
                           {trv.approvedBy ? `Approved by ${trv.approvedBy}` : trv.status}
                         </span>
                       )}
@@ -321,49 +321,49 @@ export const TravelTransportationView: React.FC<TravelTransportationViewProps> =
       {activeTab === 'fleet' && (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
           {filteredFleet.map(veh => (
-            <div key={veh.id} className="bg-white rounded-2xl p-5 border border-slate-200 shadow-2xs flex flex-col justify-between">
+            <div key={veh.id} className="bg-white dark:bg-slate-900 rounded-2xl p-5 border border-slate-200 dark:border-slate-700 shadow-2xs flex flex-col justify-between">
               <div>
                 <div className="flex items-center justify-between mb-2">
                   <span className="font-mono text-xs font-extrabold bg-slate-900 text-white px-2 py-0.5 rounded">
                     {veh.plateNumber}
                   </span>
                   <span className={`px-2 py-0.5 rounded text-[10px] font-bold ${
-                    veh.currentStatus === 'Available' ? 'bg-emerald-100 text-emerald-800' :
-                    veh.currentStatus === 'On Mission' ? 'bg-blue-100 text-blue-800' :
-                    veh.currentStatus === 'Scheduled Maintenance' ? 'bg-amber-100 text-amber-800' :
-                    'bg-slate-100 text-slate-800'
+                    veh.currentStatus === 'Available' ? 'bg-emerald-100 dark:bg-emerald-500/20 text-emerald-800 dark:text-emerald-200' :
+                    veh.currentStatus === 'On Mission' ? 'bg-blue-100 dark:bg-blue-500/20 text-blue-800 dark:text-blue-200' :
+                    veh.currentStatus === 'Scheduled Maintenance' ? 'bg-amber-100 dark:bg-amber-500/20 text-amber-800 dark:text-amber-200' :
+                    'bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200'
                   }`}>
                     {veh.currentStatus}
                   </span>
                 </div>
 
-                <h3 className="font-bold text-slate-900 text-sm">{veh.makeModel}</h3>
-                <p className="text-[11px] text-slate-500">{veh.vehicleType} • Code: {veh.vehicleCode}</p>
+                <h3 className="font-bold text-slate-900 dark:text-slate-100 text-sm">{veh.makeModel}</h3>
+                <p className="text-[11px] text-slate-500 dark:text-slate-400">{veh.vehicleType} • Code: {veh.vehicleCode}</p>
 
-                <div className="grid grid-cols-2 gap-2 mt-4 text-[11px] pt-3 border-t border-slate-100">
+                <div className="grid grid-cols-2 gap-2 mt-4 text-[11px] pt-3 border-t border-slate-100 dark:border-slate-800">
                   <div>
-                    <span className="text-slate-400 block">Odometer</span>
-                    <span className="font-mono font-bold text-slate-800">{veh.currentOdometerKm.toLocaleString()} KM</span>
+                    <span className="text-slate-500 dark:text-slate-400 block">Odometer</span>
+                    <span className="font-mono font-bold text-slate-800 dark:text-slate-200">{veh.currentOdometerKm.toLocaleString()} KM</span>
                   </div>
                   <div>
-                    <span className="text-slate-400 block">Assigned Pool</span>
-                    <span className="font-medium text-slate-800">{veh.assignedBranch}</span>
+                    <span className="text-slate-500 dark:text-slate-400 block">Assigned Pool</span>
+                    <span className="font-medium text-slate-800 dark:text-slate-200">{veh.assignedBranch}</span>
                   </div>
                   <div>
-                    <span className="text-slate-400 block">Last Service</span>
-                    <span className="font-medium text-slate-800">{veh.lastServiceDate}</span>
+                    <span className="text-slate-500 dark:text-slate-400 block">Last Service</span>
+                    <span className="font-medium text-slate-800 dark:text-slate-200">{veh.lastServiceDate}</span>
                   </div>
                   <div>
-                    <span className="text-slate-400 block">Default Driver</span>
-                    <span className="font-medium text-slate-800">{veh.defaultDriver || 'Pool'}</span>
+                    <span className="text-slate-500 dark:text-slate-400 block">Default Driver</span>
+                    <span className="font-medium text-slate-800 dark:text-slate-200">{veh.defaultDriver || 'Pool'}</span>
                   </div>
                 </div>
               </div>
 
-              <div className="pt-3 mt-3 border-t border-slate-100 flex gap-2">
+              <div className="pt-3 mt-3 border-t border-slate-100 dark:border-slate-800 flex gap-2">
                 <button
                   onClick={() => updateFleetVehicleStatus(veh.id, veh.currentStatus === 'Available' ? 'On Mission' : 'Available')}
-                  className="w-full py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-800 rounded-lg text-xs font-semibold cursor-pointer"
+                  className="w-full py-1.5 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-200 rounded-lg text-xs font-semibold cursor-pointer"
                 >
                   Toggle Status ({veh.currentStatus === 'Available' ? 'Set Mission' : 'Set Available'})
                 </button>
@@ -375,10 +375,10 @@ export const TravelTransportationView: React.FC<TravelTransportationViewProps> =
 
       {/* Tab 3: Vehicle Bookings */}
       {activeTab === 'bookings' && (
-        <div className="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-2xs">
+        <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-700 overflow-hidden shadow-2xs">
           <div className="overflow-x-auto">
-            <table className="w-full text-left text-xs text-slate-700">
-              <thead className="bg-slate-50 text-slate-500 border-b border-slate-200 uppercase font-semibold text-[10px] tracking-wider">
+            <table className="w-full text-left text-xs text-slate-700 dark:text-slate-300">
+              <thead className="bg-slate-50 dark:bg-slate-800/50 text-slate-500 dark:text-slate-400 border-b border-slate-200 dark:border-slate-700 uppercase font-semibold text-[10px] tracking-wider">
                 <tr>
                   <th className="p-3.5">Booking #</th>
                   <th className="p-3.5">Requester & Purpose</th>
@@ -388,24 +388,24 @@ export const TravelTransportationView: React.FC<TravelTransportationViewProps> =
                   <th className="p-3.5">Status</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-100">
+              <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
                 {filteredBookings.map(bk => (
-                  <tr key={bk.id} className="hover:bg-slate-50/70">
-                    <td className="p-3.5 font-mono font-bold text-indigo-700">{bk.bookingNumber}</td>
+                  <tr key={bk.id} className="hover:bg-slate-50/70 dark:hover:bg-slate-800/70">
+                    <td className="p-3.5 font-mono font-bold text-indigo-700 dark:text-indigo-300">{bk.bookingNumber}</td>
                     <td className="p-3.5">
-                      <div className="font-bold text-slate-900">{bk.requestedBy}</div>
-                      <div className="text-[11px] text-slate-500">{bk.purpose}</div>
+                      <div className="font-bold text-slate-900 dark:text-slate-100">{bk.requestedBy}</div>
+                      <div className="text-[11px] text-slate-500 dark:text-slate-400">{bk.purpose}</div>
                     </td>
                     <td className="p-3.5">
-                      <span className="font-semibold text-slate-800">{bk.vehicleAssigned}</span>
+                      <span className="font-semibold text-slate-800 dark:text-slate-200">{bk.vehicleAssigned}</span>
                     </td>
                     <td className="p-3.5">
-                      <div className="text-slate-800">{bk.pickupLocation} → {bk.dropoffLocation}</div>
-                      <div className="text-[10px] text-slate-400">{bk.tripStartDate} {bk.tripStartTime}</div>
+                      <div className="text-slate-800 dark:text-slate-200">{bk.pickupLocation} → {bk.dropoffLocation}</div>
+                      <div className="text-[10px] text-slate-500 dark:text-slate-400">{bk.tripStartDate} {bk.tripStartTime}</div>
                     </td>
                     <td className="p-3.5 font-medium">{bk.assignedDriver || 'Self-Driven'}</td>
                     <td className="p-3.5">
-                      <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-100 text-emerald-800">
+                      <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-100 dark:bg-emerald-500/20 text-emerald-800 dark:text-emerald-200">
                         {bk.status}
                       </span>
                     </td>
@@ -420,119 +420,119 @@ export const TravelTransportationView: React.FC<TravelTransportationViewProps> =
       {/* Request Travel Modal */}
       {showTravelModal && (
         <div className="fixed inset-0 bg-black/40 backdrop-blur-xs flex items-center justify-center p-4 z-50 animate-in fade-in">
-          <div className="bg-white rounded-2xl p-6 w-full max-w-lg shadow-xl border border-slate-200">
-            <h3 className="text-base font-bold text-slate-900 mb-4">Request Corporate Travel Authorization</h3>
+          <div className="bg-white dark:bg-slate-900 rounded-2xl p-6 w-full max-w-lg shadow-xl border border-slate-200 dark:border-slate-700">
+            <h3 className="text-base font-bold text-slate-900 dark:text-slate-100 mb-4">Request Corporate Travel Authorization</h3>
             <form onSubmit={handleCreateTravel} className="space-y-4 text-xs">
               <div>
-                <label className="block text-slate-700 font-semibold mb-1">Traveler Name</label>
+                <label className="block text-slate-700 dark:text-slate-300 font-semibold mb-1">Traveler Name</label>
                 <input
                   type="text"
                   required
                   value={travelerName}
                   onChange={e => setTravelerName(e.target.value)}
-                  className="w-full p-2.5 rounded-lg border border-slate-300 focus:outline-none"
+                  className="w-full p-2.5 rounded-lg border border-slate-300 dark:border-slate-600 focus:outline-none"
                 />
               </div>
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-slate-700 font-semibold mb-1">Destination City</label>
+                  <label className="block text-slate-700 dark:text-slate-300 font-semibold mb-1">Destination City</label>
                   <input
                     type="text"
                     required
                     value={destinationCity}
                     onChange={e => setDestinationCity(e.target.value)}
-                    className="w-full p-2.5 rounded-lg border border-slate-300 focus:outline-none"
+                    className="w-full p-2.5 rounded-lg border border-slate-300 dark:border-slate-600 focus:outline-none"
                   />
                 </div>
                 <div>
-                  <label className="block text-slate-700 font-semibold mb-1">Country</label>
+                  <label className="block text-slate-700 dark:text-slate-300 font-semibold mb-1">Country</label>
                   <input
                     type="text"
                     required
                     value={destinationCountry}
                     onChange={e => setDestinationCountry(e.target.value)}
-                    className="w-full p-2.5 rounded-lg border border-slate-300 focus:outline-none"
+                    className="w-full p-2.5 rounded-lg border border-slate-300 dark:border-slate-600 focus:outline-none"
                   />
                 </div>
               </div>
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-slate-700 font-semibold mb-1">Departure Date</label>
+                  <label className="block text-slate-700 dark:text-slate-300 font-semibold mb-1">Departure Date</label>
                   <input
                     type="date"
                     required
                     value={departureDate}
                     onChange={e => setDepartureDate(e.target.value)}
-                    className="w-full p-2.5 rounded-lg border border-slate-300 focus:outline-none"
+                    className="w-full p-2.5 rounded-lg border border-slate-300 dark:border-slate-600 focus:outline-none"
                   />
                 </div>
                 <div>
-                  <label className="block text-slate-700 font-semibold mb-1">Return Date</label>
+                  <label className="block text-slate-700 dark:text-slate-300 font-semibold mb-1">Return Date</label>
                   <input
                     type="date"
                     required
                     value={returnDate}
                     onChange={e => setReturnDate(e.target.value)}
-                    className="w-full p-2.5 rounded-lg border border-slate-300 focus:outline-none"
+                    className="w-full p-2.5 rounded-lg border border-slate-300 dark:border-slate-600 focus:outline-none"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block text-slate-700 font-semibold mb-1">Purpose of Mission</label>
+                <label className="block text-slate-700 dark:text-slate-300 font-semibold mb-1">Purpose of Mission</label>
                 <textarea
                   rows={2}
                   required
                   value={travelPurpose}
                   onChange={e => setTravelPurpose(e.target.value)}
-                  className="w-full p-2.5 rounded-lg border border-slate-300 focus:outline-none"
+                  className="w-full p-2.5 rounded-lg border border-slate-300 dark:border-slate-600 focus:outline-none"
                 />
               </div>
 
               <div className="grid grid-cols-3 gap-2">
                 <div>
-                  <label className="block text-slate-700 font-semibold mb-1">Flight (OMR)</label>
+                  <label className="block text-slate-700 dark:text-slate-300 font-semibold mb-1">Flight (OMR)</label>
                   <input
                     type="number"
                     value={flightCost}
                     onChange={e => setFlightCost(Number(e.target.value))}
-                    className="w-full p-2 rounded-lg border border-slate-300 focus:outline-none"
+                    className="w-full p-2 rounded-lg border border-slate-300 dark:border-slate-600 focus:outline-none"
                   />
                 </div>
                 <div>
-                  <label className="block text-slate-700 font-semibold mb-1">Hotel (OMR)</label>
+                  <label className="block text-slate-700 dark:text-slate-300 font-semibold mb-1">Hotel (OMR)</label>
                   <input
                     type="number"
                     value={hotelCost}
                     onChange={e => setHotelCost(Number(e.target.value))}
-                    className="w-full p-2 rounded-lg border border-slate-300 focus:outline-none"
+                    className="w-full p-2 rounded-lg border border-slate-300 dark:border-slate-600 focus:outline-none"
                   />
                 </div>
                 <div>
-                  <label className="block text-slate-700 font-semibold mb-1">Per Diem (OMR)</label>
+                  <label className="block text-slate-700 dark:text-slate-300 font-semibold mb-1">Per Diem (OMR)</label>
                   <input
                     type="number"
                     value={perDiem}
                     onChange={e => setPerDiem(Number(e.target.value))}
-                    className="w-full p-2 rounded-lg border border-slate-300 focus:outline-none"
+                    className="w-full p-2 rounded-lg border border-slate-300 dark:border-slate-600 focus:outline-none"
                   />
                 </div>
               </div>
 
-              <div className="p-3 bg-slate-50 rounded-xl border border-slate-200 flex justify-between items-center">
-                <span className="font-bold text-slate-800">Total Estimated Budget:</span>
-                <span className="font-mono font-bold text-sm text-indigo-700">
+              <div className="p-3 bg-slate-50 dark:bg-slate-800/50 rounded-xl border border-slate-200 dark:border-slate-700 flex justify-between items-center">
+                <span className="font-bold text-slate-800 dark:text-slate-200">Total Estimated Budget:</span>
+                <span className="font-mono font-bold text-sm text-indigo-700 dark:text-indigo-300">
                   {formatCurrency(flightCost + hotelCost + perDiem)}
                 </span>
               </div>
 
-              <div className="flex justify-end gap-2 pt-4 border-t border-slate-100">
+              <div className="flex justify-end gap-2 pt-4 border-t border-slate-100 dark:border-slate-800">
                 <button
                   type="button"
                   onClick={() => setShowTravelModal(false)}
-                  className="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg font-semibold cursor-pointer"
+                  className="px-4 py-2 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 rounded-lg font-semibold cursor-pointer"
                 >
                   Cancel
                 </button>
@@ -551,27 +551,27 @@ export const TravelTransportationView: React.FC<TravelTransportationViewProps> =
       {/* Book Vehicle Modal */}
       {showBookingModal && (
         <div className="fixed inset-0 bg-black/40 backdrop-blur-xs flex items-center justify-center p-4 z-50 animate-in fade-in">
-          <div className="bg-white rounded-2xl p-6 w-full max-w-lg shadow-xl border border-slate-200">
-            <h3 className="text-base font-bold text-slate-900 mb-4">Book Motor Pool Vehicle</h3>
+          <div className="bg-white dark:bg-slate-900 rounded-2xl p-6 w-full max-w-lg shadow-xl border border-slate-200 dark:border-slate-700">
+            <h3 className="text-base font-bold text-slate-900 dark:text-slate-100 mb-4">Book Motor Pool Vehicle</h3>
             <form onSubmit={handleCreateBooking} className="space-y-4 text-xs">
               <div>
-                <label className="block text-slate-700 font-semibold mb-1">Mission Purpose</label>
+                <label className="block text-slate-700 dark:text-slate-300 font-semibold mb-1">Mission Purpose</label>
                 <input
                   type="text"
                   required
                   value={bookingPurpose}
                   onChange={e => setBookingPurpose(e.target.value)}
                   placeholder="e.g. VIP Client Escort from MCT Airport to HQ"
-                  className="w-full p-2.5 rounded-lg border border-slate-300 focus:outline-none"
+                  className="w-full p-2.5 rounded-lg border border-slate-300 dark:border-slate-600 focus:outline-none"
                 />
               </div>
 
               <div>
-                <label className="block text-slate-700 font-semibold mb-1">Select Available Fleet Vehicle</label>
+                <label className="block text-slate-700 dark:text-slate-300 font-semibold mb-1">Select Available Fleet Vehicle</label>
                 <select
                   value={selectedVehicle}
                   onChange={e => setSelectedVehicle(e.target.value)}
-                  className="w-full p-2.5 rounded-lg border border-slate-300 focus:outline-none"
+                  className="w-full p-2.5 rounded-lg border border-slate-300 dark:border-slate-600 focus:outline-none"
                 >
                   {fleetVehicles.filter(v => v.currentStatus === 'Available').map(v => (
                     <option key={v.id} value={v.id}>
@@ -583,36 +583,36 @@ export const TravelTransportationView: React.FC<TravelTransportationViewProps> =
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-slate-700 font-semibold mb-1">Pickup Location</label>
+                  <label className="block text-slate-700 dark:text-slate-300 font-semibold mb-1">Pickup Location</label>
                   <input
                     type="text"
                     required
                     value={pickupLoc}
                     onChange={e => setPickupLoc(e.target.value)}
-                    className="w-full p-2.5 rounded-lg border border-slate-300 focus:outline-none"
+                    className="w-full p-2.5 rounded-lg border border-slate-300 dark:border-slate-600 focus:outline-none"
                   />
                 </div>
                 <div>
-                  <label className="block text-slate-700 font-semibold mb-1">Dropoff Location</label>
+                  <label className="block text-slate-700 dark:text-slate-300 font-semibold mb-1">Dropoff Location</label>
                   <input
                     type="text"
                     required
                     value={dropoffLoc}
                     onChange={e => setDropoffLoc(e.target.value)}
-                    className="w-full p-2.5 rounded-lg border border-slate-300 focus:outline-none"
+                    className="w-full p-2.5 rounded-lg border border-slate-300 dark:border-slate-600 focus:outline-none"
                   />
                 </div>
               </div>
 
               <div className="grid grid-cols-2 gap-3 items-center">
                 <div>
-                  <label className="block text-slate-700 font-semibold mb-1">Trip Date</label>
+                  <label className="block text-slate-700 dark:text-slate-300 font-semibold mb-1">Trip Date</label>
                   <input
                     type="date"
                     required
                     value={tripDate}
                     onChange={e => setTripDate(e.target.value)}
-                    className="w-full p-2.5 rounded-lg border border-slate-300 focus:outline-none"
+                    className="w-full p-2.5 rounded-lg border border-slate-300 dark:border-slate-600 focus:outline-none"
                   />
                 </div>
                 <div className="pt-4">
@@ -621,18 +621,18 @@ export const TravelTransportationView: React.FC<TravelTransportationViewProps> =
                       type="checkbox"
                       checked={requiresChauffeur}
                       onChange={e => setRequiresChauffeur(e.target.checked)}
-                      className="rounded text-slate-900 focus:ring-slate-900"
+                      className="rounded text-slate-900 dark:text-slate-100 focus:ring-slate-200 dark:focus:ring-slate-900"
                     />
-                    <span className="font-semibold text-slate-800">Assign Company Driver</span>
+                    <span className="font-semibold text-slate-800 dark:text-slate-200">Assign Company Driver</span>
                   </label>
                 </div>
               </div>
 
-              <div className="flex justify-end gap-2 pt-4 border-t border-slate-100">
+              <div className="flex justify-end gap-2 pt-4 border-t border-slate-100 dark:border-slate-800">
                 <button
                   type="button"
                   onClick={() => setShowBookingModal(false)}
-                  className="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg font-semibold cursor-pointer"
+                  className="px-4 py-2 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 rounded-lg font-semibold cursor-pointer"
                 >
                   Cancel
                 </button>

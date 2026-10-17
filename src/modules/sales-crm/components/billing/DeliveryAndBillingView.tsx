@@ -92,7 +92,7 @@ export const DeliveryAndBillingView: React.FC<DeliveryAndBillingViewProps> = ({
               <span className="px-2.5 py-0.5 rounded-full bg-amber-50 dark:bg-amber-950 text-amber-600 dark:text-amber-400 text-xs font-semibold">
                 Functional Area 06.07
               </span>
-              <span className="text-xs text-slate-500">Logistics Dispatch, Tax Invoicing & Receivables</span>
+              <span className="text-xs text-slate-500 dark:text-slate-400">Logistics Dispatch, Tax Invoicing & Receivables</span>
             </div>
             <h2 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white mt-1">
               Delivery Notes, AR Tax Invoices, Credit Memos & Advances
@@ -143,7 +143,7 @@ export const DeliveryAndBillingView: React.FC<DeliveryAndBillingViewProps> = ({
               <h3 className="font-bold text-slate-900 dark:text-white text-base">
                 06.07.01 Delivery Notes & Shipment Gate Passes
               </h3>
-              <p className="text-xs text-slate-500">Goods dispatch documentation and site delivery receipts</p>
+              <p className="text-xs text-slate-500 dark:text-slate-400">Goods dispatch documentation and site delivery receipts</p>
             </div>
             <span className="text-xs font-semibold text-amber-600 dark:text-amber-400">
               {deliveryNotes.length} Dispatched Shipments
@@ -168,7 +168,7 @@ export const DeliveryAndBillingView: React.FC<DeliveryAndBillingViewProps> = ({
                     <td className="px-5 py-3.5">
                       <div className="font-bold text-slate-900 dark:text-white">{dn.deliveryNoteNumber}</div>
                       <div className="text-xs text-slate-500 dark:text-slate-400 flex items-center gap-1 mt-0.5">
-                        <Building2 className="w-3 h-3 text-amber-500" />
+                        <Building2 className="w-3 h-3 text-amber-500 dark:text-amber-400" />
                         <span>{dn.customerName}</span>
                       </div>
                     </td>
@@ -177,7 +177,7 @@ export const DeliveryAndBillingView: React.FC<DeliveryAndBillingViewProps> = ({
                     </td>
                     <td className="px-4 py-3.5 text-xs text-slate-600 dark:text-slate-400">
                       <div>{dn.carrierName}</div>
-                      <div className="text-[10px] text-slate-400 font-mono">WB: {dn.waybillNumber}</div>
+                      <div className="text-[10px] text-slate-600 dark:text-slate-400 font-mono">WB: {dn.waybillNumber}</div>
                     </td>
                     <td className="px-4 py-3.5 text-xs text-slate-600 dark:text-slate-400">
                       {dn.dispatchDate}
@@ -197,7 +197,7 @@ export const DeliveryAndBillingView: React.FC<DeliveryAndBillingViewProps> = ({
                       {dn.status === 'In Transit' && (
                         <button
                           onClick={() => confirmDeliveryNote(dn.id, 'Eng. Salim Al-Ghafri (PDO Receiving Lead)')}
-                          className="px-2.5 py-1 rounded-lg text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200 cursor-pointer"
+                          className="px-2.5 py-1 rounded-lg text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 cursor-pointer"
                         >
                           Confirm POD
                         </button>
@@ -228,7 +228,7 @@ export const DeliveryAndBillingView: React.FC<DeliveryAndBillingViewProps> = ({
               <h3 className="font-bold text-sm text-slate-900 dark:text-white">
                 06.07.02 Accounts Receivable Tax Invoices
               </h3>
-              <span className="text-xs text-slate-500">{arInvoices.length} Invoices</span>
+              <span className="text-xs text-slate-500 dark:text-slate-400">{arInvoices.length} Invoices</span>
             </div>
 
             <div className="space-y-3">
@@ -243,7 +243,7 @@ export const DeliveryAndBillingView: React.FC<DeliveryAndBillingViewProps> = ({
                     className={`p-4 rounded-2xl border transition-all cursor-pointer text-left ${
                       isSelected
                         ? 'bg-amber-50/70 dark:bg-amber-950/40 border-amber-400 dark:border-amber-700 shadow-sm ring-1 ring-amber-400/50'
-                        : 'bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800 hover:border-slate-300'
+                        : 'bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800 hover:border-slate-300 dark:hover:border-slate-600'
                     }`}
                   >
                     <div className="flex items-start justify-between">
@@ -267,13 +267,13 @@ export const DeliveryAndBillingView: React.FC<DeliveryAndBillingViewProps> = ({
                     </div>
 
                     <div className="flex items-center justify-between text-xs mt-2 pt-2 border-t border-slate-100 dark:border-slate-800">
-                      <span className="text-slate-500">Invoice Total:</span>
+                      <span className="text-slate-500 dark:text-slate-400">Invoice Total:</span>
                       <span className="font-bold text-slate-900 dark:text-white">
                         OMR {inv.totalAmountOMR.toLocaleString()}
                       </span>
                     </div>
 
-                    <div className="flex items-center justify-between text-[11px] text-slate-400 mt-1">
+                    <div className="flex items-center justify-between text-[11px] text-slate-600 dark:text-slate-400 mt-1">
                       <span>Due: {inv.paymentDueDate}</span>
                       <span className="font-semibold text-amber-600 dark:text-amber-400">
                         Due: OMR {inv.amountDueOMR.toLocaleString()}
@@ -321,7 +321,7 @@ export const DeliveryAndBillingView: React.FC<DeliveryAndBillingViewProps> = ({
 
                     <button
                       onClick={() => window.print()}
-                      className="p-2 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200 text-xs cursor-pointer"
+                      className="p-2 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 text-xs cursor-pointer"
                     >
                       <Printer className="w-4 h-4" />
                     </button>
@@ -345,7 +345,7 @@ export const DeliveryAndBillingView: React.FC<DeliveryAndBillingViewProps> = ({
                   {/* Visual QR Code Mock */}
                   <div className="w-20 h-20 bg-white dark:bg-slate-900 p-2 rounded-xl border border-slate-300 dark:border-slate-700 flex flex-col items-center justify-center shrink-0 shadow-xs">
                     <QrCode className="w-12 h-12 text-slate-900 dark:text-white" />
-                    <span className="text-[9px] font-mono text-slate-400 mt-0.5">Oman E-Tax</span>
+                    <span className="text-[9px] font-mono text-slate-600 dark:text-slate-400 mt-0.5">Oman E-Tax</span>
                   </div>
                 </div>
 
@@ -402,7 +402,7 @@ export const DeliveryAndBillingView: React.FC<DeliveryAndBillingViewProps> = ({
                 </div>
               </div>
             ) : (
-              <div className="p-12 text-center text-slate-400 bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800">
+              <div className="p-12 text-center text-slate-600 dark:text-slate-400 bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800">
                 Select an invoice to inspect tax calculations.
               </div>
             )}
@@ -418,7 +418,7 @@ export const DeliveryAndBillingView: React.FC<DeliveryAndBillingViewProps> = ({
               <h3 className="font-bold text-slate-900 dark:text-white text-base">
                 06.07.04 Customer Down-Payments & Advances
               </h3>
-              <p className="text-xs text-slate-500">Advance payments received against project milestones</p>
+              <p className="text-xs text-slate-500 dark:text-slate-400">Advance payments received against project milestones</p>
             </div>
           </div>
 
@@ -439,7 +439,7 @@ export const DeliveryAndBillingView: React.FC<DeliveryAndBillingViewProps> = ({
                 <div className="font-bold text-sm text-slate-900 dark:text-white">
                   {adv.customerName}
                 </div>
-                <div className="text-slate-500">
+                <div className="text-slate-500 dark:text-slate-400">
                   Ref SO: <span className="font-mono text-slate-700 dark:text-slate-300">{adv.salesOrderNumber}</span> • Bank: <span className="text-slate-700 dark:text-slate-300">{adv.bankAccount}</span>
                 </div>
                 <div className="pt-2 border-t border-slate-200 dark:border-slate-700 flex justify-between font-bold text-sm text-slate-900 dark:text-white">

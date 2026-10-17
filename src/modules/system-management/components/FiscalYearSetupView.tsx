@@ -269,17 +269,17 @@ export const FiscalYearSetupView: React.FC<FiscalYearSetupViewProps> = ({
                           CURRENT FY
                         </span>
                       ) : (
-                        <span className="text-slate-400 text-xs">—</span>
+                        <span className="text-slate-600 dark:text-slate-400 text-xs">—</span>
                       )}
                     </td>
                     <td className="px-4 py-3.5">
                       <span
                         className={`inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-semibold border ${
                           fy.status === 'Open'
-                            ? 'bg-emerald-50 text-emerald-700 border-emerald-200 dark:bg-emerald-950/60 dark:text-emerald-300'
+                            ? 'bg-emerald-50 text-emerald-700 border-emerald-200 dark:border-emerald-500/30 dark:bg-emerald-950/60 dark:text-emerald-300'
                             : fy.status === 'Planning'
-                            ? 'bg-sky-50 text-sky-700 border-sky-200'
-                            : 'bg-slate-100 text-slate-600 border-slate-200'
+                            ? 'bg-sky-50 dark:bg-sky-500/10 text-sky-700 dark:text-sky-300 border-sky-200 dark:border-sky-500/30'
+                            : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 border-slate-200 dark:border-slate-700'
                         }`}
                       >
                         {fy.status}
@@ -298,7 +298,7 @@ export const FiscalYearSetupView: React.FC<FiscalYearSetupViewProps> = ({
         <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl shadow-xs p-6 space-y-6">
           <div className="border-b border-slate-200 dark:border-slate-800 pb-4">
             <h2 className="text-base font-bold text-slate-900 dark:text-slate-100 flex items-center gap-2">
-              <Unlock className="w-5 h-5 text-indigo-600" />
+              <Unlock className="w-5 h-5 text-indigo-600 dark:text-indigo-400" />
               <span>Fiscal Year Opening Routine & Balance Carry-Forward</span>
             </h2>
             <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
@@ -309,7 +309,7 @@ export const FiscalYearSetupView: React.FC<FiscalYearSetupViewProps> = ({
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div className="p-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-800/40">
               <div className="flex items-center gap-2 text-xs font-bold text-slate-900 dark:text-slate-100 mb-2">
-                <CheckCircle2 className="w-4 h-4 text-emerald-600" />
+                <CheckCircle2 className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
                 <span>1. General Ledger Rollover</span>
               </div>
               <p className="text-xs text-slate-600 dark:text-slate-400">
@@ -319,7 +319,7 @@ export const FiscalYearSetupView: React.FC<FiscalYearSetupViewProps> = ({
 
             <div className="p-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-800/40">
               <div className="flex items-center gap-2 text-xs font-bold text-slate-900 dark:text-slate-100 mb-2">
-                <CheckCircle2 className="w-4 h-4 text-emerald-600" />
+                <CheckCircle2 className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
                 <span>2. Sub-Ledger Balances</span>
               </div>
               <p className="text-xs text-slate-600 dark:text-slate-400">
@@ -329,7 +329,7 @@ export const FiscalYearSetupView: React.FC<FiscalYearSetupViewProps> = ({
 
             <div className="p-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-800/40">
               <div className="flex items-center gap-2 text-xs font-bold text-slate-900 dark:text-slate-100 mb-2">
-                <CheckCircle2 className="w-4 h-4 text-emerald-600" />
+                <CheckCircle2 className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
                 <span>3. Period 01 Activation</span>
               </div>
               <p className="text-xs text-slate-600 dark:text-slate-400">
@@ -368,7 +368,7 @@ export const FiscalYearSetupView: React.FC<FiscalYearSetupViewProps> = ({
         <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl shadow-xs p-6 space-y-6">
           <div className="border-b border-slate-200 dark:border-slate-800 pb-4">
             <h2 className="text-base font-bold text-slate-900 dark:text-slate-100 flex items-center gap-2">
-              <Lock className="w-5 h-5 text-amber-600" />
+              <Lock className="w-5 h-5 text-amber-600 dark:text-amber-400" />
               <span>Year-End Financial Closing Wizard</span>
             </h2>
             <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
@@ -391,7 +391,7 @@ export const FiscalYearSetupView: React.FC<FiscalYearSetupViewProps> = ({
                     type="checkbox"
                     checked={val}
                     onChange={e => setClosingChecklist({ ...closingChecklist, [key]: e.target.checked })}
-                    className="rounded border-slate-300 text-indigo-600 focus:ring-indigo-500"
+                    className="rounded border-slate-300 dark:border-slate-600 text-indigo-600 dark:text-indigo-400 focus:ring-indigo-500"
                   />
                   <span className="text-xs font-medium text-slate-800 dark:text-slate-200 capitalize">
                     {key.replace(/([A-Z])/g, ' $1')}
@@ -403,7 +403,7 @@ export const FiscalYearSetupView: React.FC<FiscalYearSetupViewProps> = ({
 
           <div className="p-4 bg-amber-50 dark:bg-amber-950/40 border border-amber-200 dark:border-amber-800 rounded-xl flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <AlertTriangle className="w-5 h-5 text-amber-600" />
+              <AlertTriangle className="w-5 h-5 text-amber-600 dark:text-amber-400" />
               <div>
                 <h4 className="text-xs font-bold text-amber-900 dark:text-amber-200">
                   FY 2025 Audit Hard-Close Status
@@ -414,7 +414,7 @@ export const FiscalYearSetupView: React.FC<FiscalYearSetupViewProps> = ({
               </div>
             </div>
 
-            <span className="px-3 py-1 bg-amber-200 text-amber-900 rounded-full font-bold text-xs">
+            <span className="px-3 py-1 bg-amber-200 dark:bg-amber-500/30 text-amber-900 dark:text-amber-100 rounded-full font-bold text-xs">
               Closed & Archived
             </span>
           </div>
@@ -426,7 +426,7 @@ export const FiscalYearSetupView: React.FC<FiscalYearSetupViewProps> = ({
         <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl shadow-xs p-6 space-y-6">
           <div className="border-b border-slate-200 dark:border-slate-800 pb-4">
             <h2 className="text-base font-bold text-slate-900 dark:text-slate-100 flex items-center gap-2">
-              <Settings className="w-5 h-5 text-indigo-600" />
+              <Settings className="w-5 h-5 text-indigo-600 dark:text-indigo-400" />
               <span>Fiscal Year Parameters & General Ledger Mapping</span>
             </h2>
           </div>
@@ -464,7 +464,7 @@ export const FiscalYearSetupView: React.FC<FiscalYearSetupViewProps> = ({
                   type="checkbox"
                   checked={yeConfig.autoDepreciationOnClose}
                   onChange={e => setYeConfig({ ...yeConfig, autoDepreciationOnClose: e.target.checked })}
-                  className="rounded border-slate-300 text-indigo-600"
+                  className="rounded border-slate-300 dark:border-slate-600 text-indigo-600 dark:text-indigo-400"
                 />
                 <span className="text-xs font-medium text-slate-800 dark:text-slate-200">
                   Auto-run final month depreciation batch during year-end close
@@ -476,7 +476,7 @@ export const FiscalYearSetupView: React.FC<FiscalYearSetupViewProps> = ({
                   type="checkbox"
                   checked={yeConfig.enableAdjustmentPeriod13}
                   onChange={e => setYeConfig({ ...yeConfig, enableAdjustmentPeriod13: e.target.checked })}
-                  className="rounded border-slate-300 text-indigo-600"
+                  className="rounded border-slate-300 dark:border-slate-600 text-indigo-600 dark:text-indigo-400"
                 />
                 <span className="text-xs font-medium text-slate-800 dark:text-slate-200">
                   Enable Special Period 13 (P13) for post-audit statutory adjustments
@@ -488,7 +488,7 @@ export const FiscalYearSetupView: React.FC<FiscalYearSetupViewProps> = ({
                   type="checkbox"
                   checked={yeConfig.blockPostingsToClosedYears}
                   onChange={e => setYeConfig({ ...yeConfig, blockPostingsToClosedYears: e.target.checked })}
-                  className="rounded border-slate-300 text-indigo-600"
+                  className="rounded border-slate-300 dark:border-slate-600 text-indigo-600 dark:text-indigo-400"
                 />
                 <span className="text-xs font-medium text-slate-800 dark:text-slate-200">
                   Strictly block all transactional postings to closed fiscal years
@@ -501,16 +501,16 @@ export const FiscalYearSetupView: React.FC<FiscalYearSetupViewProps> = ({
 
       {/* New Fiscal Year Modal */}
       {isNewFyModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/50 backdrop-blur-xs p-4">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-white/50 dark:bg-slate-900/50 backdrop-blur-xs p-4">
           <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl shadow-xl w-full max-w-lg overflow-hidden">
             <div className="px-6 py-4 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between">
               <h3 className="font-bold text-slate-900 dark:text-slate-100 text-sm flex items-center gap-2">
-                <Calendar className="w-4 h-4 text-amber-600" />
+                <Calendar className="w-4 h-4 text-amber-600 dark:text-amber-400" />
                 <span>Create Statutory Fiscal Year</span>
               </h3>
               <button
                 onClick={() => setIsNewFyModalOpen(false)}
-                className="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 cursor-pointer"
+                className="text-slate-600 dark:text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 cursor-pointer"
               >
                 <X className="w-5 h-5" />
               </button>

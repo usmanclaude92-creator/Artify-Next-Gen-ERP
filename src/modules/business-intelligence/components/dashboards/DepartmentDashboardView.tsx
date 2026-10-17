@@ -59,7 +59,7 @@ export const DepartmentDashboardView: React.FC = () => {
       <DemoDataBanner moduleSource="Module 02.03 Departmental Intelligence" />
 
       {/* Department Tab Switcher */}
-      <div className="bg-white border border-slate-200 rounded-xl p-1.5 shadow-xs flex flex-wrap gap-1.5">
+      <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl p-1.5 shadow-xs flex flex-wrap gap-1.5">
         {deptTabs.map(tab => (
           <button
             key={tab.key}
@@ -67,7 +67,7 @@ export const DepartmentDashboardView: React.FC = () => {
             className={`flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-semibold transition-all ${
               activeDept === tab.key
                 ? 'bg-indigo-600 text-white shadow-xs'
-                : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'
+                : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 hover:bg-slate-50 dark:hover:bg-slate-800/50'
             }`}
           >
             {tab.icon}
@@ -112,12 +112,12 @@ export const DepartmentDashboardView: React.FC = () => {
             />
           </div>
 
-          <div className="bg-white border border-slate-200 rounded-xl p-5 shadow-xs">
-            <h3 className="text-sm font-bold text-slate-900 mb-4">Core Financial Ratios & Benchmark Scorecard</h3>
+          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl p-5 shadow-xs">
+            <h3 className="text-sm font-bold text-slate-900 dark:text-slate-100 mb-4">Core Financial Ratios & Benchmark Scorecard</h3>
             <div className="overflow-x-auto">
               <table className="w-full text-left text-xs border-collapse">
                 <thead>
-                  <tr className="border-b border-slate-200 bg-slate-50 text-slate-600">
+                  <tr className="border-b border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/50 text-slate-600 dark:text-slate-400">
                     <th className="py-2.5 px-3 font-semibold">Category</th>
                     <th className="py-2.5 px-3 font-semibold">Financial Ratio</th>
                     <th className="py-2.5 px-3 font-semibold">Formula</th>
@@ -127,24 +127,24 @@ export const DepartmentDashboardView: React.FC = () => {
                     <th className="py-2.5 px-3 font-semibold">Executive Commentary</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-slate-100">
+                <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
                   {financialRatios.map(r => (
-                    <tr key={r.name} className="hover:bg-slate-50/80">
-                      <td className="py-2.5 px-3 font-medium text-slate-600">{r.category}</td>
-                      <td className="py-2.5 px-3 font-bold text-slate-900">{r.name}</td>
-                      <td className="py-2.5 px-3 font-mono text-[11px] text-slate-500">{r.formula}</td>
-                      <td className="py-2.5 px-3 font-mono font-bold text-right text-indigo-900">
+                    <tr key={r.name} className="hover:bg-slate-50/80 dark:hover:bg-slate-800/80">
+                      <td className="py-2.5 px-3 font-medium text-slate-600 dark:text-slate-400">{r.category}</td>
+                      <td className="py-2.5 px-3 font-bold text-slate-900 dark:text-slate-100">{r.name}</td>
+                      <td className="py-2.5 px-3 font-mono text-[11px] text-slate-500 dark:text-slate-400">{r.formula}</td>
+                      <td className="py-2.5 px-3 font-mono font-bold text-right text-indigo-900 dark:text-indigo-100">
                         {r.value} {r.unit}
                       </td>
-                      <td className="py-2.5 px-3 font-mono text-right text-slate-600">
+                      <td className="py-2.5 px-3 font-mono text-right text-slate-600 dark:text-slate-400">
                         {r.benchmark} {r.unit}
                       </td>
                       <td className="py-2.5 px-3 text-center">
-                        <span className="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-100 text-emerald-800">
+                        <span className="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-100 dark:bg-emerald-500/20 text-emerald-800 dark:text-emerald-200">
                           {r.status}
                         </span>
                       </td>
-                      <td className="py-2.5 px-3 text-slate-600 text-[11px]">{r.commentary}</td>
+                      <td className="py-2.5 px-3 text-slate-600 dark:text-slate-400 text-[11px]">{r.commentary}</td>
                     </tr>
                   ))}
                 </tbody>
@@ -186,30 +186,30 @@ export const DepartmentDashboardView: React.FC = () => {
             />
           </div>
 
-          <div className="bg-white border border-slate-200 rounded-xl p-5 shadow-xs">
-            <h3 className="text-sm font-bold text-slate-900 mb-3">Key Strategic Suppliers & Delivery SLA</h3>
+          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl p-5 shadow-xs">
+            <h3 className="text-sm font-bold text-slate-900 dark:text-slate-100 mb-3">Key Strategic Suppliers & Delivery SLA</h3>
             <div className="space-y-3">
               {supplierAnalytics.map(sup => (
-                <div key={sup.supplierCode} className="p-3 bg-slate-50 border border-slate-200 rounded-xl flex flex-wrap items-center justify-between gap-3">
+                <div key={sup.supplierCode} className="p-3 bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-xl flex flex-wrap items-center justify-between gap-3">
                   <div>
-                    <div className="text-xs font-bold text-slate-900">{sup.supplierName}</div>
-                    <div className="text-[11px] text-slate-500 mt-0.5">
+                    <div className="text-xs font-bold text-slate-900 dark:text-slate-100">{sup.supplierName}</div>
+                    <div className="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">
                       Category: <strong>{sup.category}</strong> • Terms: <strong>{sup.paymentTermDays} Days</strong> • Renewal: <strong>{sup.contractRenewalDate}</strong>
                     </div>
                   </div>
                   <div className="flex items-center gap-4 text-xs font-mono">
                     <div>
-                      <span className="text-[10px] text-slate-400 block">YTD Spend</span>
-                      <span className="font-bold text-slate-900">{formatCurrency(sup.ytdSpendOMR)}</span>
+                      <span className="text-[10px] text-slate-500 dark:text-slate-400 block">YTD Spend</span>
+                      <span className="font-bold text-slate-900 dark:text-slate-100">{formatCurrency(sup.ytdSpendOMR)}</span>
                     </div>
                     <div>
-                      <span className="text-[10px] text-slate-400 block">OTIF Rate</span>
-                      <span className="font-bold text-emerald-700">{sup.onTimeDeliveryRate}%</span>
+                      <span className="text-[10px] text-slate-500 dark:text-slate-400 block">OTIF Rate</span>
+                      <span className="font-bold text-emerald-700 dark:text-emerald-300">{sup.onTimeDeliveryRate}%</span>
                     </div>
                     <div>
-                      <span className="text-[10px] text-slate-400 block">Risk Rating</span>
+                      <span className="text-[10px] text-slate-500 dark:text-slate-400 block">Risk Rating</span>
                       <span className={`px-2 py-0.5 rounded text-[10px] font-bold ${
-                        sup.riskRating === 'Low' ? 'bg-emerald-100 text-emerald-800' : 'bg-amber-100 text-amber-800'
+                        sup.riskRating === 'Low' ? 'bg-emerald-100 dark:bg-emerald-500/20 text-emerald-800 dark:text-emerald-200' : 'bg-amber-100 dark:bg-amber-500/20 text-amber-800 dark:text-amber-200'
                       }`}>
                         {sup.riskRating}
                       </span>
@@ -254,12 +254,12 @@ export const DepartmentDashboardView: React.FC = () => {
             />
           </div>
 
-          <div className="bg-white border border-slate-200 rounded-xl p-5 shadow-xs">
-            <h3 className="text-sm font-bold text-slate-900 mb-4">Project Portfolio Earned Value & Margin Tracking</h3>
+          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl p-5 shadow-xs">
+            <h3 className="text-sm font-bold text-slate-900 dark:text-slate-100 mb-4">Project Portfolio Earned Value & Margin Tracking</h3>
             <div className="overflow-x-auto">
               <table className="w-full text-left text-xs border-collapse">
                 <thead>
-                  <tr className="border-b border-slate-200 bg-slate-50 text-slate-600">
+                  <tr className="border-b border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/50 text-slate-600 dark:text-slate-400">
                     <th className="py-2.5 px-3 font-semibold">Project Code & Name</th>
                     <th className="py-2.5 px-3 font-semibold">Client</th>
                     <th className="py-2.5 px-3 font-semibold text-right">Contract Value</th>
@@ -270,22 +270,22 @@ export const DepartmentDashboardView: React.FC = () => {
                     <th className="py-2.5 px-3 font-semibold text-center">Health</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-slate-100">
+                <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
                   {projectData.map(p => (
-                    <tr key={p.id} className="hover:bg-slate-50/80">
+                    <tr key={p.id} className="hover:bg-slate-50/80 dark:hover:bg-slate-800/80">
                       <td className="py-2.5 px-3">
-                        <div className="font-bold text-slate-900">{p.projectName}</div>
-                        <div className="text-[10px] text-slate-400 font-mono">{p.projectCode} • Lead: {p.projectManager}</div>
+                        <div className="font-bold text-slate-900 dark:text-slate-100">{p.projectName}</div>
+                        <div className="text-[10px] text-slate-500 dark:text-slate-400 font-mono">{p.projectCode} • Lead: {p.projectManager}</div>
                       </td>
-                      <td className="py-2.5 px-3 text-slate-700">{p.clientName}</td>
-                      <td className="py-2.5 px-3 font-mono font-bold text-right text-slate-900">{formatCurrency(p.contractValueOMR)}</td>
-                      <td className="py-2.5 px-3 font-mono text-right text-slate-600">{formatCurrency(p.actualCostOMR)}</td>
-                      <td className="py-2.5 px-3 font-mono text-center font-bold text-emerald-700">{p.cpi}</td>
-                      <td className="py-2.5 px-3 font-mono text-center font-bold text-indigo-700">{p.spi}</td>
-                      <td className="py-2.5 px-3 font-mono text-right font-bold text-emerald-700">{p.marginPercent}%</td>
+                      <td className="py-2.5 px-3 text-slate-700 dark:text-slate-300">{p.clientName}</td>
+                      <td className="py-2.5 px-3 font-mono font-bold text-right text-slate-900 dark:text-slate-100">{formatCurrency(p.contractValueOMR)}</td>
+                      <td className="py-2.5 px-3 font-mono text-right text-slate-600 dark:text-slate-400">{formatCurrency(p.actualCostOMR)}</td>
+                      <td className="py-2.5 px-3 font-mono text-center font-bold text-emerald-700 dark:text-emerald-300">{p.cpi}</td>
+                      <td className="py-2.5 px-3 font-mono text-center font-bold text-indigo-700 dark:text-indigo-300">{p.spi}</td>
+                      <td className="py-2.5 px-3 font-mono text-right font-bold text-emerald-700 dark:text-emerald-300">{p.marginPercent}%</td>
                       <td className="py-2.5 px-3 text-center">
                         <span className={`inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold ${
-                          p.health === 'Green' ? 'bg-emerald-100 text-emerald-800' : p.health === 'Amber' ? 'bg-amber-100 text-amber-800' : 'bg-rose-100 text-rose-800'
+                          p.health === 'Green' ? 'bg-emerald-100 dark:bg-emerald-500/20 text-emerald-800 dark:text-emerald-200' : p.health === 'Amber' ? 'bg-amber-100 dark:bg-amber-500/20 text-amber-800 dark:text-amber-200' : 'bg-rose-100 dark:bg-rose-500/20 text-rose-800 dark:text-rose-200'
                         }`}>
                           {p.health}
                         </span>
@@ -330,12 +330,12 @@ export const DepartmentDashboardView: React.FC = () => {
             />
           </div>
 
-          <div className="bg-white border border-slate-200 rounded-xl p-5 shadow-xs">
-            <h3 className="text-sm font-bold text-slate-900 mb-3">Warehouse Valuation & Days of Stock</h3>
+          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl p-5 shadow-xs">
+            <h3 className="text-sm font-bold text-slate-900 dark:text-slate-100 mb-3">Warehouse Valuation & Days of Stock</h3>
             <div className="overflow-x-auto">
               <table className="w-full text-left text-xs border-collapse">
                 <thead>
-                  <tr className="border-b border-slate-200 bg-slate-50 text-slate-600">
+                  <tr className="border-b border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/50 text-slate-600 dark:text-slate-400">
                     <th className="py-2.5 px-3 font-semibold">SKU / Item Name</th>
                     <th className="py-2.5 px-3 font-semibold">Warehouse</th>
                     <th className="py-2.5 px-3 font-semibold text-right">On Hand Qty</th>
@@ -345,21 +345,21 @@ export const DepartmentDashboardView: React.FC = () => {
                     <th className="py-2.5 px-3 font-semibold text-center">Stock Health</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-slate-100">
+                <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
                   {inventoryData.map(item => (
-                    <tr key={item.id} className="hover:bg-slate-50/80">
+                    <tr key={item.id} className="hover:bg-slate-50/80 dark:hover:bg-slate-800/80">
                       <td className="py-2.5 px-3">
-                        <span className="font-bold text-slate-900 block">{item.itemName}</span>
-                        <span className="text-[10px] text-slate-400 font-mono">{item.itemCode} • {item.category}</span>
+                        <span className="font-bold text-slate-900 dark:text-slate-100 block">{item.itemName}</span>
+                        <span className="text-[10px] text-slate-500 dark:text-slate-400 font-mono">{item.itemCode} • {item.category}</span>
                       </td>
-                      <td className="py-2.5 px-3 text-slate-700">{item.warehouse}</td>
-                      <td className="py-2.5 px-3 font-mono font-bold text-right text-slate-900">{item.quantityOnHand}</td>
-                      <td className="py-2.5 px-3 font-mono font-bold text-right text-indigo-900">{formatCurrency(item.totalValuationOMR)}</td>
-                      <td className="py-2.5 px-3 font-mono text-right text-slate-700">{item.stockTurnoverRatio}x</td>
-                      <td className="py-2.5 px-3 font-mono text-right text-slate-700">{item.daysOfInventoryRemaining}d</td>
+                      <td className="py-2.5 px-3 text-slate-700 dark:text-slate-300">{item.warehouse}</td>
+                      <td className="py-2.5 px-3 font-mono font-bold text-right text-slate-900 dark:text-slate-100">{item.quantityOnHand}</td>
+                      <td className="py-2.5 px-3 font-mono font-bold text-right text-indigo-900 dark:text-indigo-100">{formatCurrency(item.totalValuationOMR)}</td>
+                      <td className="py-2.5 px-3 font-mono text-right text-slate-700 dark:text-slate-300">{item.stockTurnoverRatio}x</td>
+                      <td className="py-2.5 px-3 font-mono text-right text-slate-700 dark:text-slate-300">{item.daysOfInventoryRemaining}d</td>
                       <td className="py-2.5 px-3 text-center">
                         <span className={`inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold ${
-                          item.status === 'Healthy' ? 'bg-emerald-100 text-emerald-800' : item.status === 'Low Stock' ? 'bg-amber-100 text-amber-800' : 'bg-rose-100 text-rose-800'
+                          item.status === 'Healthy' ? 'bg-emerald-100 dark:bg-emerald-500/20 text-emerald-800 dark:text-emerald-200' : item.status === 'Low Stock' ? 'bg-amber-100 dark:bg-amber-500/20 text-amber-800 dark:text-amber-200' : 'bg-rose-100 dark:bg-rose-500/20 text-rose-800 dark:text-rose-200'
                         }`}>
                           {item.status}
                         </span>
@@ -404,12 +404,12 @@ export const DepartmentDashboardView: React.FC = () => {
             />
           </div>
 
-          <div className="bg-white border border-slate-200 rounded-xl p-5 shadow-xs">
-            <h3 className="text-sm font-bold text-slate-900 mb-3">Workforce Distribution & Retention by Department</h3>
+          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl p-5 shadow-xs">
+            <h3 className="text-sm font-bold text-slate-900 dark:text-slate-100 mb-3">Workforce Distribution & Retention by Department</h3>
             <div className="overflow-x-auto">
               <table className="w-full text-left text-xs border-collapse">
                 <thead>
-                  <tr className="border-b border-slate-200 bg-slate-50 text-slate-600">
+                  <tr className="border-b border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/50 text-slate-600 dark:text-slate-400">
                     <th className="py-2.5 px-3 font-semibold">Department</th>
                     <th className="py-2.5 px-3 font-semibold text-right">Headcount</th>
                     <th className="py-2.5 px-3 font-semibold text-right">Joiners YTD</th>
@@ -418,15 +418,15 @@ export const DepartmentDashboardView: React.FC = () => {
                     <th className="py-2.5 px-3 font-semibold text-right">Open Requisitions</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-slate-100">
+                <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
                   {hrData.map(h => (
-                    <tr key={h.id} className="hover:bg-slate-50/80">
-                      <td className="py-2.5 px-3 font-bold text-slate-900">{h.department}</td>
-                      <td className="py-2.5 px-3 font-mono font-bold text-right text-slate-900">{h.headcount}</td>
-                      <td className="py-2.5 px-3 font-mono text-right text-emerald-700">+{h.joinersYtd}</td>
-                      <td className="py-2.5 px-3 font-mono text-right font-semibold text-slate-700">{h.turnoverRatePercent}%</td>
-                      <td className="py-2.5 px-3 font-mono text-right text-slate-600">{h.avgTenureYears} yrs</td>
-                      <td className="py-2.5 px-3 font-mono text-right font-bold text-indigo-700">{h.recruitmentOpenPositions} Roles</td>
+                    <tr key={h.id} className="hover:bg-slate-50/80 dark:hover:bg-slate-800/80">
+                      <td className="py-2.5 px-3 font-bold text-slate-900 dark:text-slate-100">{h.department}</td>
+                      <td className="py-2.5 px-3 font-mono font-bold text-right text-slate-900 dark:text-slate-100">{h.headcount}</td>
+                      <td className="py-2.5 px-3 font-mono text-right text-emerald-700 dark:text-emerald-300">+{h.joinersYtd}</td>
+                      <td className="py-2.5 px-3 font-mono text-right font-semibold text-slate-700 dark:text-slate-300">{h.turnoverRatePercent}%</td>
+                      <td className="py-2.5 px-3 font-mono text-right text-slate-600 dark:text-slate-400">{h.avgTenureYears} yrs</td>
+                      <td className="py-2.5 px-3 font-mono text-right font-bold text-indigo-700 dark:text-indigo-300">{h.recruitmentOpenPositions} Roles</td>
                     </tr>
                   ))}
                 </tbody>

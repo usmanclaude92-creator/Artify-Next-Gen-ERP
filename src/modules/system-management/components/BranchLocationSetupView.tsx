@@ -352,7 +352,7 @@ export const BranchLocationSetupView: React.FC<BranchLocationSetupViewProps> = (
       {/* Filter and Search Bar */}
       <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-4 shadow-xs flex flex-col sm:flex-row items-center justify-between gap-3">
         <div className="relative w-full sm:w-80">
-          <Search className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
+          <Search className="w-4 h-4 text-slate-600 dark:text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
           <input
             type="text"
             value={searchQuery}
@@ -446,7 +446,7 @@ export const BranchLocationSetupView: React.FC<BranchLocationSetupViewProps> = (
                     </td>
                     <td className="px-4 py-3.5">
                       <div className="flex items-center gap-1.5 text-slate-700 dark:text-slate-300">
-                        <MapPin className="w-3.5 h-3.5 text-slate-400" />
+                        <MapPin className="w-3.5 h-3.5 text-slate-600 dark:text-slate-400" />
                         <span>{branch.locationName}</span>
                       </div>
                     </td>
@@ -479,7 +479,7 @@ export const BranchLocationSetupView: React.FC<BranchLocationSetupViewProps> = (
                     <td className="px-4 py-3.5 text-right">
                       <button
                         onClick={() => handleEditBranch(branch)}
-                        className="p-1.5 text-slate-500 hover:text-indigo-600 dark:hover:text-indigo-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-md transition-colors cursor-pointer"
+                        className="p-1.5 text-slate-500 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-md transition-colors cursor-pointer"
                         title="Edit Branch"
                       >
                         <Edit2 className="w-4 h-4" />
@@ -568,7 +568,7 @@ export const BranchLocationSetupView: React.FC<BranchLocationSetupViewProps> = (
                     <td className="px-4 py-3.5 text-right">
                       <button
                         onClick={() => handleEditLocation(loc)}
-                        className="p-1.5 text-slate-500 hover:text-indigo-600 dark:hover:text-indigo-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-md transition-colors cursor-pointer"
+                        className="p-1.5 text-slate-500 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-md transition-colors cursor-pointer"
                         title="Edit Location"
                       >
                         <Edit2 className="w-4 h-4" />
@@ -620,7 +620,7 @@ export const BranchLocationSetupView: React.FC<BranchLocationSetupViewProps> = (
                       </span>
                     </div>
                   </div>
-                  <span className="text-[10px] px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 dark:bg-emerald-950/60 dark:text-emerald-300 font-semibold">
+                  <span className="text-[10px] px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 dark:border-emerald-500/30 dark:bg-emerald-950/60 dark:text-emerald-300 font-semibold">
                     {site.status}
                   </span>
                 </div>
@@ -636,7 +636,7 @@ export const BranchLocationSetupView: React.FC<BranchLocationSetupViewProps> = (
                   </div>
                   <div className="flex justify-between">
                     <span>Coordinates:</span>
-                    <span className="font-mono text-[10px] text-slate-500">{site.coordinates}</span>
+                    <span className="font-mono text-[10px] text-slate-500 dark:text-slate-400">{site.coordinates}</span>
                   </div>
                 </div>
 
@@ -708,7 +708,7 @@ export const BranchLocationSetupView: React.FC<BranchLocationSetupViewProps> = (
 
                     <button
                       onClick={() => handleEditBranch(branch)}
-                      className="px-3 py-1.5 text-xs font-semibold rounded-lg bg-indigo-50 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-300 hover:bg-indigo-600 hover:text-white border border-indigo-200 dark:border-indigo-800 transition-colors cursor-pointer"
+                      className="px-3 py-1.5 text-xs font-semibold rounded-lg bg-indigo-50 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-300 hover:bg-indigo-600 hover:text-slate-900 dark:hover:text-white border border-indigo-200 dark:border-indigo-800 transition-colors cursor-pointer"
                     >
                       Reassign
                     </button>
@@ -722,16 +722,16 @@ export const BranchLocationSetupView: React.FC<BranchLocationSetupViewProps> = (
 
       {/* Branch Modal */}
       {isBranchModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/50 backdrop-blur-xs p-4">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-white/50 dark:bg-slate-900/50 backdrop-blur-xs p-4">
           <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl shadow-xl w-full max-w-lg overflow-hidden">
             <div className="px-6 py-4 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between">
               <h3 className="font-bold text-slate-900 dark:text-slate-100 text-sm flex items-center gap-2">
-                <Building className="w-4 h-4 text-indigo-600" />
+                <Building className="w-4 h-4 text-indigo-600 dark:text-indigo-400" />
                 <span>{editingBranch ? 'Edit Branch' : 'Create Operational Branch'}</span>
               </h3>
               <button
                 onClick={() => setIsBranchModalOpen(false)}
-                className="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 cursor-pointer"
+                className="text-slate-600 dark:text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 cursor-pointer"
               >
                 <X className="w-5 h-5" />
               </button>
@@ -849,7 +849,7 @@ export const BranchLocationSetupView: React.FC<BranchLocationSetupViewProps> = (
                     type="checkbox"
                     checked={branchForm.isTaxBranch}
                     onChange={e => setBranchForm({ ...branchForm, isTaxBranch: e.target.checked })}
-                    className="rounded border-slate-300 text-indigo-600 focus:ring-indigo-500"
+                    className="rounded border-slate-300 dark:border-slate-600 text-indigo-600 dark:text-indigo-400 focus:ring-indigo-500"
                   />
                   <span className="text-xs text-slate-700 dark:text-slate-300 font-medium">
                     Registered Tax / VAT Reporting Branch
@@ -879,16 +879,16 @@ export const BranchLocationSetupView: React.FC<BranchLocationSetupViewProps> = (
 
       {/* Location Modal */}
       {isLocationModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/50 backdrop-blur-xs p-4">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-white/50 dark:bg-slate-900/50 backdrop-blur-xs p-4">
           <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl shadow-xl w-full max-w-lg overflow-hidden">
             <div className="px-6 py-4 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between">
               <h3 className="font-bold text-slate-900 dark:text-slate-100 text-sm flex items-center gap-2">
-                <MapPin className="w-4 h-4 text-sky-600" />
+                <MapPin className="w-4 h-4 text-sky-600 dark:text-sky-400" />
                 <span>{editingLocation ? 'Edit Facility Location' : 'Create Physical Location / Site'}</span>
               </h3>
               <button
                 onClick={() => setIsLocationModalOpen(false)}
-                className="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 cursor-pointer"
+                className="text-slate-600 dark:text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 cursor-pointer"
               >
                 <X className="w-5 h-5" />
               </button>

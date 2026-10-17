@@ -201,27 +201,27 @@ const ConstructionDashboardContent: React.FC<{ activeSection?: string }> = ({ ac
               onClick={() => setSelectedSection(sec.id)}
               className={`p-3.5 rounded-2xl border text-left transition-all cursor-pointer flex flex-col justify-between ${
                 isSelected
-                  ? 'bg-slate-900 border-orange-500 shadow-xl shadow-orange-500/10 ring-1 ring-orange-500'
-                  : 'bg-slate-900/60 border-slate-800 hover:border-slate-700 hover:bg-slate-900'
+                  ? 'bg-white dark:bg-slate-900 border-orange-500 shadow-xl shadow-orange-500/10 ring-1 ring-orange-500'
+                  : 'bg-white/60 dark:bg-slate-900/60 border-slate-200 dark:border-slate-800 hover:border-slate-300 dark:hover:border-slate-700 hover:bg-white dark:hover:bg-slate-900'
               }`}
             >
               <div className="flex items-center justify-between mb-2">
                 <div
                   className={`p-2 rounded-xl border ${
                     isSelected
-                      ? 'bg-orange-600/20 border-orange-500 text-orange-400'
-                      : 'bg-slate-950 border-slate-800 text-slate-400'
+                      ? 'bg-orange-600/20 border-orange-500 text-orange-700 dark:text-orange-400'
+                      : 'bg-slate-50 dark:bg-slate-950 border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400'
                   }`}
                 >
                   <Icon className="w-4 h-4" />
                 </div>
-                <span className="text-[10px] font-mono font-bold text-slate-500">{sec.id}</span>
+                <span className="text-[10px] font-mono font-bold text-slate-500 dark:text-slate-400">{sec.id}</span>
               </div>
 
               <div className="space-y-0.5">
-                <div className="text-xs font-bold text-white leading-tight">{sec.title}</div>
-                <div className="text-[10px] text-slate-400 truncate">{sec.subtitle}</div>
-                <div className="text-[10px] font-mono text-orange-400 font-medium pt-1 truncate">{sec.count}</div>
+                <div className="text-xs font-bold text-slate-900 dark:text-white leading-tight">{sec.title}</div>
+                <div className="text-[10px] text-slate-600 dark:text-slate-400 truncate">{sec.subtitle}</div>
+                <div className="text-[10px] font-mono text-orange-700 dark:text-orange-400 font-medium pt-1 truncate">{sec.count}</div>
               </div>
             </button>
           );

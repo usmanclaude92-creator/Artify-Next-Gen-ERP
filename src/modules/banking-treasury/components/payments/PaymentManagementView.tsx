@@ -247,53 +247,53 @@ export const PaymentManagementView: React.FC = () => {
     <div className="space-y-6">
       {/* Top Metrics Row */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        <div className="bg-white rounded-2xl p-4 border border-slate-200 shadow-2xs">
-          <span className="text-[11px] font-semibold text-slate-500 uppercase tracking-wider block">
+        <div className="bg-white dark:bg-slate-900 rounded-2xl p-4 border border-slate-200 dark:border-slate-700 shadow-2xs">
+          <span className="text-[11px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider block">
             Pending Dual Approvals
           </span>
           <div className="flex items-baseline justify-between mt-1">
-            <span className="text-2xl font-bold text-amber-600">
+            <span className="text-2xl font-bold text-amber-600 dark:text-amber-400">
               {approvalQueue.filter((q) => q.status === 'Pending').length}
             </span>
-            <span className="text-xs text-amber-700 bg-amber-50 px-2 py-0.5 rounded-full font-medium">
+            <span className="text-xs text-amber-700 dark:text-amber-300 bg-amber-50 dark:bg-amber-500/10 px-2 py-0.5 rounded-full font-medium">
               Queue SLA &lt; 24h
             </span>
           </div>
         </div>
 
-        <div className="bg-white rounded-2xl p-4 border border-slate-200 shadow-2xs">
-          <span className="text-[11px] font-semibold text-slate-500 uppercase tracking-wider block">
+        <div className="bg-white dark:bg-slate-900 rounded-2xl p-4 border border-slate-200 dark:border-slate-700 shadow-2xs">
+          <span className="text-[11px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider block">
             Approved Bank Wires (MT103)
           </span>
           <div className="flex items-baseline justify-between mt-1">
-            <span className="text-2xl font-bold text-emerald-600">
+            <span className="text-2xl font-bold text-emerald-600 dark:text-emerald-400">
               {bankPayments.filter((p) => p.status === 'Approved' || p.status === 'Posted').length}
             </span>
-            <span className="text-xs text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full font-medium">
+            <span className="text-xs text-emerald-700 dark:text-emerald-300 bg-emerald-50 dark:bg-emerald-500/10 px-2 py-0.5 rounded-full font-medium">
               Real-Time RTGS
             </span>
           </div>
         </div>
 
-        <div className="bg-white rounded-2xl p-4 border border-slate-200 shadow-2xs">
-          <span className="text-[11px] font-semibold text-slate-500 uppercase tracking-wider block">
+        <div className="bg-white dark:bg-slate-900 rounded-2xl p-4 border border-slate-200 dark:border-slate-700 shadow-2xs">
+          <span className="text-[11px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider block">
             WPS Payroll / Bulk Batches
           </span>
           <div className="flex items-baseline justify-between mt-1">
-            <span className="text-2xl font-bold text-indigo-600">{electronicBatches.length}</span>
-            <span className="text-xs text-indigo-700 bg-indigo-50 px-2 py-0.5 rounded-full font-medium">
+            <span className="text-2xl font-bold text-indigo-600 dark:text-indigo-400">{electronicBatches.length}</span>
+            <span className="text-xs text-indigo-700 dark:text-indigo-300 bg-indigo-50 dark:bg-indigo-500/10 px-2 py-0.5 rounded-full font-medium">
               ISO 20022 SIF
             </span>
           </div>
         </div>
 
-        <div className="bg-white rounded-2xl p-4 border border-slate-200 shadow-2xs">
-          <span className="text-[11px] font-semibold text-slate-500 uppercase tracking-wider block">
+        <div className="bg-white dark:bg-slate-900 rounded-2xl p-4 border border-slate-200 dark:border-slate-700 shadow-2xs">
+          <span className="text-[11px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider block">
             GL Posted Vouchers
           </span>
           <div className="flex items-baseline justify-between mt-1">
-            <span className="text-2xl font-bold text-slate-900">{glJournalEntries.length}</span>
-            <span className="text-xs text-slate-600 bg-slate-100 px-2 py-0.5 rounded-full font-medium font-mono">
+            <span className="text-2xl font-bold text-slate-900 dark:text-slate-100">{glJournalEntries.length}</span>
+            <span className="text-xs text-slate-600 dark:text-slate-400 bg-slate-100 dark:bg-slate-800 px-2 py-0.5 rounded-full font-medium font-mono">
               Auto-Balanced
             </span>
           </div>
@@ -301,7 +301,7 @@ export const PaymentManagementView: React.FC = () => {
       </div>
 
       {/* Navigation Tabs & Primary Action Controls */}
-      <div className="bg-white rounded-2xl p-4 border border-slate-200 shadow-2xs">
+      <div className="bg-white dark:bg-slate-900 rounded-2xl p-4 border border-slate-200 dark:border-slate-700 shadow-2xs">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div className="flex items-center gap-1.5 overflow-x-auto">
             <button
@@ -309,10 +309,10 @@ export const PaymentManagementView: React.FC = () => {
               className={`px-3.5 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center gap-2 whitespace-nowrap ${
                 activeTab === 'approvals'
                   ? 'bg-slate-900 text-white shadow-xs'
-                  : 'bg-slate-100 text-slate-600 hover:text-slate-900'
+                  : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100'
               }`}
             >
-              <ShieldCheck className="w-4 h-4 text-amber-400" />
+              <ShieldCheck className="w-4 h-4 text-amber-700 dark:text-amber-400" />
               <span>Workflow Approval Queue</span>
               {approvalQueue.filter((q) => q.status === 'Pending').length > 0 && (
                 <span className="bg-amber-500 text-white text-[10px] px-1.5 py-0.2 rounded-full">
@@ -326,7 +326,7 @@ export const PaymentManagementView: React.FC = () => {
               className={`px-3.5 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center gap-2 whitespace-nowrap ${
                 activeTab === 'bank'
                   ? 'bg-slate-900 text-white shadow-xs'
-                  : 'bg-slate-100 text-slate-600 hover:text-slate-900'
+                  : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100'
               }`}
             >
               <CreditCard className="w-4 h-4" />
@@ -338,7 +338,7 @@ export const PaymentManagementView: React.FC = () => {
               className={`px-3.5 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center gap-2 whitespace-nowrap ${
                 activeTab === 'cheque'
                   ? 'bg-slate-900 text-white shadow-xs'
-                  : 'bg-slate-100 text-slate-600 hover:text-slate-900'
+                  : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100'
               }`}
             >
               <FileText className="w-4 h-4" />
@@ -350,7 +350,7 @@ export const PaymentManagementView: React.FC = () => {
               className={`px-3.5 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center gap-2 whitespace-nowrap ${
                 activeTab === 'electronic'
                   ? 'bg-slate-900 text-white shadow-xs'
-                  : 'bg-slate-100 text-slate-600 hover:text-slate-900'
+                  : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100'
               }`}
             >
               <Layers className="w-4 h-4" />
@@ -362,10 +362,10 @@ export const PaymentManagementView: React.FC = () => {
               className={`px-3.5 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center gap-2 whitespace-nowrap ${
                 activeTab === 'gl_audit'
                   ? 'bg-slate-900 text-white shadow-xs'
-                  : 'bg-slate-100 text-slate-600 hover:text-slate-900'
+                  : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100'
               }`}
             >
-              <BookOpen className="w-4 h-4 text-indigo-400" />
+              <BookOpen className="w-4 h-4 text-indigo-600 dark:text-indigo-400" />
               <span>GL Journals & Audit Trail</span>
             </button>
           </div>
@@ -388,7 +388,7 @@ export const PaymentManagementView: React.FC = () => {
             </button>
             <button
               onClick={() => setShowBatchModal(true)}
-              className="px-3.5 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold flex items-center gap-1.5 cursor-pointer transition-colors"
+              className="px-3.5 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 text-xs font-bold flex items-center gap-1.5 cursor-pointer transition-colors"
             >
               <Layers className="w-3.5 h-3.5" />
               <span>Create WPS Batch</span>
@@ -397,24 +397,24 @@ export const PaymentManagementView: React.FC = () => {
         </div>
 
         {/* Filter bar */}
-        <div className="mt-4 pt-3 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-between gap-3">
+        <div className="mt-4 pt-3 border-t border-slate-100 dark:border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-3">
           <div className="relative w-full sm:w-72">
-            <Search className="w-3.5 h-3.5 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
+            <Search className="w-3.5 h-3.5 text-slate-500 dark:text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
             <input
               type="text"
               placeholder="Search beneficiary, reference, IBAN..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full pl-9 pr-3 py-1.5 text-xs rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-slate-900"
+              className="w-full pl-9 pr-3 py-1.5 text-xs rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/50 focus:bg-white dark:focus:bg-slate-900 focus:outline-none focus:ring-2 focus:ring-slate-200 dark:focus:ring-slate-900"
             />
           </div>
 
           <div className="flex items-center gap-2 self-end">
-            <span className="text-[11px] text-slate-400 font-medium">Status Filter:</span>
+            <span className="text-[11px] text-slate-500 dark:text-slate-400 font-medium">Status Filter:</span>
             <select
               value={statusFilter}
               onChange={(e) => setStatusFilter(e.target.value)}
-              className="px-2.5 py-1 text-xs rounded-lg border border-slate-200 bg-white text-slate-700 focus:outline-none"
+              className="px-2.5 py-1 text-xs rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 focus:outline-none"
             >
               <option value="ALL">All Statuses</option>
               <option value="Pending">Pending</option>
@@ -430,20 +430,20 @@ export const PaymentManagementView: React.FC = () => {
       {activeTab === 'approvals' && (
         <div className="space-y-4">
           <div className="bg-amber-500/10 border border-amber-500/20 rounded-2xl p-4 flex items-start gap-3">
-            <AlertTriangle className="w-5 h-5 text-amber-600 shrink-0 mt-0.5" />
+            <AlertTriangle className="w-5 h-5 text-amber-600 dark:text-amber-400 shrink-0 mt-0.5" />
             <div>
-              <h4 className="text-xs font-bold text-amber-900">
+              <h4 className="text-xs font-bold text-amber-900 dark:text-amber-100">
                 Active Segregation of Duties (SoD) & Multi-Tier Governance Engine
               </h4>
-              <p className="text-[11px] text-amber-800 leading-relaxed mt-0.5">
+              <p className="text-[11px] text-amber-800 dark:text-amber-200 leading-relaxed mt-0.5">
                 Every payment requisition is evaluated in real time. Self-approvals by transaction preparers are strictly prohibited (Rule SOD-BNK-01). Transactions over OMR 50,000 require concurrent Category A (Executive) and Category B (Treasury Director) authorization.
               </p>
             </div>
           </div>
 
-          <div className="bg-white rounded-2xl border border-slate-200 shadow-2xs overflow-hidden">
+          <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-2xs overflow-hidden">
             <table className="w-full text-left text-xs">
-              <thead className="bg-slate-50 text-slate-600 font-semibold border-b border-slate-200">
+              <thead className="bg-slate-50 dark:bg-slate-800/50 text-slate-600 dark:text-slate-400 font-semibold border-b border-slate-200 dark:border-slate-700">
                 <tr>
                   <th className="p-3.5">Transaction Ref & Type</th>
                   <th className="p-3.5">Beneficiary / Payee</th>
@@ -454,26 +454,26 @@ export const PaymentManagementView: React.FC = () => {
                   <th className="p-3.5 text-center">Action</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-100">
+              <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
                 {filteredQueue.map((item) => {
                   const isPending = item.status === 'Pending';
                   return (
-                    <tr key={item.id} className="hover:bg-slate-50/70 transition-colors">
+                    <tr key={item.id} className="hover:bg-slate-50/70 dark:hover:bg-slate-800/70 transition-colors">
                       <td className="p-3.5">
-                        <div className="font-mono font-bold text-slate-900">{item.transactionRef}</div>
-                        <div className="text-[11px] text-slate-500">{item.transactionType}</div>
-                        <div className="text-[10px] text-slate-400 mt-0.5">{item.submissionDate}</div>
+                        <div className="font-mono font-bold text-slate-900 dark:text-slate-100">{item.transactionRef}</div>
+                        <div className="text-[11px] text-slate-500 dark:text-slate-400">{item.transactionType}</div>
+                        <div className="text-[10px] text-slate-500 dark:text-slate-400 mt-0.5">{item.submissionDate}</div>
                       </td>
                       <td className="p-3.5">
-                        <div className="font-bold text-slate-900">{item.beneficiaryName}</div>
-                        <div className="text-[11px] text-slate-500">
-                          Submitted by: <strong className="text-slate-700">{item.submittedBy}</strong>
+                        <div className="font-bold text-slate-900 dark:text-slate-100">{item.beneficiaryName}</div>
+                        <div className="text-[11px] text-slate-500 dark:text-slate-400">
+                          Submitted by: <strong className="text-slate-700 dark:text-slate-300">{item.submittedBy}</strong>
                         </div>
                       </td>
                       <td className="p-3.5">
-                        <div className="font-semibold text-slate-800">{item.requiredApprovalLevel}</div>
+                        <div className="font-semibold text-slate-800 dark:text-slate-200">{item.requiredApprovalLevel}</div>
                         <div className="flex items-center gap-1.5 mt-1">
-                          <div className="flex-1 bg-slate-100 h-1.5 rounded-full overflow-hidden w-24">
+                          <div className="flex-1 bg-slate-100 dark:bg-slate-800 h-1.5 rounded-full overflow-hidden w-24">
                             <div
                               className="bg-indigo-600 h-full rounded-full transition-all"
                               style={{
@@ -481,35 +481,35 @@ export const PaymentManagementView: React.FC = () => {
                               }}
                             />
                           </div>
-                          <span className="text-[10px] text-indigo-700 font-bold">
+                          <span className="text-[10px] text-indigo-700 dark:text-indigo-300 font-bold">
                             Stage {item.currentStep}/{item.totalSteps}
                           </span>
                         </div>
                       </td>
                       <td className="p-3.5">
-                        <div className="flex items-center gap-1 text-emerald-700 font-semibold text-[11px]">
+                        <div className="flex items-center gap-1 text-emerald-700 dark:text-emerald-300 font-semibold text-[11px]">
                           <ShieldCheck className="w-3.5 h-3.5" />
                           <span>Sanctions Clear</span>
                         </div>
-                        <span className="text-[10px] text-slate-400">CBO Whitelist OK</span>
+                        <span className="text-[10px] text-slate-500 dark:text-slate-400">CBO Whitelist OK</span>
                       </td>
-                      <td className="p-3.5 text-right font-bold text-slate-900 text-sm">
+                      <td className="p-3.5 text-right font-bold text-slate-900 dark:text-slate-100 text-sm">
                         {formatCurrency(item.amount, item.currency)}
                       </td>
                       <td className="p-3.5 text-center">
                         <span
                           className={`px-2.5 py-0.5 rounded-full text-[10px] font-bold ${
                             item.status === 'Approved'
-                              ? 'bg-emerald-100 text-emerald-800 border border-emerald-200'
+                              ? 'bg-emerald-100 dark:bg-emerald-500/20 text-emerald-800 dark:text-emerald-200 border border-emerald-200 dark:border-emerald-500/30'
                               : item.status === 'Rejected'
-                              ? 'bg-rose-100 text-rose-800 border border-rose-200'
-                              : 'bg-amber-100 text-amber-800 border border-amber-200'
+                              ? 'bg-rose-100 dark:bg-rose-500/20 text-rose-800 dark:text-rose-200 border border-rose-200 dark:border-rose-500/30'
+                              : 'bg-amber-100 dark:bg-amber-500/20 text-amber-800 dark:text-amber-200 border border-amber-200 dark:border-amber-500/30'
                           }`}
                         >
                           {item.status}
                         </span>
                         {item.glVoucherId && (
-                          <span className="block text-[10px] font-mono text-indigo-600 mt-0.5">
+                          <span className="block text-[10px] font-mono text-indigo-600 dark:text-indigo-400 mt-0.5">
                             {item.glVoucherId}
                           </span>
                         )}
@@ -538,10 +538,10 @@ export const PaymentManagementView: React.FC = () => {
 
       {/* TAB 2: BANK WIRE TRANSFERS */}
       {activeTab === 'bank' && (
-        <div className="bg-white rounded-2xl border border-slate-200 shadow-2xs overflow-hidden">
+        <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-2xs overflow-hidden">
           <div className="overflow-x-auto">
             <table className="w-full text-left text-xs">
-              <thead className="bg-slate-50 text-slate-600 font-semibold border-b border-slate-200">
+              <thead className="bg-slate-50 dark:bg-slate-800/50 text-slate-600 dark:text-slate-400 font-semibold border-b border-slate-200 dark:border-slate-700">
                 <tr>
                   <th className="p-3.5">Payment Ref & Date</th>
                   <th className="p-3.5">Beneficiary & Bank</th>
@@ -552,35 +552,35 @@ export const PaymentManagementView: React.FC = () => {
                   <th className="p-3.5 text-center">GL Ledger Link</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-100">
+              <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
                 {filteredWires.map((pay) => (
-                  <tr key={pay.id} className="hover:bg-slate-50/70 transition-colors">
+                  <tr key={pay.id} className="hover:bg-slate-50/70 dark:hover:bg-slate-800/70 transition-colors">
                     <td className="p-3.5">
-                      <div className="font-mono font-bold text-slate-900">{pay.paymentReference}</div>
-                      <div className="text-[10px] text-slate-500">{pay.paymentDate}</div>
-                      <div className="text-[10px] text-slate-400">Prep: {pay.preparedBy}</div>
+                      <div className="font-mono font-bold text-slate-900 dark:text-slate-100">{pay.paymentReference}</div>
+                      <div className="text-[10px] text-slate-500 dark:text-slate-400">{pay.paymentDate}</div>
+                      <div className="text-[10px] text-slate-500 dark:text-slate-400">Prep: {pay.preparedBy}</div>
                     </td>
                     <td className="p-3.5">
-                      <div className="font-bold text-slate-900">{pay.beneficiaryName}</div>
-                      <div className="text-[10px] text-slate-500 font-mono">{pay.beneficiaryIban}</div>
-                      <div className="text-[10px] text-slate-400">{pay.beneficiarySwift}</div>
+                      <div className="font-bold text-slate-900 dark:text-slate-100">{pay.beneficiaryName}</div>
+                      <div className="text-[10px] text-slate-500 dark:text-slate-400 font-mono">{pay.beneficiaryIban}</div>
+                      <div className="text-[10px] text-slate-500 dark:text-slate-400">{pay.beneficiarySwift}</div>
                     </td>
                     <td className="p-3.5">
-                      <div className="font-medium text-slate-800">{pay.bankAccountName}</div>
-                      <span className="text-[10px] bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono">
+                      <div className="font-medium text-slate-800 dark:text-slate-200">{pay.bankAccountName}</div>
+                      <span className="text-[10px] bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 px-1.5 py-0.5 rounded font-mono">
                         {pay.currency}
                       </span>
                     </td>
                     <td className="p-3.5">
-                      <div className="text-slate-800 font-medium">{pay.purposeOfRemittance}</div>
-                      <span className="text-[10px] bg-indigo-50 text-indigo-700 px-1.5 py-0.5 rounded font-semibold mt-0.5 inline-block">
+                      <div className="text-slate-800 dark:text-slate-200 font-medium">{pay.purposeOfRemittance}</div>
+                      <span className="text-[10px] bg-indigo-50 dark:bg-indigo-500/10 text-indigo-700 dark:text-indigo-300 px-1.5 py-0.5 rounded font-semibold mt-0.5 inline-block">
                         {pay.paymentMethod}
                       </span>
                     </td>
-                    <td className="p-3.5 text-right font-bold text-slate-900 text-sm">
+                    <td className="p-3.5 text-right font-bold text-slate-900 dark:text-slate-100 text-sm">
                       {formatCurrency(pay.amount, pay.currency)}
                       {pay.currency !== 'OMR' && (
-                        <span className="block text-[10px] text-slate-400 font-normal">
+                        <span className="block text-[10px] text-slate-500 dark:text-slate-400 font-normal">
                           ≈ {formatCurrency(pay.amountInOMR, 'OMR')}
                         </span>
                       )}
@@ -589,10 +589,10 @@ export const PaymentManagementView: React.FC = () => {
                       <span
                         className={`px-2.5 py-0.5 rounded-full text-[10px] font-bold ${
                           pay.status === 'Approved' || pay.status === 'Posted'
-                            ? 'bg-emerald-100 text-emerald-800'
+                            ? 'bg-emerald-100 dark:bg-emerald-500/20 text-emerald-800 dark:text-emerald-200'
                             : pay.status === 'Rejected'
-                            ? 'bg-rose-100 text-rose-800'
-                            : 'bg-amber-100 text-amber-800'
+                            ? 'bg-rose-100 dark:bg-rose-500/20 text-rose-800 dark:text-rose-200'
+                            : 'bg-amber-100 dark:bg-amber-500/20 text-amber-800 dark:text-amber-200'
                         }`}
                       >
                         {pay.status}
@@ -600,11 +600,11 @@ export const PaymentManagementView: React.FC = () => {
                     </td>
                     <td className="p-3.5 text-center">
                       {pay.glVoucherId ? (
-                        <span className="px-2 py-1 bg-indigo-50 text-indigo-700 rounded-lg text-[10px] font-mono font-bold">
+                        <span className="px-2 py-1 bg-indigo-50 dark:bg-indigo-500/10 text-indigo-700 dark:text-indigo-300 rounded-lg text-[10px] font-mono font-bold">
                           {pay.glVoucherId}
                         </span>
                       ) : (
-                        <span className="text-[10px] text-slate-400">Pending Post</span>
+                        <span className="text-[10px] text-slate-500 dark:text-slate-400">Pending Post</span>
                       )}
                     </td>
                   </tr>
@@ -617,10 +617,10 @@ export const PaymentManagementView: React.FC = () => {
 
       {/* TAB 3: CHEQUES & PDCs */}
       {activeTab === 'cheque' && (
-        <div className="bg-white rounded-2xl border border-slate-200 shadow-2xs overflow-hidden">
+        <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-2xs overflow-hidden">
           <div className="overflow-x-auto">
             <table className="w-full text-left text-xs">
-              <thead className="bg-slate-50 text-slate-600 font-semibold border-b border-slate-200">
+              <thead className="bg-slate-50 dark:bg-slate-800/50 text-slate-600 dark:text-slate-400 font-semibold border-b border-slate-200 dark:border-slate-700">
                 <tr>
                   <th className="p-3.5">Cheque # & Series</th>
                   <th className="p-3.5">Payee Name & Purpose</th>
@@ -632,34 +632,34 @@ export const PaymentManagementView: React.FC = () => {
                   <th className="p-3.5 text-center">Action</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-100">
+              <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
                 {filteredCheques.map((chq) => (
-                  <tr key={chq.id} className="hover:bg-slate-50/70 transition-colors">
+                  <tr key={chq.id} className="hover:bg-slate-50/70 dark:hover:bg-slate-800/70 transition-colors">
                     <td className="p-3.5">
-                      <div className="font-mono font-bold text-slate-900">#{chq.chequeNumber}</div>
-                      <div className="text-[10px] text-slate-400">{chq.chequeBookId}</div>
+                      <div className="font-mono font-bold text-slate-900 dark:text-slate-100">#{chq.chequeNumber}</div>
+                      <div className="text-[10px] text-slate-500 dark:text-slate-400">{chq.chequeBookId}</div>
                     </td>
                     <td className="p-3.5">
-                      <div className="font-bold text-slate-900">{chq.payeeName}</div>
-                      <div className="text-[10px] text-slate-500">{chq.purpose}</div>
+                      <div className="font-bold text-slate-900 dark:text-slate-100">{chq.payeeName}</div>
+                      <div className="text-[10px] text-slate-500 dark:text-slate-400">{chq.purpose}</div>
                     </td>
                     <td className="p-3.5">
-                      <div className="font-medium text-slate-800">{chq.bankAccountName}</div>
+                      <div className="font-medium text-slate-800 dark:text-slate-200">{chq.bankAccountName}</div>
                     </td>
                     <td className="p-3.5">
-                      <div className="text-slate-800">Date: {chq.chequeDate}</div>
-                      <div className="text-[11px] text-slate-500 font-medium">Due: {chq.dueDate}</div>
+                      <div className="text-slate-800 dark:text-slate-200">Date: {chq.chequeDate}</div>
+                      <div className="text-[11px] text-slate-500 dark:text-slate-400 font-medium">Due: {chq.dueDate}</div>
                     </td>
-                    <td className="p-3.5 text-right font-bold text-slate-900 text-sm">
+                    <td className="p-3.5 text-right font-bold text-slate-900 dark:text-slate-100 text-sm">
                       {formatCurrency(chq.amount, chq.currency)}
                     </td>
                     <td className="p-3.5 text-center">
                       {chq.isPostDated ? (
-                        <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-purple-100 text-purple-800">
+                        <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-purple-100 dark:bg-purple-500/20 text-purple-800 dark:text-purple-200">
                           Post-Dated (PDC)
                         </span>
                       ) : (
-                        <span className="px-2 py-0.5 rounded-full text-[10px] font-medium bg-slate-100 text-slate-600">
+                        <span className="px-2 py-0.5 rounded-full text-[10px] font-medium bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400">
                           Current Date
                         </span>
                       )}
@@ -668,10 +668,10 @@ export const PaymentManagementView: React.FC = () => {
                       <span
                         className={`px-2 py-0.5 rounded-full text-[10px] font-bold ${
                           chq.status === 'Presented & Cleared'
-                            ? 'bg-emerald-100 text-emerald-800'
+                            ? 'bg-emerald-100 dark:bg-emerald-500/20 text-emerald-800 dark:text-emerald-200'
                             : chq.status === 'Signed'
-                            ? 'bg-blue-100 text-blue-800'
-                            : 'bg-slate-100 text-slate-700'
+                            ? 'bg-blue-100 dark:bg-blue-500/20 text-blue-800 dark:text-blue-200'
+                            : 'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300'
                         }`}
                       >
                         {chq.status}
@@ -681,7 +681,7 @@ export const PaymentManagementView: React.FC = () => {
                       {chq.status !== 'Presented & Cleared' && (
                         <button
                           onClick={() => updateChequeStatus(chq.id, 'Presented & Cleared')}
-                          className="px-2 py-1 rounded bg-slate-100 hover:bg-slate-200 text-indigo-700 text-[11px] font-semibold cursor-pointer"
+                          className="px-2 py-1 rounded bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-indigo-700 dark:text-indigo-300 text-[11px] font-semibold cursor-pointer"
                         >
                           Mark Cleared
                         </button>
@@ -700,20 +700,20 @@ export const PaymentManagementView: React.FC = () => {
         <div className="space-y-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {electronicBatches.map((batch) => (
-              <div key={batch.id} className="bg-white rounded-2xl p-5 border border-slate-200 shadow-2xs">
+              <div key={batch.id} className="bg-white dark:bg-slate-900 rounded-2xl p-5 border border-slate-200 dark:border-slate-700 shadow-2xs">
                 <div className="flex items-start justify-between">
                   <div>
-                    <span className="font-mono text-[10px] font-bold text-slate-500 bg-slate-100 px-1.5 py-0.5 rounded">
+                    <span className="font-mono text-[10px] font-bold text-slate-500 dark:text-slate-400 bg-slate-100 dark:bg-slate-800 px-1.5 py-0.5 rounded">
                       {batch.batchNumber}
                     </span>
-                    <h3 className="text-sm font-bold text-slate-900 mt-1">{batch.batchType}</h3>
-                    <p className="text-xs text-slate-500">{batch.bankAccountName}</p>
+                    <h3 className="text-sm font-bold text-slate-900 dark:text-slate-100 mt-1">{batch.batchType}</h3>
+                    <p className="text-xs text-slate-500 dark:text-slate-400">{batch.bankAccountName}</p>
                   </div>
                   <span
                     className={`px-2.5 py-0.5 rounded-full text-[10px] font-bold ${
                       batch.status === 'Approved' || batch.status === 'Processed'
-                        ? 'bg-emerald-100 text-emerald-800'
-                        : 'bg-amber-100 text-amber-800'
+                        ? 'bg-emerald-100 dark:bg-emerald-500/20 text-emerald-800 dark:text-emerald-200'
+                        : 'bg-amber-100 dark:bg-amber-500/20 text-amber-800 dark:text-amber-200'
                     }`}
                   >
                     {batch.status}
@@ -721,32 +721,32 @@ export const PaymentManagementView: React.FC = () => {
                 </div>
 
                 <div className="grid grid-cols-2 gap-3 mt-4 text-xs">
-                  <div className="p-2.5 rounded-xl bg-slate-50 border border-slate-100">
-                    <span className="text-slate-400 block text-[10px]">Beneficiary Records</span>
-                    <span className="text-sm font-bold text-slate-900">
+                  <div className="p-2.5 rounded-xl bg-slate-50 dark:bg-slate-800/50 border border-slate-100 dark:border-slate-800">
+                    <span className="text-slate-500 dark:text-slate-400 block text-[10px]">Beneficiary Records</span>
+                    <span className="text-sm font-bold text-slate-900 dark:text-slate-100">
                       {batch.totalTransactions} Employees
                     </span>
                   </div>
-                  <div className="p-2.5 rounded-xl bg-slate-50 border border-slate-100">
-                    <span className="text-slate-400 block text-[10px]">Total Disbursement</span>
-                    <span className="text-sm font-bold text-emerald-700">
+                  <div className="p-2.5 rounded-xl bg-slate-50 dark:bg-slate-800/50 border border-slate-100 dark:border-slate-800">
+                    <span className="text-slate-500 dark:text-slate-400 block text-[10px]">Total Disbursement</span>
+                    <span className="text-sm font-bold text-emerald-700 dark:text-emerald-300">
                       {formatCurrency(batch.totalAmount, batch.currency)}
                     </span>
                   </div>
                 </div>
 
-                <div className="mt-3 p-2.5 rounded-xl bg-indigo-50/60 border border-indigo-100 text-xs flex items-center justify-between">
-                  <span className="text-indigo-900 font-medium">Format: {batch.generatedFileFormat}</span>
+                <div className="mt-3 p-2.5 rounded-xl bg-indigo-50/60 dark:bg-indigo-500/60 border border-indigo-100 dark:border-indigo-500/20 text-xs flex items-center justify-between">
+                  <span className="text-indigo-900 dark:text-indigo-100 font-medium">Format: {batch.generatedFileFormat}</span>
                   <button
                     onClick={() => notify(`Simulated file export for ${batch.batchNumber} generated.`)}
-                    className="text-indigo-700 hover:text-indigo-900 font-bold flex items-center gap-1 cursor-pointer"
+                    className="text-indigo-700 dark:text-indigo-300 hover:text-indigo-900 dark:hover:text-indigo-100 font-bold flex items-center gap-1 cursor-pointer"
                   >
                     <Download className="w-3.5 h-3.5" />
                     <span>Download WPS SIF</span>
                   </button>
                 </div>
 
-                <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-500">
+                <div className="mt-4 pt-3 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-[11px] text-slate-500 dark:text-slate-400">
                   <span>Signatories: {batch.authorizedSignatories?.join(', ') || 'Dual Sign-off'}</span>
                   <span>Exec: {batch.executionDate}</span>
                 </div>
@@ -759,37 +759,37 @@ export const PaymentManagementView: React.FC = () => {
       {/* TAB 5: GL JOURNALS & AUDIT TRAIL */}
       {activeTab === 'gl_audit' && (
         <div className="space-y-6">
-          <div className="bg-white rounded-2xl p-5 border border-slate-200 shadow-2xs">
-            <h3 className="text-sm font-bold text-slate-900 mb-1 flex items-center gap-2">
-              <BookOpen className="w-4 h-4 text-indigo-600" />
+          <div className="bg-white dark:bg-slate-900 rounded-2xl p-5 border border-slate-200 dark:border-slate-700 shadow-2xs">
+            <h3 className="text-sm font-bold text-slate-900 dark:text-slate-100 mb-1 flex items-center gap-2">
+              <BookOpen className="w-4 h-4 text-indigo-600 dark:text-indigo-400" />
               General Ledger (GL) Posted Accounting Vouchers
             </h3>
-            <p className="text-xs text-slate-500 mb-4">
+            <p className="text-xs text-slate-500 dark:text-slate-400 mb-4">
               Real-time balanced double-entry accounting journals generated by workflow approvals and cash postings
             </p>
 
             {glJournalEntries.length === 0 ? (
-              <div className="p-8 text-center bg-slate-50 rounded-xl border border-slate-100 text-slate-400 text-xs">
+              <div className="p-8 text-center bg-slate-50 dark:bg-slate-800/50 rounded-xl border border-slate-100 dark:border-slate-800 text-slate-500 dark:text-slate-400 text-xs">
                 No GL vouchers posted in this session yet. Approve a payment or post a cash voucher to see automatic balanced journals.
               </div>
             ) : (
               <div className="space-y-3">
                 {glJournalEntries.map((gl) => (
-                  <div key={gl.id} className="p-4 rounded-xl border border-slate-200 bg-slate-50/50">
+                  <div key={gl.id} className="p-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50/50 dark:bg-slate-800/50">
                     <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-2">
                       <div>
-                        <span className="font-mono font-bold text-xs text-indigo-700 bg-indigo-50 px-2 py-0.5 rounded">
+                        <span className="font-mono font-bold text-xs text-indigo-700 dark:text-indigo-300 bg-indigo-50 dark:bg-indigo-500/10 px-2 py-0.5 rounded">
                           {gl.voucherNumber}
                         </span>
-                        <span className="text-xs font-semibold text-slate-800 ml-2">{gl.narration}</span>
+                        <span className="text-xs font-semibold text-slate-800 dark:text-slate-200 ml-2">{gl.narration}</span>
                       </div>
-                      <div className="text-xs text-slate-500">
-                        Date: {gl.postingDate} • Posted by: <strong className="text-slate-700">{gl.postedBy}</strong>
+                      <div className="text-xs text-slate-500 dark:text-slate-400">
+                        Date: {gl.postingDate} • Posted by: <strong className="text-slate-700 dark:text-slate-300">{gl.postedBy}</strong>
                       </div>
                     </div>
 
-                    <table className="w-full text-xs text-left mt-2 bg-white rounded-lg overflow-hidden border border-slate-100">
-                      <thead className="bg-slate-100 text-slate-600 text-[11px]">
+                    <table className="w-full text-xs text-left mt-2 bg-white dark:bg-slate-900 rounded-lg overflow-hidden border border-slate-100 dark:border-slate-800">
+                      <thead className="bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 text-[11px]">
                         <tr>
                           <th className="p-2">Account Code & Name</th>
                           <th className="p-2">Description</th>
@@ -797,17 +797,17 @@ export const PaymentManagementView: React.FC = () => {
                           <th className="p-2 text-right">Credit (OMR)</th>
                         </tr>
                       </thead>
-                      <tbody className="divide-y divide-slate-100">
+                      <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
                         {gl.lines.map((line) => (
                           <tr key={line.id}>
-                            <td className="p-2 font-mono font-medium text-slate-800">
+                            <td className="p-2 font-mono font-medium text-slate-800 dark:text-slate-200">
                               {line.accountCode} — {line.accountName}
                             </td>
-                            <td className="p-2 text-slate-600">{line.description}</td>
-                            <td className="p-2 text-right font-bold text-slate-900">
+                            <td className="p-2 text-slate-600 dark:text-slate-400">{line.description}</td>
+                            <td className="p-2 text-right font-bold text-slate-900 dark:text-slate-100">
                               {line.debit > 0 ? formatCurrency(line.debit) : '—'}
                             </td>
-                            <td className="p-2 text-right font-bold text-slate-900">
+                            <td className="p-2 text-right font-bold text-slate-900 dark:text-slate-100">
                               {line.credit > 0 ? formatCurrency(line.credit) : '—'}
                             </td>
                           </tr>
@@ -820,34 +820,34 @@ export const PaymentManagementView: React.FC = () => {
             )}
           </div>
 
-          <div className="bg-white rounded-2xl p-5 border border-slate-200 shadow-2xs">
-            <h3 className="text-sm font-bold text-slate-900 mb-1 flex items-center gap-2">
-              <ShieldCheck className="w-4 h-4 text-emerald-600" />
+          <div className="bg-white dark:bg-slate-900 rounded-2xl p-5 border border-slate-200 dark:border-slate-700 shadow-2xs">
+            <h3 className="text-sm font-bold text-slate-900 dark:text-slate-100 mb-1 flex items-center gap-2">
+              <ShieldCheck className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
               Banking & Treasury Audit Trail Log
             </h3>
-            <p className="text-xs text-slate-500 mb-4">
+            <p className="text-xs text-slate-500 dark:text-slate-400 mb-4">
               Immutable historical trace of all payment submissions, signatory decisions, and authorization attempts
             </p>
 
             <div className="space-y-2 max-h-96 overflow-y-auto">
               {auditLogs.map((log) => (
-                <div key={log.id} className="p-3 rounded-xl border border-slate-100 bg-slate-50 text-xs flex items-start justify-between gap-3">
+                <div key={log.id} className="p-3 rounded-xl border border-slate-100 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/50 text-xs flex items-start justify-between gap-3">
                   <div>
                     <div className="flex items-center gap-2">
-                      <span className="font-mono text-[10px] font-bold text-slate-500 bg-slate-200 px-1.5 py-0.2 rounded">
+                      <span className="font-mono text-[10px] font-bold text-slate-500 dark:text-slate-400 bg-slate-200 dark:bg-slate-700 px-1.5 py-0.2 rounded">
                         {log.action}
                       </span>
-                      <strong className="text-slate-900">{log.entityReference}</strong>
-                      <span className="text-slate-400">by {log.actorName} ({log.actorRole})</span>
+                      <strong className="text-slate-900 dark:text-slate-100">{log.entityReference}</strong>
+                      <span className="text-slate-500 dark:text-slate-400">by {log.actorName} ({log.actorRole})</span>
                     </div>
-                    <p className="text-slate-600 mt-1">{log.details}</p>
+                    <p className="text-slate-600 dark:text-slate-400 mt-1">{log.details}</p>
                     {log.violationCode && (
-                      <span className="text-rose-600 font-mono text-[10px] font-bold block mt-0.5">
+                      <span className="text-rose-600 dark:text-rose-400 font-mono text-[10px] font-bold block mt-0.5">
                         Violation Code: {log.violationCode}
                       </span>
                     )}
                   </div>
-                  <span className="text-[10px] text-slate-400 shrink-0 font-mono">{log.timestamp}</span>
+                  <span className="text-[10px] text-slate-500 dark:text-slate-400 shrink-0 font-mono">{log.timestamp}</span>
                 </div>
               ))}
             </div>
@@ -1085,19 +1085,19 @@ export const PaymentManagementView: React.FC = () => {
 
       {/* MODAL: INITIATE WIRE TRANSFER */}
       {showWireModal && (
-        <div className="fixed inset-0 bg-slate-900/50 backdrop-blur-xs flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-2xl max-w-lg w-full p-6 shadow-xl border border-slate-200">
-            <h3 className="text-base font-bold text-slate-900 mb-1">Initiate Bank Wire Transfer</h3>
-            <p className="text-xs text-slate-500 mb-4">
+        <div className="fixed inset-0 bg-white/50 dark:bg-slate-900/50 backdrop-blur-xs flex items-center justify-center z-50 p-4">
+          <div className="bg-white dark:bg-slate-900 rounded-2xl max-w-lg w-full p-6 shadow-xl border border-slate-200 dark:border-slate-700">
+            <h3 className="text-base font-bold text-slate-900 dark:text-slate-100 mb-1">Initiate Bank Wire Transfer</h3>
+            <p className="text-xs text-slate-500 dark:text-slate-400 mb-4">
               Vouchers will be routed automatically through the sequential Workflow Engine.
             </p>
             <form onSubmit={handleCreateWire} className="space-y-4">
               <div>
-                <label className="text-xs font-semibold text-slate-700 block mb-1">Debit Bank Account *</label>
+                <label className="text-xs font-semibold text-slate-700 dark:text-slate-300 block mb-1">Debit Bank Account *</label>
                 <select
                   value={wireBankAccId}
                   onChange={(e) => setWireBankAccId(e.target.value)}
-                  className="w-full text-xs p-2.5 border border-slate-200 rounded-lg focus:ring-2 focus:ring-slate-900 focus:outline-none"
+                  className="w-full text-xs p-2.5 border border-slate-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-slate-200 dark:focus:ring-slate-900 focus:outline-none"
                 >
                   {bankAccounts.map((a) => (
                     <option key={a.id} value={a.id}>
@@ -1109,47 +1109,47 @@ export const PaymentManagementView: React.FC = () => {
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="text-xs font-semibold text-slate-700 block mb-1">Beneficiary Name *</label>
+                  <label className="text-xs font-semibold text-slate-700 dark:text-slate-300 block mb-1">Beneficiary Name *</label>
                   <input
                     type="text"
                     required
                     placeholder="e.g. Al-Tasnim Infrastructure LLC"
                     value={wireBeneficiary}
                     onChange={(e) => setWireBeneficiary(e.target.value)}
-                    className="w-full text-xs p-2.5 border border-slate-200 rounded-lg focus:ring-2 focus:ring-slate-900 focus:outline-none"
+                    className="w-full text-xs p-2.5 border border-slate-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-slate-200 dark:focus:ring-slate-900 focus:outline-none"
                   />
                 </div>
                 <div>
-                  <label className="text-xs font-semibold text-slate-700 block mb-1">Beneficiary IBAN *</label>
+                  <label className="text-xs font-semibold text-slate-700 dark:text-slate-300 block mb-1">Beneficiary IBAN *</label>
                   <input
                     type="text"
                     required
                     placeholder="OM44BMUS042399990001"
                     value={wireIban}
                     onChange={(e) => setWireIban(e.target.value)}
-                    className="w-full text-xs p-2.5 border border-slate-200 rounded-lg focus:ring-2 focus:ring-slate-900 focus:outline-none font-mono"
+                    className="w-full text-xs p-2.5 border border-slate-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-slate-200 dark:focus:ring-slate-900 focus:outline-none font-mono"
                   />
                 </div>
               </div>
 
               <div className="grid grid-cols-3 gap-3">
                 <div className="col-span-2">
-                  <label className="text-xs font-semibold text-slate-700 block mb-1">Amount *</label>
+                  <label className="text-xs font-semibold text-slate-700 dark:text-slate-300 block mb-1">Amount *</label>
                   <input
                     type="number"
                     step="0.001"
                     required
                     value={wireAmount}
                     onChange={(e) => setWireAmount(Number(e.target.value))}
-                    className="w-full text-xs p-2.5 border border-slate-200 rounded-lg focus:ring-2 focus:ring-slate-900 focus:outline-none font-bold"
+                    className="w-full text-xs p-2.5 border border-slate-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-slate-200 dark:focus:ring-slate-900 focus:outline-none font-bold"
                   />
                 </div>
                 <div>
-                  <label className="text-xs font-semibold text-slate-700 block mb-1">Currency</label>
+                  <label className="text-xs font-semibold text-slate-700 dark:text-slate-300 block mb-1">Currency</label>
                   <select
                     value={wireCurrency}
                     onChange={(e) => setWireCurrency(e.target.value as CurrencyCode)}
-                    className="w-full text-xs p-2.5 border border-slate-200 rounded-lg focus:ring-2 focus:ring-slate-900 focus:outline-none"
+                    className="w-full text-xs p-2.5 border border-slate-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-slate-200 dark:focus:ring-slate-900 focus:outline-none"
                   >
                     <option value="OMR">OMR</option>
                     <option value="USD">USD</option>
@@ -1160,11 +1160,11 @@ export const PaymentManagementView: React.FC = () => {
               </div>
 
               <div>
-                <label className="text-xs font-semibold text-slate-700 block mb-1">Payment Method</label>
+                <label className="text-xs font-semibold text-slate-700 dark:text-slate-300 block mb-1">Payment Method</label>
                 <select
                   value={wireMethod}
                   onChange={(e) => setWireMethod(e.target.value as any)}
-                  className="w-full text-xs p-2.5 border border-slate-200 rounded-lg focus:ring-2 focus:ring-slate-900 focus:outline-none"
+                  className="w-full text-xs p-2.5 border border-slate-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-slate-200 dark:focus:ring-slate-900 focus:outline-none"
                 >
                   <option value="ACH / Local RTGS">ACH / Local RTGS (Central Bank of Oman)</option>
                   <option value="Bank Transfer">International SWIFT MT103</option>
@@ -1173,21 +1173,21 @@ export const PaymentManagementView: React.FC = () => {
               </div>
 
               <div>
-                <label className="text-xs font-semibold text-slate-700 block mb-1">Commercial Purpose</label>
+                <label className="text-xs font-semibold text-slate-700 dark:text-slate-300 block mb-1">Commercial Purpose</label>
                 <input
                   type="text"
                   placeholder="Monthly subcontractor milestone certificate release"
                   value={wirePurpose}
                   onChange={(e) => setWirePurpose(e.target.value)}
-                  className="w-full text-xs p-2.5 border border-slate-200 rounded-lg focus:ring-2 focus:ring-slate-900 focus:outline-none"
+                  className="w-full text-xs p-2.5 border border-slate-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-slate-200 dark:focus:ring-slate-900 focus:outline-none"
                 />
               </div>
 
-              <div className="flex items-center justify-end gap-2 pt-4 border-t border-slate-100">
+              <div className="flex items-center justify-end gap-2 pt-4 border-t border-slate-100 dark:border-slate-800">
                 <button
                   type="button"
                   onClick={() => setShowWireModal(false)}
-                  className="px-4 py-2 rounded-xl text-xs font-semibold text-slate-600 hover:bg-slate-100 cursor-pointer"
+                  className="px-4 py-2 rounded-xl text-xs font-semibold text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 cursor-pointer"
                 >
                   Cancel
                 </button>
@@ -1205,19 +1205,19 @@ export const PaymentManagementView: React.FC = () => {
 
       {/* MODAL: ISSUE CHEQUE */}
       {showChequeModal && (
-        <div className="fixed inset-0 bg-slate-900/50 backdrop-blur-xs flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-2xl max-w-lg w-full p-6 shadow-xl border border-slate-200">
-            <h3 className="text-base font-bold text-slate-900 mb-1">Issue Commercial Cheque</h3>
-            <p className="text-xs text-slate-500 mb-4">
+        <div className="fixed inset-0 bg-white/50 dark:bg-slate-900/50 backdrop-blur-xs flex items-center justify-center z-50 p-4">
+          <div className="bg-white dark:bg-slate-900 rounded-2xl max-w-lg w-full p-6 shadow-xl border border-slate-200 dark:border-slate-700">
+            <h3 className="text-base font-bold text-slate-900 dark:text-slate-100 mb-1">Issue Commercial Cheque</h3>
+            <p className="text-xs text-slate-500 dark:text-slate-400 mb-4">
               Registered cheques update the Cheque register and PDC vault if post-dated.
             </p>
             <form onSubmit={handleIssueCheque} className="space-y-4">
               <div>
-                <label className="text-xs font-semibold text-slate-700 block mb-1">Drawn Bank Account *</label>
+                <label className="text-xs font-semibold text-slate-700 dark:text-slate-300 block mb-1">Drawn Bank Account *</label>
                 <select
                   value={chqBankAccId}
                   onChange={(e) => setChqBankAccId(e.target.value)}
-                  className="w-full text-xs p-2.5 border border-slate-200 rounded-lg focus:ring-2 focus:ring-slate-900 focus:outline-none"
+                  className="w-full text-xs p-2.5 border border-slate-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-slate-200 dark:focus:ring-slate-900 focus:outline-none"
                 >
                   {bankAccounts.map((a) => (
                     <option key={a.id} value={a.id}>
@@ -1229,56 +1229,56 @@ export const PaymentManagementView: React.FC = () => {
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="text-xs font-semibold text-slate-700 block mb-1">Cheque Number *</label>
+                  <label className="text-xs font-semibold text-slate-700 dark:text-slate-300 block mb-1">Cheque Number *</label>
                   <input
                     type="text"
                     required
                     placeholder="004921"
                     value={chqNumber}
                     onChange={(e) => setChqNumber(e.target.value)}
-                    className="w-full text-xs p-2.5 border border-slate-200 rounded-lg focus:ring-2 focus:ring-slate-900 focus:outline-none font-mono"
+                    className="w-full text-xs p-2.5 border border-slate-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-slate-200 dark:focus:ring-slate-900 focus:outline-none font-mono"
                   />
                 </div>
                 <div>
-                  <label className="text-xs font-semibold text-slate-700 block mb-1">Payee Name *</label>
+                  <label className="text-xs font-semibold text-slate-700 dark:text-slate-300 block mb-1">Payee Name *</label>
                   <input
                     type="text"
                     required
                     placeholder="Muscat Electrics SAOC"
                     value={chqPayee}
                     onChange={(e) => setChqPayee(e.target.value)}
-                    className="w-full text-xs p-2.5 border border-slate-200 rounded-lg focus:ring-2 focus:ring-slate-900 focus:outline-none"
+                    className="w-full text-xs p-2.5 border border-slate-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-slate-200 dark:focus:ring-slate-900 focus:outline-none"
                   />
                 </div>
               </div>
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="text-xs font-semibold text-slate-700 block mb-1">Amount (OMR) *</label>
+                  <label className="text-xs font-semibold text-slate-700 dark:text-slate-300 block mb-1">Amount (OMR) *</label>
                   <input
                     type="number"
                     step="0.001"
                     required
                     value={chqAmount}
                     onChange={(e) => setChqAmount(Number(e.target.value))}
-                    className="w-full text-xs p-2.5 border border-slate-200 rounded-lg focus:ring-2 focus:ring-slate-900 focus:outline-none font-bold"
+                    className="w-full text-xs p-2.5 border border-slate-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-slate-200 dark:focus:ring-slate-900 focus:outline-none font-bold"
                   />
                 </div>
                 <div>
-                  <label className="text-xs font-semibold text-slate-700 block mb-1">Cheque Issue Date</label>
+                  <label className="text-xs font-semibold text-slate-700 dark:text-slate-300 block mb-1">Cheque Issue Date</label>
                   <input
                     type="date"
                     value={chqDate}
                     onChange={(e) => setChqDate(e.target.value)}
-                    className="w-full text-xs p-2.5 border border-slate-200 rounded-lg focus:ring-2 focus:ring-slate-900 focus:outline-none"
+                    className="w-full text-xs p-2.5 border border-slate-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-slate-200 dark:focus:ring-slate-900 focus:outline-none"
                   />
                 </div>
               </div>
 
-              <div className="p-3 bg-slate-50 rounded-xl border border-slate-200 flex items-center justify-between">
+              <div className="p-3 bg-slate-50 dark:bg-slate-800/50 rounded-xl border border-slate-200 dark:border-slate-700 flex items-center justify-between">
                 <div>
-                  <span className="text-xs font-bold text-slate-900 block">Post-Dated Cheque (PDC)</span>
-                  <span className="text-[10px] text-slate-500">Matures at a future date for supplier guarantee</span>
+                  <span className="text-xs font-bold text-slate-900 dark:text-slate-100 block">Post-Dated Cheque (PDC)</span>
+                  <span className="text-[10px] text-slate-500 dark:text-slate-400">Matures at a future date for supplier guarantee</span>
                 </div>
                 <input
                   type="checkbox"
@@ -1290,33 +1290,33 @@ export const PaymentManagementView: React.FC = () => {
 
               {chqIsPdc && (
                 <div>
-                  <label className="text-xs font-semibold text-slate-700 block mb-1">PDC Maturity / Presentation Date *</label>
+                  <label className="text-xs font-semibold text-slate-700 dark:text-slate-300 block mb-1">PDC Maturity / Presentation Date *</label>
                   <input
                     type="date"
                     required
                     value={chqDueDate}
                     onChange={(e) => setChqDueDate(e.target.value)}
-                    className="w-full text-xs p-2.5 border border-slate-200 rounded-lg focus:ring-2 focus:ring-slate-900 focus:outline-none"
+                    className="w-full text-xs p-2.5 border border-slate-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-slate-200 dark:focus:ring-slate-900 focus:outline-none"
                   />
                 </div>
               )}
 
               <div>
-                <label className="text-xs font-semibold text-slate-700 block mb-1">Purpose</label>
+                <label className="text-xs font-semibold text-slate-700 dark:text-slate-300 block mb-1">Purpose</label>
                 <input
                   type="text"
                   placeholder="Security deposit for heavy machinery lease"
                   value={chqPurpose}
                   onChange={(e) => setChqPurpose(e.target.value)}
-                  className="w-full text-xs p-2.5 border border-slate-200 rounded-lg focus:ring-2 focus:ring-slate-900 focus:outline-none"
+                  className="w-full text-xs p-2.5 border border-slate-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-slate-200 dark:focus:ring-slate-900 focus:outline-none"
                 />
               </div>
 
-              <div className="flex items-center justify-end gap-2 pt-4 border-t border-slate-100">
+              <div className="flex items-center justify-end gap-2 pt-4 border-t border-slate-100 dark:border-slate-800">
                 <button
                   type="button"
                   onClick={() => setShowChequeModal(false)}
-                  className="px-4 py-2 rounded-xl text-xs font-semibold text-slate-600 hover:bg-slate-100 cursor-pointer"
+                  className="px-4 py-2 rounded-xl text-xs font-semibold text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 cursor-pointer"
                 >
                   Cancel
                 </button>
@@ -1334,19 +1334,19 @@ export const PaymentManagementView: React.FC = () => {
 
       {/* MODAL: CREATE WPS BATCH */}
       {showBatchModal && (
-        <div className="fixed inset-0 bg-slate-900/50 backdrop-blur-xs flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-2xl max-w-lg w-full p-6 shadow-xl border border-slate-200">
-            <h3 className="text-base font-bold text-slate-900 mb-1">Create Electronic Payment Batch (WPS)</h3>
-            <p className="text-xs text-slate-500 mb-4">
+        <div className="fixed inset-0 bg-white/50 dark:bg-slate-900/50 backdrop-blur-xs flex items-center justify-center z-50 p-4">
+          <div className="bg-white dark:bg-slate-900 rounded-2xl max-w-lg w-full p-6 shadow-xl border border-slate-200 dark:border-slate-700">
+            <h3 className="text-base font-bold text-slate-900 dark:text-slate-100 mb-1">Create Electronic Payment Batch (WPS)</h3>
+            <p className="text-xs text-slate-500 dark:text-slate-400 mb-4">
               Generates Wages Protection System (WPS) .SIF format for Ministry of Labour compliance.
             </p>
             <form onSubmit={handleCreateBatch} className="space-y-4">
               <div>
-                <label className="text-xs font-semibold text-slate-700 block mb-1">Salary Bank Account *</label>
+                <label className="text-xs font-semibold text-slate-700 dark:text-slate-300 block mb-1">Salary Bank Account *</label>
                 <select
                   value={batchBankAccId}
                   onChange={(e) => setBatchBankAccId(e.target.value)}
-                  className="w-full text-xs p-2.5 border border-slate-200 rounded-lg focus:ring-2 focus:ring-slate-900 focus:outline-none"
+                  className="w-full text-xs p-2.5 border border-slate-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-slate-200 dark:focus:ring-slate-900 focus:outline-none"
                 >
                   {bankAccounts.map((a) => (
                     <option key={a.id} value={a.id}>
@@ -1358,32 +1358,32 @@ export const PaymentManagementView: React.FC = () => {
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="text-xs font-semibold text-slate-700 block mb-1">Total Employees *</label>
+                  <label className="text-xs font-semibold text-slate-700 dark:text-slate-300 block mb-1">Total Employees *</label>
                   <input
                     type="number"
                     required
                     value={batchTotalCount}
                     onChange={(e) => setBatchTotalCount(Number(e.target.value))}
-                    className="w-full text-xs p-2.5 border border-slate-200 rounded-lg focus:ring-2 focus:ring-slate-900 focus:outline-none font-bold"
+                    className="w-full text-xs p-2.5 border border-slate-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-slate-200 dark:focus:ring-slate-900 focus:outline-none font-bold"
                   />
                 </div>
                 <div>
-                  <label className="text-xs font-semibold text-slate-700 block mb-1">Total Net Payroll (OMR) *</label>
+                  <label className="text-xs font-semibold text-slate-700 dark:text-slate-300 block mb-1">Total Net Payroll (OMR) *</label>
                   <input
                     type="number"
                     required
                     value={batchTotalAmount}
                     onChange={(e) => setBatchTotalAmount(Number(e.target.value))}
-                    className="w-full text-xs p-2.5 border border-slate-200 rounded-lg focus:ring-2 focus:ring-slate-900 focus:outline-none font-bold"
+                    className="w-full text-xs p-2.5 border border-slate-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-slate-200 dark:focus:ring-slate-900 focus:outline-none font-bold"
                   />
                 </div>
               </div>
 
-              <div className="flex items-center justify-end gap-2 pt-4 border-t border-slate-100">
+              <div className="flex items-center justify-end gap-2 pt-4 border-t border-slate-100 dark:border-slate-800">
                 <button
                   type="button"
                   onClick={() => setShowBatchModal(false)}
-                  className="px-4 py-2 rounded-xl text-xs font-semibold text-slate-600 hover:bg-slate-100 cursor-pointer"
+                  className="px-4 py-2 rounded-xl text-xs font-semibold text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 cursor-pointer"
                 >
                   Cancel
                 </button>

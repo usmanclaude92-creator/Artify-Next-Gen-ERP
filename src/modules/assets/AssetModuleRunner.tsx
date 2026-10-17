@@ -87,7 +87,7 @@ const AssetDashboardContent: React.FC<{ activeSection?: string }> = ({ activeSec
   ];
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 p-4 lg:p-8 space-y-8">
+    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 p-4 lg:p-8 space-y-8">
       {/* Top Banner with Key Financial Metrics */}
       <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 bg-gradient-to-r from-slate-900 via-slate-900 to-amber-950/40 border border-slate-800 rounded-3xl p-6 lg:p-8 shadow-2xl relative overflow-hidden">
         <div className="space-y-2 relative z-10">
@@ -124,58 +124,58 @@ const AssetDashboardContent: React.FC<{ activeSection?: string }> = ({ activeSec
       {/* KPI Cards Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {/* Gross Asset Cost */}
-        <div className="bg-slate-900 border border-slate-800 rounded-2xl p-5 shadow-lg space-y-2">
-          <div className="flex items-center justify-between text-slate-400 text-xs">
+        <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-5 shadow-lg space-y-2">
+          <div className="flex items-center justify-between text-slate-600 dark:text-slate-400 text-xs">
             <span className="font-semibold uppercase tracking-wider">Gross Asset Cost Basis</span>
-            <DollarSign className="w-4 h-4 text-amber-400" />
+            <DollarSign className="w-4 h-4 text-amber-700 dark:text-amber-400" />
           </div>
-          <div className="text-2xl font-black font-mono text-white">
+          <div className="text-2xl font-black font-mono text-slate-900 dark:text-white">
             {currency} {totalCostBasis.toLocaleString()}
           </div>
-          <div className="text-[11px] text-slate-500">
-            Across <span className="text-slate-300 font-bold">{assets.length}</span> registered fixed assets
+          <div className="text-[11px] text-slate-500 dark:text-slate-400">
+            Across <span className="text-slate-700 dark:text-slate-300 font-bold">{assets.length}</span> registered fixed assets
           </div>
         </div>
 
         {/* Accumulated Depreciation */}
-        <div className="bg-slate-900 border border-slate-800 rounded-2xl p-5 shadow-lg space-y-2">
-          <div className="flex items-center justify-between text-slate-400 text-xs">
+        <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-5 shadow-lg space-y-2">
+          <div className="flex items-center justify-between text-slate-600 dark:text-slate-400 text-xs">
             <span className="font-semibold uppercase tracking-wider">Accumulated Depreciation</span>
-            <TrendingUp className="w-4 h-4 text-rose-400" />
+            <TrendingUp className="w-4 h-4 text-rose-600 dark:text-rose-400" />
           </div>
-          <div className="text-2xl font-black font-mono text-rose-400">
+          <div className="text-2xl font-black font-mono text-rose-600 dark:text-rose-400">
             ({currency} {totalAccumDepreciation.toLocaleString()})
           </div>
-          <div className="text-[11px] text-slate-500">
-            Depreciation Ratio: <span className="text-rose-400 font-bold">{Math.round((totalAccumDepreciation / totalCostBasis) * 100)}%</span>
+          <div className="text-[11px] text-slate-500 dark:text-slate-400">
+            Depreciation Ratio: <span className="text-rose-600 dark:text-rose-400 font-bold">{Math.round((totalAccumDepreciation / totalCostBasis) * 100)}%</span>
           </div>
         </div>
 
         {/* Net Book Value (NBV) */}
-        <div className="bg-slate-900 border border-slate-800 rounded-2xl p-5 shadow-lg space-y-2">
-          <div className="flex items-center justify-between text-slate-400 text-xs">
+        <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-5 shadow-lg space-y-2">
+          <div className="flex items-center justify-between text-slate-600 dark:text-slate-400 text-xs">
             <span className="font-semibold uppercase tracking-wider">Net Book Value (Carrying)</span>
-            <PieChart className="w-4 h-4 text-emerald-400" />
+            <PieChart className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
           </div>
-          <div className="text-2xl font-black font-mono text-emerald-400">
+          <div className="text-2xl font-black font-mono text-emerald-600 dark:text-emerald-400">
             {currency} {totalNetBookValue.toLocaleString()}
           </div>
-          <div className="text-[11px] text-slate-500">
+          <div className="text-[11px] text-slate-500 dark:text-slate-400">
             Balance Sheet Carrying Value (IAS 16)
           </div>
         </div>
 
         {/* Capital Work In Progress */}
-        <div className="bg-slate-900 border border-slate-800 rounded-2xl p-5 shadow-lg space-y-2">
-          <div className="flex items-center justify-between text-slate-400 text-xs">
+        <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-5 shadow-lg space-y-2">
+          <div className="flex items-center justify-between text-slate-600 dark:text-slate-400 text-xs">
             <span className="font-semibold uppercase tracking-wider">Active CWIP Projects</span>
-            <HardHat className="w-4 h-4 text-cyan-400" />
+            <HardHat className="w-4 h-4 text-cyan-600 dark:text-cyan-400" />
           </div>
-          <div className="text-2xl font-black font-mono text-cyan-400">
+          <div className="text-2xl font-black font-mono text-cyan-600 dark:text-cyan-400">
             {currency} {totalCwipValue.toLocaleString()}
           </div>
-          <div className="text-[11px] text-slate-500">
-            <span className="text-cyan-300 font-bold">{cwipProjects.filter(p => p.status !== 'CAPITALIZED').length}</span> construction projects in progress
+          <div className="text-[11px] text-slate-500 dark:text-slate-400">
+            <span className="text-cyan-700 dark:text-cyan-300 font-bold">{cwipProjects.filter(p => p.status !== 'CAPITALIZED').length}</span> construction projects in progress
           </div>
         </div>
       </div>
@@ -191,21 +191,21 @@ const AssetDashboardContent: React.FC<{ activeSection?: string }> = ({ activeSec
               onClick={() => setSelectedSection(sec.id)}
               className={`flex flex-col text-left p-4 rounded-2xl border transition-all cursor-pointer ${
                 isActive
-                  ? 'bg-amber-600/15 border-amber-500 text-white shadow-xl shadow-amber-600/10'
-                  : 'bg-slate-900 border-slate-800 text-slate-400 hover:text-slate-200 hover:border-slate-700'
+                  ? 'bg-amber-600/15 border-amber-500 text-slate-900 dark:text-white shadow-xl shadow-amber-600/10'
+                  : 'bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200 hover:border-slate-300 dark:hover:border-slate-700'
               }`}
             >
               <div className="flex items-center justify-between mb-2">
                 <span className={`text-[10px] font-mono font-bold px-2 py-0.5 rounded-full ${
-                  isActive ? 'bg-amber-500 text-slate-950' : 'bg-slate-800 text-slate-400'
+                  isActive ? 'bg-amber-500 text-slate-950' : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400'
                 }`}>
                   {sec.id}
                 </span>
-                <Icon className={`w-4 h-4 ${isActive ? 'text-amber-400' : 'text-slate-500'}`} />
+                <Icon className={`w-4 h-4 ${isActive ? 'text-amber-700 dark:text-amber-400' : 'text-slate-500 dark:text-slate-400'}`} />
               </div>
-              <div className="font-extrabold text-xs text-white line-clamp-1">{sec.title}</div>
-              <div className="text-[11px] text-slate-400 line-clamp-1 mt-0.5">{sec.subtitle}</div>
-              <div className="text-[10px] font-mono font-semibold text-amber-400/80 mt-2">{sec.count}</div>
+              <div className="font-extrabold text-xs text-slate-900 dark:text-white line-clamp-1">{sec.title}</div>
+              <div className="text-[11px] text-slate-600 dark:text-slate-400 line-clamp-1 mt-0.5">{sec.subtitle}</div>
+              <div className="text-[10px] font-mono font-semibold text-amber-700/80 dark:text-amber-400/80 mt-2">{sec.count}</div>
             </button>
           );
         })}

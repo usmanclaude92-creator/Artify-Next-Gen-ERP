@@ -31,19 +31,19 @@ export const CustomerAnalyticsView: React.FC = () => {
         onExport={handleExport}
       />
 
-      <div className="bg-white border border-slate-200 rounded-xl p-5 shadow-xs">
-        <div className="pb-4 mb-4 border-b border-slate-100">
-          <h3 className="text-sm font-bold text-slate-900 flex items-center gap-2">
-            <Briefcase className="w-4 h-4 text-indigo-600" />
+      <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl p-5 shadow-xs">
+        <div className="pb-4 mb-4 border-b border-slate-100 dark:border-slate-800">
+          <h3 className="text-sm font-bold text-slate-900 dark:text-slate-100 flex items-center gap-2">
+            <Briefcase className="w-4 h-4 text-indigo-600 dark:text-indigo-400" />
             Client Lifetime Value (CLV), Margin Contribution & Concentration Risk
           </h3>
-          <p className="text-xs text-slate-500">Tiered customer hierarchy, outstanding receivables exposure, and churn telemetry</p>
+          <p className="text-xs text-slate-500 dark:text-slate-400">Tiered customer hierarchy, outstanding receivables exposure, and churn telemetry</p>
         </div>
 
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs border-collapse">
             <thead>
-              <tr className="border-b border-slate-200 bg-slate-50 text-slate-600">
+              <tr className="border-b border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/50 text-slate-600 dark:text-slate-400">
                 <th className="py-2.5 px-3 font-semibold">Customer / Entity Name</th>
                 <th className="py-2.5 px-3 font-semibold">Tier Classification</th>
                 <th className="py-2.5 px-3 font-mono text-right">Lifetime Value (CLV)</th>
@@ -55,33 +55,33 @@ export const CustomerAnalyticsView: React.FC = () => {
                 <th className="py-2.5 px-3 text-center">Churn Risk</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-100">
+            <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
               {customerAnalytics.map(row => (
-                <tr key={row.customerCode} className="hover:bg-slate-50">
+                <tr key={row.customerCode} className="hover:bg-slate-50 dark:hover:bg-slate-800/50">
                   <td className="py-3 px-3">
-                    <span className="font-bold text-slate-900 block">{row.customerName}</span>
-                    <span className="text-[10px] text-slate-400 font-mono">{row.customerCode}</span>
+                    <span className="font-bold text-slate-900 dark:text-slate-100 block">{row.customerName}</span>
+                    <span className="text-[10px] text-slate-500 dark:text-slate-400 font-mono">{row.customerCode}</span>
                   </td>
                   <td className="py-3 px-3">
-                    <span className="inline-flex items-center gap-1 font-semibold text-indigo-900 bg-indigo-50 px-2 py-0.5 rounded text-[11px]">
-                      <Award className="w-3 h-3 text-indigo-600" />
+                    <span className="inline-flex items-center gap-1 font-semibold text-indigo-900 dark:text-indigo-100 bg-indigo-50 dark:bg-indigo-500/10 px-2 py-0.5 rounded text-[11px]">
+                      <Award className="w-3 h-3 text-indigo-600 dark:text-indigo-400" />
                       {row.tier}
                     </span>
                   </td>
-                  <td className="py-3 px-3 font-mono text-right font-semibold text-slate-700">{formatCurrency(row.lifetimeValueOMR)}</td>
-                  <td className="py-3 px-3 font-mono font-bold text-right text-indigo-900">{formatCurrency(row.ytdRevenueOMR)}</td>
-                  <td className="py-3 px-3 font-mono font-bold text-right text-emerald-700">{row.ytdGrossMarginPercent}%</td>
-                  <td className="py-3 px-3 font-mono text-right text-slate-800">{formatCurrency(row.currentReceivablesOMR)}</td>
-                  <td className="py-3 px-3 font-mono text-right text-slate-600 font-semibold">{row.daysSalesOutstanding}d</td>
-                  <td className="py-3 px-3 font-mono font-bold text-right text-slate-900">{row.concentrationPercent}%</td>
+                  <td className="py-3 px-3 font-mono text-right font-semibold text-slate-700 dark:text-slate-300">{formatCurrency(row.lifetimeValueOMR)}</td>
+                  <td className="py-3 px-3 font-mono font-bold text-right text-indigo-900 dark:text-indigo-100">{formatCurrency(row.ytdRevenueOMR)}</td>
+                  <td className="py-3 px-3 font-mono font-bold text-right text-emerald-700 dark:text-emerald-300">{row.ytdGrossMarginPercent}%</td>
+                  <td className="py-3 px-3 font-mono text-right text-slate-800 dark:text-slate-200">{formatCurrency(row.currentReceivablesOMR)}</td>
+                  <td className="py-3 px-3 font-mono text-right text-slate-600 dark:text-slate-400 font-semibold">{row.daysSalesOutstanding}d</td>
+                  <td className="py-3 px-3 font-mono font-bold text-right text-slate-900 dark:text-slate-100">{row.concentrationPercent}%</td>
                   <td className="py-3 px-3 text-center">
                     <span
                       className={`inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold ${
                         row.churnRisk === 'Low'
-                          ? 'bg-emerald-100 text-emerald-800'
+                          ? 'bg-emerald-100 dark:bg-emerald-500/20 text-emerald-800 dark:text-emerald-200'
                           : row.churnRisk === 'Medium'
-                          ? 'bg-amber-100 text-amber-800'
-                          : 'bg-rose-100 text-rose-800'
+                          ? 'bg-amber-100 dark:bg-amber-500/20 text-amber-800 dark:text-amber-200'
+                          : 'bg-rose-100 dark:bg-rose-500/20 text-rose-800 dark:text-rose-200'
                       }`}
                     >
                       {row.churnRisk}

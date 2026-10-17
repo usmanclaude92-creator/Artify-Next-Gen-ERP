@@ -185,22 +185,22 @@ export const CompanyBrandingStudio: React.FC<CompanyBrandingStudioProps> = ({ co
   return (
     <div className="p-6 space-y-6" id="company-branding-studio">
       {/* Top Banner with Quick Actions */}
-      <div className="flex flex-wrap items-center justify-between gap-4 bg-slate-50 border border-slate-200 rounded-xl p-4">
+      <div className="flex flex-wrap items-center justify-between gap-4 bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-xl p-4">
         <div className="flex items-center gap-3">
           <div
-            className="w-10 h-10 rounded-lg flex items-center justify-center text-white shadow-xs font-bold text-sm"
+            className="w-10 h-10 rounded-lg flex items-center justify-center text-slate-900 dark:text-white shadow-xs font-bold text-sm"
             style={{ backgroundColor: brandColor }}
           >
             <Palette className="w-5 h-5" />
           </div>
           <div>
-            <h3 className="text-sm font-bold text-slate-900 flex items-center gap-2">
+            <h3 className="text-sm font-bold text-slate-900 dark:text-slate-100 flex items-center gap-2">
               <span>Corporate Branding & Letterhead Studio</span>
-              <span className="text-[11px] px-2 py-0.5 rounded-full bg-indigo-100 text-indigo-700 font-semibold">
+              <span className="text-[11px] px-2 py-0.5 rounded-full bg-indigo-100 dark:bg-indigo-500/20 text-indigo-700 dark:text-indigo-300 font-semibold">
                 {company.code}
               </span>
             </h3>
-            <p className="text-xs text-slate-500">
+            <p className="text-xs text-slate-500 dark:text-slate-400">
               Configure corporate logos, brand accent colors, statutory watermarks, and multi-template document headers.
             </p>
           </div>
@@ -210,7 +210,7 @@ export const CompanyBrandingStudio: React.FC<CompanyBrandingStudioProps> = ({ co
           <button
             type="button"
             onClick={handleReset}
-            className="px-3 py-1.5 border border-slate-300 rounded-lg text-xs font-semibold text-slate-700 hover:bg-slate-100 flex items-center gap-1.5 cursor-pointer transition-colors"
+            className="px-3 py-1.5 border border-slate-300 dark:border-slate-600 rounded-lg text-xs font-semibold text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 flex items-center gap-1.5 cursor-pointer transition-colors"
           >
             <RotateCcw className="w-3.5 h-3.5" />
             <span>Reset</span>
@@ -218,7 +218,7 @@ export const CompanyBrandingStudio: React.FC<CompanyBrandingStudioProps> = ({ co
           <button
             type="button"
             onClick={handlePrint}
-            className="px-3 py-1.5 border border-slate-300 rounded-lg text-xs font-semibold text-slate-700 hover:bg-slate-100 flex items-center gap-1.5 cursor-pointer transition-colors"
+            className="px-3 py-1.5 border border-slate-300 dark:border-slate-600 rounded-lg text-xs font-semibold text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 flex items-center gap-1.5 cursor-pointer transition-colors"
           >
             <Printer className="w-3.5 h-3.5" />
             <span>Print Test</span>
@@ -247,18 +247,18 @@ export const CompanyBrandingStudio: React.FC<CompanyBrandingStudioProps> = ({ co
         {/* Left Column: Interactive Branding Controls */}
         <div className="space-y-6">
           {/* Card 1: Corporate Identity & Logo Manager */}
-          <div className="border border-slate-200 rounded-xl p-5 space-y-4 bg-white shadow-xs">
-            <div className="flex items-center justify-between border-b border-slate-100 pb-3">
-              <h4 className="text-xs font-bold text-slate-800 uppercase tracking-wider flex items-center gap-2">
-                <ImageIcon className="w-4 h-4 text-indigo-600" />
+          <div className="border border-slate-200 dark:border-slate-700 rounded-xl p-5 space-y-4 bg-white dark:bg-slate-900 shadow-xs">
+            <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-3">
+              <h4 className="text-xs font-bold text-slate-800 dark:text-slate-200 uppercase tracking-wider flex items-center gap-2">
+                <ImageIcon className="w-4 h-4 text-indigo-600 dark:text-indigo-400" />
                 <span>Corporate Logo & Visual Asset</span>
               </h4>
-              <span className="text-[11px] text-slate-400">High-Resolution Vector / Raster</span>
+              <span className="text-[11px] text-slate-500 dark:text-slate-400">High-Resolution Vector / Raster</span>
             </div>
 
             {/* Logo Preview & Upload Station */}
-            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 bg-slate-50 p-4 rounded-xl border border-slate-200">
-              <div className="w-24 h-24 rounded-xl bg-white border border-slate-200 shadow-inner flex items-center justify-center p-2 relative shrink-0 overflow-hidden group">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 bg-slate-50 dark:bg-slate-800/50 p-4 rounded-xl border border-slate-200 dark:border-slate-700">
+              <div className="w-24 h-24 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 shadow-inner flex items-center justify-center p-2 relative shrink-0 overflow-hidden group">
                 {logo ? (
                   <img
                     src={logo}
@@ -267,16 +267,16 @@ export const CompanyBrandingStudio: React.FC<CompanyBrandingStudioProps> = ({ co
                     referrerPolicy="no-referrer"
                   />
                 ) : (
-                  <Building2 className="w-10 h-10 text-slate-300" />
+                  <Building2 className="w-10 h-10 text-slate-400 dark:text-slate-300" />
                 )}
                 {logo && (
                   <button
                     type="button"
                     onClick={() => setLogo('')}
                     title="Remove Logo"
-                    className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 flex items-center justify-center text-white text-xs font-semibold transition-opacity cursor-pointer"
+                    className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 flex items-center justify-center text-slate-900 dark:text-white text-xs font-semibold transition-opacity cursor-pointer"
                   >
-                    <Trash2 className="w-4 h-4 text-rose-300" />
+                    <Trash2 className="w-4 h-4 text-rose-700 dark:text-rose-300" />
                   </button>
                 )}
               </div>
@@ -293,15 +293,15 @@ export const CompanyBrandingStudio: React.FC<CompanyBrandingStudioProps> = ({ co
                   <button
                     type="button"
                     onClick={() => fileInputRef.current?.click()}
-                    className="px-3 py-1.5 bg-white hover:bg-slate-50 border border-slate-300 rounded-lg text-xs font-semibold text-slate-700 flex items-center gap-1.5 cursor-pointer shadow-2xs"
+                    className="px-3 py-1.5 bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800/50 border border-slate-300 dark:border-slate-600 rounded-lg text-xs font-semibold text-slate-700 dark:text-slate-300 flex items-center gap-1.5 cursor-pointer shadow-2xs"
                   >
-                    <Upload className="w-3.5 h-3.5 text-indigo-600" />
+                    <Upload className="w-3.5 h-3.5 text-indigo-600 dark:text-indigo-400" />
                     <span>Upload Logo File</span>
                   </button>
                 </div>
 
                 <div>
-                  <label className="block text-[11px] font-semibold text-slate-600 mb-1">
+                  <label className="block text-[11px] font-semibold text-slate-600 dark:text-slate-400 mb-1">
                     Or Direct Image URL / Preset:
                   </label>
                   <input
@@ -309,19 +309,19 @@ export const CompanyBrandingStudio: React.FC<CompanyBrandingStudioProps> = ({ co
                     value={logo}
                     onChange={e => setLogo(e.target.value)}
                     placeholder="https://... or paste image link"
-                    className="w-full px-2.5 py-1.5 border border-slate-200 rounded-lg text-xs font-mono bg-white focus:ring-2 focus:ring-indigo-500 focus:outline-hidden"
+                    className="w-full px-2.5 py-1.5 border border-slate-200 dark:border-slate-700 rounded-lg text-xs font-mono bg-white dark:bg-slate-900 focus:ring-2 focus:ring-indigo-500 focus:outline-hidden"
                   />
                 </div>
 
                 {/* Preset Logo Quick Selectors */}
                 <div className="flex items-center gap-1.5 pt-1">
-                  <span className="text-[10px] font-semibold text-slate-400">Presets:</span>
+                  <span className="text-[10px] font-semibold text-slate-500 dark:text-slate-400">Presets:</span>
                   {PRESET_LOGOS.map(p => (
                     <button
                       key={p.id}
                       type="button"
                       onClick={() => setLogo(p.url)}
-                      className="px-2 py-0.5 text-[10px] rounded bg-white hover:bg-indigo-50 border border-slate-200 text-slate-600 hover:text-indigo-700 cursor-pointer font-medium"
+                      className="px-2 py-0.5 text-[10px] rounded bg-white dark:bg-slate-900 hover:bg-indigo-50 dark:hover:bg-indigo-500/10 border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-400 hover:text-indigo-700 dark:hover:text-indigo-300 cursor-pointer font-medium"
                     >
                       {p.name.split(' ')[0]}
                     </button>
@@ -332,13 +332,13 @@ export const CompanyBrandingStudio: React.FC<CompanyBrandingStudioProps> = ({ co
 
             {/* Corporate Color Palette Pickers */}
             <div className="space-y-3 pt-2">
-              <label className="block text-xs font-bold text-slate-700">Corporate Color Identity</label>
+              <label className="block text-xs font-bold text-slate-700 dark:text-slate-300">Corporate Color Identity</label>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {/* Primary Brand Accent */}
-                <div className="p-3 rounded-lg border border-slate-200 bg-slate-50/50 space-y-2">
+                <div className="p-3 rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-50/50 dark:bg-slate-800/50 space-y-2">
                   <div className="flex items-center justify-between">
-                    <span className="text-xs font-semibold text-slate-700">Primary Brand Accent</span>
+                    <span className="text-xs font-semibold text-slate-700 dark:text-slate-300">Primary Brand Accent</span>
                     <div
                       className="w-5 h-5 rounded-md shadow-2xs border border-black/10"
                       style={{ backgroundColor: brandColor }}
@@ -349,21 +349,21 @@ export const CompanyBrandingStudio: React.FC<CompanyBrandingStudioProps> = ({ co
                       type="color"
                       value={brandColor}
                       onChange={e => setBrandColor(e.target.value)}
-                      className="w-8 h-8 rounded border border-slate-300 cursor-pointer shrink-0"
+                      className="w-8 h-8 rounded border border-slate-300 dark:border-slate-600 cursor-pointer shrink-0"
                     />
                     <input
                       type="text"
                       value={brandColor}
                       onChange={e => setBrandColor(e.target.value)}
-                      className="w-full px-2.5 py-1.5 border border-slate-200 rounded-lg text-xs font-mono font-semibold bg-white uppercase"
+                      className="w-full px-2.5 py-1.5 border border-slate-200 dark:border-slate-700 rounded-lg text-xs font-mono font-semibold bg-white dark:bg-slate-900 uppercase"
                     />
                   </div>
                 </div>
 
                 {/* Secondary Brand Accent */}
-                <div className="p-3 rounded-lg border border-slate-200 bg-slate-50/50 space-y-2">
+                <div className="p-3 rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-50/50 dark:bg-slate-800/50 space-y-2">
                   <div className="flex items-center justify-between">
-                    <span className="text-xs font-semibold text-slate-700">Secondary Accent</span>
+                    <span className="text-xs font-semibold text-slate-700 dark:text-slate-300">Secondary Accent</span>
                     <div
                       className="w-5 h-5 rounded-md shadow-2xs border border-black/10"
                       style={{ backgroundColor: brandSecondaryColor }}
@@ -374,13 +374,13 @@ export const CompanyBrandingStudio: React.FC<CompanyBrandingStudioProps> = ({ co
                       type="color"
                       value={brandSecondaryColor}
                       onChange={e => setBrandSecondaryColor(e.target.value)}
-                      className="w-8 h-8 rounded border border-slate-300 cursor-pointer shrink-0"
+                      className="w-8 h-8 rounded border border-slate-300 dark:border-slate-600 cursor-pointer shrink-0"
                     />
                     <input
                       type="text"
                       value={brandSecondaryColor}
                       onChange={e => setBrandSecondaryColor(e.target.value)}
-                      className="w-full px-2.5 py-1.5 border border-slate-200 rounded-lg text-xs font-mono font-semibold bg-white uppercase"
+                      className="w-full px-2.5 py-1.5 border border-slate-200 dark:border-slate-700 rounded-lg text-xs font-mono font-semibold bg-white dark:bg-slate-900 uppercase"
                     />
                   </div>
                 </div>
@@ -388,7 +388,7 @@ export const CompanyBrandingStudio: React.FC<CompanyBrandingStudioProps> = ({ co
 
               {/* Preset Color Themes */}
               <div className="space-y-1.5 pt-1">
-                <span className="text-[11px] font-semibold text-slate-500">Quick Palette Themes:</span>
+                <span className="text-[11px] font-semibold text-slate-500 dark:text-slate-400">Quick Palette Themes:</span>
                 <div className="flex flex-wrap gap-2">
                   {PRESET_PALETTES.map(pal => (
                     <button
@@ -398,7 +398,7 @@ export const CompanyBrandingStudio: React.FC<CompanyBrandingStudioProps> = ({ co
                         setBrandColor(pal.primary);
                         setBrandSecondaryColor(pal.secondary);
                       }}
-                      className="flex items-center gap-1.5 px-2.5 py-1 rounded-md border border-slate-200 bg-white hover:border-slate-400 text-[11px] font-medium text-slate-700 cursor-pointer shadow-2xs transition-colors"
+                      className="flex items-center gap-1.5 px-2.5 py-1 rounded-md border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 hover:border-slate-400 text-[11px] font-medium text-slate-700 dark:text-slate-300 cursor-pointer shadow-2xs transition-colors"
                     >
                       <span className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: pal.primary }} />
                       <span className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: pal.secondary }} />
@@ -410,13 +410,13 @@ export const CompanyBrandingStudio: React.FC<CompanyBrandingStudioProps> = ({ co
             </div>
 
             {/* Bilingual Arabic Entity Details for Statutory Documents */}
-            <div className="border-t border-slate-100 pt-4 space-y-3">
-              <label className="block text-xs font-bold text-slate-700">
+            <div className="border-t border-slate-100 dark:border-slate-800 pt-4 space-y-3">
+              <label className="block text-xs font-bold text-slate-700 dark:text-slate-300">
                 Bilingual Statutory Identity (Arabic / English)
               </label>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-[11px] font-medium text-slate-600 mb-1">
+                  <label className="block text-[11px] font-medium text-slate-600 dark:text-slate-400 mb-1">
                     Arabic Legal Entity Name
                   </label>
                   <input
@@ -425,11 +425,11 @@ export const CompanyBrandingStudio: React.FC<CompanyBrandingStudioProps> = ({ co
                     value={arabicLegalName}
                     onChange={e => setArabicLegalName(e.target.value)}
                     placeholder="شركة آرتفاي القابضة ش.م.ع.م"
-                    className="w-full px-2.5 py-1.5 border border-slate-200 rounded-lg text-xs bg-white text-right font-medium"
+                    className="w-full px-2.5 py-1.5 border border-slate-200 dark:border-slate-700 rounded-lg text-xs bg-white dark:bg-slate-900 text-right font-medium"
                   />
                 </div>
                 <div>
-                  <label className="block text-[11px] font-medium text-slate-600 mb-1">
+                  <label className="block text-[11px] font-medium text-slate-600 dark:text-slate-400 mb-1">
                     Arabic Registered Address
                   </label>
                   <input
@@ -438,7 +438,7 @@ export const CompanyBrandingStudio: React.FC<CompanyBrandingStudioProps> = ({ co
                     value={arabicAddress}
                     onChange={e => setArabicAddress(e.target.value)}
                     placeholder="مجمع القرم التجاري، مسقط، عُمان"
-                    className="w-full px-2.5 py-1.5 border border-slate-200 rounded-lg text-xs bg-white text-right"
+                    className="w-full px-2.5 py-1.5 border border-slate-200 dark:border-slate-700 rounded-lg text-xs bg-white dark:bg-slate-900 text-right"
                   />
                 </div>
               </div>
@@ -446,10 +446,10 @@ export const CompanyBrandingStudio: React.FC<CompanyBrandingStudioProps> = ({ co
           </div>
 
           {/* Card 2: Watermark & Letterhead Security Configuration */}
-          <div className="border border-slate-200 rounded-xl p-5 space-y-4 bg-white shadow-xs">
-            <div className="flex items-center justify-between border-b border-slate-100 pb-3">
-              <h4 className="text-xs font-bold text-slate-800 uppercase tracking-wider flex items-center gap-2">
-                <ShieldCheck className="w-4 h-4 text-emerald-600" />
+          <div className="border border-slate-200 dark:border-slate-700 rounded-xl p-5 space-y-4 bg-white dark:bg-slate-900 shadow-xs">
+            <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-3">
+              <h4 className="text-xs font-bold text-slate-800 dark:text-slate-200 uppercase tracking-wider flex items-center gap-2">
+                <ShieldCheck className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
                 <span>Watermark & Letterhead Security Engine</span>
               </h4>
               <label className="flex items-center gap-2 cursor-pointer">
@@ -457,16 +457,16 @@ export const CompanyBrandingStudio: React.FC<CompanyBrandingStudioProps> = ({ co
                   type="checkbox"
                   checked={watermarkEnabled}
                   onChange={e => setWatermarkEnabled(e.target.checked)}
-                  className="rounded text-indigo-600 focus:ring-indigo-500 w-3.5 h-3.5"
+                  className="rounded text-indigo-600 dark:text-indigo-400 focus:ring-indigo-500 w-3.5 h-3.5"
                 />
-                <span className="text-xs font-semibold text-slate-700">Watermark Active</span>
+                <span className="text-xs font-semibold text-slate-700 dark:text-slate-300">Watermark Active</span>
               </label>
             </div>
 
             {/* Watermark Controls */}
             <div className="space-y-3">
               <div>
-                <label className="block text-xs font-semibold text-slate-700 mb-1">
+                <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
                   Watermark Security Text
                 </label>
                 <input
@@ -475,7 +475,7 @@ export const CompanyBrandingStudio: React.FC<CompanyBrandingStudioProps> = ({ co
                   onChange={e => setWatermarkText(e.target.value)}
                   placeholder="e.g. ARTIFY GROUP HOLDINGS SAOC CONFIDENTIAL"
                   disabled={!watermarkEnabled}
-                  className="w-full px-3 py-2 border border-slate-200 rounded-lg text-xs font-mono font-bold uppercase disabled:opacity-50 bg-white"
+                  className="w-full px-3 py-2 border border-slate-200 dark:border-slate-700 rounded-lg text-xs font-mono font-bold uppercase disabled:opacity-50 bg-white dark:bg-slate-900"
                 />
               </div>
 
@@ -492,7 +492,7 @@ export const CompanyBrandingStudio: React.FC<CompanyBrandingStudioProps> = ({ co
                     key={txt}
                     type="button"
                     onClick={() => setWatermarkText(txt)}
-                    className="px-2 py-0.5 text-[10px] rounded bg-slate-100 hover:bg-slate-200 text-slate-700 font-mono font-medium cursor-pointer"
+                    className="px-2 py-0.5 text-[10px] rounded bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 font-mono font-medium cursor-pointer"
                   >
                     {txt.length > 22 ? txt.slice(0, 20) + '...' : txt}
                   </button>
@@ -502,7 +502,7 @@ export const CompanyBrandingStudio: React.FC<CompanyBrandingStudioProps> = ({ co
               {/* Sliders: Opacity & Angle */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
                 <div>
-                  <div className="flex justify-between text-xs font-medium text-slate-700 mb-1">
+                  <div className="flex justify-between text-xs font-medium text-slate-700 dark:text-slate-300 mb-1">
                     <span>Watermark Opacity:</span>
                     <span className="font-mono font-bold">{watermarkOpacity}%</span>
                   </div>
@@ -514,12 +514,12 @@ export const CompanyBrandingStudio: React.FC<CompanyBrandingStudioProps> = ({ co
                     value={watermarkOpacity}
                     onChange={e => setWatermarkOpacity(Number(e.target.value))}
                     disabled={!watermarkEnabled}
-                    className="w-full h-1.5 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-indigo-600"
+                    className="w-full h-1.5 bg-slate-200 dark:bg-slate-700 rounded-lg appearance-none cursor-pointer accent-indigo-600"
                   />
                 </div>
 
                 <div>
-                  <div className="flex justify-between text-xs font-medium text-slate-700 mb-1">
+                  <div className="flex justify-between text-xs font-medium text-slate-700 dark:text-slate-300 mb-1">
                     <span>Watermark Angle:</span>
                     <span className="font-mono font-bold">{watermarkAngle}°</span>
                   </div>
@@ -531,24 +531,24 @@ export const CompanyBrandingStudio: React.FC<CompanyBrandingStudioProps> = ({ co
                     value={watermarkAngle}
                     onChange={e => setWatermarkAngle(Number(e.target.value))}
                     disabled={!watermarkEnabled}
-                    className="w-full h-1.5 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-indigo-600"
+                    className="w-full h-1.5 bg-slate-200 dark:bg-slate-700 rounded-lg appearance-none cursor-pointer accent-indigo-600"
                   />
                 </div>
               </div>
             </div>
 
             {/* Letterhead Templates & Layout Style */}
-            <div className="border-t border-slate-100 pt-4 space-y-3">
-              <label className="block text-xs font-bold text-slate-700">Document Layout Template</label>
+            <div className="border-t border-slate-100 dark:border-slate-800 pt-4 space-y-3">
+              <label className="block text-xs font-bold text-slate-700 dark:text-slate-300">Document Layout Template</label>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-[11px] font-semibold text-slate-600 mb-1">
+                  <label className="block text-[11px] font-semibold text-slate-600 dark:text-slate-400 mb-1">
                     Header Template
                   </label>
                   <select
                     value={letterheadTemplate}
                     onChange={e => setLetterheadTemplate(e.target.value as any)}
-                    className="w-full px-2.5 py-1.5 border border-slate-200 rounded-lg text-xs bg-white font-medium"
+                    className="w-full px-2.5 py-1.5 border border-slate-200 dark:border-slate-700 rounded-lg text-xs bg-white dark:bg-slate-900 font-medium"
                   >
                     <option value="Default Standard">Default Standard (Corporate Banner)</option>
                     <option value="Modern Minimalist">Modern Minimalist (Sleek Border)</option>
@@ -559,7 +559,7 @@ export const CompanyBrandingStudio: React.FC<CompanyBrandingStudioProps> = ({ co
                 </div>
 
                 <div>
-                  <label className="block text-[11px] font-semibold text-slate-600 mb-1">
+                  <label className="block text-[11px] font-semibold text-slate-600 dark:text-slate-400 mb-1">
                     Corporate Tagline / Subtitle
                   </label>
                   <input
@@ -567,13 +567,13 @@ export const CompanyBrandingStudio: React.FC<CompanyBrandingStudioProps> = ({ co
                     value={headerTagline}
                     onChange={e => setHeaderTagline(e.target.value)}
                     placeholder="e.g. Enterprise Commercial Solutions"
-                    className="w-full px-2.5 py-1.5 border border-slate-200 rounded-lg text-xs bg-white"
+                    className="w-full px-2.5 py-1.5 border border-slate-200 dark:border-slate-700 rounded-lg text-xs bg-white dark:bg-slate-900"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block text-[11px] font-semibold text-slate-600 mb-1">
+                <label className="block text-[11px] font-semibold text-slate-600 dark:text-slate-400 mb-1">
                   Footer Bank & Wire Instructions
                 </label>
                 <input
@@ -581,22 +581,22 @@ export const CompanyBrandingStudio: React.FC<CompanyBrandingStudioProps> = ({ co
                   value={footerBankDetails}
                   onChange={e => setFooterBankDetails(e.target.value)}
                   placeholder="e.g. Bank Muscat SAOG • IBAN: OM02BMUS... • SWIFT: BMUSOMRX"
-                  className="w-full px-2.5 py-1.5 border border-slate-200 rounded-lg text-xs bg-white font-mono"
+                  className="w-full px-2.5 py-1.5 border border-slate-200 dark:border-slate-700 rounded-lg text-xs bg-white dark:bg-slate-900 font-mono"
                 />
               </div>
 
               {/* Signatory Seal & Stamp */}
-              <div className="p-3 bg-slate-50 rounded-lg border border-slate-200 space-y-2">
+              <div className="p-3 bg-slate-50 dark:bg-slate-800/50 rounded-lg border border-slate-200 dark:border-slate-700 space-y-2">
                 <div className="flex items-center justify-between">
                   <label className="flex items-center gap-2 cursor-pointer">
                     <input
                       type="checkbox"
                       checked={stampEnabled}
                       onChange={e => setStampEnabled(e.target.checked)}
-                      className="rounded text-indigo-600 focus:ring-indigo-500 w-3.5 h-3.5"
+                      className="rounded text-indigo-600 dark:text-indigo-400 focus:ring-indigo-500 w-3.5 h-3.5"
                     />
-                    <span className="text-xs font-semibold text-slate-800 flex items-center gap-1.5">
-                      <Stamp className="w-3.5 h-3.5 text-indigo-600" />
+                    <span className="text-xs font-semibold text-slate-800 dark:text-slate-200 flex items-center gap-1.5">
+                      <Stamp className="w-3.5 h-3.5 text-indigo-600 dark:text-indigo-400" />
                       <span>Authorized Officer Stamp & Signature</span>
                     </span>
                   </label>
@@ -605,25 +605,25 @@ export const CompanyBrandingStudio: React.FC<CompanyBrandingStudioProps> = ({ co
                 {stampEnabled && (
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
                     <div>
-                      <label className="block text-[10px] font-medium text-slate-500 mb-0.5">
+                      <label className="block text-[10px] font-medium text-slate-500 dark:text-slate-400 mb-0.5">
                         Officer Name
                       </label>
                       <input
                         type="text"
                         value={signatureOfficerName}
                         onChange={e => setSignatureOfficerName(e.target.value)}
-                        className="w-full px-2 py-1 border border-slate-200 rounded text-xs bg-white font-semibold"
+                        className="w-full px-2 py-1 border border-slate-200 dark:border-slate-700 rounded text-xs bg-white dark:bg-slate-900 font-semibold"
                       />
                     </div>
                     <div>
-                      <label className="block text-[10px] font-medium text-slate-500 mb-0.5">
+                      <label className="block text-[10px] font-medium text-slate-500 dark:text-slate-400 mb-0.5">
                         Official Title
                       </label>
                       <input
                         type="text"
                         value={signatureOfficerTitle}
                         onChange={e => setSignatureOfficerTitle(e.target.value)}
-                        className="w-full px-2 py-1 border border-slate-200 rounded text-xs bg-white"
+                        className="w-full px-2 py-1 border border-slate-200 dark:border-slate-700 rounded text-xs bg-white dark:bg-slate-900"
                       />
                     </div>
                   </div>
@@ -637,19 +637,19 @@ export const CompanyBrandingStudio: React.FC<CompanyBrandingStudioProps> = ({ co
         <div className="space-y-4">
           <div className="flex flex-wrap items-center justify-between gap-2">
             <div className="flex items-center gap-1.5">
-              <Printer className="w-4 h-4 text-slate-600" />
-              <h4 className="text-xs font-bold text-slate-900 uppercase tracking-wider">
+              <Printer className="w-4 h-4 text-slate-600 dark:text-slate-400" />
+              <h4 className="text-xs font-bold text-slate-900 dark:text-slate-100 uppercase tracking-wider">
                 Live Statutory Document Output
               </h4>
             </div>
 
             {/* Document Type Switcher */}
-            <div className="flex items-center bg-slate-100 p-1 rounded-lg border border-slate-200 text-xs">
+            <div className="flex items-center bg-slate-100 dark:bg-slate-800 p-1 rounded-lg border border-slate-200 dark:border-slate-700 text-xs">
               <button
                 type="button"
                 onClick={() => setDocType('invoice')}
                 className={`px-2.5 py-1 rounded-md font-semibold cursor-pointer transition-colors ${
-                  docType === 'invoice' ? 'bg-white text-indigo-700 shadow-2xs' : 'text-slate-600 hover:text-slate-900'
+                  docType === 'invoice' ? 'bg-white dark:bg-slate-900 text-indigo-700 dark:text-indigo-300 shadow-2xs' : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100'
                 }`}
               >
                 Tax Invoice
@@ -658,7 +658,7 @@ export const CompanyBrandingStudio: React.FC<CompanyBrandingStudioProps> = ({ co
                 type="button"
                 onClick={() => setDocType('po')}
                 className={`px-2.5 py-1 rounded-md font-semibold cursor-pointer transition-colors ${
-                  docType === 'po' ? 'bg-white text-indigo-700 shadow-2xs' : 'text-slate-600 hover:text-slate-900'
+                  docType === 'po' ? 'bg-white dark:bg-slate-900 text-indigo-700 dark:text-indigo-300 shadow-2xs' : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100'
                 }`}
               >
                 Purchase Order
@@ -667,7 +667,7 @@ export const CompanyBrandingStudio: React.FC<CompanyBrandingStudioProps> = ({ co
                 type="button"
                 onClick={() => setDocType('letterhead')}
                 className={`px-2.5 py-1 rounded-md font-semibold cursor-pointer transition-colors ${
-                  docType === 'letterhead' ? 'bg-white text-indigo-700 shadow-2xs' : 'text-slate-600 hover:text-slate-900'
+                  docType === 'letterhead' ? 'bg-white dark:bg-slate-900 text-indigo-700 dark:text-indigo-300 shadow-2xs' : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100'
                 }`}
               >
                 Letterhead Memo
@@ -676,7 +676,7 @@ export const CompanyBrandingStudio: React.FC<CompanyBrandingStudioProps> = ({ co
                 type="button"
                 onClick={() => setDocType('voucher')}
                 className={`px-2.5 py-1 rounded-md font-semibold cursor-pointer transition-colors ${
-                  docType === 'voucher' ? 'bg-white text-indigo-700 shadow-2xs' : 'text-slate-600 hover:text-slate-900'
+                  docType === 'voucher' ? 'bg-white dark:bg-slate-900 text-indigo-700 dark:text-indigo-300 shadow-2xs' : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100'
                 }`}
               >
                 Payment Voucher
@@ -685,7 +685,7 @@ export const CompanyBrandingStudio: React.FC<CompanyBrandingStudioProps> = ({ co
           </div>
 
           {/* Interactive Document Sheet (Simulated A4 Paper) */}
-          <div className="bg-white border-2 border-slate-300 rounded-xl shadow-md p-6 relative overflow-hidden min-h-[580px] flex flex-col justify-between select-none">
+          <div className="bg-white dark:bg-slate-900 border-2 border-slate-300 dark:border-slate-600 rounded-xl shadow-md p-6 relative overflow-hidden min-h-[580px] flex flex-col justify-between select-none">
             {/* Real Dynamic Watermark Overlay */}
             {watermarkEnabled && watermarkText && (
               <div
@@ -693,7 +693,7 @@ export const CompanyBrandingStudio: React.FC<CompanyBrandingStudioProps> = ({ co
                 style={{ opacity: watermarkOpacity / 100 }}
               >
                 <div
-                  className="font-black font-mono text-center tracking-widest text-slate-800 uppercase leading-none select-none text-2xl sm:text-4xl"
+                  className="font-black font-mono text-center tracking-widest text-slate-800 dark:text-slate-200 uppercase leading-none select-none text-2xl sm:text-4xl"
                   style={{
                     transform: `rotate(${watermarkAngle}deg)`,
                     whiteSpace: 'nowrap'
@@ -723,9 +723,9 @@ export const CompanyBrandingStudio: React.FC<CompanyBrandingStudioProps> = ({ co
                       />
                     )}
                     <div>
-                      <h3 className="font-bold text-slate-900 text-sm">{company.legalName}</h3>
-                      <p className="text-[11px] text-slate-500 font-medium">{headerTagline}</p>
-                      <div className="text-[10px] text-slate-500 font-mono mt-0.5">
+                      <h3 className="font-bold text-slate-900 dark:text-slate-100 text-sm">{company.legalName}</h3>
+                      <p className="text-[11px] text-slate-500 dark:text-slate-400 font-medium">{headerTagline}</p>
+                      <div className="text-[10px] text-slate-500 dark:text-slate-400 font-mono mt-0.5">
                         CR: <strong>{company.registrationNumber}</strong> | VAT TRN: <strong>{company.taxNumber}</strong>
                       </div>
                     </div>
@@ -733,9 +733,9 @@ export const CompanyBrandingStudio: React.FC<CompanyBrandingStudioProps> = ({ co
 
                   {/* Right Arabic */}
                   <div className="text-right" dir="rtl">
-                    <h3 className="font-bold text-slate-900 text-sm">{arabicLegalName}</h3>
-                    <p className="text-[11px] text-slate-500">{arabicAddress}</p>
-                    <div className="text-[10px] text-slate-500 font-mono mt-0.5">
+                    <h3 className="font-bold text-slate-900 dark:text-slate-100 text-sm">{arabicLegalName}</h3>
+                    <p className="text-[11px] text-slate-500 dark:text-slate-400">{arabicAddress}</p>
+                    <div className="text-[10px] text-slate-500 dark:text-slate-400 font-mono mt-0.5">
                       هاتف: {company.phone} | ص.ب: {company.poBox || '112'}
                     </div>
                   </div>
@@ -754,12 +754,12 @@ export const CompanyBrandingStudio: React.FC<CompanyBrandingStudioProps> = ({ co
                     />
                   )}
                   <div>
-                    <h3 className="font-bold text-slate-900 text-base uppercase tracking-wider">
+                    <h3 className="font-bold text-slate-900 dark:text-slate-100 text-base uppercase tracking-wider">
                       {company.legalName}
                     </h3>
-                    <p className="text-[11px] font-semibold text-slate-600">{arabicLegalName}</p>
+                    <p className="text-[11px] font-semibold text-slate-600 dark:text-slate-400">{arabicLegalName}</p>
                   </div>
-                  <div className="flex items-center justify-center gap-4 text-[10px] text-slate-500 font-mono">
+                  <div className="flex items-center justify-center gap-4 text-[10px] text-slate-500 dark:text-slate-400 font-mono">
                     <span>CR: {company.registrationNumber}</span>
                     <span>•</span>
                     <span>VAT TRN: {company.taxNumber}</span>
@@ -782,11 +782,11 @@ export const CompanyBrandingStudio: React.FC<CompanyBrandingStudioProps> = ({ co
                       />
                     )}
                     <div>
-                      <h3 className="font-bold text-slate-900 text-sm tracking-tight">{company.legalName}</h3>
-                      <div className="text-[10px] text-slate-500">{headerTagline}</div>
+                      <h3 className="font-bold text-slate-900 dark:text-slate-100 text-sm tracking-tight">{company.legalName}</h3>
+                      <div className="text-[10px] text-slate-500 dark:text-slate-400">{headerTagline}</div>
                     </div>
                   </div>
-                  <div className="text-right text-[10px] text-slate-500 font-mono">
+                  <div className="text-right text-[10px] text-slate-500 dark:text-slate-400 font-mono">
                     <div>VAT: {company.taxNumber}</div>
                     <div>CR: {company.registrationNumber}</div>
                   </div>
@@ -807,14 +807,14 @@ export const CompanyBrandingStudio: React.FC<CompanyBrandingStudioProps> = ({ co
                       />
                     )}
                     <div>
-                      <h3 className="font-bold text-slate-900 text-sm">{company.legalName}</h3>
-                      <div className="text-[11px] text-slate-500 font-mono">
+                      <h3 className="font-bold text-slate-900 dark:text-slate-100 text-sm">{company.legalName}</h3>
+                      <div className="text-[11px] text-slate-500 dark:text-slate-400 font-mono">
                         CR Number: {company.registrationNumber} • VAT TRN: {company.taxNumber}
                       </div>
-                      <div className="text-[10px] font-medium text-slate-400 mt-0.5">{headerTagline}</div>
+                      <div className="text-[10px] font-medium text-slate-500 dark:text-slate-400 mt-0.5">{headerTagline}</div>
                     </div>
                   </div>
-                  <div className="text-right text-[11px] text-slate-500 space-y-0.5">
+                  <div className="text-right text-[11px] text-slate-500 dark:text-slate-400 space-y-0.5">
                     <div>{company.address}</div>
                     <div>{company.city}, {company.country}</div>
                     <div>Tel: {company.phone} • {company.email}</div>
@@ -826,41 +826,41 @@ export const CompanyBrandingStudio: React.FC<CompanyBrandingStudioProps> = ({ co
               {docType === 'invoice' && (
                 <div className="space-y-4 text-xs">
                   {/* Invoice Header Details */}
-                  <div className="flex justify-between items-center bg-slate-50 p-3 rounded-lg border border-slate-200">
+                  <div className="flex justify-between items-center bg-slate-50 dark:bg-slate-800/50 p-3 rounded-lg border border-slate-200 dark:border-slate-700">
                     <div>
                       <span
-                        className="text-xs font-bold uppercase tracking-wider px-2 py-0.5 rounded text-white"
+                        className="text-xs font-bold uppercase tracking-wider px-2 py-0.5 rounded text-slate-900 dark:text-white"
                         style={{ backgroundColor: brandColor }}
                       >
                         TAX INVOICE
                       </span>
-                      <div className="text-slate-600 font-mono text-[11px] mt-1">Invoice #: INV-2026-08492</div>
+                      <div className="text-slate-600 dark:text-slate-400 font-mono text-[11px] mt-1">Invoice #: INV-2026-08492</div>
                     </div>
-                    <div className="text-right text-[11px] text-slate-600">
+                    <div className="text-right text-[11px] text-slate-600 dark:text-slate-400">
                       <div>Date: {new Date().toISOString().split('T')[0]}</div>
                       <div>Due Date: 30 Days Net</div>
                     </div>
                   </div>
 
                   {/* Bill To Info */}
-                  <div className="grid grid-cols-2 gap-4 text-[11px] text-slate-600">
+                  <div className="grid grid-cols-2 gap-4 text-[11px] text-slate-600 dark:text-slate-400">
                     <div>
-                      <span className="font-bold text-slate-800">Customer / Billed To:</span>
+                      <span className="font-bold text-slate-800 dark:text-slate-200">Customer / Billed To:</span>
                       <div>Oman National Telecommunications SAOC</div>
                       <div>Tax TRN: OM-VAT-9920184</div>
                       <div>Way 3012, Ruwi High Street, Muscat</div>
                     </div>
                     <div className="text-right">
-                      <span className="font-bold text-slate-800">Payment Reference:</span>
+                      <span className="font-bold text-slate-800 dark:text-slate-200">Payment Reference:</span>
                       <div className="font-mono">PO-OMNTEL-84910</div>
                       <div className="font-mono">Currency: {company.currency}</div>
                     </div>
                   </div>
 
                   {/* Itemized Line Items Table */}
-                  <table className="w-full text-[11px] border border-slate-200">
+                  <table className="w-full text-[11px] border border-slate-200 dark:border-slate-700">
                     <thead>
-                      <tr className="bg-slate-100 text-slate-800 font-bold border-b border-slate-200">
+                      <tr className="bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 font-bold border-b border-slate-200 dark:border-slate-700">
                         <th className="p-2 text-left">Description</th>
                         <th className="p-2 text-center">Qty</th>
                         <th className="p-2 text-right">Unit Price ({company.currency})</th>
@@ -868,7 +868,7 @@ export const CompanyBrandingStudio: React.FC<CompanyBrandingStudioProps> = ({ co
                         <th className="p-2 text-right">Total ({company.currency})</th>
                       </tr>
                     </thead>
-                    <tbody className="divide-y divide-slate-100">
+                    <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
                       <tr>
                         <td className="p-2 font-medium">Enterprise System License & Hosting SLA Q1-2026</td>
                         <td className="p-2 text-center">1</td>
@@ -889,16 +889,16 @@ export const CompanyBrandingStudio: React.FC<CompanyBrandingStudioProps> = ({ co
                   {/* Summary & Totals */}
                   <div className="flex justify-end pt-2">
                     <div className="w-64 space-y-1 text-[11px]">
-                      <div className="flex justify-between text-slate-600">
+                      <div className="flex justify-between text-slate-600 dark:text-slate-400">
                         <span>Subtotal:</span>
                         <span className="font-mono">17,300.000 {company.currency}</span>
                       </div>
-                      <div className="flex justify-between text-slate-600">
+                      <div className="flex justify-between text-slate-600 dark:text-slate-400">
                         <span>VAT Amount (5%):</span>
                         <span className="font-mono">865.000 {company.currency}</span>
                       </div>
                       <div
-                        className="flex justify-between font-bold text-sm pt-2 border-t text-white p-2 rounded"
+                        className="flex justify-between font-bold text-sm pt-2 border-t text-slate-900 dark:text-white p-2 rounded"
                         style={{ backgroundColor: brandColor }}
                       >
                         <span>Grand Total:</span>
@@ -911,44 +911,44 @@ export const CompanyBrandingStudio: React.FC<CompanyBrandingStudioProps> = ({ co
 
               {docType === 'po' && (
                 <div className="space-y-4 text-xs">
-                  <div className="flex justify-between items-center bg-slate-50 p-3 rounded-lg border border-slate-200">
+                  <div className="flex justify-between items-center bg-slate-50 dark:bg-slate-800/50 p-3 rounded-lg border border-slate-200 dark:border-slate-700">
                     <div>
                       <span
-                        className="text-xs font-bold uppercase tracking-wider px-2 py-0.5 rounded text-white"
+                        className="text-xs font-bold uppercase tracking-wider px-2 py-0.5 rounded text-slate-900 dark:text-white"
                         style={{ backgroundColor: brandColor }}
                       >
                         OFFICIAL PURCHASE ORDER
                       </span>
-                      <div className="text-slate-600 font-mono text-[11px] mt-1">PO #: PO-2026-04192</div>
+                      <div className="text-slate-600 dark:text-slate-400 font-mono text-[11px] mt-1">PO #: PO-2026-04192</div>
                     </div>
-                    <div className="text-right text-[11px] text-slate-600">
+                    <div className="text-right text-[11px] text-slate-600 dark:text-slate-400">
                       <div>Issued Date: {new Date().toISOString().split('T')[0]}</div>
                       <div>Delivery Term: DDP Muscat Warehouse</div>
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-2 gap-4 text-[11px] text-slate-600">
+                  <div className="grid grid-cols-2 gap-4 text-[11px] text-slate-600 dark:text-slate-400">
                     <div>
-                      <span className="font-bold text-slate-800">Vendor:</span>
+                      <span className="font-bold text-slate-800 dark:text-slate-200">Vendor:</span>
                       <div>Dell EMC Enterprise Middle East FZ-LLC</div>
                       <div>Dubai Internet City, UAE</div>
                     </div>
                     <div className="text-right">
-                      <span className="font-bold text-slate-800">Delivery Destination:</span>
+                      <span className="font-bold text-slate-800 dark:text-slate-200">Delivery Destination:</span>
                       <div>KOM Data Center, Building 4, Muscat</div>
                     </div>
                   </div>
 
-                  <table className="w-full text-[11px] border border-slate-200">
+                  <table className="w-full text-[11px] border border-slate-200 dark:border-slate-700">
                     <thead>
-                      <tr className="bg-slate-100 text-slate-800 font-bold border-b border-slate-200">
+                      <tr className="bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 font-bold border-b border-slate-200 dark:border-slate-700">
                         <th className="p-2 text-left">Item / Specification</th>
                         <th className="p-2 text-center">Qty</th>
                         <th className="p-2 text-right">Price ({company.currency})</th>
                         <th className="p-2 text-right">Total ({company.currency})</th>
                       </tr>
                     </thead>
-                    <tbody className="divide-y divide-slate-100">
+                    <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
                       <tr>
                         <td className="p-2 font-medium">PowerEdge R750 Rack Server Dual Xeon 64GB</td>
                         <td className="p-2 text-center">4</td>
@@ -961,16 +961,16 @@ export const CompanyBrandingStudio: React.FC<CompanyBrandingStudioProps> = ({ co
               )}
 
               {docType === 'letterhead' && (
-                <div className="space-y-4 text-xs text-slate-700 leading-relaxed">
-                  <div className="flex justify-between text-[11px] text-slate-500 font-mono border-b pb-2">
+                <div className="space-y-4 text-xs text-slate-700 dark:text-slate-300 leading-relaxed">
+                  <div className="flex justify-between text-[11px] text-slate-500 dark:text-slate-400 font-mono border-b pb-2">
                     <div>Ref: {company.code}/EXEC/2026/092</div>
                     <div>Date: {new Date().toISOString().split('T')[0]}</div>
                   </div>
 
-                  <div className="space-y-1 font-semibold text-slate-800">
+                  <div className="space-y-1 font-semibold text-slate-800 dark:text-slate-200">
                     <div>TO: The Board of Directors & Governance Committee</div>
                     <div>FROM: {signatureOfficerName}, {signatureOfficerTitle}</div>
-                    <div className="text-indigo-700 font-bold pt-1">
+                    <div className="text-indigo-700 dark:text-indigo-300 font-bold pt-1">
                       SUBJECT: Official Master Entity Charter & Statutory Compliance Verification
                     </div>
                   </div>
@@ -990,32 +990,32 @@ export const CompanyBrandingStudio: React.FC<CompanyBrandingStudioProps> = ({ co
 
               {docType === 'voucher' && (
                 <div className="space-y-4 text-xs">
-                  <div className="flex justify-between items-center bg-slate-50 p-3 rounded-lg border border-slate-200">
+                  <div className="flex justify-between items-center bg-slate-50 dark:bg-slate-800/50 p-3 rounded-lg border border-slate-200 dark:border-slate-700">
                     <div>
                       <span
-                        className="text-xs font-bold uppercase tracking-wider px-2 py-0.5 rounded text-white"
+                        className="text-xs font-bold uppercase tracking-wider px-2 py-0.5 rounded text-slate-900 dark:text-white"
                         style={{ backgroundColor: brandColor }}
                       >
                         BANK PAYMENT DISBURSEMENT VOUCHER
                       </span>
-                      <div className="text-slate-600 font-mono text-[11px] mt-1">Voucher #: BPV-2026-00482</div>
+                      <div className="text-slate-600 dark:text-slate-400 font-mono text-[11px] mt-1">Voucher #: BPV-2026-00482</div>
                     </div>
-                    <div className="text-right text-[11px] text-slate-600">
+                    <div className="text-right text-[11px] text-slate-600 dark:text-slate-400">
                       <div>Posting Date: {new Date().toISOString().split('T')[0]}</div>
                       <div>Mode: Real-Time Gross Settlement (RTGS)</div>
                     </div>
                   </div>
 
-                  <table className="w-full text-[11px] border border-slate-200">
+                  <table className="w-full text-[11px] border border-slate-200 dark:border-slate-700">
                     <thead>
-                      <tr className="bg-slate-100 text-slate-800 font-bold border-b border-slate-200">
+                      <tr className="bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 font-bold border-b border-slate-200 dark:border-slate-700">
                         <th className="p-2 text-left">GL Account #</th>
                         <th className="p-2 text-left">Account Description</th>
                         <th className="p-2 text-right">Debit ({company.currency})</th>
                         <th className="p-2 text-right">Credit ({company.currency})</th>
                       </tr>
                     </thead>
-                    <tbody className="divide-y divide-slate-100">
+                    <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
                       <tr>
                         <td className="p-2 font-mono">2100-00-AP</td>
                         <td className="p-2">Accounts Payable — Trade Creditors</td>
@@ -1035,8 +1035,8 @@ export const CompanyBrandingStudio: React.FC<CompanyBrandingStudioProps> = ({ co
 
               {/* Authorized Signatory & Official Stamp Seal */}
               {stampEnabled && (
-                <div className="pt-4 flex justify-between items-end border-t border-slate-200">
-                  <div className="text-[10px] text-slate-400">
+                <div className="pt-4 flex justify-between items-end border-t border-slate-200 dark:border-slate-700">
+                  <div className="text-[10px] text-slate-500 dark:text-slate-400">
                     Generated by Artify Master Management Suite • Authenticated Cryptographically
                   </div>
 
@@ -1056,18 +1056,18 @@ export const CompanyBrandingStudio: React.FC<CompanyBrandingStudioProps> = ({ co
                       <div className="text-[6px]">MOCIIP • {company.country}</div>
                     </div>
 
-                    <div className="border-t border-slate-400 pt-1 text-[11px] font-bold text-slate-900">
+                    <div className="border-t border-slate-400 pt-1 text-[11px] font-bold text-slate-900 dark:text-slate-100">
                       {signatureOfficerName}
                     </div>
-                    <div className="text-[10px] text-slate-500">{signatureOfficerTitle}</div>
+                    <div className="text-[10px] text-slate-500 dark:text-slate-400">{signatureOfficerTitle}</div>
                   </div>
                 </div>
               )}
             </div>
 
             {/* Dynamic Footer with Bank details and legal disclaimer */}
-            <div className="relative z-10 border-t border-slate-200 pt-3 text-center space-y-1 text-[10px] text-slate-500">
-              <div className="font-semibold text-slate-700">{footerBankDetails}</div>
+            <div className="relative z-10 border-t border-slate-200 dark:border-slate-700 pt-3 text-center space-y-1 text-[10px] text-slate-500 dark:text-slate-400">
+              <div className="font-semibold text-slate-700 dark:text-slate-300">{footerBankDetails}</div>
               <div>
                 {letterheadFooterHtml ||
                   `${company.legalName} • Registered in ${company.country} • Commercial Registry: ${company.registrationNumber} • Tax TRN: ${company.taxNumber}`}

@@ -166,14 +166,14 @@ export const PurchaseOrdersView: React.FC = () => {
   return (
     <div className="space-y-6">
       {/* Tab Navigation */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white p-4 rounded-2xl border border-slate-200 shadow-2xs">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white dark:bg-slate-900 p-4 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-2xs">
         <div className="flex items-center gap-2">
           <button
             onClick={() => setActiveTab('standard')}
             className={`px-3.5 py-2 rounded-xl text-xs font-semibold flex items-center gap-2 transition-all cursor-pointer ${
               activeTab === 'standard'
                 ? 'bg-slate-900 text-white shadow-xs'
-                : 'bg-slate-100 text-slate-600 hover:text-slate-900'
+                : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100'
             }`}
           >
             <FileCheck className="w-3.5 h-3.5" />
@@ -184,7 +184,7 @@ export const PurchaseOrdersView: React.FC = () => {
             className={`px-3.5 py-2 rounded-xl text-xs font-semibold flex items-center gap-2 transition-all cursor-pointer ${
               activeTab === 'blanket'
                 ? 'bg-slate-900 text-white shadow-xs'
-                : 'bg-slate-100 text-slate-600 hover:text-slate-900'
+                : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100'
             }`}
           >
             <Layers className="w-3.5 h-3.5" />
@@ -195,7 +195,7 @@ export const PurchaseOrdersView: React.FC = () => {
             className={`px-3.5 py-2 rounded-xl text-xs font-semibold flex items-center gap-2 transition-all cursor-pointer ${
               activeTab === 'tracking'
                 ? 'bg-slate-900 text-white shadow-xs'
-                : 'bg-slate-100 text-slate-600 hover:text-slate-900'
+                : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100'
             }`}
           >
             <Truck className="w-3.5 h-3.5" />
@@ -228,16 +228,16 @@ export const PurchaseOrdersView: React.FC = () => {
       {/* TAB 1: STANDARD PURCHASE ORDERS */}
       {activeTab === 'standard' && (
         <div className="space-y-4">
-          <div className="bg-white rounded-2xl border border-slate-200 shadow-2xs overflow-hidden">
-            <div className="p-4 border-b border-slate-100 flex items-center justify-between">
+          <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-2xs overflow-hidden">
+            <div className="p-4 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between">
               <div className="relative flex-1 max-w-md">
-                <Search className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
+                <Search className="w-4 h-4 text-slate-500 dark:text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
                 <input
                   type="text"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   placeholder="Search PO #, supplier name, buyer..."
-                  className="w-full pl-9 pr-3 py-1.5 text-xs border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-slate-900"
+                  className="w-full pl-9 pr-3 py-1.5 text-xs border border-slate-200 dark:border-slate-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-slate-200 dark:focus:ring-slate-900"
                 />
               </div>
             </div>
@@ -245,7 +245,7 @@ export const PurchaseOrdersView: React.FC = () => {
             <div className="overflow-x-auto">
               <table className="w-full text-left text-xs">
                 <thead>
-                  <tr className="bg-slate-50 text-slate-500 uppercase tracking-wider text-[10px] border-b border-slate-200">
+                  <tr className="bg-slate-50 dark:bg-slate-800/50 text-slate-500 dark:text-slate-400 uppercase tracking-wider text-[10px] border-b border-slate-200 dark:border-slate-700">
                     <th className="py-3 px-4">PO Number & Date</th>
                     <th className="py-3 px-4">Supplier & Contact</th>
                     <th className="py-3 px-4">Delivery Deadline</th>
@@ -255,36 +255,36 @@ export const PurchaseOrdersView: React.FC = () => {
                     <th className="py-3 px-4 text-right">Action</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-slate-100">
+                <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
                   {filteredPOs.map((po) => (
-                    <tr key={po.id} className="hover:bg-slate-50/70 transition-colors">
+                    <tr key={po.id} className="hover:bg-slate-50/70 dark:hover:bg-slate-800/70 transition-colors">
                       <td className="py-3 px-4">
-                        <div className="font-mono font-bold text-slate-900">{po.poNumber}</div>
-                        <div className="text-[10px] text-slate-400">{po.orderDate}</div>
+                        <div className="font-mono font-bold text-slate-900 dark:text-slate-100">{po.poNumber}</div>
+                        <div className="text-[10px] text-slate-500 dark:text-slate-400">{po.orderDate}</div>
                       </td>
                       <td className="py-3 px-4">
-                        <div className="font-bold text-slate-900">{po.supplierName}</div>
-                        <div className="text-[11px] text-slate-500">{po.supplierContact}</div>
+                        <div className="font-bold text-slate-900 dark:text-slate-100">{po.supplierName}</div>
+                        <div className="text-[11px] text-slate-500 dark:text-slate-400">{po.supplierContact}</div>
                       </td>
-                      <td className="py-3 px-4 text-slate-700 font-medium">{po.promisedDeliveryDate}</td>
-                      <td className="py-3 px-4 text-right font-bold text-slate-900">
+                      <td className="py-3 px-4 text-slate-700 dark:text-slate-300 font-medium">{po.promisedDeliveryDate}</td>
+                      <td className="py-3 px-4 text-right font-bold text-slate-900 dark:text-slate-100">
                         {formatOMR(po.grandTotalOMR)}
                       </td>
                       <td className="py-3 px-4">
-                        <span className="text-[11px] font-medium text-slate-600">{po.approvalLevel}</span>
+                        <span className="text-[11px] font-medium text-slate-600 dark:text-slate-400">{po.approvalLevel}</span>
                       </td>
                       <td className="py-3 px-4">
                         <span
                           className={`px-2.5 py-0.5 rounded-full text-[10px] font-bold ${
                             po.status === 'Approved'
-                              ? 'bg-blue-100 text-blue-800'
+                              ? 'bg-blue-100 dark:bg-blue-500/20 text-blue-800 dark:text-blue-200'
                               : po.status === 'Issued to Vendor'
-                              ? 'bg-cyan-100 text-cyan-800'
+                              ? 'bg-cyan-100 dark:bg-cyan-500/20 text-cyan-800 dark:text-cyan-200'
                               : po.status === 'Received'
-                              ? 'bg-emerald-100 text-emerald-800'
+                              ? 'bg-emerald-100 dark:bg-emerald-500/20 text-emerald-800 dark:text-emerald-200'
                               : po.status === 'Closed'
-                              ? 'bg-purple-100 text-purple-800'
-                              : 'bg-amber-100 text-amber-800'
+                              ? 'bg-purple-100 dark:bg-purple-500/20 text-purple-800 dark:text-purple-200'
+                              : 'bg-amber-100 dark:bg-amber-500/20 text-amber-800 dark:text-amber-200'
                           }`}
                         >
                           {po.status}
@@ -293,7 +293,7 @@ export const PurchaseOrdersView: React.FC = () => {
                       <td className="py-3 px-4 text-right">
                         <button
                           onClick={() => setSelectedPo(po)}
-                          className="px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold text-xs cursor-pointer"
+                          className="px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 font-semibold text-xs cursor-pointer"
                         >
                           View & Approve
                         </button>
@@ -311,37 +311,37 @@ export const PurchaseOrdersView: React.FC = () => {
       {activeTab === 'blanket' && (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {blanketPOs.map((bpo) => (
-            <div key={bpo.id} className="bg-white rounded-2xl p-5 border border-slate-200 shadow-2xs space-y-4">
+            <div key={bpo.id} className="bg-white dark:bg-slate-900 rounded-2xl p-5 border border-slate-200 dark:border-slate-700 shadow-2xs space-y-4">
               <div className="flex items-center justify-between">
                 <div>
-                  <span className="font-mono text-xs font-bold text-slate-900 bg-slate-100 px-2 py-0.5 rounded">
+                  <span className="font-mono text-xs font-bold text-slate-900 dark:text-slate-100 bg-slate-100 dark:bg-slate-800 px-2 py-0.5 rounded">
                     {bpo.blanketPoNumber}
                   </span>
-                  <h3 className="text-sm font-bold text-slate-900 mt-1">{bpo.agreementTitle}</h3>
-                  <p className="text-xs text-slate-500 font-medium">{bpo.supplierName}</p>
+                  <h3 className="text-sm font-bold text-slate-900 dark:text-slate-100 mt-1">{bpo.agreementTitle}</h3>
+                  <p className="text-xs text-slate-500 dark:text-slate-400 font-medium">{bpo.supplierName}</p>
                 </div>
-                <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-100 text-emerald-800">
+                <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-100 dark:bg-emerald-500/20 text-emerald-800 dark:text-emerald-200">
                   {bpo.status}
                 </span>
               </div>
 
-              <div className="grid grid-cols-3 gap-2 bg-slate-50 p-3 rounded-xl text-xs">
+              <div className="grid grid-cols-3 gap-2 bg-slate-50 dark:bg-slate-800/50 p-3 rounded-xl text-xs">
                 <div>
-                  <span className="text-[10px] uppercase font-semibold text-slate-400 block">Ceiling Limit</span>
-                  <span className="font-bold text-slate-900">{formatOMR(bpo.agreedCeilingAmount)}</span>
+                  <span className="text-[10px] uppercase font-semibold text-slate-500 dark:text-slate-400 block">Ceiling Limit</span>
+                  <span className="font-bold text-slate-900 dark:text-slate-100">{formatOMR(bpo.agreedCeilingAmount)}</span>
                 </div>
                 <div>
-                  <span className="text-[10px] uppercase font-semibold text-slate-400 block">Released Total</span>
-                  <span className="font-bold text-indigo-600">{formatOMR(bpo.releasedAmount)}</span>
+                  <span className="text-[10px] uppercase font-semibold text-slate-500 dark:text-slate-400 block">Released Total</span>
+                  <span className="font-bold text-indigo-600 dark:text-indigo-400">{formatOMR(bpo.releasedAmount)}</span>
                 </div>
                 <div>
-                  <span className="text-[10px] uppercase font-semibold text-slate-400 block">Remaining</span>
-                  <span className="font-bold text-emerald-600">{formatOMR(bpo.remainingAmount)}</span>
+                  <span className="text-[10px] uppercase font-semibold text-slate-500 dark:text-slate-400 block">Remaining</span>
+                  <span className="font-bold text-emerald-600 dark:text-emerald-400">{formatOMR(bpo.remainingAmount)}</span>
                 </div>
               </div>
 
               {/* Meter */}
-              <div className="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
+              <div className="w-full bg-slate-100 dark:bg-slate-800 h-2 rounded-full overflow-hidden">
                 <div
                   className="bg-indigo-600 h-full rounded-full"
                   style={{
@@ -351,7 +351,7 @@ export const PurchaseOrdersView: React.FC = () => {
               </div>
 
               <div className="flex items-center justify-between text-xs pt-1">
-                <span className="text-slate-500">{bpo.numberOfReleaseOrders} Call-Off Release Orders</span>
+                <span className="text-slate-500 dark:text-slate-400">{bpo.numberOfReleaseOrders} Call-Off Release Orders</span>
                 <button
                   onClick={() => {
                     setTargetBlanket(bpo);
@@ -369,32 +369,32 @@ export const PurchaseOrdersView: React.FC = () => {
 
       {/* TAB 3: ORDER FULFILLMENT TRACKING */}
       {activeTab === 'tracking' && (
-        <div className="bg-white rounded-2xl p-5 border border-slate-200 shadow-2xs space-y-4">
-          <h3 className="text-sm font-bold text-slate-900">Purchase Order Line-Item Receipt & Invoicing Status</h3>
+        <div className="bg-white dark:bg-slate-900 rounded-2xl p-5 border border-slate-200 dark:border-slate-700 shadow-2xs space-y-4">
+          <h3 className="text-sm font-bold text-slate-900 dark:text-slate-100">Purchase Order Line-Item Receipt & Invoicing Status</h3>
 
           <div className="space-y-4">
             {purchaseOrders.map((po) => (
-              <div key={po.id} className="p-4 rounded-xl bg-slate-50 border border-slate-200 space-y-3 text-xs">
+              <div key={po.id} className="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 space-y-3 text-xs">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
-                    <span className="font-mono font-bold text-slate-900">{po.poNumber}</span>
-                    <span className="font-semibold text-slate-700">• {po.supplierName}</span>
+                    <span className="font-mono font-bold text-slate-900 dark:text-slate-100">{po.poNumber}</span>
+                    <span className="font-semibold text-slate-700 dark:text-slate-300">• {po.supplierName}</span>
                   </div>
-                  <span className="font-bold text-slate-900">{formatOMR(po.grandTotalOMR)}</span>
+                  <span className="font-bold text-slate-900 dark:text-slate-100">{formatOMR(po.grandTotalOMR)}</span>
                 </div>
 
                 <div className="space-y-2">
                   {po.lines.map((l) => {
                     const recPct = Math.round((l.receivedQuantity / (l.orderedQuantity || 1)) * 100);
                     return (
-                      <div key={l.id} className="bg-white p-3 rounded-lg border border-slate-100 space-y-1.5">
-                        <div className="flex justify-between font-medium text-slate-800">
+                      <div key={l.id} className="bg-white dark:bg-slate-900 p-3 rounded-lg border border-slate-100 dark:border-slate-800 space-y-1.5">
+                        <div className="flex justify-between font-medium text-slate-800 dark:text-slate-200">
                           <span>{l.itemDescription}</span>
                           <span>
                             Ordered: {l.orderedQuantity} {l.unitOfMeasure} | Received: {l.receivedQuantity} | Invoiced: {l.invoicedQuantity}
                           </span>
                         </div>
-                        <div className="w-full bg-slate-100 h-1.5 rounded-full overflow-hidden">
+                        <div className="w-full bg-slate-100 dark:bg-slate-800 h-1.5 rounded-full overflow-hidden">
                           <div
                             className="bg-emerald-500 h-full rounded-full"
                             style={{ width: `${recPct}%` }}
@@ -412,54 +412,54 @@ export const PurchaseOrdersView: React.FC = () => {
 
       {/* PO DETAIL & APPROVAL MODAL */}
       {selectedPo && (
-        <div className="fixed inset-0 z-50 bg-slate-900/50 backdrop-blur-xs flex items-center justify-center p-4">
-          <div className="bg-white rounded-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto p-6 border border-slate-200 shadow-xl space-y-4 text-xs">
-            <div className="flex items-center justify-between border-b border-slate-100 pb-3">
+        <div className="fixed inset-0 z-50 bg-white/50 dark:bg-slate-900/50 backdrop-blur-xs flex items-center justify-center p-4">
+          <div className="bg-white dark:bg-slate-900 rounded-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto p-6 border border-slate-200 dark:border-slate-700 shadow-xl space-y-4 text-xs">
+            <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-3">
               <div>
                 <div className="flex items-center gap-2">
-                  <span className="font-mono text-sm font-bold text-slate-900">{selectedPo.poNumber}</span>
-                  <span className="px-2 py-0.5 rounded-full text-xs font-bold bg-slate-100 text-slate-800">
+                  <span className="font-mono text-sm font-bold text-slate-900 dark:text-slate-100">{selectedPo.poNumber}</span>
+                  <span className="px-2 py-0.5 rounded-full text-xs font-bold bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200">
                     {selectedPo.status}
                   </span>
                 </div>
-                <p className="text-slate-500 mt-0.5">
+                <p className="text-slate-500 dark:text-slate-400 mt-0.5">
                   Ordered on {selectedPo.orderDate} by {selectedPo.buyerName}
                 </p>
               </div>
               <button
                 onClick={() => setSelectedPo(null)}
-                className="text-slate-400 hover:text-slate-600 font-bold text-sm cursor-pointer"
+                className="text-slate-600 dark:text-slate-400 hover:text-slate-600 dark:hover:text-slate-400 font-bold text-sm cursor-pointer"
               >
                 ✕
               </button>
             </div>
 
             {/* General Information */}
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 bg-slate-50 p-4 rounded-xl">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 bg-slate-50 dark:bg-slate-800/50 p-4 rounded-xl">
               <div>
-                <span className="text-[10px] uppercase font-semibold text-slate-400 block">Supplier</span>
-                <span className="font-bold text-slate-800">{selectedPo.supplierName}</span>
+                <span className="text-[10px] uppercase font-semibold text-slate-500 dark:text-slate-400 block">Supplier</span>
+                <span className="font-bold text-slate-800 dark:text-slate-200">{selectedPo.supplierName}</span>
               </div>
               <div>
-                <span className="text-[10px] uppercase font-semibold text-slate-400 block">Payment Terms</span>
-                <span className="font-bold text-slate-800">{selectedPo.paymentTerms}</span>
+                <span className="text-[10px] uppercase font-semibold text-slate-500 dark:text-slate-400 block">Payment Terms</span>
+                <span className="font-bold text-slate-800 dark:text-slate-200">{selectedPo.paymentTerms}</span>
               </div>
               <div>
-                <span className="text-[10px] uppercase font-semibold text-slate-400 block">Incoterms</span>
-                <span className="font-bold text-slate-800">{selectedPo.incoterms}</span>
+                <span className="text-[10px] uppercase font-semibold text-slate-500 dark:text-slate-400 block">Incoterms</span>
+                <span className="font-bold text-slate-800 dark:text-slate-200">{selectedPo.incoterms}</span>
               </div>
               <div>
-                <span className="text-[10px] uppercase font-semibold text-slate-400 block">Grand Total</span>
-                <span className="font-bold text-slate-900">{formatOMR(selectedPo.grandTotalOMR)}</span>
+                <span className="text-[10px] uppercase font-semibold text-slate-500 dark:text-slate-400 block">Grand Total</span>
+                <span className="font-bold text-slate-900 dark:text-slate-100">{formatOMR(selectedPo.grandTotalOMR)}</span>
               </div>
             </div>
 
             {/* Line Items */}
             <div className="space-y-2">
-              <span className="font-bold text-slate-900 block">Order Line Items</span>
-              <div className="overflow-x-auto border border-slate-200 rounded-xl">
+              <span className="font-bold text-slate-900 dark:text-slate-100 block">Order Line Items</span>
+              <div className="overflow-x-auto border border-slate-200 dark:border-slate-700 rounded-xl">
                 <table className="w-full text-left text-xs">
-                  <thead className="bg-slate-50 text-slate-500 uppercase text-[10px]">
+                  <thead className="bg-slate-50 dark:bg-slate-800/50 text-slate-500 dark:text-slate-400 uppercase text-[10px]">
                     <tr>
                       <th className="p-2.5">Item Description</th>
                       <th className="p-2.5 text-right">Qty</th>
@@ -468,16 +468,16 @@ export const PurchaseOrdersView: React.FC = () => {
                       <th className="p-2.5 text-right">Total (OMR)</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-slate-100">
+                  <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
                     {selectedPo.lines.map((l) => (
                       <tr key={l.id}>
-                        <td className="p-2.5 font-medium text-slate-900">{l.itemDescription}</td>
-                        <td className="p-2.5 text-right font-medium text-slate-800">
+                        <td className="p-2.5 font-medium text-slate-900 dark:text-slate-100">{l.itemDescription}</td>
+                        <td className="p-2.5 text-right font-medium text-slate-800 dark:text-slate-200">
                           {l.orderedQuantity} {l.unitOfMeasure}
                         </td>
-                        <td className="p-2.5 text-right text-slate-700">{formatOMR(l.unitPrice)}</td>
-                        <td className="p-2.5 text-right text-slate-700">{formatOMR(l.lineTotal * 0.05)}</td>
-                        <td className="p-2.5 text-right font-bold text-slate-900">
+                        <td className="p-2.5 text-right text-slate-700 dark:text-slate-300">{formatOMR(l.unitPrice)}</td>
+                        <td className="p-2.5 text-right text-slate-700 dark:text-slate-300">{formatOMR(l.lineTotal * 0.05)}</td>
+                        <td className="p-2.5 text-right font-bold text-slate-900 dark:text-slate-100">
                           {formatOMR(l.lineTotal * 1.05)}
                         </td>
                       </tr>
@@ -487,15 +487,15 @@ export const PurchaseOrdersView: React.FC = () => {
               </div>
             </div>
 
-            <p className="text-slate-600 bg-slate-50 p-3 rounded-lg text-[11px]">
+            <p className="text-slate-600 dark:text-slate-400 bg-slate-50 dark:bg-slate-800/50 p-3 rounded-lg text-[11px]">
               <span className="font-bold">Instructions:</span> {selectedPo.specialInstructions}
             </p>
 
             {/* Action Bar */}
-            <div className="flex items-center justify-between pt-4 border-t border-slate-100">
+            <div className="flex items-center justify-between pt-4 border-t border-slate-100 dark:border-slate-800">
               <div>
                 {selectedPo.approvedBy && (
-                  <span className="text-emerald-700 font-medium text-xs">
+                  <span className="text-emerald-700 dark:text-emerald-300 font-medium text-xs">
                     ✓ Approved by {selectedPo.approvedBy} on {selectedPo.approvedDate}
                   </span>
                 )}
@@ -533,17 +533,17 @@ export const PurchaseOrdersView: React.FC = () => {
 
       {/* CREATE PO MODAL */}
       {showCreatePoModal && (
-        <div className="fixed inset-0 z-50 bg-slate-900/50 backdrop-blur-xs flex items-center justify-center p-4">
-          <div className="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto p-6 border border-slate-200 shadow-xl space-y-4 text-xs">
-            <h3 className="text-sm font-bold text-slate-900">Create Standard Purchase Order (PO)</h3>
+        <div className="fixed inset-0 z-50 bg-white/50 dark:bg-slate-900/50 backdrop-blur-xs flex items-center justify-center p-4">
+          <div className="bg-white dark:bg-slate-900 rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto p-6 border border-slate-200 dark:border-slate-700 shadow-xl space-y-4 text-xs">
+            <h3 className="text-sm font-bold text-slate-900 dark:text-slate-100">Create Standard Purchase Order (PO)</h3>
             <form onSubmit={handleCreatePoSubmit} className="space-y-3">
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="font-semibold text-slate-700 block mb-1">Select Supplier</label>
+                  <label className="font-semibold text-slate-700 dark:text-slate-300 block mb-1">Select Supplier</label>
                   <select
                     value={selectedSupplierId}
                     onChange={(e) => setSelectedSupplierId(e.target.value)}
-                    className="w-full p-2.5 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-slate-900"
+                    className="w-full p-2.5 border border-slate-200 dark:border-slate-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-slate-200 dark:focus:ring-slate-900"
                   >
                     {suppliers.map((s) => (
                       <option key={s.id} value={s.id}>
@@ -553,53 +553,53 @@ export const PurchaseOrdersView: React.FC = () => {
                   </select>
                 </div>
                 <div>
-                  <label className="font-semibold text-slate-700 block mb-1">Promised Delivery Date</label>
+                  <label className="font-semibold text-slate-700 dark:text-slate-300 block mb-1">Promised Delivery Date</label>
                   <input
                     type="date"
                     required
                     value={poDeliveryDate}
                     onChange={(e) => setPoDeliveryDate(e.target.value)}
-                    className="w-full p-2.5 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-slate-900"
+                    className="w-full p-2.5 border border-slate-200 dark:border-slate-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-slate-200 dark:focus:ring-slate-900"
                   />
                 </div>
               </div>
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="font-semibold text-slate-700 block mb-1">Incoterms</label>
+                  <label className="font-semibold text-slate-700 dark:text-slate-300 block mb-1">Incoterms</label>
                   <input
                     type="text"
                     value={poIncoterms}
                     onChange={(e) => setPoIncoterms(e.target.value)}
-                    className="w-full p-2.5 border border-slate-200 rounded-lg"
+                    className="w-full p-2.5 border border-slate-200 dark:border-slate-700 rounded-lg"
                   />
                 </div>
                 <div>
-                  <label className="font-semibold text-slate-700 block mb-1">Payment Terms</label>
+                  <label className="font-semibold text-slate-700 dark:text-slate-300 block mb-1">Payment Terms</label>
                   <input
                     type="text"
                     value={poPaymentTerms}
                     onChange={(e) => setPoPaymentTerms(e.target.value)}
-                    className="w-full p-2.5 border border-slate-200 rounded-lg"
+                    className="w-full p-2.5 border border-slate-200 dark:border-slate-700 rounded-lg"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="font-semibold text-slate-700 block mb-1">Delivery Destination</label>
+                <label className="font-semibold text-slate-700 dark:text-slate-300 block mb-1">Delivery Destination</label>
                 <input
                   type="text"
                   value={poDeliveryAddr}
                   onChange={(e) => setPoDeliveryAddr(e.target.value)}
-                  className="w-full p-2.5 border border-slate-200 rounded-lg"
+                  className="w-full p-2.5 border border-slate-200 dark:border-slate-700 rounded-lg"
                 />
               </div>
 
-              <div className="flex items-center justify-end gap-2 pt-3 border-t border-slate-100">
+              <div className="flex items-center justify-end gap-2 pt-3 border-t border-slate-100 dark:border-slate-800">
                 <button
                   type="button"
                   onClick={() => setShowCreatePoModal(false)}
-                  className="px-3 py-2 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold cursor-pointer"
+                  className="px-3 py-2 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 font-semibold cursor-pointer"
                 >
                   Cancel
                 </button>
@@ -617,27 +617,27 @@ export const PurchaseOrdersView: React.FC = () => {
 
       {/* CREATE BLANKET PO MODAL */}
       {showBlanketModal && (
-        <div className="fixed inset-0 z-50 bg-slate-900/50 backdrop-blur-xs flex items-center justify-center p-4">
-          <div className="bg-white rounded-2xl max-w-md w-full p-6 border border-slate-200 shadow-xl space-y-4 text-xs">
-            <h3 className="text-sm font-bold text-slate-900">New Blanket Purchase Agreement</h3>
+        <div className="fixed inset-0 z-50 bg-white/50 dark:bg-slate-900/50 backdrop-blur-xs flex items-center justify-center p-4">
+          <div className="bg-white dark:bg-slate-900 rounded-2xl max-w-md w-full p-6 border border-slate-200 dark:border-slate-700 shadow-xl space-y-4 text-xs">
+            <h3 className="text-sm font-bold text-slate-900 dark:text-slate-100">New Blanket Purchase Agreement</h3>
             <form onSubmit={handleCreateBlanketSubmit} className="space-y-3">
               <div>
-                <label className="font-semibold text-slate-700 block mb-1">Agreement Title</label>
+                <label className="font-semibold text-slate-700 dark:text-slate-300 block mb-1">Agreement Title</label>
                 <input
                   type="text"
                   required
                   value={blanketTitle}
                   onChange={(e) => setBlanketTitle(e.target.value)}
                   placeholder="e.g. Annual Rate Contract for Heavy Cables"
-                  className="w-full p-2.5 border border-slate-200 rounded-lg"
+                  className="w-full p-2.5 border border-slate-200 dark:border-slate-700 rounded-lg"
                 />
               </div>
               <div>
-                <label className="font-semibold text-slate-700 block mb-1">Contractor / Supplier</label>
+                <label className="font-semibold text-slate-700 dark:text-slate-300 block mb-1">Contractor / Supplier</label>
                 <select
                   value={selectedSupplierId}
                   onChange={(e) => setSelectedSupplierId(e.target.value)}
-                  className="w-full p-2.5 border border-slate-200 rounded-lg"
+                  className="w-full p-2.5 border border-slate-200 dark:border-slate-700 rounded-lg"
                 >
                   {suppliers.map((s) => (
                     <option key={s.id} value={s.id}>
@@ -647,13 +647,13 @@ export const PurchaseOrdersView: React.FC = () => {
                 </select>
               </div>
               <div>
-                <label className="font-semibold text-slate-700 block mb-1">Agreed Ceiling Limit (OMR)</label>
+                <label className="font-semibold text-slate-700 dark:text-slate-300 block mb-1">Agreed Ceiling Limit (OMR)</label>
                 <input
                   type="number"
                   required
                   value={blanketCeiling}
                   onChange={(e) => setBlanketCeiling(Number(e.target.value))}
-                  className="w-full p-2.5 border border-slate-200 rounded-lg"
+                  className="w-full p-2.5 border border-slate-200 dark:border-slate-700 rounded-lg"
                 />
               </div>
 
@@ -661,7 +661,7 @@ export const PurchaseOrdersView: React.FC = () => {
                 <button
                   type="button"
                   onClick={() => setShowBlanketModal(false)}
-                  className="px-3 py-2 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold cursor-pointer"
+                  className="px-3 py-2 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 font-semibold cursor-pointer"
                 >
                   Cancel
                 </button>
@@ -679,36 +679,36 @@ export const PurchaseOrdersView: React.FC = () => {
 
       {/* RELEASE ORDER MODAL */}
       {showReleaseModal && targetBlanket && (
-        <div className="fixed inset-0 z-50 bg-slate-900/50 backdrop-blur-xs flex items-center justify-center p-4">
-          <div className="bg-white rounded-2xl max-w-md w-full p-6 border border-slate-200 shadow-xl space-y-4 text-xs">
-            <h3 className="text-sm font-bold text-slate-900">Issue Call-Off Release Order</h3>
-            <p className="text-slate-600">
-              Agreement: <span className="font-bold text-slate-900">{targetBlanket.agreementTitle}</span>
+        <div className="fixed inset-0 z-50 bg-white/50 dark:bg-slate-900/50 backdrop-blur-xs flex items-center justify-center p-4">
+          <div className="bg-white dark:bg-slate-900 rounded-2xl max-w-md w-full p-6 border border-slate-200 dark:border-slate-700 shadow-xl space-y-4 text-xs">
+            <h3 className="text-sm font-bold text-slate-900 dark:text-slate-100">Issue Call-Off Release Order</h3>
+            <p className="text-slate-600 dark:text-slate-400">
+              Agreement: <span className="font-bold text-slate-900 dark:text-slate-100">{targetBlanket.agreementTitle}</span>
               <br />
-              Remaining Ceiling: <span className="font-bold text-emerald-700">{formatOMR(targetBlanket.remainingAmount)}</span>
+              Remaining Ceiling: <span className="font-bold text-emerald-700 dark:text-emerald-300">{formatOMR(targetBlanket.remainingAmount)}</span>
             </p>
 
             <form onSubmit={handleReleaseSubmit} className="space-y-3">
               <div>
-                <label className="font-semibold text-slate-700 block mb-1">Release Amount (OMR)</label>
+                <label className="font-semibold text-slate-700 dark:text-slate-300 block mb-1">Release Amount (OMR)</label>
                 <input
                   type="number"
                   required
                   max={targetBlanket.remainingAmount}
                   value={releaseAmount}
                   onChange={(e) => setReleaseAmount(Number(e.target.value))}
-                  className="w-full p-2.5 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-slate-900"
+                  className="w-full p-2.5 border border-slate-200 dark:border-slate-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-slate-200 dark:focus:ring-slate-900"
                 />
               </div>
               <div>
-                <label className="font-semibold text-slate-700 block mb-1">Release Order Description / Lot</label>
+                <label className="font-semibold text-slate-700 dark:text-slate-300 block mb-1">Release Order Description / Lot</label>
                 <input
                   type="text"
                   required
                   value={releaseDesc}
                   onChange={(e) => setReleaseDesc(e.target.value)}
                   placeholder="e.g. Call-off batch #4 for Sohar substation delivery"
-                  className="w-full p-2.5 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-slate-900"
+                  className="w-full p-2.5 border border-slate-200 dark:border-slate-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-slate-200 dark:focus:ring-slate-900"
                 />
               </div>
 
@@ -716,7 +716,7 @@ export const PurchaseOrdersView: React.FC = () => {
                 <button
                   type="button"
                   onClick={() => setShowReleaseModal(false)}
-                  className="px-3 py-2 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold cursor-pointer"
+                  className="px-3 py-2 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 font-semibold cursor-pointer"
                 >
                   Cancel
                 </button>

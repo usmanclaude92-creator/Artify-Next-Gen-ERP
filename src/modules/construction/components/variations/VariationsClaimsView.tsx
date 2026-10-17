@@ -125,14 +125,14 @@ export const VariationsClaimsView: React.FC = () => {
   return (
     <div className="space-y-6">
       {/* Top Banner */}
-      <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 text-white shadow-xl flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6">
+      <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 text-slate-900 dark:text-white shadow-xl flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6">
         <div className="space-y-2 max-w-2xl">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-rose-500/20 text-rose-400 text-xs font-semibold uppercase tracking-wider">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-rose-500/20 text-rose-600 dark:text-rose-400 text-xs font-semibold uppercase tracking-wider">
             <GitPullRequest className="w-3.5 h-3.5" />
             Module 15.07 — Variations & Claims
           </div>
           <h2 className="text-2xl font-bold tracking-tight">Variation Orders, Claims & Extension of Time (EOT)</h2>
-          <p className="text-sm text-slate-400">
+          <p className="text-sm text-slate-600 dark:text-slate-400">
             FIDIC Clause 13 Variations, Clause 20.1 28-day notice verification, EOT critical path delay claims, and Liquidated Damages exposure risk.
           </p>
         </div>
@@ -140,9 +140,9 @@ export const VariationsClaimsView: React.FC = () => {
         <div className="flex flex-wrap items-center gap-3">
           <button
             onClick={() => setShowAddClaimModal(true)}
-            className="inline-flex items-center gap-2 bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 font-medium text-xs px-4 py-2.5 rounded-xl shadow transition-all"
+            className="inline-flex items-center gap-2 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-200 border border-slate-300 dark:border-slate-700 font-medium text-xs px-4 py-2.5 rounded-xl shadow transition-all"
           >
-            <ShieldAlert className="w-4 h-4 text-amber-400" />
+            <ShieldAlert className="w-4 h-4 text-amber-700 dark:text-amber-400" />
             Lodge FIDIC Claim
           </button>
           <button
@@ -158,27 +158,27 @@ export const VariationsClaimsView: React.FC = () => {
       {/* Summary KPI Ribbon */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
         <div className="bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm space-y-1">
-          <span className="text-xs font-medium text-slate-500">Approved Variations Value</span>
+          <span className="text-xs font-medium text-slate-500 dark:text-slate-400">Approved Variations Value</span>
           <p className="text-xl font-bold font-mono text-emerald-600 dark:text-emerald-400">
             {currency} {totalApprovedVos.toLocaleString()}
           </p>
-          <p className="text-[11px] text-slate-400">Added to baseline contract sum</p>
+          <p className="text-[11px] text-slate-600 dark:text-slate-400">Added to baseline contract sum</p>
         </div>
 
         <div className="bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm space-y-1">
-          <span className="text-xs font-medium text-slate-500">Contractual EOT Approved</span>
-          <p className="text-xl font-bold font-mono text-blue-600">
+          <span className="text-xs font-medium text-slate-500 dark:text-slate-400">Contractual EOT Approved</span>
+          <p className="text-xl font-bold font-mono text-blue-600 dark:text-blue-400">
             +{totalApprovedEotDays} Calendar Days
           </p>
-          <p className="text-[11px] text-slate-400">Completion shifted to {selectedContract?.revisedCompletionDate}</p>
+          <p className="text-[11px] text-slate-600 dark:text-slate-400">Completion shifted to {selectedContract?.revisedCompletionDate}</p>
         </div>
 
         <div className="bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm space-y-1">
-          <span className="text-xs font-medium text-slate-500">Liquidated Damages (LD) Exposure</span>
-          <p className="text-xl font-bold font-mono text-emerald-600">
+          <span className="text-xs font-medium text-slate-500 dark:text-slate-400">Liquidated Damages (LD) Exposure</span>
+          <p className="text-xl font-bold font-mono text-emerald-600 dark:text-emerald-400">
             {currency} 0.00 (Zero Exposure)
           </p>
-          <p className="text-[11px] text-emerald-600">Project timeline protected by approved EOT</p>
+          <p className="text-[11px] text-emerald-600 dark:text-emerald-400">Project timeline protected by approved EOT</p>
         </div>
       </div>
 
@@ -233,7 +233,7 @@ export const VariationsClaimsView: React.FC = () => {
         <div className="space-y-4">
           <div className="overflow-x-auto bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm">
             <table className="w-full text-left text-xs">
-              <thead className="bg-slate-50 dark:bg-slate-800/60 text-slate-500 uppercase tracking-wider font-semibold border-b border-slate-200 dark:border-slate-800">
+              <thead className="bg-slate-50 dark:bg-slate-800/60 text-slate-500 dark:text-slate-400 uppercase tracking-wider font-semibold border-b border-slate-200 dark:border-slate-800">
                 <tr>
                   <th className="py-3 px-4">VO No.</th>
                   <th className="py-3 px-4">Variation Title</th>
@@ -253,15 +253,15 @@ export const VariationsClaimsView: React.FC = () => {
                     </td>
                     <td className="py-3.5 px-4 font-medium text-slate-900 dark:text-white max-w-xs">
                       <div>{vo.title}</div>
-                      <div className="text-[11px] text-slate-400 truncate">{vo.scopeJustification}</div>
+                      <div className="text-[11px] text-slate-600 dark:text-slate-400 truncate">{vo.scopeJustification}</div>
                     </td>
-                    <td className="py-3.5 px-4 text-slate-500">{vo.initiatedBy.replace(/_/g, ' ')}</td>
+                    <td className="py-3.5 px-4 text-slate-500 dark:text-slate-400">{vo.initiatedBy.replace(/_/g, ' ')}</td>
                     <td className="py-3.5 px-4 text-right font-mono font-semibold">{currency} {vo.proposedAmount.toLocaleString()}</td>
-                    <td className="py-3.5 px-4 text-right font-mono text-blue-600 font-semibold">{currency} {vo.engineerEvaluatedAmount.toLocaleString()}</td>
-                    <td className="py-3.5 px-4 text-right font-mono font-bold text-emerald-600">{currency} {vo.approvedAmount.toLocaleString()}</td>
+                    <td className="py-3.5 px-4 text-right font-mono text-blue-600 dark:text-blue-400 font-semibold">{currency} {vo.engineerEvaluatedAmount.toLocaleString()}</td>
+                    <td className="py-3.5 px-4 text-right font-mono font-bold text-emerald-600 dark:text-emerald-400">{currency} {vo.approvedAmount.toLocaleString()}</td>
                     <td className="py-3.5 px-4 text-center font-bold font-mono">+{vo.scheduleImpactDays} d</td>
                     <td className="py-3.5 px-4">
-                      <span className="px-2 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-50 dark:bg-emerald-950 text-emerald-600">
+                      <span className="px-2 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-50 dark:bg-emerald-950 text-emerald-600 dark:text-emerald-400">
                         {vo.status}
                       </span>
                     </td>
@@ -280,46 +280,46 @@ export const VariationsClaimsView: React.FC = () => {
             {contractClaims.map(claim => (
               <div key={claim.id} className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 shadow-sm space-y-4">
                 <div className="flex justify-between items-start">
-                  <span className="text-xs font-mono font-bold text-amber-600 bg-amber-50 dark:bg-amber-950 px-2 py-1 rounded">
+                  <span className="text-xs font-mono font-bold text-amber-600 dark:text-amber-400 bg-amber-50 dark:bg-amber-950 px-2 py-1 rounded">
                     {claim.claimNumber}
                   </span>
-                  <span className="text-xs font-semibold px-2 py-0.5 rounded-full bg-blue-50 text-blue-600">
+                  <span className="text-xs font-semibold px-2 py-0.5 rounded-full bg-blue-50 dark:bg-blue-500/10 text-blue-600 dark:text-blue-400">
                     {claim.status}
                   </span>
                 </div>
 
                 <div>
-                  <span className="text-xs font-mono font-semibold text-slate-400">{claim.fidicClauseReference}</span>
+                  <span className="text-xs font-mono font-semibold text-slate-600 dark:text-slate-400">{claim.fidicClauseReference}</span>
                   <h4 className="text-base font-bold text-slate-900 dark:text-white mt-0.5">
                     {claim.claimTitle}
                   </h4>
-                  <p className="text-xs text-slate-500 mt-1">
+                  <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
                     Event Date: <strong>{claim.eventDate}</strong> • 28-Day Notice: <strong>{claim.noticeDateClause20_1}</strong> (Compliant)
                   </p>
                 </div>
 
                 <div className="grid grid-cols-2 gap-3 p-4 bg-slate-50 dark:bg-slate-800/40 rounded-xl border border-slate-100 dark:border-slate-800 text-xs">
                   <div>
-                    <span className="text-slate-500">Claimed Cost</span>
+                    <span className="text-slate-500 dark:text-slate-400">Claimed Cost</span>
                     <p className="font-mono font-bold text-slate-900 dark:text-white mt-0.5">
                       {currency} {claim.claimedCost.toLocaleString()}
                     </p>
                   </div>
                   <div>
-                    <span className="text-slate-500">Claimed EOT</span>
+                    <span className="text-slate-500 dark:text-slate-400">Claimed EOT</span>
                     <p className="font-mono font-bold text-slate-900 dark:text-white mt-0.5">
                       +{claim.claimedEOTDays} Calendar Days
                     </p>
                   </div>
                   <div>
-                    <span className="text-slate-500">Engineer Assessed</span>
-                    <p className="font-mono font-bold text-emerald-600 mt-0.5">
+                    <span className="text-slate-500 dark:text-slate-400">Engineer Assessed</span>
+                    <p className="font-mono font-bold text-emerald-600 dark:text-emerald-400 mt-0.5">
                       {currency} {claim.engineerAssessedCost.toLocaleString()}
                     </p>
                   </div>
                   <div>
-                    <span className="text-slate-500">Assessed EOT</span>
-                    <p className="font-mono font-bold text-blue-600 mt-0.5">
+                    <span className="text-slate-500 dark:text-slate-400">Assessed EOT</span>
+                    <p className="font-mono font-bold text-blue-600 dark:text-blue-400 mt-0.5">
                       +{claim.engineerAssessedEOTDays} Calendar Days
                     </p>
                   </div>
@@ -334,7 +334,7 @@ export const VariationsClaimsView: React.FC = () => {
       {activeTab === 'eot' && (
         <div className="overflow-x-auto bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm">
           <table className="w-full text-left text-xs">
-            <thead className="bg-slate-50 dark:bg-slate-800/60 text-slate-500 uppercase tracking-wider font-semibold border-b border-slate-200 dark:border-slate-800">
+            <thead className="bg-slate-50 dark:bg-slate-800/60 text-slate-500 dark:text-slate-400 uppercase tracking-wider font-semibold border-b border-slate-200 dark:border-slate-800">
               <tr>
                 <th className="py-3 px-4">EOT Ref</th>
                 <th className="py-3 px-4">Delay Event Cause</th>
@@ -351,11 +351,11 @@ export const VariationsClaimsView: React.FC = () => {
                   <td className="py-3.5 px-4 font-mono font-bold text-rose-600 dark:text-rose-400">{eot.eotReferenceNumber}</td>
                   <td className="py-3.5 px-4 font-medium text-slate-900 dark:text-white max-w-sm">{eot.causeOfDelay}</td>
                   <td className="py-3.5 px-4 text-center font-mono font-semibold">+{eot.daysClaimedByContractor} d</td>
-                  <td className="py-3.5 px-4 text-center font-mono text-blue-600 font-semibold">+{eot.recommendedDaysByEngineer} d</td>
-                  <td className="py-3.5 px-4 text-center font-mono font-bold text-emerald-600">+{eot.approvedDaysByEmployer} d</td>
+                  <td className="py-3.5 px-4 text-center font-mono text-blue-600 dark:text-blue-400 font-semibold">+{eot.recommendedDaysByEngineer} d</td>
+                  <td className="py-3.5 px-4 text-center font-mono font-bold text-emerald-600 dark:text-emerald-400">+{eot.approvedDaysByEmployer} d</td>
                   <td className="py-3.5 px-4 font-mono font-semibold text-slate-900 dark:text-white">{eot.newContractualCompletionDate}</td>
                   <td className="py-3.5 px-4">
-                    <span className="px-2 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-50 dark:bg-emerald-950 text-emerald-600">
+                    <span className="px-2 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-50 dark:bg-emerald-950 text-emerald-600 dark:text-emerald-400">
                       {eot.status}
                     </span>
                   </td>
@@ -375,25 +375,25 @@ export const VariationsClaimsView: React.FC = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5 text-xs">
             <div className="p-4 bg-slate-50 dark:bg-slate-800/40 rounded-xl border border-slate-100 dark:border-slate-800 space-y-1">
-              <span className="text-slate-500">Daily Liquidated Damages Penalty</span>
-              <p className="text-xl font-bold font-mono text-rose-600">
+              <span className="text-slate-500 dark:text-slate-400">Daily Liquidated Damages Penalty</span>
+              <p className="text-xl font-bold font-mono text-rose-600 dark:text-rose-400">
                 {currency} {ldPerDay.toLocaleString()} / Day
               </p>
-              <p className="text-[11px] text-slate-400">As stipulated in Contract Appendix</p>
+              <p className="text-[11px] text-slate-600 dark:text-slate-400">As stipulated in Contract Appendix</p>
             </div>
             <div className="p-4 bg-slate-50 dark:bg-slate-800/40 rounded-xl border border-slate-100 dark:border-slate-800 space-y-1">
-              <span className="text-slate-500">Maximum Liquidated Damages Cap (10%)</span>
+              <span className="text-slate-500 dark:text-slate-400">Maximum Liquidated Damages Cap (10%)</span>
               <p className="text-xl font-bold font-mono text-slate-900 dark:text-white">
                 {currency} {maxLdCap.toLocaleString()}
               </p>
-              <p className="text-[11px] text-slate-400">Statutory FIDIC liability ceiling</p>
+              <p className="text-[11px] text-slate-600 dark:text-slate-400">Statutory FIDIC liability ceiling</p>
             </div>
             <div className="p-4 bg-slate-50 dark:bg-slate-800/40 rounded-xl border border-slate-100 dark:border-slate-800 space-y-1">
-              <span className="text-slate-500">Current Delay Exposure</span>
-              <p className="text-xl font-bold font-mono text-emerald-600">
+              <span className="text-slate-500 dark:text-slate-400">Current Delay Exposure</span>
+              <p className="text-xl font-bold font-mono text-emerald-600 dark:text-emerald-400">
                 {currency} {currentLdExposure.toLocaleString()}
               </p>
-              <p className="text-[11px] text-emerald-600">0 days critical path unauthorized delay</p>
+              <p className="text-[11px] text-emerald-600 dark:text-emerald-400">0 days critical path unauthorized delay</p>
             </div>
           </div>
         </div>
@@ -405,7 +405,7 @@ export const VariationsClaimsView: React.FC = () => {
           <div className="bg-white dark:bg-slate-900 rounded-2xl max-w-lg w-full p-6 border border-slate-200 dark:border-slate-800 shadow-2xl space-y-4 text-xs">
             <div className="flex justify-between items-center border-b border-slate-100 dark:border-slate-800 pb-3">
               <h3 className="text-base font-bold text-slate-900 dark:text-white">Issue Variation Order (VO)</h3>
-              <button onClick={() => setShowAddVoModal(false)} className="text-slate-400 hover:text-slate-600">✕</button>
+              <button onClick={() => setShowAddVoModal(false)} className="text-slate-600 dark:text-slate-400 hover:text-slate-600 dark:hover:text-slate-400">✕</button>
             </div>
 
             <form onSubmit={handleCreateVO} className="space-y-3">
@@ -456,7 +456,7 @@ export const VariationsClaimsView: React.FC = () => {
                 <button
                   type="button"
                   onClick={() => setShowAddVoModal(false)}
-                  className="px-4 py-2 rounded-xl text-slate-600 dark:text-slate-300 hover:bg-slate-100"
+                  className="px-4 py-2 rounded-xl text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800"
                 >
                   Cancel
                 </button>
@@ -478,7 +478,7 @@ export const VariationsClaimsView: React.FC = () => {
           <div className="bg-white dark:bg-slate-900 rounded-2xl max-w-lg w-full p-6 border border-slate-200 dark:border-slate-800 shadow-2xl space-y-4 text-xs">
             <div className="flex justify-between items-center border-b border-slate-100 dark:border-slate-800 pb-3">
               <h3 className="text-base font-bold text-slate-900 dark:text-white">Lodge FIDIC Contractor Claim</h3>
-              <button onClick={() => setShowAddClaimModal(false)} className="text-slate-400 hover:text-slate-600">✕</button>
+              <button onClick={() => setShowAddClaimModal(false)} className="text-slate-600 dark:text-slate-400 hover:text-slate-600 dark:hover:text-slate-400">✕</button>
             </div>
 
             <form onSubmit={handleCreateClaim} className="space-y-3">
@@ -529,7 +529,7 @@ export const VariationsClaimsView: React.FC = () => {
                 <button
                   type="button"
                   onClick={() => setShowAddClaimModal(false)}
-                  className="px-4 py-2 rounded-xl text-slate-600 dark:text-slate-300 hover:bg-slate-100"
+                  className="px-4 py-2 rounded-xl text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800"
                 >
                   Cancel
                 </button>

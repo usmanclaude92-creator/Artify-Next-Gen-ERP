@@ -195,38 +195,38 @@ export const ManufacturingModuleRunner: React.FC<ManufacturingModuleRunnerProps>
     <ManufacturingProvider>
       <div className="space-y-6">
         {/* Top Control Bar with Breadcrumbs and Quick Nav Tabs */}
-        <div className="bg-slate-900 border border-slate-800 rounded-2xl p-4 shadow-sm">
+        <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-4 shadow-sm">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
             {/* Breadcrumb & Title */}
             <div className="flex items-center gap-3">
               <button
                 onClick={() => onNavigate({ view: 'module_overview', moduleId: 'manufacturing' })}
-                className="p-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white transition-all"
+                className="p-2 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-all"
                 title="Back to Manufacturing Hub"
               >
                 <ArrowLeft className="w-4 h-4" />
               </button>
 
               <div>
-                <div className="flex items-center gap-2 text-xs text-slate-400">
-                  <span className="font-semibold text-orange-400 uppercase tracking-wider">
+                <div className="flex items-center gap-2 text-xs text-slate-600 dark:text-slate-400">
+                  <span className="font-semibold text-orange-700 dark:text-orange-400 uppercase tracking-wider">
                     {module.code} — {module.shortName}
                   </span>
                   {functionalArea && (
                     <>
                       <span>/</span>
-                      <span className="text-slate-300 font-medium">{functionalArea.name}</span>
+                      <span className="text-slate-700 dark:text-slate-300 font-medium">{functionalArea.name}</span>
                     </>
                   )}
                   {process && (
                     <>
                       <span>/</span>
-                      <span className="text-slate-400">{process.name}</span>
+                      <span className="text-slate-600 dark:text-slate-400">{process.name}</span>
                     </>
                   )}
                 </div>
-                <h2 className="text-lg font-bold text-white tracking-tight flex items-center gap-2">
-                  <Factory className="w-5 h-5 text-orange-400" />
+                <h2 className="text-lg font-bold text-slate-900 dark:text-white tracking-tight flex items-center gap-2">
+                  <Factory className="w-5 h-5 text-orange-700 dark:text-orange-400" />
                   {functionalArea ? functionalArea.name : 'Manufacturing & Production Cockpit'}
                 </h2>
               </div>
@@ -238,8 +238,8 @@ export const ManufacturingModuleRunner: React.FC<ManufacturingModuleRunnerProps>
                 onClick={onToggleFavorite}
                 className={`p-2 rounded-xl border transition-all ${
                   isFavorite
-                    ? 'bg-amber-500/10 border-amber-500/30 text-amber-400'
-                    : 'bg-slate-800 border-slate-700 text-slate-400 hover:text-white'
+                    ? 'bg-amber-500/10 border-amber-500/30 text-amber-700 dark:text-amber-400'
+                    : 'bg-slate-100 dark:bg-slate-800 border-slate-300 dark:border-slate-700 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
                 }`}
                 title={isFavorite ? 'Remove from favorites' : 'Add to favorites'}
               >
@@ -249,7 +249,7 @@ export const ManufacturingModuleRunner: React.FC<ManufacturingModuleRunnerProps>
           </div>
 
           {/* Quick Sub-Navigation Pills */}
-          <div className="mt-4 pt-3 border-t border-slate-800/80 flex items-center gap-1.5 overflow-x-auto pb-1 scrollbar-none">
+          <div className="mt-4 pt-3 border-t border-slate-200/80 dark:border-slate-800/80 flex items-center gap-1.5 overflow-x-auto pb-1 scrollbar-none">
             {navItems.map((item) => {
               const Icon = item.icon;
               const isActive = item.isDashboard ? !functionalArea : functionalArea?.id === item.id;
@@ -267,7 +267,7 @@ export const ManufacturingModuleRunner: React.FC<ManufacturingModuleRunnerProps>
                   className={`px-3 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap transition-all flex items-center gap-1.5 ${
                     isActive
                       ? 'bg-orange-600 text-white shadow-sm shadow-orange-600/30'
-                      : 'bg-slate-800/60 hover:bg-slate-800 text-slate-300 hover:text-white'
+                      : 'bg-slate-100/60 dark:bg-slate-800/60 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white'
                   }`}
                 >
                   <Icon className="w-3.5 h-3.5" />

@@ -38,24 +38,24 @@ export const PurchaseReportsView: React.FC = () => {
         onExport={handleExport}
       />
 
-      <div className="bg-white border border-slate-200 rounded-xl p-5 shadow-xs">
-        <div className="flex flex-wrap items-center justify-between gap-3 pb-4 mb-4 border-b border-slate-100">
+      <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl p-5 shadow-xs">
+        <div className="flex flex-wrap items-center justify-between gap-3 pb-4 mb-4 border-b border-slate-100 dark:border-slate-800">
           <div>
-            <h3 className="text-sm font-bold text-slate-900 flex items-center gap-2">
-              <ShoppingCart className="w-4 h-4 text-indigo-600" />
+            <h3 className="text-sm font-bold text-slate-900 dark:text-slate-100 flex items-center gap-2">
+              <ShoppingCart className="w-4 h-4 text-indigo-600 dark:text-indigo-400" />
               Vendor Spend & Fulfillment SLA Analytics
             </h3>
-            <p className="text-xs text-slate-500">Procurement volumes, order frequencies, and vendor performance</p>
+            <p className="text-xs text-slate-500 dark:text-slate-400">Procurement volumes, order frequencies, and vendor performance</p>
           </div>
 
           <div className="relative min-w-[200px]">
-            <Search className="w-3.5 h-3.5 absolute left-3 top-2.5 text-slate-400" />
+            <Search className="w-3.5 h-3.5 absolute left-3 top-2.5 text-slate-500 dark:text-slate-400" />
             <input
               type="text"
               placeholder="Search vendor or category..."
               value={searchTerm}
               onChange={e => setSearchTerm(e.target.value)}
-              className="w-full pl-8 pr-3 py-1.5 bg-slate-50 border border-slate-200 rounded-lg text-xs"
+              className="w-full pl-8 pr-3 py-1.5 bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-lg text-xs"
             />
           </div>
         </div>
@@ -63,7 +63,7 @@ export const PurchaseReportsView: React.FC = () => {
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs border-collapse">
             <thead>
-              <tr className="border-b border-slate-200 bg-slate-50 text-slate-600">
+              <tr className="border-b border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/50 text-slate-600 dark:text-slate-400">
                 <th className="py-2.5 px-3 font-semibold">Vendor Name</th>
                 <th className="py-2.5 px-3 font-semibold">Spend Category</th>
                 <th className="py-2.5 px-3 font-mono text-right">YTD Spend ({currencySymbol})</th>
@@ -73,23 +73,23 @@ export const PurchaseReportsView: React.FC = () => {
                 <th className="py-2.5 px-3 font-mono text-right">Price Variance %</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-100">
+            <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
               {filteredPurchases.map(row => (
-                <tr key={row.id} className="hover:bg-slate-50">
+                <tr key={row.id} className="hover:bg-slate-50 dark:hover:bg-slate-800/50">
                   <td className="py-2.5 px-3">
-                    <span className="font-bold text-slate-900 block">{row.supplierName}</span>
-                    <span className="text-[10px] text-slate-400 font-mono">{row.supplierCode}</span>
+                    <span className="font-bold text-slate-900 dark:text-slate-100 block">{row.supplierName}</span>
+                    <span className="text-[10px] text-slate-500 dark:text-slate-400 font-mono">{row.supplierCode}</span>
                   </td>
-                  <td className="py-2.5 px-3 text-slate-700 font-medium">{row.category}</td>
-                  <td className="py-2.5 px-3 font-mono font-bold text-right text-slate-900">
+                  <td className="py-2.5 px-3 text-slate-700 dark:text-slate-300 font-medium">{row.category}</td>
+                  <td className="py-2.5 px-3 font-mono font-bold text-right text-slate-900 dark:text-slate-100">
                     {formatCurrency(row.spendOMR)}
                   </td>
-                  <td className="py-2.5 px-3 font-mono text-center font-bold text-slate-800">{row.poCount}</td>
-                  <td className="py-2.5 px-3 font-mono text-right text-slate-600">{row.leadTimeDaysAvg} Days</td>
-                  <td className="py-2.5 px-3 font-mono font-bold text-right text-emerald-700">{row.otifPercent}%</td>
+                  <td className="py-2.5 px-3 font-mono text-center font-bold text-slate-800 dark:text-slate-200">{row.poCount}</td>
+                  <td className="py-2.5 px-3 font-mono text-right text-slate-600 dark:text-slate-400">{row.leadTimeDaysAvg} Days</td>
+                  <td className="py-2.5 px-3 font-mono font-bold text-right text-emerald-700 dark:text-emerald-300">{row.otifPercent}%</td>
                   <td
                     className={`py-2.5 px-3 font-mono font-semibold text-right ${
-                      row.priceVariancePercent <= 0 ? 'text-emerald-700' : 'text-rose-700'
+                      row.priceVariancePercent <= 0 ? 'text-emerald-700 dark:text-emerald-300' : 'text-rose-700 dark:text-rose-300'
                     }`}
                   >
                     {row.priceVariancePercent > 0 ? '+' : ''}

@@ -160,7 +160,7 @@ export const OpportunityManagementView: React.FC<OpportunityManagementViewProps>
               <span className="px-2.5 py-0.5 rounded-full bg-purple-50 dark:bg-purple-950 text-purple-600 dark:text-purple-400 text-xs font-semibold">
                 Functional Area 06.03
               </span>
-              <span className="text-xs text-slate-500">Pipeline Governance & Revenue Projections</span>
+              <span className="text-xs text-slate-500 dark:text-slate-400">Pipeline Governance & Revenue Projections</span>
             </div>
             <h2 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white mt-1">
               Sales Pipeline, Opportunity Stages & Forecasts
@@ -205,35 +205,35 @@ export const OpportunityManagementView: React.FC<OpportunityManagementViewProps>
       {/* Summary KPI Pills */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
         <div className="p-4 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
-          <div className="text-xs text-slate-500 font-semibold">Total Pipeline Value</div>
+          <div className="text-xs text-slate-500 dark:text-slate-400 font-semibold">Total Pipeline Value</div>
           <div className="text-lg sm:text-xl font-bold text-slate-900 dark:text-white mt-1">
             OMR {stats.totalPipelineValueOMR.toLocaleString()}
           </div>
-          <div className="text-[11px] text-slate-400 mt-0.5">{opportunities.length} Registered Deals</div>
+          <div className="text-[11px] text-slate-600 dark:text-slate-400 mt-0.5">{opportunities.length} Registered Deals</div>
         </div>
 
         <div className="p-4 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
-          <div className="text-xs text-slate-500 font-semibold">Weighted Forecast (EV)</div>
+          <div className="text-xs text-slate-500 dark:text-slate-400 font-semibold">Weighted Forecast (EV)</div>
           <div className="text-lg sm:text-xl font-bold text-purple-600 dark:text-purple-400 mt-1">
             OMR {stats.weightedPipelineValueOMR.toLocaleString()}
           </div>
-          <div className="text-[11px] text-purple-500 mt-0.5">Probability Adjusted</div>
+          <div className="text-[11px] text-purple-500 dark:text-purple-400 mt-0.5">Probability Adjusted</div>
         </div>
 
         <div className="p-4 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
-          <div className="text-xs text-slate-500 font-semibold">Won Revenue (YTD)</div>
+          <div className="text-xs text-slate-500 dark:text-slate-400 font-semibold">Won Revenue (YTD)</div>
           <div className="text-lg sm:text-xl font-bold text-emerald-600 dark:text-emerald-400 mt-1">
             OMR {opportunities.filter((o) => o.stage === 'Closed Won').reduce((s, o) => s + o.dealValueOMR, 0).toLocaleString()}
           </div>
-          <div className="text-[11px] text-emerald-500 mt-0.5">100% Milestone Reached</div>
+          <div className="text-[11px] text-emerald-500 dark:text-emerald-400 mt-0.5">100% Milestone Reached</div>
         </div>
 
         <div className="p-4 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
-          <div className="text-xs text-slate-500 font-semibold">Average Win Rate</div>
+          <div className="text-xs text-slate-500 dark:text-slate-400 font-semibold">Average Win Rate</div>
           <div className="text-lg sm:text-xl font-bold text-blue-600 dark:text-blue-400 mt-1">
             {stats.avgWinRatePercentage}%
           </div>
-          <div className="text-[11px] text-slate-400 mt-0.5">Trailing 12 Months</div>
+          <div className="text-[11px] text-slate-600 dark:text-slate-400 mt-0.5">Trailing 12 Months</div>
         </div>
       </div>
 
@@ -309,7 +309,7 @@ export const OpportunityManagementView: React.FC<OpportunityManagementViewProps>
                               {opp.title}
                             </h4>
                             <div className="text-[11px] text-slate-500 dark:text-slate-400 flex items-center gap-1 mt-0.5">
-                              <Building2 className="w-3 h-3 text-indigo-500" />
+                              <Building2 className="w-3 h-3 text-indigo-500 dark:text-indigo-400" />
                               <span className="truncate">{opp.customerName}</span>
                             </div>
                           </div>
@@ -318,7 +318,7 @@ export const OpportunityManagementView: React.FC<OpportunityManagementViewProps>
                             <span className="font-bold text-slate-900 dark:text-white">
                               OMR {opp.dealValueOMR.toLocaleString()}
                             </span>
-                            <span className="text-[10px] text-slate-400">
+                            <span className="text-[10px] text-slate-600 dark:text-slate-400">
                               {opp.expectedCloseDate.slice(5)}
                             </span>
                           </div>
@@ -352,7 +352,7 @@ export const OpportunityManagementView: React.FC<OpportunityManagementViewProps>
                       ))}
 
                       {stageOpps.length === 0 && (
-                        <div className="p-6 text-center text-[11px] text-slate-400 italic">
+                        <div className="p-6 text-center text-[11px] text-slate-600 dark:text-slate-400 italic">
                           No deals in this stage
                         </div>
                       )}
@@ -387,7 +387,7 @@ export const OpportunityManagementView: React.FC<OpportunityManagementViewProps>
                   <tr key={opp.id} className="hover:bg-slate-50 dark:hover:bg-slate-800/40 transition-colors">
                     <td className="px-5 py-3.5">
                       <div className="font-bold text-slate-900 dark:text-white">{opp.title}</div>
-                      <div className="text-xs text-slate-400 font-mono mt-0.5">{opp.opportunityCode}</div>
+                      <div className="text-xs text-slate-600 dark:text-slate-400 font-mono mt-0.5">{opp.opportunityCode}</div>
                     </td>
                     <td className="px-4 py-3.5 text-xs font-medium text-slate-800 dark:text-slate-200">
                       {opp.customerName}
@@ -415,7 +415,7 @@ export const OpportunityManagementView: React.FC<OpportunityManagementViewProps>
                           const res = predictOpportunityWinAI(opp.id);
                           setAiInsight({ oppCode: opp.opportunityCode, res });
                         }}
-                        className="p-1.5 rounded-lg bg-purple-50 dark:bg-purple-950/60 text-purple-600 dark:text-purple-400 hover:bg-purple-100 text-xs border border-purple-200 dark:border-purple-800 cursor-pointer"
+                        className="p-1.5 rounded-lg bg-purple-50 dark:bg-purple-950/60 text-purple-600 dark:text-purple-400 hover:bg-purple-100 dark:hover:bg-purple-500/20 text-xs border border-purple-200 dark:border-purple-800 cursor-pointer"
                         title="Run AI Predictor"
                       >
                         <Sparkles className="w-3.5 h-3.5" />
@@ -434,25 +434,25 @@ export const OpportunityManagementView: React.FC<OpportunityManagementViewProps>
         <div className="space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div className="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
-              <span className="text-xs text-slate-500 font-semibold uppercase">Q3 2026 Commit</span>
+              <span className="text-xs text-slate-500 dark:text-slate-400 font-semibold uppercase">Q3 2026 Commit</span>
               <div className="text-2xl font-bold text-emerald-600 dark:text-emerald-400 mt-1">
                 OMR 1,160,000
               </div>
-              <p className="text-xs text-slate-400 mt-1">High-confidence deals with signed LPOs & tender award letters</p>
+              <p className="text-xs text-slate-600 dark:text-slate-400 mt-1">High-confidence deals with signed LPOs & tender award letters</p>
             </div>
             <div className="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
-              <span className="text-xs text-slate-500 font-semibold uppercase">Q4 2026 Best Case</span>
+              <span className="text-xs text-slate-500 dark:text-slate-400 font-semibold uppercase">Q4 2026 Best Case</span>
               <div className="text-2xl font-bold text-purple-600 dark:text-purple-400 mt-1">
                 OMR 2,450,000
               </div>
-              <p className="text-xs text-slate-400 mt-1">Includes active negotiations with OQ, Asyad and Galfar SEZAD</p>
+              <p className="text-xs text-slate-600 dark:text-slate-400 mt-1">Includes active negotiations with OQ, Asyad and Galfar SEZAD</p>
             </div>
             <div className="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
-              <span className="text-xs text-slate-500 font-semibold uppercase">Pipeline Coverage Ratio</span>
+              <span className="text-xs text-slate-500 dark:text-slate-400 font-semibold uppercase">Pipeline Coverage Ratio</span>
               <div className="text-2xl font-bold text-blue-600 dark:text-blue-400 mt-1">
                 3.8x
               </div>
-              <p className="text-xs text-slate-400 mt-1">Exceeds recommended 3.0x quota benchmark for industrial capital sales</p>
+              <p className="text-xs text-slate-600 dark:text-slate-400 mt-1">Exceeds recommended 3.0x quota benchmark for industrial capital sales</p>
             </div>
           </div>
         </div>
@@ -464,7 +464,7 @@ export const OpportunityManagementView: React.FC<OpportunityManagementViewProps>
           <h3 className="font-bold text-base text-slate-900 dark:text-white">
             06.03.03 Governance Stage Gate Verification Matrix
           </h3>
-          <p className="text-xs text-slate-500">Standard operating procedure mandatory validation checkpoints</p>
+          <p className="text-xs text-slate-500 dark:text-slate-400">Standard operating procedure mandatory validation checkpoints</p>
 
           <div className="space-y-3">
             {STAGES.map((s, idx) => (

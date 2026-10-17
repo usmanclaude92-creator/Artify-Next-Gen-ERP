@@ -120,12 +120,12 @@ export const UserAccessManagementView: React.FC<{ activeTab?: string }> = ({ act
       header: 'User Account',
       accessor: item => (
         <div className="flex items-center gap-2.5">
-          <div className="w-8 h-8 rounded-full bg-slate-100 border border-slate-200 text-indigo-700 font-bold text-xs flex items-center justify-center">
+          <div className="w-8 h-8 rounded-full bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-indigo-700 dark:text-indigo-300 font-bold text-xs flex items-center justify-center">
             {item.fullName.split(' ').map(n => n[0]).join('').substring(0, 2)}
           </div>
           <div>
-            <div className="font-semibold text-slate-900">{item.fullName}</div>
-            <div className="text-[11px] text-slate-500 font-mono">@{item.username} • {item.email}</div>
+            <div className="font-semibold text-slate-900 dark:text-slate-100">{item.fullName}</div>
+            <div className="text-[11px] text-slate-500 dark:text-slate-400 font-mono">@{item.username} • {item.email}</div>
           </div>
         </div>
       )
@@ -134,7 +134,7 @@ export const UserAccessManagementView: React.FC<{ activeTab?: string }> = ({ act
       key: 'roleName',
       header: 'Assigned Role',
       accessor: item => (
-        <span className="px-2.5 py-1 rounded-md bg-indigo-50 text-indigo-700 border border-indigo-200 font-semibold text-[11px]">
+        <span className="px-2.5 py-1 rounded-md bg-indigo-50 dark:bg-indigo-500/10 text-indigo-700 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-500/30 font-semibold text-[11px]">
           {item.roleName}
         </span>
       )
@@ -143,14 +143,14 @@ export const UserAccessManagementView: React.FC<{ activeTab?: string }> = ({ act
       key: 'authMethod',
       header: 'Auth & MFA',
       accessor: item => (
-        <div className="flex items-center gap-1.5 text-slate-600">
+        <div className="flex items-center gap-1.5 text-slate-600 dark:text-slate-400">
           <span className="font-mono text-[11px]">{item.authMethod}</span>
           {item.mfaEnabled ? (
-            <span className="px-1.5 py-0.5 rounded text-[10px] bg-emerald-100 text-emerald-800 font-semibold flex items-center gap-0.5">
+            <span className="px-1.5 py-0.5 rounded text-[10px] bg-emerald-100 dark:bg-emerald-500/20 text-emerald-800 dark:text-emerald-200 font-semibold flex items-center gap-0.5">
               <Fingerprint className="w-3 h-3" /> MFA
             </span>
           ) : (
-            <span className="px-1.5 py-0.5 rounded text-[10px] bg-slate-100 text-slate-500 font-medium">
+            <span className="px-1.5 py-0.5 rounded text-[10px] bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 font-medium">
               No MFA
             </span>
           )}
@@ -161,7 +161,7 @@ export const UserAccessManagementView: React.FC<{ activeTab?: string }> = ({ act
       key: 'lastLogin',
       header: 'Last Active Session',
       accessor: item => (
-        <span className="text-[11px] text-slate-500 font-mono">
+        <span className="text-[11px] text-slate-500 dark:text-slate-400 font-mono">
           {item.lastLogin || 'Never Logged In'}
         </span>
       )
@@ -178,15 +178,15 @@ export const UserAccessManagementView: React.FC<{ activeTab?: string }> = ({ act
     {
       key: 'code',
       header: 'Group Code',
-      accessor: item => <span className="font-mono font-bold text-indigo-700">{item.code}</span>
+      accessor: item => <span className="font-mono font-bold text-indigo-700 dark:text-indigo-300">{item.code}</span>
     },
     {
       key: 'name',
       header: 'Group Title & Scope',
       accessor: item => (
         <div>
-          <div className="font-semibold text-slate-900">{item.name}</div>
-          <div className="text-[11px] text-slate-500">{item.description}</div>
+          <div className="font-semibold text-slate-900 dark:text-slate-100">{item.name}</div>
+          <div className="text-[11px] text-slate-500 dark:text-slate-400">{item.description}</div>
         </div>
       )
     },
@@ -194,7 +194,7 @@ export const UserAccessManagementView: React.FC<{ activeTab?: string }> = ({ act
       key: 'memberCount',
       header: 'Members Enrolled',
       accessor: item => (
-        <span className="font-semibold text-slate-800">{item.memberCount} Users</span>
+        <span className="font-semibold text-slate-800 dark:text-slate-200">{item.memberCount} Users</span>
       )
     },
     {
@@ -203,7 +203,7 @@ export const UserAccessManagementView: React.FC<{ activeTab?: string }> = ({ act
       accessor: item => (
         <div className="flex gap-1 flex-wrap">
           {item.assignedRoles.map(r => (
-            <span key={r} className="px-1.5 py-0.5 rounded bg-slate-100 text-slate-700 font-mono text-[10px]">
+            <span key={r} className="px-1.5 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-mono text-[10px]">
               {r}
             </span>
           ))}
@@ -222,17 +222,17 @@ export const UserAccessManagementView: React.FC<{ activeTab?: string }> = ({ act
     {
       key: 'code',
       header: 'Rule Code',
-      accessor: item => <span className="font-mono font-bold text-rose-700">{item.code}</span>
+      accessor: item => <span className="font-mono font-bold text-rose-700 dark:text-rose-300">{item.code}</span>
     },
     {
       key: 'title',
       header: 'Conflicting Entitlements',
       accessor: item => (
         <div>
-          <div className="font-semibold text-slate-900">{item.title}</div>
-          <div className="text-[11px] text-slate-500 mt-0.5">
+          <div className="font-semibold text-slate-900 dark:text-slate-100">{item.title}</div>
+          <div className="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">
             Conflict:{' '}
-            <strong className="text-slate-700">
+            <strong className="text-slate-700 dark:text-slate-300">
               {item.conflictingActionA} ⚡ {item.conflictingActionB}
             </strong>
           </div>
@@ -250,11 +250,11 @@ export const UserAccessManagementView: React.FC<{ activeTab?: string }> = ({ act
       accessor: item => {
         const count = item.exceptions.filter(e => e.status === 'Active').length;
         return count > 0 ? (
-          <span className="px-2 py-0.5 rounded bg-amber-100 text-amber-800 text-[11px] font-semibold">
+          <span className="px-2 py-0.5 rounded bg-amber-100 dark:bg-amber-500/20 text-amber-800 dark:text-amber-200 text-[11px] font-semibold">
             {count} Exception Granted
           </span>
         ) : (
-          <span className="text-slate-400 text-[11px]">Zero Waivers (Strict)</span>
+          <span className="text-slate-500 dark:text-slate-400 text-[11px]">Zero Waivers (Strict)</span>
         );
       }
     },
@@ -282,7 +282,7 @@ export const UserAccessManagementView: React.FC<{ activeTab?: string }> = ({ act
           value={sodRules.length}
           status="positive"
           description="Strict Anti-Fraud Matrix"
-          icon={<ShieldAlert className="w-5 h-5 text-rose-600" />}
+          icon={<ShieldAlert className="w-5 h-5 text-rose-600 dark:text-rose-400" />}
         />
         <MetricCard
           label="Security Role Groups"
@@ -296,16 +296,16 @@ export const UserAccessManagementView: React.FC<{ activeTab?: string }> = ({ act
           value={users.filter(u => u.status === 'Locked').length}
           status="warning"
           description="Security Quarantined"
-          icon={<Lock className="w-5 h-5 text-amber-600" />}
+          icon={<Lock className="w-5 h-5 text-amber-600 dark:text-amber-400" />}
         />
       </div>
 
       {/* Tabs */}
-      <div className="flex items-center gap-2 border-b border-slate-200 overflow-x-auto pb-1">
+      <div className="flex items-center gap-2 border-b border-slate-200 dark:border-slate-700 overflow-x-auto pb-1">
         <button
           onClick={() => setActiveTab('users')}
           className={`flex items-center gap-2 px-4 py-2.5 rounded-lg text-xs font-semibold whitespace-nowrap transition-colors cursor-pointer ${
-            activeTab === 'users' ? 'bg-indigo-600 text-white shadow-xs' : 'text-slate-600 hover:bg-slate-100'
+            activeTab === 'users' ? 'bg-indigo-600 text-white shadow-xs' : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800'
           }`}
         >
           <Users className="w-4 h-4" />
@@ -315,7 +315,7 @@ export const UserAccessManagementView: React.FC<{ activeTab?: string }> = ({ act
         <button
           onClick={() => setActiveTab('groups')}
           className={`flex items-center gap-2 px-4 py-2.5 rounded-lg text-xs font-semibold whitespace-nowrap transition-colors cursor-pointer ${
-            activeTab === 'groups' ? 'bg-indigo-600 text-white shadow-xs' : 'text-slate-600 hover:bg-slate-100'
+            activeTab === 'groups' ? 'bg-indigo-600 text-white shadow-xs' : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800'
           }`}
         >
           <Shield className="w-4 h-4" />
@@ -325,7 +325,7 @@ export const UserAccessManagementView: React.FC<{ activeTab?: string }> = ({ act
         <button
           onClick={() => setActiveTab('sod')}
           className={`flex items-center gap-2 px-4 py-2.5 rounded-lg text-xs font-semibold whitespace-nowrap transition-colors cursor-pointer ${
-            activeTab === 'sod' ? 'bg-indigo-600 text-white shadow-xs' : 'text-slate-600 hover:bg-slate-100'
+            activeTab === 'sod' ? 'bg-indigo-600 text-white shadow-xs' : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800'
           }`}
         >
           <ShieldAlert className="w-4 h-4" />
@@ -335,7 +335,7 @@ export const UserAccessManagementView: React.FC<{ activeTab?: string }> = ({ act
         <button
           onClick={() => setActiveTab('restrictions')}
           className={`flex items-center gap-2 px-4 py-2.5 rounded-lg text-xs font-semibold whitespace-nowrap transition-colors cursor-pointer ${
-            activeTab === 'restrictions' ? 'bg-indigo-600 text-white shadow-xs' : 'text-slate-600 hover:bg-slate-100'
+            activeTab === 'restrictions' ? 'bg-indigo-600 text-white shadow-xs' : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800'
           }`}
         >
           <Globe className="w-4 h-4" />
@@ -383,7 +383,7 @@ export const UserAccessManagementView: React.FC<{ activeTab?: string }> = ({ act
               <button
                 onClick={() => resetUserPassword(item.id)}
                 title="Send password reset link"
-                className="p-1 text-slate-500 hover:text-indigo-600 rounded hover:bg-slate-100 cursor-pointer"
+                className="p-1 text-slate-500 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 rounded hover:bg-slate-100 dark:hover:bg-slate-800 cursor-pointer"
               >
                 <RotateCcw className="w-3.5 h-3.5" />
               </button>
@@ -392,8 +392,8 @@ export const UserAccessManagementView: React.FC<{ activeTab?: string }> = ({ act
                 title={item.status === 'Locked' ? 'Unlock user account' : 'Lock user account'}
                 className={`px-2.5 py-1 rounded text-xs font-medium border cursor-pointer ${
                   item.status === 'Locked'
-                    ? 'border-emerald-300 text-emerald-700 hover:bg-emerald-50'
-                    : 'border-rose-300 text-rose-700 hover:bg-rose-50'
+                    ? 'border-emerald-300 dark:border-emerald-500/40 text-emerald-700 dark:text-emerald-300 hover:bg-emerald-50 dark:hover:bg-emerald-500/10'
+                    : 'border-rose-300 dark:border-rose-500/40 text-rose-700 dark:text-rose-300 hover:bg-rose-50 dark:hover:bg-rose-500/10'
                 }`}
               >
                 {item.status === 'Locked' ? (
@@ -444,13 +444,13 @@ export const UserAccessManagementView: React.FC<{ activeTab?: string }> = ({ act
                     setSelectedRuleId(item.id);
                     setIsExceptionModalOpen(true);
                   }}
-                  className="px-2.5 py-1 bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-300 rounded text-xs font-medium cursor-pointer"
+                  className="px-2.5 py-1 bg-amber-50 dark:bg-amber-500/10 hover:bg-amber-100 dark:hover:bg-amber-500/20 text-amber-800 dark:text-amber-200 border border-amber-300 dark:border-amber-500/40 rounded text-xs font-medium cursor-pointer"
                 >
                   Grant Waiver
                 </button>
                 <button
                   onClick={() => toggleSoDRule(item.id)}
-                  className="text-xs text-indigo-600 hover:text-indigo-800 font-semibold cursor-pointer"
+                  className="text-xs text-indigo-600 dark:text-indigo-400 hover:text-indigo-800 dark:hover:text-indigo-200 font-semibold cursor-pointer"
                 >
                   {item.status === 'Enforced' ? 'Set Warning' : 'Enforce'}
                 </button>
@@ -459,12 +459,12 @@ export const UserAccessManagementView: React.FC<{ activeTab?: string }> = ({ act
           />
 
           {/* Active Exceptions Detail */}
-          <div className="bg-white rounded-xl border border-slate-200 p-5 shadow-sm">
-            <h4 className="text-sm font-bold text-slate-900 mb-2 flex items-center gap-2">
-              <AlertTriangle className="w-4 h-4 text-amber-600" />
+          <div className="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-700 p-5 shadow-sm">
+            <h4 className="text-sm font-bold text-slate-900 dark:text-slate-100 mb-2 flex items-center gap-2">
+              <AlertTriangle className="w-4 h-4 text-amber-600 dark:text-amber-400" />
               <span>Active SoD Compliance Exceptions & Temporary Waivers</span>
             </h4>
-            <p className="text-xs text-slate-500 mb-4">
+            <p className="text-xs text-slate-500 dark:text-slate-400 mb-4">
               All exceptions require executive CFO sign-off and are subject to mandatory continuous SIEM audit review.
             </p>
 
@@ -473,18 +473,18 @@ export const UserAccessManagementView: React.FC<{ activeTab?: string }> = ({ act
                 r.exceptions.map(exc => (
                   <div
                     key={exc.id}
-                    className="border border-amber-200 bg-amber-50/50 rounded-lg p-3.5 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs"
+                    className="border border-amber-200 dark:border-amber-500/30 bg-amber-50/50 dark:bg-amber-500/50 rounded-lg p-3.5 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs"
                   >
                     <div>
-                      <div className="font-semibold text-slate-900">
-                        {exc.userName} • <span className="font-mono text-indigo-700">{r.code}</span> ({r.name})
+                      <div className="font-semibold text-slate-900 dark:text-slate-100">
+                        {exc.userName} • <span className="font-mono text-indigo-700 dark:text-indigo-300">{r.code}</span> ({r.name})
                       </div>
-                      <div className="text-slate-600 mt-0.5">
+                      <div className="text-slate-600 dark:text-slate-400 mt-0.5">
                         <strong>Reason:</strong> {exc.reason}
                       </div>
-                      <div className="text-[11px] text-slate-500 mt-1">
+                      <div className="text-[11px] text-slate-500 dark:text-slate-400 mt-1">
                         Approved by: <strong>{exc.approvedBy}</strong> • Expiry Date:{' '}
-                        <strong className="text-rose-700">{exc.expiresAt}</strong>
+                        <strong className="text-rose-700 dark:text-rose-300">{exc.expiresAt}</strong>
                       </div>
                     </div>
                     <StatusBadge status={exc.status} size="sm" />
@@ -498,11 +498,11 @@ export const UserAccessManagementView: React.FC<{ activeTab?: string }> = ({ act
 
       {/* Restrictions Tab */}
       {activeTab === 'restrictions' && (
-        <div className="bg-white rounded-xl border border-slate-200 p-6 shadow-sm">
-          <div className="flex items-center justify-between border-b border-slate-200 pb-4 mb-5">
+        <div className="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-700 p-6 shadow-sm">
+          <div className="flex items-center justify-between border-b border-slate-200 dark:border-slate-700 pb-4 mb-5">
             <div>
-              <h3 className="text-base font-bold text-slate-900">Network & Geolocation Access Policies</h3>
-              <p className="text-xs text-slate-500 mt-0.5">
+              <h3 className="text-base font-bold text-slate-900 dark:text-slate-100">Network & Geolocation Access Policies</h3>
+              <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
                 Conditional access rules restricting financial and system transactions to authorized IP subnets and work hours
               </p>
             </div>
@@ -525,23 +525,23 @@ export const UserAccessManagementView: React.FC<{ activeTab?: string }> = ({ act
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {accessRestrictions.map(ar => (
-              <div key={ar.id} className="border border-slate-200 rounded-xl p-4 bg-slate-50/60 shadow-xs space-y-3">
+              <div key={ar.id} className="border border-slate-200 dark:border-slate-700 rounded-xl p-4 bg-slate-50/60 dark:bg-slate-800/60 shadow-xs space-y-3">
                 <div className="flex items-start justify-between">
                   <div>
-                    <h4 className="font-bold text-slate-900 text-sm">{ar.policyName}</h4>
-                    <span className="text-[11px] text-slate-500 font-mono mt-0.5">ID: {ar.id}</span>
+                    <h4 className="font-bold text-slate-900 dark:text-slate-100 text-sm">{ar.policyName}</h4>
+                    <span className="text-[11px] text-slate-500 dark:text-slate-400 font-mono mt-0.5">ID: {ar.id}</span>
                   </div>
-                  <span className="px-2.5 py-0.5 rounded-full text-xs font-bold bg-rose-50 text-rose-700 border border-rose-200">
+                  <span className="px-2.5 py-0.5 rounded-full text-xs font-bold bg-rose-50 dark:bg-rose-500/10 text-rose-700 dark:text-rose-300 border border-rose-200 dark:border-rose-500/30">
                     Enforcement: {ar.enforcement}
                   </span>
                 </div>
 
                 <div className="space-y-2 text-xs">
                   <div>
-                    <span className="text-slate-500 font-medium">Applied Roles:</span>
+                    <span className="text-slate-500 dark:text-slate-400 font-medium">Applied Roles:</span>
                     <div className="flex gap-1 flex-wrap mt-1">
                       {ar.targetRoles.map(r => (
-                        <span key={r} className="px-2 py-0.5 rounded bg-white border border-slate-200 text-indigo-700 font-mono text-[10px]">
+                        <span key={r} className="px-2 py-0.5 rounded bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-indigo-700 dark:text-indigo-300 font-mono text-[10px]">
                           {r}
                         </span>
                       ))}
@@ -549,10 +549,10 @@ export const UserAccessManagementView: React.FC<{ activeTab?: string }> = ({ act
                   </div>
 
                   <div>
-                    <span className="text-slate-500 font-medium">Permitted Subnets / IP Ranges:</span>
+                    <span className="text-slate-500 dark:text-slate-400 font-medium">Permitted Subnets / IP Ranges:</span>
                     <div className="flex gap-1 flex-wrap mt-1">
                       {ar.allowedIpRanges.map(ip => (
-                        <span key={ip} className="px-2 py-0.5 rounded bg-emerald-50 border border-emerald-200 text-emerald-800 font-mono text-[10px]">
+                        <span key={ip} className="px-2 py-0.5 rounded bg-emerald-50 dark:bg-emerald-500/10 border border-emerald-200 dark:border-emerald-500/30 text-emerald-800 dark:text-emerald-200 font-mono text-[10px]">
                           {ip}
                         </span>
                       ))}
@@ -560,9 +560,9 @@ export const UserAccessManagementView: React.FC<{ activeTab?: string }> = ({ act
                   </div>
 
                   <div>
-                    <span className="text-slate-500 font-medium">Time Window:</span>
-                    <div className="mt-1 text-slate-700 font-semibold flex items-center gap-1.5">
-                      <Clock className="w-3.5 h-3.5 text-slate-400" />
+                    <span className="text-slate-500 dark:text-slate-400 font-medium">Time Window:</span>
+                    <div className="mt-1 text-slate-700 dark:text-slate-300 font-semibold flex items-center gap-1.5">
+                      <Clock className="w-3.5 h-3.5 text-slate-500 dark:text-slate-400" />
                       <span>{ar.allowedTimeWindows.join(', ')}</span>
                     </div>
                   </div>
@@ -584,43 +584,43 @@ export const UserAccessManagementView: React.FC<{ activeTab?: string }> = ({ act
       >
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
-            <label className="block text-slate-700 font-semibold mb-1">Username *</label>
+            <label className="block text-slate-700 dark:text-slate-300 font-semibold mb-1">Username *</label>
             <input
               type="text"
               required
               value={userForm.username}
               onChange={e => setUserForm({ ...userForm, username: e.target.value.toLowerCase().replace(/\s+/g, '.') })}
               placeholder="e.g. omar.khalid"
-              className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg font-mono text-xs focus:ring-2 focus:ring-indigo-500"
+              className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-lg font-mono text-xs focus:ring-2 focus:ring-indigo-500"
             />
           </div>
 
           <div>
-            <label className="block text-slate-700 font-semibold mb-1">Full Name *</label>
+            <label className="block text-slate-700 dark:text-slate-300 font-semibold mb-1">Full Name *</label>
             <input
               type="text"
               required
               value={userForm.fullName}
               onChange={e => setUserForm({ ...userForm, fullName: e.target.value })}
               placeholder="e.g. Omar Khalid Al-Raisi"
-              className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-xs focus:ring-2 focus:ring-indigo-500"
+              className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-lg text-xs focus:ring-2 focus:ring-indigo-500"
             />
           </div>
 
           <div className="sm:col-span-2">
-            <label className="block text-slate-700 font-semibold mb-1">Work Email Address *</label>
+            <label className="block text-slate-700 dark:text-slate-300 font-semibold mb-1">Work Email Address *</label>
             <input
               type="email"
               required
               value={userForm.email}
               onChange={e => setUserForm({ ...userForm, email: e.target.value })}
               placeholder="e.g. omar.khalid@artify.om"
-              className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-xs focus:ring-2 focus:ring-indigo-500"
+              className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-lg text-xs focus:ring-2 focus:ring-indigo-500"
             />
           </div>
 
           <div>
-            <label className="block text-slate-700 font-semibold mb-1">Assigned Role</label>
+            <label className="block text-slate-700 dark:text-slate-300 font-semibold mb-1">Assigned Role</label>
             <select
               value={userForm.roleName}
               onChange={e => {
@@ -632,7 +632,7 @@ export const UserAccessManagementView: React.FC<{ activeTab?: string }> = ({ act
                 if (r === 'Inventory Controller') id = 'role-inv-mgr';
                 setUserForm({ ...userForm, roleName: r, roleId: id });
               }}
-              className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-xs"
+              className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-lg text-xs"
             >
               <option value="AP Accountant">AP Accountant</option>
               <option value="General Ledger Lead">General Ledger Lead</option>
@@ -643,11 +643,11 @@ export const UserAccessManagementView: React.FC<{ activeTab?: string }> = ({ act
           </div>
 
           <div>
-            <label className="block text-slate-700 font-semibold mb-1">Authentication Method</label>
+            <label className="block text-slate-700 dark:text-slate-300 font-semibold mb-1">Authentication Method</label>
             <select
               value={userForm.authMethod}
               onChange={e => setUserForm({ ...userForm, authMethod: e.target.value as any })}
-              className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-xs"
+              className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-lg text-xs"
             >
               <option value="SAML_SSO">SAML 2.0 / Okta / Azure AD</option>
               <option value="LOCAL_PASSWORD">Internal Secure Database Auth</option>
@@ -668,37 +668,37 @@ export const UserAccessManagementView: React.FC<{ activeTab?: string }> = ({ act
       >
         <div className="space-y-4">
           <div>
-            <label className="block text-slate-700 font-semibold mb-1">Group Code *</label>
+            <label className="block text-slate-700 dark:text-slate-300 font-semibold mb-1">Group Code *</label>
             <input
               type="text"
               required
               value={groupForm.code}
               onChange={e => setGroupForm({ ...groupForm, code: e.target.value.toUpperCase() })}
               placeholder="e.g. GRP-AUDIT-TEAM"
-              className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg font-mono text-xs"
+              className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-lg font-mono text-xs"
             />
           </div>
 
           <div>
-            <label className="block text-slate-700 font-semibold mb-1">Group Name *</label>
+            <label className="block text-slate-700 dark:text-slate-300 font-semibold mb-1">Group Name *</label>
             <input
               type="text"
               required
               value={groupForm.name}
               onChange={e => setGroupForm({ ...groupForm, name: e.target.value })}
               placeholder="e.g. Internal & External Auditors"
-              className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-xs"
+              className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-lg text-xs"
             />
           </div>
 
           <div>
-            <label className="block text-slate-700 font-semibold mb-1">Description</label>
+            <label className="block text-slate-700 dark:text-slate-300 font-semibold mb-1">Description</label>
             <textarea
               rows={2}
               value={groupForm.description}
               onChange={e => setGroupForm({ ...groupForm, description: e.target.value })}
               placeholder="Explain intended use and permissions..."
-              className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-xs"
+              className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-lg text-xs"
             />
           </div>
         </div>
@@ -715,7 +715,7 @@ export const UserAccessManagementView: React.FC<{ activeTab?: string }> = ({ act
       >
         <div className="space-y-4">
           <div>
-            <label className="block text-slate-700 font-semibold mb-1">Target User *</label>
+            <label className="block text-slate-700 dark:text-slate-300 font-semibold mb-1">Target User *</label>
             <select
               value={exceptionForm.userId}
               onChange={e => {
@@ -726,7 +726,7 @@ export const UserAccessManagementView: React.FC<{ activeTab?: string }> = ({ act
                   userName: u ? u.fullName : exceptionForm.userName
                 });
               }}
-              className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-xs"
+              className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-lg text-xs"
             >
               {users.map(u => (
                 <option key={u.id} value={u.id}>
@@ -737,18 +737,18 @@ export const UserAccessManagementView: React.FC<{ activeTab?: string }> = ({ act
           </div>
 
           <div>
-            <label className="block text-slate-700 font-semibold mb-1">Expiry Date *</label>
+            <label className="block text-slate-700 dark:text-slate-300 font-semibold mb-1">Expiry Date *</label>
             <input
               type="date"
               required
               value={exceptionForm.expiresAt}
               onChange={e => setExceptionForm({ ...exceptionForm, expiresAt: e.target.value })}
-              className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-xs"
+              className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-lg text-xs"
             />
           </div>
 
           <div>
-            <label className="block text-slate-700 font-semibold mb-1">
+            <label className="block text-slate-700 dark:text-slate-300 font-semibold mb-1">
               Audit Justification & Compensating Controls *
             </label>
             <textarea
@@ -757,7 +757,7 @@ export const UserAccessManagementView: React.FC<{ activeTab?: string }> = ({ act
               value={exceptionForm.reason}
               onChange={e => setExceptionForm({ ...exceptionForm, reason: e.target.value })}
               placeholder="e.g. Month-end emergency coverage approved by CFO with secondary reconciliation check..."
-              className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-xs"
+              className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-lg text-xs"
             />
           </div>
         </div>

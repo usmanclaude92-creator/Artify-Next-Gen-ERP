@@ -31,19 +31,19 @@ export const SupplierAnalyticsView: React.FC = () => {
         onExport={handleExport}
       />
 
-      <div className="bg-white border border-slate-200 rounded-xl p-5 shadow-xs">
-        <div className="pb-4 mb-4 border-b border-slate-100">
-          <h3 className="text-sm font-bold text-slate-900 flex items-center gap-2">
-            <ShoppingCart className="w-4 h-4 text-indigo-600" />
+      <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl p-5 shadow-xs">
+        <div className="pb-4 mb-4 border-b border-slate-100 dark:border-slate-800">
+          <h3 className="text-sm font-bold text-slate-900 dark:text-slate-100 flex items-center gap-2">
+            <ShoppingCart className="w-4 h-4 text-indigo-600 dark:text-indigo-400" />
             Vendor Spend Concentration, OTIF Delivery & Quality Scorecard
           </h3>
-          <p className="text-xs text-slate-500">Procurement exposure, quality defect rates (PPM), and contract renewal timelines</p>
+          <p className="text-xs text-slate-500 dark:text-slate-400">Procurement exposure, quality defect rates (PPM), and contract renewal timelines</p>
         </div>
 
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs border-collapse">
             <thead>
-              <tr className="border-b border-slate-200 bg-slate-50 text-slate-600">
+              <tr className="border-b border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/50 text-slate-600 dark:text-slate-400">
                 <th className="py-2.5 px-3 font-semibold">Vendor / Supplier Name</th>
                 <th className="py-2.5 px-3 font-semibold">Spend Category</th>
                 <th className="py-2.5 px-3 font-mono text-right">YTD Spend ({currencySymbol})</th>
@@ -55,26 +55,26 @@ export const SupplierAnalyticsView: React.FC = () => {
                 <th className="py-2.5 px-3 text-center">Risk Rating</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-100">
+            <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
               {supplierAnalytics.map(row => (
-                <tr key={row.supplierCode} className="hover:bg-slate-50">
+                <tr key={row.supplierCode} className="hover:bg-slate-50 dark:hover:bg-slate-800/50">
                   <td className="py-3 px-3">
-                    <span className="font-bold text-slate-900 block">{row.supplierName}</span>
-                    <span className="text-[10px] text-slate-400 font-mono">{row.supplierCode}</span>
+                    <span className="font-bold text-slate-900 dark:text-slate-100 block">{row.supplierName}</span>
+                    <span className="text-[10px] text-slate-500 dark:text-slate-400 font-mono">{row.supplierCode}</span>
                   </td>
-                  <td className="py-3 px-3 text-slate-700 font-medium">{row.category}</td>
-                  <td className="py-3 px-3 font-mono font-bold text-right text-slate-900">{formatCurrency(row.ytdSpendOMR)}</td>
-                  <td className="py-3 px-3 font-mono font-bold text-right text-indigo-700">{row.spendConcentrationPercent}%</td>
-                  <td className="py-3 px-3 font-mono font-bold text-right text-emerald-700">{row.onTimeDeliveryRate}%</td>
-                  <td className="py-3 px-3 font-mono text-right text-slate-600 font-semibold">{row.qualityDefectRatePpm} PPM</td>
-                  <td className="py-3 px-3 font-mono text-right text-slate-800">{formatCurrency(row.outstandingPayablesOMR)}</td>
-                  <td className="py-3 px-3 font-mono text-right text-slate-600">{row.paymentTermDays} Days</td>
+                  <td className="py-3 px-3 text-slate-700 dark:text-slate-300 font-medium">{row.category}</td>
+                  <td className="py-3 px-3 font-mono font-bold text-right text-slate-900 dark:text-slate-100">{formatCurrency(row.ytdSpendOMR)}</td>
+                  <td className="py-3 px-3 font-mono font-bold text-right text-indigo-700 dark:text-indigo-300">{row.spendConcentrationPercent}%</td>
+                  <td className="py-3 px-3 font-mono font-bold text-right text-emerald-700 dark:text-emerald-300">{row.onTimeDeliveryRate}%</td>
+                  <td className="py-3 px-3 font-mono text-right text-slate-600 dark:text-slate-400 font-semibold">{row.qualityDefectRatePpm} PPM</td>
+                  <td className="py-3 px-3 font-mono text-right text-slate-800 dark:text-slate-200">{formatCurrency(row.outstandingPayablesOMR)}</td>
+                  <td className="py-3 px-3 font-mono text-right text-slate-600 dark:text-slate-400">{row.paymentTermDays} Days</td>
                   <td className="py-3 px-3 text-center">
                     <span
                       className={`inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold ${
                         row.riskRating === 'Low'
-                          ? 'bg-emerald-100 text-emerald-800'
-                          : 'bg-amber-100 text-amber-800'
+                          ? 'bg-emerald-100 dark:bg-emerald-500/20 text-emerald-800 dark:text-emerald-200'
+                          : 'bg-amber-100 dark:bg-amber-500/20 text-amber-800 dark:text-amber-200'
                       }`}
                     >
                       {row.riskRating} Risk

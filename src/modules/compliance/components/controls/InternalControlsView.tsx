@@ -131,15 +131,15 @@ export const InternalControlsView: React.FC = () => {
   return (
     <div className="space-y-6">
       {/* Submodule Header */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm">
         <div>
           <div className="flex items-center gap-2">
-            <span className="text-xs font-bold font-mono px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-700">
+            <span className="text-xs font-bold font-mono px-2.5 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">
               17.03
             </span>
-            <h2 className="text-xl font-bold text-slate-900">COSO Internal Controls & Segregation of Duties (SoD)</h2>
+            <h2 className="text-xl font-bold text-slate-900 dark:text-slate-100">COSO Internal Controls & Segregation of Duties (SoD)</h2>
           </div>
-          <p className="text-sm text-slate-500 mt-1">
+          <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">
             Enterprise key control matrix, Delegation of Authority (DOA) financial thresholds, automated SoD conflict matrices, and control effectiveness workpapers.
           </p>
         </div>
@@ -165,13 +165,13 @@ export const InternalControlsView: React.FC = () => {
       </div>
 
       {/* Tabs */}
-      <div className="flex items-center gap-2 border-b border-slate-200">
+      <div className="flex items-center gap-2 border-b border-slate-200 dark:border-slate-700">
         <button
           onClick={() => setActiveTab('framework')}
           className={`px-5 py-3 text-sm font-semibold border-b-2 transition flex items-center gap-2 ${
             activeTab === 'framework'
-              ? 'border-emerald-600 text-emerald-700 bg-emerald-50/50 rounded-t-xl'
-              : 'border-transparent text-slate-600 hover:text-slate-900'
+              ? 'border-emerald-600 text-emerald-700 dark:text-emerald-300 bg-emerald-50/50 dark:bg-emerald-500/50 rounded-t-xl'
+              : 'border-transparent text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100'
           }`}
         >
           <ShieldCheck className="w-4 h-4" /> Control Matrix ({controlActivities.length})
@@ -180,8 +180,8 @@ export const InternalControlsView: React.FC = () => {
           onClick={() => setActiveTab('approval')}
           className={`px-5 py-3 text-sm font-semibold border-b-2 transition flex items-center gap-2 ${
             activeTab === 'approval'
-              ? 'border-emerald-600 text-emerald-700 bg-emerald-50/50 rounded-t-xl'
-              : 'border-transparent text-slate-600 hover:text-slate-900'
+              ? 'border-emerald-600 text-emerald-700 dark:text-emerald-300 bg-emerald-50/50 dark:bg-emerald-500/50 rounded-t-xl'
+              : 'border-transparent text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100'
           }`}
         >
           <SlidersHorizontal className="w-4 h-4" /> Approval Limits (DOA) ({approvalRules.length})
@@ -190,8 +190,8 @@ export const InternalControlsView: React.FC = () => {
           onClick={() => setActiveTab('sod')}
           className={`px-5 py-3 text-sm font-semibold border-b-2 transition flex items-center gap-2 ${
             activeTab === 'sod'
-              ? 'border-emerald-600 text-emerald-700 bg-emerald-50/50 rounded-t-xl'
-              : 'border-transparent text-slate-600 hover:text-slate-900'
+              ? 'border-emerald-600 text-emerald-700 dark:text-emerald-300 bg-emerald-50/50 dark:bg-emerald-500/50 rounded-t-xl'
+              : 'border-transparent text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100'
           }`}
         >
           <Lock className="w-4 h-4" /> Segregation of Duties ({sodRules.length})
@@ -200,8 +200,8 @@ export const InternalControlsView: React.FC = () => {
           onClick={() => setActiveTab('testing')}
           className={`px-5 py-3 text-sm font-semibold border-b-2 transition flex items-center gap-2 ${
             activeTab === 'testing'
-              ? 'border-emerald-600 text-emerald-700 bg-emerald-50/50 rounded-t-xl'
-              : 'border-transparent text-slate-600 hover:text-slate-900'
+              ? 'border-emerald-600 text-emerald-700 dark:text-emerald-300 bg-emerald-50/50 dark:bg-emerald-500/50 rounded-t-xl'
+              : 'border-transparent text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100'
           }`}
         >
           <FileCheck className="w-4 h-4" /> Walkthrough Testing ({controlTests.length})
@@ -211,22 +211,22 @@ export const InternalControlsView: React.FC = () => {
       {/* 1. CONTROL FRAMEWORK */}
       {activeTab === 'framework' && (
         <div className="space-y-4">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-3 bg-slate-50 p-3 rounded-xl border border-slate-200">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-3 bg-slate-50 dark:bg-slate-800/50 p-3 rounded-xl border border-slate-200 dark:border-slate-700">
             <div className="md:col-span-2 relative">
-              <Search className="w-4 h-4 absolute left-3 top-3 text-slate-400" />
+              <Search className="w-4 h-4 absolute left-3 top-3 text-slate-500 dark:text-slate-400" />
               <input
                 type="text"
                 placeholder="Search control by code, name, owner..."
                 value={ctrlSearch}
                 onChange={e => setCtrlSearch(e.target.value)}
-                className="w-full pl-9 pr-4 py-2 text-sm bg-white border border-slate-200 rounded-lg focus:ring-2 focus:ring-emerald-500"
+                className="w-full pl-9 pr-4 py-2 text-sm bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-emerald-500"
               />
             </div>
             <div>
               <select
                 value={selectedProcessArea}
                 onChange={e => setSelectedProcessArea(e.target.value)}
-                className="w-full px-3 py-2 text-sm bg-white border border-slate-200 rounded-lg focus:ring-2 focus:ring-emerald-500"
+                className="w-full px-3 py-2 text-sm bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-emerald-500"
               >
                 <option value="ALL">All Process Cycles</option>
                 <option value="PROCURE_TO_PAY">Procure-to-Pay (P2P)</option>
@@ -238,10 +238,10 @@ export const InternalControlsView: React.FC = () => {
             </div>
           </div>
 
-          <div className="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+          <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm overflow-hidden">
             <div className="overflow-x-auto">
-              <table className="w-full text-left text-sm text-slate-700">
-                <thead className="bg-slate-50 border-b border-slate-200 text-xs font-bold text-slate-500 uppercase tracking-wider">
+              <table className="w-full text-left text-sm text-slate-700 dark:text-slate-300">
+                <thead className="bg-slate-50 dark:bg-slate-800/50 border-b border-slate-200 dark:border-slate-700 text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
                   <tr>
                     <th className="px-5 py-3">Control Code & Area</th>
                     <th className="px-4 py-3">Control Description & Objective</th>
@@ -251,42 +251,42 @@ export const InternalControlsView: React.FC = () => {
                     <th className="px-4 py-3 text-center">Design Status</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-slate-200">
+                <tbody className="divide-y divide-slate-200 dark:divide-slate-700">
                   {filteredControls.map(c => (
-                    <tr key={c.id} className="hover:bg-slate-50 transition">
+                    <tr key={c.id} className="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition">
                       <td className="px-5 py-4">
                         <div className="flex items-center gap-2">
-                          <span className="font-mono text-xs font-bold px-2 py-0.5 rounded bg-slate-100 text-slate-800">
+                          <span className="font-mono text-xs font-bold px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200">
                             {c.code}
                           </span>
                           {c.keyControl && (
-                            <span className="px-1.5 py-0.5 rounded bg-amber-50 text-amber-700 font-bold text-[10px]">
+                            <span className="px-1.5 py-0.5 rounded bg-amber-50 dark:bg-amber-500/10 text-amber-700 dark:text-amber-300 font-bold text-[10px]">
                               KEY
                             </span>
                           )}
                         </div>
-                        <span className="text-[11px] text-slate-400 block mt-1">
+                        <span className="text-[11px] text-slate-500 dark:text-slate-400 block mt-1">
                           {c.processArea.replace(/_/g, ' ')}
                         </span>
                       </td>
                       <td className="px-4 py-4 max-w-md">
-                        <p className="font-semibold text-slate-900 text-xs">{c.controlName}</p>
-                        <p className="text-[11px] text-slate-500 mt-0.5 line-clamp-2">{c.controlObjective}</p>
+                        <p className="font-semibold text-slate-900 dark:text-slate-100 text-xs">{c.controlName}</p>
+                        <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5 line-clamp-2">{c.controlObjective}</p>
                       </td>
                       <td className="px-4 py-4">
-                        <span className="text-xs font-medium text-slate-800 block">{c.controlType}</span>
-                        <span className="text-[11px] text-slate-400">{c.automatedOrManual}</span>
+                        <span className="text-xs font-medium text-slate-800 dark:text-slate-200 block">{c.controlType}</span>
+                        <span className="text-[11px] text-slate-500 dark:text-slate-400">{c.automatedOrManual}</span>
                       </td>
-                      <td className="px-4 py-4 font-mono text-xs text-slate-600">{c.frequency}</td>
-                      <td className="px-4 py-4 text-xs font-medium text-slate-800">{c.ownerRole}</td>
+                      <td className="px-4 py-4 font-mono text-xs text-slate-600 dark:text-slate-400">{c.frequency}</td>
+                      <td className="px-4 py-4 text-xs font-medium text-slate-800 dark:text-slate-200">{c.ownerRole}</td>
                       <td className="px-4 py-4 text-center">
                         <span
                           className={`inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-semibold ${
                             c.status === 'EFFECTIVE'
-                              ? 'bg-emerald-50 text-emerald-700 border border-emerald-200'
+                              ? 'bg-emerald-50 dark:bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-500/30'
                               : c.status === 'DEFICIENT'
-                              ? 'bg-rose-50 text-rose-700 border border-rose-200'
-                              : 'bg-slate-100 text-slate-600'
+                              ? 'bg-rose-50 dark:bg-rose-500/10 text-rose-700 dark:text-rose-300 border border-rose-200 dark:border-rose-500/30'
+                              : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400'
                           }`}
                         >
                           {c.status === 'EFFECTIVE' && <CheckCircle2 className="w-3 h-3" />}
@@ -308,40 +308,40 @@ export const InternalControlsView: React.FC = () => {
         <div className="space-y-4">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {approvalRules.map(rule => (
-              <div key={rule.id} className="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm space-y-4">
+              <div key={rule.id} className="bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm space-y-4">
                 <div className="flex items-center justify-between">
-                  <span className="font-mono text-xs font-bold px-2 py-0.5 rounded bg-slate-100 text-slate-800">
+                  <span className="font-mono text-xs font-bold px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200">
                     {rule.ruleCode}
                   </span>
-                  <span className="px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 text-xs font-semibold border border-emerald-200">
+                  <span className="px-2 py-0.5 rounded-full bg-emerald-50 dark:bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 text-xs font-semibold border border-emerald-200 dark:border-emerald-500/30">
                     {rule.status}
                   </span>
                 </div>
 
                 <div>
-                  <h4 className="font-bold text-slate-900 text-sm">{rule.workflowName}</h4>
-                  <div className="mt-2 p-3 bg-slate-50 rounded-xl border border-slate-100">
-                    <span className="text-[10px] uppercase font-bold text-slate-400 block">Monetary Threshold</span>
-                    <strong className="text-sm font-mono text-slate-900">
+                  <h4 className="font-bold text-slate-900 dark:text-slate-100 text-sm">{rule.workflowName}</h4>
+                  <div className="mt-2 p-3 bg-slate-50 dark:bg-slate-800/50 rounded-xl border border-slate-100 dark:border-slate-800">
+                    <span className="text-[10px] uppercase font-bold text-slate-500 dark:text-slate-400 block">Monetary Threshold</span>
+                    <strong className="text-sm font-mono text-slate-900 dark:text-slate-100">
                       OMR {rule.thresholdMinOMR.toLocaleString()} — OMR {rule.thresholdMaxOMR.toLocaleString()}
                     </strong>
                   </div>
                 </div>
 
-                <div className="text-xs text-slate-600 space-y-1.5">
-                  <strong className="text-[11px] font-bold text-slate-700 block">Required Dual Approvers:</strong>
+                <div className="text-xs text-slate-600 dark:text-slate-400 space-y-1.5">
+                  <strong className="text-[11px] font-bold text-slate-700 dark:text-slate-300 block">Required Dual Approvers:</strong>
                   <div className="flex flex-wrap gap-1.5">
                     {rule.requiredApprovers.map((appr, i) => (
-                      <span key={i} className="px-2 py-1 rounded-md bg-indigo-50 text-indigo-700 font-medium text-[11px]">
+                      <span key={i} className="px-2 py-1 rounded-md bg-indigo-50 dark:bg-indigo-500/10 text-indigo-700 dark:text-indigo-300 font-medium text-[11px]">
                         {appr}
                       </span>
                     ))}
                   </div>
                 </div>
 
-                <div className="pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-400">
+                <div className="pt-3 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-xs text-slate-500 dark:text-slate-400">
                   <span>Self-Approval: <strong>Forbidden</strong></span>
-                  <span>Active Violations: <strong className="text-emerald-600">0</strong></span>
+                  <span>Active Violations: <strong className="text-emerald-600 dark:text-emerald-400">0</strong></span>
                 </div>
               </div>
             ))}
@@ -352,64 +352,64 @@ export const InternalControlsView: React.FC = () => {
       {/* 3. SEGREGATION OF DUTIES (SoD) */}
       {activeTab === 'sod' && (
         <div className="space-y-4">
-          <div className="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
-            <div className="p-5 border-b border-slate-200">
-              <h3 className="font-bold text-slate-900 text-base">Incompatible Role Conflict Analyzer</h3>
-              <p className="text-xs text-slate-500">
+          <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm overflow-hidden">
+            <div className="p-5 border-b border-slate-200 dark:border-slate-700">
+              <h3 className="font-bold text-slate-900 dark:text-slate-100 text-base">Incompatible Role Conflict Analyzer</h3>
+              <p className="text-xs text-slate-500 dark:text-slate-400">
                 Continuous automated scans detecting users holding conflicting transactional roles across modules.
               </p>
             </div>
 
-            <div className="divide-y divide-slate-200">
+            <div className="divide-y divide-slate-200 dark:divide-slate-700">
               {sodRules.map(sod => (
                 <div key={sod.id} className="p-5 space-y-3">
                   <div className="flex flex-col md:flex-row md:items-center justify-between gap-2">
                     <div className="flex items-center gap-2">
-                      <span className="font-mono text-xs font-bold px-2 py-0.5 rounded bg-slate-100 text-slate-800">
+                      <span className="font-mono text-xs font-bold px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200">
                         {sod.ruleCode}
                       </span>
-                      <h4 className="font-bold text-slate-900 text-sm">{sod.conflictTitle}</h4>
+                      <h4 className="font-bold text-slate-900 dark:text-slate-100 text-sm">{sod.conflictTitle}</h4>
                     </div>
                     <span
                       className={`text-xs font-bold px-2.5 py-0.5 rounded-full ${
                         sod.severity === 'CRITICAL'
-                          ? 'bg-rose-50 text-rose-700 border border-rose-200'
-                          : 'bg-amber-50 text-amber-700 border border-amber-200'
+                          ? 'bg-rose-50 dark:bg-rose-500/10 text-rose-700 dark:text-rose-300 border border-rose-200 dark:border-rose-500/30'
+                          : 'bg-amber-50 dark:bg-amber-500/10 text-amber-700 dark:text-amber-300 border border-amber-200 dark:border-amber-500/30'
                       }`}
                     >
                       {sod.severity} Risk
                     </span>
                   </div>
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3 bg-slate-50 p-3 rounded-xl border border-slate-100 text-xs">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3 bg-slate-50 dark:bg-slate-800/50 p-3 rounded-xl border border-slate-100 dark:border-slate-800 text-xs">
                     <div>
-                      <span className="text-[10px] uppercase font-bold text-slate-400 block">Incompatible Role A</span>
-                      <strong className="text-slate-800">{sod.incompatibleRoleA}</strong>
+                      <span className="text-[10px] uppercase font-bold text-slate-500 dark:text-slate-400 block">Incompatible Role A</span>
+                      <strong className="text-slate-800 dark:text-slate-200">{sod.incompatibleRoleA}</strong>
                     </div>
                     <div>
-                      <span className="text-[10px] uppercase font-bold text-slate-400 block">Incompatible Role B</span>
-                      <strong className="text-slate-800">{sod.incompatibleRoleB}</strong>
+                      <span className="text-[10px] uppercase font-bold text-slate-500 dark:text-slate-400 block">Incompatible Role B</span>
+                      <strong className="text-slate-800 dark:text-slate-200">{sod.incompatibleRoleB}</strong>
                     </div>
                   </div>
 
-                  <p className="text-xs text-slate-600 leading-relaxed">{sod.riskDescription}</p>
+                  <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">{sod.riskDescription}</p>
 
                   {/* Active Violations List */}
                   {sod.activeViolations.length > 0 ? (
-                    <div className="mt-3 p-3 rounded-xl bg-amber-50/70 border border-amber-200 space-y-2">
-                      <div className="flex items-center gap-1.5 text-xs font-bold text-amber-900">
-                        <AlertTriangle className="w-4 h-4 text-amber-600" />
+                    <div className="mt-3 p-3 rounded-xl bg-amber-50/70 dark:bg-amber-500/70 border border-amber-200 dark:border-amber-500/30 space-y-2">
+                      <div className="flex items-center gap-1.5 text-xs font-bold text-amber-900 dark:text-amber-100">
+                        <AlertTriangle className="w-4 h-4 text-amber-600 dark:text-amber-400" />
                         Active User Conflict Identified ({sod.activeViolations.length})
                       </div>
                       {sod.activeViolations.map((v, i) => (
-                        <div key={i} className="flex flex-col md:flex-row md:items-center justify-between gap-2 p-2.5 bg-white rounded-lg border border-amber-200 text-xs">
+                        <div key={i} className="flex flex-col md:flex-row md:items-center justify-between gap-2 p-2.5 bg-white dark:bg-slate-900 rounded-lg border border-amber-200 dark:border-amber-500/30 text-xs">
                           <div>
-                            <strong className="text-slate-900">{v.userName}</strong> ({v.department})
-                            <p className="text-[11px] text-slate-500 mt-0.5">
+                            <strong className="text-slate-900 dark:text-slate-100">{v.userName}</strong> ({v.department})
+                            <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">
                               Mitigating Control: {v.mitigatingControl || 'None assigned'}
                             </p>
                             {v.exceptionApprovedBy && (
-                              <p className="text-[10px] text-emerald-700 font-mono">
+                              <p className="text-[10px] text-emerald-700 dark:text-emerald-300 font-mono">
                                 Waiver Approved By: {v.exceptionApprovedBy}
                               </p>
                             )}
@@ -432,7 +432,7 @@ export const InternalControlsView: React.FC = () => {
                       ))}
                     </div>
                   ) : (
-                    <div className="flex items-center gap-1.5 text-xs font-medium text-emerald-700">
+                    <div className="flex items-center gap-1.5 text-xs font-medium text-emerald-700 dark:text-emerald-300">
                       <CheckCircle2 className="w-4 h-4" /> Zero active SoD conflicts across all company branches
                     </div>
                   )}
@@ -446,17 +446,17 @@ export const InternalControlsView: React.FC = () => {
       {/* 4. CONTROL TESTING */}
       {activeTab === 'testing' && (
         <div className="space-y-4">
-          <div className="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
-            <div className="p-5 border-b border-slate-200">
-              <h3 className="font-bold text-slate-900 text-base">Internal Control Sample Testing Workpapers</h3>
-              <p className="text-xs text-slate-500">
+          <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm overflow-hidden">
+            <div className="p-5 border-b border-slate-200 dark:border-slate-700">
+              <h3 className="font-bold text-slate-900 dark:text-slate-100 text-base">Internal Control Sample Testing Workpapers</h3>
+              <p className="text-xs text-slate-500 dark:text-slate-400">
                 Formal walkthrough results, sample populations, and operational effectiveness conclusions.
               </p>
             </div>
 
             <div className="overflow-x-auto">
-              <table className="w-full text-left text-sm text-slate-700">
-                <thead className="bg-slate-50 border-b border-slate-200 text-xs font-bold text-slate-500 uppercase tracking-wider">
+              <table className="w-full text-left text-sm text-slate-700 dark:text-slate-300">
+                <thead className="bg-slate-50 dark:bg-slate-800/50 border-b border-slate-200 dark:border-slate-700 text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
                   <tr>
                     <th className="px-5 py-3">Workpaper Ref & Date</th>
                     <th className="px-4 py-3">Target Control Code</th>
@@ -466,28 +466,28 @@ export const InternalControlsView: React.FC = () => {
                     <th className="px-4 py-3">Conclusion</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-slate-200">
+                <tbody className="divide-y divide-slate-200 dark:divide-slate-700">
                   {controlTests.map(test => (
-                    <tr key={test.id} className="hover:bg-slate-50 transition">
+                    <tr key={test.id} className="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition">
                       <td className="px-5 py-4">
-                        <span className="font-mono text-xs font-bold text-slate-900">{test.workpaperReference}</span>
-                        <span className="text-[11px] text-slate-400 block">{test.completedDate}</span>
+                        <span className="font-mono text-xs font-bold text-slate-900 dark:text-slate-100">{test.workpaperReference}</span>
+                        <span className="text-[11px] text-slate-500 dark:text-slate-400 block">{test.completedDate}</span>
                       </td>
-                      <td className="px-4 py-4 font-mono font-bold text-xs text-slate-800">{test.controlCode}</td>
-                      <td className="px-4 py-4 text-xs text-slate-700">{test.testerName}</td>
+                      <td className="px-4 py-4 font-mono font-bold text-xs text-slate-800 dark:text-slate-200">{test.controlCode}</td>
+                      <td className="px-4 py-4 text-xs text-slate-700 dark:text-slate-300">{test.testerName}</td>
                       <td className="px-4 py-4 text-xs font-mono">
                         <span>Tested: {test.sampleSize}</span>
-                        <span className={`block font-bold ${test.exceptionsIdentified > 0 ? 'text-rose-600' : 'text-emerald-600'}`}>
+                        <span className={`block font-bold ${test.exceptionsIdentified > 0 ? 'text-rose-600 dark:text-rose-400' : 'text-emerald-600 dark:text-emerald-400'}`}>
                           Exceptions: {test.exceptionsIdentified}
                         </span>
                       </td>
-                      <td className="px-4 py-4 text-xs text-slate-600 max-w-sm">{test.walkthroughNotes}</td>
+                      <td className="px-4 py-4 text-xs text-slate-600 dark:text-slate-400 max-w-sm">{test.walkthroughNotes}</td>
                       <td className="px-4 py-4">
                         <span
                           className={`px-2.5 py-0.5 rounded-full text-xs font-semibold ${
                             test.testConclusion === 'OPERATING_EFFECTIVELY'
-                              ? 'bg-emerald-50 text-emerald-700 border border-emerald-200'
-                              : 'bg-rose-50 text-rose-700 border border-rose-200'
+                              ? 'bg-emerald-50 dark:bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-500/30'
+                              : 'bg-rose-50 dark:bg-rose-500/10 text-rose-700 dark:text-rose-300 border border-rose-200 dark:border-rose-500/30'
                           }`}
                         >
                           {test.testConclusion.replace(/_/g, ' ')}

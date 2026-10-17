@@ -88,27 +88,27 @@ const BudgetingRunnerInner: React.FC<BudgetingModuleRunnerProps> = ({
   return (
     <div className="space-y-6 animate-fadeIn">
       {/* Module Level Header */}
-      <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl">
+      <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 shadow-xl">
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
           <div className="flex items-center gap-4">
             <button
               onClick={() => onNavigate({ view: 'dashboard' })}
               aria-label="Back to dashboard"
-              className="p-2.5 rounded-xl bg-slate-800 text-slate-400 hover:text-white hover:bg-slate-700 transition-colors cursor-pointer"
+              className="p-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors cursor-pointer"
             >
               <ArrowLeft className="w-5 h-5" />
             </button>
             <div className="w-12 h-12 rounded-2xl bg-emerald-600/20 border border-emerald-500/30 flex items-center justify-center shadow-lg shadow-emerald-500/10">
-              <PieChart className="w-6 h-6 text-emerald-400" />
+              <PieChart className="w-6 h-6 text-emerald-600 dark:text-emerald-400" />
             </div>
             <div>
               <div className="flex items-center gap-2">
-                <span className="px-2.5 py-0.5 rounded-full text-xs font-black bg-emerald-950 text-emerald-400 border border-emerald-800 tracking-wider">
+                <span className="px-2.5 py-0.5 rounded-full text-xs font-black bg-emerald-50 dark:bg-emerald-950 text-emerald-600 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800 tracking-wider">
                   MODULE 11
                 </span>
-                <span className="text-xs text-slate-400 font-medium">{module.phase}</span>
+                <span className="text-xs text-slate-600 dark:text-slate-400 font-medium">{module.phase}</span>
               </div>
-              <h1 className="text-2xl font-black text-white tracking-tight mt-0.5">
+              <h1 className="text-2xl font-black text-slate-900 dark:text-white tracking-tight mt-0.5">
                 {module.name}
               </h1>
             </div>
@@ -121,7 +121,7 @@ const BudgetingRunnerInner: React.FC<BudgetingModuleRunnerProps> = ({
                 value={selectedBudget.id}
                 onChange={(e) => selectBudget(e.target.value)}
                 aria-label="Select active enterprise budget"
-                className="appearance-none bg-slate-950 border border-slate-800 rounded-xl px-4 py-2.5 pr-9 text-xs font-bold text-white focus:outline-none focus:border-emerald-500 cursor-pointer shadow-lg"
+                className="appearance-none bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl px-4 py-2.5 pr-9 text-xs font-bold text-slate-900 dark:text-white focus:outline-none focus:border-emerald-500 cursor-pointer shadow-lg"
               >
                 {budgets.map(b => (
                   <option key={b.id} value={b.id}>
@@ -129,7 +129,7 @@ const BudgetingRunnerInner: React.FC<BudgetingModuleRunnerProps> = ({
                   </option>
                 ))}
               </select>
-              <ChevronDown className="w-4 h-4 absolute right-3 top-3 text-slate-400 pointer-events-none" />
+              <ChevronDown className="w-4 h-4 absolute right-3 top-3 text-slate-600 dark:text-slate-400 pointer-events-none" />
             </div>
 
             {/* AI Copilot Trigger */}
@@ -137,7 +137,7 @@ const BudgetingRunnerInner: React.FC<BudgetingModuleRunnerProps> = ({
               onClick={() => setShowAiModal(true)}
               className="flex items-center gap-2 px-4 py-2.5 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white rounded-xl text-xs font-bold shadow-lg shadow-emerald-600/30 transition-all cursor-pointer"
             >
-              <Sparkles className="w-4 h-4 text-emerald-200 animate-pulse" />
+              <Sparkles className="w-4 h-4 text-emerald-800 dark:text-emerald-200 animate-pulse" />
               <span>FP&A AI Copilot</span>
             </button>
 
@@ -147,8 +147,8 @@ const BudgetingRunnerInner: React.FC<BudgetingModuleRunnerProps> = ({
               aria-label={isFavorite ? 'Remove from favorites' : 'Add to favorites'}
               className={`p-2.5 rounded-xl border transition-colors cursor-pointer ${
                 isFavorite
-                  ? 'bg-amber-950/60 border-amber-800 text-amber-400'
-                  : 'bg-slate-800 border-slate-700 text-slate-400 hover:text-white'
+                  ? 'bg-amber-50 dark:bg-amber-950/60 border-amber-200 dark:border-amber-800 text-amber-700 dark:text-amber-400'
+                  : 'bg-slate-100 dark:bg-slate-800 border-slate-300 dark:border-slate-700 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
               }`}
             >
               <Star className={`w-5 h-5 ${isFavorite ? 'fill-amber-400' : ''}`} />
@@ -157,13 +157,13 @@ const BudgetingRunnerInner: React.FC<BudgetingModuleRunnerProps> = ({
         </div>
 
         {/* Executive KPI Summary Cards */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-6 pt-6 border-t border-slate-800">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-6 pt-6 border-t border-slate-200 dark:border-slate-800">
           {module.kpiPlaceholders?.map((kpi, idx) => (
-            <div key={idx} className="bg-slate-950/70 border border-slate-800/80 rounded-xl p-3.5">
-              <span className="text-[10px] uppercase font-bold text-slate-500 tracking-wider block">
+            <div key={idx} className="bg-slate-50/70 dark:bg-slate-950/70 border border-slate-200/80 dark:border-slate-800/80 rounded-xl p-3.5">
+              <span className="text-[10px] uppercase font-bold text-slate-500 dark:text-slate-400 tracking-wider block">
                 {kpi.label}
               </span>
-              <p className="text-sm sm:text-base font-black font-mono text-white mt-1">
+              <p className="text-sm sm:text-base font-black font-mono text-slate-900 dark:text-white mt-1">
                 {kpi.value}
               </p>
             </div>
@@ -171,13 +171,13 @@ const BudgetingRunnerInner: React.FC<BudgetingModuleRunnerProps> = ({
         </div>
 
         {/* Functional Area Tab Navigation */}
-        <div className="flex items-center gap-2 mt-6 pt-4 border-t border-slate-800 overflow-x-auto pb-1">
+        <div className="flex items-center gap-2 mt-6 pt-4 border-t border-slate-200 dark:border-slate-800 overflow-x-auto pb-1">
           <button
             onClick={() => handleTabClick('11.01')}
             className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-bold transition-all cursor-pointer whitespace-nowrap ${
               currentTab === '11.01'
                 ? 'bg-emerald-600 text-white shadow-lg shadow-emerald-600/30'
-                : 'text-slate-400 hover:text-white hover:bg-slate-800/80'
+                : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100/80 dark:hover:bg-slate-800/80'
             }`}
           >
             <Layers className="w-4 h-4" />
@@ -189,7 +189,7 @@ const BudgetingRunnerInner: React.FC<BudgetingModuleRunnerProps> = ({
             className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-bold transition-all cursor-pointer whitespace-nowrap ${
               currentTab === '11.02'
                 ? 'bg-emerald-600 text-white shadow-lg shadow-emerald-600/30'
-                : 'text-slate-400 hover:text-white hover:bg-slate-800/80'
+                : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100/80 dark:hover:bg-slate-800/80'
             }`}
           >
             <Calculator className="w-4 h-4" />
@@ -201,7 +201,7 @@ const BudgetingRunnerInner: React.FC<BudgetingModuleRunnerProps> = ({
             className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-bold transition-all cursor-pointer whitespace-nowrap ${
               currentTab === '11.03'
                 ? 'bg-emerald-600 text-white shadow-lg shadow-emerald-600/30'
-                : 'text-slate-400 hover:text-white hover:bg-slate-800/80'
+                : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100/80 dark:hover:bg-slate-800/80'
             }`}
           >
             <DollarSign className="w-4 h-4" />
@@ -213,7 +213,7 @@ const BudgetingRunnerInner: React.FC<BudgetingModuleRunnerProps> = ({
             className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-bold transition-all cursor-pointer whitespace-nowrap ${
               currentTab === '11.04'
                 ? 'bg-emerald-600 text-white shadow-lg shadow-emerald-600/30'
-                : 'text-slate-400 hover:text-white hover:bg-slate-800/80'
+                : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100/80 dark:hover:bg-slate-800/80'
             }`}
           >
             <ShieldCheck className="w-4 h-4" />
@@ -225,7 +225,7 @@ const BudgetingRunnerInner: React.FC<BudgetingModuleRunnerProps> = ({
             className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-bold transition-all cursor-pointer whitespace-nowrap ${
               currentTab === '11.05'
                 ? 'bg-emerald-600 text-white shadow-lg shadow-emerald-600/30'
-                : 'text-slate-400 hover:text-white hover:bg-slate-800/80'
+                : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100/80 dark:hover:bg-slate-800/80'
             }`}
           >
             <TrendingUp className="w-4 h-4" />

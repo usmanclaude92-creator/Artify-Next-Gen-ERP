@@ -73,13 +73,13 @@ export const RiskManagementView: React.FC = () => {
   const getRiskBadge = (level: RiskLevel) => {
     switch (level) {
       case 'CRITICAL':
-        return <span className="px-2.5 py-1 rounded-full text-xs font-bold bg-rose-100 text-rose-800 border border-rose-300">Critical</span>;
+        return <span className="px-2.5 py-1 rounded-full text-xs font-bold bg-rose-100 dark:bg-rose-500/20 text-rose-800 dark:text-rose-200 border border-rose-300 dark:border-rose-500/40">Critical</span>;
       case 'HIGH':
-        return <span className="px-2.5 py-1 rounded-full text-xs font-bold bg-orange-100 text-orange-800 border border-orange-300">High</span>;
+        return <span className="px-2.5 py-1 rounded-full text-xs font-bold bg-orange-100 dark:bg-orange-500/20 text-orange-800 dark:text-orange-200 border border-orange-300 dark:border-orange-500/40">High</span>;
       case 'MEDIUM':
-        return <span className="px-2.5 py-1 rounded-full text-xs font-bold bg-amber-100 text-amber-800 border border-amber-300">Medium</span>;
+        return <span className="px-2.5 py-1 rounded-full text-xs font-bold bg-amber-100 dark:bg-amber-500/20 text-amber-800 dark:text-amber-200 border border-amber-300 dark:border-amber-500/40">Medium</span>;
       case 'LOW':
-        return <span className="px-2.5 py-1 rounded-full text-xs font-bold bg-emerald-100 text-emerald-800 border border-emerald-300">Low</span>;
+        return <span className="px-2.5 py-1 rounded-full text-xs font-bold bg-emerald-100 dark:bg-emerald-500/20 text-emerald-800 dark:text-emerald-200 border border-emerald-300 dark:border-emerald-500/40">Low</span>;
     }
   };
 
@@ -117,10 +117,10 @@ export const RiskManagementView: React.FC = () => {
   // Likelihood (rows 5 down to 1), Impact (columns 1 across to 5)
   const renderHeatmapCell = (likelihood: number, impact: number) => {
     const cellScore = likelihood * impact;
-    let bgColor = 'bg-emerald-50 text-emerald-800 border-emerald-200';
-    if (cellScore >= 15) bgColor = 'bg-rose-100/90 text-rose-900 border-rose-300';
-    else if (cellScore >= 10) bgColor = 'bg-orange-100/80 text-orange-900 border-orange-300';
-    else if (cellScore >= 5) bgColor = 'bg-amber-50 text-amber-900 border-amber-200';
+    let bgColor = 'bg-emerald-50 dark:bg-emerald-500/10 text-emerald-800 dark:text-emerald-200 border-emerald-200 dark:border-emerald-500/30';
+    if (cellScore >= 15) bgColor = 'bg-rose-100/90 dark:bg-rose-500/90 text-rose-900 dark:text-rose-100 border-rose-300 dark:border-rose-500/40';
+    else if (cellScore >= 10) bgColor = 'bg-orange-100/80 dark:bg-orange-500/80 text-orange-900 dark:text-orange-100 border-orange-300 dark:border-orange-500/40';
+    else if (cellScore >= 5) bgColor = 'bg-amber-50 dark:bg-amber-500/10 text-amber-900 dark:text-amber-100 border-amber-200 dark:border-amber-500/30';
 
     // Find risks with matching inherent or residual positions
     const inherentMatches = riskItems.filter(
@@ -169,15 +169,15 @@ export const RiskManagementView: React.FC = () => {
   return (
     <div className="space-y-6">
       {/* Submodule Header */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm">
         <div>
           <div className="flex items-center gap-2">
-            <span className="text-xs font-bold font-mono px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-700">
+            <span className="text-xs font-bold font-mono px-2.5 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">
               17.04
             </span>
-            <h2 className="text-xl font-bold text-slate-900">Enterprise Risk Management (ERM) & Heatmap</h2>
+            <h2 className="text-xl font-bold text-slate-900 dark:text-slate-100">Enterprise Risk Management (ERM) & Heatmap</h2>
           </div>
-          <p className="text-sm text-slate-500 mt-1">
+          <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">
             Qualitative and quantitative risk scoring, dynamic 5x5 Inherent vs Residual risk matrix, and Key Risk Indicators (KRIs).
           </p>
         </div>
@@ -191,13 +191,13 @@ export const RiskManagementView: React.FC = () => {
       </div>
 
       {/* Tabs */}
-      <div className="flex items-center gap-2 border-b border-slate-200">
+      <div className="flex items-center gap-2 border-b border-slate-200 dark:border-slate-700">
         <button
           onClick={() => setActiveTab('register')}
           className={`px-5 py-3 text-sm font-semibold border-b-2 transition flex items-center gap-2 ${
             activeTab === 'register'
-              ? 'border-emerald-600 text-emerald-700 bg-emerald-50/50 rounded-t-xl'
-              : 'border-transparent text-slate-600 hover:text-slate-900'
+              ? 'border-emerald-600 text-emerald-700 dark:text-emerald-300 bg-emerald-50/50 dark:bg-emerald-500/50 rounded-t-xl'
+              : 'border-transparent text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100'
           }`}
         >
           <Shield className="w-4 h-4" /> Risk Register ({riskItems.length})
@@ -206,8 +206,8 @@ export const RiskManagementView: React.FC = () => {
           onClick={() => setActiveTab('heatmap')}
           className={`px-5 py-3 text-sm font-semibold border-b-2 transition flex items-center gap-2 ${
             activeTab === 'heatmap'
-              ? 'border-emerald-600 text-emerald-700 bg-emerald-50/50 rounded-t-xl'
-              : 'border-transparent text-slate-600 hover:text-slate-900'
+              ? 'border-emerald-600 text-emerald-700 dark:text-emerald-300 bg-emerald-50/50 dark:bg-emerald-500/50 rounded-t-xl'
+              : 'border-transparent text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100'
           }`}
         >
           <Grid className="w-4 h-4" /> Interactive 5×5 Heatmap
@@ -216,8 +216,8 @@ export const RiskManagementView: React.FC = () => {
           onClick={() => setActiveTab('mitigation')}
           className={`px-5 py-3 text-sm font-semibold border-b-2 transition flex items-center gap-2 ${
             activeTab === 'mitigation'
-              ? 'border-emerald-600 text-emerald-700 bg-emerald-50/50 rounded-t-xl'
-              : 'border-transparent text-slate-600 hover:text-slate-900'
+              ? 'border-emerald-600 text-emerald-700 dark:text-emerald-300 bg-emerald-50/50 dark:bg-emerald-500/50 rounded-t-xl'
+              : 'border-transparent text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100'
           }`}
         >
           <Target className="w-4 h-4" /> Mitigation & KRIs
@@ -227,22 +227,22 @@ export const RiskManagementView: React.FC = () => {
       {/* 1. RISK REGISTER */}
       {activeTab === 'register' && (
         <div className="space-y-4">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-3 bg-slate-50 p-3 rounded-xl border border-slate-200">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-3 bg-slate-50 dark:bg-slate-800/50 p-3 rounded-xl border border-slate-200 dark:border-slate-700">
             <div className="md:col-span-2 relative">
-              <Search className="w-4 h-4 absolute left-3 top-3 text-slate-400" />
+              <Search className="w-4 h-4 absolute left-3 top-3 text-slate-500 dark:text-slate-400" />
               <input
                 type="text"
                 placeholder="Search risk by code, title, owner, department..."
                 value={riskSearch}
                 onChange={e => setRiskSearch(e.target.value)}
-                className="w-full pl-9 pr-4 py-2 text-sm bg-white border border-slate-200 rounded-lg focus:ring-2 focus:ring-emerald-500"
+                className="w-full pl-9 pr-4 py-2 text-sm bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-emerald-500"
               />
             </div>
             <div>
               <select
                 value={selectedCategory}
                 onChange={e => setSelectedCategory(e.target.value)}
-                className="w-full px-3 py-2 text-sm bg-white border border-slate-200 rounded-lg focus:ring-2 focus:ring-emerald-500"
+                className="w-full px-3 py-2 text-sm bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-emerald-500"
               >
                 <option value="ALL">All Categories</option>
                 <option value="STRATEGIC">Strategic</option>
@@ -254,10 +254,10 @@ export const RiskManagementView: React.FC = () => {
             </div>
           </div>
 
-          <div className="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+          <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm overflow-hidden">
             <div className="overflow-x-auto">
-              <table className="w-full text-left text-sm text-slate-700">
-                <thead className="bg-slate-50 border-b border-slate-200 text-xs font-bold text-slate-500 uppercase tracking-wider">
+              <table className="w-full text-left text-sm text-slate-700 dark:text-slate-300">
+                <thead className="bg-slate-50 dark:bg-slate-800/50 border-b border-slate-200 dark:border-slate-700 text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
                   <tr>
                     <th className="px-5 py-3">Risk Code & Category</th>
                     <th className="px-4 py-3">Risk Title & Description</th>
@@ -268,46 +268,46 @@ export const RiskManagementView: React.FC = () => {
                     <th className="px-4 py-3 text-right">Actions</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-slate-200">
+                <tbody className="divide-y divide-slate-200 dark:divide-slate-700">
                   {filteredRisks.map(r => (
-                    <tr key={r.id} className="hover:bg-slate-50 transition">
+                    <tr key={r.id} className="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition">
                       <td className="px-5 py-4">
-                        <span className="font-mono text-xs font-bold px-2 py-0.5 rounded bg-slate-100 text-slate-800">
+                        <span className="font-mono text-xs font-bold px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200">
                           {r.code}
                         </span>
-                        <span className="text-[11px] text-slate-400 block mt-1 capitalize">
+                        <span className="text-[11px] text-slate-500 dark:text-slate-400 block mt-1 capitalize">
                           {r.category.toLowerCase().replace(/_/g, ' ')}
                         </span>
                       </td>
                       <td className="px-4 py-4 max-w-sm">
-                        <p className="font-semibold text-slate-900 text-xs">{r.title}</p>
-                        <p className="text-[11px] text-slate-500 line-clamp-1 mt-0.5">{r.description}</p>
+                        <p className="font-semibold text-slate-900 dark:text-slate-100 text-xs">{r.title}</p>
+                        <p className="text-[11px] text-slate-500 dark:text-slate-400 line-clamp-1 mt-0.5">{r.description}</p>
                       </td>
                       <td className="px-4 py-4">
-                        <p className="text-xs font-medium text-slate-900">{r.riskOwner}</p>
-                        <span className="text-[11px] text-slate-400">{r.department}</span>
+                        <p className="text-xs font-medium text-slate-900 dark:text-slate-100">{r.riskOwner}</p>
+                        <span className="text-[11px] text-slate-500 dark:text-slate-400">{r.department}</span>
                       </td>
                       <td className="px-4 py-4 text-center">
                         <div className="inline-flex flex-col items-center">
-                          <span className="font-mono font-bold text-xs text-slate-800">{r.inherentScore} / 25</span>
-                          <span className="text-[10px] text-slate-400">L:{r.inherentLikelihood} × I:{r.inherentImpact}</span>
+                          <span className="font-mono font-bold text-xs text-slate-800 dark:text-slate-200">{r.inherentScore} / 25</span>
+                          <span className="text-[10px] text-slate-500 dark:text-slate-400">L:{r.inherentLikelihood} × I:{r.inherentImpact}</span>
                         </div>
                       </td>
                       <td className="px-4 py-4 text-center">
                         <div className="inline-flex flex-col items-center">
                           {getRiskBadge(r.residualLevel)}
-                          <span className="font-mono text-[10px] text-emerald-700 font-bold mt-1">
+                          <span className="font-mono text-[10px] text-emerald-700 dark:text-emerald-300 font-bold mt-1">
                             Score: {r.residualScore}
                           </span>
                         </div>
                       </td>
-                      <td className="px-4 py-4 font-mono text-xs font-bold text-slate-900">
+                      <td className="px-4 py-4 font-mono text-xs font-bold text-slate-900 dark:text-slate-100">
                         OMR {r.financialExposureOMR.toLocaleString()}
                       </td>
                       <td className="px-4 py-4 text-right">
                         <button
                           onClick={() => setSelectedRiskDetail(r)}
-                          className="px-3 py-1.5 text-xs font-semibold text-slate-700 bg-slate-100 hover:bg-slate-200 rounded-lg transition cursor-pointer"
+                          className="px-3 py-1.5 text-xs font-semibold text-slate-700 dark:text-slate-300 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 rounded-lg transition cursor-pointer"
                         >
                           View Plan
                         </button>
@@ -323,11 +323,11 @@ export const RiskManagementView: React.FC = () => {
 
       {/* 2. 5x5 HEATMAP */}
       {activeTab === 'heatmap' && (
-        <div className="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm space-y-6">
+        <div className="bg-white dark:bg-slate-900 p-6 rounded-3xl border border-slate-200 dark:border-slate-700 shadow-sm space-y-6">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
             <div>
-              <h3 className="font-bold text-slate-900 text-lg">Inherent vs. Residual 5×5 Risk Matrix</h3>
-              <p className="text-xs text-slate-500">
+              <h3 className="font-bold text-slate-900 dark:text-slate-100 text-lg">Inherent vs. Residual 5×5 Risk Matrix</h3>
+              <p className="text-xs text-slate-500 dark:text-slate-400">
                 Visual plotting of organizational risks before and after active internal controls and mitigation strategies.
               </p>
             </div>
@@ -335,18 +335,18 @@ export const RiskManagementView: React.FC = () => {
             <div className="flex items-center gap-4 text-xs">
               <div className="flex items-center gap-1.5">
                 <span className="w-3 h-3 rounded bg-slate-900 inline-block" />
-                <span className="font-medium text-slate-700">Black: Inherent Risk</span>
+                <span className="font-medium text-slate-700 dark:text-slate-300">Black: Inherent Risk</span>
               </div>
               <div className="flex items-center gap-1.5">
                 <span className="w-3 h-3 rounded bg-emerald-600 inline-block" />
-                <span className="font-medium text-slate-700">Green: Residual Position</span>
+                <span className="font-medium text-slate-700 dark:text-slate-300">Green: Residual Position</span>
               </div>
             </div>
           </div>
 
           {/* 5x5 Grid */}
           <div className="space-y-2">
-            <div className="grid grid-cols-5 gap-2 text-center text-xs font-bold text-slate-500 uppercase tracking-wider pb-1">
+            <div className="grid grid-cols-5 gap-2 text-center text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider pb-1">
               <span>Impact 1 (Insignificant)</span>
               <span>Impact 2 (Minor)</span>
               <span>Impact 3 (Moderate)</span>
@@ -367,31 +367,31 @@ export const RiskManagementView: React.FC = () => {
       {activeTab === 'mitigation' && (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {riskItems.map(r => (
-            <div key={r.id} className="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm space-y-4">
+            <div key={r.id} className="bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm space-y-4">
               <div className="flex items-center justify-between">
-                <span className="font-mono text-xs font-bold px-2 py-0.5 rounded bg-slate-100 text-slate-800">
+                <span className="font-mono text-xs font-bold px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200">
                   {r.code}
                 </span>
-                <span className="px-2.5 py-0.5 rounded-full text-xs font-bold bg-indigo-50 text-indigo-700 border border-indigo-200">
+                <span className="px-2.5 py-0.5 rounded-full text-xs font-bold bg-indigo-50 dark:bg-indigo-500/10 text-indigo-700 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-500/30">
                   Strategy: {r.mitigationStrategy}
                 </span>
               </div>
 
-              <h4 className="font-bold text-slate-900 text-sm">{r.title}</h4>
+              <h4 className="font-bold text-slate-900 dark:text-slate-100 text-sm">{r.title}</h4>
 
-              <div className="p-3 bg-slate-50 rounded-xl border border-slate-100 text-xs">
-                <span className="text-[10px] uppercase font-bold text-slate-400 block mb-1">Mitigation Plan</span>
-                <p className="text-slate-700 leading-relaxed">{r.mitigationPlanSummary}</p>
+              <div className="p-3 bg-slate-50 dark:bg-slate-800/50 rounded-xl border border-slate-100 dark:border-slate-800 text-xs">
+                <span className="text-[10px] uppercase font-bold text-slate-500 dark:text-slate-400 block mb-1">Mitigation Plan</span>
+                <p className="text-slate-700 dark:text-slate-300 leading-relaxed">{r.mitigationPlanSummary}</p>
               </div>
 
-              <div className="space-y-2 pt-2 border-t border-slate-100">
-                <strong className="text-xs font-bold text-slate-700 block">Key Risk Indicators (KRIs):</strong>
+              <div className="space-y-2 pt-2 border-t border-slate-100 dark:border-slate-800">
+                <strong className="text-xs font-bold text-slate-700 dark:text-slate-300 block">Key Risk Indicators (KRIs):</strong>
                 {r.kriIndicators.map((kri, i) => (
-                  <div key={i} className="flex items-center justify-between p-2 rounded-lg bg-slate-50 border border-slate-200 text-xs">
-                    <span className="text-slate-800 font-medium">{kri.name}</span>
+                  <div key={i} className="flex items-center justify-between p-2 rounded-lg bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 text-xs">
+                    <span className="text-slate-800 dark:text-slate-200 font-medium">{kri.name}</span>
                     <div className="text-right font-mono text-[11px]">
-                      <span className="text-slate-400 mr-2">Limit: {kri.threshold}</span>
-                      <strong className="text-emerald-700 font-bold">{kri.currentValue}</strong>
+                      <span className="text-slate-500 dark:text-slate-400 mr-2">Limit: {kri.threshold}</span>
+                      <strong className="text-emerald-700 dark:text-emerald-300 font-bold">{kri.currentValue}</strong>
                     </div>
                   </div>
                 ))}

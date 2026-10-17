@@ -460,7 +460,7 @@ export const CompanyOrganizationLandingView: React.FC<CompanyOrganizationLanding
 
                   <button
                     onClick={() => handleOpenProcess(mod.id)}
-                    className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-indigo-50 dark:bg-indigo-950/60 hover:bg-indigo-600 hover:text-white dark:hover:bg-indigo-600 text-indigo-700 dark:text-indigo-300 text-xs font-semibold border border-indigo-200 dark:border-indigo-800/80 transition-all cursor-pointer group-hover:bg-indigo-600 group-hover:text-white group-hover:border-indigo-600 shadow-2xs"
+                    className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-indigo-50 dark:bg-indigo-950/60 hover:bg-indigo-600 hover:text-slate-900 dark:hover:text-white dark:hover:bg-indigo-600 text-indigo-700 dark:text-indigo-300 text-xs font-semibold border border-indigo-200 dark:border-indigo-800/80 transition-all cursor-pointer group-hover:bg-indigo-600 group-hover:text-slate-900 dark:group-hover:text-white group-hover:border-indigo-600 shadow-2xs"
                   >
                     <span>{mod.id === 'group-holding-hierarchy' ? 'Manage Hierarchy' : 'Open Module'}</span>
                     <ArrowRight className="w-3.5 h-3.5" />

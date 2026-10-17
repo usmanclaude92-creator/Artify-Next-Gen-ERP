@@ -575,40 +575,40 @@ export const SupplyChainNetworkMap: React.FC = () => {
   const getNodeBadgeColor = (type: NetworkNodeType) => {
     switch (type) {
       case 'WAREHOUSE_RDC':
-        return { bg: 'bg-purple-950/80', text: 'text-purple-400', border: 'border-purple-800', icon: Warehouse };
+        return { bg: 'bg-purple-50 dark:bg-purple-950/80', text: 'text-purple-600 dark:text-purple-400', border: 'border-purple-200 dark:border-purple-800', icon: Warehouse };
       case 'SEAPORT':
-        return { bg: 'bg-sky-950/80', text: 'text-sky-400', border: 'border-sky-800', icon: Anchor };
+        return { bg: 'bg-sky-50 dark:bg-sky-950/80', text: 'text-sky-600 dark:text-sky-400', border: 'border-sky-200 dark:border-sky-800', icon: Anchor };
       case 'AIRPORT':
-        return { bg: 'bg-cyan-950/80', text: 'text-cyan-400', border: 'border-cyan-800', icon: Plane };
+        return { bg: 'bg-cyan-50 dark:bg-cyan-950/80', text: 'text-cyan-600 dark:text-cyan-400', border: 'border-cyan-200 dark:border-cyan-800', icon: Plane };
       case 'CUSTOMER_SITE':
-        return { bg: 'bg-emerald-950/80', text: 'text-emerald-400', border: 'border-emerald-800', icon: PackageCheck };
+        return { bg: 'bg-emerald-50 dark:bg-emerald-950/80', text: 'text-emerald-600 dark:text-emerald-400', border: 'border-emerald-200 dark:border-emerald-800', icon: PackageCheck };
       default:
-        return { bg: 'bg-amber-950/80', text: 'text-amber-400', border: 'border-amber-800', icon: MapPin };
+        return { bg: 'bg-amber-50 dark:bg-amber-950/80', text: 'text-amber-700 dark:text-amber-400', border: 'border-amber-200 dark:border-amber-800', icon: MapPin };
     }
   };
 
   return (
     <div className="space-y-6 animate-fadeIn">
       {/* ----------------- HEADER & TOPOLOGY METRICS STRIP ----------------- */}
-      <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl relative overflow-hidden">
+      <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 shadow-xl relative overflow-hidden">
         <div className="absolute top-0 right-0 w-96 h-96 bg-sky-600/10 rounded-full blur-3xl pointer-events-none -mr-20 -mt-20" />
         
-        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 border-b border-slate-800 pb-5">
+        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 border-b border-slate-200 dark:border-slate-800 pb-5">
           <div>
             <div className="flex items-center gap-2">
-              <span className="px-2.5 py-0.5 rounded-full text-xs font-black bg-sky-950 text-sky-400 border border-sky-800 tracking-wider">
+              <span className="px-2.5 py-0.5 rounded-full text-xs font-black bg-sky-50 dark:bg-sky-950 text-sky-600 dark:text-sky-400 border border-sky-200 dark:border-sky-800 tracking-wider">
                 12.04.05 SUPPLY CHAIN NETWORK VISUALIZATION
               </span>
-              <span className="text-xs font-mono text-emerald-400 flex items-center gap-1.5">
+              <span className="text-xs font-mono text-emerald-600 dark:text-emerald-400 flex items-center gap-1.5">
                 <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
                 Live Multimodal Telemetry Active
               </span>
             </div>
-            <h2 className="text-xl font-black text-white tracking-tight mt-1 flex items-center gap-2">
+            <h2 className="text-xl font-black text-slate-900 dark:text-white tracking-tight mt-1 flex items-center gap-2">
               <span>Interactive Supply Chain Topology & Live Shipment Flow</span>
-              <Sparkles className="w-5 h-5 text-sky-400" />
+              <Sparkles className="w-5 h-5 text-sky-600 dark:text-sky-400" />
             </h2>
-            <p className="text-xs text-slate-400 mt-0.5">
+            <p className="text-xs text-slate-600 dark:text-slate-400 mt-0.5">
               Live end-to-end visual network graph mapping global sea/air arrival corridors, central distribution hubs (RDCs), transshipment terminals, and last-mile delivery tracking.
             </p>
           </div>
@@ -619,14 +619,14 @@ export const SupplyChainNetworkMap: React.FC = () => {
               onClick={() => setIsLiveTelemetrySimulating(!isLiveTelemetrySimulating)}
               className={`flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-bold transition-all border cursor-pointer ${
                 isLiveTelemetrySimulating
-                  ? 'bg-emerald-950/60 text-emerald-300 border-emerald-800/80 shadow-lg shadow-emerald-950/40'
-                  : 'bg-slate-800 text-slate-400 border-slate-700 hover:text-white'
+                  ? 'bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300 border-emerald-800/80 shadow-lg shadow-emerald-950/40'
+                  : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 border-slate-300 dark:border-slate-700 hover:text-slate-900 dark:hover:text-white'
               }`}
               title={isLiveTelemetrySimulating ? 'Pause live coordinate polling' : 'Resume live GPS coordinate updates'}
             >
               {isLiveTelemetrySimulating ? (
                 <>
-                  <Activity className="w-3.5 h-3.5 text-emerald-400 animate-spin" />
+                  <Activity className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400 animate-spin" />
                   <span>Live Pulse: ON</span>
                 </>
               ) : (
@@ -641,8 +641,8 @@ export const SupplyChainNetworkMap: React.FC = () => {
               onClick={() => setShowTelemetryFeed(!showTelemetryFeed)}
               className={`px-3.5 py-2 rounded-xl text-xs font-bold border transition-all cursor-pointer ${
                 showTelemetryFeed
-                  ? 'bg-sky-600/30 text-sky-300 border-sky-500/50'
-                  : 'bg-slate-800 text-slate-400 border-slate-700'
+                  ? 'bg-sky-600/30 text-sky-700 dark:text-sky-300 border-sky-500/50'
+                  : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 border-slate-300 dark:border-slate-700'
               }`}
             >
               <Radio className="w-3.5 h-3.5 inline mr-1" />
@@ -653,65 +653,65 @@ export const SupplyChainNetworkMap: React.FC = () => {
 
         {/* Real-Time Supply Chain Performance KPIs */}
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 pt-4 text-xs font-mono">
-          <div className="bg-slate-950/60 border border-slate-800/80 rounded-xl p-3">
-            <span className="text-[10px] text-slate-500 uppercase font-sans font-bold block">Ocean Freight</span>
+          <div className="bg-slate-50/60 dark:bg-slate-950/60 border border-slate-200/80 dark:border-slate-800/80 rounded-xl p-3">
+            <span className="text-[10px] text-slate-500 dark:text-slate-400 uppercase font-sans font-bold block">Ocean Freight</span>
             <div className="flex items-center justify-between mt-1">
-              <span className="text-base font-black text-sky-400 flex items-center gap-1">
-                <Ship className="w-4 h-4 text-sky-400" />
+              <span className="text-base font-black text-sky-600 dark:text-sky-400 flex items-center gap-1">
+                <Ship className="w-4 h-4 text-sky-600 dark:text-sky-400" />
                 {networkMetrics.totalOceanShipments}
               </span>
-              <span className="text-[10px] text-slate-400">{networkMetrics.totalActiveVessels} In-Transit</span>
+              <span className="text-[10px] text-slate-600 dark:text-slate-400">{networkMetrics.totalActiveVessels} In-Transit</span>
             </div>
           </div>
 
-          <div className="bg-slate-950/60 border border-slate-800/80 rounded-xl p-3">
-            <span className="text-[10px] text-slate-500 uppercase font-sans font-bold block">Air Cargo Flights</span>
+          <div className="bg-slate-50/60 dark:bg-slate-950/60 border border-slate-200/80 dark:border-slate-800/80 rounded-xl p-3">
+            <span className="text-[10px] text-slate-500 dark:text-slate-400 uppercase font-sans font-bold block">Air Cargo Flights</span>
             <div className="flex items-center justify-between mt-1">
-              <span className="text-base font-black text-cyan-400 flex items-center gap-1">
-                <Plane className="w-4 h-4 text-cyan-400" />
+              <span className="text-base font-black text-cyan-600 dark:text-cyan-400 flex items-center gap-1">
+                <Plane className="w-4 h-4 text-cyan-600 dark:text-cyan-400" />
                 {networkMetrics.totalAirShipments述}
               </span>
-              <span className="text-[10px] text-emerald-400 font-bold">100% Cleared</span>
+              <span className="text-[10px] text-emerald-600 dark:text-emerald-400 font-bold">100% Cleared</span>
             </div>
           </div>
 
-          <div className="bg-slate-950/60 border border-slate-800/80 rounded-xl p-3">
-            <span className="text-[10px] text-slate-500 uppercase font-sans font-bold block">Overland Road Trips</span>
+          <div className="bg-slate-50/60 dark:bg-slate-950/60 border border-slate-200/80 dark:border-slate-800/80 rounded-xl p-3">
+            <span className="text-[10px] text-slate-500 dark:text-slate-400 uppercase font-sans font-bold block">Overland Road Trips</span>
             <div className="flex items-center justify-between mt-1">
-              <span className="text-base font-black text-indigo-400 flex items-center gap-1">
-                <Truck className="w-4 h-4 text-indigo-400" />
+              <span className="text-base font-black text-indigo-600 dark:text-indigo-400 flex items-center gap-1">
+                <Truck className="w-4 h-4 text-indigo-600 dark:text-indigo-400" />
                 {networkMetrics.totalRoadTrips}
               </span>
-              <span className="text-[10px] text-slate-400 font-sans">FTL 90%</span>
+              <span className="text-[10px] text-slate-600 dark:text-slate-400 font-sans">FTL 90%</span>
             </div>
           </div>
 
-          <div className="bg-slate-950/60 border border-slate-800/80 rounded-xl p-3">
-            <span className="text-[10px] text-slate-500 uppercase font-sans font-bold block">Last-Mile Deliveries</span>
+          <div className="bg-slate-50/60 dark:bg-slate-950/60 border border-slate-200/80 dark:border-slate-800/80 rounded-xl p-3">
+            <span className="text-[10px] text-slate-500 dark:text-slate-400 uppercase font-sans font-bold block">Last-Mile Deliveries</span>
             <div className="flex items-center justify-between mt-1">
-              <span className="text-base font-black text-emerald-400 flex items-center gap-1">
-                <PackageCheck className="w-4 h-4 text-emerald-400" />
+              <span className="text-base font-black text-emerald-600 dark:text-emerald-400 flex items-center gap-1">
+                <PackageCheck className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
                 {networkMetrics.totalLastMile}
               </span>
-              <span className="text-[10px] text-emerald-300 font-sans">{networkMetrics.deliveredCount} Delivered</span>
+              <span className="text-[10px] text-emerald-700 dark:text-emerald-300 font-sans">{networkMetrics.deliveredCount} Delivered</span>
             </div>
           </div>
 
-          <div className="bg-slate-950/60 border border-slate-800/80 rounded-xl p-3">
-            <span className="text-[10px] text-slate-500 uppercase font-sans font-bold block">Hub Storage Load</span>
+          <div className="bg-slate-50/60 dark:bg-slate-950/60 border border-slate-200/80 dark:border-slate-800/80 rounded-xl p-3">
+            <span className="text-[10px] text-slate-500 dark:text-slate-400 uppercase font-sans font-bold block">Hub Storage Load</span>
             <div className="flex items-center justify-between mt-1">
-              <span className="text-base font-black text-purple-400 flex items-center gap-1">
-                <Warehouse className="w-4 h-4 text-purple-400" />
+              <span className="text-base font-black text-purple-600 dark:text-purple-400 flex items-center gap-1">
+                <Warehouse className="w-4 h-4 text-purple-600 dark:text-purple-400" />
                 {networkMetrics.avgHubOccupancy}%
               </span>
-              <span className="text-[10px] text-slate-400">4 RDCs</span>
+              <span className="text-[10px] text-slate-600 dark:text-slate-400">4 RDCs</span>
             </div>
           </div>
 
-          <div className="bg-slate-950/60 border border-slate-800/80 rounded-xl p-3">
-            <span className="text-[10px] text-slate-500 uppercase font-sans font-bold block">Cargo Value In Transit</span>
+          <div className="bg-slate-50/60 dark:bg-slate-950/60 border border-slate-200/80 dark:border-slate-800/80 rounded-xl p-3">
+            <span className="text-[10px] text-slate-500 dark:text-slate-400 uppercase font-sans font-bold block">Cargo Value In Transit</span>
             <div className="flex items-center justify-between mt-1">
-              <span className="text-sm font-black text-emerald-400 truncate">
+              <span className="text-sm font-black text-emerald-600 dark:text-emerald-400 truncate">
                 {(networkMetrics.totalCargoValueInTransit / 1000000).toFixed(2)}M {currency}
               </span>
             </div>
@@ -720,25 +720,25 @@ export const SupplyChainNetworkMap: React.FC = () => {
       </div>
 
       {/* ----------------- INTERACTIVE CONTROL BAR ----------------- */}
-      <div className="bg-slate-900 border border-slate-800 rounded-2xl p-4 flex flex-wrap items-center justify-between gap-3 shadow-lg">
+      <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-4 flex flex-wrap items-center justify-between gap-3 shadow-lg">
         {/* Search */}
         <div className="relative min-w-[240px] flex-1 max-w-sm">
-          <Search className="w-4 h-4 absolute left-3.5 top-3 text-slate-500" />
+          <Search className="w-4 h-4 absolute left-3.5 top-3 text-slate-500 dark:text-slate-400" />
           <input
             type="text"
             placeholder="Search warehouse, seaport, airport, corridor..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full bg-slate-950 border border-slate-800 rounded-xl pl-10 pr-4 py-2 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-sky-500"
+            className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl pl-10 pr-4 py-2 text-xs text-slate-900 dark:text-white placeholder-slate-500 focus:outline-none focus:border-sky-500"
           />
         </div>
 
         {/* Layer Selectors */}
-        <div className="flex items-center gap-1 bg-slate-950 p-1 rounded-xl border border-slate-800 text-xs">
+        <div className="flex items-center gap-1 bg-slate-50 dark:bg-slate-950 p-1 rounded-xl border border-slate-200 dark:border-slate-800 text-xs">
           <button
             onClick={() => setActiveLayer('all')}
             className={`px-3 py-1.5 rounded-lg font-bold transition-all cursor-pointer ${
-              activeLayer === 'all' ? 'bg-sky-600 text-white' : 'text-slate-400 hover:text-white'
+              activeLayer === 'all' ? 'bg-sky-600 text-white' : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
             }`}
           >
             All Network
@@ -746,7 +746,7 @@ export const SupplyChainNetworkMap: React.FC = () => {
           <button
             onClick={() => setActiveLayer('warehouses')}
             className={`px-3 py-1.5 rounded-lg font-bold transition-all cursor-pointer ${
-              activeLayer === 'warehouses' ? 'bg-purple-600 text-white' : 'text-slate-400 hover:text-white'
+              activeLayer === 'warehouses' ? 'bg-purple-600 text-white' : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
             }`}
           >
             Warehouse RDCs
@@ -754,7 +754,7 @@ export const SupplyChainNetworkMap: React.FC = () => {
           <button
             onClick={() => setActiveLayer('transit')}
             className={`px-3 py-1.5 rounded-lg font-bold transition-all cursor-pointer ${
-              activeLayer === 'transit' ? 'bg-cyan-600 text-white' : 'text-slate-400 hover:text-white'
+              activeLayer === 'transit' ? 'bg-cyan-600 text-white' : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
             }`}
           >
             Transit Gateways
@@ -763,7 +763,7 @@ export const SupplyChainNetworkMap: React.FC = () => {
 
         {/* Mode Selector */}
         <div className="flex items-center gap-1.5">
-          <span className="text-[11px] text-slate-500 font-bold uppercase mr-1">Mode:</span>
+          <span className="text-[11px] text-slate-500 dark:text-slate-400 font-bold uppercase mr-1">Mode:</span>
           {(['ALL', 'Ocean', 'Air', 'Road', 'Last-Mile'] as const).map((mode) => (
             <button
               key={mode}
@@ -771,7 +771,7 @@ export const SupplyChainNetworkMap: React.FC = () => {
               className={`px-2.5 py-1 rounded-lg text-xs font-bold transition-all cursor-pointer ${
                 filterMode === mode
                   ? 'bg-sky-600 text-white shadow-md'
-                  : 'bg-slate-950 text-slate-400 hover:text-white border border-slate-800'
+                  : 'bg-slate-50 dark:bg-slate-950 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white border border-slate-200 dark:border-slate-800'
               }`}
             >
               {mode}
@@ -783,24 +783,24 @@ export const SupplyChainNetworkMap: React.FC = () => {
         <div className="flex items-center gap-1">
           <button
             onClick={() => setZoomLevel(prev => Math.max(0.8, prev - 0.1))}
-            className="p-2 rounded-lg bg-slate-950 border border-slate-800 text-slate-300 hover:text-white hover:border-slate-700 cursor-pointer"
+            className="p-2 rounded-lg bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:border-slate-300 dark:hover:border-slate-700 cursor-pointer"
             title="Zoom Out"
           >
             <ZoomOut className="w-3.5 h-3.5" />
           </button>
-          <span className="text-xs font-mono font-bold text-slate-400 px-1">
+          <span className="text-xs font-mono font-bold text-slate-600 dark:text-slate-400 px-1">
             {Math.round(zoomLevel * 100)}%
           </span>
           <button
             onClick={() => setZoomLevel(prev => Math.min(1.5, prev + 0.1))}
-            className="p-2 rounded-lg bg-slate-950 border border-slate-800 text-slate-300 hover:text-white hover:border-slate-700 cursor-pointer"
+            className="p-2 rounded-lg bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:border-slate-300 dark:hover:border-slate-700 cursor-pointer"
             title="Zoom In"
           >
             <ZoomIn className="w-3.5 h-3.5" />
           </button>
           <button
             onClick={() => setZoomLevel(1)}
-            className="p-2 rounded-lg bg-slate-950 border border-slate-800 text-slate-300 hover:text-white hover:border-slate-700 cursor-pointer text-xs"
+            className="p-2 rounded-lg bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:border-slate-300 dark:hover:border-slate-700 cursor-pointer text-xs"
             title="Reset Zoom"
           >
             <Maximize2 className="w-3.5 h-3.5" />
@@ -811,21 +811,21 @@ export const SupplyChainNetworkMap: React.FC = () => {
       {/* ----------------- PRIMARY INTERACTIVE NETWORK CANVAS ----------------- */}
       <div className="grid grid-cols-1 xl:grid-cols-4 gap-6">
         {/* SVG Network Map (3 Columns on Wide Screens) */}
-        <div className="xl:col-span-3 bg-slate-950 border border-slate-800 rounded-2xl p-4 shadow-2xl relative overflow-hidden flex flex-col min-h-[580px]">
+        <div className="xl:col-span-3 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-2xl p-4 shadow-2xl relative overflow-hidden flex flex-col min-h-[580px]">
           {/* Subtle Grid Background */}
           <div className="absolute inset-0 opacity-20 bg-[radial-gradient(#38bdf8_1px,transparent_1px)] [background-size:24px_24px] pointer-events-none" />
           
           {/* Regional Background Watermark Annotations */}
-          <div className="absolute top-4 left-6 text-slate-800 font-black text-xs tracking-widest uppercase pointer-events-none">
+          <div className="absolute top-4 left-6 text-slate-800 dark:text-slate-200 font-black text-xs tracking-widest uppercase pointer-events-none">
             [ European Supply Corridor ]
           </div>
-          <div className="absolute top-4 right-8 text-slate-800 font-black text-xs tracking-widest uppercase pointer-events-none">
+          <div className="absolute top-4 right-8 text-slate-800 dark:text-slate-200 font-black text-xs tracking-widest uppercase pointer-events-none">
             [ Far East Asia & Pacific ]
           </div>
-          <div className="absolute bottom-6 right-8 text-slate-800 font-black text-xs tracking-widest uppercase pointer-events-none">
+          <div className="absolute bottom-6 right-8 text-slate-800 dark:text-slate-200 font-black text-xs tracking-widest uppercase pointer-events-none">
             [ Indian Ocean & Arabian Sea Lanes ]
           </div>
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-slate-800/40 font-black text-3xl tracking-widest uppercase pointer-events-none select-none">
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-slate-800/40 dark:text-slate-200/40 font-black text-3xl tracking-widest uppercase pointer-events-none select-none">
             OMAN & GCC SCM CORRIDOR
           </div>
 
@@ -1091,27 +1091,27 @@ export const SupplyChainNetworkMap: React.FC = () => {
           </div>
 
           {/* Map Legend Footer */}
-          <div className="mt-auto pt-3 border-t border-slate-900 flex flex-wrap items-center justify-between gap-3 text-xs">
-            <div className="flex items-center gap-4 text-slate-400">
+          <div className="mt-auto pt-3 border-t border-slate-200 dark:border-slate-900 flex flex-wrap items-center justify-between gap-3 text-xs">
+            <div className="flex items-center gap-4 text-slate-600 dark:text-slate-400">
               <div className="flex items-center gap-1.5">
                 <span className="w-3 h-3 rounded-full bg-purple-500 border border-purple-300" />
-                <span className="text-[11px] font-medium text-slate-300">Central Warehouse RDC</span>
+                <span className="text-[11px] font-medium text-slate-700 dark:text-slate-300">Central Warehouse RDC</span>
               </div>
               <div className="flex items-center gap-1.5">
                 <span className="w-3 h-3 rounded-full bg-sky-500 border border-sky-300" />
-                <span className="text-[11px] font-medium text-slate-300">Deepwater Seaport</span>
+                <span className="text-[11px] font-medium text-slate-700 dark:text-slate-300">Deepwater Seaport</span>
               </div>
               <div className="flex items-center gap-1.5">
                 <span className="w-3 h-3 rounded-full bg-cyan-500 border border-cyan-300" />
-                <span className="text-[11px] font-medium text-slate-300">Air Cargo Hub</span>
+                <span className="text-[11px] font-medium text-slate-700 dark:text-slate-300">Air Cargo Hub</span>
               </div>
               <div className="flex items-center gap-1.5">
                 <span className="w-3 h-3 rounded-full bg-emerald-500 border border-emerald-300" />
-                <span className="text-[11px] font-medium text-slate-300">Customer Site / Destination</span>
+                <span className="text-[11px] font-medium text-slate-700 dark:text-slate-300">Customer Site / Destination</span>
               </div>
             </div>
 
-            <div className="text-[11px] text-slate-500 font-mono">
+            <div className="text-[11px] text-slate-500 dark:text-slate-400 font-mono">
               Click any node or corridor to inspect live telemetry & cargo manifests
             </div>
           </div>
@@ -1121,26 +1121,26 @@ export const SupplyChainNetworkMap: React.FC = () => {
         <div className="space-y-4">
           {/* Active Node 360 Inspection */}
           {selectedNode ? (
-            <div className="bg-slate-900 border border-slate-800 rounded-2xl p-5 shadow-xl space-y-4 animate-fadeIn">
-              <div className="flex items-start justify-between border-b border-slate-800 pb-3">
+            <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-5 shadow-xl space-y-4 animate-fadeIn">
+              <div className="flex items-start justify-between border-b border-slate-200 dark:border-slate-800 pb-3">
                 <div>
                   <div className="flex items-center gap-2">
-                    <span className="font-mono text-xs font-black text-sky-400 bg-sky-950 px-2 py-0.5 rounded border border-sky-800">
+                    <span className="font-mono text-xs font-black text-sky-600 dark:text-sky-400 bg-sky-50 dark:bg-sky-950 px-2 py-0.5 rounded border border-sky-200 dark:border-sky-800">
                       {selectedNode.code}
                     </span>
-                    <span className="text-xs px-2 py-0.5 rounded-full font-bold bg-slate-800 text-slate-300">
+                    <span className="text-xs px-2 py-0.5 rounded-full font-bold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">
                       {selectedNode.type.replace('_', ' ')}
                     </span>
                   </div>
-                  <h3 className="text-base font-black text-white mt-1">{selectedNode.name}</h3>
-                  <p className="text-xs text-slate-400 flex items-center gap-1 mt-0.5">
-                    <MapPin className="w-3.5 h-3.5 text-rose-400" />
+                  <h3 className="text-base font-black text-slate-900 dark:text-white mt-1">{selectedNode.name}</h3>
+                  <p className="text-xs text-slate-600 dark:text-slate-400 flex items-center gap-1 mt-0.5">
+                    <MapPin className="w-3.5 h-3.5 text-rose-600 dark:text-rose-400" />
                     {selectedNode.city}, {selectedNode.country} ({selectedNode.region})
                   </p>
                 </div>
                 <button
                   onClick={() => setSelectedNode(null)}
-                  className="text-slate-400 hover:text-white text-xs font-bold p-1"
+                  className="text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white text-xs font-bold p-1"
                 >
                   ✕
                 </button>
@@ -1149,115 +1149,115 @@ export const SupplyChainNetworkMap: React.FC = () => {
               {/* Warehouse / Terminal Metrics */}
               <div className="grid grid-cols-2 gap-3 font-mono text-xs">
                 {selectedNode.capacityPallets && (
-                  <div className="bg-slate-950 p-3 rounded-xl border border-slate-800">
-                    <span className="text-[10px] text-slate-500 font-sans uppercase font-bold">Storage Capacity</span>
-                    <p className="text-sm font-bold text-purple-400 mt-0.5">
+                  <div className="bg-slate-50 dark:bg-slate-950 p-3 rounded-xl border border-slate-200 dark:border-slate-800">
+                    <span className="text-[10px] text-slate-500 dark:text-slate-400 font-sans uppercase font-bold">Storage Capacity</span>
+                    <p className="text-sm font-bold text-purple-600 dark:text-purple-400 mt-0.5">
                       {selectedNode.capacityPallets.toLocaleString()} Pallets
                     </p>
-                    <div className="w-full bg-slate-800 rounded-full h-1.5 mt-1.5 overflow-hidden">
+                    <div className="w-full bg-slate-100 dark:bg-slate-800 rounded-full h-1.5 mt-1.5 overflow-hidden">
                       <div
                         className="bg-purple-500 h-1.5 rounded-full"
                         style={{ width: `${selectedNode.occupancyPercent}%` }}
                       />
                     </div>
-                    <span className="text-[10px] text-slate-400 mt-1 block">
+                    <span className="text-[10px] text-slate-600 dark:text-slate-400 mt-1 block">
                       Occupancy: {selectedNode.occupancyPercent}%
                     </span>
                   </div>
                 )}
 
                 {selectedNode.crossDockBays && (
-                  <div className="bg-slate-950 p-3 rounded-xl border border-slate-800">
-                    <span className="text-[10px] text-slate-500 font-sans uppercase font-bold">Cross-Dock Bays</span>
-                    <p className="text-sm font-bold text-cyan-400 mt-0.5">{selectedNode.crossDockBays} Active Bays</p>
-                    <span className="text-[10px] text-emerald-400 mt-1 block">Direct Transshipment</span>
+                  <div className="bg-slate-50 dark:bg-slate-950 p-3 rounded-xl border border-slate-200 dark:border-slate-800">
+                    <span className="text-[10px] text-slate-500 dark:text-slate-400 font-sans uppercase font-bold">Cross-Dock Bays</span>
+                    <p className="text-sm font-bold text-cyan-600 dark:text-cyan-400 mt-0.5">{selectedNode.crossDockBays} Active Bays</p>
+                    <span className="text-[10px] text-emerald-600 dark:text-emerald-400 mt-1 block">Direct Transshipment</span>
                   </div>
                 )}
 
-                <div className="bg-slate-950 p-3 rounded-xl border border-slate-800">
-                  <span className="text-[10px] text-slate-500 font-sans uppercase font-bold">Active Flow In/Out</span>
-                  <p className="text-sm font-bold text-white mt-0.5">
+                <div className="bg-slate-50 dark:bg-slate-950 p-3 rounded-xl border border-slate-200 dark:border-slate-800">
+                  <span className="text-[10px] text-slate-500 dark:text-slate-400 font-sans uppercase font-bold">Active Flow In/Out</span>
+                  <p className="text-sm font-bold text-slate-900 dark:text-white mt-0.5">
                     +{selectedNode.activeShipmentsInbound} / -{selectedNode.activeShipmentsOutbound}
                   </p>
-                  <span className="text-[10px] text-slate-400 font-sans">Shipments</span>
+                  <span className="text-[10px] text-slate-600 dark:text-slate-400 font-sans">Shipments</span>
                 </div>
 
-                <div className="bg-slate-950 p-3 rounded-xl border border-slate-800">
-                  <span className="text-[10px] text-slate-500 font-sans uppercase font-bold">Throughput Index</span>
-                  <p className="text-sm font-bold text-emerald-400 mt-0.5">{selectedNode.throughputIndex} / 100</p>
-                  <span className="text-[10px] text-slate-400 font-sans">Status: {selectedNode.operationalStatus}</span>
+                <div className="bg-slate-50 dark:bg-slate-950 p-3 rounded-xl border border-slate-200 dark:border-slate-800">
+                  <span className="text-[10px] text-slate-500 dark:text-slate-400 font-sans uppercase font-bold">Throughput Index</span>
+                  <p className="text-sm font-bold text-emerald-600 dark:text-emerald-400 mt-0.5">{selectedNode.throughputIndex} / 100</p>
+                  <span className="text-[10px] text-slate-600 dark:text-slate-400 font-sans">Status: {selectedNode.operationalStatus}</span>
                 </div>
               </div>
 
               {selectedNode.customsTerminalCode && (
-                <div className="bg-slate-950/80 border border-slate-800 rounded-xl p-3 text-xs">
-                  <span className="text-[10px] text-slate-500 uppercase font-bold">Customs Bayan Authority Code</span>
-                  <p className="text-xs font-mono font-bold text-amber-400 mt-0.5">
+                <div className="bg-slate-50/80 dark:bg-slate-950/80 border border-slate-200 dark:border-slate-800 rounded-xl p-3 text-xs">
+                  <span className="text-[10px] text-slate-500 dark:text-slate-400 uppercase font-bold">Customs Bayan Authority Code</span>
+                  <p className="text-xs font-mono font-bold text-amber-700 dark:text-amber-400 mt-0.5">
                     {selectedNode.customsTerminalCode}
                   </p>
                 </div>
               )}
 
               {selectedNode.notes && (
-                <div className="p-3 rounded-xl bg-slate-950 border border-slate-800 text-xs text-slate-400">
-                  <span className="text-[10px] font-bold text-slate-300 uppercase block mb-1">Operational Directive</span>
+                <div className="p-3 rounded-xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 text-xs text-slate-600 dark:text-slate-400">
+                  <span className="text-[10px] font-bold text-slate-700 dark:text-slate-300 uppercase block mb-1">Operational Directive</span>
                   {selectedNode.notes}
                 </div>
               )}
             </div>
           ) : selectedArc ? (
             /* Selected Corridor Arc 360 Inspection */
-            <div className="bg-slate-900 border border-slate-800 rounded-2xl p-5 shadow-xl space-y-4 animate-fadeIn">
-              <div className="flex items-start justify-between border-b border-slate-800 pb-3">
+            <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-5 shadow-xl space-y-4 animate-fadeIn">
+              <div className="flex items-start justify-between border-b border-slate-200 dark:border-slate-800 pb-3">
                 <div>
-                  <span className="font-mono text-xs font-bold text-sky-400 bg-sky-950 px-2 py-0.5 rounded border border-sky-800">
+                  <span className="font-mono text-xs font-bold text-sky-600 dark:text-sky-400 bg-sky-50 dark:bg-sky-950 px-2 py-0.5 rounded border border-sky-200 dark:border-sky-800">
                     {selectedArc.arcCode}
                   </span>
-                  <h3 className="text-base font-black text-white mt-1">
+                  <h3 className="text-base font-black text-slate-900 dark:text-white mt-1">
                     {networkNodes.find(n => n.id === selectedArc.fromNodeId)?.shortName} →{' '}
                     {networkNodes.find(n => n.id === selectedArc.toNodeId)?.shortName}
                   </h3>
-                  <p className="text-xs text-slate-400">
-                    Mode: <strong className="text-white">{selectedArc.mode} Transport Lane</strong>
+                  <p className="text-xs text-slate-600 dark:text-slate-400">
+                    Mode: <strong className="text-slate-900 dark:text-white">{selectedArc.mode} Transport Lane</strong>
                   </p>
                 </div>
-                <button onClick={() => setSelectedArc(null)} className="text-slate-400 hover:text-white text-xs font-bold">
+                <button onClick={() => setSelectedArc(null)} className="text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white text-xs font-bold">
                   ✕
                 </button>
               </div>
 
               <div className="grid grid-cols-2 gap-3 font-mono text-xs">
-                <div className="bg-slate-950 p-3 rounded-xl border border-slate-800">
-                  <span className="text-[10px] text-slate-500 font-sans uppercase font-bold">Corridor Distance</span>
-                  <p className="text-sm font-bold text-white mt-0.5">{selectedArc.distanceKm.toLocaleString()} KM</p>
+                <div className="bg-slate-50 dark:bg-slate-950 p-3 rounded-xl border border-slate-200 dark:border-slate-800">
+                  <span className="text-[10px] text-slate-500 dark:text-slate-400 font-sans uppercase font-bold">Corridor Distance</span>
+                  <p className="text-sm font-bold text-slate-900 dark:text-white mt-0.5">{selectedArc.distanceKm.toLocaleString()} KM</p>
                 </div>
-                <div className="bg-slate-950 p-3 rounded-xl border border-slate-800">
-                  <span className="text-[10px] text-slate-500 font-sans uppercase font-bold">Standard Transit</span>
-                  <p className="text-sm font-bold text-emerald-400 mt-0.5">
+                <div className="bg-slate-50 dark:bg-slate-950 p-3 rounded-xl border border-slate-200 dark:border-slate-800">
+                  <span className="text-[10px] text-slate-500 dark:text-slate-400 font-sans uppercase font-bold">Standard Transit</span>
+                  <p className="text-sm font-bold text-emerald-600 dark:text-emerald-400 mt-0.5">
                     {selectedArc.avgTransitHours > 48
                       ? `${(selectedArc.avgTransitHours / 24).toFixed(0)} Days`
                       : `${selectedArc.avgTransitHours} Hours`}
                   </p>
                 </div>
-                <div className="bg-slate-950 p-3 rounded-xl border border-slate-800">
-                  <span className="text-[10px] text-slate-500 font-sans uppercase font-bold">Active Payloads</span>
-                  <p className="text-sm font-bold text-sky-400 mt-0.5">{selectedArc.activeShipmentsCount} Shipments</p>
+                <div className="bg-slate-50 dark:bg-slate-950 p-3 rounded-xl border border-slate-200 dark:border-slate-800">
+                  <span className="text-[10px] text-slate-500 dark:text-slate-400 font-sans uppercase font-bold">Active Payloads</span>
+                  <p className="text-sm font-bold text-sky-600 dark:text-sky-400 mt-0.5">{selectedArc.activeShipmentsCount} Shipments</p>
                 </div>
-                <div className="bg-slate-950 p-3 rounded-xl border border-slate-800">
-                  <span className="text-[10px] text-slate-500 font-sans uppercase font-bold">Flow Condition</span>
-                  <p className="text-sm font-bold text-emerald-400 mt-0.5">{selectedArc.status}</p>
+                <div className="bg-slate-50 dark:bg-slate-950 p-3 rounded-xl border border-slate-200 dark:border-slate-800">
+                  <span className="text-[10px] text-slate-500 dark:text-slate-400 font-sans uppercase font-bold">Flow Condition</span>
+                  <p className="text-sm font-bold text-emerald-600 dark:text-emerald-400 mt-0.5">{selectedArc.status}</p>
                 </div>
               </div>
             </div>
           ) : (
             /* Active Live Freight Telemetry Snapshot */
-            <div className="bg-slate-900 border border-slate-800 rounded-2xl p-5 shadow-xl space-y-4">
-              <div className="flex items-center justify-between border-b border-slate-800 pb-3">
+            <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-5 shadow-xl space-y-4">
+              <div className="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-3">
                 <div className="flex items-center gap-2">
-                  <Radio className="w-4 h-4 text-sky-400 animate-pulse" />
-                  <h3 className="text-sm font-bold text-white">Live In-Transit Vessels & Flights</h3>
+                  <Radio className="w-4 h-4 text-sky-600 dark:text-sky-400 animate-pulse" />
+                  <h3 className="text-sm font-bold text-slate-900 dark:text-white">Live In-Transit Vessels & Flights</h3>
                 </div>
-                <span className="text-[10px] font-mono bg-slate-800 px-2 py-0.5 rounded text-slate-300">
+                <span className="text-[10px] font-mono bg-slate-100 dark:bg-slate-800 px-2 py-0.5 rounded text-slate-700 dark:text-slate-300">
                   {freightShipments.length} Global Units
                 </span>
               </div>
@@ -1274,33 +1274,33 @@ export const SupplyChainNetworkMap: React.FC = () => {
                       }}
                       className={`p-3 rounded-xl border transition-all cursor-pointer ${
                         isCurrent
-                          ? 'bg-sky-950/50 border-sky-500 shadow-md'
-                          : 'bg-slate-950 border-slate-800 hover:border-slate-700'
+                          ? 'bg-sky-50 dark:bg-sky-950/50 border-sky-500 shadow-md'
+                          : 'bg-slate-50 dark:bg-slate-950 border-slate-200 dark:border-slate-800 hover:border-slate-300 dark:hover:border-slate-700'
                       }`}
                     >
                       <div className="flex items-start justify-between">
                         <div>
-                          <span className="font-mono text-[10px] font-bold text-sky-400">
+                          <span className="font-mono text-[10px] font-bold text-sky-600 dark:text-sky-400">
                             {shp.shipmentNumber}
                           </span>
-                          <h4 className="text-xs font-bold text-white mt-0.5">{shp.carrierName}</h4>
-                          <p className="text-[11px] text-slate-400 font-mono truncate">{shp.vesselOrFlightNumber}</p>
+                          <h4 className="text-xs font-bold text-slate-900 dark:text-white mt-0.5">{shp.carrierName}</h4>
+                          <p className="text-[11px] text-slate-600 dark:text-slate-400 font-mono truncate">{shp.vesselOrFlightNumber}</p>
                         </div>
                         <span
                           className={`text-[9px] px-2 py-0.5 rounded-full font-bold ${
                             shp.status === 'Delivered'
-                              ? 'bg-emerald-950 text-emerald-400 border border-emerald-800'
+                              ? 'bg-emerald-50 dark:bg-emerald-950 text-emerald-600 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800'
                               : shp.status === 'In Transit / High Seas'
-                              ? 'bg-sky-950 text-sky-400 border border-sky-800'
-                              : 'bg-amber-950 text-amber-400 border border-amber-800'
+                              ? 'bg-sky-50 dark:bg-sky-950 text-sky-600 dark:text-sky-400 border border-sky-200 dark:border-sky-800'
+                              : 'bg-amber-50 dark:bg-amber-950 text-amber-700 dark:text-amber-400 border border-amber-200 dark:border-amber-800'
                           }`}
                         >
                           {shp.status}
                         </span>
                       </div>
 
-                      <div className="mt-2 pt-2 border-t border-slate-800/80 flex items-center justify-between text-[10px] font-mono text-slate-400">
-                        <span>ETA: <strong className="text-emerald-400">{shp.estimatedArrivalDate}</strong></span>
+                      <div className="mt-2 pt-2 border-t border-slate-200/80 dark:border-slate-800/80 flex items-center justify-between text-[10px] font-mono text-slate-600 dark:text-slate-400">
+                        <span>ETA: <strong className="text-emerald-600 dark:text-emerald-400">{shp.estimatedArrivalDate}</strong></span>
                         <span>{shp.containerCount} x FCL</span>
                       </div>
                     </div>
@@ -1311,32 +1311,32 @@ export const SupplyChainNetworkMap: React.FC = () => {
           )}
 
           {/* Quick Last-Mile Real-Time Dispatch Card */}
-          <div className="bg-slate-900 border border-slate-800 rounded-2xl p-4 shadow-xl space-y-3">
-            <div className="flex items-center justify-between border-b border-slate-800 pb-2">
-              <h4 className="text-xs font-bold text-white flex items-center gap-1.5">
-                <Truck className="w-3.5 h-3.5 text-indigo-400" />
+          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-4 shadow-xl space-y-3">
+            <div className="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-2">
+              <h4 className="text-xs font-bold text-slate-900 dark:text-white flex items-center gap-1.5">
+                <Truck className="w-3.5 h-3.5 text-indigo-600 dark:text-indigo-400" />
                 <span>Last-Mile Customer Dispatches</span>
               </h4>
-              <span className="text-[10px] text-slate-500 font-mono">ePOD Active</span>
+              <span className="text-[10px] text-slate-500 dark:text-slate-400 font-mono">ePOD Active</span>
             </div>
 
             <div className="space-y-2">
               {deliveryRecords.map((deliv) => (
-                <div key={deliv.id} className="p-2.5 rounded-xl bg-slate-950 border border-slate-800 text-xs">
+                <div key={deliv.id} className="p-2.5 rounded-xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 text-xs">
                   <div className="flex items-center justify-between">
-                    <span className="font-bold text-white">{deliv.customerName}</span>
+                    <span className="font-bold text-slate-900 dark:text-white">{deliv.customerName}</span>
                     <span
                       className={`text-[9px] px-1.5 py-0.5 rounded font-bold ${
                         deliv.status === 'Delivered'
-                          ? 'bg-emerald-950 text-emerald-400 border border-emerald-800'
-                          : 'bg-amber-950 text-amber-400 border border-amber-800'
+                          ? 'bg-emerald-50 dark:bg-emerald-950 text-emerald-600 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800'
+                          : 'bg-amber-50 dark:bg-amber-950 text-amber-700 dark:text-amber-400 border border-amber-200 dark:border-amber-800'
                       }`}
                     >
                       {deliv.status}
                     </span>
                   </div>
-                  <p className="text-[11px] text-slate-400 mt-1 truncate">{deliv.deliveryAddress}</p>
-                  <div className="flex items-center justify-between mt-1.5 text-[10px] font-mono text-slate-500">
+                  <p className="text-[11px] text-slate-600 dark:text-slate-400 mt-1 truncate">{deliv.deliveryAddress}</p>
+                  <div className="flex items-center justify-between mt-1.5 text-[10px] font-mono text-slate-500 dark:text-slate-400">
                     <span>Driver: {deliv.assignedDriver}</span>
                     <span>Ref: {deliv.customerOrderRef}</span>
                   </div>

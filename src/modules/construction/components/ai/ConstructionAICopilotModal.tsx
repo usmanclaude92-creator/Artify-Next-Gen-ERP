@@ -105,19 +105,19 @@ export const ConstructionAICopilotModal: React.FC<Props> = ({ isOpen, onClose })
         <div className="p-3 bg-slate-50 dark:bg-slate-800/40 border-b border-slate-100 dark:border-slate-800 flex items-center gap-2 overflow-x-auto text-xs">
           <button
             onClick={() => handleSend('Check FIDIC Clause 20.1 28-day notice status for active claims')}
-            className="shrink-0 px-3 py-1.5 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:border-orange-500 hover:text-orange-500 transition-colors"
+            className="shrink-0 px-3 py-1.5 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:border-orange-500 hover:text-orange-700 dark:hover:text-orange-500 transition-colors"
           >
             📋 FIDIC Clause 20.1 Notice Check
           </button>
           <button
             onClick={() => handleSend('Audit IPC-09 valuation and retention cap calculation')}
-            className="shrink-0 px-3 py-1.5 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:border-orange-500 hover:text-orange-500 transition-colors"
+            className="shrink-0 px-3 py-1.5 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:border-orange-500 hover:text-orange-700 dark:hover:text-orange-500 transition-colors"
           >
             💰 IPC Valuation & Retention Audit
           </button>
           <button
             onClick={() => handleSend('Evaluate Liquidated Damages delay exposure risk')}
-            className="shrink-0 px-3 py-1.5 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:border-orange-500 hover:text-orange-500 transition-colors"
+            className="shrink-0 px-3 py-1.5 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:border-orange-500 hover:text-orange-700 dark:hover:text-orange-500 transition-colors"
           >
             ⏱️ Delay & LD Penalty Analysis
           </button>
@@ -131,7 +131,7 @@ export const ConstructionAICopilotModal: React.FC<Props> = ({ isOpen, onClose })
               className={`flex gap-3 ${msg.sender === 'user' ? 'justify-end' : 'justify-start'}`}
             >
               {msg.sender === 'ai' && (
-                <div className="w-8 h-8 rounded-xl bg-orange-500/20 text-orange-500 flex items-center justify-center shrink-0 mt-0.5">
+                <div className="w-8 h-8 rounded-xl bg-orange-500/20 text-orange-700 dark:text-orange-500 flex items-center justify-center shrink-0 mt-0.5">
                   <Bot className="w-4 h-4" />
                 </div>
               )}
@@ -151,8 +151,8 @@ export const ConstructionAICopilotModal: React.FC<Props> = ({ isOpen, onClose })
           ))}
 
           {isAnalyzing && (
-            <div className="flex gap-3 items-center text-slate-400 text-xs italic">
-              <div className="w-8 h-8 rounded-xl bg-orange-500/20 text-orange-500 flex items-center justify-center shrink-0">
+            <div className="flex gap-3 items-center text-slate-600 dark:text-slate-400 text-xs italic">
+              <div className="w-8 h-8 rounded-xl bg-orange-500/20 text-orange-700 dark:text-orange-500 flex items-center justify-center shrink-0">
                 <Sparkles className="w-4 h-4 animate-spin" />
               </div>
               <span>Copilot is parsing contract terms, IPC valuations & delay curves...</span>

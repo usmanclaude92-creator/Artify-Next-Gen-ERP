@@ -432,7 +432,7 @@ export const CompanySetupManagementView: React.FC<CompanySetupManagementViewProp
             style={{ backgroundColor: item.brandColor || '#4f46e5' }}
             title={`Brand Color: ${item.brandColor}`}
           />
-          <span className="font-mono font-bold text-indigo-700">{item.code}</span>
+          <span className="font-mono font-bold text-indigo-700 dark:text-indigo-300">{item.code}</span>
         </div>
       )
     },
@@ -441,18 +441,18 @@ export const CompanySetupManagementView: React.FC<CompanySetupManagementViewProp
       header: 'Legal Entity & Structure',
       accessor: item => (
         <div>
-          <div className="font-semibold text-slate-900 flex items-center gap-1.5">
+          <div className="font-semibold text-slate-900 dark:text-slate-100 flex items-center gap-1.5">
             {item.legalName}
             {item.isParent && (
-              <span className="px-1.5 py-0.5 rounded text-[10px] bg-purple-100 text-purple-700 font-bold">
+              <span className="px-1.5 py-0.5 rounded text-[10px] bg-purple-100 dark:bg-purple-500/20 text-purple-700 dark:text-purple-300 font-bold">
                 Holding Apex
               </span>
             )}
           </div>
-          <div className="text-[11px] text-slate-500 flex items-center gap-2 mt-0.5">
+          <div className="text-[11px] text-slate-500 dark:text-slate-400 flex items-center gap-2 mt-0.5">
             <span>{item.legalStructure || item.companyType}</span>
             <span>•</span>
-            <span className="text-slate-600 font-medium">{item.industrySegment || 'General'}</span>
+            <span className="text-slate-600 dark:text-slate-400 font-medium">{item.industrySegment || 'General'}</span>
           </div>
         </div>
       )
@@ -462,11 +462,11 @@ export const CompanySetupManagementView: React.FC<CompanySetupManagementViewProp
       header: 'Jurisdiction & Currency',
       accessor: item => (
         <div>
-          <div className="flex items-center gap-1.5 text-xs text-slate-800 font-medium">
-            <Globe2 className="w-3.5 h-3.5 text-slate-400" />
+          <div className="flex items-center gap-1.5 text-xs text-slate-800 dark:text-slate-200 font-medium">
+            <Globe2 className="w-3.5 h-3.5 text-slate-500 dark:text-slate-400" />
             <span>{item.country}</span>
           </div>
-          <div className="text-[11px] text-slate-500 mt-0.5 font-mono">
+          <div className="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5 font-mono">
             Base: <strong>{item.currency}</strong> (3 decimals: {item.decimalPrecision || 3})
           </div>
         </div>
@@ -476,9 +476,9 @@ export const CompanySetupManagementView: React.FC<CompanySetupManagementViewProp
       key: 'taxNumber',
       header: 'Commercial & Tax Identifiers',
       accessor: item => (
-        <div className="font-mono text-xs text-slate-600">
-          <div>CR: <span className="font-bold text-slate-800">{item.registrationNumber}</span></div>
-          <div className="text-[11px] text-slate-500 mt-0.5">TRN: {item.taxNumber}</div>
+        <div className="font-mono text-xs text-slate-600 dark:text-slate-400">
+          <div>CR: <span className="font-bold text-slate-800 dark:text-slate-200">{item.registrationNumber}</span></div>
+          <div className="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">TRN: {item.taxNumber}</div>
         </div>
       )
     },
@@ -487,10 +487,10 @@ export const CompanySetupManagementView: React.FC<CompanySetupManagementViewProp
       header: 'Paid-up Capital',
       accessor: item => (
         <div className="font-mono text-xs">
-          <span className="font-semibold text-slate-800">
+          <span className="font-semibold text-slate-800 dark:text-slate-200">
             {item.capitalPaidUp ? item.capitalPaidUp.toLocaleString() : '—'} {item.currency}
           </span>
-          <div className="text-[10px] text-slate-400">
+          <div className="text-[10px] text-slate-500 dark:text-slate-400">
             Auth: {item.capitalAuthorized ? item.capitalAuthorized.toLocaleString() : '—'}
           </div>
         </div>
@@ -548,14 +548,14 @@ export const CompanySetupManagementView: React.FC<CompanySetupManagementViewProp
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         {/* Left Column: Legal Entity Selector & Quick Table (5 Cols) */}
         <div className="lg:col-span-5 space-y-4">
-          <div className="bg-white rounded-xl border border-slate-200 shadow-2xs overflow-hidden">
-            <div className="p-4 border-b border-slate-200 flex items-center justify-between bg-slate-50/50">
+          <div className="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-700 shadow-2xs overflow-hidden">
+            <div className="p-4 border-b border-slate-200 dark:border-slate-700 flex items-center justify-between bg-slate-50/50 dark:bg-slate-800/50">
               <div>
-                <h3 className="font-bold text-slate-900 text-sm flex items-center gap-2">
-                  <Building2 className="w-4 h-4 text-indigo-600" />
+                <h3 className="font-bold text-slate-900 dark:text-slate-100 text-sm flex items-center gap-2">
+                  <Building2 className="w-4 h-4 text-indigo-600 dark:text-indigo-400" />
                   <span>01.01.01 Legal Entities Directory</span>
                 </h3>
-                <p className="text-xs text-slate-500 mt-0.5">Authoritative organizational master register</p>
+                <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Authoritative organizational master register</p>
               </div>
 
               <button
@@ -573,7 +573,7 @@ export const CompanySetupManagementView: React.FC<CompanySetupManagementViewProp
             </div>
 
             {/* Quick Entity List Cards */}
-            <div className="divide-y divide-slate-100 max-h-[640px] overflow-y-auto">
+            <div className="divide-y divide-slate-100 dark:divide-slate-800 max-h-[640px] overflow-y-auto">
               {companies.map(comp => {
                 const isSelected = comp.id === selectedCompanyId;
                 return (
@@ -582,8 +582,8 @@ export const CompanySetupManagementView: React.FC<CompanySetupManagementViewProp
                     onClick={() => setSelectedCompanyId(comp.id)}
                     className={`p-4 transition-all cursor-pointer ${
                       isSelected
-                        ? 'bg-indigo-50/80 border-l-4 border-indigo-600'
-                        : 'hover:bg-slate-50 border-l-4 border-transparent'
+                        ? 'bg-indigo-50/80 dark:bg-indigo-500/80 border-l-4 border-indigo-600'
+                        : 'hover:bg-slate-50 dark:hover:bg-slate-800/50 border-l-4 border-transparent'
                     }`}
                   >
                     <div className="flex items-start justify-between">
@@ -599,15 +599,15 @@ export const CompanySetupManagementView: React.FC<CompanySetupManagementViewProp
                           {comp.code.slice(0, 3)}
                         </div>
                         <div>
-                          <div className="font-bold text-slate-900 text-xs flex items-center gap-1.5">
+                          <div className="font-bold text-slate-900 dark:text-slate-100 text-xs flex items-center gap-1.5">
                             <span>{comp.legalName}</span>
                             {comp.isParent && (
-                              <span className="px-1.5 py-0.2 rounded text-[9px] bg-purple-100 text-purple-700 font-bold">
+                              <span className="px-1.5 py-0.2 rounded text-[9px] bg-purple-100 dark:bg-purple-500/20 text-purple-700 dark:text-purple-300 font-bold">
                                 Holding
                               </span>
                             )}
                           </div>
-                          <div className="text-[11px] text-slate-500 font-mono mt-0.5">
+                          <div className="text-[11px] text-slate-500 dark:text-slate-400 font-mono mt-0.5">
                             {comp.code} • {comp.country} ({comp.currency})
                           </div>
                         </div>
@@ -616,10 +616,10 @@ export const CompanySetupManagementView: React.FC<CompanySetupManagementViewProp
                       <StatusBadge status={comp.status} size="sm" />
                     </div>
 
-                    <div className="mt-2.5 pt-2 border-t border-slate-100/60 flex items-center justify-between text-[11px] text-slate-500">
-                      <span>CR: <strong className="text-slate-700 font-mono">{comp.registrationNumber}</strong></span>
-                      <span>VAT: <strong className="text-slate-700 font-mono">{comp.taxNumber}</strong></span>
-                      <span className="text-indigo-600 font-semibold flex items-center gap-0.5">
+                    <div className="mt-2.5 pt-2 border-t border-slate-100/60 dark:border-slate-800/60 flex items-center justify-between text-[11px] text-slate-500 dark:text-slate-400">
+                      <span>CR: <strong className="text-slate-700 dark:text-slate-300 font-mono">{comp.registrationNumber}</strong></span>
+                      <span>VAT: <strong className="text-slate-700 dark:text-slate-300 font-mono">{comp.taxNumber}</strong></span>
+                      <span className="text-indigo-600 dark:text-indigo-400 font-semibold flex items-center gap-0.5">
                         Inspect <ChevronRight className="w-3 h-3" />
                       </span>
                     </div>
@@ -632,13 +632,13 @@ export const CompanySetupManagementView: React.FC<CompanySetupManagementViewProp
 
         {/* Right Column: 01.01.01 Functional Inspector & Setup Console (7 Cols) */}
         <div className="lg:col-span-7 space-y-4">
-          <div className="bg-white rounded-xl border border-slate-200 shadow-2xs overflow-hidden">
+          <div className="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-700 shadow-2xs overflow-hidden">
             {/* Inspector Header */}
-            <div className="p-5 border-b border-slate-200 bg-slate-50/50">
+            <div className="p-5 border-b border-slate-200 dark:border-slate-700 bg-slate-50/50 dark:bg-slate-800/50">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                 <div className="flex items-center gap-3">
                   <div
-                    className="w-12 h-12 rounded-xl flex items-center justify-center shadow-xs overflow-hidden border border-slate-200 bg-white"
+                    className="w-12 h-12 rounded-xl flex items-center justify-center shadow-xs overflow-hidden border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900"
                     style={{ borderColor: activeCompany?.brandColor || '#cbd5e1' }}
                   >
                     {activeCompany?.logo ? (
@@ -649,16 +649,16 @@ export const CompanySetupManagementView: React.FC<CompanySetupManagementViewProp
                         referrerPolicy="no-referrer"
                       />
                     ) : (
-                      <Building2 className="w-6 h-6 text-indigo-600" />
+                      <Building2 className="w-6 h-6 text-indigo-600 dark:text-indigo-400" />
                     )}
                   </div>
                   <div>
                     <div className="flex items-center gap-2">
-                      <h2 className="text-base font-bold text-slate-900">{activeCompany?.legalName}</h2>
+                      <h2 className="text-base font-bold text-slate-900 dark:text-slate-100">{activeCompany?.legalName}</h2>
                       <StatusBadge status={activeCompany?.status} />
                     </div>
-                    <p className="text-xs text-slate-500 mt-0.5 flex items-center gap-2">
-                      <span className="font-mono font-bold text-indigo-700">{activeCompany?.code}</span>
+                    <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5 flex items-center gap-2">
+                      <span className="font-mono font-bold text-indigo-700 dark:text-indigo-300">{activeCompany?.code}</span>
                       <span>•</span>
                       <span>{activeCompany?.legalStructure || activeCompany?.companyType}</span>
                       <span>•</span>
@@ -671,9 +671,9 @@ export const CompanySetupManagementView: React.FC<CompanySetupManagementViewProp
                 <div className="flex items-center gap-2 flex-wrap">
                   <button
                     onClick={() => handleOpenEdit(activeCompany)}
-                    className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white border border-slate-300 hover:bg-slate-50 text-slate-700 text-xs font-semibold shadow-2xs transition-colors cursor-pointer"
+                    className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-600 hover:bg-slate-50 dark:hover:bg-slate-800/50 text-slate-700 dark:text-slate-300 text-xs font-semibold shadow-2xs transition-colors cursor-pointer"
                   >
-                    <Edit3 className="w-3.5 h-3.5 text-slate-600" />
+                    <Edit3 className="w-3.5 h-3.5 text-slate-600 dark:text-slate-400" />
                     <span>Edit Profile</span>
                   </button>
 
@@ -715,7 +715,7 @@ export const CompanySetupManagementView: React.FC<CompanySetupManagementViewProp
                   {activeCompany?.status === 'Active' && (
                     <button
                       onClick={() => toggleCompanyStatus(activeCompany.id, 'Inactive', { id: 'usr-admin', name: 'Administrator' })}
-                      className="px-3 py-1.5 rounded-lg border border-amber-300 hover:bg-amber-50 text-amber-800 text-xs font-medium transition-colors cursor-pointer"
+                      className="px-3 py-1.5 rounded-lg border border-amber-300 dark:border-amber-500/40 hover:bg-amber-50 dark:hover:bg-amber-500/10 text-amber-800 dark:text-amber-200 text-xs font-medium transition-colors cursor-pointer"
                     >
                       Deactivate
                     </button>
@@ -724,7 +724,7 @@ export const CompanySetupManagementView: React.FC<CompanySetupManagementViewProp
                   {activeCompany?.status === 'Inactive' && (
                     <button
                       onClick={() => toggleCompanyStatus(activeCompany.id, 'Active', { id: 'usr-admin', name: 'Administrator' })}
-                      className="px-3 py-1.5 rounded-lg border border-emerald-300 hover:bg-emerald-50 text-emerald-800 text-xs font-medium transition-colors cursor-pointer"
+                      className="px-3 py-1.5 rounded-lg border border-emerald-300 dark:border-emerald-500/40 hover:bg-emerald-50 dark:hover:bg-emerald-500/10 text-emerald-800 dark:text-emerald-200 text-xs font-medium transition-colors cursor-pointer"
                     >
                       Reactivate
                     </button>
@@ -732,7 +732,7 @@ export const CompanySetupManagementView: React.FC<CompanySetupManagementViewProp
 
                   <button
                     onClick={() => setIsHierarchyStudioOpen(true)}
-                    className="px-3 py-1.5 rounded-lg border border-purple-300 hover:bg-purple-50 text-purple-700 text-xs font-semibold flex items-center gap-1.5 transition-colors cursor-pointer"
+                    className="px-3 py-1.5 rounded-lg border border-purple-300 dark:border-purple-500/40 hover:bg-purple-50 dark:hover:bg-purple-500/10 text-purple-700 dark:text-purple-300 text-xs font-semibold flex items-center gap-1.5 transition-colors cursor-pointer"
                     title="Launch Enterprise Group & Holding Hierarchy Studio"
                   >
                     <GitFork className="w-3.5 h-3.5" />
@@ -743,7 +743,7 @@ export const CompanySetupManagementView: React.FC<CompanySetupManagementViewProp
                     onClick={() => archiveCompany(activeCompany.id, { id: 'usr-admin', name: 'Administrator' })}
                     disabled={activeCompany?.isParent || activeCompany?.isHolding}
                     title={activeCompany?.isParent ? 'Apex holding parent cannot be archived' : 'Archive entity'}
-                    className="p-1.5 rounded-lg border border-slate-200 text-slate-400 hover:text-rose-600 hover:border-rose-300 disabled:opacity-30 disabled:cursor-not-allowed cursor-pointer transition-colors"
+                    className="p-1.5 rounded-lg border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-400 hover:text-rose-600 dark:hover:text-rose-400 hover:border-rose-300 dark:hover:border-rose-500/40 disabled:opacity-30 disabled:cursor-not-allowed cursor-pointer transition-colors"
                   >
                     <Archive className="w-4 h-4" />
                   </button>
@@ -751,7 +751,7 @@ export const CompanySetupManagementView: React.FC<CompanySetupManagementViewProp
               </div>
 
               {/* Sub-Tabs Navigation for Level-4 Operations */}
-              <div className="flex items-center gap-1 border-b border-slate-200 mt-5 -mb-5 overflow-x-auto">
+              <div className="flex items-center gap-1 border-b border-slate-200 dark:border-slate-700 mt-5 -mb-5 overflow-x-auto">
                 {[
                   { key: 'profile', label: 'Company Profile', icon: Building2 },
                   { key: 'information', label: 'Statutory & Identification', icon: FileCheck2 },
@@ -770,8 +770,8 @@ export const CompanySetupManagementView: React.FC<CompanySetupManagementViewProp
                       onClick={() => setInspectorTab(tab.key as any)}
                       className={`flex items-center gap-1.5 px-3.5 py-2.5 text-xs font-semibold whitespace-nowrap border-b-2 transition-colors cursor-pointer ${
                         isActive
-                          ? 'border-indigo-600 text-indigo-700 bg-white'
-                          : 'border-transparent text-slate-600 hover:text-slate-900 hover:bg-slate-100/60'
+                          ? 'border-indigo-600 text-indigo-700 dark:text-indigo-300 bg-white dark:bg-slate-900'
+                          : 'border-transparent text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 hover:bg-slate-100/60 dark:hover:bg-slate-800/60'
                       }`}
                     >
                       <Icon className="w-3.5 h-3.5" />
@@ -786,16 +786,16 @@ export const CompanySetupManagementView: React.FC<CompanySetupManagementViewProp
             {inspectorTab === 'profile' && (
               <div className="p-6 space-y-6">
                 {/* AI Executive Profile Assistant */}
-                <div className="bg-linear-to-r from-indigo-50/70 via-purple-50/40 to-slate-50 border border-indigo-100 rounded-xl p-4">
+                <div className="bg-linear-to-r from-indigo-50/70 dark:from-indigo-500/10 via-purple-50/40 dark:via-purple-500/10 to-slate-50 dark:to-slate-900 border border-indigo-100 dark:border-indigo-500/20 rounded-xl p-4">
                   <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-2 text-xs font-bold text-indigo-900">
-                      <Sparkles className="w-4 h-4 text-indigo-600" />
+                    <div className="flex items-center gap-2 text-xs font-bold text-indigo-900 dark:text-indigo-100">
+                      <Sparkles className="w-4 h-4 text-indigo-600 dark:text-indigo-400" />
                       <span>AI Statutory Profile Briefing & Compliance Diagnosis</span>
                     </div>
                     <button
                       onClick={handleGenerateAiSummary}
                       disabled={isGeneratingAiSummary}
-                      className="px-3 py-1 bg-white border border-indigo-200 hover:border-indigo-300 rounded-lg text-xs font-semibold text-indigo-700 shadow-2xs flex items-center gap-1 cursor-pointer disabled:opacity-50"
+                      className="px-3 py-1 bg-white dark:bg-slate-900 border border-indigo-200 dark:border-indigo-500/30 hover:border-indigo-300 dark:hover:border-indigo-500/40 rounded-lg text-xs font-semibold text-indigo-700 dark:text-indigo-300 shadow-2xs flex items-center gap-1 cursor-pointer disabled:opacity-50"
                     >
                       {isGeneratingAiSummary ? (
                         <RefreshCw className="w-3 h-3 animate-spin" />
@@ -807,11 +807,11 @@ export const CompanySetupManagementView: React.FC<CompanySetupManagementViewProp
                   </div>
 
                   {aiSummary ? (
-                    <div className="mt-3 text-xs text-slate-700 leading-relaxed whitespace-pre-line bg-white/80 p-3 rounded-lg border border-indigo-50">
+                    <div className="mt-3 text-xs text-slate-700 dark:text-slate-300 leading-relaxed whitespace-pre-line bg-white/80 dark:bg-slate-900/80 p-3 rounded-lg border border-indigo-50">
                       {aiSummary}
                     </div>
                   ) : (
-                    <p className="text-xs text-slate-500 mt-1">
+                    <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
                       Synthesizes statutory commercial registration, capital adequacy, VAT tax regimes, management roles, and branch topology for executive audit.
                     </p>
                   )}
@@ -819,23 +819,23 @@ export const CompanySetupManagementView: React.FC<CompanySetupManagementViewProp
 
                 {/* Statutory Quick Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div className="bg-slate-50/70 rounded-xl p-4 border border-slate-200/80 space-y-2.5">
-                    <h4 className="text-xs font-bold text-slate-800 uppercase tracking-wider flex items-center gap-1.5">
-                      <Building2 className="w-3.5 h-3.5 text-slate-500" />
+                  <div className="bg-slate-50/70 dark:bg-slate-800/70 rounded-xl p-4 border border-slate-200/80 dark:border-slate-700/80 space-y-2.5">
+                    <h4 className="text-xs font-bold text-slate-800 dark:text-slate-200 uppercase tracking-wider flex items-center gap-1.5">
+                      <Building2 className="w-3.5 h-3.5 text-slate-500 dark:text-slate-400" />
                       <span>Registration & Identification</span>
                     </h4>
-                    <div className="text-xs space-y-1.5 text-slate-600">
+                    <div className="text-xs space-y-1.5 text-slate-600 dark:text-slate-400">
                       <div className="flex justify-between">
                         <span>Commercial Register (CR):</span>
-                        <strong className="font-mono text-slate-900">{activeCompany?.registrationNumber}</strong>
+                        <strong className="font-mono text-slate-900 dark:text-slate-100">{activeCompany?.registrationNumber}</strong>
                       </div>
                       <div className="flex justify-between">
                         <span>Tax Registration (TRN):</span>
-                        <strong className="font-mono text-slate-900">{activeCompany?.taxNumber}</strong>
+                        <strong className="font-mono text-slate-900 dark:text-slate-100">{activeCompany?.taxNumber}</strong>
                       </div>
                       <div className="flex justify-between">
                         <span>Tax Authority:</span>
-                        <span className="font-medium text-slate-800">{activeCompany?.taxAuthority || 'OTA'}</span>
+                        <span className="font-medium text-slate-800 dark:text-slate-200">{activeCompany?.taxAuthority || 'OTA'}</span>
                       </div>
                       <div className="flex justify-between">
                         <span>Registration Date:</span>
@@ -843,26 +843,26 @@ export const CompanySetupManagementView: React.FC<CompanySetupManagementViewProp
                       </div>
                       <div className="flex justify-between">
                         <span>License Expiry Date:</span>
-                        <span className="text-emerald-700 font-semibold">{activeCompany?.registrationExpiryDate || '2030-01-14'}</span>
+                        <span className="text-emerald-700 dark:text-emerald-300 font-semibold">{activeCompany?.registrationExpiryDate || '2030-01-14'}</span>
                       </div>
                     </div>
                   </div>
 
-                  <div className="bg-slate-50/70 rounded-xl p-4 border border-slate-200/80 space-y-2.5">
-                    <h4 className="text-xs font-bold text-slate-800 uppercase tracking-wider flex items-center gap-1.5">
-                      <Coins className="w-3.5 h-3.5 text-slate-500" />
+                  <div className="bg-slate-50/70 dark:bg-slate-800/70 rounded-xl p-4 border border-slate-200/80 dark:border-slate-700/80 space-y-2.5">
+                    <h4 className="text-xs font-bold text-slate-800 dark:text-slate-200 uppercase tracking-wider flex items-center gap-1.5">
+                      <Coins className="w-3.5 h-3.5 text-slate-500 dark:text-slate-400" />
                       <span>Capital Structure & Accounting</span>
                     </h4>
-                    <div className="text-xs space-y-1.5 text-slate-600">
+                    <div className="text-xs space-y-1.5 text-slate-600 dark:text-slate-400">
                       <div className="flex justify-between">
                         <span>Authorized Capital:</span>
-                        <strong className="font-mono text-slate-900">
+                        <strong className="font-mono text-slate-900 dark:text-slate-100">
                           {activeCompany?.capitalAuthorized ? activeCompany.capitalAuthorized.toLocaleString() : '0'} {activeCompany?.currency}
                         </strong>
                       </div>
                       <div className="flex justify-between">
                         <span>Paid-Up Capital:</span>
-                        <strong className="font-mono text-emerald-800">
+                        <strong className="font-mono text-emerald-800 dark:text-emerald-200">
                           {activeCompany?.capitalPaidUp ? activeCompany.capitalPaidUp.toLocaleString() : '0'} {activeCompany?.currency}
                         </strong>
                       </div>
@@ -872,34 +872,34 @@ export const CompanySetupManagementView: React.FC<CompanySetupManagementViewProp
                       </div>
                       <div className="flex justify-between">
                         <span>Base Currency:</span>
-                        <strong className="text-indigo-700 font-bold">{activeCompany?.currency} (Decimals: {activeCompany?.decimalPrecision || 3})</strong>
+                        <strong className="text-indigo-700 dark:text-indigo-300 font-bold">{activeCompany?.currency} (Decimals: {activeCompany?.decimalPrecision || 3})</strong>
                       </div>
                       <div className="flex justify-between">
                         <span>Fiscal Start Month:</span>
-                        <span className="font-semibold text-slate-800">Month {activeCompany?.fiscalYearStartMonth || 1} (Jan)</span>
+                        <span className="font-semibold text-slate-800 dark:text-slate-200">Month {activeCompany?.fiscalYearStartMonth || 1} (Jan)</span>
                       </div>
                     </div>
                   </div>
                 </div>
 
                 {/* Governance & Management Leadership */}
-                <div className="border border-slate-200 rounded-xl p-4 space-y-3">
-                  <h4 className="text-xs font-bold text-slate-800 uppercase tracking-wider flex items-center gap-1.5">
-                    <UserCheck className="w-3.5 h-3.5 text-slate-500" />
+                <div className="border border-slate-200 dark:border-slate-700 rounded-xl p-4 space-y-3">
+                  <h4 className="text-xs font-bold text-slate-800 dark:text-slate-200 uppercase tracking-wider flex items-center gap-1.5">
+                    <UserCheck className="w-3.5 h-3.5 text-slate-500 dark:text-slate-400" />
                     <span>Statutory Management & Appointed Auditors</span>
                   </h4>
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
-                    <div className="p-3 rounded-lg bg-slate-50 border border-slate-200/60">
-                      <div className="text-slate-500 text-[11px]">Managing Director / CEO</div>
-                      <div className="font-bold text-slate-900 mt-1">{activeCompany?.managingDirectorName || 'Executive Board'}</div>
+                    <div className="p-3 rounded-lg bg-slate-50 dark:bg-slate-800/50 border border-slate-200/60 dark:border-slate-700/60">
+                      <div className="text-slate-500 dark:text-slate-400 text-[11px]">Managing Director / CEO</div>
+                      <div className="font-bold text-slate-900 dark:text-slate-100 mt-1">{activeCompany?.managingDirectorName || 'Executive Board'}</div>
                     </div>
-                    <div className="p-3 rounded-lg bg-slate-50 border border-slate-200/60">
-                      <div className="text-slate-500 text-[11px]">Chief Financial Officer (CFO)</div>
-                      <div className="font-bold text-slate-900 mt-1">{activeCompany?.cfoName || 'Financial Controller'}</div>
+                    <div className="p-3 rounded-lg bg-slate-50 dark:bg-slate-800/50 border border-slate-200/60 dark:border-slate-700/60">
+                      <div className="text-slate-500 dark:text-slate-400 text-[11px]">Chief Financial Officer (CFO)</div>
+                      <div className="font-bold text-slate-900 dark:text-slate-100 mt-1">{activeCompany?.cfoName || 'Financial Controller'}</div>
                     </div>
-                    <div className="p-3 rounded-lg bg-slate-50 border border-slate-200/60">
-                      <div className="text-slate-500 text-[11px]">Independent Statutory Auditor</div>
-                      <div className="font-bold text-indigo-700 mt-1">{activeCompany?.statutoryAuditor || 'Appointed Auditor'}</div>
+                    <div className="p-3 rounded-lg bg-slate-50 dark:bg-slate-800/50 border border-slate-200/60 dark:border-slate-700/60">
+                      <div className="text-slate-500 dark:text-slate-400 text-[11px]">Independent Statutory Auditor</div>
+                      <div className="font-bold text-indigo-700 dark:text-indigo-300 mt-1">{activeCompany?.statutoryAuditor || 'Appointed Auditor'}</div>
                     </div>
                   </div>
                 </div>
@@ -910,32 +910,32 @@ export const CompanySetupManagementView: React.FC<CompanySetupManagementViewProp
             {inspectorTab === 'information' && (
               <div className="p-6 space-y-6">
                 <div className="space-y-4">
-                  <h4 className="text-xs font-bold text-slate-800 uppercase tracking-wider">
+                  <h4 className="text-xs font-bold text-slate-800 dark:text-slate-200 uppercase tracking-wider">
                     Official Head Office & Address Coordinates
                   </h4>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
-                    <div className="space-y-2 border border-slate-200 rounded-xl p-4">
-                      <div className="text-slate-500 font-medium">Physical Street Address</div>
-                      <div className="font-semibold text-slate-900">{activeCompany?.address}</div>
-                      <div className="text-slate-600">
+                    <div className="space-y-2 border border-slate-200 dark:border-slate-700 rounded-xl p-4">
+                      <div className="text-slate-500 dark:text-slate-400 font-medium">Physical Street Address</div>
+                      <div className="font-semibold text-slate-900 dark:text-slate-100">{activeCompany?.address}</div>
+                      <div className="text-slate-600 dark:text-slate-400">
                         {activeCompany?.buildingNumber && `${activeCompany.buildingNumber}, `}
                         {activeCompany?.wayStreet && `${activeCompany.wayStreet}, `}
                         {activeCompany?.city}, {activeCompany?.state}
                       </div>
-                      <div className="text-slate-600 font-mono">
+                      <div className="text-slate-600 dark:text-slate-400 font-mono">
                         Postal Code: {activeCompany?.postalCode} {activeCompany?.poBox && `• ${activeCompany.poBox}`}
                       </div>
                     </div>
 
-                    <div className="space-y-2 border border-slate-200 rounded-xl p-4">
-                      <div className="text-slate-500 font-medium">Official Communications</div>
+                    <div className="space-y-2 border border-slate-200 dark:border-slate-700 rounded-xl p-4">
+                      <div className="text-slate-500 dark:text-slate-400 font-medium">Official Communications</div>
                       <div className="flex justify-between">
                         <span>Official Phone:</span>
-                        <strong className="font-mono text-slate-900">{activeCompany?.phone}</strong>
+                        <strong className="font-mono text-slate-900 dark:text-slate-100">{activeCompany?.phone}</strong>
                       </div>
                       <div className="flex justify-between">
                         <span>Official Email:</span>
-                        <span className="text-indigo-600 font-medium">{activeCompany?.email}</span>
+                        <span className="text-indigo-600 dark:text-indigo-400 font-medium">{activeCompany?.email}</span>
                       </div>
                       <div className="flex justify-between">
                         <span>Corporate Website:</span>
@@ -943,35 +943,35 @@ export const CompanySetupManagementView: React.FC<CompanySetupManagementViewProp
                           href={activeCompany?.website}
                           target="_blank"
                           rel="noreferrer"
-                          className="text-indigo-600 hover:underline flex items-center gap-1"
+                          className="text-indigo-600 dark:text-indigo-400 hover:underline flex items-center gap-1"
                         >
                           {activeCompany?.website} <ExternalLink className="w-3 h-3" />
                         </a>
                       </div>
                       <div className="flex justify-between">
                         <span>Contact Officer:</span>
-                        <span className="font-semibold text-slate-800">{activeCompany?.contactPerson || 'Corporate Secretary'}</span>
+                        <span className="font-semibold text-slate-800 dark:text-slate-200">{activeCompany?.contactPerson || 'Corporate Secretary'}</span>
                       </div>
                     </div>
                   </div>
                 </div>
 
-                <div className="space-y-4 pt-4 border-t border-slate-200">
-                  <h4 className="text-xs font-bold text-slate-800 uppercase tracking-wider">
+                <div className="space-y-4 pt-4 border-t border-slate-200 dark:border-slate-700">
+                  <h4 className="text-xs font-bold text-slate-800 dark:text-slate-200 uppercase tracking-wider">
                     Statutory Registry Offices & Licenses
                   </h4>
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
-                    <div className="p-3 border border-slate-200 rounded-lg">
-                      <div className="text-slate-500 text-[11px]">Commercial Registry Office</div>
-                      <div className="font-semibold text-slate-900 mt-1">{activeCompany?.commercialRegistryOffice || 'MOCIIP'}</div>
+                    <div className="p-3 border border-slate-200 dark:border-slate-700 rounded-lg">
+                      <div className="text-slate-500 dark:text-slate-400 text-[11px]">Commercial Registry Office</div>
+                      <div className="font-semibold text-slate-900 dark:text-slate-100 mt-1">{activeCompany?.commercialRegistryOffice || 'MOCIIP'}</div>
                     </div>
-                    <div className="p-3 border border-slate-200 rounded-lg">
-                      <div className="text-slate-500 text-[11px]">Chamber of Commerce #</div>
-                      <div className="font-mono font-semibold text-slate-900 mt-1">{activeCompany?.chamberOfCommerceNumber || 'OCCI-98421'}</div>
+                    <div className="p-3 border border-slate-200 dark:border-slate-700 rounded-lg">
+                      <div className="text-slate-500 dark:text-slate-400 text-[11px]">Chamber of Commerce #</div>
+                      <div className="font-mono font-semibold text-slate-900 dark:text-slate-100 mt-1">{activeCompany?.chamberOfCommerceNumber || 'OCCI-98421'}</div>
                     </div>
-                    <div className="p-3 border border-slate-200 rounded-lg">
-                      <div className="text-slate-500 text-[11px]">Municipality Permit #</div>
-                      <div className="font-mono font-semibold text-slate-900 mt-1">{activeCompany?.municipalLicenseNumber || 'MM-LIC-2020-00921'}</div>
+                    <div className="p-3 border border-slate-200 dark:border-slate-700 rounded-lg">
+                      <div className="text-slate-500 dark:text-slate-400 text-[11px]">Municipality Permit #</div>
+                      <div className="font-mono font-semibold text-slate-900 dark:text-slate-100 mt-1">{activeCompany?.municipalLicenseNumber || 'MM-LIC-2020-00921'}</div>
                     </div>
                   </div>
                 </div>
@@ -997,19 +997,19 @@ export const CompanySetupManagementView: React.FC<CompanySetupManagementViewProp
             {inspectorTab === 'parameters' && (
               <div className="p-6 space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
-                  <div className="border border-slate-200 rounded-xl p-4 space-y-3">
-                    <h4 className="font-bold text-slate-800 uppercase tracking-wider flex items-center gap-1.5">
-                      <Coins className="w-3.5 h-3.5 text-slate-500" />
+                  <div className="border border-slate-200 dark:border-slate-700 rounded-xl p-4 space-y-3">
+                    <h4 className="font-bold text-slate-800 dark:text-slate-200 uppercase tracking-wider flex items-center gap-1.5">
+                      <Coins className="w-3.5 h-3.5 text-slate-500 dark:text-slate-400" />
                       <span>Currency & Decimal Precisions</span>
                     </h4>
-                    <div className="space-y-2 text-slate-600">
+                    <div className="space-y-2 text-slate-600 dark:text-slate-400">
                       <div className="flex justify-between">
                         <span>Functional Base Currency:</span>
-                        <strong className="font-mono font-bold text-indigo-700">{activeCompany?.currency}</strong>
+                        <strong className="font-mono font-bold text-indigo-700 dark:text-indigo-300">{activeCompany?.currency}</strong>
                       </div>
                       <div className="flex justify-between">
                         <span>Secondary / Reporting Currency:</span>
-                        <strong className="font-mono text-slate-800">{activeCompany?.secondaryCurrency || 'USD'}</strong>
+                        <strong className="font-mono text-slate-800 dark:text-slate-200">{activeCompany?.secondaryCurrency || 'USD'}</strong>
                       </div>
                       <div className="flex justify-between">
                         <span>Decimal Precision:</span>
@@ -1017,40 +1017,40 @@ export const CompanySetupManagementView: React.FC<CompanySetupManagementViewProp
                       </div>
                       <div className="flex justify-between">
                         <span>Number Mask:</span>
-                        <span className="font-mono text-slate-800">{activeCompany?.numberFormat || '1,234,567.890'}</span>
+                        <span className="font-mono text-slate-800 dark:text-slate-200">{activeCompany?.numberFormat || '1,234,567.890'}</span>
                       </div>
                       <div className="flex justify-between">
                         <span>Rounding Rule:</span>
-                        <span className="font-medium text-slate-800">{activeCompany?.defaultRoundingMethod || 'Round Half Up'}</span>
+                        <span className="font-medium text-slate-800 dark:text-slate-200">{activeCompany?.defaultRoundingMethod || 'Round Half Up'}</span>
                       </div>
                     </div>
                   </div>
 
-                  <div className="border border-slate-200 rounded-xl p-4 space-y-3">
-                    <h4 className="font-bold text-slate-800 uppercase tracking-wider flex items-center gap-1.5">
-                      <DollarSign className="w-3.5 h-3.5 text-slate-500" />
+                  <div className="border border-slate-200 dark:border-slate-700 rounded-xl p-4 space-y-3">
+                    <h4 className="font-bold text-slate-800 dark:text-slate-200 uppercase tracking-wider flex items-center gap-1.5">
+                      <DollarSign className="w-3.5 h-3.5 text-slate-500 dark:text-slate-400" />
                       <span>Statutory Tax & Fiscal Rules</span>
                     </h4>
-                    <div className="space-y-2 text-slate-600">
+                    <div className="space-y-2 text-slate-600 dark:text-slate-400">
                       <div className="flex justify-between">
                         <span>Tax Scheme:</span>
-                        <strong className="text-slate-900">{activeCompany?.taxScheme || 'Standard VAT 5%'}</strong>
+                        <strong className="text-slate-900 dark:text-slate-100">{activeCompany?.taxScheme || 'Standard VAT 5%'}</strong>
                       </div>
                       <div className="flex justify-between">
                         <span>Standard VAT Rate:</span>
-                        <span className="font-mono font-bold text-slate-800">{activeCompany?.vatRate || 5}%</span>
+                        <span className="font-mono font-bold text-slate-800 dark:text-slate-200">{activeCompany?.vatRate || 5}%</span>
                       </div>
                       <div className="flex justify-between">
                         <span>Corporate Income Tax Rate:</span>
-                        <span className="font-mono font-bold text-slate-800">{activeCompany?.corporateTaxRate || 15}%</span>
+                        <span className="font-mono font-bold text-slate-800 dark:text-slate-200">{activeCompany?.corporateTaxRate || 15}%</span>
                       </div>
                       <div className="flex justify-between">
                         <span>Fiscal Year Start Month:</span>
-                        <span className="font-semibold text-slate-800">Month {activeCompany?.fiscalYearStartMonth || 1} (January)</span>
+                        <span className="font-semibold text-slate-800 dark:text-slate-200">Month {activeCompany?.fiscalYearStartMonth || 1} (January)</span>
                       </div>
                       <div className="flex justify-between">
                         <span>System Date Format:</span>
-                        <span className="font-mono font-semibold text-slate-800">{activeCompany?.dateFormat || 'YYYY-MM-DD'}</span>
+                        <span className="font-mono font-semibold text-slate-800 dark:text-slate-200">{activeCompany?.dateFormat || 'YYYY-MM-DD'}</span>
                       </div>
                     </div>
                   </div>
@@ -1062,7 +1062,7 @@ export const CompanySetupManagementView: React.FC<CompanySetupManagementViewProp
             {inspectorTab === 'hierarchy' && (
               <div className="p-6 space-y-6">
                 {/* Header Banner */}
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-4 rounded-xl bg-purple-50/70 border border-purple-200/80">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-4 rounded-xl bg-purple-50/70 dark:bg-purple-500/70 border border-purple-200/80">
                   <div className="flex items-start gap-3">
                     <div className="w-10 h-10 rounded-lg bg-purple-600 text-white flex items-center justify-center shrink-0 shadow-xs">
                       <GitFork className="w-5 h-5" />
@@ -1071,7 +1071,7 @@ export const CompanySetupManagementView: React.FC<CompanySetupManagementViewProp
                       <h4 className="text-xs font-bold text-purple-950 uppercase tracking-wider">
                         Enterprise Group & Multi-Tier Holding Architecture
                       </h4>
-                      <p className="text-xs text-purple-800/80 mt-0.5">
+                      <p className="text-xs text-purple-800/80 dark:text-purple-200/80 mt-0.5">
                         IFRS 10 Consolidated Financial Reporting • Parent-Subsidiary Equity Mapping
                       </p>
                     </div>
@@ -1089,22 +1089,22 @@ export const CompanySetupManagementView: React.FC<CompanySetupManagementViewProp
                 {/* Corporate Position Cards */}
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                   {/* Entity Role */}
-                  <div className="p-4 rounded-xl border border-slate-200 bg-slate-50/50 space-y-2">
-                    <span className="text-[11px] font-semibold text-slate-500 uppercase tracking-wider block">
+                  <div className="p-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50/50 dark:bg-slate-800/50 space-y-2">
+                    <span className="text-[11px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider block">
                       Corporate Role
                     </span>
                     <div className="flex items-center gap-2">
                       <span className={`px-2.5 py-1 rounded-full text-xs font-bold ${
                         activeCompany?.isParent || activeCompany?.companyType === 'Holding'
-                          ? 'bg-purple-100 text-purple-800 border border-purple-200'
-                          : 'bg-indigo-100 text-indigo-800 border border-indigo-200'
+                          ? 'bg-purple-100 dark:bg-purple-500/20 text-purple-800 dark:text-purple-200 border border-purple-200 dark:border-purple-500/30'
+                          : 'bg-indigo-100 dark:bg-indigo-500/20 text-indigo-800 dark:text-indigo-200 border border-indigo-200 dark:border-indigo-500/30'
                       }`}>
                         {activeCompany?.isParent || activeCompany?.companyType === 'Holding'
                           ? '👑 Apex Holding Entity'
                           : `${activeCompany?.companyType || 'Operating Subsidiary'}`}
                       </span>
                     </div>
-                    <p className="text-[11px] text-slate-500">
+                    <p className="text-[11px] text-slate-500 dark:text-slate-400">
                       {activeCompany?.isParent
                         ? 'Serves as the apex parent entity with ultimate controlling interest across group subsidiaries.'
                         : 'Operating legal entity consolidated into enterprise holding financials.'}
@@ -1112,49 +1112,49 @@ export const CompanySetupManagementView: React.FC<CompanySetupManagementViewProp
                   </div>
 
                   {/* Parent Entity / Holding Group */}
-                  <div className="p-4 rounded-xl border border-slate-200 bg-slate-50/50 space-y-2">
-                    <span className="text-[11px] font-semibold text-slate-500 uppercase tracking-wider block">
+                  <div className="p-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50/50 dark:bg-slate-800/50 space-y-2">
+                    <span className="text-[11px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider block">
                       Parent Holding Group
                     </span>
-                    <div className="text-xs font-bold text-slate-900">
+                    <div className="text-xs font-bold text-slate-900 dark:text-slate-100">
                       {groups.find(g => g.parentCompanyId === activeCompany?.id)?.name ||
                        groups[0]?.name ||
                        'Artify Global Holdings'}
                     </div>
-                    <div className="text-[11px] text-slate-500 font-mono">
+                    <div className="text-[11px] text-slate-500 dark:text-slate-400 font-mono">
                       Code: {groups.find(g => g.parentCompanyId === activeCompany?.id)?.code || groups[0]?.code || 'ART-HOLD-GRP'}
                     </div>
                   </div>
 
                   {/* Anti-Circular Validation */}
-                  <div className="p-4 rounded-xl border border-emerald-200 bg-emerald-50/40 space-y-2">
-                    <div className="flex items-center gap-1.5 text-emerald-800 text-xs font-bold">
-                      <CheckCircle2 className="w-4 h-4 text-emerald-600" />
+                  <div className="p-4 rounded-xl border border-emerald-200 dark:border-emerald-500/30 bg-emerald-50/40 dark:bg-emerald-500/40 space-y-2">
+                    <div className="flex items-center gap-1.5 text-emerald-800 dark:text-emerald-200 text-xs font-bold">
+                      <CheckCircle2 className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
                       <span>Hierarchy Integrity Valid</span>
                     </div>
-                    <p className="text-[11px] text-emerald-700">
+                    <p className="text-[11px] text-emerald-700 dark:text-emerald-300">
                       No circular holding loops detected. Compliant with ISO 17442 LEI hierarchy & IFRS 10 consolidated governance.
                     </p>
                   </div>
                 </div>
 
                 {/* Subsidiary Relationships Matrix */}
-                <div className="border border-slate-200 rounded-xl overflow-hidden">
-                  <div className="p-4 bg-slate-50 border-b border-slate-200 flex items-center justify-between">
+                <div className="border border-slate-200 dark:border-slate-700 rounded-xl overflow-hidden">
+                  <div className="p-4 bg-slate-50 dark:bg-slate-800/50 border-b border-slate-200 dark:border-slate-700 flex items-center justify-between">
                     <div>
-                      <h5 className="text-xs font-bold text-slate-900">
+                      <h5 className="text-xs font-bold text-slate-900 dark:text-slate-100">
                         Associated Group Memberships & Subsidiary Equity Holdings
                       </h5>
-                      <p className="text-[11px] text-slate-500 mt-0.5">
+                      <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">
                         Direct ownership shares, voting rights, and financial consolidation classification
                       </p>
                     </div>
-                    <span className="text-xs font-mono font-semibold px-2 py-0.5 rounded bg-indigo-50 text-indigo-700 border border-indigo-200">
+                    <span className="text-xs font-mono font-semibold px-2 py-0.5 rounded bg-indigo-50 dark:bg-indigo-500/10 text-indigo-700 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-500/30">
                       {groupMemberships.length} Entities in Group
                     </span>
                   </div>
 
-                  <div className="divide-y divide-slate-200">
+                  <div className="divide-y divide-slate-200 dark:divide-slate-700">
                     {groupMemberships.map(mem => {
                       const memberComp = companies.find(c => c.id === mem.companyId);
                       const isCurrent = mem.companyId === activeCompany?.id;
@@ -1162,23 +1162,23 @@ export const CompanySetupManagementView: React.FC<CompanySetupManagementViewProp
                         <div
                           key={mem.id}
                           className={`p-3.5 flex items-center justify-between text-xs transition-colors ${
-                            isCurrent ? 'bg-purple-50/60 font-semibold' : 'hover:bg-slate-50'
+                            isCurrent ? 'bg-purple-50/60 dark:bg-purple-500/60 font-semibold' : 'hover:bg-slate-50 dark:hover:bg-slate-800/50'
                           }`}
                         >
                           <div className="flex items-center gap-3">
-                            <div className="w-7 h-7 rounded-lg bg-indigo-50 border border-indigo-200 text-indigo-700 flex items-center justify-center font-bold text-[11px]">
+                            <div className="w-7 h-7 rounded-lg bg-indigo-50 dark:bg-indigo-500/10 border border-indigo-200 dark:border-indigo-500/30 text-indigo-700 dark:text-indigo-300 flex items-center justify-center font-bold text-[11px]">
                               {memberComp?.code?.slice(0, 2) || 'EN'}
                             </div>
                             <div>
-                              <div className="text-slate-900 flex items-center gap-2">
+                              <div className="text-slate-900 dark:text-slate-100 flex items-center gap-2">
                                 <span>{memberComp?.legalName || mem.companyId}</span>
                                 {isCurrent && (
-                                  <span className="px-2 py-0.2 rounded text-[10px] bg-purple-200 text-purple-900 font-bold">
+                                  <span className="px-2 py-0.2 rounded text-[10px] bg-purple-200 dark:bg-purple-500/30 text-purple-900 dark:text-purple-100 font-bold">
                                     Current Entity
                                   </span>
                                 )}
                               </div>
-                              <div className="text-[11px] text-slate-500 font-mono mt-0.5">
+                              <div className="text-[11px] text-slate-500 dark:text-slate-400 font-mono mt-0.5">
                                 Tier {mem.tierLevel || 1} • Role: {mem.roleInGroup || 'Subsidiary'}
                               </div>
                             </div>
@@ -1186,16 +1186,16 @@ export const CompanySetupManagementView: React.FC<CompanySetupManagementViewProp
 
                           <div className="flex items-center gap-4 text-right">
                             <div>
-                              <span className="text-[11px] text-slate-500 block">Equity Share</span>
-                              <span className="font-bold text-slate-900">{mem.ownershipPercentage || 100}%</span>
+                              <span className="text-[11px] text-slate-500 dark:text-slate-400 block">Equity Share</span>
+                              <span className="font-bold text-slate-900 dark:text-slate-100">{mem.ownershipPercentage || 100}%</span>
                             </div>
                             <div>
-                              <span className="text-[11px] text-slate-500 block">Voting Control</span>
-                              <span className="font-bold text-slate-900">{mem.votingPercentage || 100}%</span>
+                              <span className="text-[11px] text-slate-500 dark:text-slate-400 block">Voting Control</span>
+                              <span className="font-bold text-slate-900 dark:text-slate-100">{mem.votingPercentage || 100}%</span>
                             </div>
                             <div className="hidden sm:block">
-                              <span className="text-[11px] text-slate-500 block">Method</span>
-                              <span className="px-2 py-0.5 rounded text-[10px] bg-indigo-50 text-indigo-700 border border-indigo-200 font-semibold">
+                              <span className="text-[11px] text-slate-500 dark:text-slate-400 block">Method</span>
+                              <span className="px-2 py-0.5 rounded text-[10px] bg-indigo-50 dark:bg-indigo-500/10 text-indigo-700 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-500/30 font-semibold">
                                 {mem.consolidationMethod || 'Full Consolidation'}
                               </span>
                             </div>
@@ -1204,7 +1204,7 @@ export const CompanySetupManagementView: React.FC<CompanySetupManagementViewProp
                                 setSelectedCompanyId(mem.companyId);
                                 setInspectorTab('profile');
                               }}
-                              className="px-2.5 py-1 rounded bg-slate-100 hover:bg-indigo-50 text-slate-700 hover:text-indigo-600 text-xs font-semibold transition-colors cursor-pointer"
+                              className="px-2.5 py-1 rounded bg-slate-100 dark:bg-slate-800 hover:bg-indigo-50 dark:hover:bg-indigo-500/10 text-slate-700 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 text-xs font-semibold transition-colors cursor-pointer"
                             >
                               Inspect
                             </button>
@@ -1222,10 +1222,10 @@ export const CompanySetupManagementView: React.FC<CompanySetupManagementViewProp
               <div className="p-6 space-y-4">
                 <div className="flex items-center justify-between">
                   <div>
-                    <h4 className="text-xs font-bold text-slate-800 uppercase tracking-wider">
+                    <h4 className="text-xs font-bold text-slate-800 dark:text-slate-200 uppercase tracking-wider">
                       Regulatory Filings & Governance Documents
                     </h4>
-                    <p className="text-xs text-slate-500 mt-0.5">
+                    <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
                       Commercial Registration certificates, Tax cards, Municipality licenses, and Articles of Association
                     </p>
                   </div>
@@ -1239,25 +1239,25 @@ export const CompanySetupManagementView: React.FC<CompanySetupManagementViewProp
                 </div>
 
                 {activeCompanyAttachments.length === 0 ? (
-                  <div className="p-8 text-center border-2 border-dashed border-slate-200 rounded-xl text-slate-400 text-xs">
+                  <div className="p-8 text-center border-2 border-dashed border-slate-200 dark:border-slate-700 rounded-xl text-slate-500 dark:text-slate-400 text-xs">
                     No regulatory documents attached to this legal entity yet.
                   </div>
                 ) : (
-                  <div className="divide-y divide-slate-200 border border-slate-200 rounded-xl overflow-hidden">
+                  <div className="divide-y divide-slate-200 dark:divide-slate-700 border border-slate-200 dark:border-slate-700 rounded-xl overflow-hidden">
                     {activeCompanyAttachments.map(att => (
-                      <div key={att.id} className="p-4 flex items-center justify-between hover:bg-slate-50 transition-colors">
+                      <div key={att.id} className="p-4 flex items-center justify-between hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
                         <div className="flex items-center gap-3">
-                          <div className="w-9 h-9 rounded-lg bg-indigo-50 border border-indigo-200 flex items-center justify-center text-indigo-700">
+                          <div className="w-9 h-9 rounded-lg bg-indigo-50 dark:bg-indigo-500/10 border border-indigo-200 dark:border-indigo-500/30 flex items-center justify-center text-indigo-700 dark:text-indigo-300">
                             <FileText className="w-4 h-4" />
                           </div>
                           <div>
-                            <div className="font-semibold text-slate-900 text-xs flex items-center gap-2">
+                            <div className="font-semibold text-slate-900 dark:text-slate-100 text-xs flex items-center gap-2">
                               <span>{att.name}</span>
-                              <span className="px-2 py-0.5 rounded text-[10px] bg-slate-100 text-slate-700 font-medium">
+                              <span className="px-2 py-0.5 rounded text-[10px] bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-medium">
                                 {att.category}
                               </span>
                             </div>
-                            <div className="text-[11px] text-slate-500 mt-0.5 flex items-center gap-2 font-mono">
+                            <div className="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5 flex items-center gap-2 font-mono">
                               <span>{att.size}</span>
                               <span>•</span>
                               <span>Uploaded by {att.uploadedBy} on {att.uploadedAt}</span>
@@ -1269,14 +1269,14 @@ export const CompanySetupManagementView: React.FC<CompanySetupManagementViewProp
                         <div className="flex items-center gap-2">
                           <button
                             onClick={() => notify(`Simulated downloading document: ${att.name}`)}
-                            className="p-1.5 rounded-lg hover:bg-slate-200 text-slate-600 transition-colors cursor-pointer"
+                            className="p-1.5 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-400 transition-colors cursor-pointer"
                             title="Download Document"
                           >
                             <Download className="w-4 h-4" />
                           </button>
                           <button
                             onClick={() => removeCompanyAttachment(activeCompany.id, att.id, { id: 'usr-admin', name: 'Administrator' })}
-                            className="p-1.5 rounded-lg hover:bg-rose-100 text-slate-400 hover:text-rose-600 transition-colors cursor-pointer"
+                            className="p-1.5 rounded-lg hover:bg-rose-100 dark:hover:bg-rose-500/20 text-slate-600 dark:text-slate-400 hover:text-rose-600 dark:hover:text-rose-400 transition-colors cursor-pointer"
                             title="Remove Document"
                           >
                             <Trash2 className="w-4 h-4" />
@@ -1293,30 +1293,30 @@ export const CompanySetupManagementView: React.FC<CompanySetupManagementViewProp
             {inspectorTab === 'branches' && (
               <div className="p-6 space-y-4">
                 <div className="flex items-center justify-between">
-                  <h4 className="text-xs font-bold text-slate-800 uppercase tracking-wider">
+                  <h4 className="text-xs font-bold text-slate-800 dark:text-slate-200 uppercase tracking-wider">
                     Associated Operational Branches ({activeCompanyBranches.length})
                   </h4>
-                  <span className="text-xs text-slate-500">
+                  <span className="text-xs text-slate-500 dark:text-slate-400">
                     Cross-referenced to 01.01.02 Branch Master
                   </span>
                 </div>
 
                 {activeCompanyBranches.length === 0 ? (
-                  <div className="p-8 text-center border-2 border-dashed border-slate-200 rounded-xl text-slate-400 text-xs">
+                  <div className="p-8 text-center border-2 border-dashed border-slate-200 dark:border-slate-700 rounded-xl text-slate-500 dark:text-slate-400 text-xs">
                     No operating branches registered under this legal entity yet.
                   </div>
                 ) : (
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                     {activeCompanyBranches.map(br => (
-                      <div key={br.id} className="border border-slate-200 rounded-xl p-4 bg-slate-50/50 space-y-2">
+                      <div key={br.id} className="border border-slate-200 dark:border-slate-700 rounded-xl p-4 bg-slate-50/50 dark:bg-slate-800/50 space-y-2">
                         <div className="flex items-start justify-between">
                           <div>
-                            <div className="font-bold text-slate-900 text-xs">{br.name}</div>
-                            <div className="font-mono text-[11px] text-indigo-700 mt-0.5">{br.code}</div>
+                            <div className="font-bold text-slate-900 dark:text-slate-100 text-xs">{br.name}</div>
+                            <div className="font-mono text-[11px] text-indigo-700 dark:text-indigo-300 mt-0.5">{br.code}</div>
                           </div>
                           <StatusBadge status={br.status} size="sm" />
                         </div>
-                        <div className="text-[11px] text-slate-600 space-y-1 pt-2 border-t border-slate-200">
+                        <div className="text-[11px] text-slate-600 dark:text-slate-400 space-y-1 pt-2 border-t border-slate-200 dark:border-slate-700">
                           <div>Address: {br.address}</div>
                           <div>Branch Manager: <strong>{br.manager || 'Unassigned'}</strong></div>
                           <div>Tax Status: <span className="font-semibold">{br.isTaxBranch ? 'Autonomous Tax Branch' : 'Operating Branch'}</span></div>
@@ -1332,34 +1332,34 @@ export const CompanySetupManagementView: React.FC<CompanySetupManagementViewProp
             {inspectorTab === 'history' && (
               <div className="p-6 space-y-4">
                 <div className="flex items-center justify-between">
-                  <h4 className="text-xs font-bold text-slate-800 uppercase tracking-wider flex items-center gap-1.5">
-                    <History className="w-3.5 h-3.5 text-slate-500" />
+                  <h4 className="text-xs font-bold text-slate-800 dark:text-slate-200 uppercase tracking-wider flex items-center gap-1.5">
+                    <History className="w-3.5 h-3.5 text-slate-500 dark:text-slate-400" />
                     <span>Immutable Change History & Audit Ledger</span>
                   </h4>
-                  <span className="text-xs font-mono text-slate-500">Entity Version: v{activeCompany?.version || 1}</span>
+                  <span className="text-xs font-mono text-slate-500 dark:text-slate-400">Entity Version: v{activeCompany?.version || 1}</span>
                 </div>
 
                 {activeCompanyHistory.length === 0 ? (
-                  <div className="p-8 text-center border-2 border-dashed border-slate-200 rounded-xl text-slate-400 text-xs">
+                  <div className="p-8 text-center border-2 border-dashed border-slate-200 dark:border-slate-700 rounded-xl text-slate-500 dark:text-slate-400 text-xs">
                     No parameter changes logged yet for this entity.
                   </div>
                 ) : (
                   <div className="space-y-3">
                     {activeCompanyHistory.map(hist => (
-                      <div key={hist.id} className="border border-slate-200 rounded-lg p-3.5 bg-slate-50/40 text-xs space-y-1.5">
+                      <div key={hist.id} className="border border-slate-200 dark:border-slate-700 rounded-lg p-3.5 bg-slate-50/40 dark:bg-slate-800/40 text-xs space-y-1.5">
                         <div className="flex items-center justify-between">
-                          <span className="font-bold text-indigo-900 font-mono">{hist.fieldChanged}</span>
-                          <span className="text-[11px] text-slate-400 flex items-center gap-1">
+                          <span className="font-bold text-indigo-900 dark:text-indigo-100 font-mono">{hist.fieldChanged}</span>
+                          <span className="text-[11px] text-slate-500 dark:text-slate-400 flex items-center gap-1">
                             <Clock className="w-3 h-3" />
                             {hist.timestamp}
                           </span>
                         </div>
-                        <div className="flex items-center gap-2 text-slate-700">
-                          <span className="line-through text-slate-400">{hist.oldValue}</span>
-                          <span className="text-slate-400">→</span>
-                          <strong className="text-emerald-800 font-semibold">{hist.newValue}</strong>
+                        <div className="flex items-center gap-2 text-slate-700 dark:text-slate-300">
+                          <span className="line-through text-slate-500 dark:text-slate-400">{hist.oldValue}</span>
+                          <span className="text-slate-500 dark:text-slate-400">→</span>
+                          <strong className="text-emerald-800 dark:text-emerald-200 font-semibold">{hist.newValue}</strong>
                         </div>
-                        <div className="text-[11px] text-slate-500 pt-1 border-t border-slate-100 flex items-center justify-between">
+                        <div className="text-[11px] text-slate-500 dark:text-slate-400 pt-1 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between">
                           <span>Reason: <em>{hist.changeReason}</em></span>
                           <span>By: <strong>{hist.changedBy}</strong></span>
                         </div>
@@ -1421,13 +1421,13 @@ export const CompanySetupManagementView: React.FC<CompanySetupManagementViewProp
                   setSelectedCompanyId(item.id);
                   setInspectorTab('profile');
                 }}
-                className="px-2.5 py-1 rounded text-xs font-semibold bg-indigo-50 hover:bg-indigo-100 text-indigo-700 transition-colors cursor-pointer"
+                className="px-2.5 py-1 rounded text-xs font-semibold bg-indigo-50 dark:bg-indigo-500/10 hover:bg-indigo-100 dark:hover:bg-indigo-500/20 text-indigo-700 dark:text-indigo-300 transition-colors cursor-pointer"
               >
                 Inspect
               </button>
               <button
                 onClick={() => handleOpenEdit(item)}
-                className="p-1.5 rounded hover:bg-slate-100 text-slate-600 transition-colors cursor-pointer"
+                className="p-1.5 rounded hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400 transition-colors cursor-pointer"
                 title="Edit Entity"
               >
                 <Edit3 className="w-3.5 h-3.5" />
@@ -1447,9 +1447,9 @@ export const CompanySetupManagementView: React.FC<CompanySetupManagementViewProp
       >
         <div className="space-y-5">
           {/* AI Pre-fill Action Banner */}
-          <div className="flex items-center justify-between p-3 rounded-lg bg-indigo-50 border border-indigo-100 text-xs">
-            <div className="flex items-center gap-2 text-indigo-900 font-semibold">
-              <Sparkles className="w-4 h-4 text-indigo-600" />
+          <div className="flex items-center justify-between p-3 rounded-lg bg-indigo-50 dark:bg-indigo-500/10 border border-indigo-100 dark:border-indigo-500/20 text-xs">
+            <div className="flex items-center gap-2 text-indigo-900 dark:text-indigo-100 font-semibold">
+              <Sparkles className="w-4 h-4 text-indigo-600 dark:text-indigo-400" />
               <span>Have a Trade License / CR Certificate? Use AI extraction</span>
             </div>
             <button
@@ -1463,7 +1463,7 @@ export const CompanySetupManagementView: React.FC<CompanySetupManagementViewProp
           </div>
 
           {/* Step Indicator */}
-          <div className="flex items-center justify-between border-b border-slate-200 pb-3 text-xs overflow-x-auto gap-2">
+          <div className="flex items-center justify-between border-b border-slate-200 dark:border-slate-700 pb-3 text-xs overflow-x-auto gap-2">
             {[
               { num: 1, label: 'Identification & Structure' },
               { num: 2, label: 'Registration & Tax' },
@@ -1476,12 +1476,12 @@ export const CompanySetupManagementView: React.FC<CompanySetupManagementViewProp
                 onClick={() => setFormStep(step.num)}
                 className={`flex items-center gap-2 font-semibold pb-1 cursor-pointer whitespace-nowrap ${
                   formStep === step.num
-                    ? 'text-indigo-600 border-b-2 border-indigo-600'
-                    : 'text-slate-400 hover:text-slate-700'
+                    ? 'text-indigo-600 dark:text-indigo-400 border-b-2 border-indigo-600'
+                    : 'text-slate-600 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-300'
                 }`}
               >
                 <span className={`w-5 h-5 rounded-full flex items-center justify-center text-[11px] ${
-                  formStep === step.num ? 'bg-indigo-600 text-white' : 'bg-slate-200 text-slate-600'
+                  formStep === step.num ? 'bg-indigo-600 text-white' : 'bg-slate-200 dark:bg-slate-700 text-slate-600 dark:text-slate-400'
                 }`}>
                   {step.num}
                 </span>
@@ -1495,8 +1495,8 @@ export const CompanySetupManagementView: React.FC<CompanySetupManagementViewProp
             <div className="space-y-4">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs font-semibold text-slate-700 mb-1">
-                    Company Code <span className="text-rose-500">*</span>
+                  <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
+                    Company Code <span className="text-rose-500 dark:text-rose-400">*</span>
                   </label>
                   <input
                     type="text"
@@ -1505,12 +1505,12 @@ export const CompanySetupManagementView: React.FC<CompanySetupManagementViewProp
                     placeholder="e.g. ART-HOLD, GH-ENERGY"
                     className="w-full px-3 py-2 border rounded-lg text-xs font-mono font-bold uppercase focus:ring-2 focus:ring-indigo-500 focus:outline-hidden"
                   />
-                  {formErrors.code && <p className="text-rose-600 text-[11px] mt-1">{formErrors.code}</p>}
+                  {formErrors.code && <p className="text-rose-600 dark:text-rose-400 text-[11px] mt-1">{formErrors.code}</p>}
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-slate-700 mb-1">
-                    Legal Entity Name <span className="text-rose-500">*</span>
+                  <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
+                    Legal Entity Name <span className="text-rose-500 dark:text-rose-400">*</span>
                   </label>
                   <input
                     type="text"
@@ -1528,13 +1528,13 @@ export const CompanySetupManagementView: React.FC<CompanySetupManagementViewProp
                     placeholder="e.g. Gulf Horizon Energy SAOC"
                     className="w-full px-3 py-2 border rounded-lg text-xs font-semibold focus:ring-2 focus:ring-indigo-500 focus:outline-hidden"
                   />
-                  {formErrors.legalName && <p className="text-rose-600 text-[11px] mt-1">{formErrors.legalName}</p>}
+                  {formErrors.legalName && <p className="text-rose-600 dark:text-rose-400 text-[11px] mt-1">{formErrors.legalName}</p>}
                 </div>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs font-semibold text-slate-700 mb-1">Trading Name</label>
+                  <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Trading Name</label>
                   <input
                     type="text"
                     value={formData.tradingName}
@@ -1545,11 +1545,11 @@ export const CompanySetupManagementView: React.FC<CompanySetupManagementViewProp
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-slate-700 mb-1">Legal Structure</label>
+                  <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Legal Structure</label>
                   <select
                     value={formData.legalStructure}
                     onChange={e => setFormData(prev => ({ ...prev, legalStructure: e.target.value as any }))}
-                    className="w-full px-3 py-2 border rounded-lg text-xs bg-white"
+                    className="w-full px-3 py-2 border rounded-lg text-xs bg-white dark:bg-slate-900"
                   >
                     <option value="Closed Joint Stock Company (SAOC)">Closed Joint Stock Company (SAOC)</option>
                     <option value="Public Joint Stock Company (SAOG)">Public Joint Stock Company (SAOG)</option>
@@ -1563,11 +1563,11 @@ export const CompanySetupManagementView: React.FC<CompanySetupManagementViewProp
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs font-semibold text-slate-700 mb-1">Entity Role</label>
+                  <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Entity Role</label>
                   <select
                     value={formData.companyType}
                     onChange={e => setFormData(prev => ({ ...prev, companyType: e.target.value as any }))}
-                    className="w-full px-3 py-2 border rounded-lg text-xs bg-white"
+                    className="w-full px-3 py-2 border rounded-lg text-xs bg-white dark:bg-slate-900"
                   >
                     <option value="Subsidiary">Subsidiary</option>
                     <option value="Holding">Holding Apex</option>
@@ -1578,7 +1578,7 @@ export const CompanySetupManagementView: React.FC<CompanySetupManagementViewProp
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-slate-700 mb-1">Industry Segment</label>
+                  <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Industry Segment</label>
                   <input
                     type="text"
                     value={formData.industrySegment}
@@ -1596,7 +1596,7 @@ export const CompanySetupManagementView: React.FC<CompanySetupManagementViewProp
             <div className="space-y-4">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs font-semibold text-slate-700 mb-1">
+                  <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
                     Commercial Registration (CR) Number
                   </label>
                   <input
@@ -1606,11 +1606,11 @@ export const CompanySetupManagementView: React.FC<CompanySetupManagementViewProp
                     placeholder="e.g. CR-4829103"
                     className="w-full px-3 py-2 border rounded-lg text-xs font-mono font-semibold"
                   />
-                  {formErrors.registrationNumber && <p className="text-rose-600 text-[11px] mt-1">{formErrors.registrationNumber}</p>}
+                  {formErrors.registrationNumber && <p className="text-rose-600 dark:text-rose-400 text-[11px] mt-1">{formErrors.registrationNumber}</p>}
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-slate-700 mb-1">
+                  <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
                     VAT Tax Identification Number (TRN)
                   </label>
                   <input
@@ -1620,13 +1620,13 @@ export const CompanySetupManagementView: React.FC<CompanySetupManagementViewProp
                     placeholder="e.g. OM-VAT-40082910"
                     className="w-full px-3 py-2 border rounded-lg text-xs font-mono font-semibold"
                   />
-                  {formErrors.taxNumber && <p className="text-rose-600 text-[11px] mt-1">{formErrors.taxNumber}</p>}
+                  {formErrors.taxNumber && <p className="text-rose-600 dark:text-rose-400 text-[11px] mt-1">{formErrors.taxNumber}</p>}
                 </div>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                 <div>
-                  <label className="block text-xs font-semibold text-slate-700 mb-1">Tax Authority</label>
+                  <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Tax Authority</label>
                   <input
                     type="text"
                     value={formData.taxAuthority}
@@ -1635,7 +1635,7 @@ export const CompanySetupManagementView: React.FC<CompanySetupManagementViewProp
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-semibold text-slate-700 mb-1">Registration Date</label>
+                  <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Registration Date</label>
                   <input
                     type="date"
                     value={formData.registrationDate}
@@ -1644,7 +1644,7 @@ export const CompanySetupManagementView: React.FC<CompanySetupManagementViewProp
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-semibold text-slate-700 mb-1">License Expiry Date</label>
+                  <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">License Expiry Date</label>
                   <input
                     type="date"
                     value={formData.registrationExpiryDate}
@@ -1656,7 +1656,7 @@ export const CompanySetupManagementView: React.FC<CompanySetupManagementViewProp
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs font-semibold text-slate-700 mb-1">Chamber of Commerce #</label>
+                  <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Chamber of Commerce #</label>
                   <input
                     type="text"
                     value={formData.chamberOfCommerceNumber}
@@ -1667,7 +1667,7 @@ export const CompanySetupManagementView: React.FC<CompanySetupManagementViewProp
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-slate-700 mb-1">Municipal License #</label>
+                  <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Municipal License #</label>
                   <input
                     type="text"
                     value={formData.municipalLicenseNumber}
@@ -1685,7 +1685,7 @@ export const CompanySetupManagementView: React.FC<CompanySetupManagementViewProp
             <div className="space-y-4">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs font-semibold text-slate-700 mb-1">Authorized Capital</label>
+                  <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Authorized Capital</label>
                   <input
                     type="number"
                     value={formData.capitalAuthorized}
@@ -1695,7 +1695,7 @@ export const CompanySetupManagementView: React.FC<CompanySetupManagementViewProp
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-slate-700 mb-1">Paid-Up Capital</label>
+                  <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Paid-Up Capital</label>
                   <input
                     type="number"
                     value={formData.capitalPaidUp}
@@ -1707,11 +1707,11 @@ export const CompanySetupManagementView: React.FC<CompanySetupManagementViewProp
 
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                 <div>
-                  <label className="block text-xs font-semibold text-slate-700 mb-1">Base Currency</label>
+                  <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Base Currency</label>
                   <select
                     value={formData.currency}
                     onChange={e => setFormData(prev => ({ ...prev, currency: e.target.value }))}
-                    className="w-full px-3 py-2 border rounded-lg text-xs bg-white font-bold"
+                    className="w-full px-3 py-2 border rounded-lg text-xs bg-white dark:bg-slate-900 font-bold"
                   >
                     <option value="OMR">OMR (Omani Rial - 3 Decimals)</option>
                     <option value="AED">AED (UAE Dirham)</option>
@@ -1722,11 +1722,11 @@ export const CompanySetupManagementView: React.FC<CompanySetupManagementViewProp
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-slate-700 mb-1">Secondary Currency</label>
+                  <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Secondary Currency</label>
                   <select
                     value={formData.secondaryCurrency}
                     onChange={e => setFormData(prev => ({ ...prev, secondaryCurrency: e.target.value }))}
-                    className="w-full px-3 py-2 border rounded-lg text-xs bg-white"
+                    className="w-full px-3 py-2 border rounded-lg text-xs bg-white dark:bg-slate-900"
                   >
                     <option value="USD">USD</option>
                     <option value="EUR">EUR</option>
@@ -1735,11 +1735,11 @@ export const CompanySetupManagementView: React.FC<CompanySetupManagementViewProp
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-slate-700 mb-1">Fiscal Year Start</label>
+                  <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Fiscal Year Start</label>
                   <select
                     value={formData.fiscalYearStartMonth}
                     onChange={e => setFormData(prev => ({ ...prev, fiscalYearStartMonth: Number(e.target.value) }))}
-                    className="w-full px-3 py-2 border rounded-lg text-xs bg-white"
+                    className="w-full px-3 py-2 border rounded-lg text-xs bg-white dark:bg-slate-900"
                   >
                     <option value={1}>January (Standard Calendar)</option>
                     <option value={4}>April (Financial Year)</option>
@@ -1751,11 +1751,11 @@ export const CompanySetupManagementView: React.FC<CompanySetupManagementViewProp
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs font-semibold text-slate-700 mb-1">Tax Regime</label>
+                  <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Tax Regime</label>
                   <select
                     value={formData.taxScheme}
                     onChange={e => setFormData(prev => ({ ...prev, taxScheme: e.target.value as any }))}
-                    className="w-full px-3 py-2 border rounded-lg text-xs bg-white"
+                    className="w-full px-3 py-2 border rounded-lg text-xs bg-white dark:bg-slate-900"
                   >
                     <option value="Standard VAT 5%">Standard VAT 5% (Oman / UAE)</option>
                     <option value="VAT 15%">Standard VAT 15% (Saudi Arabia)</option>
@@ -1765,7 +1765,7 @@ export const CompanySetupManagementView: React.FC<CompanySetupManagementViewProp
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-slate-700 mb-1">Corporate Tax Rate (%)</label>
+                  <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Corporate Tax Rate (%)</label>
                   <input
                     type="number"
                     value={formData.corporateTaxRate}
@@ -1782,11 +1782,11 @@ export const CompanySetupManagementView: React.FC<CompanySetupManagementViewProp
             <div className="space-y-4">
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                 <div>
-                  <label className="block text-xs font-semibold text-slate-700 mb-1">Country</label>
+                  <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Country</label>
                   <select
                     value={formData.country}
                     onChange={e => setFormData(prev => ({ ...prev, country: e.target.value }))}
-                    className="w-full px-3 py-2 border rounded-lg text-xs bg-white"
+                    className="w-full px-3 py-2 border rounded-lg text-xs bg-white dark:bg-slate-900"
                   >
                     <option value="Oman">Oman</option>
                     <option value="United Arab Emirates">United Arab Emirates</option>
@@ -1796,7 +1796,7 @@ export const CompanySetupManagementView: React.FC<CompanySetupManagementViewProp
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-slate-700 mb-1">City</label>
+                  <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">City</label>
                   <input
                     type="text"
                     value={formData.city}
@@ -1807,7 +1807,7 @@ export const CompanySetupManagementView: React.FC<CompanySetupManagementViewProp
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-slate-700 mb-1">Governorate / State</label>
+                  <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Governorate / State</label>
                   <input
                     type="text"
                     value={formData.state}
@@ -1819,7 +1819,7 @@ export const CompanySetupManagementView: React.FC<CompanySetupManagementViewProp
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-slate-700 mb-1">Physical Street Address</label>
+                <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Physical Street Address</label>
                 <input
                   type="text"
                   value={formData.address}
@@ -1831,7 +1831,7 @@ export const CompanySetupManagementView: React.FC<CompanySetupManagementViewProp
 
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                 <div>
-                  <label className="block text-xs font-semibold text-slate-700 mb-1">Managing Director / CEO</label>
+                  <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Managing Director / CEO</label>
                   <input
                     type="text"
                     value={formData.managingDirectorName}
@@ -1842,7 +1842,7 @@ export const CompanySetupManagementView: React.FC<CompanySetupManagementViewProp
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-slate-700 mb-1">Chief Financial Officer (CFO)</label>
+                  <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Chief Financial Officer (CFO)</label>
                   <input
                     type="text"
                     value={formData.cfoName}
@@ -1853,7 +1853,7 @@ export const CompanySetupManagementView: React.FC<CompanySetupManagementViewProp
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-slate-700 mb-1">Statutory Auditor</label>
+                  <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Statutory Auditor</label>
                   <input
                     type="text"
                     value={formData.statutoryAuditor}
@@ -1866,7 +1866,7 @@ export const CompanySetupManagementView: React.FC<CompanySetupManagementViewProp
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs font-semibold text-slate-700 mb-1">Official Email</label>
+                  <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Official Email</label>
                   <input
                     type="email"
                     value={formData.email}
@@ -1876,7 +1876,7 @@ export const CompanySetupManagementView: React.FC<CompanySetupManagementViewProp
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-slate-700 mb-1">Official Phone</label>
+                  <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Official Phone</label>
                   <input
                     type="text"
                     value={formData.phone}
@@ -1893,7 +1893,7 @@ export const CompanySetupManagementView: React.FC<CompanySetupManagementViewProp
             <div className="space-y-4">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs font-semibold text-slate-700 mb-1">Company Logo URL / Preset</label>
+                  <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Company Logo URL / Preset</label>
                   <input
                     type="text"
                     value={formData.logo}
@@ -1910,7 +1910,7 @@ export const CompanySetupManagementView: React.FC<CompanySetupManagementViewProp
                           logo: 'https://images.unsplash.com/photo-1560179707-f14e90ef3623?w=128&auto=format&fit=crop&q=80'
                         }))
                       }
-                      className="text-[10px] px-2 py-0.5 rounded bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium cursor-pointer"
+                      className="text-[10px] px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 font-medium cursor-pointer"
                     >
                       Preset Apex Crest
                     </button>
@@ -1922,7 +1922,7 @@ export const CompanySetupManagementView: React.FC<CompanySetupManagementViewProp
                           logo: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=128&auto=format&fit=crop&q=80'
                         }))
                       }
-                      className="text-[10px] px-2 py-0.5 rounded bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium cursor-pointer"
+                      className="text-[10px] px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 font-medium cursor-pointer"
                     >
                       Preset Tech Tower
                     </button>
@@ -1930,7 +1930,7 @@ export const CompanySetupManagementView: React.FC<CompanySetupManagementViewProp
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-slate-700 mb-1">Primary Brand Accent Color</label>
+                  <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Primary Brand Accent Color</label>
                   <div className="flex items-center gap-2">
                     <input
                       type="color"
@@ -1950,7 +1950,7 @@ export const CompanySetupManagementView: React.FC<CompanySetupManagementViewProp
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs font-semibold text-slate-700 mb-1">Watermark Security Text</label>
+                  <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Watermark Security Text</label>
                   <input
                     type="text"
                     value={formData.watermarkText}
@@ -1961,11 +1961,11 @@ export const CompanySetupManagementView: React.FC<CompanySetupManagementViewProp
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-slate-700 mb-1">Header Layout Template</label>
+                  <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Header Layout Template</label>
                   <select
                     value={formData.letterheadTemplate || 'Default Standard'}
                     onChange={e => setFormData(prev => ({ ...prev, letterheadTemplate: e.target.value as any }))}
-                    className="w-full px-3 py-2 border rounded-lg text-xs bg-white font-medium"
+                    className="w-full px-3 py-2 border rounded-lg text-xs bg-white dark:bg-slate-900 font-medium"
                   >
                     <option value="Default Standard">Default Standard (Corporate Banner)</option>
                     <option value="Modern Minimalist">Modern Minimalist (Sleek Border)</option>
@@ -1978,7 +1978,7 @@ export const CompanySetupManagementView: React.FC<CompanySetupManagementViewProp
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs font-semibold text-slate-700 mb-1">Letterhead Header Tagline</label>
+                  <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Letterhead Header Tagline</label>
                   <input
                     type="text"
                     value={formData.headerTagline}
@@ -1989,7 +1989,7 @@ export const CompanySetupManagementView: React.FC<CompanySetupManagementViewProp
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-slate-700 mb-1">Arabic Legal Entity Name</label>
+                  <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Arabic Legal Entity Name</label>
                   <input
                     type="text"
                     dir="rtl"
@@ -2002,7 +2002,7 @@ export const CompanySetupManagementView: React.FC<CompanySetupManagementViewProp
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-slate-700 mb-1">Footer Bank & Wire Instructions</label>
+                <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Footer Bank & Wire Instructions</label>
                 <input
                   type="text"
                   value={formData.footerBankDetails}
@@ -2015,13 +2015,13 @@ export const CompanySetupManagementView: React.FC<CompanySetupManagementViewProp
           )}
 
           {/* Navigation Controls */}
-          <div className="flex items-center justify-between pt-4 border-t border-slate-200">
+          <div className="flex items-center justify-between pt-4 border-t border-slate-200 dark:border-slate-700">
             <div>
               {formStep > 1 && (
                 <button
                   type="button"
                   onClick={() => setFormStep(s => s - 1)}
-                  className="px-4 py-2 border rounded-lg text-xs font-semibold text-slate-700 hover:bg-slate-50 cursor-pointer"
+                  className="px-4 py-2 border rounded-lg text-xs font-semibold text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800/50 cursor-pointer"
                 >
                   Previous Step
                 </button>
@@ -2042,7 +2042,7 @@ export const CompanySetupManagementView: React.FC<CompanySetupManagementViewProp
                   <button
                     type="button"
                     onClick={() => handleSaveNewCompany('Draft')}
-                    className="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-800 rounded-lg text-xs font-semibold cursor-pointer"
+                    className="px-4 py-2 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-200 rounded-lg text-xs font-semibold cursor-pointer"
                   >
                     Save as Draft
                   </button>
@@ -2071,7 +2071,7 @@ export const CompanySetupManagementView: React.FC<CompanySetupManagementViewProp
         <div className="space-y-4">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label className="block text-xs font-semibold text-slate-700 mb-1">Legal Entity Name</label>
+              <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Legal Entity Name</label>
               <input
                 type="text"
                 value={formData.legalName}
@@ -2081,7 +2081,7 @@ export const CompanySetupManagementView: React.FC<CompanySetupManagementViewProp
             </div>
 
             <div>
-              <label className="block text-xs font-semibold text-slate-700 mb-1">Trading Name</label>
+              <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Trading Name</label>
               <input
                 type="text"
                 value={formData.tradingName}
@@ -2093,7 +2093,7 @@ export const CompanySetupManagementView: React.FC<CompanySetupManagementViewProp
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label className="block text-xs font-semibold text-slate-700 mb-1">CR Number</label>
+              <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">CR Number</label>
               <input
                 type="text"
                 value={formData.registrationNumber}
@@ -2103,7 +2103,7 @@ export const CompanySetupManagementView: React.FC<CompanySetupManagementViewProp
             </div>
 
             <div>
-              <label className="block text-xs font-semibold text-slate-700 mb-1">Tax Number (VAT TRN)</label>
+              <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Tax Number (VAT TRN)</label>
               <input
                 type="text"
                 value={formData.taxNumber}
@@ -2114,25 +2114,25 @@ export const CompanySetupManagementView: React.FC<CompanySetupManagementViewProp
           </div>
 
           {/* Branding, Logo & Colors in Edit Modal */}
-          <div className="p-3.5 bg-slate-50 border border-slate-200 rounded-xl space-y-3">
-            <h5 className="text-xs font-bold text-slate-800 uppercase tracking-wider">
+          <div className="p-3.5 bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-xl space-y-3">
+            <h5 className="text-xs font-bold text-slate-800 dark:text-slate-200 uppercase tracking-wider">
               Branding, Logo & Watermark Settings
             </h5>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="block text-[11px] font-semibold text-slate-700 mb-1">Logo URL</label>
+                <label className="block text-[11px] font-semibold text-slate-700 dark:text-slate-300 mb-1">Logo URL</label>
                 <input
                   type="text"
                   value={formData.logo}
                   onChange={e => setFormData(prev => ({ ...prev, logo: e.target.value }))}
                   placeholder="https://..."
-                  className="w-full px-2.5 py-1.5 border rounded-lg text-xs bg-white"
+                  className="w-full px-2.5 py-1.5 border rounded-lg text-xs bg-white dark:bg-slate-900"
                 />
               </div>
 
               <div>
-                <label className="block text-[11px] font-semibold text-slate-700 mb-1">Primary Brand Accent Color</label>
+                <label className="block text-[11px] font-semibold text-slate-700 dark:text-slate-300 mb-1">Primary Brand Accent Color</label>
                 <div className="flex items-center gap-2">
                   <input
                     type="color"
@@ -2144,7 +2144,7 @@ export const CompanySetupManagementView: React.FC<CompanySetupManagementViewProp
                     type="text"
                     value={formData.brandColor}
                     onChange={e => setFormData(prev => ({ ...prev, brandColor: e.target.value }))}
-                    className="w-full px-2.5 py-1.5 border rounded-lg text-xs font-mono uppercase font-bold bg-white"
+                    className="w-full px-2.5 py-1.5 border rounded-lg text-xs font-mono uppercase font-bold bg-white dark:bg-slate-900"
                   />
                 </div>
               </div>
@@ -2152,22 +2152,22 @@ export const CompanySetupManagementView: React.FC<CompanySetupManagementViewProp
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="block text-[11px] font-semibold text-slate-700 mb-1">Watermark Security Text</label>
+                <label className="block text-[11px] font-semibold text-slate-700 dark:text-slate-300 mb-1">Watermark Security Text</label>
                 <input
                   type="text"
                   value={formData.watermarkText}
                   onChange={e => setFormData(prev => ({ ...prev, watermarkText: e.target.value }))}
                   placeholder="e.g. CONFIDENTIAL"
-                  className="w-full px-2.5 py-1.5 border rounded-lg text-xs font-mono uppercase bg-white"
+                  className="w-full px-2.5 py-1.5 border rounded-lg text-xs font-mono uppercase bg-white dark:bg-slate-900"
                 />
               </div>
 
               <div>
-                <label className="block text-[11px] font-semibold text-slate-700 mb-1">Letterhead Layout Template</label>
+                <label className="block text-[11px] font-semibold text-slate-700 dark:text-slate-300 mb-1">Letterhead Layout Template</label>
                 <select
                   value={formData.letterheadTemplate || 'Default Standard'}
                   onChange={e => setFormData(prev => ({ ...prev, letterheadTemplate: e.target.value as any }))}
-                  className="w-full px-2.5 py-1.5 border rounded-lg text-xs bg-white font-medium"
+                  className="w-full px-2.5 py-1.5 border rounded-lg text-xs bg-white dark:bg-slate-900 font-medium"
                 >
                   <option value="Default Standard">Default Standard (Corporate Banner)</option>
                   <option value="Modern Minimalist">Modern Minimalist</option>
@@ -2180,24 +2180,24 @@ export const CompanySetupManagementView: React.FC<CompanySetupManagementViewProp
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="block text-[11px] font-semibold text-slate-700 mb-1">Header Tagline</label>
+                <label className="block text-[11px] font-semibold text-slate-700 dark:text-slate-300 mb-1">Header Tagline</label>
                 <input
                   type="text"
                   value={formData.headerTagline}
                   onChange={e => setFormData(prev => ({ ...prev, headerTagline: e.target.value }))}
                   placeholder="Enterprise Commercial Solutions"
-                  className="w-full px-2.5 py-1.5 border rounded-lg text-xs bg-white"
+                  className="w-full px-2.5 py-1.5 border rounded-lg text-xs bg-white dark:bg-slate-900"
                 />
               </div>
 
               <div>
-                <label className="block text-[11px] font-semibold text-slate-700 mb-1">Footer Bank / Wire Details</label>
+                <label className="block text-[11px] font-semibold text-slate-700 dark:text-slate-300 mb-1">Footer Bank / Wire Details</label>
                 <input
                   type="text"
                   value={formData.footerBankDetails}
                   onChange={e => setFormData(prev => ({ ...prev, footerBankDetails: e.target.value }))}
                   placeholder="Bank Muscat SAOG • IBAN: OM02BMUS..."
-                  className="w-full px-2.5 py-1.5 border rounded-lg text-xs font-mono bg-white"
+                  className="w-full px-2.5 py-1.5 border rounded-lg text-xs font-mono bg-white dark:bg-slate-900"
                 />
               </div>
             </div>
@@ -2205,7 +2205,7 @@ export const CompanySetupManagementView: React.FC<CompanySetupManagementViewProp
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label className="block text-xs font-semibold text-slate-700 mb-1">Paid-up Capital</label>
+              <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Paid-up Capital</label>
               <input
                 type="number"
                 value={formData.capitalPaidUp}
@@ -2215,7 +2215,7 @@ export const CompanySetupManagementView: React.FC<CompanySetupManagementViewProp
             </div>
 
             <div>
-              <label className="block text-xs font-semibold text-slate-700 mb-1">Managing Director</label>
+              <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Managing Director</label>
               <input
                 type="text"
                 value={formData.managingDirectorName}
@@ -2226,8 +2226,8 @@ export const CompanySetupManagementView: React.FC<CompanySetupManagementViewProp
           </div>
 
           <div>
-            <label className="block text-xs font-semibold text-slate-700 mb-1">
-              Change Reason / Resolution Reference <span className="text-rose-500">*</span>
+            <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
+              Change Reason / Resolution Reference <span className="text-rose-500 dark:text-rose-400">*</span>
             </label>
             <input
               type="text"
@@ -2238,10 +2238,10 @@ export const CompanySetupManagementView: React.FC<CompanySetupManagementViewProp
             />
           </div>
 
-          <div className="flex items-center justify-end gap-2 pt-4 border-t border-slate-200">
+          <div className="flex items-center justify-end gap-2 pt-4 border-t border-slate-200 dark:border-slate-700">
             <button
               onClick={() => setIsEditModalOpen(false)}
-              className="px-4 py-2 border rounded-lg text-xs font-semibold text-slate-700 hover:bg-slate-50 cursor-pointer"
+              className="px-4 py-2 border rounded-lg text-xs font-semibold text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800/50 cursor-pointer"
             >
               Cancel
             </button>
@@ -2264,18 +2264,18 @@ export const CompanySetupManagementView: React.FC<CompanySetupManagementViewProp
         size="md"
       >
         <div className="space-y-4 text-xs">
-          <div className="p-3 bg-emerald-50 border border-emerald-200 rounded-lg text-emerald-900 space-y-1">
+          <div className="p-3 bg-emerald-50 dark:bg-emerald-500/10 border border-emerald-200 dark:border-emerald-500/30 rounded-lg text-emerald-900 dark:text-emerald-100 space-y-1">
             <div className="font-bold flex items-center gap-1.5">
-              <CheckCircle2 className="w-4 h-4 text-emerald-600" />
+              <CheckCircle2 className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
               <span>Segregation of Duties (SoD) Verified</span>
             </div>
-            <p className="text-[11px] text-emerald-700">
+            <p className="text-[11px] text-emerald-700 dark:text-emerald-300">
               Submitted by <strong>{activeCompany?.submittedBy || 'Corporate Secretariat'}</strong> on {activeCompany?.submittedAt || 'Today'}. You are approving as Independent Compliance / Financial Officer.
             </p>
           </div>
 
           <div>
-            <label className="block font-semibold text-slate-700 mb-1">Approval Comments</label>
+            <label className="block font-semibold text-slate-700 dark:text-slate-300 mb-1">Approval Comments</label>
             <textarea
               rows={3}
               value={approvalComments}
@@ -2285,10 +2285,10 @@ export const CompanySetupManagementView: React.FC<CompanySetupManagementViewProp
             />
           </div>
 
-          <div className="flex items-center justify-end gap-2 pt-3 border-t border-slate-200">
+          <div className="flex items-center justify-end gap-2 pt-3 border-t border-slate-200 dark:border-slate-700">
             <button
               onClick={() => setIsApprovalModalOpen(false)}
-              className="px-4 py-2 border rounded-lg text-xs font-semibold text-slate-700 hover:bg-slate-50 cursor-pointer"
+              className="px-4 py-2 border rounded-lg text-xs font-semibold text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800/50 cursor-pointer"
             >
               Cancel
             </button>
@@ -2324,8 +2324,8 @@ export const CompanySetupManagementView: React.FC<CompanySetupManagementViewProp
       >
         <div className="space-y-4 text-xs">
           <div>
-            <label className="block font-semibold text-slate-700 mb-1">
-              Rejection / Feedback Reason <span className="text-rose-500">*</span>
+            <label className="block font-semibold text-slate-700 dark:text-slate-300 mb-1">
+              Rejection / Feedback Reason <span className="text-rose-500 dark:text-rose-400">*</span>
             </label>
             <textarea
               rows={3}
@@ -2336,10 +2336,10 @@ export const CompanySetupManagementView: React.FC<CompanySetupManagementViewProp
             />
           </div>
 
-          <div className="flex items-center justify-end gap-2 pt-3 border-t border-slate-200">
+          <div className="flex items-center justify-end gap-2 pt-3 border-t border-slate-200 dark:border-slate-700">
             <button
               onClick={() => setIsRejectModalOpen(false)}
-              className="px-4 py-2 border rounded-lg text-xs font-semibold text-slate-700 hover:bg-slate-50 cursor-pointer"
+              className="px-4 py-2 border rounded-lg text-xs font-semibold text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800/50 cursor-pointer"
             >
               Cancel
             </button>
@@ -2374,7 +2374,7 @@ export const CompanySetupManagementView: React.FC<CompanySetupManagementViewProp
       >
         <form onSubmit={handleAddAttachment} className="space-y-4 text-xs">
           <div>
-            <label className="block font-semibold text-slate-700 mb-1">Document Name / File</label>
+            <label className="block font-semibold text-slate-700 dark:text-slate-300 mb-1">Document Name / File</label>
             <input
               type="text"
               required
@@ -2387,11 +2387,11 @@ export const CompanySetupManagementView: React.FC<CompanySetupManagementViewProp
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div>
-              <label className="block font-semibold text-slate-700 mb-1">Category</label>
+              <label className="block font-semibold text-slate-700 dark:text-slate-300 mb-1">Category</label>
               <select
                 value={attachmentForm.category}
                 onChange={e => setAttachmentForm(prev => ({ ...prev, category: e.target.value as any }))}
-                className="w-full px-3 py-2 border rounded-lg bg-white"
+                className="w-full px-3 py-2 border rounded-lg bg-white dark:bg-slate-900"
               >
                 <option value="Commercial Registration (CR)">Commercial Registration (CR)</option>
                 <option value="Tax / VAT Certificate">Tax / VAT Certificate</option>
@@ -2404,7 +2404,7 @@ export const CompanySetupManagementView: React.FC<CompanySetupManagementViewProp
             </div>
 
             <div>
-              <label className="block font-semibold text-slate-700 mb-1">Document / Serial #</label>
+              <label className="block font-semibold text-slate-700 dark:text-slate-300 mb-1">Document / Serial #</label>
               <input
                 type="text"
                 value={attachmentForm.documentNumber}
@@ -2415,17 +2415,17 @@ export const CompanySetupManagementView: React.FC<CompanySetupManagementViewProp
             </div>
           </div>
 
-          <div className="p-4 border-2 border-dashed border-slate-300 rounded-lg text-center bg-slate-50 text-slate-500">
-            <Upload className="w-6 h-6 mx-auto mb-1 text-slate-400" />
+          <div className="p-4 border-2 border-dashed border-slate-300 dark:border-slate-600 rounded-lg text-center bg-slate-50 dark:bg-slate-800/50 text-slate-500 dark:text-slate-400">
+            <Upload className="w-6 h-6 mx-auto mb-1 text-slate-500 dark:text-slate-400" />
             <div className="font-semibold">Drag and drop regulatory PDF or scan here</div>
-            <div className="text-[11px] text-slate-400 mt-0.5">Supports PDF, PNG, TIFF up to 25MB</div>
+            <div className="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">Supports PDF, PNG, TIFF up to 25MB</div>
           </div>
 
-          <div className="flex items-center justify-end gap-2 pt-3 border-t border-slate-200">
+          <div className="flex items-center justify-end gap-2 pt-3 border-t border-slate-200 dark:border-slate-700">
             <button
               type="button"
               onClick={() => setIsAttachmentModalOpen(false)}
-              className="px-4 py-2 border rounded-lg text-xs font-semibold text-slate-700 hover:bg-slate-50 cursor-pointer"
+              className="px-4 py-2 border rounded-lg text-xs font-semibold text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800/50 cursor-pointer"
             >
               Cancel
             </button>

@@ -201,7 +201,7 @@ export const TopBar: React.FC<TopBarProps> = ({
       <div className="flex-1 min-w-0 max-w-lg mx-1 sm:mx-2">
         <button
           onClick={onOpenSearch}
-          className="w-full min-w-0 overflow-hidden flex items-center justify-between gap-2 px-3 py-1.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-850 hover:bg-slate-100 dark:hover:bg-slate-800 hover:border-slate-300 dark:hover:border-slate-600 text-xs text-slate-500 dark:text-slate-400 transition-all shadow-2xs"
+          className="w-full min-w-0 overflow-hidden flex items-center justify-between gap-2 px-3 py-1.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-800 hover:border-slate-300 dark:hover:border-slate-600 text-xs text-slate-500 dark:text-slate-400 transition-all shadow-2xs"
         >
           <div className="flex items-center gap-2 truncate">
             <Search className="w-4 h-4 text-slate-400 dark:text-slate-500 shrink-0" />

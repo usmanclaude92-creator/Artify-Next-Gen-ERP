@@ -163,16 +163,16 @@ export const AssetAcquisitionView: React.FC = () => {
   return (
     <div className="space-y-6">
       {/* Top Header & Sub-Tabs */}
-      <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl">
+      <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 shadow-xl">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div>
             <div className="flex items-center gap-2">
-              <span className="px-2.5 py-0.5 rounded-full text-xs font-black bg-amber-950 text-amber-400 border border-amber-800">
+              <span className="px-2.5 py-0.5 rounded-full text-xs font-black bg-amber-50 dark:bg-amber-950 text-amber-700 dark:text-amber-400 border border-amber-200 dark:border-amber-800">
                 13.02
               </span>
-              <h2 className="text-xl font-black text-white">Asset Acquisition & Construction (CWIP)</h2>
+              <h2 className="text-xl font-black text-slate-900 dark:text-white">Asset Acquisition & Construction (CWIP)</h2>
             </div>
-            <p className="text-xs text-slate-400 mt-1">
+            <p className="text-xs text-slate-600 dark:text-slate-400 mt-1">
               Capital purchases, multi-cost capitalization, CWIP construction tracking, and legacy opening balance uploads.
             </p>
           </div>
@@ -189,13 +189,13 @@ export const AssetAcquisitionView: React.FC = () => {
         </div>
 
         {/* Sub Tabs */}
-        <div className="flex items-center gap-2 mt-6 pt-4 border-t border-slate-800 overflow-x-auto">
+        <div className="flex items-center gap-2 mt-6 pt-4 border-t border-slate-200 dark:border-slate-800 overflow-x-auto">
           <button
             onClick={() => setActiveTab('cwip')}
             className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
               activeTab === 'cwip'
                 ? 'bg-amber-600 text-white shadow-lg shadow-amber-600/30'
-                : 'text-slate-400 hover:text-white hover:bg-slate-800'
+                : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800'
             }`}
           >
             <Building className="w-4 h-4" />
@@ -207,7 +207,7 @@ export const AssetAcquisitionView: React.FC = () => {
             className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
               activeTab === 'capitalization'
                 ? 'bg-amber-600 text-white shadow-lg shadow-amber-600/30'
-                : 'text-slate-400 hover:text-white hover:bg-slate-800'
+                : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800'
             }`}
           >
             <Layers className="w-4 h-4" />
@@ -219,7 +219,7 @@ export const AssetAcquisitionView: React.FC = () => {
             className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
               activeTab === 'purchase'
                 ? 'bg-amber-600 text-white shadow-lg shadow-amber-600/30'
-                : 'text-slate-400 hover:text-white hover:bg-slate-800'
+                : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800'
             }`}
           >
             <FileCheck className="w-4 h-4" />
@@ -231,7 +231,7 @@ export const AssetAcquisitionView: React.FC = () => {
             className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
               activeTab === 'opening_balance'
                 ? 'bg-amber-600 text-white shadow-lg shadow-amber-600/30'
-                : 'text-slate-400 hover:text-white hover:bg-slate-800'
+                : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800'
             }`}
           >
             <UploadCloud className="w-4 h-4" />
@@ -249,26 +249,26 @@ export const AssetAcquisitionView: React.FC = () => {
               return (
                 <div
                   key={project.id}
-                  className="bg-slate-900 border border-slate-800 hover:border-amber-500/40 rounded-2xl p-6 shadow-xl space-y-4"
+                  className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:border-amber-500/40 rounded-2xl p-6 shadow-xl space-y-4"
                 >
                   <div className="flex items-start justify-between gap-4">
                     <div>
                       <div className="flex items-center gap-2">
-                        <span className="font-mono text-xs font-bold text-amber-400 bg-amber-950 px-2 py-0.5 rounded border border-amber-800">
+                        <span className="font-mono text-xs font-bold text-amber-700 dark:text-amber-400 bg-amber-50 dark:bg-amber-950 px-2 py-0.5 rounded border border-amber-200 dark:border-amber-800">
                           {project.projectCode}
                         </span>
                         <span className={`text-[10px] font-bold px-2 py-0.5 rounded border ${
                           project.status === 'READY_FOR_CAPITALIZATION'
-                            ? 'bg-cyan-950 text-cyan-400 border-cyan-800 animate-pulse'
+                            ? 'bg-cyan-50 dark:bg-cyan-950 text-cyan-600 dark:text-cyan-400 border-cyan-200 dark:border-cyan-800 animate-pulse'
                             : project.status === 'CAPITALIZED'
-                            ? 'bg-emerald-950 text-emerald-400 border-emerald-800'
-                            : 'bg-slate-800 text-slate-300 border-slate-700'
+                            ? 'bg-emerald-50 dark:bg-emerald-950 text-emerald-600 dark:text-emerald-400 border-emerald-200 dark:border-emerald-800'
+                            : 'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border-slate-300 dark:border-slate-700'
                         }`}>
                           {project.status.replace(/_/g, ' ')}
                         </span>
                       </div>
-                      <h3 className="text-base font-bold text-white mt-1.5">{project.projectName}</h3>
-                      <p className="text-xs text-slate-400 font-mono mt-0.5">Target: {project.targetAssetCategory} • {project.costCenter}</p>
+                      <h3 className="text-base font-bold text-slate-900 dark:text-white mt-1.5">{project.projectName}</h3>
+                      <p className="text-xs text-slate-600 dark:text-slate-400 font-mono mt-0.5">Target: {project.targetAssetCategory} • {project.costCenter}</p>
                     </div>
 
                     {project.status === 'READY_FOR_CAPITALIZATION' && (
@@ -288,12 +288,12 @@ export const AssetAcquisitionView: React.FC = () => {
                   {/* Budget & Progress bar */}
                   <div className="space-y-1.5">
                     <div className="flex items-center justify-between text-xs">
-                      <span className="text-slate-400">Budget Consumed ({progressPct}%)</span>
-                      <span className="font-mono text-slate-200">
+                      <span className="text-slate-600 dark:text-slate-400">Budget Consumed ({progressPct}%)</span>
+                      <span className="font-mono text-slate-800 dark:text-slate-200">
                         {currency} {project.totalCwipCost.toLocaleString()} / {currency} {project.budgetAllocated.toLocaleString()}
                       </span>
                     </div>
-                    <div className="w-full h-2 bg-slate-950 rounded-full overflow-hidden border border-slate-800">
+                    <div className="w-full h-2 bg-slate-50 dark:bg-slate-950 rounded-full overflow-hidden border border-slate-200 dark:border-slate-800">
                       <div
                         className={`h-full transition-all duration-500 ${
                           progressPct > 95 ? 'bg-amber-500' : 'bg-emerald-500'
@@ -304,26 +304,26 @@ export const AssetAcquisitionView: React.FC = () => {
                   </div>
 
                   {/* Cost breakdown items */}
-                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-3 border-t border-slate-800 text-[11px]">
-                    <div className="bg-slate-950 p-2 rounded-lg">
-                      <div className="text-slate-500">Materials</div>
-                      <div className="font-mono font-bold text-slate-300">{currency} {project.accumulatedMaterialCost.toLocaleString()}</div>
+                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-3 border-t border-slate-200 dark:border-slate-800 text-[11px]">
+                    <div className="bg-slate-50 dark:bg-slate-950 p-2 rounded-lg">
+                      <div className="text-slate-500 dark:text-slate-400">Materials</div>
+                      <div className="font-mono font-bold text-slate-700 dark:text-slate-300">{currency} {project.accumulatedMaterialCost.toLocaleString()}</div>
                     </div>
-                    <div className="bg-slate-950 p-2 rounded-lg">
-                      <div className="text-slate-500">Contractors</div>
-                      <div className="font-mono font-bold text-slate-300">{currency} {project.accumulatedContractorCost.toLocaleString()}</div>
+                    <div className="bg-slate-50 dark:bg-slate-950 p-2 rounded-lg">
+                      <div className="text-slate-500 dark:text-slate-400">Contractors</div>
+                      <div className="font-mono font-bold text-slate-700 dark:text-slate-300">{currency} {project.accumulatedContractorCost.toLocaleString()}</div>
                     </div>
-                    <div className="bg-slate-950 p-2 rounded-lg">
-                      <div className="text-slate-500">Direct Labor</div>
-                      <div className="font-mono font-bold text-slate-300">{currency} {project.accumulatedInternalLaborCost.toLocaleString()}</div>
+                    <div className="bg-slate-50 dark:bg-slate-950 p-2 rounded-lg">
+                      <div className="text-slate-500 dark:text-slate-400">Direct Labor</div>
+                      <div className="font-mono font-bold text-slate-700 dark:text-slate-300">{currency} {project.accumulatedInternalLaborCost.toLocaleString()}</div>
                     </div>
-                    <div className="bg-slate-950 p-2 rounded-lg">
-                      <div className="text-slate-500">Overheads</div>
-                      <div className="font-mono font-bold text-slate-300">{currency} {project.accumulatedOverheadCost.toLocaleString()}</div>
+                    <div className="bg-slate-50 dark:bg-slate-950 p-2 rounded-lg">
+                      <div className="text-slate-500 dark:text-slate-400">Overheads</div>
+                      <div className="font-mono font-bold text-slate-700 dark:text-slate-300">{currency} {project.accumulatedOverheadCost.toLocaleString()}</div>
                     </div>
                   </div>
 
-                  <div className="flex items-center justify-between text-xs text-slate-500 pt-1">
+                  <div className="flex items-center justify-between text-xs text-slate-500 dark:text-slate-400 pt-1">
                     <span>Est. Commissioning: {project.estimatedCompletionDate}</span>
                     <span className="font-mono">{project.completionCertificateNumber}</span>
                   </div>
@@ -336,10 +336,10 @@ export const AssetAcquisitionView: React.FC = () => {
 
       {/* VIEW: MULTI-ELEMENT CAPITALIZATION FORM */}
       {activeTab === 'capitalization' && (
-        <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl space-y-6">
+        <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 shadow-xl space-y-6">
           <div>
-            <h3 className="text-base font-bold text-white">IAS 16 Multi-Element Asset Capitalization</h3>
-            <p className="text-xs text-slate-400">
+            <h3 className="text-base font-bold text-slate-900 dark:text-white">IAS 16 Multi-Element Asset Capitalization</h3>
+            <p className="text-xs text-slate-600 dark:text-slate-400">
               Combine invoice base cost with shipping, port customs duties, foundation construction, and technician installation labor into a single asset cost basis.
             </p>
           </div>
@@ -347,111 +347,111 @@ export const AssetAcquisitionView: React.FC = () => {
           <form onSubmit={handleDirectPurchaseCapitalization} className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <div className="space-y-4">
-                <h4 className="text-xs font-bold text-amber-400 uppercase tracking-wider">1. Technical & Commercial</h4>
+                <h4 className="text-xs font-bold text-amber-700 dark:text-amber-400 uppercase tracking-wider">1. Technical & Commercial</h4>
                 <div>
-                  <label className="block text-xs text-slate-400 mb-1">Asset Full Description *</label>
+                  <label className="block text-xs text-slate-600 dark:text-slate-400 mb-1">Asset Full Description *</label>
                   <input
                     type="text"
                     required
                     value={purchaseForm.assetName}
                     onChange={e => setPurchaseForm({ ...purchaseForm, assetName: e.target.value })}
-                    className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-amber-500"
+                    className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 text-xs text-slate-900 dark:text-white focus:outline-none focus:border-amber-500"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs text-slate-400 mb-1">Supplier / OEM Vendor</label>
+                  <label className="block text-xs text-slate-600 dark:text-slate-400 mb-1">Supplier / OEM Vendor</label>
                   <input
                     type="text"
                     value={purchaseForm.vendorName}
                     onChange={e => setPurchaseForm({ ...purchaseForm, vendorName: e.target.value })}
-                    className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-amber-500"
+                    className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 text-xs text-slate-900 dark:text-white focus:outline-none focus:border-amber-500"
                   />
                 </div>
 
                 <div className="grid grid-cols-2 gap-2">
                   <div>
-                    <label className="block text-xs text-slate-400 mb-1">PO Reference</label>
+                    <label className="block text-xs text-slate-600 dark:text-slate-400 mb-1">PO Reference</label>
                     <input
                       type="text"
                       value={purchaseForm.poReference}
                       onChange={e => setPurchaseForm({ ...purchaseForm, poReference: e.target.value })}
-                      className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-amber-500 font-mono"
+                      className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 text-xs text-slate-900 dark:text-white focus:outline-none focus:border-amber-500 font-mono"
                     />
                   </div>
                   <div>
-                    <label className="block text-xs text-slate-400 mb-1">Vendor Invoice #</label>
+                    <label className="block text-xs text-slate-600 dark:text-slate-400 mb-1">Vendor Invoice #</label>
                     <input
                       type="text"
                       value={purchaseForm.invoiceNumber}
                       onChange={e => setPurchaseForm({ ...purchaseForm, invoiceNumber: e.target.value })}
-                      className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-amber-500 font-mono"
+                      className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 text-xs text-slate-900 dark:text-white focus:outline-none focus:border-amber-500 font-mono"
                     />
                   </div>
                 </div>
               </div>
 
               <div className="space-y-4">
-                <h4 className="text-xs font-bold text-amber-400 uppercase tracking-wider">2. Cost Component Allocation</h4>
+                <h4 className="text-xs font-bold text-amber-700 dark:text-amber-400 uppercase tracking-wider">2. Cost Component Allocation</h4>
                 <div>
-                  <label className="block text-xs text-slate-400 mb-1">Base Machinery Invoice Cost ({currency}) *</label>
+                  <label className="block text-xs text-slate-600 dark:text-slate-400 mb-1">Base Machinery Invoice Cost ({currency}) *</label>
                   <input
                     type="number"
                     required
                     value={purchaseForm.baseInvoiceCost}
                     onChange={e => setPurchaseForm({ ...purchaseForm, baseInvoiceCost: Number(e.target.value) })}
-                    className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-amber-500 font-mono font-bold"
+                    className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 text-xs text-slate-900 dark:text-white focus:outline-none focus:border-amber-500 font-mono font-bold"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs text-slate-400 mb-1">Ocean / Air Freight & Marine Insurance ({currency})</label>
+                  <label className="block text-xs text-slate-600 dark:text-slate-400 mb-1">Ocean / Air Freight & Marine Insurance ({currency})</label>
                   <input
                     type="number"
                     value={purchaseForm.shippingFreightCost}
                     onChange={e => setPurchaseForm({ ...purchaseForm, shippingFreightCost: Number(e.target.value) })}
-                    className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-amber-500 font-mono"
+                    className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 text-xs text-slate-900 dark:text-white focus:outline-none focus:border-amber-500 font-mono"
                   />
                 </div>
 
                 <div className="grid grid-cols-2 gap-2">
                   <div>
-                    <label className="block text-xs text-slate-400 mb-1">Customs Clearance / Bayan</label>
+                    <label className="block text-xs text-slate-600 dark:text-slate-400 mb-1">Customs Clearance / Bayan</label>
                     <input
                       type="number"
                       value={purchaseForm.customsDutyCost}
                       onChange={e => setPurchaseForm({ ...purchaseForm, customsDutyCost: Number(e.target.value) })}
-                      className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-amber-500 font-mono"
+                      className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 text-xs text-slate-900 dark:text-white focus:outline-none focus:border-amber-500 font-mono"
                     />
                   </div>
                   <div>
-                    <label className="block text-xs text-slate-400 mb-1">Installation / Commissioning</label>
+                    <label className="block text-xs text-slate-600 dark:text-slate-400 mb-1">Installation / Commissioning</label>
                     <input
                       type="number"
                       value={purchaseForm.installationLaborCost}
                       onChange={e => setPurchaseForm({ ...purchaseForm, installationLaborCost: Number(e.target.value) })}
-                      className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-amber-500 font-mono"
+                      className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 text-xs text-slate-900 dark:text-white focus:outline-none focus:border-amber-500 font-mono"
                     />
                   </div>
                 </div>
               </div>
 
               <div className="space-y-4">
-                <h4 className="text-xs font-bold text-amber-400 uppercase tracking-wider">3. Capitalization Summary</h4>
-                <div className="bg-slate-950 border border-slate-800 rounded-xl p-4 space-y-3">
+                <h4 className="text-xs font-bold text-amber-700 dark:text-amber-400 uppercase tracking-wider">3. Capitalization Summary</h4>
+                <div className="bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl p-4 space-y-3">
                   <div className="flex justify-between text-xs">
-                    <span className="text-slate-500">Base Cost:</span>
-                    <span className="font-mono text-slate-300">{currency} {purchaseForm.baseInvoiceCost.toLocaleString()}</span>
+                    <span className="text-slate-500 dark:text-slate-400">Base Cost:</span>
+                    <span className="font-mono text-slate-700 dark:text-slate-300">{currency} {purchaseForm.baseInvoiceCost.toLocaleString()}</span>
                   </div>
                   <div className="flex justify-between text-xs">
-                    <span className="text-slate-500">Capitalized Add-ons:</span>
-                    <span className="font-mono text-cyan-400">
+                    <span className="text-slate-500 dark:text-slate-400">Capitalized Add-ons:</span>
+                    <span className="font-mono text-cyan-600 dark:text-cyan-400">
                       +{currency} {(purchaseForm.shippingFreightCost + purchaseForm.customsDutyCost + purchaseForm.installationLaborCost).toLocaleString()}
                     </span>
                   </div>
-                  <div className="pt-2 border-t border-slate-800 flex justify-between text-sm font-bold">
-                    <span className="text-white">Total Gross Asset Basis:</span>
-                    <span className="font-mono text-emerald-400">
+                  <div className="pt-2 border-t border-slate-200 dark:border-slate-800 flex justify-between text-sm font-bold">
+                    <span className="text-slate-900 dark:text-white">Total Gross Asset Basis:</span>
+                    <span className="font-mono text-emerald-600 dark:text-emerald-400">
                       {currency} {(purchaseForm.baseInvoiceCost + purchaseForm.shippingFreightCost + purchaseForm.customsDutyCost + purchaseForm.installationLaborCost).toLocaleString()}
                     </span>
                   </div>
@@ -471,17 +471,17 @@ export const AssetAcquisitionView: React.FC = () => {
 
       {/* VIEW: PURCHASE ORDERS INTAKE */}
       {activeTab === 'purchase' && (
-        <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl space-y-6">
+        <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 shadow-xl space-y-6">
           <div className="flex items-center justify-between">
             <div>
-              <h3 className="text-base font-bold text-white">Direct PO & AP Invoice Capital Ingestion</h3>
-              <p className="text-xs text-slate-400">Match pending Capital Purchase Orders (CAPEX) with vendor goods receipts (GRN).</p>
+              <h3 className="text-base font-bold text-slate-900 dark:text-white">Direct PO & AP Invoice Capital Ingestion</h3>
+              <p className="text-xs text-slate-600 dark:text-slate-400">Match pending Capital Purchase Orders (CAPEX) with vendor goods receipts (GRN).</p>
             </div>
           </div>
 
           <div className="overflow-x-auto">
             <table className="w-full text-left text-xs">
-              <thead className="bg-slate-950 text-slate-400 uppercase font-mono tracking-wider border-b border-slate-800">
+              <thead className="bg-slate-50 dark:bg-slate-950 text-slate-600 dark:text-slate-400 uppercase font-mono tracking-wider border-b border-slate-200 dark:border-slate-800">
                 <tr>
                   <th className="py-3 px-4">PO Reference</th>
                   <th className="py-3 px-4">Vendor</th>
@@ -492,15 +492,15 @@ export const AssetAcquisitionView: React.FC = () => {
                   <th className="py-3 px-4 text-center">Action</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-800 text-slate-300">
-                <tr className="hover:bg-slate-800/40">
-                  <td className="py-3.5 px-4 font-mono font-bold text-amber-400">PO-CAPEX-2026-091</td>
-                  <td className="py-3.5 px-4 font-medium text-white">Yamazaki Mazak Gulf FZCO</td>
+              <tbody className="divide-y divide-slate-200 dark:divide-slate-800 text-slate-700 dark:text-slate-300">
+                <tr className="hover:bg-slate-100/70 dark:hover:bg-slate-800/40">
+                  <td className="py-3.5 px-4 font-mono font-bold text-amber-700 dark:text-amber-400">PO-CAPEX-2026-091</td>
+                  <td className="py-3.5 px-4 font-medium text-slate-900 dark:text-white">Yamazaki Mazak Gulf FZCO</td>
                   <td className="py-3.5 px-4">High Precision Milling Machine 4-Axis</td>
                   <td className="py-3.5 px-4 font-mono">1 Unit</td>
-                  <td className="py-3.5 px-4 text-right font-mono font-bold text-emerald-400">{currency} 185,000</td>
+                  <td className="py-3.5 px-4 text-right font-mono font-bold text-emerald-600 dark:text-emerald-400">{currency} 185,000</td>
                   <td className="py-3.5 px-4">
-                    <span className="px-2 py-0.5 rounded bg-emerald-950 text-emerald-400 font-bold border border-emerald-800 text-[10px]">
+                    <span className="px-2 py-0.5 rounded bg-emerald-50 dark:bg-emerald-950 text-emerald-600 dark:text-emerald-400 font-bold border border-emerald-200 dark:border-emerald-800 text-[10px]">
                       GRN RECEIVED
                     </span>
                   </td>
@@ -521,28 +521,28 @@ export const AssetAcquisitionView: React.FC = () => {
 
       {/* VIEW: OPENING BALANCE MIGRATION */}
       {activeTab === 'opening_balance' && (
-        <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl space-y-6">
+        <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 shadow-xl space-y-6">
           <div className="flex items-center justify-between">
             <div>
-              <h3 className="text-base font-bold text-white">Legacy Fixed Asset Opening Balance Migration</h3>
-              <p className="text-xs text-slate-400">Batch upload existing asset books with historical cost, placed in service dates, and accumulated depreciation layers.</p>
+              <h3 className="text-base font-bold text-slate-900 dark:text-white">Legacy Fixed Asset Opening Balance Migration</h3>
+              <p className="text-xs text-slate-600 dark:text-slate-400">Batch upload existing asset books with historical cost, placed in service dates, and accumulated depreciation layers.</p>
             </div>
             <button
               onClick={() => notify('Downloading Excel Opening Balance Migration Template...')}
-              className="flex items-center gap-2 px-4 py-2 bg-slate-800 hover:bg-slate-700 text-white rounded-xl text-xs font-bold border border-slate-700 transition-colors cursor-pointer"
+              className="flex items-center gap-2 px-4 py-2 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-900 dark:text-white rounded-xl text-xs font-bold border border-slate-300 dark:border-slate-700 transition-colors cursor-pointer"
             >
-              <Download className="w-4 h-4 text-amber-400" />
+              <Download className="w-4 h-4 text-amber-700 dark:text-amber-400" />
               <span>Download Excel Template</span>
             </button>
           </div>
 
-          <div className="border-2 border-dashed border-slate-800 hover:border-amber-500/50 transition-colors rounded-2xl p-10 text-center space-y-4 bg-slate-950/60">
-            <div className="w-14 h-14 mx-auto rounded-2xl bg-amber-600/10 border border-amber-500/20 flex items-center justify-center text-amber-400">
+          <div className="border-2 border-dashed border-slate-200 dark:border-slate-800 hover:border-amber-500/50 transition-colors rounded-2xl p-10 text-center space-y-4 bg-slate-50/60 dark:bg-slate-950/60">
+            <div className="w-14 h-14 mx-auto rounded-2xl bg-amber-600/10 border border-amber-500/20 flex items-center justify-center text-amber-700 dark:text-amber-400">
               <UploadCloud className="w-7 h-7" />
             </div>
             <div>
-              <h4 className="text-sm font-bold text-white">Upload Completed Excel / CSV Asset Register</h4>
-              <p className="text-xs text-slate-500 mt-1 max-w-md mx-auto">
+              <h4 className="text-sm font-bold text-slate-900 dark:text-white">Upload Completed Excel / CSV Asset Register</h4>
+              <p className="text-xs text-slate-500 dark:text-slate-400 mt-1 max-w-md mx-auto">
                 File must include AssetTag, Name, CategoryCode, AcquisitionDate, GrossCost, AccumDepreciation, and Location.
               </p>
             </div>
@@ -559,12 +559,12 @@ export const AssetAcquisitionView: React.FC = () => {
       {/* MODAL: NEW CWIP PROJECT */}
       {showCwipModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-fadeIn">
-          <div className="bg-slate-900 border border-slate-800 rounded-2xl w-full max-w-xl p-6 shadow-2xl space-y-6">
-            <div className="flex items-center justify-between pb-4 border-b border-slate-800">
-              <h3 className="text-lg font-black text-white">Create Capital Work In Progress (CWIP)</h3>
+          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl w-full max-w-xl p-6 shadow-2xl space-y-6">
+            <div className="flex items-center justify-between pb-4 border-b border-slate-200 dark:border-slate-800">
+              <h3 className="text-lg font-black text-slate-900 dark:text-white">Create Capital Work In Progress (CWIP)</h3>
               <button
                 onClick={() => setShowCwipModal(false)}
-                className="text-slate-400 hover:text-white text-sm font-bold cursor-pointer"
+                className="text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white text-sm font-bold cursor-pointer"
               >
                 ✕
               </button>
@@ -573,53 +573,53 @@ export const AssetAcquisitionView: React.FC = () => {
             <form onSubmit={handleCreateCWIP} className="space-y-4 text-xs">
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-slate-400 mb-1">Project Code</label>
+                  <label className="block text-slate-600 dark:text-slate-400 mb-1">Project Code</label>
                   <input
                     type="text"
                     value={cwipForm.projectCode}
                     onChange={e => setCwipForm({ ...cwipForm, projectCode: e.target.value })}
-                    className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-white font-mono"
+                    className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 text-slate-900 dark:text-white font-mono"
                   />
                 </div>
                 <div>
-                  <label className="block text-slate-400 mb-1">Cost Center</label>
+                  <label className="block text-slate-600 dark:text-slate-400 mb-1">Cost Center</label>
                   <input
                     type="text"
                     value={cwipForm.costCenter}
                     onChange={e => setCwipForm({ ...cwipForm, costCenter: e.target.value })}
-                    className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-white font-mono"
+                    className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 text-slate-900 dark:text-white font-mono"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block text-slate-400 mb-1">Project Name *</label>
+                <label className="block text-slate-600 dark:text-slate-400 mb-1">Project Name *</label>
                 <input
                   type="text"
                   required
                   placeholder="e.g. Duqm Bulk Storage Warehouse Construction"
                   value={cwipForm.projectName}
                   onChange={e => setCwipForm({ ...cwipForm, projectName: e.target.value })}
-                  className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-white focus:border-amber-500"
+                  className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 text-slate-900 dark:text-white focus:border-amber-500"
                 />
               </div>
 
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-slate-400 mb-1">Allocated Budget ({currency})</label>
+                  <label className="block text-slate-600 dark:text-slate-400 mb-1">Allocated Budget ({currency})</label>
                   <input
                     type="number"
                     value={cwipForm.budgetAllocated}
                     onChange={e => setCwipForm({ ...cwipForm, budgetAllocated: Number(e.target.value) })}
-                    className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-white font-mono"
+                    className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 text-slate-900 dark:text-white font-mono"
                   />
                 </div>
                 <div>
-                  <label className="block text-slate-400 mb-1">Target Asset Category</label>
+                  <label className="block text-slate-600 dark:text-slate-400 mb-1">Target Asset Category</label>
                   <select
                     value={cwipForm.targetAssetCategory}
                     onChange={e => setCwipForm({ ...cwipForm, targetAssetCategory: e.target.value })}
-                    className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-white"
+                    className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 text-slate-900 dark:text-white"
                   >
                     <option value="Land & Buildings">Land & Buildings</option>
                     <option value="Plant & Heavy Machinery">Plant & Heavy Machinery</option>
@@ -628,11 +628,11 @@ export const AssetAcquisitionView: React.FC = () => {
                 </div>
               </div>
 
-              <div className="flex justify-end gap-3 pt-4 border-t border-slate-800">
+              <div className="flex justify-end gap-3 pt-4 border-t border-slate-200 dark:border-slate-800">
                 <button
                   type="button"
                   onClick={() => setShowCwipModal(false)}
-                  className="px-4 py-2 bg-slate-800 text-slate-300 rounded-xl font-bold cursor-pointer"
+                  className="px-4 py-2 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 rounded-xl font-bold cursor-pointer"
                 >
                   Cancel
                 </button>
@@ -651,49 +651,49 @@ export const AssetAcquisitionView: React.FC = () => {
       {/* MODAL: CAPITALIZE CWIP TO FIXED ASSET */}
       {selectedCwipToCap && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-fadeIn">
-          <div className="bg-slate-900 border border-slate-800 rounded-2xl w-full max-w-lg p-6 shadow-2xl space-y-6">
-            <div className="flex items-center justify-between pb-4 border-b border-slate-800">
-              <h3 className="text-lg font-black text-white">Capitalize CWIP to Fixed Asset Subledger</h3>
+          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl w-full max-w-lg p-6 shadow-2xl space-y-6">
+            <div className="flex items-center justify-between pb-4 border-b border-slate-200 dark:border-slate-800">
+              <h3 className="text-lg font-black text-slate-900 dark:text-white">Capitalize CWIP to Fixed Asset Subledger</h3>
               <button
                 onClick={() => setSelectedCwipToCap(null)}
-                className="text-slate-400 hover:text-white text-sm font-bold cursor-pointer"
+                className="text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white text-sm font-bold cursor-pointer"
               >
                 ✕
               </button>
             </div>
 
             <form onSubmit={handleConfirmCapitalize} className="space-y-4 text-xs">
-              <div className="bg-slate-950 p-4 rounded-xl space-y-2 border border-slate-800">
+              <div className="bg-slate-50 dark:bg-slate-950 p-4 rounded-xl space-y-2 border border-slate-200 dark:border-slate-800">
                 <div className="flex justify-between">
-                  <span className="text-slate-500">CWIP Reference:</span>
-                  <span className="font-mono text-amber-400 font-bold">{selectedCwipToCap.projectCode}</span>
+                  <span className="text-slate-500 dark:text-slate-400">CWIP Reference:</span>
+                  <span className="font-mono text-amber-700 dark:text-amber-400 font-bold">{selectedCwipToCap.projectCode}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-slate-500">Accumulated Cost Basis:</span>
-                  <span className="font-mono text-emerald-400 font-bold text-sm">
+                  <span className="text-slate-500 dark:text-slate-400">Accumulated Cost Basis:</span>
+                  <span className="font-mono text-emerald-600 dark:text-emerald-400 font-bold text-sm">
                     {currency} {selectedCwipToCap.totalCwipCost.toLocaleString()}
                   </span>
                 </div>
               </div>
 
               <div>
-                <label className="block text-slate-400 mb-1">Commissioned Asset Name *</label>
+                <label className="block text-slate-600 dark:text-slate-400 mb-1">Commissioned Asset Name *</label>
                 <input
                   type="text"
                   required
                   value={capForm.assetName}
                   onChange={e => setCapForm({ ...capForm, assetName: e.target.value })}
-                  className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-white"
+                  className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 text-slate-900 dark:text-white"
                 />
               </div>
 
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-slate-400 mb-1">Asset Category</label>
+                  <label className="block text-slate-600 dark:text-slate-400 mb-1">Asset Category</label>
                   <select
                     value={capForm.categoryId}
                     onChange={e => setCapForm({ ...capForm, categoryId: e.target.value })}
-                    className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-white"
+                    className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 text-slate-900 dark:text-white"
                   >
                     {categories.map(c => (
                       <option key={c.id} value={c.id}>{c.name}</option>
@@ -701,21 +701,21 @@ export const AssetAcquisitionView: React.FC = () => {
                   </select>
                 </div>
                 <div>
-                  <label className="block text-slate-400 mb-1">Useful Life (Months)</label>
+                  <label className="block text-slate-600 dark:text-slate-400 mb-1">Useful Life (Months)</label>
                   <input
                     type="number"
                     value={capForm.usefulLifeMonths}
                     onChange={e => setCapForm({ ...capForm, usefulLifeMonths: Number(e.target.value) })}
-                    className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-white font-mono"
+                    className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 text-slate-900 dark:text-white font-mono"
                   />
                 </div>
               </div>
 
-              <div className="flex justify-end gap-3 pt-4 border-t border-slate-800">
+              <div className="flex justify-end gap-3 pt-4 border-t border-slate-200 dark:border-slate-800">
                 <button
                   type="button"
                   onClick={() => setSelectedCwipToCap(null)}
-                  className="px-4 py-2 bg-slate-800 text-slate-300 rounded-xl font-bold cursor-pointer"
+                  className="px-4 py-2 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 rounded-xl font-bold cursor-pointer"
                 >
                   Cancel
                 </button>

@@ -97,14 +97,14 @@ export const ProgressBillingView: React.FC = () => {
   return (
     <div className="space-y-6">
       {/* Top Banner */}
-      <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 text-white shadow-xl flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6">
+      <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 text-slate-900 dark:text-white shadow-xl flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6">
         <div className="space-y-2 max-w-2xl">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/20 text-blue-400 text-xs font-semibold uppercase tracking-wider">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/20 text-blue-600 dark:text-blue-400 text-xs font-semibold uppercase tracking-wider">
             <Receipt className="w-3.5 h-3.5" />
             Module 15.04 — Progress & Billing
           </div>
           <h2 className="text-2xl font-bold tracking-tight">Interim Payment Certificates (IPC) & Progress Billing</h2>
-          <p className="text-sm text-slate-400">
+          <p className="text-sm text-slate-600 dark:text-slate-400">
             Certified surveyor joint measurement sheets, consultant engineer valuations, advance payment amortization, retention withholds, and VAT tax invoicing.
           </p>
         </div>
@@ -161,7 +161,7 @@ export const ProgressBillingView: React.FC = () => {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           {/* Left Column: IPC Cards List */}
           <div className="space-y-3">
-            <h4 className="text-xs font-bold text-slate-500 uppercase tracking-wider">
+            <h4 className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
               Issued Certificates ({selectedContract?.contractNumber})
             </h4>
             {contractIpcs.map(ipc => (
@@ -171,7 +171,7 @@ export const ProgressBillingView: React.FC = () => {
                 className={`cursor-pointer p-4 rounded-2xl border transition-all ${
                   selectedIpc?.id === ipc.id
                     ? 'border-blue-500 bg-blue-50/20 dark:bg-blue-950/30 shadow-md'
-                    : 'border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 hover:border-slate-300'
+                    : 'border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 hover:border-slate-300 dark:hover:border-slate-600'
                 }`}
               >
                 <div className="flex justify-between items-start">
@@ -180,17 +180,17 @@ export const ProgressBillingView: React.FC = () => {
                   </span>
                   <span className={`text-[11px] font-semibold px-2 py-0.5 rounded-full ${
                     ipc.status === 'PAID'
-                      ? 'bg-emerald-50 dark:bg-emerald-950 text-emerald-600'
+                      ? 'bg-emerald-50 dark:bg-emerald-950 text-emerald-600 dark:text-emerald-400'
                       : ipc.status === 'CERTIFIED'
-                      ? 'bg-blue-50 dark:bg-blue-950 text-blue-600'
-                      : 'bg-amber-50 dark:bg-amber-950 text-amber-600'
+                      ? 'bg-blue-50 dark:bg-blue-950 text-blue-600 dark:text-blue-400'
+                      : 'bg-amber-50 dark:bg-amber-950 text-amber-600 dark:text-amber-400'
                   }`}>
                     {ipc.status}
                   </span>
                 </div>
 
                 <div className="mt-3 space-y-1 text-xs">
-                  <div className="flex justify-between text-slate-500">
+                  <div className="flex justify-between text-slate-500 dark:text-slate-400">
                     <span>Period:</span>
                     <span className="font-medium text-slate-700 dark:text-slate-300">{ipc.periodStartDate} to {ipc.periodEndDate}</span>
                   </div>
@@ -215,14 +215,14 @@ export const ProgressBillingView: React.FC = () => {
                       <span className="text-base font-mono font-bold text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-950 px-3 py-1 rounded-xl">
                         {selectedIpc.ipcNumber}
                       </span>
-                      <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-emerald-50 dark:bg-emerald-950 text-emerald-600">
+                      <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-emerald-50 dark:bg-emerald-950 text-emerald-600 dark:text-emerald-400">
                         {selectedIpc.status}
                       </span>
                     </div>
                     <h3 className="text-lg font-bold text-slate-900 dark:text-white mt-2">
                       Interim Payment Certificate Valuation Summary
                     </h3>
-                    <p className="text-xs text-slate-500 mt-0.5">
+                    <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
                       Client: <strong>{selectedIpc.clientName}</strong> • Certified by: <strong>{selectedIpc.certifiedByConsultantEngineer}</strong>
                     </p>
                   </div>
@@ -237,7 +237,7 @@ export const ProgressBillingView: React.FC = () => {
                         Certify IPC
                       </button>
                     )}
-                    <button className="p-2 border border-slate-200 dark:border-slate-700 rounded-xl hover:bg-slate-50 text-slate-600 dark:text-slate-400">
+                    <button className="p-2 border border-slate-200 dark:border-slate-700 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-800/50 text-slate-600 dark:text-slate-400">
                       <Printer className="w-4 h-4" />
                     </button>
                   </div>
@@ -251,11 +251,11 @@ export const ProgressBillingView: React.FC = () => {
                   </div>
                   <div className="flex justify-between py-2 border-b border-slate-100 dark:border-slate-800">
                     <span className="font-medium text-slate-600 dark:text-slate-400">2. Materials on Site (MOS) Advancement (80% Invoice Value)</span>
-                    <span className="font-mono font-semibold text-blue-600">{currency} {selectedIpc.materialsOnSiteAdvancement.toLocaleString()}</span>
+                    <span className="font-mono font-semibold text-blue-600 dark:text-blue-400">{currency} {selectedIpc.materialsOnSiteAdvancement.toLocaleString()}</span>
                   </div>
                   <div className="flex justify-between py-2 border-b border-slate-100 dark:border-slate-800">
                     <span className="font-medium text-slate-600 dark:text-slate-400">3. Approved Variation Orders Certified This Period</span>
-                    <span className="font-mono font-semibold text-emerald-600">{currency} {selectedIpc.approvedVariationsThisPeriod.toLocaleString()}</span>
+                    <span className="font-mono font-semibold text-emerald-600 dark:text-emerald-400">{currency} {selectedIpc.approvedVariationsThisPeriod.toLocaleString()}</span>
                   </div>
                   <div className="flex justify-between py-2 bg-slate-50 dark:bg-slate-800/50 px-3 rounded-xl font-bold">
                     <span className="text-slate-900 dark:text-white">A. Cumulative Gross Work Certified to Date</span>
@@ -264,7 +264,7 @@ export const ProgressBillingView: React.FC = () => {
 
                   {/* Deductions Section */}
                   <div className="pt-2">
-                    <span className="text-[11px] font-bold uppercase tracking-wider text-rose-600">Contractual Deductions</span>
+                    <span className="text-[11px] font-bold uppercase tracking-wider text-rose-600 dark:text-rose-400">Contractual Deductions</span>
                   </div>
                   <div className="flex justify-between py-2 border-b border-slate-100 dark:border-slate-800 text-rose-600 dark:text-rose-400">
                     <span>4. Less: Mobilization Advance Payment Recovery (10%)</span>
@@ -274,7 +274,7 @@ export const ProgressBillingView: React.FC = () => {
                     <span>5. Less: Retention Money Deducted This Period (5% Cap Reached)</span>
                     <span className="font-mono font-semibold">({currency} {selectedIpc.retentionDeductedThisPeriod.toLocaleString()})</span>
                   </div>
-                  <div className="flex justify-between py-2 border-b border-slate-100 dark:border-slate-800 text-slate-500">
+                  <div className="flex justify-between py-2 border-b border-slate-100 dark:border-slate-800 text-slate-500 dark:text-slate-400">
                     <span>6. Less: Previous Certificates Certified & Paid</span>
                     <span className="font-mono font-semibold">({currency} {selectedIpc.previousCertificatesCumulativePaid.toLocaleString()})</span>
                   </div>
@@ -289,15 +289,15 @@ export const ProgressBillingView: React.FC = () => {
                       <span>Value Added Tax (VAT 5.0%)</span>
                       <span className="font-mono font-semibold">{currency} {selectedIpc.vatTaxAmount.toLocaleString()}</span>
                     </div>
-                    <div className="flex justify-between py-3 bg-slate-900 text-white px-4 rounded-xl font-bold text-sm">
+                    <div className="flex justify-between py-3 bg-white dark:bg-slate-900 text-slate-900 dark:text-white px-4 rounded-xl font-bold text-sm">
                       <span>TOTAL NET AMOUNT CERTIFIED & PAYABLE (INCL. VAT)</span>
-                      <span className="font-mono text-emerald-400">{currency} {selectedIpc.totalNetPayableWithVat.toLocaleString()}</span>
+                      <span className="font-mono text-emerald-600 dark:text-emerald-400">{currency} {selectedIpc.totalNetPayableWithVat.toLocaleString()}</span>
                     </div>
                   </div>
                 </div>
               </div>
             ) : (
-              <div className="p-8 text-center bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 text-slate-400 text-xs">
+              <div className="p-8 text-center bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400 text-xs">
                 Select an IPC on the left to view the certified calculation statement.
               </div>
             )}
@@ -309,7 +309,7 @@ export const ProgressBillingView: React.FC = () => {
       {activeTab === 'tax-invoices' && (
         <div className="overflow-x-auto bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm">
           <table className="w-full text-left text-xs">
-            <thead className="bg-slate-50 dark:bg-slate-800/60 text-slate-500 uppercase tracking-wider font-semibold border-b border-slate-200 dark:border-slate-800">
+            <thead className="bg-slate-50 dark:bg-slate-800/60 text-slate-500 dark:text-slate-400 uppercase tracking-wider font-semibold border-b border-slate-200 dark:border-slate-800">
               <tr>
                 <th className="py-3 px-4">Invoice No.</th>
                 <th className="py-3 px-4">Matching IPC</th>
@@ -333,13 +333,13 @@ export const ProgressBillingView: React.FC = () => {
                   <td className="py-3.5 px-4 font-mono">{inv.invoiceDate}</td>
                   <td className="py-3.5 px-4 font-mono">{inv.paymentDueDate}</td>
                   <td className="py-3.5 px-4 text-right font-mono font-semibold">{currency} {inv.taxableCertifiedAmount.toLocaleString()}</td>
-                  <td className="py-3.5 px-4 text-right font-mono text-slate-500">{currency} {inv.vatAmount.toLocaleString()}</td>
+                  <td className="py-3.5 px-4 text-right font-mono text-slate-500 dark:text-slate-400">{currency} {inv.vatAmount.toLocaleString()}</td>
                   <td className="py-3.5 px-4 text-right font-mono font-bold text-slate-900 dark:text-white">{currency} {inv.totalInvoiceAmount.toLocaleString()}</td>
                   <td className="py-3.5 px-4">
                     <span className={`px-2 py-0.5 rounded-full text-[11px] font-semibold ${
                       inv.paymentStatus === 'PAID'
-                        ? 'bg-emerald-50 dark:bg-emerald-950 text-emerald-600'
-                        : 'bg-amber-50 dark:bg-amber-950 text-amber-600'
+                        ? 'bg-emerald-50 dark:bg-emerald-950 text-emerald-600 dark:text-emerald-400'
+                        : 'bg-amber-50 dark:bg-amber-950 text-amber-600 dark:text-amber-400'
                     }`}>
                       {inv.paymentStatus}
                     </span>
@@ -353,10 +353,10 @@ export const ProgressBillingView: React.FC = () => {
 
       {/* Tab 3: Subcontractor Billing */}
       {activeTab === 'subcontractor-billing' && (
-        <div className="p-8 text-center bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 text-slate-500 text-xs space-y-3">
-          <FileCheck className="w-10 h-10 mx-auto text-blue-500" />
+        <div className="p-8 text-center bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 text-slate-500 dark:text-slate-400 text-xs space-y-3">
+          <FileCheck className="w-10 h-10 mx-auto text-blue-600 dark:text-blue-500" />
           <h4 className="text-base font-bold text-slate-900 dark:text-white">Trade Subcontractor Payment Applications</h4>
-          <p className="max-w-md mx-auto text-slate-400">
+          <p className="max-w-md mx-auto text-slate-600 dark:text-slate-400">
             Subcontractor claims for Bahwan Engineering (MEP) and Alumco (Facade) are audited by the Senior QS against Joint Measurement Sheets and approved for Treasury disbursements.
           </p>
         </div>
@@ -368,7 +368,7 @@ export const ProgressBillingView: React.FC = () => {
           <div className="bg-white dark:bg-slate-900 rounded-2xl max-w-lg w-full p-6 border border-slate-200 dark:border-slate-800 shadow-2xl space-y-4 text-xs">
             <div className="flex justify-between items-center border-b border-slate-100 dark:border-slate-800 pb-3">
               <h3 className="text-base font-bold text-slate-900 dark:text-white">Generate Monthly Interim Payment Certificate (IPC)</h3>
-              <button onClick={() => setShowCreateIpcModal(false)} className="text-slate-400 hover:text-slate-600">✕</button>
+              <button onClick={() => setShowCreateIpcModal(false)} className="text-slate-600 dark:text-slate-400 hover:text-slate-600 dark:hover:text-slate-400">✕</button>
             </div>
 
             <form onSubmit={handleCreateIPC} className="space-y-3">
@@ -439,7 +439,7 @@ export const ProgressBillingView: React.FC = () => {
                 <button
                   type="button"
                   onClick={() => setShowCreateIpcModal(false)}
-                  className="px-4 py-2 rounded-xl text-slate-600 dark:text-slate-300 hover:bg-slate-100"
+                  className="px-4 py-2 rounded-xl text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800"
                 >
                   Cancel
                 </button>

@@ -72,15 +72,15 @@ export const MasterDataManagementView: React.FC<{ activeTab?: string }> = ({ act
     {
       key: 'code',
       header: 'Entity Code',
-      accessor: item => <span className="font-mono font-bold text-indigo-700">{item.code}</span>
+      accessor: item => <span className="font-mono font-bold text-indigo-700 dark:text-indigo-300">{item.code}</span>
     },
     {
       key: 'entityName',
       header: 'Master Entity & Category',
       accessor: item => (
         <div>
-          <div className="font-semibold text-slate-900">{item.entityName}</div>
-          <div className="text-[11px] text-slate-500">{item.category} • Ver {item.version}</div>
+          <div className="font-semibold text-slate-900 dark:text-slate-100">{item.entityName}</div>
+          <div className="text-[11px] text-slate-500 dark:text-slate-400">{item.category} • Ver {item.version}</div>
         </div>
       )
     },
@@ -88,7 +88,7 @@ export const MasterDataManagementView: React.FC<{ activeTab?: string }> = ({ act
       key: 'ownerDepartment',
       header: 'Data Governance Steward',
       accessor: item => (
-        <span className="px-2.5 py-0.5 rounded-md bg-indigo-50 text-indigo-700 font-medium text-[11px]">
+        <span className="px-2.5 py-0.5 rounded-md bg-indigo-50 dark:bg-indigo-500/10 text-indigo-700 dark:text-indigo-300 font-medium text-[11px]">
           {item.ownerDepartment}
         </span>
       )
@@ -97,7 +97,7 @@ export const MasterDataManagementView: React.FC<{ activeTab?: string }> = ({ act
       key: 'goldenRecordCount',
       header: 'Master Records',
       accessor: item => (
-        <span className="font-mono font-semibold text-slate-800">
+        <span className="font-mono font-semibold text-slate-800 dark:text-slate-200">
           {item.goldenRecordCount.toLocaleString()} Golden
         </span>
       )
@@ -106,7 +106,7 @@ export const MasterDataManagementView: React.FC<{ activeTab?: string }> = ({ act
       key: 'approvalRequired',
       header: 'Dual Gate Approvals',
       accessor: item => (
-        <span className={`px-2 py-0.5 rounded text-[11px] font-semibold ${item.approvalRequired ? 'bg-indigo-50 text-indigo-700' : 'bg-slate-100 text-slate-600'}`}>
+        <span className={`px-2 py-0.5 rounded text-[11px] font-semibold ${item.approvalRequired ? 'bg-indigo-50 dark:bg-indigo-500/10 text-indigo-700 dark:text-indigo-300' : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400'}`}>
           {item.approvalRequired ? 'Mandatory' : 'Auto-Approve'}
         </span>
       )
@@ -125,8 +125,8 @@ export const MasterDataManagementView: React.FC<{ activeTab?: string }> = ({ act
       header: 'Deduplication Rule & Domain',
       accessor: item => (
         <div>
-          <div className="font-semibold text-slate-900">{item.ruleName}</div>
-          <div className="text-[11px] text-slate-500">{item.entityType} • {item.matchType}</div>
+          <div className="font-semibold text-slate-900 dark:text-slate-100">{item.ruleName}</div>
+          <div className="text-[11px] text-slate-500 dark:text-slate-400">{item.entityType} • {item.matchType}</div>
         </div>
       )
     },
@@ -136,7 +136,7 @@ export const MasterDataManagementView: React.FC<{ activeTab?: string }> = ({ act
       accessor: item => (
         <div className="flex gap-1 flex-wrap">
           {item.fieldsChecked.map(f => (
-            <span key={f} className="px-1.5 py-0.5 rounded bg-slate-100 font-mono text-[10px] text-slate-700">
+            <span key={f} className="px-1.5 py-0.5 rounded bg-slate-100 dark:bg-slate-800 font-mono text-[10px] text-slate-700 dark:text-slate-300">
               {f}
             </span>
           ))}
@@ -147,7 +147,7 @@ export const MasterDataManagementView: React.FC<{ activeTab?: string }> = ({ act
       key: 'similarityThresholdPercent',
       header: 'Similarity Threshold',
       accessor: item => (
-        <span className="font-mono text-xs font-bold text-indigo-700">{item.similarityThresholdPercent}%</span>
+        <span className="font-mono text-xs font-bold text-indigo-700 dark:text-indigo-300">{item.similarityThresholdPercent}%</span>
       )
     },
     {
@@ -156,7 +156,7 @@ export const MasterDataManagementView: React.FC<{ activeTab?: string }> = ({ act
       accessor: item => (
         <span
           className={`px-2 py-0.5 rounded text-[10px] font-bold ${
-            item.actionOnMatch.includes('Block') ? 'bg-rose-100 text-rose-800' : 'bg-amber-100 text-amber-800'
+            item.actionOnMatch.includes('Block') ? 'bg-rose-100 dark:bg-rose-500/20 text-rose-800 dark:text-rose-200' : 'bg-amber-100 dark:bg-amber-500/20 text-amber-800 dark:text-amber-200'
           }`}
         >
           {item.actionOnMatch}
@@ -175,15 +175,15 @@ export const MasterDataManagementView: React.FC<{ activeTab?: string }> = ({ act
     {
       key: 'recordIdentifier',
       header: 'Proposed Entity Code',
-      accessor: item => <span className="font-mono font-bold text-indigo-700">{item.recordIdentifier}</span>
+      accessor: item => <span className="font-mono font-bold text-indigo-700 dark:text-indigo-300">{item.recordIdentifier}</span>
     },
     {
       key: 'entityType',
       header: 'Master Domain & Type',
       accessor: item => (
         <div>
-          <div className="font-semibold text-slate-900">{item.entityType}</div>
-          <span className="text-[10px] px-1.5 py-0.5 rounded bg-slate-100 font-mono text-slate-600">
+          <div className="font-semibold text-slate-900 dark:text-slate-100">{item.entityType}</div>
+          <span className="text-[10px] px-1.5 py-0.5 rounded bg-slate-100 dark:bg-slate-800 font-mono text-slate-600 dark:text-slate-400">
             Approver: {item.assignedApprover}
           </span>
         </div>
@@ -194,8 +194,8 @@ export const MasterDataManagementView: React.FC<{ activeTab?: string }> = ({ act
       header: 'Requested By',
       accessor: item => (
         <div>
-          <div className="font-medium text-slate-800">{item.submittedBy}</div>
-          <div className="text-[10px] text-slate-400 font-mono">{item.submittedAt}</div>
+          <div className="font-medium text-slate-800 dark:text-slate-200">{item.submittedBy}</div>
+          <div className="text-[10px] text-slate-500 dark:text-slate-400 font-mono">{item.submittedAt}</div>
         </div>
       )
     },
@@ -203,7 +203,7 @@ export const MasterDataManagementView: React.FC<{ activeTab?: string }> = ({ act
       key: 'recordData',
       header: 'Committed Attributes',
       accessor: item => (
-        <pre className="font-mono text-[10px] bg-slate-50 border border-slate-200 p-1.5 rounded max-w-xs truncate">
+        <pre className="font-mono text-[10px] bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 p-1.5 rounded max-w-xs truncate">
           {JSON.stringify(item.recordData)}
         </pre>
       )
@@ -224,37 +224,37 @@ export const MasterDataManagementView: React.FC<{ activeTab?: string }> = ({ act
           value={mdmDefinitions.length}
           status="positive"
           description="Golden Records Architecture"
-          icon={<Database className="w-5 h-5 text-indigo-600" />}
+          icon={<Database className="w-5 h-5 text-indigo-600 dark:text-indigo-400" />}
         />
         <MetricCard
           label="Average Master Quality Index"
           value="98.4%"
           status="positive"
           description="Across 18,300 Golden Records"
-          icon={<Sparkles className="w-5 h-5 text-emerald-600" />}
+          icon={<Sparkles className="w-5 h-5 text-emerald-600 dark:text-emerald-400" />}
         />
         <MetricCard
           label="Deduplication Collision Rules"
           value={duplicateRules.length}
           status="positive"
           description="Fuzzy Match Engines"
-          icon={<Copy className="w-5 h-5 text-indigo-600" />}
+          icon={<Copy className="w-5 h-5 text-indigo-600 dark:text-indigo-400" />}
         />
         <MetricCard
           label="Pending Master Approvals"
           value={mdmApprovals.filter(a => a.status === 'Pending Review').length}
           status="warning"
           description="Awaiting Steward Sign-Off"
-          icon={<FileCheck className="w-5 h-5 text-amber-600" />}
+          icon={<FileCheck className="w-5 h-5 text-amber-600 dark:text-amber-400" />}
         />
       </div>
 
       {/* Tabs */}
-      <div className="flex items-center gap-2 border-b border-slate-200 overflow-x-auto pb-1">
+      <div className="flex items-center gap-2 border-b border-slate-200 dark:border-slate-700 overflow-x-auto pb-1">
         <button
           onClick={() => setActiveTab('catalog')}
           className={`flex items-center gap-2 px-4 py-2.5 rounded-lg text-xs font-semibold whitespace-nowrap transition-colors cursor-pointer ${
-            activeTab === 'catalog' ? 'bg-indigo-600 text-white shadow-xs' : 'text-slate-600 hover:bg-slate-100'
+            activeTab === 'catalog' ? 'bg-indigo-600 text-white shadow-xs' : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800'
           }`}
         >
           <Database className="w-4 h-4" />
@@ -264,7 +264,7 @@ export const MasterDataManagementView: React.FC<{ activeTab?: string }> = ({ act
         <button
           onClick={() => setActiveTab('duplicates')}
           className={`flex items-center gap-2 px-4 py-2.5 rounded-lg text-xs font-semibold whitespace-nowrap transition-colors cursor-pointer ${
-            activeTab === 'duplicates' ? 'bg-indigo-600 text-white shadow-xs' : 'text-slate-600 hover:bg-slate-100'
+            activeTab === 'duplicates' ? 'bg-indigo-600 text-white shadow-xs' : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800'
           }`}
         >
           <Copy className="w-4 h-4" />
@@ -274,7 +274,7 @@ export const MasterDataManagementView: React.FC<{ activeTab?: string }> = ({ act
         <button
           onClick={() => setActiveTab('validations')}
           className={`flex items-center gap-2 px-4 py-2.5 rounded-lg text-xs font-semibold whitespace-nowrap transition-colors cursor-pointer ${
-            activeTab === 'validations' ? 'bg-indigo-600 text-white shadow-xs' : 'text-slate-600 hover:bg-slate-100'
+            activeTab === 'validations' ? 'bg-indigo-600 text-white shadow-xs' : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800'
           }`}
         >
           <CheckCheck className="w-4 h-4" />
@@ -284,7 +284,7 @@ export const MasterDataManagementView: React.FC<{ activeTab?: string }> = ({ act
         <button
           onClick={() => setActiveTab('approvals')}
           className={`flex items-center gap-2 px-4 py-2.5 rounded-lg text-xs font-semibold whitespace-nowrap transition-colors cursor-pointer ${
-            activeTab === 'approvals' ? 'bg-indigo-600 text-white shadow-xs' : 'text-slate-600 hover:bg-slate-100'
+            activeTab === 'approvals' ? 'bg-indigo-600 text-white shadow-xs' : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800'
           }`}
         >
           <FileCheck className="w-4 h-4" />
@@ -322,11 +322,11 @@ export const MasterDataManagementView: React.FC<{ activeTab?: string }> = ({ act
 
       {/* Tab 3: Validations */}
       {activeTab === 'validations' && (
-        <div className="bg-white rounded-xl border border-slate-200 p-6 shadow-sm">
-          <div className="border-b border-slate-200 pb-4 mb-5 flex items-center justify-between">
+        <div className="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-700 p-6 shadow-sm">
+          <div className="border-b border-slate-200 dark:border-slate-700 pb-4 mb-5 flex items-center justify-between">
             <div>
-              <h3 className="text-base font-bold text-slate-900">Attribute Validation Schemas</h3>
-              <p className="text-xs text-slate-500 mt-0.5">
+              <h3 className="text-base font-bold text-slate-900 dark:text-slate-100">Attribute Validation Schemas</h3>
+              <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
                 Strict Regex, Range, and Format validations enforced across master record attributes
               </p>
             </div>
@@ -341,22 +341,22 @@ export const MasterDataManagementView: React.FC<{ activeTab?: string }> = ({ act
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {validationRules.map(vr => (
-              <div key={vr.id} className="border border-slate-200 rounded-xl p-4 bg-slate-50/60 shadow-2xs space-y-2.5">
+              <div key={vr.id} className="border border-slate-200 dark:border-slate-700 rounded-xl p-4 bg-slate-50/60 dark:bg-slate-800/60 shadow-2xs space-y-2.5">
                 <div className="flex items-start justify-between">
                   <div>
-                    <span className="font-mono text-xs font-bold text-indigo-700">{vr.fieldName}</span>
-                    <h4 className="font-bold text-slate-900 text-sm mt-0.5">{vr.entity}</h4>
+                    <span className="font-mono text-xs font-bold text-indigo-700 dark:text-indigo-300">{vr.fieldName}</span>
+                    <h4 className="font-bold text-slate-900 dark:text-slate-100 text-sm mt-0.5">{vr.entity}</h4>
                   </div>
-                  <span className="px-2 py-0.5 rounded bg-indigo-100 text-indigo-800 text-[10px] font-mono font-bold">
+                  <span className="px-2 py-0.5 rounded bg-indigo-100 dark:bg-indigo-500/20 text-indigo-800 dark:text-indigo-200 text-[10px] font-mono font-bold">
                     {vr.ruleType}
                   </span>
                 </div>
 
                 <div className="text-xs space-y-1.5">
-                  <div className="bg-white border border-slate-200 p-2 rounded font-mono text-[11px] text-slate-800 truncate">
+                  <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 p-2 rounded font-mono text-[11px] text-slate-800 dark:text-slate-200 truncate">
                     Expression: {vr.ruleExpression}
                   </div>
-                  <div className="text-rose-700 font-medium text-[11px]">
+                  <div className="text-rose-700 dark:text-rose-300 font-medium text-[11px]">
                     Error Message: "{vr.errorMessage}"
                   </div>
                 </div>
@@ -393,7 +393,7 @@ export const MasterDataManagementView: React.FC<{ activeTab?: string }> = ({ act
                 </button>
               </div>
             ) : (
-              <span className="text-xs font-medium text-slate-400">Processed</span>
+              <span className="text-xs font-medium text-slate-500 dark:text-slate-400">Processed</span>
             )
           )}
         />
@@ -410,11 +410,11 @@ export const MasterDataManagementView: React.FC<{ activeTab?: string }> = ({ act
       >
         <div className="space-y-4">
           <div>
-            <label className="block text-slate-700 font-semibold mb-1">Target Entity Domain</label>
+            <label className="block text-slate-700 dark:text-slate-300 font-semibold mb-1">Target Entity Domain</label>
             <select
               value={dupForm.entity}
               onChange={e => setDupForm({ ...dupForm, entity: e.target.value })}
-              className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-xs"
+              className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-lg text-xs"
             >
               <option value="Customer Master">Customer Master</option>
               <option value="Vendor Master">Vendor Master</option>
@@ -424,33 +424,33 @@ export const MasterDataManagementView: React.FC<{ activeTab?: string }> = ({ act
           </div>
 
           <div>
-            <label className="block text-slate-700 font-semibold mb-1">Rule Name *</label>
+            <label className="block text-slate-700 dark:text-slate-300 font-semibold mb-1">Rule Name *</label>
             <input
               type="text"
               required
               value={dupForm.ruleName}
               onChange={e => setDupForm({ ...dupForm, ruleName: e.target.value })}
               placeholder="e.g. Exact Tax Registration Number Collision"
-              className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-xs"
+              className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-lg text-xs"
             />
           </div>
 
           <div>
-            <label className="block text-slate-700 font-semibold mb-1">Similarity Threshold (%)</label>
+            <label className="block text-slate-700 dark:text-slate-300 font-semibold mb-1">Similarity Threshold (%)</label>
             <input
               type="number"
               value={dupForm.thresholdScore}
               onChange={e => setDupForm({ ...dupForm, thresholdScore: Number(e.target.value) })}
-              className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg font-mono text-xs"
+              className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-lg font-mono text-xs"
             />
           </div>
 
           <div>
-            <label className="block text-slate-700 font-semibold mb-1">Collision Action</label>
+            <label className="block text-slate-700 dark:text-slate-300 font-semibold mb-1">Collision Action</label>
             <select
               value={dupForm.action}
               onChange={e => setDupForm({ ...dupForm, action: e.target.value as any })}
-              className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-xs"
+              className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-lg text-xs"
             >
               <option value="Block">Block Creation (Strict)</option>
               <option value="Warn">Warn User and Require Override Note</option>
@@ -471,48 +471,48 @@ export const MasterDataManagementView: React.FC<{ activeTab?: string }> = ({ act
       >
         <div className="space-y-4">
           <div>
-            <label className="block text-slate-700 font-semibold mb-1">Master Entity Domain</label>
+            <label className="block text-slate-700 dark:text-slate-300 font-semibold mb-1">Master Entity Domain</label>
             <input
               type="text"
               value={valForm.entity}
               onChange={e => setValForm({ ...valForm, entity: e.target.value })}
-              className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-xs"
+              className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-lg text-xs"
             />
           </div>
 
           <div>
-            <label className="block text-slate-700 font-semibold mb-1">Field Name *</label>
+            <label className="block text-slate-700 dark:text-slate-300 font-semibold mb-1">Field Name *</label>
             <input
               type="text"
               required
               value={valForm.fieldName}
               onChange={e => setValForm({ ...valForm, fieldName: e.target.value })}
               placeholder="e.g. taxRegistrationNumber"
-              className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg font-mono text-xs"
+              className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-lg font-mono text-xs"
             />
           </div>
 
           <div>
-            <label className="block text-slate-700 font-semibold mb-1">Regex Expression *</label>
+            <label className="block text-slate-700 dark:text-slate-300 font-semibold mb-1">Regex Expression *</label>
             <input
               type="text"
               required
               value={valForm.ruleExpression}
               onChange={e => setValForm({ ...valForm, ruleExpression: e.target.value })}
               placeholder="e.g. ^OM[0-9]{10}$"
-              className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg font-mono text-xs"
+              className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-lg font-mono text-xs"
             />
           </div>
 
           <div>
-            <label className="block text-slate-700 font-semibold mb-1">Custom Error Message *</label>
+            <label className="block text-slate-700 dark:text-slate-300 font-semibold mb-1">Custom Error Message *</label>
             <input
               type="text"
               required
               value={valForm.errorMessage}
               onChange={e => setValForm({ ...valForm, errorMessage: e.target.value })}
               placeholder="e.g. Tax registration number must start with OM followed by 10 digits"
-              className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-xs"
+              className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-lg text-xs"
             />
           </div>
         </div>

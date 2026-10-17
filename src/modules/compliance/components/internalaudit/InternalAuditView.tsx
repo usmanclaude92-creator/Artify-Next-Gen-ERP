@@ -87,13 +87,13 @@ export const InternalAuditView: React.FC = () => {
   const getSeverityBadge = (sev: FindingSeverity) => {
     switch (sev) {
       case 'HIGH':
-        return <span className="px-2.5 py-0.5 rounded-full text-xs font-bold bg-rose-100 text-rose-800 border border-rose-300">High Risk</span>;
+        return <span className="px-2.5 py-0.5 rounded-full text-xs font-bold bg-rose-100 dark:bg-rose-500/20 text-rose-800 dark:text-rose-200 border border-rose-300 dark:border-rose-500/40">High Risk</span>;
       case 'MEDIUM':
-        return <span className="px-2.5 py-0.5 rounded-full text-xs font-bold bg-amber-100 text-amber-800 border border-amber-300">Medium</span>;
+        return <span className="px-2.5 py-0.5 rounded-full text-xs font-bold bg-amber-100 dark:bg-amber-500/20 text-amber-800 dark:text-amber-200 border border-amber-300 dark:border-amber-500/40">Medium</span>;
       case 'LOW':
-        return <span className="px-2.5 py-0.5 rounded-full text-xs font-bold bg-emerald-100 text-emerald-800 border border-emerald-300">Low</span>;
+        return <span className="px-2.5 py-0.5 rounded-full text-xs font-bold bg-emerald-100 dark:bg-emerald-500/20 text-emerald-800 dark:text-emerald-200 border border-emerald-300 dark:border-emerald-500/40">Low</span>;
       case 'INFORMATIONAL':
-        return <span className="px-2.5 py-0.5 rounded-full text-xs font-bold bg-slate-100 text-slate-700 border border-slate-300">Info</span>;
+        return <span className="px-2.5 py-0.5 rounded-full text-xs font-bold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-600">Info</span>;
     }
   };
 
@@ -114,15 +114,15 @@ export const InternalAuditView: React.FC = () => {
   return (
     <div className="space-y-6">
       {/* Submodule Header */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm">
         <div>
           <div className="flex items-center gap-2">
-            <span className="text-xs font-bold font-mono px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-700">
+            <span className="text-xs font-bold font-mono px-2.5 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">
               17.05
             </span>
-            <h2 className="text-xl font-bold text-slate-900">Internal Audit Planning & Findings Register</h2>
+            <h2 className="text-xl font-bold text-slate-900 dark:text-slate-100">Internal Audit Planning & Findings Register</h2>
           </div>
-          <p className="text-sm text-slate-500 mt-1">
+          <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">
             Risk-based annual audit plan, fieldwork workpapers, 5C structured audit findings (Condition, Criteria, Cause, Consequence, Corrective Action).
           </p>
         </div>
@@ -148,13 +148,13 @@ export const InternalAuditView: React.FC = () => {
       </div>
 
       {/* Tabs */}
-      <div className="flex items-center gap-2 border-b border-slate-200">
+      <div className="flex items-center gap-2 border-b border-slate-200 dark:border-slate-700">
         <button
           onClick={() => setActiveTab('engagements')}
           className={`px-5 py-3 text-sm font-semibold border-b-2 transition flex items-center gap-2 ${
             activeTab === 'engagements'
-              ? 'border-emerald-600 text-emerald-700 bg-emerald-50/50 rounded-t-xl'
-              : 'border-transparent text-slate-600 hover:text-slate-900'
+              ? 'border-emerald-600 text-emerald-700 dark:text-emerald-300 bg-emerald-50/50 dark:bg-emerald-500/50 rounded-t-xl'
+              : 'border-transparent text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100'
           }`}
         >
           <Calendar className="w-4 h-4" /> Audit Plan Engagements ({auditEngagements.length})
@@ -163,8 +163,8 @@ export const InternalAuditView: React.FC = () => {
           onClick={() => setActiveTab('findings')}
           className={`px-5 py-3 text-sm font-semibold border-b-2 transition flex items-center gap-2 ${
             activeTab === 'findings'
-              ? 'border-emerald-600 text-emerald-700 bg-emerald-50/50 rounded-t-xl'
-              : 'border-transparent text-slate-600 hover:text-slate-900'
+              ? 'border-emerald-600 text-emerald-700 dark:text-emerald-300 bg-emerald-50/50 dark:bg-emerald-500/50 rounded-t-xl'
+              : 'border-transparent text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100'
           }`}
         >
           <AlertOctagon className="w-4 h-4" /> 5C Findings Register ({auditFindings.length})
@@ -173,8 +173,8 @@ export const InternalAuditView: React.FC = () => {
           onClick={() => setActiveTab('universe')}
           className={`px-5 py-3 text-sm font-semibold border-b-2 transition flex items-center gap-2 ${
             activeTab === 'universe'
-              ? 'border-emerald-600 text-emerald-700 bg-emerald-50/50 rounded-t-xl'
-              : 'border-transparent text-slate-600 hover:text-slate-900'
+              ? 'border-emerald-600 text-emerald-700 dark:text-emerald-300 bg-emerald-50/50 dark:bg-emerald-500/50 rounded-t-xl'
+              : 'border-transparent text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100'
           }`}
         >
           <ClipboardList className="w-4 h-4" /> Fieldwork Workpapers ({auditPrograms.length})
@@ -185,23 +185,23 @@ export const InternalAuditView: React.FC = () => {
       {activeTab === 'engagements' && (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {auditEngagements.map(eng => (
-            <div key={eng.id} className="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm space-y-4">
+            <div key={eng.id} className="bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm space-y-4">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
-                  <span className="font-mono text-xs font-bold px-2 py-0.5 rounded bg-slate-100 text-slate-800">
+                  <span className="font-mono text-xs font-bold px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200">
                     {eng.auditCode}
                   </span>
-                  <span className="text-xs px-2 py-0.5 rounded bg-indigo-50 text-indigo-700 font-semibold">
+                  <span className="text-xs px-2 py-0.5 rounded bg-indigo-50 dark:bg-indigo-500/10 text-indigo-700 dark:text-indigo-300 font-semibold">
                     {eng.auditType}
                   </span>
                 </div>
                 <span
                   className={`text-xs px-2.5 py-0.5 rounded-full font-bold ${
                     eng.status === 'REPORT_ISSUED'
-                      ? 'bg-emerald-50 text-emerald-700 border border-emerald-200'
+                      ? 'bg-emerald-50 dark:bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-500/30'
                       : eng.status === 'IN_PROGRESS'
-                      ? 'bg-indigo-50 text-indigo-700 border border-indigo-200'
-                      : 'bg-amber-50 text-amber-700 border border-amber-200'
+                      ? 'bg-indigo-50 dark:bg-indigo-500/10 text-indigo-700 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-500/30'
+                      : 'bg-amber-50 dark:bg-amber-500/10 text-amber-700 dark:text-amber-300 border border-amber-200 dark:border-amber-500/30'
                   }`}
                 >
                   {eng.status.replace(/_/g, ' ')}
@@ -209,31 +209,31 @@ export const InternalAuditView: React.FC = () => {
               </div>
 
               <div>
-                <h3 className="font-bold text-slate-900 text-base">{eng.engagementTitle}</h3>
-                <p className="text-xs text-slate-500 mt-0.5">Universe: {eng.auditUniverseArea}</p>
+                <h3 className="font-bold text-slate-900 dark:text-slate-100 text-base">{eng.engagementTitle}</h3>
+                <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Universe: {eng.auditUniverseArea}</p>
               </div>
 
-              <div className="grid grid-cols-3 gap-2 bg-slate-50 p-3 rounded-xl border border-slate-100 text-xs">
+              <div className="grid grid-cols-3 gap-2 bg-slate-50 dark:bg-slate-800/50 p-3 rounded-xl border border-slate-100 dark:border-slate-800 text-xs">
                 <div>
-                  <span className="text-slate-400 block text-[10px] uppercase font-bold">Planned Quarter</span>
-                  <strong className="text-slate-700">{eng.plannedQuarter}</strong>
+                  <span className="text-slate-500 dark:text-slate-400 block text-[10px] uppercase font-bold">Planned Quarter</span>
+                  <strong className="text-slate-700 dark:text-slate-300">{eng.plannedQuarter}</strong>
                 </div>
                 <div>
-                  <span className="text-slate-400 block text-[10px] uppercase font-bold">Lead Auditor</span>
-                  <strong className="text-slate-700 truncate block">{eng.leadAuditor}</strong>
+                  <span className="text-slate-500 dark:text-slate-400 block text-[10px] uppercase font-bold">Lead Auditor</span>
+                  <strong className="text-slate-700 dark:text-slate-300 truncate block">{eng.leadAuditor}</strong>
                 </div>
                 <div>
-                  <span className="text-slate-400 block text-[10px] uppercase font-bold">Days Budget</span>
-                  <strong className="text-slate-700">{eng.actualDays}/{eng.budgetDays} Days</strong>
+                  <span className="text-slate-500 dark:text-slate-400 block text-[10px] uppercase font-bold">Days Budget</span>
+                  <strong className="text-slate-700 dark:text-slate-300">{eng.actualDays}/{eng.budgetDays} Days</strong>
                 </div>
               </div>
 
-              <div className="flex items-center justify-between pt-2 border-t border-slate-100 text-xs">
-                <div className="flex items-center gap-1.5 text-emerald-700 font-semibold">
+              <div className="flex items-center justify-between pt-2 border-t border-slate-100 dark:border-slate-800 text-xs">
+                <div className="flex items-center gap-1.5 text-emerald-700 dark:text-emerald-300 font-semibold">
                   <CheckCircle2 className="w-3.5 h-3.5" />
                   <span>Audit Committee Approved ({eng.committeeApprovalDate})</span>
                 </div>
-                <span className="text-slate-400 font-mono text-[11px]">Weight: {eng.riskWeighting}</span>
+                <span className="text-slate-500 dark:text-slate-400 font-mono text-[11px]">Weight: {eng.riskWeighting}</span>
               </div>
             </div>
           ))}
@@ -243,22 +243,22 @@ export const InternalAuditView: React.FC = () => {
       {/* 2. FINDINGS REGISTER (5C Structured) */}
       {activeTab === 'findings' && (
         <div className="space-y-4">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-3 bg-slate-50 p-3 rounded-xl border border-slate-200">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-3 bg-slate-50 dark:bg-slate-800/50 p-3 rounded-xl border border-slate-200 dark:border-slate-700">
             <div className="md:col-span-2 relative">
-              <Search className="w-4 h-4 absolute left-3 top-3 text-slate-400" />
+              <Search className="w-4 h-4 absolute left-3 top-3 text-slate-500 dark:text-slate-400" />
               <input
                 type="text"
                 placeholder="Search finding code, title, action owner..."
                 value={findingSearch}
                 onChange={e => setFindingSearch(e.target.value)}
-                className="w-full pl-9 pr-4 py-2 text-sm bg-white border border-slate-200 rounded-lg focus:ring-2 focus:ring-emerald-500"
+                className="w-full pl-9 pr-4 py-2 text-sm bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-emerald-500"
               />
             </div>
             <div>
               <select
                 value={selectedSeverity}
                 onChange={e => setSelectedSeverity(e.target.value)}
-                className="w-full px-3 py-2 text-sm bg-white border border-slate-200 rounded-lg focus:ring-2 focus:ring-emerald-500"
+                className="w-full px-3 py-2 text-sm bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-emerald-500"
               >
                 <option value="ALL">All Severities</option>
                 <option value="HIGH">High Risk</option>
@@ -274,41 +274,41 @@ export const InternalAuditView: React.FC = () => {
               <div
                 key={f.id}
                 onClick={() => setSelectedFindingDetail(f)}
-                className="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm hover:border-emerald-500 transition cursor-pointer space-y-3"
+                className="bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm hover:border-emerald-500 transition cursor-pointer space-y-3"
               >
                 <div className="flex flex-col md:flex-row md:items-center justify-between gap-2">
                   <div className="flex items-center gap-2">
-                    <span className="font-mono text-xs font-bold px-2 py-0.5 rounded bg-slate-100 text-slate-800">
+                    <span className="font-mono text-xs font-bold px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200">
                       {f.findingCode}
                     </span>
                     {getSeverityBadge(f.severity)}
-                    <span className="text-xs text-slate-500 font-mono">[{f.engagementTitle}]</span>
+                    <span className="text-xs text-slate-500 dark:text-slate-400 font-mono">[{f.engagementTitle}]</span>
                   </div>
 
                   <span
                     className={`text-xs px-2.5 py-0.5 rounded-full font-bold self-start md:self-auto ${
                       f.status === 'VERIFIED_CLOSED'
-                        ? 'bg-emerald-50 text-emerald-700 border border-emerald-200'
+                        ? 'bg-emerald-50 dark:bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-500/30'
                         : f.status === 'UNDER_REMEDIATION'
-                        ? 'bg-indigo-50 text-indigo-700 border border-indigo-200'
-                        : 'bg-rose-50 text-rose-700 border border-rose-200'
+                        ? 'bg-indigo-50 dark:bg-indigo-500/10 text-indigo-700 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-500/30'
+                        : 'bg-rose-50 dark:bg-rose-500/10 text-rose-700 dark:text-rose-300 border border-rose-200 dark:border-rose-500/30'
                     }`}
                   >
                     {f.status.replace(/_/g, ' ')}
                   </span>
                 </div>
 
-                <h4 className="font-bold text-slate-900 text-base">{f.title}</h4>
-                <p className="text-xs text-slate-600 line-clamp-2">
-                  <strong className="text-slate-800">Condition:</strong> {f.condition}
+                <h4 className="font-bold text-slate-900 dark:text-slate-100 text-base">{f.title}</h4>
+                <p className="text-xs text-slate-600 dark:text-slate-400 line-clamp-2">
+                  <strong className="text-slate-800 dark:text-slate-200">Condition:</strong> {f.condition}
                 </p>
 
-                <div className="flex flex-wrap items-center justify-between gap-2 pt-2 border-t border-slate-100 text-xs text-slate-500">
+                <div className="flex flex-wrap items-center justify-between gap-2 pt-2 border-t border-slate-100 dark:border-slate-800 text-xs text-slate-500 dark:text-slate-400">
                   <div className="flex items-center gap-4">
-                    <span>Owner: <strong className="text-slate-700">{f.actionOwner}</strong></span>
-                    <span>Target Date: <strong className="text-slate-700">{f.targetClosureDate}</strong></span>
+                    <span>Owner: <strong className="text-slate-700 dark:text-slate-300">{f.actionOwner}</strong></span>
+                    <span>Target Date: <strong className="text-slate-700 dark:text-slate-300">{f.targetClosureDate}</strong></span>
                   </div>
-                  <span className="text-emerald-700 font-semibold flex items-center gap-1">
+                  <span className="text-emerald-700 dark:text-emerald-300 font-semibold flex items-center gap-1">
                     View 5C Workpaper <ChevronRight className="w-3.5 h-3.5" />
                   </span>
                 </div>
@@ -320,15 +320,15 @@ export const InternalAuditView: React.FC = () => {
 
       {/* 3. FIELDWORK WORKPAPERS */}
       {activeTab === 'universe' && (
-        <div className="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
-          <div className="p-5 border-b border-slate-200">
-            <h3 className="font-bold text-slate-900 text-base">Active Fieldwork Audit Programs</h3>
-            <p className="text-xs text-slate-500">Sampling methodologies and procedure checklists.</p>
+        <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm overflow-hidden">
+          <div className="p-5 border-b border-slate-200 dark:border-slate-700">
+            <h3 className="font-bold text-slate-900 dark:text-slate-100 text-base">Active Fieldwork Audit Programs</h3>
+            <p className="text-xs text-slate-500 dark:text-slate-400">Sampling methodologies and procedure checklists.</p>
           </div>
 
           <div className="overflow-x-auto">
-            <table className="w-full text-left text-sm text-slate-700">
-              <thead className="bg-slate-50 border-b border-slate-200 text-xs font-bold text-slate-500 uppercase tracking-wider">
+            <table className="w-full text-left text-sm text-slate-700 dark:text-slate-300">
+              <thead className="bg-slate-50 dark:bg-slate-800/50 border-b border-slate-200 dark:border-slate-700 text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
                 <tr>
                   <th className="px-5 py-3">Step #</th>
                   <th className="px-4 py-3">Objective & Procedure</th>
@@ -338,28 +338,28 @@ export const InternalAuditView: React.FC = () => {
                   <th className="px-4 py-3">Findings</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-200">
+              <tbody className="divide-y divide-slate-200 dark:divide-slate-700">
                 {auditPrograms.map(p => (
-                  <tr key={p.id} className="hover:bg-slate-50 transition">
-                    <td className="px-5 py-4 font-mono font-bold text-slate-900 text-xs">{p.stepNumber}</td>
+                  <tr key={p.id} className="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition">
+                    <td className="px-5 py-4 font-mono font-bold text-slate-900 dark:text-slate-100 text-xs">{p.stepNumber}</td>
                     <td className="px-4 py-4 text-xs space-y-0.5">
-                      <strong className="text-slate-900 block">{p.objective}</strong>
-                      <span className="text-slate-500">{p.procedureDescription}</span>
+                      <strong className="text-slate-900 dark:text-slate-100 block">{p.objective}</strong>
+                      <span className="text-slate-500 dark:text-slate-400">{p.procedureDescription}</span>
                     </td>
-                    <td className="px-4 py-4 font-mono text-xs text-slate-600">{p.samplingMethod}</td>
-                    <td className="px-4 py-4 font-mono text-xs text-slate-900">{p.sampleSize} Items</td>
+                    <td className="px-4 py-4 font-mono text-xs text-slate-600 dark:text-slate-400">{p.samplingMethod}</td>
+                    <td className="px-4 py-4 font-mono text-xs text-slate-900 dark:text-slate-100">{p.sampleSize} Items</td>
                     <td className="px-4 py-4">
                       <span
                         className={`px-2.5 py-0.5 rounded-full text-xs font-semibold ${
                           p.status === 'COMPLETED'
-                            ? 'bg-emerald-50 text-emerald-700 border border-emerald-200'
-                            : 'bg-indigo-50 text-indigo-700 border border-indigo-200'
+                            ? 'bg-emerald-50 dark:bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-500/30'
+                            : 'bg-indigo-50 dark:bg-indigo-500/10 text-indigo-700 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-500/30'
                         }`}
                       >
                         {p.status}
                       </span>
                     </td>
-                    <td className="px-4 py-4 font-mono text-xs font-bold text-rose-700">
+                    <td className="px-4 py-4 font-mono text-xs font-bold text-rose-700 dark:text-rose-300">
                       {p.findingsCount > 0 ? `${p.findingsCount} Raised` : '0 None'}
                     </td>
                   </tr>

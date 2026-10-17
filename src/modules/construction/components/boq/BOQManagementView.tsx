@@ -132,14 +132,14 @@ export const BOQManagementView: React.FC = () => {
   return (
     <div className="space-y-6">
       {/* Top Banner */}
-      <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 text-white shadow-xl flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6">
+      <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 text-slate-900 dark:text-white shadow-xl flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6">
         <div className="space-y-2 max-w-2xl">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/20 text-amber-400 text-xs font-semibold uppercase tracking-wider">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/20 text-amber-700 dark:text-amber-400 text-xs font-semibold uppercase tracking-wider">
             <List className="w-3.5 h-3.5" />
             Module 15.02 — BOQ Management
           </div>
           <h2 className="text-2xl font-bold tracking-tight">Hierarchical Bill of Quantities (BOQ)</h2>
-          <p className="text-sm text-slate-400">
+          <p className="text-sm text-slate-600 dark:text-slate-400">
             Multi-division measurement breakdown, analytical unit rate deconstruction, drawing revision addendums, and certified quantity takeoff.
           </p>
         </div>
@@ -147,7 +147,7 @@ export const BOQManagementView: React.FC = () => {
         <div className="flex flex-wrap items-center gap-3">
           <button
             onClick={() => setShowAddRevisionModal(true)}
-            className="inline-flex items-center gap-2 bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 font-medium text-xs px-4 py-2.5 rounded-xl shadow transition-all"
+            className="inline-flex items-center gap-2 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-200 border border-slate-300 dark:border-slate-700 font-medium text-xs px-4 py-2.5 rounded-xl shadow transition-all"
           >
             <History className="w-4 h-4" />
             Issue BOQ Addendum
@@ -260,7 +260,7 @@ export const BOQManagementView: React.FC = () => {
           </select>
 
           <div className="relative w-48">
-            <Search className="w-3.5 h-3.5 absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
+            <Search className="w-3.5 h-3.5 absolute left-3 top-1/2 -translate-y-1/2 text-slate-600 dark:text-slate-400" />
             <input
               type="text"
               placeholder="Search items..."
@@ -276,7 +276,7 @@ export const BOQManagementView: React.FC = () => {
       {activeTab === 'boq-items' && (
         <div className="overflow-x-auto bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm">
           <table className="w-full text-left text-xs">
-            <thead className="bg-slate-50 dark:bg-slate-800/60 text-slate-500 uppercase tracking-wider font-semibold border-b border-slate-200 dark:border-slate-800">
+            <thead className="bg-slate-50 dark:bg-slate-800/60 text-slate-500 dark:text-slate-400 uppercase tracking-wider font-semibold border-b border-slate-200 dark:border-slate-800">
               <tr>
                 <th className="py-3 px-4">Item Code</th>
                 <th className="py-3 px-4">Division</th>
@@ -341,7 +341,7 @@ export const BOQManagementView: React.FC = () => {
         <div className="space-y-6">
           <div className="bg-slate-50 dark:bg-slate-800/40 p-4 rounded-2xl border border-slate-200 dark:border-slate-800 flex items-center justify-between">
             <div>
-              <span className="text-xs font-semibold text-slate-500">Selected BOQ Item Rate Analysis:</span>
+              <span className="text-xs font-semibold text-slate-500 dark:text-slate-400">Selected BOQ Item Rate Analysis:</span>
               <h4 className="text-base font-bold text-slate-900 dark:text-white mt-0.5">
                 {selectedBoqItemForRate ? `${selectedBoqItemForRate.boqCode} — ${selectedBoqItemForRate.itemDescription}` : 'Select an item to view rate composition'}
               </h4>
@@ -357,43 +357,43 @@ export const BOQManagementView: React.FC = () => {
             {selectedBoqItemForRate ? (
               <>
                 <div className="p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 space-y-1">
-                  <span className="text-xs font-medium text-slate-500">Material Cost</span>
+                  <span className="text-xs font-medium text-slate-500 dark:text-slate-400">Material Cost</span>
                   <p className="text-lg font-bold font-mono text-slate-900 dark:text-white">
                     {currency} {selectedBoqItemForRate.rateBreakdown.materialRate.toFixed(2)}
                   </p>
-                  <p className="text-[11px] text-slate-400">Direct raw materials</p>
+                  <p className="text-[11px] text-slate-600 dark:text-slate-400">Direct raw materials</p>
                 </div>
                 <div className="p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 space-y-1">
-                  <span className="text-xs font-medium text-slate-500">Direct Labor Cost</span>
+                  <span className="text-xs font-medium text-slate-500 dark:text-slate-400">Direct Labor Cost</span>
                   <p className="text-lg font-bold font-mono text-slate-900 dark:text-white">
                     {currency} {selectedBoqItemForRate.rateBreakdown.laborRate.toFixed(2)}
                   </p>
-                  <p className="text-[11px] text-slate-400">Gang rate & productivity</p>
+                  <p className="text-[11px] text-slate-600 dark:text-slate-400">Gang rate & productivity</p>
                 </div>
                 <div className="p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 space-y-1">
-                  <span className="text-xs font-medium text-slate-500">Plant & Equipment</span>
+                  <span className="text-xs font-medium text-slate-500 dark:text-slate-400">Plant & Equipment</span>
                   <p className="text-lg font-bold font-mono text-slate-900 dark:text-white">
                     {currency} {selectedBoqItemForRate.rateBreakdown.equipmentRate.toFixed(2)}
                   </p>
-                  <p className="text-[11px] text-slate-400">Fuel & mobilization</p>
+                  <p className="text-[11px] text-slate-600 dark:text-slate-400">Fuel & mobilization</p>
                 </div>
                 <div className="p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 space-y-1">
-                  <span className="text-xs font-medium text-slate-500">Trade Subcontractor</span>
+                  <span className="text-xs font-medium text-slate-500 dark:text-slate-400">Trade Subcontractor</span>
                   <p className="text-lg font-bold font-mono text-slate-900 dark:text-white">
                     {currency} {selectedBoqItemForRate.rateBreakdown.subcontractorRate.toFixed(2)}
                   </p>
-                  <p className="text-[11px] text-slate-400">Specialist package</p>
+                  <p className="text-[11px] text-slate-600 dark:text-slate-400">Specialist package</p>
                 </div>
                 <div className="p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 space-y-1">
-                  <span className="text-xs font-medium text-slate-500">Overhead & Profit</span>
+                  <span className="text-xs font-medium text-slate-500 dark:text-slate-400">Overhead & Profit</span>
                   <p className="text-lg font-bold font-mono text-emerald-600 dark:text-emerald-400">
                     {currency} {selectedBoqItemForRate.rateBreakdown.overheadProfitRate.toFixed(2)}
                   </p>
-                  <p className="text-[11px] text-slate-400">Site prelims + 12% margin</p>
+                  <p className="text-[11px] text-slate-600 dark:text-slate-400">Site prelims + 12% margin</p>
                 </div>
               </>
             ) : (
-              <div className="col-span-5 p-8 text-center bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 text-slate-400 text-xs">
+              <div className="col-span-5 p-8 text-center bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400 text-xs">
                 Click "Rate Breakdown" on any BOQ line in the first tab to inspect the 5-component rate analysis.
               </div>
             )}
@@ -411,19 +411,19 @@ export const BOQManagementView: React.FC = () => {
                   <span className="text-xs font-mono font-bold text-amber-600 dark:text-amber-400 bg-amber-50 dark:bg-amber-950/60 px-2 py-1 rounded">
                     {rev.revisionCode}
                   </span>
-                  <span className="text-xs font-semibold px-2 py-0.5 rounded bg-emerald-50 dark:bg-emerald-950 text-emerald-600">
+                  <span className="text-xs font-semibold px-2 py-0.5 rounded bg-emerald-50 dark:bg-emerald-950 text-emerald-600 dark:text-emerald-400">
                     {rev.status}
                   </span>
                 </div>
                 <h5 className="font-bold text-slate-900 dark:text-white text-sm">
                   {rev.title}
                 </h5>
-                <p className="text-xs text-slate-500">
+                <p className="text-xs text-slate-500 dark:text-slate-400">
                   <strong>Reason:</strong> {rev.reason.replace(/_/g, ' ')} • <strong>Issued by:</strong> {rev.issuedBy}
                 </p>
                 <div className="flex justify-between items-center pt-2 border-t border-slate-100 dark:border-slate-800 text-xs">
-                  <span className="text-slate-500">Net Value Change:</span>
-                  <span className={`font-mono font-bold ${rev.netFinancialImpact >= 0 ? 'text-rose-600' : 'text-emerald-600'}`}>
+                  <span className="text-slate-500 dark:text-slate-400">Net Value Change:</span>
+                  <span className={`font-mono font-bold ${rev.netFinancialImpact >= 0 ? 'text-rose-600 dark:text-rose-400' : 'text-emerald-600 dark:text-emerald-400'}`}>
                     {rev.netFinancialImpact >= 0 ? '+' : ''}{currency} {rev.netFinancialImpact.toLocaleString()}
                   </span>
                 </div>
@@ -437,7 +437,7 @@ export const BOQManagementView: React.FC = () => {
       {activeTab === 'quantity-tracking' && (
         <div className="overflow-x-auto bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm">
           <table className="w-full text-left text-xs">
-            <thead className="bg-slate-50 dark:bg-slate-800/60 text-slate-500 uppercase tracking-wider font-semibold border-b border-slate-200 dark:border-slate-800">
+            <thead className="bg-slate-50 dark:bg-slate-800/60 text-slate-500 dark:text-slate-400 uppercase tracking-wider font-semibold border-b border-slate-200 dark:border-slate-800">
               <tr>
                 <th className="py-3 px-4">Item Code</th>
                 <th className="py-3 px-4">Description</th>
@@ -464,18 +464,18 @@ export const BOQManagementView: React.FC = () => {
                     </td>
                     <td className="py-3.5 px-4 text-right font-mono">{item.tenderQuantity.toLocaleString()} {item.unitOfMeasure}</td>
                     <td className="py-3.5 px-4 text-right font-mono font-semibold">{item.revisedQuantity.toLocaleString()} {item.unitOfMeasure}</td>
-                    <td className="py-3.5 px-4 text-right font-mono text-blue-600 font-semibold">{item.executedQuantityToDate.toLocaleString()} {item.unitOfMeasure}</td>
-                    <td className="py-3.5 px-4 text-right font-mono text-emerald-600 font-semibold">{item.certifiedQuantityToDate.toLocaleString()} {item.unitOfMeasure}</td>
+                    <td className="py-3.5 px-4 text-right font-mono text-blue-600 dark:text-blue-400 font-semibold">{item.executedQuantityToDate.toLocaleString()} {item.unitOfMeasure}</td>
+                    <td className="py-3.5 px-4 text-right font-mono text-emerald-600 dark:text-emerald-400 font-semibold">{item.certifiedQuantityToDate.toLocaleString()} {item.unitOfMeasure}</td>
                     <td className="py-3.5 px-4 text-center font-bold font-mono">
                       {execPct.toFixed(1)}%
                     </td>
                     <td className="py-3.5 px-4 text-center">
                       {isOverrun ? (
-                        <span className="inline-flex items-center gap-1 text-[11px] font-semibold text-rose-600 bg-rose-50 dark:bg-rose-950 px-2 py-0.5 rounded">
+                        <span className="inline-flex items-center gap-1 text-[11px] font-semibold text-rose-600 dark:text-rose-400 bg-rose-50 dark:bg-rose-950 px-2 py-0.5 rounded">
                           <AlertTriangle className="w-3 h-3" /> Overrun
                         </span>
                       ) : (
-                        <span className="inline-flex items-center gap-1 text-[11px] font-semibold text-emerald-600 bg-emerald-50 dark:bg-emerald-950 px-2 py-0.5 rounded">
+                        <span className="inline-flex items-center gap-1 text-[11px] font-semibold text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950 px-2 py-0.5 rounded">
                           <CheckCircle2 className="w-3 h-3" /> Within Cap
                         </span>
                       )}
@@ -494,7 +494,7 @@ export const BOQManagementView: React.FC = () => {
           <div className="bg-white dark:bg-slate-900 rounded-2xl max-w-lg w-full p-6 border border-slate-200 dark:border-slate-800 shadow-2xl space-y-4 text-xs">
             <div className="flex justify-between items-center border-b border-slate-100 dark:border-slate-800 pb-3">
               <h3 className="text-base font-bold text-slate-900 dark:text-white">Add New BOQ Line Item</h3>
-              <button onClick={() => setShowAddItemModal(false)} className="text-slate-400 hover:text-slate-600">✕</button>
+              <button onClick={() => setShowAddItemModal(false)} className="text-slate-600 dark:text-slate-400 hover:text-slate-600 dark:hover:text-slate-400">✕</button>
             </div>
 
             <form onSubmit={handleCreateBOQItem} className="space-y-3">
@@ -575,7 +575,7 @@ export const BOQManagementView: React.FC = () => {
                 <button
                   type="button"
                   onClick={() => setShowAddItemModal(false)}
-                  className="px-4 py-2 rounded-xl text-slate-600 dark:text-slate-300 hover:bg-slate-100"
+                  className="px-4 py-2 rounded-xl text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800"
                 >
                   Cancel
                 </button>
@@ -597,7 +597,7 @@ export const BOQManagementView: React.FC = () => {
           <div className="bg-white dark:bg-slate-900 rounded-2xl max-w-lg w-full p-6 border border-slate-200 dark:border-slate-800 shadow-2xl space-y-4 text-xs">
             <div className="flex justify-between items-center border-b border-slate-100 dark:border-slate-800 pb-3">
               <h3 className="text-base font-bold text-slate-900 dark:text-white">Issue BOQ Addendum / Revision</h3>
-              <button onClick={() => setShowAddRevisionModal(false)} className="text-slate-400 hover:text-slate-600">✕</button>
+              <button onClick={() => setShowAddRevisionModal(false)} className="text-slate-600 dark:text-slate-400 hover:text-slate-600 dark:hover:text-slate-400">✕</button>
             </div>
 
             <form onSubmit={handleCreateRevision} className="space-y-3">
@@ -652,7 +652,7 @@ export const BOQManagementView: React.FC = () => {
                 <button
                   type="button"
                   onClick={() => setShowAddRevisionModal(false)}
-                  className="px-4 py-2 rounded-xl text-slate-600 dark:text-slate-300 hover:bg-slate-100"
+                  className="px-4 py-2 rounded-xl text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800"
                 >
                   Cancel
                 </button>

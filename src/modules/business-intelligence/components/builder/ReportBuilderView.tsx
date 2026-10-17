@@ -117,20 +117,20 @@ export const ReportBuilderView: React.FC = () => {
       <DemoDataBanner moduleSource="Module 02.26 Visual Ad-hoc Report Builder & Query Engine" />
 
       {/* Builder Top Bar */}
-      <div className="flex flex-wrap items-center justify-between gap-3 bg-white border border-slate-200 rounded-xl p-4 shadow-xs">
+      <div className="flex flex-wrap items-center justify-between gap-3 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl p-4 shadow-xs">
         <div>
-          <h2 className="text-sm font-bold text-slate-900 flex items-center gap-2">
-            <Wand2 className="w-4 h-4 text-indigo-600" />
+          <h2 className="text-sm font-bold text-slate-900 dark:text-slate-100 flex items-center gap-2">
+            <Wand2 className="w-4 h-4 text-indigo-600 dark:text-indigo-400" />
             Ad-hoc Report Studio & SQL-Free Dataset Builder
           </h2>
-          <p className="text-xs text-slate-500">
+          <p className="text-xs text-slate-500 dark:text-slate-400">
             Combine cross-module datasets, apply multi-condition filters, and execute real-time queries.
           </p>
         </div>
 
         <div className="flex items-center gap-2">
           {saveSuccessMessage && (
-            <span className="text-xs font-semibold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-lg flex items-center gap-1 animate-fade-in">
+            <span className="text-xs font-semibold text-emerald-700 dark:text-emerald-300 bg-emerald-50 dark:bg-emerald-500/10 px-2.5 py-1 rounded-lg flex items-center gap-1 animate-fade-in">
               <CheckCircle2 className="w-3.5 h-3.5" />
               Report Saved!
             </span>
@@ -147,7 +147,7 @@ export const ReportBuilderView: React.FC = () => {
 
           <button
             onClick={handleSaveReport}
-            className="inline-flex items-center gap-1.5 px-3.5 py-2 text-xs font-semibold text-slate-700 bg-slate-100 hover:bg-slate-200 rounded-lg transition-colors"
+            className="inline-flex items-center gap-1.5 px-3.5 py-2 text-xs font-semibold text-slate-700 dark:text-slate-300 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 rounded-lg transition-colors"
           >
             <Save className="w-3.5 h-3.5" />
             Save Report
@@ -160,23 +160,23 @@ export const ReportBuilderView: React.FC = () => {
         {/* Left Column: Configuration Controls (1 col) */}
         <div className="space-y-4">
           {/* Metadata */}
-          <div className="bg-white border border-slate-200 rounded-xl p-4 shadow-xs space-y-3">
-            <h3 className="text-xs font-bold text-slate-900 uppercase tracking-wider">1. Report Definition</h3>
+          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl p-4 shadow-xs space-y-3">
+            <h3 className="text-xs font-bold text-slate-900 dark:text-slate-100 uppercase tracking-wider">1. Report Definition</h3>
             <div>
-              <label className="block text-[11px] font-semibold text-slate-600 mb-1">Report Title</label>
+              <label className="block text-[11px] font-semibold text-slate-600 dark:text-slate-400 mb-1">Report Title</label>
               <input
                 type="text"
                 value={reportTitle}
                 onChange={e => setReportTitle(e.target.value)}
-                className="w-full p-2 bg-slate-50 border border-slate-200 rounded-lg text-xs font-semibold focus:bg-white"
+                className="w-full p-2 bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-lg text-xs font-semibold focus:bg-white dark:focus:bg-slate-900"
               />
             </div>
             <div>
-              <label className="block text-[11px] font-semibold text-slate-600 mb-1">Primary Data Source</label>
+              <label className="block text-[11px] font-semibold text-slate-600 dark:text-slate-400 mb-1">Primary Data Source</label>
               <select
                 value={selectedSourceId}
                 onChange={e => handleSourceChange(e.target.value)}
-                className="w-full p-2 bg-slate-50 border border-slate-200 rounded-lg text-xs font-semibold focus:bg-white"
+                className="w-full p-2 bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-lg text-xs font-semibold focus:bg-white dark:focus:bg-slate-900"
               >
                 {DATA_SOURCE_REGISTRY.map(ds => (
                   <option key={ds.id} value={ds.id}>
@@ -188,10 +188,10 @@ export const ReportBuilderView: React.FC = () => {
           </div>
 
           {/* Selectable Columns */}
-          <div className="bg-white border border-slate-200 rounded-xl p-4 shadow-xs space-y-3">
+          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl p-4 shadow-xs space-y-3">
             <div className="flex items-center justify-between">
-              <h3 className="text-xs font-bold text-slate-900 uppercase tracking-wider">2. Available Fields</h3>
-              <span className="text-[10px] text-slate-400 font-mono">
+              <h3 className="text-xs font-bold text-slate-900 dark:text-slate-100 uppercase tracking-wider">2. Available Fields</h3>
+              <span className="text-[10px] text-slate-500 dark:text-slate-400 font-mono">
                 {selectedFieldIds.length} Selected
               </span>
             </div>
@@ -206,12 +206,12 @@ export const ReportBuilderView: React.FC = () => {
                     onClick={() => handleToggleField(f.id)}
                     className={`w-full text-left p-2 rounded-lg text-xs flex items-center justify-between transition-colors ${
                       isSelected
-                        ? 'bg-indigo-50 border border-indigo-200 text-indigo-950 font-bold'
-                        : 'bg-slate-50 border border-transparent text-slate-700 hover:bg-slate-100'
+                        ? 'bg-indigo-50 dark:bg-indigo-500/10 border border-indigo-200 dark:border-indigo-500/30 text-indigo-950 font-bold'
+                        : 'bg-slate-50 dark:bg-slate-800/50 border border-transparent text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800'
                     }`}
                   >
                     <span>{f.label}</span>
-                    <span className="font-mono text-[10px] text-slate-400 uppercase">{f.dataType}</span>
+                    <span className="font-mono text-[10px] text-slate-500 dark:text-slate-400 uppercase">{f.dataType}</span>
                   </button>
                 );
               })}
@@ -221,21 +221,21 @@ export const ReportBuilderView: React.FC = () => {
 
         {/* Right Column: Query Results / Live Preview (2 cols) */}
         <div className="lg:col-span-2 space-y-4">
-          <div className="bg-white border border-slate-200 rounded-xl p-5 shadow-xs flex flex-col min-h-[480px]">
-            <div className="flex flex-wrap items-center justify-between gap-3 pb-3 mb-3 border-b border-slate-100">
+          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl p-5 shadow-xs flex flex-col min-h-[480px]">
+            <div className="flex flex-wrap items-center justify-between gap-3 pb-3 mb-3 border-b border-slate-100 dark:border-slate-800">
               <div className="flex items-center gap-2">
-                <Database className="w-4 h-4 text-indigo-600" />
-                <h3 className="text-sm font-bold text-slate-900">Query Output & Live Data Table</h3>
+                <Database className="w-4 h-4 text-indigo-600 dark:text-indigo-400" />
+                <h3 className="text-sm font-bold text-slate-900 dark:text-slate-100">Query Output & Live Data Table</h3>
               </div>
 
               {queryResult && (
                 <div className="flex items-center gap-2">
-                  <span className="text-xs font-mono font-semibold text-slate-500 bg-slate-100 px-2 py-1 rounded">
+                  <span className="text-xs font-mono font-semibold text-slate-500 dark:text-slate-400 bg-slate-100 dark:bg-slate-800 px-2 py-1 rounded">
                     {queryResult.rows.length} Rows • {queryResult.executionTimeMs.toFixed(1)}ms
                   </span>
                   <button
                     onClick={handleExportResult}
-                    className="inline-flex items-center gap-1 px-2.5 py-1 text-xs font-semibold text-slate-700 bg-slate-100 hover:bg-slate-200 rounded-lg"
+                    className="inline-flex items-center gap-1 px-2.5 py-1 text-xs font-semibold text-slate-700 dark:text-slate-300 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 rounded-lg"
                   >
                     <Download className="w-3.5 h-3.5" />
                     CSV
@@ -245,22 +245,22 @@ export const ReportBuilderView: React.FC = () => {
             </div>
 
             {queryResult === null ? (
-              <div className="flex-1 flex flex-col items-center justify-center text-center p-8 text-slate-400">
-                <Database className="w-12 h-12 stroke-1 text-slate-300 mb-2" />
-                <p className="text-xs font-medium text-slate-600">No Query Executed Yet</p>
-                <p className="text-[11px] text-slate-400 mt-1 max-w-sm">
-                  Select your fields and click <strong className="text-indigo-600">"Run Query"</strong> to compute real-time dataset outputs.
+              <div className="flex-1 flex flex-col items-center justify-center text-center p-8 text-slate-500 dark:text-slate-400">
+                <Database className="w-12 h-12 stroke-1 text-slate-400 dark:text-slate-300 mb-2" />
+                <p className="text-xs font-medium text-slate-600 dark:text-slate-400">No Query Executed Yet</p>
+                <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-1 max-w-sm">
+                  Select your fields and click <strong className="text-indigo-600 dark:text-indigo-400">"Run Query"</strong> to compute real-time dataset outputs.
                 </p>
               </div>
             ) : queryResult.rows.length === 0 ? (
-              <div className="flex-1 flex items-center justify-center p-8 text-slate-400 text-xs">
+              <div className="flex-1 flex items-center justify-center p-8 text-slate-500 dark:text-slate-400 text-xs">
                 No matching records found for the applied filter parameters.
               </div>
             ) : (
               <div className="flex-1 overflow-x-auto">
                 <table className="w-full text-left text-xs border-collapse">
                   <thead>
-                    <tr className="border-b border-slate-200 bg-slate-50 text-slate-700 font-semibold">
+                    <tr className="border-b border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/50 text-slate-700 dark:text-slate-300 font-semibold">
                       {queryResult.headers.map(h => (
                         <th key={h.key} className="py-2.5 px-3">
                           {h.label}
@@ -268,9 +268,9 @@ export const ReportBuilderView: React.FC = () => {
                       ))}
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-slate-100">
+                  <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
                     {queryResult.rows.map((row, idx) => (
-                      <tr key={idx} className="hover:bg-slate-50">
+                      <tr key={idx} className="hover:bg-slate-50 dark:hover:bg-slate-800/50">
                         {queryResult.headers.map(h => {
                           const val = row[h.key];
                           let displayVal = val;
@@ -285,7 +285,7 @@ export const ReportBuilderView: React.FC = () => {
                               className={`py-2.5 px-3 ${
                                 h.dataType === 'currency' || h.dataType === 'number' || h.dataType === 'percent'
                                   ? 'font-mono text-right'
-                                  : 'text-slate-800'
+                                  : 'text-slate-800 dark:text-slate-200'
                               }`}
                             >
                               {displayVal !== undefined ? String(displayVal) : '-'}

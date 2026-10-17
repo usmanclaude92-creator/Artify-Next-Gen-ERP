@@ -57,12 +57,12 @@ export const FinancialAnalysisView: React.FC = () => {
       </div>
 
       {/* Ratios Table grouped by Category */}
-      <div className="bg-white border border-slate-200 rounded-xl p-5 shadow-xs">
-        <h3 className="text-sm font-bold text-slate-900 mb-4">Financial Ratios & Benchmark Comparison</h3>
+      <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl p-5 shadow-xs">
+        <h3 className="text-sm font-bold text-slate-900 dark:text-slate-100 mb-4">Financial Ratios & Benchmark Comparison</h3>
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs border-collapse">
             <thead>
-              <tr className="border-b border-slate-200 bg-slate-50 text-slate-600">
+              <tr className="border-b border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/50 text-slate-600 dark:text-slate-400">
                 <th className="py-2.5 px-3 font-semibold">Category</th>
                 <th className="py-2.5 px-3 font-semibold">Ratio Name</th>
                 <th className="py-2.5 px-3 font-semibold">Calculation Formula</th>
@@ -72,24 +72,24 @@ export const FinancialAnalysisView: React.FC = () => {
                 <th className="py-2.5 px-3 font-semibold">Strategic Commentary</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-100">
+            <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
               {financialRatios.map(r => (
-                <tr key={r.name} className="hover:bg-slate-50/80">
-                  <td className="py-3 px-3 font-medium text-slate-600">{r.category}</td>
-                  <td className="py-3 px-3 font-bold text-slate-900">{r.name}</td>
-                  <td className="py-3 px-3 font-mono text-[11px] text-slate-500">{r.formula}</td>
-                  <td className="py-3 px-3 font-mono font-bold text-right text-indigo-900">
+                <tr key={r.name} className="hover:bg-slate-50/80 dark:hover:bg-slate-800/80">
+                  <td className="py-3 px-3 font-medium text-slate-600 dark:text-slate-400">{r.category}</td>
+                  <td className="py-3 px-3 font-bold text-slate-900 dark:text-slate-100">{r.name}</td>
+                  <td className="py-3 px-3 font-mono text-[11px] text-slate-500 dark:text-slate-400">{r.formula}</td>
+                  <td className="py-3 px-3 font-mono font-bold text-right text-indigo-900 dark:text-indigo-100">
                     {r.value} {r.unit}
                   </td>
-                  <td className="py-3 px-3 font-mono text-right text-slate-600">
+                  <td className="py-3 px-3 font-mono text-right text-slate-600 dark:text-slate-400">
                     {r.benchmark} {r.unit}
                   </td>
                   <td className="py-3 px-3 text-center">
-                    <span className="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-100 text-emerald-800">
+                    <span className="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-100 dark:bg-emerald-500/20 text-emerald-800 dark:text-emerald-200">
                       {r.status}
                     </span>
                   </td>
-                  <td className="py-3 px-3 text-slate-600 text-[11px] max-w-xs">{r.commentary}</td>
+                  <td className="py-3 px-3 text-slate-600 dark:text-slate-400 text-[11px] max-w-xs">{r.commentary}</td>
                 </tr>
               ))}
             </tbody>

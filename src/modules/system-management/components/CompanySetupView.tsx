@@ -231,7 +231,7 @@ export const CompanySetupView: React.FC = () => {
         <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl shadow-xs overflow-hidden">
           <div className="p-4 border-b border-slate-200 dark:border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-3">
             <div className="relative w-full sm:w-80">
-              <Search className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
+              <Search className="w-4 h-4 text-slate-600 dark:text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
               <input
                 type="text"
                 value={searchQuery}
@@ -309,7 +309,7 @@ export const CompanySetupView: React.FC = () => {
                     <td className="px-4 py-3.5 text-right">
                       <button
                         onClick={() => handleEditCompany(company)}
-                        className="p-1.5 text-slate-500 hover:text-indigo-600 dark:hover:text-indigo-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-md transition-colors cursor-pointer"
+                        className="p-1.5 text-slate-500 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-md transition-colors cursor-pointer"
                         title="Edit Entity Parameters"
                       >
                         <Edit2 className="w-4 h-4" />
@@ -356,7 +356,7 @@ export const CompanySetupView: React.FC = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             <div className="space-y-4 p-4 rounded-xl bg-slate-50 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800">
               <h3 className="text-xs font-bold text-slate-900 dark:text-slate-100 uppercase tracking-wider flex items-center gap-2">
-                <Landmark className="w-4 h-4 text-indigo-600" />
+                <Landmark className="w-4 h-4 text-indigo-600 dark:text-indigo-400" />
                 <span>Commercial Registry Details</span>
               </h3>
               <div className="space-y-2 text-xs">
@@ -377,7 +377,7 @@ export const CompanySetupView: React.FC = () => {
 
             <div className="space-y-4 p-4 rounded-xl bg-slate-50 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800">
               <h3 className="text-xs font-bold text-slate-900 dark:text-slate-100 uppercase tracking-wider flex items-center gap-2">
-                <ShieldCheck className="w-4 h-4 text-emerald-600" />
+                <ShieldCheck className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
                 <span>VAT & Tax Authority Profile</span>
               </h3>
               <div className="space-y-2 text-xs">
@@ -398,7 +398,7 @@ export const CompanySetupView: React.FC = () => {
 
             <div className="space-y-4 p-4 rounded-xl bg-slate-50 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800">
               <h3 className="text-xs font-bold text-slate-900 dark:text-slate-100 uppercase tracking-wider flex items-center gap-2">
-                <Globe2 className="w-4 h-4 text-sky-600" />
+                <Globe2 className="w-4 h-4 text-sky-600 dark:text-sky-400" />
                 <span>Fiscal & Contact Registry</span>
               </h3>
               <div className="space-y-2 text-xs">
@@ -470,7 +470,7 @@ export const CompanySetupView: React.FC = () => {
                           BASE CURRENCY
                         </span>
                       ) : (
-                        <span className="text-slate-500 text-xs">Foreign Currency</span>
+                        <span className="text-slate-500 dark:text-slate-400 text-xs">Foreign Currency</span>
                       )}
                     </td>
                     <td className="px-4 py-3.5">
@@ -488,16 +488,16 @@ export const CompanySetupView: React.FC = () => {
 
       {/* Modal for Creating / Editing Company Entity */}
       {isCompanyModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/50 backdrop-blur-xs p-4">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-white/50 dark:bg-slate-900/50 backdrop-blur-xs p-4">
           <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl shadow-xl w-full max-w-2xl max-h-[90vh] overflow-y-auto">
             <div className="px-6 py-4 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between sticky top-0 bg-white dark:bg-slate-900 z-10">
               <h3 className="font-bold text-slate-900 dark:text-slate-100 text-sm flex items-center gap-2">
-                <Building2 className="w-4 h-4 text-indigo-600" />
+                <Building2 className="w-4 h-4 text-indigo-600 dark:text-indigo-400" />
                 <span>{editingCompany ? 'Edit Legal Entity Parameters' : 'Create New Legal Company Entity'}</span>
               </h3>
               <button
                 onClick={() => setIsCompanyModalOpen(false)}
-                className="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 cursor-pointer"
+                className="text-slate-600 dark:text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 cursor-pointer"
               >
                 <X className="w-5 h-5" />
               </button>

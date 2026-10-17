@@ -203,28 +203,28 @@ export const SystemDashboardView: React.FC<SystemDashboardViewProps> = ({ onNavi
       {/* 10 Functional Area Direct Launch Tiles */}
       <div className="space-y-3">
         <div className="flex items-center justify-between">
-          <h3 className="text-sm font-bold text-slate-900 uppercase tracking-wider">
+          <h3 className="text-sm font-bold text-slate-900 dark:text-slate-100 uppercase tracking-wider">
             Module 01 Functional Areas & Control Domains
           </h3>
-          <span className="text-xs text-slate-500">10 Sub-Modules Fully Configured</span>
+          <span className="text-xs text-slate-500 dark:text-slate-400">10 Sub-Modules Fully Configured</span>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-3.5">
           {/* 01.01 */}
           <div
             onClick={() => onNavigate('org-setup', 'org-mgmt-proc', 'tx-company-setup')}
-            className="p-4 rounded-xl bg-white border border-slate-200 hover:border-indigo-400 hover:shadow-md transition-all cursor-pointer flex flex-col justify-between group"
+            className="p-4 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 hover:border-indigo-400 hover:shadow-md transition-all cursor-pointer flex flex-col justify-between group"
           >
             <div>
-              <div className="w-9 h-9 rounded-lg bg-indigo-50 border border-indigo-100 text-indigo-600 flex items-center justify-center mb-3 group-hover:bg-indigo-600 group-hover:text-white transition-colors">
+              <div className="w-9 h-9 rounded-lg bg-indigo-50 dark:bg-indigo-500/10 border border-indigo-100 dark:border-indigo-500/20 text-indigo-600 dark:text-indigo-400 flex items-center justify-center mb-3 group-hover:bg-indigo-600 group-hover:text-slate-900 dark:group-hover:text-white transition-colors">
                 <Building2 className="w-4.5 h-4.5" />
               </div>
-              <div className="font-bold text-slate-900 text-xs">01.01 Organization Setup</div>
-              <p className="text-[11px] text-slate-500 mt-1">
+              <div className="font-bold text-slate-900 dark:text-slate-100 text-xs">01.01 Organization Setup</div>
+              <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-1">
                 {companies.length} Companies • {branches.length} Branches
               </p>
             </div>
-            <div className="mt-3 pt-2 border-t border-slate-100 flex items-center justify-between text-[11px] text-indigo-600 font-semibold">
+            <div className="mt-3 pt-2 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-[11px] text-indigo-600 dark:text-indigo-400 font-semibold">
               <span>Manage Hierarchy</span>
               <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
             </div>
@@ -233,18 +233,18 @@ export const SystemDashboardView: React.FC<SystemDashboardViewProps> = ({ onNavi
           {/* 01.02 */}
           <div
             onClick={() => onNavigate('user-access-mgmt', 'access-control-proc', 'tx-user-mgmt')}
-            className="p-4 rounded-xl bg-white border border-slate-200 hover:border-indigo-400 hover:shadow-md transition-all cursor-pointer flex flex-col justify-between group"
+            className="p-4 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 hover:border-indigo-400 hover:shadow-md transition-all cursor-pointer flex flex-col justify-between group"
           >
             <div>
-              <div className="w-9 h-9 rounded-lg bg-indigo-50 border border-indigo-100 text-indigo-600 flex items-center justify-center mb-3 group-hover:bg-indigo-600 group-hover:text-white transition-colors">
+              <div className="w-9 h-9 rounded-lg bg-indigo-50 dark:bg-indigo-500/10 border border-indigo-100 dark:border-indigo-500/20 text-indigo-600 dark:text-indigo-400 flex items-center justify-center mb-3 group-hover:bg-indigo-600 group-hover:text-slate-900 dark:group-hover:text-white transition-colors">
                 <Users className="w-4.5 h-4.5" />
               </div>
-              <div className="font-bold text-slate-900 text-xs">01.02 User & Access (RBAC)</div>
-              <p className="text-[11px] text-slate-500 mt-1">
+              <div className="font-bold text-slate-900 dark:text-slate-100 text-xs">01.02 User & Access (RBAC)</div>
+              <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-1">
                 {users.length} Users • {sodRules.length} SoD Rules
               </p>
             </div>
-            <div className="mt-3 pt-2 border-t border-slate-100 flex items-center justify-between text-[11px] text-indigo-600 font-semibold">
+            <div className="mt-3 pt-2 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-[11px] text-indigo-600 dark:text-indigo-400 font-semibold">
               <span>Security & Roles</span>
               <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
             </div>
@@ -253,18 +253,18 @@ export const SystemDashboardView: React.FC<SystemDashboardViewProps> = ({ onNavi
           {/* 01.03 */}
           <div
             onClick={() => onNavigate('workflow-approval-mgmt', 'workflow-proc', 'tx-approval-workflows')}
-            className="p-4 rounded-xl bg-white border border-slate-200 hover:border-indigo-400 hover:shadow-md transition-all cursor-pointer flex flex-col justify-between group"
+            className="p-4 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 hover:border-indigo-400 hover:shadow-md transition-all cursor-pointer flex flex-col justify-between group"
           >
             <div>
-              <div className="w-9 h-9 rounded-lg bg-indigo-50 border border-indigo-100 text-indigo-600 flex items-center justify-center mb-3 group-hover:bg-indigo-600 group-hover:text-white transition-colors">
+              <div className="w-9 h-9 rounded-lg bg-indigo-50 dark:bg-indigo-500/10 border border-indigo-100 dark:border-indigo-500/20 text-indigo-600 dark:text-indigo-400 flex items-center justify-center mb-3 group-hover:bg-indigo-600 group-hover:text-slate-900 dark:group-hover:text-white transition-colors">
                 <GitCommit className="w-4.5 h-4.5" />
               </div>
-              <div className="font-bold text-slate-900 text-xs">01.03 Workflow & Approval</div>
-              <p className="text-[11px] text-slate-500 mt-1">
+              <div className="font-bold text-slate-900 dark:text-slate-100 text-xs">01.03 Workflow & Approval</div>
+              <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-1">
                 {workflows.length} Pipelines • DOA Proxies
               </p>
             </div>
-            <div className="mt-3 pt-2 border-t border-slate-100 flex items-center justify-between text-[11px] text-indigo-600 font-semibold">
+            <div className="mt-3 pt-2 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-[11px] text-indigo-600 dark:text-indigo-400 font-semibold">
               <span>Matrices & SLAs</span>
               <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
             </div>
@@ -273,18 +273,18 @@ export const SystemDashboardView: React.FC<SystemDashboardViewProps> = ({ onNavi
           {/* 01.04 */}
           <div
             onClick={() => onNavigate('fin-period-controls', 'period-ctrl-proc', 'tx-posting-periods')}
-            className="p-4 rounded-xl bg-white border border-slate-200 hover:border-indigo-400 hover:shadow-md transition-all cursor-pointer flex flex-col justify-between group"
+            className="p-4 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 hover:border-indigo-400 hover:shadow-md transition-all cursor-pointer flex flex-col justify-between group"
           >
             <div>
-              <div className="w-9 h-9 rounded-lg bg-indigo-50 border border-indigo-100 text-indigo-600 flex items-center justify-center mb-3 group-hover:bg-indigo-600 group-hover:text-white transition-colors">
+              <div className="w-9 h-9 rounded-lg bg-indigo-50 dark:bg-indigo-500/10 border border-indigo-100 dark:border-indigo-500/20 text-indigo-600 dark:text-indigo-400 flex items-center justify-center mb-3 group-hover:bg-indigo-600 group-hover:text-slate-900 dark:group-hover:text-white transition-colors">
                 <Calendar className="w-4.5 h-4.5" />
               </div>
-              <div className="font-bold text-slate-900 text-xs">01.04 Financial Controls</div>
-              <p className="text-[11px] text-slate-500 mt-1">
+              <div className="font-bold text-slate-900 dark:text-slate-100 text-xs">01.04 Financial Controls</div>
+              <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-1">
                 FY-2026 Active • Sub-Ledger Locks
               </p>
             </div>
-            <div className="mt-3 pt-2 border-t border-slate-100 flex items-center justify-between text-[11px] text-indigo-600 font-semibold">
+            <div className="mt-3 pt-2 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-[11px] text-indigo-600 dark:text-indigo-400 font-semibold">
               <span>Posting Gates</span>
               <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
             </div>
@@ -293,18 +293,18 @@ export const SystemDashboardView: React.FC<SystemDashboardViewProps> = ({ onNavi
           {/* 01.05 */}
           <div
             onClick={() => onNavigate('master-data-mgmt', 'mdm-proc', 'tx-mdm-approval')}
-            className="p-4 rounded-xl bg-white border border-slate-200 hover:border-indigo-400 hover:shadow-md transition-all cursor-pointer flex flex-col justify-between group"
+            className="p-4 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 hover:border-indigo-400 hover:shadow-md transition-all cursor-pointer flex flex-col justify-between group"
           >
             <div>
-              <div className="w-9 h-9 rounded-lg bg-indigo-50 border border-indigo-100 text-indigo-600 flex items-center justify-center mb-3 group-hover:bg-indigo-600 group-hover:text-white transition-colors">
+              <div className="w-9 h-9 rounded-lg bg-indigo-50 dark:bg-indigo-500/10 border border-indigo-100 dark:border-indigo-500/20 text-indigo-600 dark:text-indigo-400 flex items-center justify-center mb-3 group-hover:bg-indigo-600 group-hover:text-slate-900 dark:group-hover:text-white transition-colors">
                 <Database className="w-4.5 h-4.5" />
               </div>
-              <div className="font-bold text-slate-900 text-xs">01.05 Master Data (MDM)</div>
-              <p className="text-[11px] text-slate-500 mt-1">
+              <div className="font-bold text-slate-900 dark:text-slate-100 text-xs">01.05 Master Data (MDM)</div>
+              <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-1">
                 {mdmDefinitions.length} Domains • Fuzzy Deduplication
               </p>
             </div>
-            <div className="mt-3 pt-2 border-t border-slate-100 flex items-center justify-between text-[11px] text-indigo-600 font-semibold">
+            <div className="mt-3 pt-2 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-[11px] text-indigo-600 dark:text-indigo-400 font-semibold">
               <span>Golden Records</span>
               <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
             </div>
@@ -313,18 +313,18 @@ export const SystemDashboardView: React.FC<SystemDashboardViewProps> = ({ onNavi
           {/* 01.06 */}
           <div
             onClick={() => onNavigate('notifications-alerts', 'notif-proc', 'tx-alerts-dashboard')}
-            className="p-4 rounded-xl bg-white border border-slate-200 hover:border-indigo-400 hover:shadow-md transition-all cursor-pointer flex flex-col justify-between group"
+            className="p-4 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 hover:border-indigo-400 hover:shadow-md transition-all cursor-pointer flex flex-col justify-between group"
           >
             <div>
-              <div className="w-9 h-9 rounded-lg bg-indigo-50 border border-indigo-100 text-indigo-600 flex items-center justify-center mb-3 group-hover:bg-indigo-600 group-hover:text-white transition-colors">
+              <div className="w-9 h-9 rounded-lg bg-indigo-50 dark:bg-indigo-500/10 border border-indigo-100 dark:border-indigo-500/20 text-indigo-600 dark:text-indigo-400 flex items-center justify-center mb-3 group-hover:bg-indigo-600 group-hover:text-slate-900 dark:group-hover:text-white transition-colors">
                 <Bell className="w-4.5 h-4.5" />
               </div>
-              <div className="font-bold text-slate-900 text-xs">01.06 Notifications & Alerts</div>
-              <p className="text-[11px] text-slate-500 mt-1">
+              <div className="font-bold text-slate-900 dark:text-slate-100 text-xs">01.06 Notifications & Alerts</div>
+              <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-1">
                 {alerts.filter(a => !a.read).length} Unread • Email / SMS Rules
               </p>
             </div>
-            <div className="mt-3 pt-2 border-t border-slate-100 flex items-center justify-between text-[11px] text-indigo-600 font-semibold">
+            <div className="mt-3 pt-2 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-[11px] text-indigo-600 dark:text-indigo-400 font-semibold">
               <span>Alert Feeds</span>
               <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
             </div>
@@ -333,18 +333,18 @@ export const SystemDashboardView: React.FC<SystemDashboardViewProps> = ({ onNavi
           {/* 01.07 */}
           <div
             onClick={() => onNavigate('audit-trail-monitoring', 'audit-proc', 'tx-audit-log')}
-            className="p-4 rounded-xl bg-white border border-slate-200 hover:border-indigo-400 hover:shadow-md transition-all cursor-pointer flex flex-col justify-between group"
+            className="p-4 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 hover:border-indigo-400 hover:shadow-md transition-all cursor-pointer flex flex-col justify-between group"
           >
             <div>
-              <div className="w-9 h-9 rounded-lg bg-indigo-50 border border-indigo-100 text-indigo-600 flex items-center justify-center mb-3 group-hover:bg-indigo-600 group-hover:text-white transition-colors">
+              <div className="w-9 h-9 rounded-lg bg-indigo-50 dark:bg-indigo-500/10 border border-indigo-100 dark:border-indigo-500/20 text-indigo-600 dark:text-indigo-400 flex items-center justify-center mb-3 group-hover:bg-indigo-600 group-hover:text-slate-900 dark:group-hover:text-white transition-colors">
                 <History className="w-4.5 h-4.5" />
               </div>
-              <div className="font-bold text-slate-900 text-xs">01.07 Audit Trail & SIEM</div>
-              <p className="text-[11px] text-slate-500 mt-1">
+              <div className="font-bold text-slate-900 dark:text-slate-100 text-xs">01.07 Audit Trail & SIEM</div>
+              <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-1">
                 {auditTrail.length} Events • Field Diffs
               </p>
             </div>
-            <div className="mt-3 pt-2 border-t border-slate-100 flex items-center justify-between text-[11px] text-indigo-600 font-semibold">
+            <div className="mt-3 pt-2 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-[11px] text-indigo-600 dark:text-indigo-400 font-semibold">
               <span>Inspect Logs</span>
               <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
             </div>
@@ -353,18 +353,18 @@ export const SystemDashboardView: React.FC<SystemDashboardViewProps> = ({ onNavi
           {/* 01.08 */}
           <div
             onClick={() => onNavigate('integrations-api', 'api-proc', 'tx-api-tokens')}
-            className="p-4 rounded-xl bg-white border border-slate-200 hover:border-indigo-400 hover:shadow-md transition-all cursor-pointer flex flex-col justify-between group"
+            className="p-4 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 hover:border-indigo-400 hover:shadow-md transition-all cursor-pointer flex flex-col justify-between group"
           >
             <div>
-              <div className="w-9 h-9 rounded-lg bg-indigo-50 border border-indigo-100 text-indigo-600 flex items-center justify-center mb-3 group-hover:bg-indigo-600 group-hover:text-white transition-colors">
+              <div className="w-9 h-9 rounded-lg bg-indigo-50 dark:bg-indigo-500/10 border border-indigo-100 dark:border-indigo-500/20 text-indigo-600 dark:text-indigo-400 flex items-center justify-center mb-3 group-hover:bg-indigo-600 group-hover:text-slate-900 dark:group-hover:text-white transition-colors">
                 <Globe2 className="w-4.5 h-4.5" />
               </div>
-              <div className="font-bold text-slate-900 text-xs">01.08 Integrations & APIs</div>
-              <p className="text-[11px] text-slate-500 mt-1">
+              <div className="font-bold text-slate-900 dark:text-slate-100 text-xs">01.08 Integrations & APIs</div>
+              <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-1">
                 SWIFT Host-to-Host • Webhooks
               </p>
             </div>
-            <div className="mt-3 pt-2 border-t border-slate-100 flex items-center justify-between text-[11px] text-indigo-600 font-semibold">
+            <div className="mt-3 pt-2 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-[11px] text-indigo-600 dark:text-indigo-400 font-semibold">
               <span>API Gateway</span>
               <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
             </div>
@@ -373,18 +373,18 @@ export const SystemDashboardView: React.FC<SystemDashboardViewProps> = ({ onNavi
           {/* 01.09 */}
           <div
             onClick={() => onNavigate('backup-recovery', 'backup-proc', 'tx-disaster-recovery')}
-            className="p-4 rounded-xl bg-white border border-slate-200 hover:border-indigo-400 hover:shadow-md transition-all cursor-pointer flex flex-col justify-between group"
+            className="p-4 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 hover:border-indigo-400 hover:shadow-md transition-all cursor-pointer flex flex-col justify-between group"
           >
             <div>
-              <div className="w-9 h-9 rounded-lg bg-indigo-50 border border-indigo-100 text-indigo-600 flex items-center justify-center mb-3 group-hover:bg-indigo-600 group-hover:text-white transition-colors">
+              <div className="w-9 h-9 rounded-lg bg-indigo-50 dark:bg-indigo-500/10 border border-indigo-100 dark:border-indigo-500/20 text-indigo-600 dark:text-indigo-400 flex items-center justify-center mb-3 group-hover:bg-indigo-600 group-hover:text-slate-900 dark:group-hover:text-white transition-colors">
                 <HardDrive className="w-4.5 h-4.5" />
               </div>
-              <div className="font-bold text-slate-900 text-xs">01.09 Backup & DR</div>
-              <p className="text-[11px] text-slate-500 mt-1">
+              <div className="font-bold text-slate-900 dark:text-slate-100 text-xs">01.09 Backup & DR</div>
+              <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-1">
                 AES-256 Vault • Point-in-Time Restore
               </p>
             </div>
-            <div className="mt-3 pt-2 border-t border-slate-100 flex items-center justify-between text-[11px] text-indigo-600 font-semibold">
+            <div className="mt-3 pt-2 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-[11px] text-indigo-600 dark:text-indigo-400 font-semibold">
               <span>Snapshot Vault</span>
               <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
             </div>
@@ -393,18 +393,18 @@ export const SystemDashboardView: React.FC<SystemDashboardViewProps> = ({ onNavi
           {/* 01.10 */}
           <div
             onClick={() => onNavigate('security-mgmt', 'security-proc', 'tx-sec-logs')}
-            className="p-4 rounded-xl bg-white border border-slate-200 hover:border-indigo-400 hover:shadow-md transition-all cursor-pointer flex flex-col justify-between group"
+            className="p-4 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 hover:border-indigo-400 hover:shadow-md transition-all cursor-pointer flex flex-col justify-between group"
           >
             <div>
-              <div className="w-9 h-9 rounded-lg bg-indigo-50 border border-indigo-100 text-indigo-600 flex items-center justify-center mb-3 group-hover:bg-indigo-600 group-hover:text-white transition-colors">
+              <div className="w-9 h-9 rounded-lg bg-indigo-50 dark:bg-indigo-500/10 border border-indigo-100 dark:border-indigo-500/20 text-indigo-600 dark:text-indigo-400 flex items-center justify-center mb-3 group-hover:bg-indigo-600 group-hover:text-slate-900 dark:group-hover:text-white transition-colors">
                 <ShieldCheck className="w-4.5 h-4.5" />
               </div>
-              <div className="font-bold text-slate-900 text-xs">01.10 Security Policies</div>
-              <p className="text-[11px] text-slate-500 mt-1">
+              <div className="font-bold text-slate-900 dark:text-slate-100 text-xs">01.10 Security Policies</div>
+              <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-1">
                 {securityPolicies.length} Policies • Session Remote Kill
               </p>
             </div>
-            <div className="mt-3 pt-2 border-t border-slate-100 flex items-center justify-between text-[11px] text-indigo-600 font-semibold">
+            <div className="mt-3 pt-2 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-[11px] text-indigo-600 dark:text-indigo-400 font-semibold">
               <span>Security Center</span>
               <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
             </div>
@@ -415,15 +415,15 @@ export const SystemDashboardView: React.FC<SystemDashboardViewProps> = ({ onNavi
       {/* Two Column Layout: Recent Cryptographic Audit Stream & Pending Compliance Alerts */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Real-time Audit Stream */}
-        <div className="bg-white rounded-xl border border-slate-200 p-5 shadow-sm space-y-4">
-          <div className="flex items-center justify-between border-b border-slate-100 pb-3">
-            <h4 className="font-bold text-slate-900 text-xs uppercase tracking-wider flex items-center gap-2">
-              <History className="w-4 h-4 text-indigo-600" />
+        <div className="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-700 p-5 shadow-sm space-y-4">
+          <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-3">
+            <h4 className="font-bold text-slate-900 dark:text-slate-100 text-xs uppercase tracking-wider flex items-center gap-2">
+              <History className="w-4 h-4 text-indigo-600 dark:text-indigo-400" />
               <span>Real-Time Audit Event Stream</span>
             </h4>
             <button
               onClick={() => onNavigate('audit-trail-monitoring', 'audit-proc', 'tx-audit-log')}
-              className="text-xs text-indigo-600 hover:text-indigo-800 font-semibold cursor-pointer"
+              className="text-xs text-indigo-600 dark:text-indigo-400 hover:text-indigo-800 dark:hover:text-indigo-200 font-semibold cursor-pointer"
             >
               Full Log
             </button>
@@ -431,29 +431,29 @@ export const SystemDashboardView: React.FC<SystemDashboardViewProps> = ({ onNavi
 
           <div className="space-y-3">
             {auditTrail.slice(0, 5).map(event => (
-              <div key={event.id} className="p-3 bg-slate-50 border border-slate-200/80 rounded-lg text-xs">
+              <div key={event.id} className="p-3 bg-slate-50 dark:bg-slate-800/50 border border-slate-200/80 dark:border-slate-700/80 rounded-lg text-xs">
                 <div className="flex items-center justify-between">
-                  <div className="font-semibold text-slate-800">
-                    {event.userName} • <span className="text-indigo-700">{event.action}</span> {event.entity}
+                  <div className="font-semibold text-slate-800 dark:text-slate-200">
+                    {event.userName} • <span className="text-indigo-700 dark:text-indigo-300">{event.action}</span> {event.entity}
                   </div>
-                  <span className="font-mono text-[10px] text-slate-400">{event.timestamp.split(' ')[1]}</span>
+                  <span className="font-mono text-[10px] text-slate-500 dark:text-slate-400">{event.timestamp.split(' ')[1]}</span>
                 </div>
-                <p className="text-slate-600 mt-1 text-[11px]">{event.details}</p>
+                <p className="text-slate-600 dark:text-slate-400 mt-1 text-[11px]">{event.details}</p>
               </div>
             ))}
           </div>
         </div>
 
         {/* Priority Incident & Compliance Queue */}
-        <div className="bg-white rounded-xl border border-slate-200 p-5 shadow-sm space-y-4">
-          <div className="flex items-center justify-between border-b border-slate-100 pb-3">
-            <h4 className="font-bold text-slate-900 text-xs uppercase tracking-wider flex items-center gap-2">
-              <Bell className="w-4 h-4 text-amber-600" />
+        <div className="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-700 p-5 shadow-sm space-y-4">
+          <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-3">
+            <h4 className="font-bold text-slate-900 dark:text-slate-100 text-xs uppercase tracking-wider flex items-center gap-2">
+              <Bell className="w-4 h-4 text-amber-600 dark:text-amber-400" />
               <span>Priority Incident & Governance Alerts</span>
             </h4>
             <button
               onClick={() => onNavigate('notifications-alerts', 'notif-proc', 'tx-alerts-dashboard')}
-              className="text-xs text-indigo-600 hover:text-indigo-800 font-semibold cursor-pointer"
+              className="text-xs text-indigo-600 dark:text-indigo-400 hover:text-indigo-800 dark:hover:text-indigo-200 font-semibold cursor-pointer"
             >
               All Alerts
             </button>
@@ -463,15 +463,15 @@ export const SystemDashboardView: React.FC<SystemDashboardViewProps> = ({ onNavi
             {alerts.slice(0, 4).map(alert => (
               <div
                 key={alert.id}
-                className="p-3 bg-amber-50/50 border border-amber-200 rounded-lg text-xs flex items-start gap-2.5"
+                className="p-3 bg-amber-50/50 dark:bg-amber-500/50 border border-amber-200 dark:border-amber-500/30 rounded-lg text-xs flex items-start gap-2.5"
               >
-                <ShieldAlert className="w-4 h-4 text-amber-700 flex-shrink-0 mt-0.5" />
+                <ShieldAlert className="w-4 h-4 text-amber-700 dark:text-amber-300 flex-shrink-0 mt-0.5" />
                 <div>
                   <div className="flex items-center gap-2">
-                    <span className="font-bold text-slate-900">{alert.title}</span>
+                    <span className="font-bold text-slate-900 dark:text-slate-100">{alert.title}</span>
                     <StatusBadge status={alert.severity} size="sm" />
                   </div>
-                  <p className="text-slate-600 mt-0.5 text-[11px]">{alert.message}</p>
+                  <p className="text-slate-600 dark:text-slate-400 mt-0.5 text-[11px]">{alert.message}</p>
                 </div>
               </div>
             ))}

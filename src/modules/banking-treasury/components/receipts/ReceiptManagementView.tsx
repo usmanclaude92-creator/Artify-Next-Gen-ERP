@@ -171,14 +171,14 @@ export const ReceiptManagementView: React.FC = () => {
   return (
     <div className="space-y-6">
       {/* Header Tabs & Actions */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white p-4 rounded-xl border border-slate-200 shadow-2xs">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white dark:bg-slate-900 p-4 rounded-xl border border-slate-200 dark:border-slate-700 shadow-2xs">
         <div className="flex items-center gap-1 overflow-x-auto">
           <button
             onClick={() => setActiveTab('customer')}
             className={`px-3.5 py-2 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-all cursor-pointer ${
               activeTab === 'customer'
                 ? 'bg-slate-900 text-white shadow-xs'
-                : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
+                : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-800'
             }`}
           >
             <ArrowDownLeft className="w-3.5 h-3.5" />
@@ -190,7 +190,7 @@ export const ReceiptManagementView: React.FC = () => {
             className={`px-3.5 py-2 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-all cursor-pointer ${
               activeTab === 'allocations'
                 ? 'bg-slate-900 text-white shadow-xs'
-                : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
+                : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-800'
             }`}
           >
             <CheckCheck className="w-3.5 h-3.5" />
@@ -202,7 +202,7 @@ export const ReceiptManagementView: React.FC = () => {
             className={`px-3.5 py-2 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-all cursor-pointer ${
               activeTab === 'other'
                 ? 'bg-slate-900 text-white shadow-xs'
-                : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
+                : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-800'
             }`}
           >
             <PieChart className="w-3.5 h-3.5" />
@@ -214,7 +214,7 @@ export const ReceiptManagementView: React.FC = () => {
             className={`px-3.5 py-2 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-all cursor-pointer ${
               activeTab === 'deposits'
                 ? 'bg-slate-900 text-white shadow-xs'
-                : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
+                : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-800'
             }`}
           >
             <Building className="w-3.5 h-3.5" />
@@ -224,13 +224,13 @@ export const ReceiptManagementView: React.FC = () => {
 
         <div className="flex items-center gap-2">
           <div className="relative">
-            <Search className="w-3.5 h-3.5 absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
+            <Search className="w-3.5 h-3.5 absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 dark:text-slate-400" />
             <input
               type="text"
               placeholder="Search receipts, invoices..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="pl-8 pr-3 py-1.5 text-xs bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-slate-900 w-48 sm:w-60"
+              className="pl-8 pr-3 py-1.5 text-xs bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-slate-200 dark:focus:ring-slate-900 w-48 sm:w-60"
             />
           </div>
 
@@ -268,10 +268,10 @@ export const ReceiptManagementView: React.FC = () => {
 
       {/* TAB 1: CUSTOMER RECEIPTS */}
       {activeTab === 'customer' && (
-        <div className="bg-white rounded-xl border border-slate-200 shadow-2xs overflow-hidden">
+        <div className="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-700 shadow-2xs overflow-hidden">
           <div className="overflow-x-auto">
             <table className="w-full text-left text-xs">
-              <thead className="bg-slate-50 text-slate-600 font-semibold border-b border-slate-200">
+              <thead className="bg-slate-50 dark:bg-slate-800/50 text-slate-600 dark:text-slate-400 font-semibold border-b border-slate-200 dark:border-slate-700">
                 <tr>
                   <th className="p-3.5">Receipt # & Date</th>
                   <th className="p-3.5">Customer Name & Code</th>
@@ -283,31 +283,31 @@ export const ReceiptManagementView: React.FC = () => {
                   <th className="p-3.5 text-center">Action</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-100">
+              <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
                 {filteredCustomerReceipts.map((rcpt) => (
-                  <tr key={rcpt.id} className="hover:bg-slate-50/70 transition-colors">
+                  <tr key={rcpt.id} className="hover:bg-slate-50/70 dark:hover:bg-slate-800/70 transition-colors">
                     <td className="p-3.5">
-                      <div className="font-mono font-bold text-slate-900">{rcpt.receiptNumber}</div>
-                      <div className="text-[11px] text-slate-500">{rcpt.receiptDate}</div>
+                      <div className="font-mono font-bold text-slate-900 dark:text-slate-100">{rcpt.receiptNumber}</div>
+                      <div className="text-[11px] text-slate-500 dark:text-slate-400">{rcpt.receiptDate}</div>
                     </td>
                     <td className="p-3.5">
-                      <div className="font-bold text-slate-900">{rcpt.customerName}</div>
-                      <div className="text-[10px] text-slate-400 font-mono">{rcpt.customerCode}</div>
+                      <div className="font-bold text-slate-900 dark:text-slate-100">{rcpt.customerName}</div>
+                      <div className="text-[10px] text-slate-500 dark:text-slate-400 font-mono">{rcpt.customerCode}</div>
                     </td>
                     <td className="p-3.5">
-                      <div className="font-medium text-slate-800">{rcpt.instrumentType}</div>
-                      <div className="font-mono text-[10px] text-slate-500">{rcpt.instrumentReference}</div>
+                      <div className="font-medium text-slate-800 dark:text-slate-200">{rcpt.instrumentType}</div>
+                      <div className="font-mono text-[10px] text-slate-500 dark:text-slate-400">{rcpt.instrumentReference}</div>
                     </td>
                     <td className="p-3.5">
-                      <div className="font-medium text-slate-800">{rcpt.depositedBankAccountName}</div>
-                      <div className="text-[10px] text-slate-400 font-mono">{rcpt.glDebitAccountCode}</div>
+                      <div className="font-medium text-slate-800 dark:text-slate-200">{rcpt.depositedBankAccountName}</div>
+                      <div className="text-[10px] text-slate-500 dark:text-slate-400 font-mono">{rcpt.glDebitAccountCode}</div>
                     </td>
-                    <td className="p-3.5 text-right font-bold text-slate-900 text-sm">
+                    <td className="p-3.5 text-right font-bold text-slate-900 dark:text-slate-100 text-sm">
                       {formatCurrency(rcpt.amountReceived, rcpt.currency)}
                     </td>
                     <td className="p-3.5 text-right">
-                      <div className="text-emerald-700 font-bold">{formatCurrency(rcpt.allocatedAmount)}</div>
-                      <div className="text-[10px] text-amber-700 font-medium">
+                      <div className="text-emerald-700 dark:text-emerald-300 font-bold">{formatCurrency(rcpt.allocatedAmount)}</div>
+                      <div className="text-[10px] text-amber-700 dark:text-amber-300 font-medium">
                         Unalloc: {formatCurrency(rcpt.unallocatedAmount)}
                       </div>
                     </td>
@@ -315,10 +315,10 @@ export const ReceiptManagementView: React.FC = () => {
                       <span
                         className={`px-2 py-0.5 rounded-full text-[10px] font-bold ${
                           rcpt.status === 'Fully Allocated'
-                            ? 'bg-emerald-100 text-emerald-800'
+                            ? 'bg-emerald-100 dark:bg-emerald-500/20 text-emerald-800 dark:text-emerald-200'
                             : rcpt.status === 'Partially Allocated'
-                            ? 'bg-amber-100 text-amber-800'
-                            : 'bg-slate-100 text-slate-800'
+                            ? 'bg-amber-100 dark:bg-amber-500/20 text-amber-800 dark:text-amber-200'
+                            : 'bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200'
                         }`}
                       >
                         {rcpt.status}
@@ -332,12 +332,12 @@ export const ReceiptManagementView: React.FC = () => {
                             setAllocAmount(rcpt.unallocatedAmount);
                             setShowAllocateModal(true);
                           }}
-                          className="px-2 py-1 bg-indigo-50 text-indigo-700 hover:bg-indigo-100 rounded text-[11px] font-semibold cursor-pointer"
+                          className="px-2 py-1 bg-indigo-50 dark:bg-indigo-500/10 text-indigo-700 dark:text-indigo-300 hover:bg-indigo-100 dark:hover:bg-indigo-500/20 rounded text-[11px] font-semibold cursor-pointer"
                         >
                           Allocate
                         </button>
                       ) : (
-                        <span className="text-[10px] text-emerald-700 font-bold flex items-center justify-center gap-1">
+                        <span className="text-[10px] text-emerald-700 dark:text-emerald-300 font-bold flex items-center justify-center gap-1">
                           <CheckCircle2 className="w-3.5 h-3.5" />
                           <span>Matched</span>
                         </span>
@@ -353,10 +353,10 @@ export const ReceiptManagementView: React.FC = () => {
 
       {/* TAB 2: RECEIPT ALLOCATIONS MATRIX */}
       {activeTab === 'allocations' && (
-        <div className="bg-white rounded-xl border border-slate-200 shadow-2xs overflow-hidden">
+        <div className="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-700 shadow-2xs overflow-hidden">
           <div className="overflow-x-auto">
             <table className="w-full text-left text-xs">
-              <thead className="bg-slate-50 text-slate-600 font-semibold border-b border-slate-200">
+              <thead className="bg-slate-50 dark:bg-slate-800/50 text-slate-600 dark:text-slate-400 font-semibold border-b border-slate-200 dark:border-slate-700">
                 <tr>
                   <th className="p-3.5">Allocation ID</th>
                   <th className="p-3.5">Invoice Number & Date</th>
@@ -367,28 +367,28 @@ export const ReceiptManagementView: React.FC = () => {
                   <th className="p-3.5 text-center">Status</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-100">
+              <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
                 {receiptAllocations.map((alloc) => (
-                  <tr key={alloc.id} className="hover:bg-slate-50/70 transition-colors">
-                    <td className="p-3.5 font-mono font-bold text-slate-900">{alloc.id}</td>
+                  <tr key={alloc.id} className="hover:bg-slate-50/70 dark:hover:bg-slate-800/70 transition-colors">
+                    <td className="p-3.5 font-mono font-bold text-slate-900 dark:text-slate-100">{alloc.id}</td>
                     <td className="p-3.5">
-                      <div className="font-mono font-bold text-slate-900">{alloc.invoiceNumber}</div>
-                      <div className="text-[11px] text-slate-500">{alloc.invoiceDate}</div>
+                      <div className="font-mono font-bold text-slate-900 dark:text-slate-100">{alloc.invoiceNumber}</div>
+                      <div className="text-[11px] text-slate-500 dark:text-slate-400">{alloc.invoiceDate}</div>
                     </td>
-                    <td className="p-3.5 text-right font-medium text-slate-800">
+                    <td className="p-3.5 text-right font-medium text-slate-800 dark:text-slate-200">
                       {formatCurrency(alloc.invoiceOriginalAmount)}
                     </td>
-                    <td className="p-3.5 text-right font-bold text-emerald-700">
+                    <td className="p-3.5 text-right font-bold text-emerald-700 dark:text-emerald-300">
                       {formatCurrency(alloc.allocatedThisVoucher)}
                     </td>
-                    <td className="p-3.5 text-right text-slate-500">
+                    <td className="p-3.5 text-right text-slate-500 dark:text-slate-400">
                       {formatCurrency(alloc.discountTaken + alloc.withholdingTaxDeducted)}
                     </td>
-                    <td className="p-3.5 text-right font-bold text-slate-900">
+                    <td className="p-3.5 text-right font-bold text-slate-900 dark:text-slate-100">
                       {formatCurrency(alloc.remainingDueAfterAllocation)}
                     </td>
                     <td className="p-3.5 text-center">
-                      <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-100 text-emerald-800">
+                      <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-100 dark:bg-emerald-500/20 text-emerald-800 dark:text-emerald-200">
                         {alloc.remainingDueAfterAllocation === 0 ? 'Settled in Full' : 'Partial Settle'}
                       </span>
                     </td>
@@ -402,10 +402,10 @@ export const ReceiptManagementView: React.FC = () => {
 
       {/* TAB 3: OTHER RECEIPTS */}
       {activeTab === 'other' && (
-        <div className="bg-white rounded-xl border border-slate-200 shadow-2xs overflow-hidden">
+        <div className="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-700 shadow-2xs overflow-hidden">
           <div className="overflow-x-auto">
             <table className="w-full text-left text-xs">
-              <thead className="bg-slate-50 text-slate-600 font-semibold border-b border-slate-200">
+              <thead className="bg-slate-50 dark:bg-slate-800/50 text-slate-600 dark:text-slate-400 font-semibold border-b border-slate-200 dark:border-slate-700">
                 <tr>
                   <th className="p-3.5">Receipt # & Date</th>
                   <th className="p-3.5">Source / Remitter</th>
@@ -415,31 +415,31 @@ export const ReceiptManagementView: React.FC = () => {
                   <th className="p-3.5 text-center">Status</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-100">
+              <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
                 {otherReceipts.map((o) => (
-                  <tr key={o.id} className="hover:bg-slate-50/70 transition-colors">
+                  <tr key={o.id} className="hover:bg-slate-50/70 dark:hover:bg-slate-800/70 transition-colors">
                     <td className="p-3.5">
-                      <div className="font-mono font-bold text-slate-900">{o.receiptNumber}</div>
-                      <div className="text-[11px] text-slate-500">{o.receiptDate}</div>
+                      <div className="font-mono font-bold text-slate-900 dark:text-slate-100">{o.receiptNumber}</div>
+                      <div className="text-[11px] text-slate-500 dark:text-slate-400">{o.receiptDate}</div>
                     </td>
                     <td className="p-3.5">
-                      <div className="font-bold text-slate-900">{o.receivedFromSource}</div>
-                      <div className="text-[10px] text-slate-400">{o.description}</div>
+                      <div className="font-bold text-slate-900 dark:text-slate-100">{o.receivedFromSource}</div>
+                      <div className="text-[10px] text-slate-500 dark:text-slate-400">{o.description}</div>
                     </td>
                     <td className="p-3.5">
-                      <span className="px-2 py-0.5 rounded bg-slate-100 text-slate-800 font-semibold">
+                      <span className="px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 font-semibold">
                         {o.incomeCategory}
                       </span>
                     </td>
                     <td className="p-3.5">
-                      <div className="font-medium text-slate-800">{o.depositedBankAccountName}</div>
-                      <div className="text-[10px] text-slate-400 font-mono">{o.glCreditAccountCode}</div>
+                      <div className="font-medium text-slate-800 dark:text-slate-200">{o.depositedBankAccountName}</div>
+                      <div className="text-[10px] text-slate-500 dark:text-slate-400 font-mono">{o.glCreditAccountCode}</div>
                     </td>
-                    <td className="p-3.5 text-right font-bold text-emerald-700 text-sm">
+                    <td className="p-3.5 text-right font-bold text-emerald-700 dark:text-emerald-300 text-sm">
                       {formatCurrency(o.amount)}
                     </td>
                     <td className="p-3.5 text-center">
-                      <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-100 text-emerald-800">
+                      <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-100 dark:bg-emerald-500/20 text-emerald-800 dark:text-emerald-200">
                         {o.status}
                       </span>
                     </td>
@@ -455,39 +455,39 @@ export const ReceiptManagementView: React.FC = () => {
       {activeTab === 'deposits' && (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {depositSlips.map((slip) => (
-            <div key={slip.id} className="bg-white rounded-xl p-5 border border-slate-200 shadow-2xs">
+            <div key={slip.id} className="bg-white dark:bg-slate-900 rounded-xl p-5 border border-slate-200 dark:border-slate-700 shadow-2xs">
               <div className="flex items-start justify-between">
                 <div>
-                  <span className="font-mono text-[10px] font-bold text-slate-500 bg-slate-100 px-1.5 py-0.5 rounded">
+                  <span className="font-mono text-[10px] font-bold text-slate-500 dark:text-slate-400 bg-slate-100 dark:bg-slate-800 px-1.5 py-0.5 rounded">
                     {slip.depositSlipNumber}
                   </span>
-                  <h3 className="text-sm font-bold text-slate-900 mt-1">{slip.targetBankAccountName}</h3>
-                  <p className="text-xs text-slate-500">{slip.bankBranchName}</p>
+                  <h3 className="text-sm font-bold text-slate-900 dark:text-slate-100 mt-1">{slip.targetBankAccountName}</h3>
+                  <p className="text-xs text-slate-500 dark:text-slate-400">{slip.bankBranchName}</p>
                 </div>
-                <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-100 text-emerald-800">
+                <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-100 dark:bg-emerald-500/20 text-emerald-800 dark:text-emerald-200">
                   {slip.status}
                 </span>
               </div>
 
               <div className="grid grid-cols-2 gap-3 mt-4 text-xs">
-                <div className="p-2.5 rounded-lg bg-slate-50 border border-slate-100">
-                  <span className="text-slate-400 block text-[10px]">Physical Cash Portion</span>
-                  <span className="font-bold text-slate-900">{formatCurrency(slip.cashAmountOMR)}</span>
+                <div className="p-2.5 rounded-lg bg-slate-50 dark:bg-slate-800/50 border border-slate-100 dark:border-slate-800">
+                  <span className="text-slate-500 dark:text-slate-400 block text-[10px]">Physical Cash Portion</span>
+                  <span className="font-bold text-slate-900 dark:text-slate-100">{formatCurrency(slip.cashAmountOMR)}</span>
                 </div>
-                <div className="p-2.5 rounded-lg bg-slate-50 border border-slate-100">
-                  <span className="text-slate-400 block text-[10px]">Cheques ({slip.numberOfCheques})</span>
-                  <span className="font-bold text-slate-900">{formatCurrency(slip.chequeAmountOMR)}</span>
+                <div className="p-2.5 rounded-lg bg-slate-50 dark:bg-slate-800/50 border border-slate-100 dark:border-slate-800">
+                  <span className="text-slate-500 dark:text-slate-400 block text-[10px]">Cheques ({slip.numberOfCheques})</span>
+                  <span className="font-bold text-slate-900 dark:text-slate-100">{formatCurrency(slip.chequeAmountOMR)}</span>
                 </div>
               </div>
 
-              <div className="mt-3 p-3 rounded-lg bg-emerald-50/70 border border-emerald-100 flex items-center justify-between">
+              <div className="mt-3 p-3 rounded-lg bg-emerald-50/70 dark:bg-emerald-500/70 border border-emerald-100 dark:border-emerald-500/20 flex items-center justify-between">
                 <span className="text-xs font-semibold text-emerald-950">Total Deposited:</span>
-                <span className="text-base font-bold text-emerald-700">{formatCurrency(slip.totalDepositAmountOMR)}</span>
+                <span className="text-base font-bold text-emerald-700 dark:text-emerald-300">{formatCurrency(slip.totalDepositAmountOMR)}</span>
               </div>
 
-              <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-500">
+              <div className="mt-4 pt-3 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-[11px] text-slate-500 dark:text-slate-400">
                 <span>Deposited By: {slip.depositedByStaffName}</span>
-                <span className="font-mono text-slate-700">Courier: {slip.courierTrackingNumber}</span>
+                <span className="font-mono text-slate-700 dark:text-slate-300">Courier: {slip.courierTrackingNumber}</span>
               </div>
             </div>
           ))}
@@ -496,16 +496,16 @@ export const ReceiptManagementView: React.FC = () => {
 
       {/* MODAL: RECORD CUSTOMER RECEIPT */}
       {showAddCustomerReceiptModal && (
-        <div className="fixed inset-0 bg-slate-900/40 backdrop-blur-xs flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-2xl max-w-lg w-full p-6 shadow-xl border border-slate-200">
-            <h3 className="text-base font-bold text-slate-900 mb-4">Record Customer Receipt (AR Collection)</h3>
+        <div className="fixed inset-0 bg-white/40 dark:bg-slate-900/40 backdrop-blur-xs flex items-center justify-center z-50 p-4">
+          <div className="bg-white dark:bg-slate-900 rounded-2xl max-w-lg w-full p-6 shadow-xl border border-slate-200 dark:border-slate-700">
+            <h3 className="text-base font-bold text-slate-900 dark:text-slate-100 mb-4">Record Customer Receipt (AR Collection)</h3>
             <form onSubmit={handleCreateCustomerReceipt} className="space-y-4">
               <div>
-                <label className="text-xs font-semibold text-slate-700 block mb-1">Deposited Bank Account *</label>
+                <label className="text-xs font-semibold text-slate-700 dark:text-slate-300 block mb-1">Deposited Bank Account *</label>
                 <select
                   value={rcptBankAccId}
                   onChange={(e) => setRcptBankAccId(e.target.value)}
-                  className="w-full text-xs p-2.5 border border-slate-200 rounded-lg focus:ring-2 focus:ring-slate-900 focus:outline-none"
+                  className="w-full text-xs p-2.5 border border-slate-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-slate-200 dark:focus:ring-slate-900 focus:outline-none"
                 >
                   {bankAccounts.map((a) => (
                     <option key={a.id} value={a.id}>
@@ -517,47 +517,47 @@ export const ReceiptManagementView: React.FC = () => {
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="text-xs font-semibold text-slate-700 block mb-1">Receipt Date *</label>
+                  <label className="text-xs font-semibold text-slate-700 dark:text-slate-300 block mb-1">Receipt Date *</label>
                   <input
                     type="date"
                     required
                     value={rcptDate}
                     onChange={(e) => setRcptDate(e.target.value)}
-                    className="w-full text-xs p-2.5 border border-slate-200 rounded-lg focus:ring-2 focus:ring-slate-900 focus:outline-none"
+                    className="w-full text-xs p-2.5 border border-slate-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-slate-200 dark:focus:ring-slate-900 focus:outline-none"
                   />
                 </div>
                 <div>
-                  <label className="text-xs font-semibold text-slate-700 block mb-1">Amount Received *</label>
+                  <label className="text-xs font-semibold text-slate-700 dark:text-slate-300 block mb-1">Amount Received *</label>
                   <input
                     type="number"
                     step="0.001"
                     required
                     value={rcptAmount}
                     onChange={(e) => setRcptAmount(Number(e.target.value))}
-                    className="w-full text-xs p-2.5 border border-slate-200 rounded-lg focus:ring-2 focus:ring-slate-900 focus:outline-none font-bold"
+                    className="w-full text-xs p-2.5 border border-slate-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-slate-200 dark:focus:ring-slate-900 focus:outline-none font-bold"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="text-xs font-semibold text-slate-700 block mb-1">Customer / Client Name *</label>
+                <label className="text-xs font-semibold text-slate-700 dark:text-slate-300 block mb-1">Customer / Client Name *</label>
                 <input
                   type="text"
                   required
                   placeholder="e.g. Petroleum Development Oman (PDO) LLC"
                   value={rcptCustomerName}
                   onChange={(e) => setRcptCustomerName(e.target.value)}
-                  className="w-full text-xs p-2.5 border border-slate-200 rounded-lg focus:ring-2 focus:ring-slate-900 focus:outline-none"
+                  className="w-full text-xs p-2.5 border border-slate-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-slate-200 dark:focus:ring-slate-900 focus:outline-none"
                 />
               </div>
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="text-xs font-semibold text-slate-700 block mb-1">Payment Mode</label>
+                  <label className="text-xs font-semibold text-slate-700 dark:text-slate-300 block mb-1">Payment Mode</label>
                   <select
                     value={rcptInstrument}
                     onChange={(e) => setRcptInstrument(e.target.value as any)}
-                    className="w-full text-xs p-2.5 border border-slate-200 rounded-lg focus:ring-2 focus:ring-slate-900 focus:outline-none"
+                    className="w-full text-xs p-2.5 border border-slate-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-slate-200 dark:focus:ring-slate-900 focus:outline-none"
                   >
                     <option value="Direct Bank Wire">Direct Bank Wire</option>
                     <option value="Cheque">Cheque</option>
@@ -567,22 +567,22 @@ export const ReceiptManagementView: React.FC = () => {
                   </select>
                 </div>
                 <div>
-                  <label className="text-xs font-semibold text-slate-700 block mb-1">Instrument Ref / TXN #</label>
+                  <label className="text-xs font-semibold text-slate-700 dark:text-slate-300 block mb-1">Instrument Ref / TXN #</label>
                   <input
                     type="text"
                     placeholder="ACH-CBO-991288"
                     value={rcptInstrumentRef}
                     onChange={(e) => setRcptInstrumentRef(e.target.value)}
-                    className="w-full text-xs p-2.5 border border-slate-200 rounded-lg focus:ring-2 focus:ring-slate-900 focus:outline-none font-mono"
+                    className="w-full text-xs p-2.5 border border-slate-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-slate-200 dark:focus:ring-slate-900 focus:outline-none font-mono"
                   />
                 </div>
               </div>
 
-              <div className="flex items-center justify-end gap-2 pt-4 border-t border-slate-100">
+              <div className="flex items-center justify-end gap-2 pt-4 border-t border-slate-100 dark:border-slate-800">
                 <button
                   type="button"
                   onClick={() => setShowAddCustomerReceiptModal(false)}
-                  className="px-4 py-2 rounded-lg text-xs font-semibold text-slate-600 hover:bg-slate-100 cursor-pointer"
+                  className="px-4 py-2 rounded-lg text-xs font-semibold text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 cursor-pointer"
                 >
                   Cancel
                 </button>
@@ -600,46 +600,46 @@ export const ReceiptManagementView: React.FC = () => {
 
       {/* MODAL: ALLOCATE RECEIPT TO INVOICE */}
       {showAllocateModal && selectedReceiptForAllocation && (
-        <div className="fixed inset-0 bg-slate-900/40 backdrop-blur-xs flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-2xl max-w-lg w-full p-6 shadow-xl border border-slate-200">
-            <h3 className="text-base font-bold text-slate-900 mb-2">Allocate Receipt to Outstanding AR Invoice</h3>
-            <p className="text-xs text-slate-500 mb-4">
-              Allocating against receipt <strong className="text-slate-800">{selectedReceiptForAllocation.receiptNumber}</strong> (
+        <div className="fixed inset-0 bg-white/40 dark:bg-slate-900/40 backdrop-blur-xs flex items-center justify-center z-50 p-4">
+          <div className="bg-white dark:bg-slate-900 rounded-2xl max-w-lg w-full p-6 shadow-xl border border-slate-200 dark:border-slate-700">
+            <h3 className="text-base font-bold text-slate-900 dark:text-slate-100 mb-2">Allocate Receipt to Outstanding AR Invoice</h3>
+            <p className="text-xs text-slate-500 dark:text-slate-400 mb-4">
+              Allocating against receipt <strong className="text-slate-800 dark:text-slate-200">{selectedReceiptForAllocation.receiptNumber}</strong> (
               {selectedReceiptForAllocation.customerName}).
             </p>
 
             <form onSubmit={handlePerformAllocation} className="space-y-4">
-              <div className="p-3 bg-slate-50 rounded-xl border border-slate-200 flex justify-between text-xs">
+              <div className="p-3 bg-slate-50 dark:bg-slate-800/50 rounded-xl border border-slate-200 dark:border-slate-700 flex justify-between text-xs">
                 <span>Unallocated Balance:</span>
-                <span className="font-bold text-emerald-700">
+                <span className="font-bold text-emerald-700 dark:text-emerald-300">
                   {formatCurrency(selectedReceiptForAllocation.unallocatedAmount)}
                 </span>
               </div>
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="text-xs font-semibold text-slate-700 block mb-1">Invoice Number *</label>
+                  <label className="text-xs font-semibold text-slate-700 dark:text-slate-300 block mb-1">Invoice Number *</label>
                   <input
                     type="text"
                     required
                     value={allocInvoiceNo}
                     onChange={(e) => setAllocInvoiceNo(e.target.value)}
-                    className="w-full text-xs p-2.5 border border-slate-200 rounded-lg focus:ring-2 focus:ring-slate-900 focus:outline-none font-mono"
+                    className="w-full text-xs p-2.5 border border-slate-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-slate-200 dark:focus:ring-slate-900 focus:outline-none font-mono"
                   />
                 </div>
                 <div>
-                  <label className="text-xs font-semibold text-slate-700 block mb-1">Invoice Total (OMR)</label>
+                  <label className="text-xs font-semibold text-slate-700 dark:text-slate-300 block mb-1">Invoice Total (OMR)</label>
                   <input
                     type="number"
                     value={allocInvTotal}
                     onChange={(e) => setAllocInvTotal(Number(e.target.value))}
-                    className="w-full text-xs p-2.5 border border-slate-200 rounded-lg focus:ring-2 focus:ring-slate-900 focus:outline-none"
+                    className="w-full text-xs p-2.5 border border-slate-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-slate-200 dark:focus:ring-slate-900 focus:outline-none"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="text-xs font-semibold text-slate-700 block mb-1">Amount to Allocate (OMR) *</label>
+                <label className="text-xs font-semibold text-slate-700 dark:text-slate-300 block mb-1">Amount to Allocate (OMR) *</label>
                 <input
                   type="number"
                   step="0.001"
@@ -647,15 +647,15 @@ export const ReceiptManagementView: React.FC = () => {
                   required
                   value={allocAmount}
                   onChange={(e) => setAllocAmount(Number(e.target.value))}
-                  className="w-full text-xs p-2.5 border border-slate-200 rounded-lg focus:ring-2 focus:ring-slate-900 focus:outline-none font-bold"
+                  className="w-full text-xs p-2.5 border border-slate-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-slate-200 dark:focus:ring-slate-900 focus:outline-none font-bold"
                 />
               </div>
 
-              <div className="flex items-center justify-end gap-2 pt-4 border-t border-slate-100">
+              <div className="flex items-center justify-end gap-2 pt-4 border-t border-slate-100 dark:border-slate-800">
                 <button
                   type="button"
                   onClick={() => setShowAllocateModal(false)}
-                  className="px-4 py-2 rounded-lg text-xs font-semibold text-slate-600 hover:bg-slate-100 cursor-pointer"
+                  className="px-4 py-2 rounded-lg text-xs font-semibold text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 cursor-pointer"
                 >
                   Cancel
                 </button>
@@ -673,16 +673,16 @@ export const ReceiptManagementView: React.FC = () => {
 
       {/* MODAL: RECORD OTHER RECEIPT */}
       {showAddOtherReceiptModal && (
-        <div className="fixed inset-0 bg-slate-900/40 backdrop-blur-xs flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-2xl max-w-lg w-full p-6 shadow-xl border border-slate-200">
-            <h3 className="text-base font-bold text-slate-900 mb-4">Record Miscellaneous / Other Receipt</h3>
+        <div className="fixed inset-0 bg-white/40 dark:bg-slate-900/40 backdrop-blur-xs flex items-center justify-center z-50 p-4">
+          <div className="bg-white dark:bg-slate-900 rounded-2xl max-w-lg w-full p-6 shadow-xl border border-slate-200 dark:border-slate-700">
+            <h3 className="text-base font-bold text-slate-900 dark:text-slate-100 mb-4">Record Miscellaneous / Other Receipt</h3>
             <form onSubmit={handleCreateOtherReceipt} className="space-y-4">
               <div>
-                <label className="text-xs font-semibold text-slate-700 block mb-1">Deposited Bank Account *</label>
+                <label className="text-xs font-semibold text-slate-700 dark:text-slate-300 block mb-1">Deposited Bank Account *</label>
                 <select
                   value={otherBankAccId}
                   onChange={(e) => setOtherBankAccId(e.target.value)}
-                  className="w-full text-xs p-2.5 border border-slate-200 rounded-lg focus:ring-2 focus:ring-slate-900 focus:outline-none"
+                  className="w-full text-xs p-2.5 border border-slate-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-slate-200 dark:focus:ring-slate-900 focus:outline-none"
                 >
                   {bankAccounts.map((a) => (
                     <option key={a.id} value={a.id}>
@@ -694,46 +694,46 @@ export const ReceiptManagementView: React.FC = () => {
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="text-xs font-semibold text-slate-700 block mb-1">Receipt Date *</label>
+                  <label className="text-xs font-semibold text-slate-700 dark:text-slate-300 block mb-1">Receipt Date *</label>
                   <input
                     type="date"
                     required
                     value={otherDate}
                     onChange={(e) => setOtherDate(e.target.value)}
-                    className="w-full text-xs p-2.5 border border-slate-200 rounded-lg focus:ring-2 focus:ring-slate-900 focus:outline-none"
+                    className="w-full text-xs p-2.5 border border-slate-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-slate-200 dark:focus:ring-slate-900 focus:outline-none"
                   />
                 </div>
                 <div>
-                  <label className="text-xs font-semibold text-slate-700 block mb-1">Amount (OMR) *</label>
+                  <label className="text-xs font-semibold text-slate-700 dark:text-slate-300 block mb-1">Amount (OMR) *</label>
                   <input
                     type="number"
                     step="0.001"
                     required
                     value={otherAmount}
                     onChange={(e) => setOtherAmount(Number(e.target.value))}
-                    className="w-full text-xs p-2.5 border border-slate-200 rounded-lg focus:ring-2 focus:ring-slate-900 focus:outline-none font-bold"
+                    className="w-full text-xs p-2.5 border border-slate-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-slate-200 dark:focus:ring-slate-900 focus:outline-none font-bold"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="text-xs font-semibold text-slate-700 block mb-1">Remitter / Source Entity *</label>
+                <label className="text-xs font-semibold text-slate-700 dark:text-slate-300 block mb-1">Remitter / Source Entity *</label>
                 <input
                   type="text"
                   required
                   placeholder="e.g. Dhofar Insurance SAOG"
                   value={otherSource}
                   onChange={(e) => setOtherSource(e.target.value)}
-                  className="w-full text-xs p-2.5 border border-slate-200 rounded-lg focus:ring-2 focus:ring-slate-900 focus:outline-none"
+                  className="w-full text-xs p-2.5 border border-slate-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-slate-200 dark:focus:ring-slate-900 focus:outline-none"
                 />
               </div>
 
               <div>
-                <label className="text-xs font-semibold text-slate-700 block mb-1">Income Category</label>
+                <label className="text-xs font-semibold text-slate-700 dark:text-slate-300 block mb-1">Income Category</label>
                 <select
                   value={otherCategory}
                   onChange={(e) => setOtherCategory(e.target.value as any)}
-                  className="w-full text-xs p-2.5 border border-slate-200 rounded-lg focus:ring-2 focus:ring-slate-900 focus:outline-none"
+                  className="w-full text-xs p-2.5 border border-slate-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-slate-200 dark:focus:ring-slate-900 focus:outline-none"
                 >
                   <option value="Bank Term Deposit Interest">Bank Term Deposit Interest</option>
                   <option value="Scrap & Asset Disposal Proceeds">Scrap & Asset Disposal Proceeds</option>
@@ -744,11 +744,11 @@ export const ReceiptManagementView: React.FC = () => {
                 </select>
               </div>
 
-              <div className="flex items-center justify-end gap-2 pt-4 border-t border-slate-100">
+              <div className="flex items-center justify-end gap-2 pt-4 border-t border-slate-100 dark:border-slate-800">
                 <button
                   type="button"
                   onClick={() => setShowAddOtherReceiptModal(false)}
-                  className="px-4 py-2 rounded-lg text-xs font-semibold text-slate-600 hover:bg-slate-100 cursor-pointer"
+                  className="px-4 py-2 rounded-lg text-xs font-semibold text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 cursor-pointer"
                 >
                   Cancel
                 </button>
@@ -766,16 +766,16 @@ export const ReceiptManagementView: React.FC = () => {
 
       {/* MODAL: CREATE DEPOSIT SLIP */}
       {showAddDepositSlipModal && (
-        <div className="fixed inset-0 bg-slate-900/40 backdrop-blur-xs flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-2xl max-w-lg w-full p-6 shadow-xl border border-slate-200">
-            <h3 className="text-base font-bold text-slate-900 mb-4">Generate Bank Deposit Slip</h3>
+        <div className="fixed inset-0 bg-white/40 dark:bg-slate-900/40 backdrop-blur-xs flex items-center justify-center z-50 p-4">
+          <div className="bg-white dark:bg-slate-900 rounded-2xl max-w-lg w-full p-6 shadow-xl border border-slate-200 dark:border-slate-700">
+            <h3 className="text-base font-bold text-slate-900 dark:text-slate-100 mb-4">Generate Bank Deposit Slip</h3>
             <form onSubmit={handleCreateDepositSlip} className="space-y-4">
               <div>
-                <label className="text-xs font-semibold text-slate-700 block mb-1">Target Bank Account *</label>
+                <label className="text-xs font-semibold text-slate-700 dark:text-slate-300 block mb-1">Target Bank Account *</label>
                 <select
                   value={depBankAccId}
                   onChange={(e) => setDepBankAccId(e.target.value)}
-                  className="w-full text-xs p-2.5 border border-slate-200 rounded-lg focus:ring-2 focus:ring-slate-900 focus:outline-none"
+                  className="w-full text-xs p-2.5 border border-slate-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-slate-200 dark:focus:ring-slate-900 focus:outline-none"
                 >
                   {bankAccounts.map((a) => (
                     <option key={a.id} value={a.id}>
@@ -787,51 +787,51 @@ export const ReceiptManagementView: React.FC = () => {
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="text-xs font-semibold text-slate-700 block mb-1">Cash to Deposit (OMR)</label>
+                  <label className="text-xs font-semibold text-slate-700 dark:text-slate-300 block mb-1">Cash to Deposit (OMR)</label>
                   <input
                     type="number"
                     value={depCashAmt}
                     onChange={(e) => setDepCashAmt(Number(e.target.value))}
-                    className="w-full text-xs p-2.5 border border-slate-200 rounded-lg focus:ring-2 focus:ring-slate-900 focus:outline-none"
+                    className="w-full text-xs p-2.5 border border-slate-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-slate-200 dark:focus:ring-slate-900 focus:outline-none"
                   />
                 </div>
                 <div>
-                  <label className="text-xs font-semibold text-slate-700 block mb-1">Cheques Amount (OMR)</label>
+                  <label className="text-xs font-semibold text-slate-700 dark:text-slate-300 block mb-1">Cheques Amount (OMR)</label>
                   <input
                     type="number"
                     value={depChequeAmt}
                     onChange={(e) => setDepChequeAmt(Number(e.target.value))}
-                    className="w-full text-xs p-2.5 border border-slate-200 rounded-lg focus:ring-2 focus:ring-slate-900 focus:outline-none"
+                    className="w-full text-xs p-2.5 border border-slate-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-slate-200 dark:focus:ring-slate-900 focus:outline-none"
                   />
                 </div>
               </div>
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="text-xs font-semibold text-slate-700 block mb-1">Number of Cheques</label>
+                  <label className="text-xs font-semibold text-slate-700 dark:text-slate-300 block mb-1">Number of Cheques</label>
                   <input
                     type="number"
                     value={depChequeCount}
                     onChange={(e) => setDepChequeCount(Number(e.target.value))}
-                    className="w-full text-xs p-2.5 border border-slate-200 rounded-lg focus:ring-2 focus:ring-slate-900 focus:outline-none"
+                    className="w-full text-xs p-2.5 border border-slate-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-slate-200 dark:focus:ring-slate-900 focus:outline-none"
                   />
                 </div>
                 <div>
-                  <label className="text-xs font-semibold text-slate-700 block mb-1">Bank Branch</label>
+                  <label className="text-xs font-semibold text-slate-700 dark:text-slate-300 block mb-1">Bank Branch</label>
                   <input
                     type="text"
                     value={depBranch}
                     onChange={(e) => setDepBranch(e.target.value)}
-                    className="w-full text-xs p-2.5 border border-slate-200 rounded-lg focus:ring-2 focus:ring-slate-900 focus:outline-none"
+                    className="w-full text-xs p-2.5 border border-slate-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-slate-200 dark:focus:ring-slate-900 focus:outline-none"
                   />
                 </div>
               </div>
 
-              <div className="flex items-center justify-end gap-2 pt-4 border-t border-slate-100">
+              <div className="flex items-center justify-end gap-2 pt-4 border-t border-slate-100 dark:border-slate-800">
                 <button
                   type="button"
                   onClick={() => setShowAddDepositSlipModal(false)}
-                  className="px-4 py-2 rounded-lg text-xs font-semibold text-slate-600 hover:bg-slate-100 cursor-pointer"
+                  className="px-4 py-2 rounded-lg text-xs font-semibold text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 cursor-pointer"
                 >
                   Cancel
                 </button>

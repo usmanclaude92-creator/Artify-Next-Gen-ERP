@@ -69,29 +69,29 @@ export const IntercompanyFxView: React.FC = () => {
 
   return (
     <div className="space-y-6">
-      <div className="bg-slate-900 border border-slate-800 rounded-3xl p-6 text-white shadow-xl flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6">
+      <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 text-slate-900 dark:text-white shadow-xl flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6">
         <div className="space-y-2 max-w-2xl">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sky-500/20 text-sky-400 text-xs font-semibold uppercase tracking-wider">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sky-500/20 text-sky-600 dark:text-sky-400 text-xs font-semibold uppercase tracking-wider">
             <Globe className="w-3.5 h-3.5" />
             Module 16.09 — Intercompany & Foreign Currency
           </div>
           <h2 className="text-2xl font-bold tracking-tight">Group Matching, FX Rates & Currency Exposure</h2>
-          <p className="text-sm text-slate-400">
+          <p className="text-sm text-slate-600 dark:text-slate-400">
             Match and eliminate intercompany balances, maintain spot rates, and monitor open foreign-currency payables and receivables.
           </p>
         </div>
         <div className="grid grid-cols-3 gap-4 text-center">
           <div>
             <div className="text-xl font-bold">{pending.length}</div>
-            <div className="text-[10px] uppercase text-slate-400">Pending Match</div>
+            <div className="text-[10px] uppercase text-slate-600 dark:text-slate-400">Pending Match</div>
           </div>
           <div>
             <div className="text-xl font-bold">{currency} {pendingAmount.toLocaleString()}</div>
-            <div className="text-[10px] uppercase text-slate-400">Unmatched Value</div>
+            <div className="text-[10px] uppercase text-slate-600 dark:text-slate-400">Unmatched Value</div>
           </div>
           <div>
             <div className="text-xl font-bold">{eliminated}</div>
-            <div className="text-[10px] uppercase text-slate-400">Eliminated</div>
+            <div className="text-[10px] uppercase text-slate-600 dark:text-slate-400">Eliminated</div>
           </div>
         </div>
       </div>
@@ -119,7 +119,7 @@ export const IntercompanyFxView: React.FC = () => {
       {activeTab === 'intercompany' && (
         <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl overflow-x-auto">
           <table className="w-full text-left text-xs">
-            <thead className="bg-slate-50 dark:bg-slate-800/50 text-slate-500 uppercase text-[10px]">
+            <thead className="bg-slate-50 dark:bg-slate-800/50 text-slate-500 dark:text-slate-400 uppercase text-[10px]">
               <tr>
                 <th className="py-3 px-4">Ref</th>
                 <th className="py-3 px-4">Entities</th>
@@ -134,13 +134,13 @@ export const IntercompanyFxView: React.FC = () => {
                 <tr key={t.id}>
                   <td className="py-3 px-4 font-mono">
                     {t.transactionRef}
-                    <div className="text-[10px] text-slate-400">{t.date}</div>
+                    <div className="text-[10px] text-slate-600 dark:text-slate-400">{t.date}</div>
                   </td>
                   <td className="py-3 px-4">
                     <div className="flex items-center gap-1.5">
-                      <Building2 className="w-3.5 h-3.5 text-slate-400" />
+                      <Building2 className="w-3.5 h-3.5 text-slate-600 dark:text-slate-400" />
                       {t.originEntity}
-                      <ArrowRight className="w-3 h-3 text-slate-400" />
+                      <ArrowRight className="w-3 h-3 text-slate-600 dark:text-slate-400" />
                       {t.targetEntity}
                     </div>
                   </td>
@@ -151,7 +151,7 @@ export const IntercompanyFxView: React.FC = () => {
                       {t.status.replace('_', ' ')}
                     </span>
                     {t.eliminationVoucherId && (
-                      <div className="text-[10px] font-mono text-slate-400 mt-1">{t.eliminationVoucherId}</div>
+                      <div className="text-[10px] font-mono text-slate-600 dark:text-slate-400 mt-1">{t.eliminationVoucherId}</div>
                     )}
                   </td>
                   <td className="py-3 px-4 text-right">
@@ -171,7 +171,7 @@ export const IntercompanyFxView: React.FC = () => {
                         Eliminate
                       </button>
                     )}
-                    {t.status === 'ELIMINATED' && <CheckCircle2 className="w-4 h-4 text-emerald-500 inline" />}
+                    {t.status === 'ELIMINATED' && <CheckCircle2 className="w-4 h-4 text-emerald-600 dark:text-emerald-500 inline" />}
                   </td>
                 </tr>
               ))}
@@ -183,7 +183,7 @@ export const IntercompanyFxView: React.FC = () => {
       {activeTab === 'rates' && (
         <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl overflow-x-auto">
           <table className="w-full text-left text-xs">
-            <thead className="bg-slate-50 dark:bg-slate-800/50 text-slate-500 uppercase text-[10px]">
+            <thead className="bg-slate-50 dark:bg-slate-800/50 text-slate-500 dark:text-slate-400 uppercase text-[10px]">
               <tr>
                 <th className="py-3 px-4">Currency</th>
                 <th className="py-3 px-4 text-right">1 {currency} = X</th>
@@ -196,12 +196,12 @@ export const IntercompanyFxView: React.FC = () => {
               {currencyRates.map(r => (
                 <tr key={r.currencyCode}>
                   <td className="py-3 px-4 font-semibold">
-                    {r.currencyCode} <span className="font-normal text-slate-400">{r.currencyName}</span>
-                    {r.isBaseCurrency && <span className="ml-2 text-[10px] text-sky-500 font-bold">BASE</span>}
+                    {r.currencyCode} <span className="font-normal text-slate-600 dark:text-slate-400">{r.currencyName}</span>
+                    {r.isBaseCurrency && <span className="ml-2 text-[10px] text-sky-600 dark:text-sky-500 font-bold">BASE</span>}
                   </td>
                   <td className="py-3 px-4 text-right font-mono">{r.exchangeRateToBase.toFixed(4)}</td>
                   <td className="py-3 px-4 text-right font-mono">{r.inverseRate.toFixed(4)}</td>
-                  <td className="py-3 px-4 text-slate-500">{r.lastUpdated}</td>
+                  <td className="py-3 px-4 text-slate-500 dark:text-slate-400">{r.lastUpdated}</td>
                   <td className="py-3 px-4 text-right">
                     {!r.isBaseCurrency && (
                       <div className="inline-flex items-center gap-2">
@@ -236,13 +236,13 @@ export const IntercompanyFxView: React.FC = () => {
         <div className="space-y-4">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-4">
-              <div className="text-[10px] uppercase text-slate-400">Net Open Exposure ({currency})</div>
+              <div className="text-[10px] uppercase text-slate-600 dark:text-slate-400">Net Open Exposure ({currency})</div>
               <div className="text-xl font-bold font-mono">{netExposure.toLocaleString(undefined, { maximumFractionDigits: 0 })}</div>
-              <div className="text-[10px] text-slate-400">Receivables minus payables at current spot</div>
+              <div className="text-[10px] text-slate-600 dark:text-slate-400">Receivables minus payables at current spot</div>
             </div>
             {[1, 5].map(pct => (
               <div key={pct} className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-4">
-                <div className="text-[10px] uppercase text-slate-400 flex items-center gap-1">
+                <div className="text-[10px] uppercase text-slate-600 dark:text-slate-400 flex items-center gap-1">
                   <TrendingUp className="w-3 h-3" /> Impact of ±{pct}% rate move
                 </div>
                 <div className="text-xl font-bold font-mono">
@@ -254,12 +254,12 @@ export const IntercompanyFxView: React.FC = () => {
 
           <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl overflow-x-auto">
             {exposures.length === 0 ? (
-              <div className="p-8 text-center text-xs text-slate-400 flex items-center justify-center gap-2">
+              <div className="p-8 text-center text-xs text-slate-600 dark:text-slate-400 flex items-center justify-center gap-2">
                 <AlertCircle className="w-4 h-4" /> No open foreign-currency balances.
               </div>
             ) : (
               <table className="w-full text-left text-xs">
-                <thead className="bg-slate-50 dark:bg-slate-800/50 text-slate-500 uppercase text-[10px]">
+                <thead className="bg-slate-50 dark:bg-slate-800/50 text-slate-500 dark:text-slate-400 uppercase text-[10px]">
                   <tr>
                     <th className="py-3 px-4">Document</th>
                     <th className="py-3 px-4">Party</th>

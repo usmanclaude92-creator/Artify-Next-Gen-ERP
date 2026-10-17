@@ -107,15 +107,15 @@ export const RequestForQuotationView: React.FC = () => {
   return (
     <div className="space-y-6">
       {/* Top Bar */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white p-4 rounded-2xl border border-slate-200 shadow-2xs">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white dark:bg-slate-900 p-4 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-2xs">
         <div className="relative flex-1 max-w-md">
-          <Search className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
+          <Search className="w-4 h-4 text-slate-500 dark:text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
           <input
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Search RFQ #, title, or category..."
-            className="w-full pl-9 pr-3 py-2 text-xs border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-slate-900"
+            className="w-full pl-9 pr-3 py-2 text-xs border border-slate-200 dark:border-slate-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-slate-200 dark:focus:ring-slate-900"
           />
         </div>
 
@@ -133,51 +133,51 @@ export const RequestForQuotationView: React.FC = () => {
         {filteredRfqs.map((rfq) => (
           <div
             key={rfq.id}
-            className="bg-white rounded-2xl p-5 border border-slate-200 shadow-2xs hover:shadow-sm transition-all space-y-3"
+            className="bg-white dark:bg-slate-900 rounded-2xl p-5 border border-slate-200 dark:border-slate-700 shadow-2xs hover:shadow-sm transition-all space-y-3"
           >
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
-                <span className="font-mono text-xs font-bold text-slate-900 bg-slate-100 px-2 py-0.5 rounded">
+                <span className="font-mono text-xs font-bold text-slate-900 dark:text-slate-100 bg-slate-100 dark:bg-slate-800 px-2 py-0.5 rounded">
                   {rfq.rfqNumber}
                 </span>
                 <span
                   className={`px-2 py-0.5 rounded-full text-[10px] font-bold ${
                     rfq.status === 'Published'
-                      ? 'bg-blue-100 text-blue-800'
+                      ? 'bg-blue-100 dark:bg-blue-500/20 text-blue-800 dark:text-blue-200'
                       : rfq.status === 'Under Evaluation'
-                      ? 'bg-amber-100 text-amber-800'
+                      ? 'bg-amber-100 dark:bg-amber-500/20 text-amber-800 dark:text-amber-200'
                       : rfq.status === 'Awarded'
-                      ? 'bg-emerald-100 text-emerald-800'
-                      : 'bg-slate-100 text-slate-700'
+                      ? 'bg-emerald-100 dark:bg-emerald-500/20 text-emerald-800 dark:text-emerald-200'
+                      : 'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300'
                   }`}
                 >
                   {rfq.status}
                 </span>
               </div>
-              <span className="text-[11px] text-slate-400">Closes: {rfq.closingDate}</span>
+              <span className="text-[11px] text-slate-500 dark:text-slate-400">Closes: {rfq.closingDate}</span>
             </div>
 
-            <h3 className="text-sm font-bold text-slate-900 leading-snug">{rfq.title}</h3>
-            <p className="text-xs text-slate-500 line-clamp-2">
+            <h3 className="text-sm font-bold text-slate-900 dark:text-slate-100 leading-snug">{rfq.title}</h3>
+            <p className="text-xs text-slate-500 dark:text-slate-400 line-clamp-2">
               {rfq.lines[0]?.specification || 'Detailed engineering specifications specified in tender package.'}
             </p>
 
-            <div className="grid grid-cols-2 gap-2 bg-slate-50 p-2.5 rounded-xl text-[11px] text-slate-600">
+            <div className="grid grid-cols-2 gap-2 bg-slate-50 dark:bg-slate-800/50 p-2.5 rounded-xl text-[11px] text-slate-600 dark:text-slate-400">
               <div>
-                <span className="font-semibold text-slate-700">Invited Suppliers:</span>{' '}
+                <span className="font-semibold text-slate-700 dark:text-slate-300">Invited Suppliers:</span>{' '}
                 {rfq.invitedSuppliers.length} Vendors
               </div>
               <div>
-                <span className="font-semibold text-slate-700">Bids Received:</span>{' '}
-                <span className="font-bold text-indigo-600">{rfq.bidSubmissionCount} Bids</span>
+                <span className="font-semibold text-slate-700 dark:text-slate-300">Bids Received:</span>{' '}
+                <span className="font-bold text-indigo-600 dark:text-indigo-400">{rfq.bidSubmissionCount} Bids</span>
               </div>
             </div>
 
-            <div className="flex items-center justify-between pt-2 border-t border-slate-100 text-xs">
-              <span className="text-slate-500 font-medium">{rfq.category}</span>
+            <div className="flex items-center justify-between pt-2 border-t border-slate-100 dark:border-slate-800 text-xs">
+              <span className="text-slate-500 dark:text-slate-400 font-medium">{rfq.category}</span>
               <button
                 onClick={() => setSelectedRfq(rfq)}
-                className="font-bold text-indigo-600 hover:text-indigo-800 cursor-pointer"
+                className="font-bold text-indigo-600 dark:text-indigo-400 hover:text-indigo-800 dark:hover:text-indigo-200 cursor-pointer"
               >
                 Manage Bids & Invites →
               </button>
@@ -188,21 +188,21 @@ export const RequestForQuotationView: React.FC = () => {
 
       {/* RFQ DETAIL & INVITATION MODAL */}
       {selectedRfq && (
-        <div className="fixed inset-0 z-50 bg-slate-900/50 backdrop-blur-xs flex items-center justify-center p-4">
-          <div className="bg-white rounded-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto p-6 border border-slate-200 shadow-xl space-y-4">
-            <div className="flex items-center justify-between border-b border-slate-100 pb-3">
+        <div className="fixed inset-0 z-50 bg-white/50 dark:bg-slate-900/50 backdrop-blur-xs flex items-center justify-center p-4">
+          <div className="bg-white dark:bg-slate-900 rounded-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto p-6 border border-slate-200 dark:border-slate-700 shadow-xl space-y-4">
+            <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-3">
               <div>
                 <div className="flex items-center gap-2">
-                  <span className="font-mono text-sm font-bold text-slate-900">{selectedRfq.rfqNumber}</span>
-                  <span className="px-2 py-0.5 rounded-full text-xs font-bold bg-slate-100 text-slate-800">
+                  <span className="font-mono text-sm font-bold text-slate-900 dark:text-slate-100">{selectedRfq.rfqNumber}</span>
+                  <span className="px-2 py-0.5 rounded-full text-xs font-bold bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200">
                     {selectedRfq.status}
                   </span>
                 </div>
-                <h3 className="text-sm font-bold text-slate-900 mt-1">{selectedRfq.title}</h3>
+                <h3 className="text-sm font-bold text-slate-900 dark:text-slate-100 mt-1">{selectedRfq.title}</h3>
               </div>
               <button
                 onClick={() => setSelectedRfq(null)}
-                className="text-slate-400 hover:text-slate-600 font-bold text-sm cursor-pointer"
+                className="text-slate-600 dark:text-slate-400 hover:text-slate-600 dark:hover:text-slate-400 font-bold text-sm cursor-pointer"
               >
                 ✕
               </button>
@@ -210,16 +210,16 @@ export const RequestForQuotationView: React.FC = () => {
 
             {/* Scope Specifications */}
             <div className="space-y-2 text-xs">
-              <span className="font-bold text-slate-900 block">Tender Scope of Work & Items</span>
+              <span className="font-bold text-slate-900 dark:text-slate-100 block">Tender Scope of Work & Items</span>
               {selectedRfq.lines.map((l) => (
-                <div key={l.id} className="p-3 bg-slate-50 rounded-xl border border-slate-100 space-y-1">
-                  <div className="flex justify-between font-bold text-slate-900">
+                <div key={l.id} className="p-3 bg-slate-50 dark:bg-slate-800/50 rounded-xl border border-slate-100 dark:border-slate-800 space-y-1">
+                  <div className="flex justify-between font-bold text-slate-900 dark:text-slate-100">
                     <span>{l.itemDescription}</span>
                     <span>
                       Target: {l.targetQuantity} {l.unitOfMeasure}
                     </span>
                   </div>
-                  <p className="text-slate-600 text-[11px]">{l.specification}</p>
+                  <p className="text-slate-600 dark:text-slate-400 text-[11px]">{l.specification}</p>
                 </div>
               ))}
             </div>
@@ -227,12 +227,12 @@ export const RequestForQuotationView: React.FC = () => {
             {/* Invited Supplier Register */}
             <div className="space-y-2 pt-2">
               <div className="flex items-center justify-between">
-                <span className="text-xs font-bold text-slate-900">
+                <span className="text-xs font-bold text-slate-900 dark:text-slate-100">
                   Invited Bidders & Response Status ({selectedRfq.invitedSuppliers.length})
                 </span>
                 <button
                   onClick={() => setShowInviteModal(true)}
-                  className="px-2.5 py-1 rounded-lg bg-indigo-50 hover:bg-indigo-100 text-indigo-700 text-xs font-semibold flex items-center gap-1 cursor-pointer"
+                  className="px-2.5 py-1 rounded-lg bg-indigo-50 dark:bg-indigo-500/10 hover:bg-indigo-100 dark:hover:bg-indigo-500/20 text-indigo-700 dark:text-indigo-300 text-xs font-semibold flex items-center gap-1 cursor-pointer"
                 >
                   <UserPlus className="w-3 h-3" />
                   <span>Invite Additional Supplier</span>
@@ -243,24 +243,24 @@ export const RequestForQuotationView: React.FC = () => {
                 {selectedRfq.invitedSuppliers.map((supp, idx) => (
                   <div
                     key={idx}
-                    className="p-3 rounded-xl bg-slate-50 border border-slate-100 flex items-center justify-between text-xs"
+                    className="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/50 border border-slate-100 dark:border-slate-800 flex items-center justify-between text-xs"
                   >
                     <div>
-                      <div className="font-bold text-slate-900">{supp.supplierName}</div>
-                      <div className="text-[11px] text-slate-500">{supp.supplierEmail}</div>
+                      <div className="font-bold text-slate-900 dark:text-slate-100">{supp.supplierName}</div>
+                      <div className="text-[11px] text-slate-500 dark:text-slate-400">{supp.supplierEmail}</div>
                     </div>
                     <div className="text-right">
                       <span
                         className={`px-2 py-0.5 rounded-full text-[10px] font-bold ${
                           supp.inviteStatus === 'Bid Submitted'
-                            ? 'bg-emerald-100 text-emerald-800'
-                            : 'bg-amber-100 text-amber-800'
+                            ? 'bg-emerald-100 dark:bg-emerald-500/20 text-emerald-800 dark:text-emerald-200'
+                            : 'bg-amber-100 dark:bg-amber-500/20 text-amber-800 dark:text-amber-200'
                         }`}
                       >
                         {supp.inviteStatus}
                       </span>
                       {supp.responseRef && (
-                        <div className="text-[10px] text-slate-500 font-mono mt-0.5">{supp.responseRef}</div>
+                        <div className="text-[10px] text-slate-500 dark:text-slate-400 font-mono mt-0.5">{supp.responseRef}</div>
                       )}
                     </div>
                   </div>
@@ -268,7 +268,7 @@ export const RequestForQuotationView: React.FC = () => {
               </div>
             </div>
 
-            <div className="flex items-center justify-end gap-2 pt-4 border-t border-slate-100">
+            <div className="flex items-center justify-end gap-2 pt-4 border-t border-slate-100 dark:border-slate-800">
               <button
                 onClick={() => setSelectedRfq(null)}
                 className="px-4 py-2 rounded-xl bg-slate-900 text-white text-xs font-semibold cursor-pointer"
@@ -327,13 +327,13 @@ export const RequestForQuotationView: React.FC = () => {
 
       {/* CREATE RFQ MODAL */}
       {showCreateModal && (
-        <div className="fixed inset-0 z-50 bg-slate-900/50 backdrop-blur-xs flex items-center justify-center p-4">
-          <div className="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto p-6 border border-slate-200 shadow-xl space-y-4 text-xs">
-            <div className="flex items-center justify-between border-b border-slate-100 pb-3">
-              <h3 className="text-sm font-bold text-slate-900">Create Request for Quotation (RFQ)</h3>
+        <div className="fixed inset-0 z-50 bg-white/50 dark:bg-slate-900/50 backdrop-blur-xs flex items-center justify-center p-4">
+          <div className="bg-white dark:bg-slate-900 rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto p-6 border border-slate-200 dark:border-slate-700 shadow-xl space-y-4 text-xs">
+            <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-3">
+              <h3 className="text-sm font-bold text-slate-900 dark:text-slate-100">Create Request for Quotation (RFQ)</h3>
               <button
                 onClick={() => setShowCreateModal(false)}
-                className="text-slate-400 hover:text-slate-600 font-bold text-sm cursor-pointer"
+                className="text-slate-600 dark:text-slate-400 hover:text-slate-600 dark:hover:text-slate-400 font-bold text-sm cursor-pointer"
               >
                 ✕
               </button>
@@ -341,24 +341,24 @@ export const RequestForQuotationView: React.FC = () => {
 
             <form onSubmit={handleCreateSubmit} className="space-y-3">
               <div>
-                <label className="font-semibold text-slate-700 block mb-1">Tender Title</label>
+                <label className="font-semibold text-slate-700 dark:text-slate-300 block mb-1">Tender Title</label>
                 <input
                   type="text"
                   required
                   value={rfqTitle}
                   onChange={(e) => setRfqTitle(e.target.value)}
                   placeholder="e.g. Competitive Tender for 1500 kVA Step-Down Distribution Transformers"
-                  className="w-full p-2.5 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-slate-900"
+                  className="w-full p-2.5 border border-slate-200 dark:border-slate-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-slate-200 dark:focus:ring-slate-900"
                 />
               </div>
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="font-semibold text-slate-700 block mb-1">Category</label>
+                  <label className="font-semibold text-slate-700 dark:text-slate-300 block mb-1">Category</label>
                   <select
                     value={rfqCategory}
                     onChange={(e) => setRfqCategory(e.target.value)}
-                    className="w-full p-2.5 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-slate-900"
+                    className="w-full p-2.5 border border-slate-200 dark:border-slate-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-slate-200 dark:focus:ring-slate-900"
                   >
                     <option value="Raw Materials">Raw Materials</option>
                     <option value="Capital Equipment">Capital Equipment</option>
@@ -368,54 +368,54 @@ export const RequestForQuotationView: React.FC = () => {
                   </select>
                 </div>
                 <div>
-                  <label className="font-semibold text-slate-700 block mb-1">Bid Submission Closing Date</label>
+                  <label className="font-semibold text-slate-700 dark:text-slate-300 block mb-1">Bid Submission Closing Date</label>
                   <input
                     type="date"
                     required
                     value={rfqClosingDate}
                     onChange={(e) => setRfqClosingDate(e.target.value)}
-                    className="w-full p-2.5 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-slate-900"
+                    className="w-full p-2.5 border border-slate-200 dark:border-slate-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-slate-200 dark:focus:ring-slate-900"
                   />
                 </div>
               </div>
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="font-semibold text-slate-700 block mb-1">Delivery Destination</label>
+                  <label className="font-semibold text-slate-700 dark:text-slate-300 block mb-1">Delivery Destination</label>
                   <input
                     type="text"
                     value={rfqLocation}
                     onChange={(e) => setRfqLocation(e.target.value)}
-                    className="w-full p-2.5 border border-slate-200 rounded-lg"
+                    className="w-full p-2.5 border border-slate-200 dark:border-slate-700 rounded-lg"
                   />
                 </div>
                 <div>
-                  <label className="font-semibold text-slate-700 block mb-1">Standard Payment Terms</label>
+                  <label className="font-semibold text-slate-700 dark:text-slate-300 block mb-1">Standard Payment Terms</label>
                   <input
                     type="text"
                     value={rfqPaymentTerms}
                     onChange={(e) => setRfqPaymentTerms(e.target.value)}
-                    className="w-full p-2.5 border border-slate-200 rounded-lg"
+                    className="w-full p-2.5 border border-slate-200 dark:border-slate-700 rounded-lg"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="font-semibold text-slate-700 block mb-1">Commercial Terms & Special Conditions</label>
+                <label className="font-semibold text-slate-700 dark:text-slate-300 block mb-1">Commercial Terms & Special Conditions</label>
                 <textarea
                   rows={3}
                   value={rfqTerms}
                   onChange={(e) => setRfqTerms(e.target.value)}
                   placeholder="Compliance requirements, warranty periods, Incoterms..."
-                  className="w-full p-2.5 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-slate-900"
+                  className="w-full p-2.5 border border-slate-200 dark:border-slate-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-slate-200 dark:focus:ring-slate-900"
                 />
               </div>
 
-              <div className="flex items-center justify-end gap-2 pt-3 border-t border-slate-100">
+              <div className="flex items-center justify-end gap-2 pt-3 border-t border-slate-100 dark:border-slate-800">
                 <button
                   type="button"
                   onClick={() => setShowCreateModal(false)}
-                  className="px-3 py-2 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold cursor-pointer"
+                  className="px-3 py-2 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 font-semibold cursor-pointer"
                 >
                   Cancel
                 </button>

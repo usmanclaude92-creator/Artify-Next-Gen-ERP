@@ -152,15 +152,15 @@ export const TaxComplianceView: React.FC = () => {
   return (
     <div className="space-y-6">
       {/* Submodule Header */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm">
         <div>
           <div className="flex items-center gap-2">
-            <span className="text-xs font-bold font-mono px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-700">
+            <span className="text-xs font-bold font-mono px-2.5 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">
               17.02
             </span>
-            <h2 className="text-xl font-bold text-slate-900">Tax Compliance & Statutory Reporting</h2>
+            <h2 className="text-xl font-bold text-slate-900 dark:text-slate-100">Tax Compliance & Statutory Reporting</h2>
           </div>
-          <p className="text-sm text-slate-500 mt-1">
+          <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">
             5% Standard Oman VAT e-invoicing audit, Corporate Income Tax (CIT 15%) computation schedules, and Central Bank / MOCIIP statutory reporting packages.
           </p>
         </div>
@@ -186,13 +186,13 @@ export const TaxComplianceView: React.FC = () => {
       </div>
 
       {/* Sub-tabs */}
-      <div className="flex items-center gap-2 border-b border-slate-200">
+      <div className="flex items-center gap-2 border-b border-slate-200 dark:border-slate-700">
         <button
           onClick={() => setActiveSubTab('vat')}
           className={`px-5 py-3 text-sm font-semibold border-b-2 transition flex items-center gap-2 ${
             activeSubTab === 'vat'
-              ? 'border-emerald-600 text-emerald-700 bg-emerald-50/50 rounded-t-xl'
-              : 'border-transparent text-slate-600 hover:text-slate-900'
+              ? 'border-emerald-600 text-emerald-700 dark:text-emerald-300 bg-emerald-50/50 dark:bg-emerald-500/50 rounded-t-xl'
+              : 'border-transparent text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100'
           }`}
         >
           <Receipt className="w-4 h-4" /> VAT Electronic Compliance ({vatRecords.length})
@@ -201,8 +201,8 @@ export const TaxComplianceView: React.FC = () => {
           onClick={() => setActiveSubTab('schedules')}
           className={`px-5 py-3 text-sm font-semibold border-b-2 transition flex items-center gap-2 ${
             activeSubTab === 'schedules'
-              ? 'border-emerald-600 text-emerald-700 bg-emerald-50/50 rounded-t-xl'
-              : 'border-transparent text-slate-600 hover:text-slate-900'
+              ? 'border-emerald-600 text-emerald-700 dark:text-emerald-300 bg-emerald-50/50 dark:bg-emerald-500/50 rounded-t-xl'
+              : 'border-transparent text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100'
           }`}
         >
           <FileSpreadsheet className="w-4 h-4" /> Corporate Tax Schedules ({taxSchedules.length})
@@ -211,8 +211,8 @@ export const TaxComplianceView: React.FC = () => {
           onClick={() => setActiveSubTab('returns')}
           className={`px-5 py-3 text-sm font-semibold border-b-2 transition flex items-center gap-2 ${
             activeSubTab === 'returns'
-              ? 'border-emerald-600 text-emerald-700 bg-emerald-50/50 rounded-t-xl'
-              : 'border-transparent text-slate-600 hover:text-slate-900'
+              ? 'border-emerald-600 text-emerald-700 dark:text-emerald-300 bg-emerald-50/50 dark:bg-emerald-500/50 rounded-t-xl'
+              : 'border-transparent text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100'
           }`}
         >
           <Building className="w-4 h-4" /> Statutory Tax Returns ({statutoryTaxReturns.length})
@@ -221,8 +221,8 @@ export const TaxComplianceView: React.FC = () => {
           onClick={() => setActiveSubTab('statutory')}
           className={`px-5 py-3 text-sm font-semibold border-b-2 transition flex items-center gap-2 ${
             activeSubTab === 'statutory'
-              ? 'border-emerald-600 text-emerald-700 bg-emerald-50/50 rounded-t-xl'
-              : 'border-transparent text-slate-600 hover:text-slate-900'
+              ? 'border-emerald-600 text-emerald-700 dark:text-emerald-300 bg-emerald-50/50 dark:bg-emerald-500/50 rounded-t-xl'
+              : 'border-transparent text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100'
           }`}
         >
           <ShieldCheck className="w-4 h-4" /> Regulatory Reporting ({statutoryReports.length})
@@ -234,28 +234,28 @@ export const TaxComplianceView: React.FC = () => {
         <div className="space-y-4">
           {/* VAT Summary Cards */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex items-center justify-between">
+            <div className="bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm flex items-center justify-between">
               <div>
-                <span className="text-xs uppercase font-bold text-slate-400 block">Total Output VAT (Sales)</span>
-                <strong className="text-xl font-bold font-mono text-slate-900">
+                <span className="text-xs uppercase font-bold text-slate-500 dark:text-slate-400 block">Total Output VAT (Sales)</span>
+                <strong className="text-xl font-bold font-mono text-slate-900 dark:text-slate-100">
                   OMR {totalOutputVat.toLocaleString('en-US', { minimumFractionDigits: 2 })}
                 </strong>
-                <span className="text-[11px] text-emerald-600 block mt-0.5">5% Standard Rate on Supplies</span>
+                <span className="text-[11px] text-emerald-600 dark:text-emerald-400 block mt-0.5">5% Standard Rate on Supplies</span>
               </div>
-              <div className="w-11 h-11 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center">
+              <div className="w-11 h-11 rounded-2xl bg-emerald-50 dark:bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 flex items-center justify-center">
                 <ArrowUpRight className="w-5 h-5" />
               </div>
             </div>
 
-            <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex items-center justify-between">
+            <div className="bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm flex items-center justify-between">
               <div>
-                <span className="text-xs uppercase font-bold text-slate-400 block">Total Input VAT (Purchases)</span>
-                <strong className="text-xl font-bold font-mono text-slate-900">
+                <span className="text-xs uppercase font-bold text-slate-500 dark:text-slate-400 block">Total Input VAT (Purchases)</span>
+                <strong className="text-xl font-bold font-mono text-slate-900 dark:text-slate-100">
                   OMR {totalInputVat.toLocaleString('en-US', { minimumFractionDigits: 2 })}
                 </strong>
-                <span className="text-[11px] text-indigo-600 block mt-0.5">Deductible Tax on Invoices</span>
+                <span className="text-[11px] text-indigo-600 dark:text-indigo-400 block mt-0.5">Deductible Tax on Invoices</span>
               </div>
-              <div className="w-11 h-11 rounded-2xl bg-indigo-50 text-indigo-600 flex items-center justify-center">
+              <div className="w-11 h-11 rounded-2xl bg-indigo-50 dark:bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 flex items-center justify-center">
                 <ArrowDownRight className="w-5 h-5" />
               </div>
             </div>
@@ -275,22 +275,22 @@ export const TaxComplianceView: React.FC = () => {
           </div>
 
           {/* Search & Filter */}
-          <div className="flex flex-col md:flex-row gap-3 bg-slate-50 p-3 rounded-xl border border-slate-200">
+          <div className="flex flex-col md:flex-row gap-3 bg-slate-50 dark:bg-slate-800/50 p-3 rounded-xl border border-slate-200 dark:border-slate-700">
             <div className="flex-1 relative">
-              <Search className="w-4 h-4 absolute left-3 top-3 text-slate-400" />
+              <Search className="w-4 h-4 absolute left-3 top-3 text-slate-500 dark:text-slate-400" />
               <input
                 type="text"
                 placeholder="Search invoice number, client/supplier name, VAT TIN..."
                 value={vatSearch}
                 onChange={e => setVatSearch(e.target.value)}
-                className="w-full pl-9 pr-4 py-2 text-sm bg-white border border-slate-200 rounded-lg focus:ring-2 focus:ring-emerald-500"
+                className="w-full pl-9 pr-4 py-2 text-sm bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-emerald-500"
               />
             </div>
             <div className="flex items-center gap-2">
               <select
                 value={selectedDirection}
                 onChange={e => setSelectedDirection(e.target.value as any)}
-                className="px-3 py-2 text-sm bg-white border border-slate-200 rounded-lg focus:ring-2 focus:ring-emerald-500"
+                className="px-3 py-2 text-sm bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-emerald-500"
               >
                 <option value="ALL">All Directions</option>
                 <option value="OUTPUT_VAT">Output VAT (Sales Invoices)</option>
@@ -300,10 +300,10 @@ export const TaxComplianceView: React.FC = () => {
           </div>
 
           {/* VAT Records Table */}
-          <div className="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+          <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm overflow-hidden">
             <div className="overflow-x-auto">
-              <table className="w-full text-left text-sm text-slate-700">
-                <thead className="bg-slate-50 border-b border-slate-200 text-xs font-bold text-slate-500 uppercase tracking-wider">
+              <table className="w-full text-left text-sm text-slate-700 dark:text-slate-300">
+                <thead className="bg-slate-50 dark:bg-slate-800/50 border-b border-slate-200 dark:border-slate-700 text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
                   <tr>
                     <th className="px-5 py-3">Invoice & Date</th>
                     <th className="px-4 py-3">Counterparty & Tax TIN</th>
@@ -313,46 +313,46 @@ export const TaxComplianceView: React.FC = () => {
                     <th className="px-4 py-3">Status</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-slate-200">
+                <tbody className="divide-y divide-slate-200 dark:divide-slate-700">
                   {filteredVatRecords.map(rec => (
-                    <tr key={rec.id} className="hover:bg-slate-50 transition">
+                    <tr key={rec.id} className="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition">
                       <td className="px-5 py-4">
-                        <div className="font-mono font-bold text-slate-900 text-xs">{rec.invoiceNumber}</div>
-                        <span className="text-[11px] text-slate-400">{rec.invoiceDate} • {rec.period}</span>
+                        <div className="font-mono font-bold text-slate-900 dark:text-slate-100 text-xs">{rec.invoiceNumber}</div>
+                        <span className="text-[11px] text-slate-500 dark:text-slate-400">{rec.invoiceDate} • {rec.period}</span>
                       </td>
                       <td className="px-4 py-4">
-                        <div className="font-semibold text-slate-900 text-xs">{rec.partyName}</div>
-                        <span className="font-mono text-[11px] text-slate-500">{rec.partyVatTin}</span>
+                        <div className="font-semibold text-slate-900 dark:text-slate-100 text-xs">{rec.partyName}</div>
+                        <span className="font-mono text-[11px] text-slate-500 dark:text-slate-400">{rec.partyVatTin}</span>
                         {rec.reverseChargeApplicable && (
-                          <span className="ml-2 px-1.5 py-0.5 rounded bg-purple-50 text-purple-700 text-[10px] font-bold">
+                          <span className="ml-2 px-1.5 py-0.5 rounded bg-purple-50 dark:bg-purple-500/10 text-purple-700 dark:text-purple-300 text-[10px] font-bold">
                             Reverse Charge
                           </span>
                         )}
                       </td>
-                      <td className="px-4 py-4 font-mono text-xs font-medium text-slate-800">
+                      <td className="px-4 py-4 font-mono text-xs font-medium text-slate-800 dark:text-slate-200">
                         OMR {rec.taxableAmountOMR.toLocaleString('en-US', { minimumFractionDigits: 2 })}
                       </td>
                       <td className="px-4 py-4">
                         <span
                           className={`font-mono text-xs font-bold ${
-                            rec.direction === 'OUTPUT_VAT' ? 'text-emerald-700' : 'text-indigo-700'
+                            rec.direction === 'OUTPUT_VAT' ? 'text-emerald-700 dark:text-emerald-300' : 'text-indigo-700 dark:text-indigo-300'
                           }`}
                         >
                           {rec.direction === 'OUTPUT_VAT' ? '+' : '-'} OMR{' '}
                           {rec.vatAmountOMR.toLocaleString('en-US', { minimumFractionDigits: 2 })}
                         </span>
-                        <span className="text-[10px] text-slate-400 block capitalize">
+                        <span className="text-[10px] text-slate-500 dark:text-slate-400 block capitalize">
                           {rec.direction.toLowerCase().replace('_', ' ')}
                         </span>
                       </td>
                       <td className="px-4 py-4 text-center">
-                        <div className="inline-flex items-center gap-1.5 px-2 py-1 rounded-md bg-slate-50 border border-slate-200 text-xs">
-                          <QrCode className="w-3.5 h-3.5 text-slate-600" />
-                          <span className="font-mono text-[11px] text-emerald-600 font-bold">SHA-256 Valid</span>
+                        <div className="inline-flex items-center gap-1.5 px-2 py-1 rounded-md bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 text-xs">
+                          <QrCode className="w-3.5 h-3.5 text-slate-600 dark:text-slate-400" />
+                          <span className="font-mono text-[11px] text-emerald-600 dark:text-emerald-400 font-bold">SHA-256 Valid</span>
                         </div>
                       </td>
                       <td className="px-4 py-4">
-                        <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">
+                        <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-50 dark:bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-500/30">
                           <CheckCircle2 className="w-3 h-3" /> {rec.complianceFlag}
                         </span>
                       </td>
@@ -368,22 +368,22 @@ export const TaxComplianceView: React.FC = () => {
       {/* 2. CORPORATE TAX SCHEDULES (CIT 15%) */}
       {activeSubTab === 'schedules' && (
         <div className="space-y-4">
-          <div className="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
-            <div className="p-5 border-b border-slate-200 flex items-center justify-between">
+          <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm overflow-hidden">
+            <div className="p-5 border-b border-slate-200 dark:border-slate-700 flex items-center justify-between">
               <div>
-                <h3 className="font-bold text-slate-900 text-base">Corporate Income Tax (CIT) Schedule of Adjustments</h3>
-                <p className="text-xs text-slate-500">
+                <h3 className="font-bold text-slate-900 dark:text-slate-100 text-base">Corporate Income Tax (CIT) Schedule of Adjustments</h3>
+                <p className="text-xs text-slate-500 dark:text-slate-400">
                   Reconciliation of IFRS accounting net profit to taxable net profit under Sultanate of Oman Income Tax Law (RD 28/2009).
                 </p>
               </div>
-              <span className="px-3 py-1 bg-slate-100 text-slate-700 font-mono text-xs font-bold rounded-lg">
+              <span className="px-3 py-1 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-mono text-xs font-bold rounded-lg">
                 Statutory CIT Rate: 15.0%
               </span>
             </div>
 
             <div className="overflow-x-auto">
-              <table className="w-full text-left text-sm text-slate-700">
-                <thead className="bg-slate-50 border-b border-slate-200 text-xs font-bold text-slate-500 uppercase tracking-wider">
+              <table className="w-full text-left text-sm text-slate-700 dark:text-slate-300">
+                <thead className="bg-slate-50 dark:bg-slate-800/50 border-b border-slate-200 dark:border-slate-700 text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
                   <tr>
                     <th className="px-5 py-3">Schedule Code</th>
                     <th className="px-4 py-3">Adjustment Description</th>
@@ -394,29 +394,29 @@ export const TaxComplianceView: React.FC = () => {
                     <th className="px-4 py-3">Status</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-slate-200">
+                <tbody className="divide-y divide-slate-200 dark:divide-slate-700">
                   {taxSchedules.map(sched => (
-                    <tr key={sched.id} className="hover:bg-slate-50 transition">
-                      <td className="px-5 py-4 font-mono font-bold text-xs text-slate-800">{sched.scheduleCode}</td>
+                    <tr key={sched.id} className="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition">
+                      <td className="px-5 py-4 font-mono font-bold text-xs text-slate-800 dark:text-slate-200">{sched.scheduleCode}</td>
                       <td className="px-4 py-4">
-                        <p className="font-semibold text-slate-900 text-xs">{sched.description}</p>
-                        <span className="text-[11px] text-slate-400">Prep: {sched.preparedBy} • Rev: {sched.reviewedBy}</span>
+                        <p className="font-semibold text-slate-900 dark:text-slate-100 text-xs">{sched.description}</p>
+                        <span className="text-[11px] text-slate-500 dark:text-slate-400">Prep: {sched.preparedBy} • Rev: {sched.reviewedBy}</span>
                       </td>
-                      <td className="px-4 py-4 font-mono text-xs text-slate-800">
+                      <td className="px-4 py-4 font-mono text-xs text-slate-800 dark:text-slate-200">
                         OMR {sched.accountingBasisOMR.toLocaleString('en-US', { minimumFractionDigits: 2 })}
                       </td>
-                      <td className="px-4 py-4 font-mono text-xs font-bold text-indigo-700">
+                      <td className="px-4 py-4 font-mono text-xs font-bold text-indigo-700 dark:text-indigo-300">
                         {sched.taxAdjustmentsOMR >= 0 ? '+' : ''} OMR{' '}
                         {sched.taxAdjustmentsOMR.toLocaleString('en-US', { minimumFractionDigits: 2 })}
                       </td>
-                      <td className="px-4 py-4 font-mono text-xs font-bold text-slate-900">
+                      <td className="px-4 py-4 font-mono text-xs font-bold text-slate-900 dark:text-slate-100">
                         OMR {sched.taxableBasisOMR.toLocaleString('en-US', { minimumFractionDigits: 2 })}
                       </td>
-                      <td className="px-4 py-4 font-mono text-xs font-bold text-emerald-700">
+                      <td className="px-4 py-4 font-mono text-xs font-bold text-emerald-700 dark:text-emerald-300">
                         OMR {sched.taxLiabilityOMR.toLocaleString('en-US', { minimumFractionDigits: 2 })}
                       </td>
                       <td className="px-4 py-4">
-                        <span className="px-2 py-0.5 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">
+                        <span className="px-2 py-0.5 rounded-full text-xs font-semibold bg-emerald-50 dark:bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-500/30">
                           {sched.status}
                         </span>
                       </td>
@@ -433,51 +433,51 @@ export const TaxComplianceView: React.FC = () => {
       {activeSubTab === 'returns' && (
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {statutoryTaxReturns.map(tr => (
-            <div key={tr.id} className="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between space-y-4">
+            <div key={tr.id} className="bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm flex flex-col justify-between space-y-4">
               <div className="space-y-2">
                 <div className="flex items-center justify-between">
-                  <span className="text-xs font-mono font-bold px-2 py-0.5 rounded bg-slate-100 text-slate-800">
+                  <span className="text-xs font-mono font-bold px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200">
                     {tr.period}
                   </span>
                   <span
                     className={`text-xs font-semibold px-2.5 py-0.5 rounded-full border ${
                       tr.status === 'AUTHORITY_ACCEPTED'
-                        ? 'bg-emerald-50 text-emerald-700 border-emerald-200'
-                        : 'bg-amber-50 text-amber-700 border-amber-200'
+                        ? 'bg-emerald-50 dark:bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 border-emerald-200 dark:border-emerald-500/30'
+                        : 'bg-amber-50 dark:bg-amber-500/10 text-amber-700 dark:text-amber-300 border-amber-200 dark:border-amber-500/30'
                     }`}
                   >
                     {tr.status}
                   </span>
                 </div>
 
-                <h4 className="font-bold text-slate-900 text-sm">
+                <h4 className="font-bold text-slate-900 dark:text-slate-100 text-sm">
                   {tr.returnType.replace(/_/g, ' ')}
                 </h4>
 
-                <div className="p-3 rounded-xl bg-slate-50 border border-slate-100 space-y-1">
-                  <span className="text-[10px] uppercase font-bold text-slate-400 block">Net Tax Payable</span>
-                  <strong className="text-lg font-bold font-mono text-slate-900">
+                <div className="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/50 border border-slate-100 dark:border-slate-800 space-y-1">
+                  <span className="text-[10px] uppercase font-bold text-slate-500 dark:text-slate-400 block">Net Tax Payable</span>
+                  <strong className="text-lg font-bold font-mono text-slate-900 dark:text-slate-100">
                     OMR {tr.netTaxPayableOMR.toLocaleString('en-US', { minimumFractionDigits: 2 })}
                   </strong>
                 </div>
 
-                <div className="text-xs text-slate-500 space-y-1">
+                <div className="text-xs text-slate-500 dark:text-slate-400 space-y-1">
                   <p><strong>Filing Deadline:</strong> {tr.filingDeadline}</p>
                   {tr.acknowledgementNumber && (
-                    <p className="font-mono text-[11px] text-slate-600">
+                    <p className="font-mono text-[11px] text-slate-600 dark:text-slate-400">
                       <strong>Ack No:</strong> {tr.acknowledgementNumber}
                     </p>
                   )}
                   {tr.paymentReference && (
-                    <p className="font-mono text-[11px] text-emerald-600">
+                    <p className="font-mono text-[11px] text-emerald-600 dark:text-emerald-400">
                       <strong>Payment Ref:</strong> {tr.paymentReference}
                     </p>
                   )}
                 </div>
               </div>
 
-              <div className="pt-3 border-t border-slate-100 flex items-center justify-between">
-                <span className="text-xs font-semibold text-slate-600">
+              <div className="pt-3 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between">
+                <span className="text-xs font-semibold text-slate-600 dark:text-slate-400">
                   {tr.paymentStatus === 'PAID' ? '✓ Settled' : '⏳ Payment Pending'}
                 </span>
                 {tr.paymentStatus === 'UNPAID' && (
@@ -496,17 +496,17 @@ export const TaxComplianceView: React.FC = () => {
 
       {/* 4. STATUTORY REPORTING (CBO / MOCIIP / NCSI) */}
       {activeSubTab === 'statutory' && (
-        <div className="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
-          <div className="p-5 border-b border-slate-200">
-            <h3 className="font-bold text-slate-900 text-base">Regulatory & Ministerial Reporting Packages</h3>
-            <p className="text-xs text-slate-500">
+        <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm overflow-hidden">
+          <div className="p-5 border-b border-slate-200 dark:border-slate-700">
+            <h3 className="font-bold text-slate-900 dark:text-slate-100 text-base">Regulatory & Ministerial Reporting Packages</h3>
+            <p className="text-xs text-slate-500 dark:text-slate-400">
               Statutory economic packages filed with Central Bank of Oman, MOCIIP, and National Statistics.
             </p>
           </div>
 
           <div className="overflow-x-auto">
-            <table className="w-full text-left text-sm text-slate-700">
-              <thead className="bg-slate-50 border-b border-slate-200 text-xs font-bold text-slate-500 uppercase tracking-wider">
+            <table className="w-full text-left text-sm text-slate-700 dark:text-slate-300">
+              <thead className="bg-slate-50 dark:bg-slate-800/50 border-b border-slate-200 dark:border-slate-700 text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
                 <tr>
                   <th className="px-5 py-3">Report Name</th>
                   <th className="px-4 py-3">Regulatory Body</th>
@@ -517,23 +517,23 @@ export const TaxComplianceView: React.FC = () => {
                   <th className="px-4 py-3">Status</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-200">
+              <tbody className="divide-y divide-slate-200 dark:divide-slate-700">
                 {statutoryReports.map(rep => (
-                  <tr key={rep.id} className="hover:bg-slate-50 transition">
-                    <td className="px-5 py-4 font-semibold text-slate-900 text-xs">{rep.reportName}</td>
+                  <tr key={rep.id} className="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition">
+                    <td className="px-5 py-4 font-semibold text-slate-900 dark:text-slate-100 text-xs">{rep.reportName}</td>
                     <td className="px-4 py-4">
-                      <span className="font-mono text-xs px-2 py-0.5 rounded bg-slate-100 text-slate-800">
+                      <span className="font-mono text-xs px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200">
                         {rep.regulatoryBody}
                       </span>
                     </td>
-                    <td className="px-4 py-4 text-xs text-slate-600">
+                    <td className="px-4 py-4 text-xs text-slate-600 dark:text-slate-400">
                       {rep.reportingPeriod} ({rep.submissionFrequency})
                     </td>
-                    <td className="px-4 py-4 font-mono text-xs text-slate-700 font-medium">{rep.dueDate}</td>
-                    <td className="px-4 py-4 font-mono text-xs text-slate-500">{rep.submissionChannel}</td>
-                    <td className="px-4 py-4 text-xs text-slate-800">{rep.signedBy}</td>
+                    <td className="px-4 py-4 font-mono text-xs text-slate-700 dark:text-slate-300 font-medium">{rep.dueDate}</td>
+                    <td className="px-4 py-4 font-mono text-xs text-slate-500 dark:text-slate-400">{rep.submissionChannel}</td>
+                    <td className="px-4 py-4 text-xs text-slate-800 dark:text-slate-200">{rep.signedBy}</td>
                     <td className="px-4 py-4">
-                      <span className="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">
+                      <span className="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-50 dark:bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-500/30">
                         {rep.status}
                       </span>
                     </td>

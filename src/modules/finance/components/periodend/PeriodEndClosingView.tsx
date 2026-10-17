@@ -46,14 +46,14 @@ export const PeriodEndClosingView: React.FC = () => {
   return (
     <div className="space-y-6">
       {/* Top Banner */}
-      <div className="bg-slate-900 border border-slate-800 rounded-3xl p-6 text-white shadow-xl flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6">
+      <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 text-slate-900 dark:text-white shadow-xl flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6">
         <div className="space-y-2 max-w-2xl">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-500/20 text-purple-400 text-xs font-semibold uppercase tracking-wider">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-500/20 text-purple-600 dark:text-purple-400 text-xs font-semibold uppercase tracking-wider">
             <CalendarCheck className="w-3.5 h-3.5" />
             Module 16.06 — Period-End Accounting
           </div>
           <h2 className="text-2xl font-bold tracking-tight">Period-End Closing, Accruals & Year-End Rollover</h2>
-          <p className="text-sm text-slate-400">
+          <p className="text-sm text-slate-600 dark:text-slate-400">
             Multi-subledger soft and hard period closing controls (AP, AR, Inventory, GL), auto-reversing accruals, prepayment amortization, and fiscal year closing.
           </p>
         </div>
@@ -72,7 +72,7 @@ export const PeriodEndClosingView: React.FC = () => {
       {yearEndSuccess && (
         <div className="bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200 dark:border-emerald-800 p-4 rounded-2xl flex items-center justify-between text-xs text-emerald-800 dark:text-emerald-200">
           <div className="flex items-center gap-2">
-            <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+            <CheckCircle2 className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0" />
             <span>
               Fiscal Year <strong>{selectedFiscalYear}</strong> successfully closed! All Revenue and Expense accounts zeroed and Net Income rolled into <strong>Retained Earnings (3020)</strong>.
             </span>
@@ -124,7 +124,7 @@ export const PeriodEndClosingView: React.FC = () => {
             <div className="p-5 border-b border-slate-100 dark:border-slate-800 flex justify-between items-center">
               <div>
                 <h3 className="text-base font-bold text-slate-900 dark:text-white">Subledger Period Lock Matrix (FY 2026)</h3>
-                <p className="text-xs text-slate-500">
+                <p className="text-xs text-slate-500 dark:text-slate-400">
                   Granular control to prevent unauthorized back-dated postings across AP, AR, Inventory and GL.
                 </p>
               </div>
@@ -133,7 +133,7 @@ export const PeriodEndClosingView: React.FC = () => {
             <div className="overflow-x-auto">
               <table className="w-full text-left text-xs">
                 <thead>
-                  <tr className="bg-slate-50 dark:bg-slate-800/70 text-slate-500 font-semibold border-b border-slate-200 dark:border-slate-800">
+                  <tr className="bg-slate-50 dark:bg-slate-800/70 text-slate-500 dark:text-slate-400 font-semibold border-b border-slate-200 dark:border-slate-800">
                     <th className="py-3 px-4">Fiscal Period</th>
                     <th className="py-3 px-4">Date Range</th>
                     <th className="py-3 px-4 text-center">Accounts Payable (AP)</th>
@@ -149,33 +149,33 @@ export const PeriodEndClosingView: React.FC = () => {
                       <td className="py-3 px-4 font-bold text-slate-900 dark:text-white">
                         {p.periodName} ({p.periodCode})
                       </td>
-                      <td className="py-3 px-4 text-slate-500 font-mono text-[11px]">
+                      <td className="py-3 px-4 text-slate-500 dark:text-slate-400 font-mono text-[11px]">
                         {p.startDate} to {p.endDate}
                       </td>
                       <td className="py-3 px-4 text-center">
                         <span className={`inline-flex items-center gap-1 text-[10px] font-bold px-2.5 py-1 rounded-full ${
-                          p.apStatus === 'HARD_CLOSED' ? 'bg-red-50 text-red-600 border border-red-200' : 'bg-emerald-50 text-emerald-600 border border-emerald-200'
+                          p.apStatus === 'HARD_CLOSED' ? 'bg-red-50 dark:bg-red-500/10 text-red-600 dark:text-red-400 border border-red-200 dark:border-red-500/30' : 'bg-emerald-50 dark:bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-500/30'
                         }`}>
                           {p.apStatus === 'HARD_CLOSED' ? <Lock className="w-3 h-3" /> : <Unlock className="w-3 h-3" />} {p.apStatus}
                         </span>
                       </td>
                       <td className="py-3 px-4 text-center">
                         <span className={`inline-flex items-center gap-1 text-[10px] font-bold px-2.5 py-1 rounded-full ${
-                          p.arStatus === 'HARD_CLOSED' ? 'bg-red-50 text-red-600 border border-red-200' : 'bg-emerald-50 text-emerald-600 border border-emerald-200'
+                          p.arStatus === 'HARD_CLOSED' ? 'bg-red-50 dark:bg-red-500/10 text-red-600 dark:text-red-400 border border-red-200 dark:border-red-500/30' : 'bg-emerald-50 dark:bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-500/30'
                         }`}>
                           {p.arStatus === 'HARD_CLOSED' ? <Lock className="w-3 h-3" /> : <Unlock className="w-3 h-3" />} {p.arStatus}
                         </span>
                       </td>
                       <td className="py-3 px-4 text-center">
                         <span className={`inline-flex items-center gap-1 text-[10px] font-bold px-2.5 py-1 rounded-full ${
-                          p.glStatus === 'HARD_CLOSED' ? 'bg-red-50 text-red-600 border border-red-200' : 'bg-emerald-50 text-emerald-600 border border-emerald-200'
+                          p.glStatus === 'HARD_CLOSED' ? 'bg-red-50 dark:bg-red-500/10 text-red-600 dark:text-red-400 border border-red-200 dark:border-red-500/30' : 'bg-emerald-50 dark:bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-500/30'
                         }`}>
                           {p.glStatus === 'HARD_CLOSED' ? <Lock className="w-3 h-3" /> : <Unlock className="w-3 h-3" />} {p.glStatus}
                         </span>
                       </td>
                       <td className="py-3 px-4 text-center">
                         <span className={`inline-flex items-center gap-1 text-[10px] font-bold px-2.5 py-1 rounded-full ${
-                          p.inventoryStatus === 'HARD_CLOSED' ? 'bg-red-50 text-red-600 border border-red-200' : 'bg-emerald-50 text-emerald-600 border border-emerald-200'
+                          p.inventoryStatus === 'HARD_CLOSED' ? 'bg-red-50 dark:bg-red-500/10 text-red-600 dark:text-red-400 border border-red-200 dark:border-red-500/30' : 'bg-emerald-50 dark:bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-500/30'
                         }`}>
                           {p.inventoryStatus === 'HARD_CLOSED' ? <Lock className="w-3 h-3" /> : <Unlock className="w-3 h-3" />} {p.inventoryStatus}
                         </span>
@@ -191,7 +191,7 @@ export const PeriodEndClosingView: React.FC = () => {
                         ) : (
                           <button
                             onClick={() => lockFiscalPeriod(p.id, 'all', 'OPEN')}
-                            className="px-3 py-1 text-xs font-bold bg-slate-200 hover:bg-slate-300 text-slate-800 rounded-xl cursor-pointer"
+                            className="px-3 py-1 text-xs font-bold bg-slate-200 dark:bg-slate-700 hover:bg-slate-300 dark:hover:bg-slate-600 text-slate-800 dark:text-slate-200 rounded-xl cursor-pointer"
                           >
                             Reopen Period
                           </button>
@@ -215,7 +215,7 @@ export const PeriodEndClosingView: React.FC = () => {
               className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-5 shadow-sm space-y-4"
             >
               <div className="flex justify-between items-start">
-                <span className="text-[10px] font-bold px-2.5 py-1 rounded-full bg-purple-50 text-purple-600 border border-purple-200">
+                <span className="text-[10px] font-bold px-2.5 py-1 rounded-full bg-purple-50 dark:bg-purple-500/10 text-purple-600 dark:text-purple-400 border border-purple-200 dark:border-purple-500/30">
                   {item.type}
                 </span>
                 <span className="text-xs font-mono font-bold text-slate-900 dark:text-white">
@@ -225,29 +225,29 @@ export const PeriodEndClosingView: React.FC = () => {
 
               <div>
                 <h4 className="font-bold text-sm text-slate-900 dark:text-white">{item.title}</h4>
-                <p className="text-xs text-slate-500 font-mono mt-1">
+                <p className="text-xs text-slate-500 dark:text-slate-400 font-mono mt-1">
                   Schedule: {item.startDate} to {item.endDate}
                 </p>
               </div>
 
               <div className="space-y-1.5 pt-2 border-t border-slate-100 dark:border-slate-800 font-mono text-xs">
                 <div className="flex justify-between">
-                  <span className="text-slate-500 font-sans">Total Booking Amount:</span>
+                  <span className="text-slate-500 dark:text-slate-400 font-sans">Total Booking Amount:</span>
                   <strong>{currency} {item.totalAmount.toLocaleString()}</strong>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-slate-500 font-sans">Monthly Amortization:</span>
-                  <span className="text-purple-600">{currency} {item.monthlyAmortization.toLocaleString()}/mo</span>
+                  <span className="text-slate-500 dark:text-slate-400 font-sans">Monthly Amortization:</span>
+                  <span className="text-purple-600 dark:text-purple-400">{currency} {item.monthlyAmortization.toLocaleString()}/mo</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-slate-500 font-sans">Remaining Carrying Balance:</span>
-                  <span className="text-emerald-600 font-bold">{currency} {item.remainingAmount.toLocaleString()}</span>
+                  <span className="text-slate-500 dark:text-slate-400 font-sans">Remaining Carrying Balance:</span>
+                  <span className="text-emerald-600 dark:text-emerald-400 font-bold">{currency} {item.remainingAmount.toLocaleString()}</span>
                 </div>
               </div>
 
-              <div className="pt-2 text-[10px] text-slate-400 flex justify-between items-center border-t border-slate-100 dark:border-slate-800">
+              <div className="pt-2 text-[10px] text-slate-600 dark:text-slate-400 flex justify-between items-center border-t border-slate-100 dark:border-slate-800">
                 <span>Auto-Reversal: {item.autoReverse ? 'Enabled (Next Period 1st)' : 'No (Amortized)'}</span>
-                <span className="text-emerald-500 font-bold">{item.status}</span>
+                <span className="text-emerald-600 dark:text-emerald-500 font-bold">{item.status}</span>
               </div>
             </div>
           ))}
@@ -259,7 +259,7 @@ export const PeriodEndClosingView: React.FC = () => {
         <div className="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 p-8 shadow-sm max-w-3xl space-y-6">
           <div>
             <h3 className="text-lg font-bold text-slate-900 dark:text-white">Fiscal Year-End Closing Wizard</h3>
-            <p className="text-xs text-slate-500">
+            <p className="text-xs text-slate-500 dark:text-slate-400">
               Automated year-end procedure: Zero all temporary Revenue & Expense accounts, calculate Net Income, and post closing transfer to <strong>Retained Earnings (Account 3020)</strong>.
             </p>
           </div>
@@ -268,19 +268,19 @@ export const PeriodEndClosingView: React.FC = () => {
             <h4 className="font-bold text-purple-900 dark:text-purple-300">Year-End Closing Checklist:</h4>
             <div className="space-y-2 text-purple-800 dark:text-purple-200">
               <div className="flex items-center gap-2">
-                <CheckCircle2 className="w-4 h-4 text-emerald-500" />
+                <CheckCircle2 className="w-4 h-4 text-emerald-600 dark:text-emerald-500" />
                 <span>All 12 monthly subledger periods (Jan–Dec) are Hard Closed.</span>
               </div>
               <div className="flex items-center gap-2">
-                <CheckCircle2 className="w-4 h-4 text-emerald-500" />
+                <CheckCircle2 className="w-4 h-4 text-emerald-600 dark:text-emerald-500" />
                 <span>Bank reconciliations complete with zero unreconciled variances.</span>
               </div>
               <div className="flex items-center gap-2">
-                <CheckCircle2 className="w-4 h-4 text-emerald-500" />
+                <CheckCircle2 className="w-4 h-4 text-emerald-600 dark:text-emerald-500" />
                 <span>Fixed asset depreciation and impairment tests fully executed.</span>
               </div>
               <div className="flex items-center gap-2">
-                <CheckCircle2 className="w-4 h-4 text-emerald-500" />
+                <CheckCircle2 className="w-4 h-4 text-emerald-600 dark:text-emerald-500" />
                 <span>Statutory 10% legal reserve calculated per Oman Commercial Companies Law.</span>
               </div>
             </div>

@@ -118,15 +118,15 @@ export const WorkflowApprovalManagementView: React.FC<{ activeTab?: string }> = 
     {
       key: 'code',
       header: 'Workflow Code',
-      accessor: item => <span className="font-mono font-bold text-indigo-700">{item.code}</span>
+      accessor: item => <span className="font-mono font-bold text-indigo-700 dark:text-indigo-300">{item.code}</span>
     },
     {
       key: 'name',
       header: 'Pipeline Name & Document',
       accessor: item => (
         <div>
-          <div className="font-semibold text-slate-900">{item.name}</div>
-          <div className="text-[11px] text-slate-500">
+          <div className="font-semibold text-slate-900 dark:text-slate-100">{item.name}</div>
+          <div className="text-[11px] text-slate-500 dark:text-slate-400">
             {item.module} • <strong>{item.process}</strong>
           </div>
         </div>
@@ -140,12 +140,12 @@ export const WorkflowApprovalManagementView: React.FC<{ activeTab?: string }> = 
           {item.stages.map((st, i) => (
             <React.Fragment key={st.stageNumber}>
               <span
-                className="px-2 py-0.5 rounded bg-slate-100 border border-slate-200 text-slate-700 text-[10px] font-medium"
+                className="px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 text-[10px] font-medium"
                 title={`${st.approverValue} (SLA: ${st.timeoutHours}h)`}
               >
                 {st.stageNumber}. {st.name}
               </span>
-              {i < item.stages.length - 1 && <ArrowRight className="w-3 h-3 text-slate-400" />}
+              {i < item.stages.length - 1 && <ArrowRight className="w-3 h-3 text-slate-500 dark:text-slate-400" />}
             </React.Fragment>
           ))}
         </div>
@@ -155,7 +155,7 @@ export const WorkflowApprovalManagementView: React.FC<{ activeTab?: string }> = 
       key: 'triggerEvent',
       header: 'Trigger Event',
       accessor: item => (
-        <span className="font-mono text-[11px] font-semibold text-slate-800 bg-slate-100 px-2 py-0.5 rounded">
+        <span className="font-mono text-[11px] font-semibold text-slate-800 dark:text-slate-200 bg-slate-100 dark:bg-slate-800 px-2 py-0.5 rounded">
           {item.triggerEvent}
         </span>
       )
@@ -174,8 +174,8 @@ export const WorkflowApprovalManagementView: React.FC<{ activeTab?: string }> = 
       header: 'Primary Authority (Delegator)',
       accessor: item => (
         <div>
-          <div className="font-semibold text-slate-900">{item.delegatorName}</div>
-          <div className="text-[11px] text-slate-500 font-mono">ID: {item.delegatorId}</div>
+          <div className="font-semibold text-slate-900 dark:text-slate-100">{item.delegatorName}</div>
+          <div className="text-[11px] text-slate-500 dark:text-slate-400 font-mono">ID: {item.delegatorId}</div>
         </div>
       )
     },
@@ -184,8 +184,8 @@ export const WorkflowApprovalManagementView: React.FC<{ activeTab?: string }> = 
       header: 'Proxy Holder (Delegate)',
       accessor: item => (
         <div>
-          <div className="font-semibold text-indigo-700">{item.delegateName}</div>
-          <div className="text-[11px] text-slate-500 font-mono">ID: {item.delegateId}</div>
+          <div className="font-semibold text-indigo-700 dark:text-indigo-300">{item.delegateName}</div>
+          <div className="text-[11px] text-slate-500 dark:text-slate-400 font-mono">ID: {item.delegateId}</div>
         </div>
       )
     },
@@ -193,7 +193,7 @@ export const WorkflowApprovalManagementView: React.FC<{ activeTab?: string }> = 
       key: 'validity',
       header: 'Validity Period',
       accessor: item => (
-        <div className="text-[11px] text-slate-600">
+        <div className="text-[11px] text-slate-600 dark:text-slate-400">
           <span>
             {item.startDate} to {item.endDate}
           </span>
@@ -204,7 +204,7 @@ export const WorkflowApprovalManagementView: React.FC<{ activeTab?: string }> = 
       key: 'maxApprovalLimitOMR',
       header: 'Delegated Cap (OMR)',
       accessor: item => (
-        <span className="font-mono font-bold text-slate-800">
+        <span className="font-mono font-bold text-slate-800 dark:text-slate-200">
           {item.maxApprovalLimitOMR.toLocaleString()} OMR
         </span>
       )
@@ -223,8 +223,8 @@ export const WorkflowApprovalManagementView: React.FC<{ activeTab?: string }> = 
       header: 'Module & Doc Type',
       accessor: item => (
         <div>
-          <div className="font-semibold text-slate-900">{item.module}</div>
-          <div className="text-[11px] text-slate-500">{item.transactionType}</div>
+          <div className="font-semibold text-slate-900 dark:text-slate-100">{item.module}</div>
+          <div className="text-[11px] text-slate-500 dark:text-slate-400">{item.transactionType}</div>
         </div>
       )
     },
@@ -232,7 +232,7 @@ export const WorkflowApprovalManagementView: React.FC<{ activeTab?: string }> = 
       key: 'threshold',
       header: 'Monetary Threshold Band (OMR)',
       accessor: item => (
-        <span className="font-mono text-slate-800 font-semibold">
+        <span className="font-mono text-slate-800 dark:text-slate-200 font-semibold">
           {item.minAmount.toLocaleString()} OMR —{' '}
           {item.maxAmount ? `${item.maxAmount.toLocaleString()} OMR` : 'Unlimited (Executive Board)'}
         </span>
@@ -244,7 +244,7 @@ export const WorkflowApprovalManagementView: React.FC<{ activeTab?: string }> = 
       accessor: item => (
         <div className="flex items-center gap-1 flex-wrap">
           {item.approvalLevels.map(lvl => (
-            <span key={lvl} className="px-2 py-0.5 rounded-md bg-indigo-50 text-indigo-700 font-medium text-[11px]">
+            <span key={lvl} className="px-2 py-0.5 rounded-md bg-indigo-50 dark:bg-indigo-500/10 text-indigo-700 dark:text-indigo-300 font-medium text-[11px]">
               {lvl}
             </span>
           ))}
@@ -269,7 +269,7 @@ export const WorkflowApprovalManagementView: React.FC<{ activeTab?: string }> = 
           value={delegations.filter(d => d.status === 'Active').length}
           status="neutral"
           description="Active Proxy Authorizations"
-          icon={<UserCheck className="w-5 h-5 text-indigo-600" />}
+          icon={<UserCheck className="w-5 h-5 text-indigo-600 dark:text-indigo-400" />}
         />
         <MetricCard
           label="Matrix Threshold Bands"
@@ -283,16 +283,16 @@ export const WorkflowApprovalManagementView: React.FC<{ activeTab?: string }> = 
           value={escalationRules.length}
           status="positive"
           description="Bottleneck Prevention"
-          icon={<Zap className="w-5 h-5 text-amber-600" />}
+          icon={<Zap className="w-5 h-5 text-amber-600 dark:text-amber-400" />}
         />
       </div>
 
       {/* Tabs */}
-      <div className="flex items-center gap-2 border-b border-slate-200 overflow-x-auto pb-1">
+      <div className="flex items-center gap-2 border-b border-slate-200 dark:border-slate-700 overflow-x-auto pb-1">
         <button
           onClick={() => setActiveTab('workflows')}
           className={`flex items-center gap-2 px-4 py-2.5 rounded-lg text-xs font-semibold whitespace-nowrap transition-colors cursor-pointer ${
-            activeTab === 'workflows' ? 'bg-indigo-600 text-white shadow-xs' : 'text-slate-600 hover:bg-slate-100'
+            activeTab === 'workflows' ? 'bg-indigo-600 text-white shadow-xs' : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800'
           }`}
         >
           <GitCommit className="w-4 h-4" />
@@ -302,7 +302,7 @@ export const WorkflowApprovalManagementView: React.FC<{ activeTab?: string }> = 
         <button
           onClick={() => setActiveTab('matrices')}
           className={`flex items-center gap-2 px-4 py-2.5 rounded-lg text-xs font-semibold whitespace-nowrap transition-colors cursor-pointer ${
-            activeTab === 'matrices' ? 'bg-indigo-600 text-white shadow-xs' : 'text-slate-600 hover:bg-slate-100'
+            activeTab === 'matrices' ? 'bg-indigo-600 text-white shadow-xs' : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800'
           }`}
         >
           <Sliders className="w-4 h-4" />
@@ -312,7 +312,7 @@ export const WorkflowApprovalManagementView: React.FC<{ activeTab?: string }> = 
         <button
           onClick={() => setActiveTab('delegations')}
           className={`flex items-center gap-2 px-4 py-2.5 rounded-lg text-xs font-semibold whitespace-nowrap transition-colors cursor-pointer ${
-            activeTab === 'delegations' ? 'bg-indigo-600 text-white shadow-xs' : 'text-slate-600 hover:bg-slate-100'
+            activeTab === 'delegations' ? 'bg-indigo-600 text-white shadow-xs' : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800'
           }`}
         >
           <UserCheck className="w-4 h-4" />
@@ -322,7 +322,7 @@ export const WorkflowApprovalManagementView: React.FC<{ activeTab?: string }> = 
         <button
           onClick={() => setActiveTab('escalations')}
           className={`flex items-center gap-2 px-4 py-2.5 rounded-lg text-xs font-semibold whitespace-nowrap transition-colors cursor-pointer ${
-            activeTab === 'escalations' ? 'bg-indigo-600 text-white shadow-xs' : 'text-slate-600 hover:bg-slate-100'
+            activeTab === 'escalations' ? 'bg-indigo-600 text-white shadow-xs' : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800'
           }`}
         >
           <Zap className="w-4 h-4" />
@@ -349,7 +349,7 @@ export const WorkflowApprovalManagementView: React.FC<{ activeTab?: string }> = 
                   status: item.status === 'Active' ? 'Draft' : 'Active'
                 })
               }
-              className="text-xs text-indigo-600 hover:text-indigo-800 font-semibold cursor-pointer"
+              className="text-xs text-indigo-600 dark:text-indigo-400 hover:text-indigo-800 dark:hover:text-indigo-200 font-semibold cursor-pointer"
             >
               {item.status === 'Active' ? 'Deactivate' : 'Activate'}
             </button>
@@ -388,12 +388,12 @@ export const WorkflowApprovalManagementView: React.FC<{ activeTab?: string }> = 
             item.status === 'Active' ? (
               <button
                 onClick={() => revokeDelegation(item.id)}
-                className="px-2.5 py-1 rounded text-xs font-semibold border border-rose-300 text-rose-700 hover:bg-rose-50 cursor-pointer"
+                className="px-2.5 py-1 rounded text-xs font-semibold border border-rose-300 dark:border-rose-500/40 text-rose-700 dark:text-rose-300 hover:bg-rose-50 dark:hover:bg-rose-500/10 cursor-pointer"
               >
                 Revoke Proxy
               </button>
             ) : (
-              <span className="text-xs text-slate-400">Revoked</span>
+              <span className="text-xs text-slate-500 dark:text-slate-400">Revoked</span>
             )
           )}
         />
@@ -401,11 +401,11 @@ export const WorkflowApprovalManagementView: React.FC<{ activeTab?: string }> = 
 
       {/* Tab 4: Escalations */}
       {activeTab === 'escalations' && (
-        <div className="bg-white rounded-xl border border-slate-200 p-6 shadow-sm">
-          <div className="flex items-center justify-between border-b border-slate-200 pb-4 mb-5">
+        <div className="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-700 p-6 shadow-sm">
+          <div className="flex items-center justify-between border-b border-slate-200 dark:border-slate-700 pb-4 mb-5">
             <div>
-              <h3 className="text-base font-bold text-slate-900">SLA Bottleneck Auto-Escalation Rules</h3>
-              <p className="text-xs text-slate-500 mt-0.5">
+              <h3 className="text-base font-bold text-slate-900 dark:text-slate-100">SLA Bottleneck Auto-Escalation Rules</h3>
+              <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
                 Automated re-routing and reminder dispatches when approval steps exceed defined turnaround windows
               </p>
             </div>
@@ -427,27 +427,27 @@ export const WorkflowApprovalManagementView: React.FC<{ activeTab?: string }> = 
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {escalationRules.map(esc => (
-              <div key={esc.id} className="border border-slate-200 rounded-xl p-4 bg-slate-50/60 shadow-xs space-y-3">
+              <div key={esc.id} className="border border-slate-200 dark:border-slate-700 rounded-xl p-4 bg-slate-50/60 dark:bg-slate-800/60 shadow-xs space-y-3">
                 <div className="flex items-start justify-between">
                   <div>
-                    <span className="font-mono text-xs font-bold text-indigo-700">{esc.workflowCode}</span>
-                    <h4 className="font-bold text-slate-900 text-sm mt-0.5">
+                    <span className="font-mono text-xs font-bold text-indigo-700 dark:text-indigo-300">{esc.workflowCode}</span>
+                    <h4 className="font-bold text-slate-900 dark:text-slate-100 text-sm mt-0.5">
                       Trigger SLA: Exceeds {esc.triggerAfterHours} Hours
                     </h4>
                   </div>
-                  <span className="px-2 py-0.5 rounded bg-amber-100 text-amber-800 text-[11px] font-bold">
+                  <span className="px-2 py-0.5 rounded bg-amber-100 dark:bg-amber-500/20 text-amber-800 dark:text-amber-200 text-[11px] font-bold">
                     Active SLA
                   </span>
                 </div>
 
                 <div className="text-xs space-y-2">
                   <div>
-                    <span className="text-slate-500 font-medium">Automatic Remediation:</span>
-                    <div className="text-slate-800 font-semibold mt-0.5">{esc.escalationAction}</div>
+                    <span className="text-slate-500 dark:text-slate-400 font-medium">Automatic Remediation:</span>
+                    <div className="text-slate-800 dark:text-slate-200 font-semibold mt-0.5">{esc.escalationAction}</div>
                   </div>
-                  <div className="pt-2 border-t border-slate-200 flex justify-between">
-                    <span className="text-slate-500">Escalates To:</span>
-                    <span className="font-mono font-bold text-slate-700">{esc.targetEscalationRole}</span>
+                  <div className="pt-2 border-t border-slate-200 dark:border-slate-700 flex justify-between">
+                    <span className="text-slate-500 dark:text-slate-400">Escalates To:</span>
+                    <span className="font-mono font-bold text-slate-700 dark:text-slate-300">{esc.targetEscalationRole}</span>
                   </div>
                 </div>
               </div>
@@ -467,35 +467,35 @@ export const WorkflowApprovalManagementView: React.FC<{ activeTab?: string }> = 
       >
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
-            <label className="block text-slate-700 font-semibold mb-1">Workflow Code *</label>
+            <label className="block text-slate-700 dark:text-slate-300 font-semibold mb-1">Workflow Code *</label>
             <input
               type="text"
               required
               value={wfForm.code}
               onChange={e => setWfForm({ ...wfForm, code: e.target.value.toUpperCase() })}
               placeholder="e.g. WF-PAYROLL-01"
-              className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg font-mono text-xs"
+              className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-lg font-mono text-xs"
             />
           </div>
 
           <div>
-            <label className="block text-slate-700 font-semibold mb-1">Pipeline Name *</label>
+            <label className="block text-slate-700 dark:text-slate-300 font-semibold mb-1">Pipeline Name *</label>
             <input
               type="text"
               required
               value={wfForm.name}
               onChange={e => setWfForm({ ...wfForm, name: e.target.value })}
               placeholder="e.g. Monthly Executive Payroll Run"
-              className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-xs"
+              className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-lg text-xs"
             />
           </div>
 
           <div>
-            <label className="block text-slate-700 font-semibold mb-1">Target ERP Module</label>
+            <label className="block text-slate-700 dark:text-slate-300 font-semibold mb-1">Target ERP Module</label>
             <select
               value={wfForm.module}
               onChange={e => setWfForm({ ...wfForm, module: e.target.value })}
-              className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-xs"
+              className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-lg text-xs"
             >
               <option value="Finance & Accounting">Finance & Accounting</option>
               <option value="Procurement">Procurement</option>
@@ -506,25 +506,25 @@ export const WorkflowApprovalManagementView: React.FC<{ activeTab?: string }> = 
           </div>
 
           <div>
-            <label className="block text-slate-700 font-semibold mb-1">Document Type</label>
+            <label className="block text-slate-700 dark:text-slate-300 font-semibold mb-1">Document Type</label>
             <input
               type="text"
               value={wfForm.documentType}
               onChange={e => setWfForm({ ...wfForm, documentType: e.target.value })}
               placeholder="e.g. Bank Payment Batch"
-              className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-xs"
+              className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-lg text-xs"
             />
           </div>
 
           <div className="sm:col-span-2">
-            <label className="block text-slate-700 font-semibold mb-1">
+            <label className="block text-slate-700 dark:text-slate-300 font-semibold mb-1">
               Dual Sign-Off Threshold (OMR)
             </label>
             <input
               type="number"
               value={wfForm.requiresDualApprovalAboveOMR}
               onChange={e => setWfForm({ ...wfForm, requiresDualApprovalAboveOMR: Number(e.target.value) })}
-              className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg font-mono text-xs"
+              className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-lg font-mono text-xs"
             />
           </div>
         </div>
@@ -541,67 +541,67 @@ export const WorkflowApprovalManagementView: React.FC<{ activeTab?: string }> = 
       >
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
-            <label className="block text-slate-700 font-semibold mb-1">Primary Delegator *</label>
+            <label className="block text-slate-700 dark:text-slate-300 font-semibold mb-1">Primary Delegator *</label>
             <input
               type="text"
               disabled
               value={`${delegationForm.delegatorName} (${delegationForm.delegatorId})`}
-              className="w-full px-3 py-2 bg-slate-100 border border-slate-200 rounded-lg text-xs font-semibold text-slate-700"
+              className="w-full px-3 py-2 bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-xs font-semibold text-slate-700 dark:text-slate-300"
             />
           </div>
 
           <div>
-            <label className="block text-slate-700 font-semibold mb-1">Proxy Delegate *</label>
+            <label className="block text-slate-700 dark:text-slate-300 font-semibold mb-1">Proxy Delegate *</label>
             <input
               type="text"
               value={delegationForm.delegateName}
               onChange={e => setDelegationForm({ ...delegationForm, delegateName: e.target.value })}
-              className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-xs font-semibold"
+              className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-lg text-xs font-semibold"
             />
           </div>
 
           <div>
-            <label className="block text-slate-700 font-semibold mb-1">Start Date *</label>
+            <label className="block text-slate-700 dark:text-slate-300 font-semibold mb-1">Start Date *</label>
             <input
               type="date"
               required
               value={delegationForm.startDate}
               onChange={e => setDelegationForm({ ...delegationForm, startDate: e.target.value })}
-              className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-xs"
+              className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-lg text-xs"
             />
           </div>
 
           <div>
-            <label className="block text-slate-700 font-semibold mb-1">End Date *</label>
+            <label className="block text-slate-700 dark:text-slate-300 font-semibold mb-1">End Date *</label>
             <input
               type="date"
               required
               value={delegationForm.endDate}
               onChange={e => setDelegationForm({ ...delegationForm, endDate: e.target.value })}
-              className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-xs"
+              className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-lg text-xs"
             />
           </div>
 
           <div className="sm:col-span-2">
-            <label className="block text-slate-700 font-semibold mb-1">Maximum Financial Cap (OMR) *</label>
+            <label className="block text-slate-700 dark:text-slate-300 font-semibold mb-1">Maximum Financial Cap (OMR) *</label>
             <input
               type="number"
               required
               value={delegationForm.maxApprovalLimitOMR}
               onChange={e => setDelegationForm({ ...delegationForm, maxApprovalLimitOMR: Number(e.target.value) })}
-              className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg font-mono text-xs"
+              className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-lg font-mono text-xs"
             />
           </div>
 
           <div className="sm:col-span-2">
-            <label className="block text-slate-700 font-semibold mb-1">Delegation Justification *</label>
+            <label className="block text-slate-700 dark:text-slate-300 font-semibold mb-1">Delegation Justification *</label>
             <textarea
               rows={2}
               required
               value={delegationForm.reason}
               onChange={e => setDelegationForm({ ...delegationForm, reason: e.target.value })}
               placeholder="e.g. Official overseas mission; financial approvals transferred to deputy."
-              className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-xs"
+              className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-lg text-xs"
             />
           </div>
         </div>
@@ -618,54 +618,54 @@ export const WorkflowApprovalManagementView: React.FC<{ activeTab?: string }> = 
       >
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
-            <label className="block text-slate-700 font-semibold mb-1">Target Module</label>
+            <label className="block text-slate-700 dark:text-slate-300 font-semibold mb-1">Target Module</label>
             <input
               type="text"
               value={matrixForm.module}
               onChange={e => setMatrixForm({ ...matrixForm, module: e.target.value })}
-              className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-xs"
+              className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-lg text-xs"
             />
           </div>
 
           <div>
-            <label className="block text-slate-700 font-semibold mb-1">Document Type</label>
+            <label className="block text-slate-700 dark:text-slate-300 font-semibold mb-1">Document Type</label>
             <input
               type="text"
               value={matrixForm.documentType}
               onChange={e => setMatrixForm({ ...matrixForm, documentType: e.target.value })}
-              className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-xs"
+              className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-lg text-xs"
             />
           </div>
 
           <div>
-            <label className="block text-slate-700 font-semibold mb-1">Min Threshold (OMR)</label>
+            <label className="block text-slate-700 dark:text-slate-300 font-semibold mb-1">Min Threshold (OMR)</label>
             <input
               type="number"
               value={matrixForm.minAmountOMR}
               onChange={e => setMatrixForm({ ...matrixForm, minAmountOMR: Number(e.target.value) })}
-              className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg font-mono text-xs"
+              className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-lg font-mono text-xs"
             />
           </div>
 
           <div>
-            <label className="block text-slate-700 font-semibold mb-1">Max Threshold (OMR)</label>
+            <label className="block text-slate-700 dark:text-slate-300 font-semibold mb-1">Max Threshold (OMR)</label>
             <input
               type="number"
               value={matrixForm.maxAmountOMR || ''}
               onChange={e => setMatrixForm({ ...matrixForm, maxAmountOMR: Number(e.target.value) || null })}
               placeholder="Leave blank for unlimited"
-              className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg font-mono text-xs"
+              className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-lg font-mono text-xs"
             />
           </div>
 
           <div className="sm:col-span-2">
-            <label className="block text-slate-700 font-semibold mb-1">Required Authority Role</label>
+            <label className="block text-slate-700 dark:text-slate-300 font-semibold mb-1">Required Authority Role</label>
             <input
               type="text"
               value={matrixForm.requiredRole}
               onChange={e => setMatrixForm({ ...matrixForm, requiredRole: e.target.value })}
               placeholder="e.g. Chief Executive Officer"
-              className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-xs font-semibold"
+              className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-lg text-xs font-semibold"
             />
           </div>
         </div>

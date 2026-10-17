@@ -48,31 +48,31 @@ export const ExternalAuditView: React.FC = () => {
     switch (status) {
       case 'ACCEPTED':
         return (
-          <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">
+          <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-bold bg-emerald-50 dark:bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-500/30">
             <CheckCircle2 className="w-3 h-3" /> Accepted by Auditor
           </span>
         );
       case 'SUBMITTED':
         return (
-          <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-bold bg-indigo-50 text-indigo-700 border border-indigo-200">
+          <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-bold bg-indigo-50 dark:bg-indigo-500/10 text-indigo-700 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-500/30">
             <Clock className="w-3 h-3" /> Under Review
           </span>
         );
       case 'IN_PREPARATION':
         return (
-          <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-bold bg-amber-50 text-amber-700 border border-amber-200">
+          <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-bold bg-amber-50 dark:bg-amber-500/10 text-amber-700 dark:text-amber-300 border border-amber-200 dark:border-amber-500/30">
             <Clock className="w-3 h-3" /> In Preparation
           </span>
         );
       case 'REQUESTED':
         return (
-          <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-bold bg-slate-100 text-slate-700 border border-slate-200">
+          <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-bold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700">
             <AlertCircle className="w-3 h-3" /> Requested
           </span>
         );
       case 'REJECTED':
         return (
-          <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-bold bg-rose-50 text-rose-700 border border-rose-200">
+          <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-bold bg-rose-50 dark:bg-rose-500/10 text-rose-700 dark:text-rose-300 border border-rose-200 dark:border-rose-500/30">
             <AlertCircle className="w-3 h-3" /> Rejected / Clarify
           </span>
         );
@@ -92,38 +92,38 @@ export const ExternalAuditView: React.FC = () => {
   return (
     <div className="space-y-6">
       {/* Submodule Header */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm">
         <div>
           <div className="flex items-center gap-2">
-            <span className="text-xs font-bold font-mono px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-700">
+            <span className="text-xs font-bold font-mono px-2.5 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">
               17.06
             </span>
-            <h2 className="text-xl font-bold text-slate-900">External Statutory Audit & PBC Workspace</h2>
+            <h2 className="text-xl font-bold text-slate-900 dark:text-slate-100">External Statutory Audit & PBC Workspace</h2>
           </div>
-          <p className="text-sm text-slate-500 mt-1">
+          <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">
             Provided-By-Client (PBC) request fulfillment tracker, digital evidence repository, and auditor query correspondence.
           </p>
         </div>
 
         {currentAuditor && (
-          <div className="flex items-center gap-3 bg-slate-50 px-4 py-2 rounded-xl border border-slate-200">
-            <Building2 className="w-5 h-5 text-indigo-600" />
+          <div className="flex items-center gap-3 bg-slate-50 dark:bg-slate-800/50 px-4 py-2 rounded-xl border border-slate-200 dark:border-slate-700">
+            <Building2 className="w-5 h-5 text-indigo-600 dark:text-indigo-400" />
             <div>
-              <strong className="text-xs text-slate-900 block">{currentAuditor.firmName}</strong>
-              <span className="text-[11px] text-slate-500">Lead: {currentAuditor.leadPartner} (FY {currentAuditor.fiscalYearUnderAudit})</span>
+              <strong className="text-xs text-slate-900 dark:text-slate-100 block">{currentAuditor.firmName}</strong>
+              <span className="text-[11px] text-slate-500 dark:text-slate-400">Lead: {currentAuditor.leadPartner} (FY {currentAuditor.fiscalYearUnderAudit})</span>
             </div>
           </div>
         )}
       </div>
 
       {/* Tabs */}
-      <div className="flex items-center gap-2 border-b border-slate-200">
+      <div className="flex items-center gap-2 border-b border-slate-200 dark:border-slate-700">
         <button
           onClick={() => setActiveTab('pbc')}
           className={`px-5 py-3 text-sm font-semibold border-b-2 transition flex items-center gap-2 ${
             activeTab === 'pbc'
-              ? 'border-emerald-600 text-emerald-700 bg-emerald-50/50 rounded-t-xl'
-              : 'border-transparent text-slate-600 hover:text-slate-900'
+              ? 'border-emerald-600 text-emerald-700 dark:text-emerald-300 bg-emerald-50/50 dark:bg-emerald-500/50 rounded-t-xl'
+              : 'border-transparent text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100'
           }`}
         >
           <FolderLock className="w-4 h-4" /> PBC Request Tracker ({pbcRequests.length})
@@ -132,8 +132,8 @@ export const ExternalAuditView: React.FC = () => {
           onClick={() => setActiveTab('queries')}
           className={`px-5 py-3 text-sm font-semibold border-b-2 transition flex items-center gap-2 ${
             activeTab === 'queries'
-              ? 'border-emerald-600 text-emerald-700 bg-emerald-50/50 rounded-t-xl'
-              : 'border-transparent text-slate-600 hover:text-slate-900'
+              ? 'border-emerald-600 text-emerald-700 dark:text-emerald-300 bg-emerald-50/50 dark:bg-emerald-500/50 rounded-t-xl'
+              : 'border-transparent text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100'
           }`}
         >
           <FileText className="w-4 h-4" /> Auditor Query Responses ({auditResponses.length})
@@ -142,8 +142,8 @@ export const ExternalAuditView: React.FC = () => {
           onClick={() => setActiveTab('firm')}
           className={`px-5 py-3 text-sm font-semibold border-b-2 transition flex items-center gap-2 ${
             activeTab === 'firm'
-              ? 'border-emerald-600 text-emerald-700 bg-emerald-50/50 rounded-t-xl'
-              : 'border-transparent text-slate-600 hover:text-slate-900'
+              ? 'border-emerald-600 text-emerald-700 dark:text-emerald-300 bg-emerald-50/50 dark:bg-emerald-500/50 rounded-t-xl'
+              : 'border-transparent text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100'
           }`}
         >
           <Building2 className="w-4 h-4" /> Audit Engagement Profile
@@ -153,22 +153,22 @@ export const ExternalAuditView: React.FC = () => {
       {/* 1. PBC TRACKER */}
       {activeTab === 'pbc' && (
         <div className="space-y-4">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-3 bg-slate-50 p-3 rounded-xl border border-slate-200">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-3 bg-slate-50 dark:bg-slate-800/50 p-3 rounded-xl border border-slate-200 dark:border-slate-700">
             <div className="md:col-span-2 relative">
-              <Search className="w-4 h-4 absolute left-3 top-3 text-slate-400" />
+              <Search className="w-4 h-4 absolute left-3 top-3 text-slate-500 dark:text-slate-400" />
               <input
                 type="text"
                 placeholder="Search PBC number, description, owner, area..."
                 value={pbcSearch}
                 onChange={e => setPbcSearch(e.target.value)}
-                className="w-full pl-9 pr-4 py-2 text-sm bg-white border border-slate-200 rounded-lg focus:ring-2 focus:ring-emerald-500"
+                className="w-full pl-9 pr-4 py-2 text-sm bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-emerald-500"
               />
             </div>
             <div>
               <select
                 value={selectedStatus}
                 onChange={e => setSelectedStatus(e.target.value)}
-                className="w-full px-3 py-2 text-sm bg-white border border-slate-200 rounded-lg focus:ring-2 focus:ring-emerald-500"
+                className="w-full px-3 py-2 text-sm bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-emerald-500"
               >
                 <option value="ALL">All Statuses</option>
                 <option value="ACCEPTED">Accepted</option>
@@ -180,10 +180,10 @@ export const ExternalAuditView: React.FC = () => {
             </div>
           </div>
 
-          <div className="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+          <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm overflow-hidden">
             <div className="overflow-x-auto">
-              <table className="w-full text-left text-sm text-slate-700">
-                <thead className="bg-slate-50 border-b border-slate-200 text-xs font-bold text-slate-500 uppercase tracking-wider">
+              <table className="w-full text-left text-sm text-slate-700 dark:text-slate-300">
+                <thead className="bg-slate-50 dark:bg-slate-800/50 border-b border-slate-200 dark:border-slate-700 text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
                   <tr>
                     <th className="px-5 py-3">PBC #</th>
                     <th className="px-4 py-3">Financial Area</th>
@@ -195,19 +195,19 @@ export const ExternalAuditView: React.FC = () => {
                     <th className="px-4 py-3 text-right">Action</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-slate-200">
+                <tbody className="divide-y divide-slate-200 dark:divide-slate-700">
                   {filteredPbc.map(p => (
-                    <tr key={p.id} className="hover:bg-slate-50 transition">
-                      <td className="px-5 py-4 font-mono font-bold text-slate-900 text-xs">{p.pbcNumber}</td>
-                      <td className="px-4 py-4 text-xs font-semibold text-slate-700">{p.financialArea.replace(/_/g, ' ')}</td>
-                      <td className="px-4 py-4 text-xs text-slate-900 font-medium max-w-xs">{p.itemDescription}</td>
-                      <td className="px-4 py-4 font-mono text-xs text-slate-500">{p.requestedFormat}</td>
-                      <td className="px-4 py-4 font-mono text-xs text-slate-700">{p.dueDate}</td>
-                      <td className="px-4 py-4 text-xs text-slate-700">{p.assignedPerson} ({p.assignedTeam})</td>
+                    <tr key={p.id} className="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition">
+                      <td className="px-5 py-4 font-mono font-bold text-slate-900 dark:text-slate-100 text-xs">{p.pbcNumber}</td>
+                      <td className="px-4 py-4 text-xs font-semibold text-slate-700 dark:text-slate-300">{p.financialArea.replace(/_/g, ' ')}</td>
+                      <td className="px-4 py-4 text-xs text-slate-900 dark:text-slate-100 font-medium max-w-xs">{p.itemDescription}</td>
+                      <td className="px-4 py-4 font-mono text-xs text-slate-500 dark:text-slate-400">{p.requestedFormat}</td>
+                      <td className="px-4 py-4 font-mono text-xs text-slate-700 dark:text-slate-300">{p.dueDate}</td>
+                      <td className="px-4 py-4 text-xs text-slate-700 dark:text-slate-300">{p.assignedPerson} ({p.assignedTeam})</td>
                       <td className="px-4 py-4">{getStatusBadge(p.status)}</td>
                       <td className="px-4 py-4 text-right">
                         {p.status === 'ACCEPTED' ? (
-                          <span className="text-xs text-emerald-700 font-semibold font-mono">
+                          <span className="text-xs text-emerald-700 dark:text-emerald-300 font-semibold font-mono">
                             ✓ {p.fileAttachment || 'Delivered'}
                           </span>
                         ) : (
@@ -232,27 +232,27 @@ export const ExternalAuditView: React.FC = () => {
       {activeTab === 'queries' && (
         <div className="space-y-3">
           {auditResponses.map(query => (
-            <div key={query.id} className="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm space-y-3">
+            <div key={query.id} className="bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm space-y-3">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
-                  <span className="font-mono text-xs font-bold px-2 py-0.5 rounded bg-slate-100 text-slate-800">
+                  <span className="font-mono text-xs font-bold px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200">
                     {query.queryNumber}
                   </span>
-                  <span className="font-mono text-xs text-slate-500">Ref: {query.pbcReference}</span>
+                  <span className="font-mono text-xs text-slate-500 dark:text-slate-400">Ref: {query.pbcReference}</span>
                 </div>
-                <span className="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">
+                <span className="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-50 dark:bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-500/30">
                   {query.status.replace(/_/g, ' ')}
                 </span>
               </div>
 
               <div>
-                <strong className="text-slate-900 text-sm block">Auditor Inquiry:</strong>
-                <p className="text-xs text-slate-600 mt-0.5">{query.auditorQuery}</p>
+                <strong className="text-slate-900 dark:text-slate-100 text-sm block">Auditor Inquiry:</strong>
+                <p className="text-xs text-slate-600 dark:text-slate-400 mt-0.5">{query.auditorQuery}</p>
               </div>
 
-              <div className="p-3 bg-slate-50 rounded-xl border border-slate-200 text-xs">
-                <strong className="text-indigo-900 block mb-1">Approved Management Response:</strong>
-                <p className="text-slate-800">{query.cfoApprovedResponse || query.managementDraftResponse}</p>
+              <div className="p-3 bg-slate-50 dark:bg-slate-800/50 rounded-xl border border-slate-200 dark:border-slate-700 text-xs">
+                <strong className="text-indigo-900 dark:text-indigo-100 block mb-1">Approved Management Response:</strong>
+                <p className="text-slate-800 dark:text-slate-200">{query.cfoApprovedResponse || query.managementDraftResponse}</p>
               </div>
             </div>
           ))}
@@ -261,34 +261,34 @@ export const ExternalAuditView: React.FC = () => {
 
       {/* 3. AUDIT FIRM PROFILE */}
       {activeTab === 'firm' && currentAuditor && (
-        <div className="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm space-y-6">
-          <div className="flex items-center justify-between pb-4 border-b border-slate-200">
+        <div className="bg-white dark:bg-slate-900 p-6 rounded-3xl border border-slate-200 dark:border-slate-700 shadow-sm space-y-6">
+          <div className="flex items-center justify-between pb-4 border-b border-slate-200 dark:border-slate-700">
             <div>
-              <h3 className="text-xl font-bold text-slate-900">{currentAuditor.firmName}</h3>
-              <p className="text-xs text-slate-500">Principal Statutory Auditor for Artify Group SAOC</p>
+              <h3 className="text-xl font-bold text-slate-900 dark:text-slate-100">{currentAuditor.firmName}</h3>
+              <p className="text-xs text-slate-500 dark:text-slate-400">Principal Statutory Auditor for Artify Group SAOC</p>
             </div>
-            <span className="px-3 py-1 rounded-full text-xs font-bold bg-indigo-50 text-indigo-700 border border-indigo-200 font-mono">
+            <span className="px-3 py-1 rounded-full text-xs font-bold bg-indigo-50 dark:bg-indigo-500/10 text-indigo-700 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-500/30 font-mono">
               Status: {currentAuditor.status}
             </span>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
-            <div className="p-4 bg-slate-50 rounded-2xl border border-slate-200 space-y-1">
-              <span className="text-slate-400 font-bold uppercase text-[10px]">Engagement Leadership</span>
-              <strong className="text-slate-900 text-sm block">{currentAuditor.leadPartner}</strong>
-              <span className="text-slate-600 block">Manager: {currentAuditor.auditManager}</span>
+            <div className="p-4 bg-slate-50 dark:bg-slate-800/50 rounded-2xl border border-slate-200 dark:border-slate-700 space-y-1">
+              <span className="text-slate-500 dark:text-slate-400 font-bold uppercase text-[10px]">Engagement Leadership</span>
+              <strong className="text-slate-900 dark:text-slate-100 text-sm block">{currentAuditor.leadPartner}</strong>
+              <span className="text-slate-600 dark:text-slate-400 block">Manager: {currentAuditor.auditManager}</span>
             </div>
 
-            <div className="p-4 bg-slate-50 rounded-2xl border border-slate-200 space-y-1">
-              <span className="text-slate-400 font-bold uppercase text-[10px]">Statutory Engagement Fee</span>
-              <strong className="text-slate-900 text-sm block font-mono">OMR {currentAuditor.auditFeeAgreedOMR.toLocaleString()}</strong>
-              <span className="text-slate-600 block">Engagement Letter: {currentAuditor.engagementLetterSignedDate}</span>
+            <div className="p-4 bg-slate-50 dark:bg-slate-800/50 rounded-2xl border border-slate-200 dark:border-slate-700 space-y-1">
+              <span className="text-slate-500 dark:text-slate-400 font-bold uppercase text-[10px]">Statutory Engagement Fee</span>
+              <strong className="text-slate-900 dark:text-slate-100 text-sm block font-mono">OMR {currentAuditor.auditFeeAgreedOMR.toLocaleString()}</strong>
+              <span className="text-slate-600 dark:text-slate-400 block">Engagement Letter: {currentAuditor.engagementLetterSignedDate}</span>
             </div>
 
-            <div className="p-4 bg-slate-50 rounded-2xl border border-slate-200 space-y-1">
-              <span className="text-slate-400 font-bold uppercase text-[10px]">Audit Timeline</span>
-              <strong className="text-slate-900 text-sm block">Interim: {currentAuditor.auditInterimDate}</strong>
-              <span className="text-slate-600 block">Final Signoff: {currentAuditor.auditFinalDate}</span>
+            <div className="p-4 bg-slate-50 dark:bg-slate-800/50 rounded-2xl border border-slate-200 dark:border-slate-700 space-y-1">
+              <span className="text-slate-500 dark:text-slate-400 font-bold uppercase text-[10px]">Audit Timeline</span>
+              <strong className="text-slate-900 dark:text-slate-100 text-sm block">Interim: {currentAuditor.auditInterimDate}</strong>
+              <span className="text-slate-600 dark:text-slate-400 block">Final Signoff: {currentAuditor.auditFinalDate}</span>
             </div>
           </div>
         </div>

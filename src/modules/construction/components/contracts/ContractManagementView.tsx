@@ -154,14 +154,14 @@ export const ContractManagementView: React.FC = () => {
   return (
     <div className="space-y-6">
       {/* Top Banner & Quick Selector */}
-      <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 text-white shadow-xl flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6">
+      <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 text-slate-900 dark:text-white shadow-xl flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6">
         <div className="space-y-2 max-w-2xl">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-500/20 text-orange-400 text-xs font-semibold uppercase tracking-wider">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-500/20 text-orange-700 dark:text-orange-400 text-xs font-semibold uppercase tracking-wider">
             <Building className="w-3.5 h-3.5" />
             Module 15.01 — Contract Management
           </div>
           <h2 className="text-2xl font-bold tracking-tight">Prime Client & Subcontract Agreements</h2>
-          <p className="text-sm text-slate-400">
+          <p className="text-sm text-slate-600 dark:text-slate-400">
             FIDIC Red/Yellow/Silver book terms, mobilization advance schedules, retention rules, and specialized trade subcontract packages.
           </p>
         </div>
@@ -170,7 +170,7 @@ export const ContractManagementView: React.FC = () => {
           <select
             value={selectedContractId}
             onChange={e => setSelectedContractId(e.target.value)}
-            className="bg-slate-800 text-slate-100 border border-slate-700 text-sm rounded-xl px-4 py-2.5 font-medium focus:ring-2 focus:ring-orange-500"
+            className="bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-slate-100 border border-slate-300 dark:border-slate-700 text-sm rounded-xl px-4 py-2.5 font-medium focus:ring-2 focus:ring-orange-500"
           >
             {contracts.map(c => (
               <option key={c.id} value={c.id}>
@@ -317,7 +317,7 @@ export const ContractManagementView: React.FC = () => {
         </div>
 
         <div className="relative w-64">
-          <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
+          <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-slate-600 dark:text-slate-400" />
           <input
             type="text"
             placeholder="Search contracts..."
@@ -359,19 +359,19 @@ export const ContractManagementView: React.FC = () => {
 
               <div className="mt-4 pt-4 border-t border-slate-100 dark:border-slate-800/60 space-y-2">
                 <div className="flex justify-between text-xs">
-                  <span className="text-slate-500">Contract Sum:</span>
+                  <span className="text-slate-500 dark:text-slate-400">Contract Sum:</span>
                   <span className="font-bold font-mono text-slate-900 dark:text-white">
                     {contract.currency} {contract.revisedContractValue.toLocaleString()}
                   </span>
                 </div>
                 <div className="flex justify-between text-xs">
-                  <span className="text-slate-500">Completion:</span>
+                  <span className="text-slate-500 dark:text-slate-400">Completion:</span>
                   <span className="text-slate-700 dark:text-slate-300">{contract.revisedCompletionDate}</span>
                 </div>
                 <div className="space-y-1 pt-1">
-                  <div className="flex justify-between text-xs text-slate-500">
+                  <div className="flex justify-between text-xs text-slate-500 dark:text-slate-400">
                     <span>Progress</span>
-                    <span className="font-semibold text-orange-600">{contract.progressPhysicalPct}%</span>
+                    <span className="font-semibold text-orange-600 dark:text-orange-400">{contract.progressPhysicalPct}%</span>
                   </div>
                   <div className="w-full bg-slate-200 dark:bg-slate-700 h-1.5 rounded-full overflow-hidden">
                     <div className="bg-orange-500 h-full rounded-full" style={{ width: `${contract.progressPhysicalPct}%` }} />
@@ -392,7 +392,7 @@ export const ContractManagementView: React.FC = () => {
             </h4>
             <button
               onClick={() => setShowAddSubcontractModal(true)}
-              className="inline-flex items-center gap-2 bg-slate-900 dark:bg-white text-white dark:text-slate-900 text-xs font-semibold px-3 py-2 rounded-xl shadow transition-all hover:bg-slate-800"
+              className="inline-flex items-center gap-2 bg-slate-900 dark:bg-white text-white dark:text-slate-900 text-xs font-semibold px-3 py-2 rounded-xl shadow transition-all hover:bg-slate-100 dark:hover:bg-slate-800"
             >
               <Plus className="w-3.5 h-3.5" />
               Add Trade Subcontract
@@ -401,7 +401,7 @@ export const ContractManagementView: React.FC = () => {
 
           <div className="overflow-x-auto bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800">
             <table className="w-full text-left text-xs">
-              <thead className="bg-slate-50 dark:bg-slate-800/60 text-slate-500 uppercase tracking-wider font-semibold border-b border-slate-200 dark:border-slate-800">
+              <thead className="bg-slate-50 dark:bg-slate-800/60 text-slate-500 dark:text-slate-400 uppercase tracking-wider font-semibold border-b border-slate-200 dark:border-slate-800">
                 <tr>
                   <th className="py-3 px-4">Subcontract No.</th>
                   <th className="py-3 px-4">Trade Package</th>
@@ -424,7 +424,7 @@ export const ContractManagementView: React.FC = () => {
                     </td>
                     <td className="py-3.5 px-4">
                       <div>{sub.subcontractorName}</div>
-                      <div className="text-[11px] text-slate-400">{sub.contactPerson}</div>
+                      <div className="text-[11px] text-slate-600 dark:text-slate-400">{sub.contactPerson}</div>
                     </td>
                     <td className="py-3.5 px-4 text-right font-mono font-semibold">
                       {currency} {sub.subcontractValue.toLocaleString()}
@@ -434,7 +434,7 @@ export const ContractManagementView: React.FC = () => {
                     </td>
                     <td className="py-3.5 px-4">{sub.retentionPercentage}%</td>
                     <td className="py-3.5 px-4">
-                      <span className={`px-2 py-0.5 rounded text-[11px] font-medium ${sub.payWhenPaidClause ? 'bg-amber-100/60 dark:bg-amber-950/60 text-amber-700 dark:text-amber-300' : 'bg-slate-100 dark:bg-slate-800 text-slate-600'}`}>
+                      <span className={`px-2 py-0.5 rounded text-[11px] font-medium ${sub.payWhenPaidClause ? 'bg-amber-100/60 dark:bg-amber-950/60 text-amber-700 dark:text-amber-300' : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400'}`}>
                         {sub.payWhenPaidClause ? 'Enabled (Standard)' : 'Direct Terms'}
                       </span>
                     </td>
@@ -489,7 +489,7 @@ export const ContractManagementView: React.FC = () => {
           <div className="bg-white dark:bg-slate-900 rounded-2xl max-w-2xl w-full p-6 border border-slate-200 dark:border-slate-800 shadow-2xl space-y-5 max-h-[90vh] overflow-y-auto">
             <div className="flex justify-between items-center border-b border-slate-100 dark:border-slate-800 pb-3">
               <h3 className="text-lg font-bold text-slate-900 dark:text-white">Create New Construction Prime Contract</h3>
-              <button onClick={() => setShowAddContractModal(false)} className="text-slate-400 hover:text-slate-600">✕</button>
+              <button onClick={() => setShowAddContractModal(false)} className="text-slate-600 dark:text-slate-400 hover:text-slate-600 dark:hover:text-slate-400">✕</button>
             </div>
 
             <form onSubmit={handleCreateContract} className="space-y-4 text-xs">
@@ -590,7 +590,7 @@ export const ContractManagementView: React.FC = () => {
                 <button
                   type="button"
                   onClick={() => setShowAddContractModal(false)}
-                  className="px-4 py-2 rounded-xl text-slate-600 dark:text-slate-300 hover:bg-slate-100"
+                  className="px-4 py-2 rounded-xl text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800"
                 >
                   Cancel
                 </button>
@@ -612,7 +612,7 @@ export const ContractManagementView: React.FC = () => {
           <div className="bg-white dark:bg-slate-900 rounded-2xl max-w-lg w-full p-6 border border-slate-200 dark:border-slate-800 shadow-2xl space-y-4 text-xs">
             <div className="flex justify-between items-center border-b border-slate-100 dark:border-slate-800 pb-3">
               <h3 className="text-base font-bold text-slate-900 dark:text-white">Add Subcontract Package</h3>
-              <button onClick={() => setShowAddSubcontractModal(false)} className="text-slate-400 hover:text-slate-600">✕</button>
+              <button onClick={() => setShowAddSubcontractModal(false)} className="text-slate-600 dark:text-slate-400 hover:text-slate-600 dark:hover:text-slate-400">✕</button>
             </div>
 
             <form onSubmit={handleCreateSubcontract} className="space-y-3">
@@ -674,7 +674,7 @@ export const ContractManagementView: React.FC = () => {
                 <button
                   type="button"
                   onClick={() => setShowAddSubcontractModal(false)}
-                  className="px-4 py-2 rounded-xl text-slate-600 dark:text-slate-300 hover:bg-slate-100"
+                  className="px-4 py-2 rounded-xl text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800"
                 >
                   Cancel
                 </button>

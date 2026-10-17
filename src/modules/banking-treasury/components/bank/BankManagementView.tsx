@@ -175,14 +175,14 @@ export const BankManagementView: React.FC = () => {
   return (
     <div className="space-y-6">
       {/* Header Tabs & Actions */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white p-4 rounded-xl border border-slate-200 shadow-2xs">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white dark:bg-slate-900 p-4 rounded-xl border border-slate-200 dark:border-slate-700 shadow-2xs">
         <div className="flex items-center gap-1 overflow-x-auto">
           <button
             onClick={() => setActiveTab('masters')}
             className={`px-3.5 py-2 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-all cursor-pointer ${
               activeTab === 'masters'
                 ? 'bg-slate-900 text-white shadow-xs'
-                : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
+                : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-800'
             }`}
           >
             <Building className="w-3.5 h-3.5" />
@@ -194,7 +194,7 @@ export const BankManagementView: React.FC = () => {
             className={`px-3.5 py-2 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-all cursor-pointer ${
               activeTab === 'accounts'
                 ? 'bg-slate-900 text-white shadow-xs'
-                : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
+                : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-800'
             }`}
           >
             <CreditCard className="w-3.5 h-3.5" />
@@ -206,7 +206,7 @@ export const BankManagementView: React.FC = () => {
             className={`px-3.5 py-2 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-all cursor-pointer ${
               activeTab === 'signatories'
                 ? 'bg-slate-900 text-white shadow-xs'
-                : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
+                : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-800'
             }`}
           >
             <UserCheck className="w-3.5 h-3.5" />
@@ -218,7 +218,7 @@ export const BankManagementView: React.FC = () => {
             className={`px-3.5 py-2 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-all cursor-pointer ${
               activeTab === 'limits'
                 ? 'bg-slate-900 text-white shadow-xs'
-                : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
+                : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-800'
             }`}
           >
             <Sliders className="w-3.5 h-3.5" />
@@ -228,13 +228,13 @@ export const BankManagementView: React.FC = () => {
 
         <div className="flex items-center gap-2">
           <div className="relative">
-            <Search className="w-3.5 h-3.5 absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
+            <Search className="w-3.5 h-3.5 absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 dark:text-slate-400" />
             <input
               type="text"
               placeholder="Search banks, accounts..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="pl-8 pr-3 py-1.5 text-xs bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-slate-900 w-48 sm:w-60"
+              className="pl-8 pr-3 py-1.5 text-xs bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-slate-200 dark:focus:ring-slate-900 w-48 sm:w-60"
             />
           </div>
 
@@ -276,54 +276,54 @@ export const BankManagementView: React.FC = () => {
           {filteredBanks.map((bank) => (
             <div
               key={bank.id}
-              className="bg-white rounded-xl p-5 border border-slate-200 shadow-2xs hover:border-slate-300 transition-all flex flex-col justify-between"
+              className="bg-white dark:bg-slate-900 rounded-xl p-5 border border-slate-200 dark:border-slate-700 shadow-2xs hover:border-slate-300 dark:hover:border-slate-600 transition-all flex flex-col justify-between"
             >
               <div>
                 <div className="flex items-start justify-between">
                   <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-xl bg-amber-50 text-amber-700 font-bold flex items-center justify-center text-sm border border-amber-200">
+                    <div className="w-10 h-10 rounded-xl bg-amber-50 dark:bg-amber-500/10 text-amber-700 dark:text-amber-300 font-bold flex items-center justify-center text-sm border border-amber-200 dark:border-amber-500/30">
                       {bank.bankCode.slice(3, 6)}
                     </div>
                     <div>
-                      <h3 className="text-sm font-bold text-slate-900">{bank.bankNameEn}</h3>
-                      <p className="text-xs text-slate-500 font-arabic">{bank.bankNameAr}</p>
+                      <h3 className="text-sm font-bold text-slate-900 dark:text-slate-100">{bank.bankNameEn}</h3>
+                      <p className="text-xs text-slate-500 dark:text-slate-400 font-arabic">{bank.bankNameAr}</p>
                     </div>
                   </div>
-                  <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-100 text-emerald-800">
+                  <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-100 dark:bg-emerald-500/20 text-emerald-800 dark:text-emerald-200">
                     {bank.status}
                   </span>
                 </div>
 
                 <div className="grid grid-cols-2 gap-2 mt-4 text-xs">
-                  <div className="p-2 rounded-lg bg-slate-50 border border-slate-100">
-                    <span className="text-slate-400 block text-[10px]">SWIFT / BIC</span>
-                    <span className="font-mono font-bold text-slate-800">{bank.swiftBic}</span>
+                  <div className="p-2 rounded-lg bg-slate-50 dark:bg-slate-800/50 border border-slate-100 dark:border-slate-800">
+                    <span className="text-slate-500 dark:text-slate-400 block text-[10px]">SWIFT / BIC</span>
+                    <span className="font-mono font-bold text-slate-800 dark:text-slate-200">{bank.swiftBic}</span>
                   </div>
-                  <div className="p-2 rounded-lg bg-slate-50 border border-slate-100">
-                    <span className="text-slate-400 block text-[10px]">Routing Code</span>
-                    <span className="font-mono font-bold text-slate-800">{bank.routingCode}</span>
+                  <div className="p-2 rounded-lg bg-slate-50 dark:bg-slate-800/50 border border-slate-100 dark:border-slate-800">
+                    <span className="text-slate-500 dark:text-slate-400 block text-[10px]">Routing Code</span>
+                    <span className="font-mono font-bold text-slate-800 dark:text-slate-200">{bank.routingCode}</span>
                   </div>
                 </div>
 
-                <div className="mt-3 p-3 rounded-lg bg-slate-50/70 border border-slate-100 text-xs space-y-1">
-                  <div className="flex items-center justify-between text-slate-600">
-                    <span className="text-slate-400">Relationship Manager</span>
-                    <span className="font-semibold text-slate-800">{bank.relationshipManagerName}</span>
+                <div className="mt-3 p-3 rounded-lg bg-slate-50/70 dark:bg-slate-800/70 border border-slate-100 dark:border-slate-800 text-xs space-y-1">
+                  <div className="flex items-center justify-between text-slate-600 dark:text-slate-400">
+                    <span className="text-slate-500 dark:text-slate-400">Relationship Manager</span>
+                    <span className="font-semibold text-slate-800 dark:text-slate-200">{bank.relationshipManagerName}</span>
                   </div>
-                  <div className="flex items-center justify-between text-slate-600">
-                    <span className="text-slate-400">RM Contact</span>
-                    <span className="text-slate-700">{bank.relationshipManagerPhone}</span>
+                  <div className="flex items-center justify-between text-slate-600 dark:text-slate-400">
+                    <span className="text-slate-500 dark:text-slate-400">RM Contact</span>
+                    <span className="text-slate-700 dark:text-slate-300">{bank.relationshipManagerPhone}</span>
                   </div>
-                  <div className="flex items-center justify-between text-slate-600">
-                    <span className="text-slate-400">Rating Agency</span>
-                    <span className="font-medium text-indigo-600">{bank.ratingAgencyGrade}</span>
+                  <div className="flex items-center justify-between text-slate-600 dark:text-slate-400">
+                    <span className="text-slate-500 dark:text-slate-400">Rating Agency</span>
+                    <span className="font-medium text-indigo-600 dark:text-indigo-400">{bank.ratingAgencyGrade}</span>
                   </div>
                 </div>
               </div>
 
-              <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
+              <div className="mt-4 pt-3 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-xs text-slate-500 dark:text-slate-400">
                 <span>{bank.totalAccountsLinked} Linked Accounts</span>
-                <span className="font-semibold text-slate-800">Facilities: {formatCurrency(bank.totalFacilitiesOMR)}</span>
+                <span className="font-semibold text-slate-800 dark:text-slate-200">Facilities: {formatCurrency(bank.totalFacilitiesOMR)}</span>
               </div>
             </div>
           ))}
@@ -332,10 +332,10 @@ export const BankManagementView: React.FC = () => {
 
       {/* TAB 2: BANK ACCOUNTS */}
       {activeTab === 'accounts' && (
-        <div className="bg-white rounded-xl border border-slate-200 shadow-2xs overflow-hidden">
+        <div className="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-700 shadow-2xs overflow-hidden">
           <div className="overflow-x-auto">
             <table className="w-full text-left text-xs">
-              <thead className="bg-slate-50 text-slate-600 font-semibold border-b border-slate-200">
+              <thead className="bg-slate-50 dark:bg-slate-800/50 text-slate-600 dark:text-slate-400 font-semibold border-b border-slate-200 dark:border-slate-700">
                 <tr>
                   <th className="p-3.5">Bank & Account Name</th>
                   <th className="p-3.5">Account Number & IBAN</th>
@@ -347,34 +347,34 @@ export const BankManagementView: React.FC = () => {
                   <th className="p-3.5 text-center">Action</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-100">
+              <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
                 {filteredAccounts.map((acc) => (
-                  <tr key={acc.id} className="hover:bg-slate-50/70 transition-colors">
+                  <tr key={acc.id} className="hover:bg-slate-50/70 dark:hover:bg-slate-800/70 transition-colors">
                     <td className="p-3.5">
-                      <div className="font-bold text-slate-900">{acc.accountName}</div>
-                      <div className="text-[11px] text-slate-500">{acc.bankName}</div>
+                      <div className="font-bold text-slate-900 dark:text-slate-100">{acc.accountName}</div>
+                      <div className="text-[11px] text-slate-500 dark:text-slate-400">{acc.bankName}</div>
                     </td>
                     <td className="p-3.5">
-                      <div className="font-mono font-medium text-slate-800">{acc.accountNumber}</div>
-                      <div className="font-mono text-[10px] text-slate-400">{acc.iban}</div>
+                      <div className="font-mono font-medium text-slate-800 dark:text-slate-200">{acc.accountNumber}</div>
+                      <div className="font-mono text-[10px] text-slate-500 dark:text-slate-400">{acc.iban}</div>
                     </td>
                     <td className="p-3.5">
-                      <span className="font-mono font-bold px-2 py-0.5 rounded bg-slate-100 text-slate-800">
+                      <span className="font-mono font-bold px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200">
                         {acc.currency}
                       </span>
                     </td>
                     <td className="p-3.5">
-                      <div className="font-medium text-slate-800">{acc.accountType}</div>
-                      <div className="text-[10px] text-slate-500 font-mono">{acc.glAccountCode}</div>
+                      <div className="font-medium text-slate-800 dark:text-slate-200">{acc.accountType}</div>
+                      <div className="text-[10px] text-slate-500 dark:text-slate-400 font-mono">{acc.glAccountCode}</div>
                     </td>
-                    <td className="p-3.5 text-right font-bold text-slate-900">
+                    <td className="p-3.5 text-right font-bold text-slate-900 dark:text-slate-100">
                       {formatCurrency(acc.currentBookBalance, acc.currency)}
                     </td>
-                    <td className="p-3.5 text-right font-bold text-emerald-700">
+                    <td className="p-3.5 text-right font-bold text-emerald-700 dark:text-emerald-300">
                       {formatCurrency(acc.clearedBankBalance, acc.currency)}
                     </td>
                     <td className="p-3.5 text-center">
-                      <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-100 text-emerald-800">
+                      <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-100 dark:bg-emerald-500/20 text-emerald-800 dark:text-emerald-200">
                         {acc.status}
                       </span>
                     </td>
@@ -383,7 +383,7 @@ export const BankManagementView: React.FC = () => {
                         onClick={() =>
                           updateBankAccountStatus(acc.id, acc.status === 'Active' ? 'Frozen' : 'Active')
                         }
-                        className="text-[10px] text-indigo-600 hover:text-indigo-800 font-semibold cursor-pointer"
+                        className="text-[10px] text-indigo-600 dark:text-indigo-400 hover:text-indigo-800 dark:hover:text-indigo-200 font-semibold cursor-pointer"
                       >
                         {acc.status === 'Active' ? 'Freeze' : 'Activate'}
                       </button>
@@ -400,45 +400,45 @@ export const BankManagementView: React.FC = () => {
       {activeTab === 'signatories' && (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {bankSignatories.map((sig) => (
-            <div key={sig.id} className="bg-white rounded-xl p-5 border border-slate-200 shadow-2xs">
+            <div key={sig.id} className="bg-white dark:bg-slate-900 rounded-xl p-5 border border-slate-200 dark:border-slate-700 shadow-2xs">
               <div className="flex items-start justify-between">
                 <div>
-                  <h3 className="text-sm font-bold text-slate-900">{sig.signatoryName}</h3>
-                  <p className="text-xs text-slate-500">{sig.signatoryTitle}</p>
+                  <h3 className="text-sm font-bold text-slate-900 dark:text-slate-100">{sig.signatoryName}</h3>
+                  <p className="text-xs text-slate-500 dark:text-slate-400">{sig.signatoryTitle}</p>
                 </div>
-                <span className="p-1.5 rounded-lg bg-emerald-50 text-emerald-600">
+                <span className="p-1.5 rounded-lg bg-emerald-50 dark:bg-emerald-500/10 text-emerald-600 dark:text-emerald-400">
                   <ShieldCheck className="w-4 h-4" />
                 </span>
               </div>
 
               <div className="mt-3 space-y-2 text-xs">
-                <div className="p-2 rounded-lg bg-indigo-50/70 border border-indigo-100 text-indigo-950">
-                  <span className="text-[10px] font-semibold text-indigo-600 block">Authority Tier</span>
+                <div className="p-2 rounded-lg bg-indigo-50/70 dark:bg-indigo-500/70 border border-indigo-100 dark:border-indigo-500/20 text-indigo-950">
+                  <span className="text-[10px] font-semibold text-indigo-600 dark:text-indigo-400 block">Authority Tier</span>
                   <span className="font-bold">{sig.categoryTier}</span>
                 </div>
 
-                <div className="flex items-center justify-between py-1 border-b border-slate-100">
-                  <span className="text-slate-500">Signing Limit</span>
-                  <span className="font-bold text-slate-900">{formatCurrency(sig.authorizationLimitOMR)}</span>
+                <div className="flex items-center justify-between py-1 border-b border-slate-100 dark:border-slate-800">
+                  <span className="text-slate-500 dark:text-slate-400">Signing Limit</span>
+                  <span className="font-bold text-slate-900 dark:text-slate-100">{formatCurrency(sig.authorizationLimitOMR)}</span>
                 </div>
 
-                <div className="flex items-center justify-between py-1 border-b border-slate-100">
-                  <span className="text-slate-500">Power of Attorney</span>
-                  <span className="font-mono text-slate-700 font-medium">{sig.powerOfAttorneyRef}</span>
+                <div className="flex items-center justify-between py-1 border-b border-slate-100 dark:border-slate-800">
+                  <span className="text-slate-500 dark:text-slate-400">Power of Attorney</span>
+                  <span className="font-mono text-slate-700 dark:text-slate-300 font-medium">{sig.powerOfAttorneyRef}</span>
                 </div>
 
-                <div className="flex items-center justify-between py-1 border-b border-slate-100">
-                  <span className="text-slate-500">Specimen Card</span>
-                  <span className="text-emerald-700 font-semibold flex items-center gap-1">
+                <div className="flex items-center justify-between py-1 border-b border-slate-100 dark:border-slate-800">
+                  <span className="text-slate-500 dark:text-slate-400">Specimen Card</span>
+                  <span className="text-emerald-700 dark:text-emerald-300 font-semibold flex items-center gap-1">
                     <CheckCircle2 className="w-3.5 h-3.5" />
                     <span>{sig.specimenCardStatus}</span>
                   </span>
                 </div>
               </div>
 
-              <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-500">
+              <div className="mt-4 pt-3 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-[11px] text-slate-500 dark:text-slate-400">
                 <span>Valid until: {sig.validUntil}</span>
-                <span className="text-slate-800 font-semibold">{sig.contactMobile}</span>
+                <span className="text-slate-800 dark:text-slate-200 font-semibold">{sig.contactMobile}</span>
               </div>
             </div>
           ))}
@@ -452,17 +452,17 @@ export const BankManagementView: React.FC = () => {
             {bankLimits.map((lim) => {
               const utilPercent = Math.round((lim.utilizedAmountOMR / lim.allocatedAmountOMR) * 100);
               return (
-                <div key={lim.id} className="bg-white rounded-xl p-5 border border-slate-200 shadow-2xs">
+                <div key={lim.id} className="bg-white dark:bg-slate-900 rounded-xl p-5 border border-slate-200 dark:border-slate-700 shadow-2xs">
                   <div className="flex items-start justify-between">
                     <div>
-                      <span className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">{lim.bankName}</span>
-                      <h3 className="text-sm font-bold text-slate-900 mt-0.5">{lim.limitType}</h3>
+                      <span className="text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">{lim.bankName}</span>
+                      <h3 className="text-sm font-bold text-slate-900 dark:text-slate-100 mt-0.5">{lim.limitType}</h3>
                     </div>
                     <span
                       className={`px-2 py-0.5 rounded-full text-[10px] font-bold ${
                         lim.status === 'Compliant'
-                          ? 'bg-emerald-100 text-emerald-800'
-                          : 'bg-amber-100 text-amber-800'
+                          ? 'bg-emerald-100 dark:bg-emerald-500/20 text-emerald-800 dark:text-emerald-200'
+                          : 'bg-amber-100 dark:bg-amber-500/20 text-amber-800 dark:text-amber-200'
                       }`}
                     >
                       {lim.status}
@@ -471,16 +471,16 @@ export const BankManagementView: React.FC = () => {
 
                   <div className="mt-4 space-y-2">
                     <div className="flex items-center justify-between text-xs">
-                      <span className="text-slate-500">Allocated Cap</span>
-                      <span className="font-bold text-slate-900">{formatCurrency(lim.allocatedAmountOMR)}</span>
+                      <span className="text-slate-500 dark:text-slate-400">Allocated Cap</span>
+                      <span className="font-bold text-slate-900 dark:text-slate-100">{formatCurrency(lim.allocatedAmountOMR)}</span>
                     </div>
                     <div className="flex items-center justify-between text-xs">
-                      <span className="text-slate-500">Utilized ({utilPercent}%)</span>
-                      <span className="font-semibold text-slate-800">{formatCurrency(lim.utilizedAmountOMR)}</span>
+                      <span className="text-slate-500 dark:text-slate-400">Utilized ({utilPercent}%)</span>
+                      <span className="font-semibold text-slate-800 dark:text-slate-200">{formatCurrency(lim.utilizedAmountOMR)}</span>
                     </div>
 
                     {/* Progress bar */}
-                    <div className="w-full bg-slate-100 h-2 rounded-full overflow-hidden mt-2">
+                    <div className="w-full bg-slate-100 dark:bg-slate-800 h-2 rounded-full overflow-hidden mt-2">
                       <div
                         className={`h-full rounded-full transition-all ${
                           utilPercent > 85 ? 'bg-amber-500' : 'bg-indigo-600'
@@ -490,12 +490,12 @@ export const BankManagementView: React.FC = () => {
                     </div>
 
                     <div className="flex items-center justify-between text-xs pt-1">
-                      <span className="text-slate-400">Available</span>
-                      <span className="font-bold text-emerald-600">{formatCurrency(lim.availableAmountOMR)}</span>
+                      <span className="text-slate-500 dark:text-slate-400">Available</span>
+                      <span className="font-bold text-emerald-600 dark:text-emerald-400">{formatCurrency(lim.availableAmountOMR)}</span>
                     </div>
                   </div>
 
-                  <div className="mt-4 pt-3 border-t border-slate-100 text-[11px] text-slate-500">
+                  <div className="mt-4 pt-3 border-t border-slate-100 dark:border-slate-800 text-[11px] text-slate-500 dark:text-slate-400">
                     <p className="line-clamp-2">{lim.covenantTerms}</p>
                   </div>
                 </div>
@@ -507,75 +507,75 @@ export const BankManagementView: React.FC = () => {
 
       {/* MODAL: ADD BANK MASTER */}
       {showAddBankModal && (
-        <div className="fixed inset-0 bg-slate-900/40 backdrop-blur-xs flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-2xl max-w-lg w-full p-6 shadow-xl border border-slate-200">
-            <h3 className="text-base font-bold text-slate-900 mb-4">Add Bank Financial Institution</h3>
+        <div className="fixed inset-0 bg-white/40 dark:bg-slate-900/40 backdrop-blur-xs flex items-center justify-center z-50 p-4">
+          <div className="bg-white dark:bg-slate-900 rounded-2xl max-w-lg w-full p-6 shadow-xl border border-slate-200 dark:border-slate-700">
+            <h3 className="text-base font-bold text-slate-900 dark:text-slate-100 mb-4">Add Bank Financial Institution</h3>
             <form onSubmit={handleCreateBankMaster} className="space-y-4">
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="text-xs font-semibold text-slate-700 block mb-1">Bank Code *</label>
+                  <label className="text-xs font-semibold text-slate-700 dark:text-slate-300 block mb-1">Bank Code *</label>
                   <input
                     type="text"
                     required
                     placeholder="e.g. BK-DHOFAR"
                     value={newBankCode}
                     onChange={(e) => setNewBankCode(e.target.value)}
-                    className="w-full text-xs p-2.5 border border-slate-200 rounded-lg focus:ring-2 focus:ring-slate-900 focus:outline-none"
+                    className="w-full text-xs p-2.5 border border-slate-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-slate-200 dark:focus:ring-slate-900 focus:outline-none"
                   />
                 </div>
                 <div>
-                  <label className="text-xs font-semibold text-slate-700 block mb-1">SWIFT / BIC Code *</label>
+                  <label className="text-xs font-semibold text-slate-700 dark:text-slate-300 block mb-1">SWIFT / BIC Code *</label>
                   <input
                     type="text"
                     required
                     placeholder="e.g. DHOFOMRX"
                     value={newSwiftBic}
                     onChange={(e) => setNewSwiftBic(e.target.value)}
-                    className="w-full text-xs p-2.5 border border-slate-200 rounded-lg focus:ring-2 focus:ring-slate-900 focus:outline-none"
+                    className="w-full text-xs p-2.5 border border-slate-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-slate-200 dark:focus:ring-slate-900 focus:outline-none"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="text-xs font-semibold text-slate-700 block mb-1">Bank Name (English) *</label>
+                <label className="text-xs font-semibold text-slate-700 dark:text-slate-300 block mb-1">Bank Name (English) *</label>
                 <input
                   type="text"
                   required
                   placeholder="e.g. Bank Dhofar SAOG"
                   value={newBankNameEn}
                   onChange={(e) => setNewBankNameEn(e.target.value)}
-                  className="w-full text-xs p-2.5 border border-slate-200 rounded-lg focus:ring-2 focus:ring-slate-900 focus:outline-none"
+                  className="w-full text-xs p-2.5 border border-slate-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-slate-200 dark:focus:ring-slate-900 focus:outline-none"
                 />
               </div>
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="text-xs font-semibold text-slate-700 block mb-1">RM Name</label>
+                  <label className="text-xs font-semibold text-slate-700 dark:text-slate-300 block mb-1">RM Name</label>
                   <input
                     type="text"
                     placeholder="e.g. Mazin Al-Hinai"
                     value={newRmName}
                     onChange={(e) => setNewRmName(e.target.value)}
-                    className="w-full text-xs p-2.5 border border-slate-200 rounded-lg focus:ring-2 focus:ring-slate-900 focus:outline-none"
+                    className="w-full text-xs p-2.5 border border-slate-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-slate-200 dark:focus:ring-slate-900 focus:outline-none"
                   />
                 </div>
                 <div>
-                  <label className="text-xs font-semibold text-slate-700 block mb-1">RM Phone</label>
+                  <label className="text-xs font-semibold text-slate-700 dark:text-slate-300 block mb-1">RM Phone</label>
                   <input
                     type="text"
                     placeholder="+968 2400 1122"
                     value={newRmPhone}
                     onChange={(e) => setNewRmPhone(e.target.value)}
-                    className="w-full text-xs p-2.5 border border-slate-200 rounded-lg focus:ring-2 focus:ring-slate-900 focus:outline-none"
+                    className="w-full text-xs p-2.5 border border-slate-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-slate-200 dark:focus:ring-slate-900 focus:outline-none"
                   />
                 </div>
               </div>
 
-              <div className="flex items-center justify-end gap-2 pt-4 border-t border-slate-100">
+              <div className="flex items-center justify-end gap-2 pt-4 border-t border-slate-100 dark:border-slate-800">
                 <button
                   type="button"
                   onClick={() => setShowAddBankModal(false)}
-                  className="px-4 py-2 rounded-lg text-xs font-semibold text-slate-600 hover:bg-slate-100 cursor-pointer"
+                  className="px-4 py-2 rounded-lg text-xs font-semibold text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 cursor-pointer"
                 >
                   Cancel
                 </button>
@@ -593,16 +593,16 @@ export const BankManagementView: React.FC = () => {
 
       {/* MODAL: ADD BANK ACCOUNT */}
       {showAddAccountModal && (
-        <div className="fixed inset-0 bg-slate-900/40 backdrop-blur-xs flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-2xl max-w-lg w-full p-6 shadow-xl border border-slate-200">
-            <h3 className="text-base font-bold text-slate-900 mb-4">Configure New Bank Account</h3>
+        <div className="fixed inset-0 bg-white/40 dark:bg-slate-900/40 backdrop-blur-xs flex items-center justify-center z-50 p-4">
+          <div className="bg-white dark:bg-slate-900 rounded-2xl max-w-lg w-full p-6 shadow-xl border border-slate-200 dark:border-slate-700">
+            <h3 className="text-base font-bold text-slate-900 dark:text-slate-100 mb-4">Configure New Bank Account</h3>
             <form onSubmit={handleCreateBankAccount} className="space-y-4">
               <div>
-                <label className="text-xs font-semibold text-slate-700 block mb-1">Partner Bank *</label>
+                <label className="text-xs font-semibold text-slate-700 dark:text-slate-300 block mb-1">Partner Bank *</label>
                 <select
                   value={newAccBankId}
                   onChange={(e) => setNewAccBankId(e.target.value)}
-                  className="w-full text-xs p-2.5 border border-slate-200 rounded-lg focus:ring-2 focus:ring-slate-900 focus:outline-none"
+                  className="w-full text-xs p-2.5 border border-slate-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-slate-200 dark:focus:ring-slate-900 focus:outline-none"
                 >
                   {bankMasters.map((b) => (
                     <option key={b.id} value={b.id}>
@@ -613,35 +613,35 @@ export const BankManagementView: React.FC = () => {
               </div>
 
               <div>
-                <label className="text-xs font-semibold text-slate-700 block mb-1">Account Title / Name *</label>
+                <label className="text-xs font-semibold text-slate-700 dark:text-slate-300 block mb-1">Account Title / Name *</label>
                 <input
                   type="text"
                   required
                   placeholder="e.g. Artify Global — Salalah Operations Current"
                   value={newAccName}
                   onChange={(e) => setNewAccName(e.target.value)}
-                  className="w-full text-xs p-2.5 border border-slate-200 rounded-lg focus:ring-2 focus:ring-slate-900 focus:outline-none"
+                  className="w-full text-xs p-2.5 border border-slate-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-slate-200 dark:focus:ring-slate-900 focus:outline-none"
                 />
               </div>
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="text-xs font-semibold text-slate-700 block mb-1">Account Number *</label>
+                  <label className="text-xs font-semibold text-slate-700 dark:text-slate-300 block mb-1">Account Number *</label>
                   <input
                     type="text"
                     required
                     placeholder="042301988271009"
                     value={newAccNumber}
                     onChange={(e) => setNewAccNumber(e.target.value)}
-                    className="w-full text-xs p-2.5 border border-slate-200 rounded-lg focus:ring-2 focus:ring-slate-900 focus:outline-none"
+                    className="w-full text-xs p-2.5 border border-slate-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-slate-200 dark:focus:ring-slate-900 focus:outline-none"
                   />
                 </div>
                 <div>
-                  <label className="text-xs font-semibold text-slate-700 block mb-1">Currency *</label>
+                  <label className="text-xs font-semibold text-slate-700 dark:text-slate-300 block mb-1">Currency *</label>
                   <select
                     value={newAccCurrency}
                     onChange={(e) => setNewAccCurrency(e.target.value as CurrencyCode)}
-                    className="w-full text-xs p-2.5 border border-slate-200 rounded-lg focus:ring-2 focus:ring-slate-900 focus:outline-none"
+                    className="w-full text-xs p-2.5 border border-slate-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-slate-200 dark:focus:ring-slate-900 focus:outline-none"
                   >
                     <option value="OMR">OMR — Omani Rial</option>
                     <option value="USD">USD — US Dollar</option>
@@ -653,24 +653,24 @@ export const BankManagementView: React.FC = () => {
               </div>
 
               <div>
-                <label className="text-xs font-semibold text-slate-700 block mb-1">IBAN *</label>
+                <label className="text-xs font-semibold text-slate-700 dark:text-slate-300 block mb-1">IBAN *</label>
                 <input
                   type="text"
                   required
                   placeholder="OM44BMUS042301988271009"
                   value={newAccIban}
                   onChange={(e) => setNewAccIban(e.target.value)}
-                  className="w-full text-xs p-2.5 border border-slate-200 rounded-lg focus:ring-2 focus:ring-slate-900 focus:outline-none font-mono"
+                  className="w-full text-xs p-2.5 border border-slate-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-slate-200 dark:focus:ring-slate-900 focus:outline-none font-mono"
                 />
               </div>
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="text-xs font-semibold text-slate-700 block mb-1">Account Type</label>
+                  <label className="text-xs font-semibold text-slate-700 dark:text-slate-300 block mb-1">Account Type</label>
                   <select
                     value={newAccType}
                     onChange={(e) => setNewAccType(e.target.value as any)}
-                    className="w-full text-xs p-2.5 border border-slate-200 rounded-lg focus:ring-2 focus:ring-slate-900 focus:outline-none"
+                    className="w-full text-xs p-2.5 border border-slate-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-slate-200 dark:focus:ring-slate-900 focus:outline-none"
                   >
                     <option value="Current Operating">Current Operating</option>
                     <option value="Call Deposit">Call Deposit</option>
@@ -680,21 +680,21 @@ export const BankManagementView: React.FC = () => {
                   </select>
                 </div>
                 <div>
-                  <label className="text-xs font-semibold text-slate-700 block mb-1">Overdraft Limit (OMR)</label>
+                  <label className="text-xs font-semibold text-slate-700 dark:text-slate-300 block mb-1">Overdraft Limit (OMR)</label>
                   <input
                     type="number"
                     value={newAccOverdraftLimit}
                     onChange={(e) => setNewAccOverdraftLimit(Number(e.target.value))}
-                    className="w-full text-xs p-2.5 border border-slate-200 rounded-lg focus:ring-2 focus:ring-slate-900 focus:outline-none"
+                    className="w-full text-xs p-2.5 border border-slate-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-slate-200 dark:focus:ring-slate-900 focus:outline-none"
                   />
                 </div>
               </div>
 
-              <div className="flex items-center justify-end gap-2 pt-4 border-t border-slate-100">
+              <div className="flex items-center justify-end gap-2 pt-4 border-t border-slate-100 dark:border-slate-800">
                 <button
                   type="button"
                   onClick={() => setShowAddAccountModal(false)}
-                  className="px-4 py-2 rounded-lg text-xs font-semibold text-slate-600 hover:bg-slate-100 cursor-pointer"
+                  className="px-4 py-2 rounded-lg text-xs font-semibold text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 cursor-pointer"
                 >
                   Cancel
                 </button>
@@ -712,16 +712,16 @@ export const BankManagementView: React.FC = () => {
 
       {/* MODAL: ADD SIGNATORY */}
       {showAddSignatoryModal && (
-        <div className="fixed inset-0 bg-slate-900/40 backdrop-blur-xs flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-2xl max-w-lg w-full p-6 shadow-xl border border-slate-200">
-            <h3 className="text-base font-bold text-slate-900 mb-4">Register Bank Account Signatory</h3>
+        <div className="fixed inset-0 bg-white/40 dark:bg-slate-900/40 backdrop-blur-xs flex items-center justify-center z-50 p-4">
+          <div className="bg-white dark:bg-slate-900 rounded-2xl max-w-lg w-full p-6 shadow-xl border border-slate-200 dark:border-slate-700">
+            <h3 className="text-base font-bold text-slate-900 dark:text-slate-100 mb-4">Register Bank Account Signatory</h3>
             <form onSubmit={handleCreateSignatory} className="space-y-4">
               <div>
-                <label className="text-xs font-semibold text-slate-700 block mb-1">Link to Bank Account *</label>
+                <label className="text-xs font-semibold text-slate-700 dark:text-slate-300 block mb-1">Link to Bank Account *</label>
                 <select
                   value={newSigAccountId}
                   onChange={(e) => setNewSigAccountId(e.target.value)}
-                  className="w-full text-xs p-2.5 border border-slate-200 rounded-lg focus:ring-2 focus:ring-slate-900 focus:outline-none"
+                  className="w-full text-xs p-2.5 border border-slate-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-slate-200 dark:focus:ring-slate-900 focus:outline-none"
                 >
                   {bankAccounts.map((a) => (
                     <option key={a.id} value={a.id}>
@@ -733,36 +733,36 @@ export const BankManagementView: React.FC = () => {
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="text-xs font-semibold text-slate-700 block mb-1">Signatory Name *</label>
+                  <label className="text-xs font-semibold text-slate-700 dark:text-slate-300 block mb-1">Signatory Name *</label>
                   <input
                     type="text"
                     required
                     placeholder="e.g. Eng. Nasser Al-Hinai"
                     value={newSigName}
                     onChange={(e) => setNewSigName(e.target.value)}
-                    className="w-full text-xs p-2.5 border border-slate-200 rounded-lg focus:ring-2 focus:ring-slate-900 focus:outline-none"
+                    className="w-full text-xs p-2.5 border border-slate-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-slate-200 dark:focus:ring-slate-900 focus:outline-none"
                   />
                 </div>
                 <div>
-                  <label className="text-xs font-semibold text-slate-700 block mb-1">Designation Title *</label>
+                  <label className="text-xs font-semibold text-slate-700 dark:text-slate-300 block mb-1">Designation Title *</label>
                   <input
                     type="text"
                     required
                     placeholder="e.g. Chief Executive Officer"
                     value={newSigTitle}
                     onChange={(e) => setNewSigTitle(e.target.value)}
-                    className="w-full text-xs p-2.5 border border-slate-200 rounded-lg focus:ring-2 focus:ring-slate-900 focus:outline-none"
+                    className="w-full text-xs p-2.5 border border-slate-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-slate-200 dark:focus:ring-slate-900 focus:outline-none"
                   />
                 </div>
               </div>
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="text-xs font-semibold text-slate-700 block mb-1">Mandate Tier</label>
+                  <label className="text-xs font-semibold text-slate-700 dark:text-slate-300 block mb-1">Mandate Tier</label>
                   <select
                     value={newSigTier}
                     onChange={(e) => setNewSigTier(e.target.value as any)}
-                    className="w-full text-xs p-2.5 border border-slate-200 rounded-lg focus:ring-2 focus:ring-slate-900 focus:outline-none"
+                    className="w-full text-xs p-2.5 border border-slate-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-slate-200 dark:focus:ring-slate-900 focus:outline-none"
                   >
                     <option value="Category A (Executive)">Category A (Executive)</option>
                     <option value="Category B (Senior Management)">Category B (Senior Management)</option>
@@ -770,32 +770,32 @@ export const BankManagementView: React.FC = () => {
                   </select>
                 </div>
                 <div>
-                  <label className="text-xs font-semibold text-slate-700 block mb-1">Limit (OMR)</label>
+                  <label className="text-xs font-semibold text-slate-700 dark:text-slate-300 block mb-1">Limit (OMR)</label>
                   <input
                     type="number"
                     value={newSigLimit}
                     onChange={(e) => setNewSigLimit(Number(e.target.value))}
-                    className="w-full text-xs p-2.5 border border-slate-200 rounded-lg focus:ring-2 focus:ring-slate-900 focus:outline-none"
+                    className="w-full text-xs p-2.5 border border-slate-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-slate-200 dark:focus:ring-slate-900 focus:outline-none"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="text-xs font-semibold text-slate-700 block mb-1">Power of Attorney Reference</label>
+                <label className="text-xs font-semibold text-slate-700 dark:text-slate-300 block mb-1">Power of Attorney Reference</label>
                 <input
                   type="text"
                   placeholder="MOCI-POA-2026-9941"
                   value={newSigPoa}
                   onChange={(e) => setNewSigPoa(e.target.value)}
-                  className="w-full text-xs p-2.5 border border-slate-200 rounded-lg focus:ring-2 focus:ring-slate-900 focus:outline-none"
+                  className="w-full text-xs p-2.5 border border-slate-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-slate-200 dark:focus:ring-slate-900 focus:outline-none"
                 />
               </div>
 
-              <div className="flex items-center justify-end gap-2 pt-4 border-t border-slate-100">
+              <div className="flex items-center justify-end gap-2 pt-4 border-t border-slate-100 dark:border-slate-800">
                 <button
                   type="button"
                   onClick={() => setShowAddSignatoryModal(false)}
-                  className="px-4 py-2 rounded-lg text-xs font-semibold text-slate-600 hover:bg-slate-100 cursor-pointer"
+                  className="px-4 py-2 rounded-lg text-xs font-semibold text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 cursor-pointer"
                 >
                   Cancel
                 </button>

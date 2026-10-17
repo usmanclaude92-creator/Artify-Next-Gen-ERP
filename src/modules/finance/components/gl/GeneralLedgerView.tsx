@@ -139,14 +139,14 @@ export const GeneralLedgerView: React.FC = () => {
   return (
     <div className="space-y-6">
       {/* Top Banner */}
-      <div className="bg-slate-900 border border-slate-800 rounded-3xl p-6 text-white shadow-xl flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6">
+      <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 text-slate-900 dark:text-white shadow-xl flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6">
         <div className="space-y-2 max-w-2xl">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-400 text-xs font-semibold uppercase tracking-wider">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 text-xs font-semibold uppercase tracking-wider">
             <BookOpen className="w-3.5 h-3.5" />
             Module 16.01 — General Ledger (GL)
           </div>
           <h2 className="text-2xl font-bold tracking-tight">General Ledger & Double-Entry Accounting</h2>
-          <p className="text-sm text-slate-400">
+          <p className="text-sm text-slate-600 dark:text-slate-400">
             Multi-tiered IFRS Chart of Accounts, manual and automated journal vouchers, recurring journal schedules, and transaction ledger inquiries.
           </p>
         </div>
@@ -213,7 +213,7 @@ export const GeneralLedgerView: React.FC = () => {
         <div className="space-y-4">
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
             <div className="relative flex-1 max-w-md">
-              <Search className="w-4 h-4 absolute left-3.5 top-3 text-slate-400" />
+              <Search className="w-4 h-4 absolute left-3.5 top-3 text-slate-600 dark:text-slate-400" />
               <input
                 type="text"
                 placeholder="Search by JV number, narration, reference..."
@@ -222,7 +222,7 @@ export const GeneralLedgerView: React.FC = () => {
                 className="w-full pl-10 pr-4 py-2 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl text-xs focus:ring-2 focus:ring-emerald-500"
               />
             </div>
-            <div className="text-xs text-slate-500">
+            <div className="text-xs text-slate-500 dark:text-slate-400">
               Showing <strong>{journalEntries.length}</strong> journal entries
             </div>
           </div>
@@ -247,7 +247,7 @@ export const GeneralLedgerView: React.FC = () => {
                           {jv.voucherType}
                         </span>
                       </div>
-                      <p className="text-xs text-slate-500">
+                      <p className="text-xs text-slate-500 dark:text-slate-400">
                         Date: <strong>{jv.voucherDate}</strong> • Period: <strong>{jv.period}</strong> • Ref: <strong>{jv.reference}</strong>
                       </p>
                     </div>
@@ -255,7 +255,7 @@ export const GeneralLedgerView: React.FC = () => {
 
                   <div className="flex items-center gap-3">
                     <div className="text-right">
-                      <span className="text-[10px] text-slate-400 font-medium">Total Amount</span>
+                      <span className="text-[10px] text-slate-600 dark:text-slate-400 font-medium">Total Amount</span>
                       <p className="text-sm font-bold font-mono text-slate-900 dark:text-white">
                         {currency} {jv.totalDebit.toLocaleString()}
                       </p>
@@ -264,7 +264,7 @@ export const GeneralLedgerView: React.FC = () => {
                       className={`text-xs font-semibold px-3 py-1 rounded-full ${
                         jv.status === 'POSTED'
                           ? 'bg-emerald-50 text-emerald-600 dark:bg-emerald-950/40 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800'
-                          : 'bg-amber-50 text-amber-600 border border-amber-200'
+                          : 'bg-amber-50 dark:bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-200 dark:border-amber-500/30'
                       }`}
                     >
                       {jv.status}
@@ -284,7 +284,7 @@ export const GeneralLedgerView: React.FC = () => {
                 <div className="overflow-x-auto">
                   <table className="w-full text-left text-xs">
                     <thead>
-                      <tr className="bg-slate-50 dark:bg-slate-800/50 text-slate-500 font-semibold border-y border-slate-100 dark:border-slate-800">
+                      <tr className="bg-slate-50 dark:bg-slate-800/50 text-slate-500 dark:text-slate-400 font-semibold border-y border-slate-100 dark:border-slate-800">
                         <th className="py-2 px-3">Account Code & Name</th>
                         <th className="py-2 px-3">Line Description</th>
                         <th className="py-2 px-3 text-right">Debit ({currency})</th>
@@ -347,7 +347,7 @@ export const GeneralLedgerView: React.FC = () => {
             </div>
 
             <div className="relative w-full sm:w-72">
-              <Search className="w-4 h-4 absolute left-3 top-2.5 text-slate-400" />
+              <Search className="w-4 h-4 absolute left-3 top-2.5 text-slate-600 dark:text-slate-400" />
               <input
                 type="text"
                 placeholder="Search account code or name..."
@@ -362,7 +362,7 @@ export const GeneralLedgerView: React.FC = () => {
             <div className="overflow-x-auto">
               <table className="w-full text-left text-xs">
                 <thead>
-                  <tr className="bg-slate-50 dark:bg-slate-800/70 text-slate-500 font-semibold border-b border-slate-200 dark:border-slate-800">
+                  <tr className="bg-slate-50 dark:bg-slate-800/70 text-slate-500 dark:text-slate-400 font-semibold border-b border-slate-200 dark:border-slate-800">
                     <th className="py-3 px-4">Account Code</th>
                     <th className="py-3 px-4">Account Title</th>
                     <th className="py-3 px-4">Class</th>
@@ -386,7 +386,7 @@ export const GeneralLedgerView: React.FC = () => {
                       </td>
                       <td className="py-3 px-4">
                         <div style={{ paddingLeft: `${(acc.level - 1) * 16}px` }} className="flex items-center gap-2">
-                          {acc.level > 1 && <ChevronRight className="w-3 h-3 text-slate-400 shrink-0" />}
+                          {acc.level > 1 && <ChevronRight className="w-3 h-3 text-slate-600 dark:text-slate-400 shrink-0" />}
                           <span className={acc.level === 1 ? 'text-slate-900 dark:text-white font-bold' : 'text-slate-700 dark:text-slate-300'}>
                             {acc.name}
                           </span>
@@ -397,7 +397,7 @@ export const GeneralLedgerView: React.FC = () => {
                           {acc.accountClass}
                         </span>
                       </td>
-                      <td className="py-3 px-4 text-slate-500 font-mono text-[11px]">
+                      <td className="py-3 px-4 text-slate-500 dark:text-slate-400 font-mono text-[11px]">
                         Level {acc.level} ({acc.subClass})
                       </td>
                       <td className="py-3 px-4 text-right font-mono text-slate-700 dark:text-slate-300">
@@ -434,11 +434,11 @@ export const GeneralLedgerView: React.FC = () => {
                   <div>
                     <div className="flex items-center gap-2">
                       <span className="font-bold text-sm text-slate-900 dark:text-white">{rj.title}</span>
-                      <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-200">
+                      <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full bg-emerald-50 dark:bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-500/30">
                         {rj.frequency}
                       </span>
                     </div>
-                    <p className="text-xs text-slate-500 font-mono mt-0.5">Template Ref: {rj.code}</p>
+                    <p className="text-xs text-slate-500 dark:text-slate-400 font-mono mt-0.5">Template Ref: {rj.code}</p>
                   </div>
                   <span className="text-xs font-bold px-2.5 py-1 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">
                     {rj.status}
@@ -451,12 +451,12 @@ export const GeneralLedgerView: React.FC = () => {
 
                 <div className="grid grid-cols-2 gap-3 pt-2 text-xs border-t border-slate-100 dark:border-slate-800">
                   <div>
-                    <span className="text-slate-400 block text-[10px]">Next Scheduled Run:</span>
+                    <span className="text-slate-600 dark:text-slate-400 block text-[10px]">Next Scheduled Run:</span>
                     <strong className="text-slate-900 dark:text-white font-mono">{rj.nextRunDate}</strong>
                   </div>
                   <div>
-                    <span className="text-slate-400 block text-[10px]">Auto-Post Mode:</span>
-                    <strong className={rj.autoPost ? 'text-emerald-500' : 'text-slate-500'}>
+                    <span className="text-slate-600 dark:text-slate-400 block text-[10px]">Auto-Post Mode:</span>
+                    <strong className={rj.autoPost ? 'text-emerald-600 dark:text-emerald-500' : 'text-slate-500 dark:text-slate-400'}>
                       {rj.autoPost ? 'Enabled (Instant GL Commit)' : 'Draft Review Mode'}
                     </strong>
                   </div>
@@ -487,11 +487,11 @@ export const GeneralLedgerView: React.FC = () => {
             </div>
 
             <div className="flex items-center gap-2">
-              <button className="flex items-center gap-1.5 px-3 py-1.5 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 text-slate-700 dark:text-slate-300 text-xs font-semibold rounded-xl transition-all">
+              <button className="flex items-center gap-1.5 px-3 py-1.5 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 text-xs font-semibold rounded-xl transition-all">
                 <Printer className="w-3.5 h-3.5" />
                 <span>Print Ledger</span>
               </button>
-              <button className="flex items-center gap-1.5 px-3 py-1.5 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 text-slate-700 dark:text-slate-300 text-xs font-semibold rounded-xl transition-all">
+              <button className="flex items-center gap-1.5 px-3 py-1.5 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 text-xs font-semibold rounded-xl transition-all">
                 <Download className="w-3.5 h-3.5" />
                 <span>Export CSV</span>
               </button>
@@ -504,12 +504,12 @@ export const GeneralLedgerView: React.FC = () => {
                 <h3 className="text-base font-bold text-slate-900 dark:text-white">
                   Account Ledger: {selectedAccount.code} — {selectedAccount.name}
                 </h3>
-                <p className="text-xs text-slate-500">
+                <p className="text-xs text-slate-500 dark:text-slate-400">
                   Class: {selectedAccount.accountClass} • Sub-Class: {selectedAccount.subClass} • Currency: {selectedAccount.currency}
                 </p>
               </div>
               <div className="text-right">
-                <span className="text-xs text-slate-500">Current Closing Balance</span>
+                <span className="text-xs text-slate-500 dark:text-slate-400">Current Closing Balance</span>
                 <p className="text-xl font-bold font-mono text-emerald-600 dark:text-emerald-400">
                   {currency} {selectedAccount.closingBalance.toLocaleString()}
                 </p>
@@ -519,7 +519,7 @@ export const GeneralLedgerView: React.FC = () => {
             <div className="overflow-x-auto">
               <table className="w-full text-left text-xs">
                 <thead>
-                  <tr className="bg-slate-50 dark:bg-slate-800/60 text-slate-500 font-semibold border-y border-slate-100 dark:border-slate-800">
+                  <tr className="bg-slate-50 dark:bg-slate-800/60 text-slate-500 dark:text-slate-400 font-semibold border-y border-slate-100 dark:border-slate-800">
                     <th className="py-2.5 px-3">Date</th>
                     <th className="py-2.5 px-3">Voucher #</th>
                     <th className="py-2.5 px-3">Type</th>
@@ -530,7 +530,7 @@ export const GeneralLedgerView: React.FC = () => {
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-slate-100 dark:divide-slate-800 font-mono">
-                  <tr className="bg-slate-50/50 dark:bg-slate-800/20 italic text-slate-500">
+                  <tr className="bg-slate-50/50 dark:bg-slate-800/20 italic text-slate-500 dark:text-slate-400">
                     <td className="py-2.5 px-3">2026-01-01</td>
                     <td className="py-2.5 px-3">—</td>
                     <td className="py-2.5 px-3 font-sans">OPENING</td>
@@ -542,13 +542,13 @@ export const GeneralLedgerView: React.FC = () => {
                   {accountTransactions.map((tx, idx) => (
                     <tr key={idx} className="hover:bg-slate-50 dark:hover:bg-slate-800/40">
                       <td className="py-2.5 px-3">{tx.date}</td>
-                      <td className="py-2.5 px-3 font-bold text-emerald-600">{tx.voucherNumber}</td>
+                      <td className="py-2.5 px-3 font-bold text-emerald-600 dark:text-emerald-400">{tx.voucherNumber}</td>
                       <td className="py-2.5 px-3 font-sans text-slate-600 dark:text-slate-400">{tx.type}</td>
                       <td className="py-2.5 px-3 font-sans text-slate-900 dark:text-white">{tx.description}</td>
                       <td className="py-2.5 px-3 text-right text-slate-900 dark:text-white font-bold">{tx.debit > 0 ? tx.debit.toLocaleString() : '-'}</td>
                       <td className="py-2.5 px-3 text-right text-slate-900 dark:text-white font-bold">{tx.credit > 0 ? tx.credit.toLocaleString() : '-'}</td>
                       <td className="py-2.5 px-3 text-center font-sans">
-                        <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-200">
+                        <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full bg-emerald-50 dark:bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-500/30">
                           {tx.status}
                         </span>
                       </td>
@@ -565,12 +565,12 @@ export const GeneralLedgerView: React.FC = () => {
       {showCreateModal && (
         <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
           <div className="bg-white dark:bg-slate-900 rounded-3xl max-w-3xl w-full border border-slate-200 dark:border-slate-800 shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
-            <div className="p-6 bg-slate-900 text-white flex justify-between items-center border-b border-slate-800">
+            <div className="p-6 bg-white dark:bg-slate-900 text-slate-900 dark:text-white flex justify-between items-center border-b border-slate-200 dark:border-slate-800">
               <div>
                 <h3 className="text-lg font-bold">Create Balanced Journal Voucher</h3>
-                <p className="text-xs text-slate-400">Double-entry General Ledger posting</p>
+                <p className="text-xs text-slate-600 dark:text-slate-400">Double-entry General Ledger posting</p>
               </div>
-              <button onClick={() => setShowCreateModal(false)} className="text-slate-400 hover:text-white text-xl">✕</button>
+              <button onClick={() => setShowCreateModal(false)} className="text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white text-xl">✕</button>
             </div>
 
             <form onSubmit={handleSubmitJournal} className="p-6 space-y-4 overflow-y-auto flex-1 text-xs">
@@ -620,7 +620,7 @@ export const GeneralLedgerView: React.FC = () => {
                   <button
                     type="button"
                     onClick={handleAddLine}
-                    className="flex items-center gap-1 text-emerald-600 font-bold hover:underline"
+                    className="flex items-center gap-1 text-emerald-600 dark:text-emerald-400 font-bold hover:underline"
                   >
                     <Plus className="w-3.5 h-3.5" /> Add Line
                   </button>
@@ -683,7 +683,7 @@ export const GeneralLedgerView: React.FC = () => {
                         <button
                           type="button"
                           onClick={() => handleRemoveLine(idx)}
-                          className="text-red-500 hover:text-red-700 text-sm font-bold"
+                          className="text-red-600 dark:text-red-500 hover:text-red-700 dark:hover:text-red-300 text-sm font-bold"
                         >
                           ✕
                         </button>

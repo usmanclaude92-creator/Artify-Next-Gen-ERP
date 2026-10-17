@@ -125,16 +125,16 @@ export const AssetValuationView: React.FC = () => {
   return (
     <div className="space-y-6">
       {/* Top Header & Sub-Tabs */}
-      <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl">
+      <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 shadow-xl">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div>
             <div className="flex items-center gap-2">
-              <span className="px-2.5 py-0.5 rounded-full text-xs font-black bg-amber-950 text-amber-400 border border-amber-800">
+              <span className="px-2.5 py-0.5 rounded-full text-xs font-black bg-amber-50 dark:bg-amber-950 text-amber-700 dark:text-amber-400 border border-amber-200 dark:border-amber-800">
                 13.04
               </span>
-              <h2 className="text-xl font-black text-white">Asset Valuation, Depreciation & IAS 36</h2>
+              <h2 className="text-xl font-black text-slate-900 dark:text-white">Asset Valuation, Depreciation & IAS 36</h2>
             </div>
-            <p className="text-xs text-slate-400 mt-1">
+            <p className="text-xs text-slate-600 dark:text-slate-400 mt-1">
               Automated periodic depreciation engine, fair value revaluation reserve, and impairment write-down testing.
             </p>
           </div>
@@ -142,30 +142,30 @@ export const AssetValuationView: React.FC = () => {
           <div className="flex items-center gap-3">
             <button
               onClick={() => setShowRevalModal(true)}
-              className="flex items-center gap-2 px-3.5 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-xl text-xs font-bold border border-slate-700 transition-all cursor-pointer"
+              className="flex items-center gap-2 px-3.5 py-2 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-200 rounded-xl text-xs font-bold border border-slate-300 dark:border-slate-700 transition-all cursor-pointer"
             >
-              <TrendingUp className="w-4 h-4 text-cyan-400" />
+              <TrendingUp className="w-4 h-4 text-cyan-600 dark:text-cyan-400" />
               <span>Asset Revaluation</span>
             </button>
 
             <button
               onClick={() => setShowImpairModal(true)}
-              className="flex items-center gap-2 px-3.5 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-xl text-xs font-bold border border-slate-700 transition-all cursor-pointer"
+              className="flex items-center gap-2 px-3.5 py-2 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-200 rounded-xl text-xs font-bold border border-slate-300 dark:border-slate-700 transition-all cursor-pointer"
             >
-              <AlertOctagon className="w-4 h-4 text-rose-400" />
+              <AlertOctagon className="w-4 h-4 text-rose-600 dark:text-rose-400" />
               <span>Impairment Test (IAS 36)</span>
             </button>
           </div>
         </div>
 
         {/* Sub Tabs */}
-        <div className="flex items-center gap-2 mt-6 pt-4 border-t border-slate-800 overflow-x-auto">
+        <div className="flex items-center gap-2 mt-6 pt-4 border-t border-slate-200 dark:border-slate-800 overflow-x-auto">
           <button
             onClick={() => setActiveTab('depreciation')}
             className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
               activeTab === 'depreciation'
                 ? 'bg-amber-600 text-white shadow-lg shadow-amber-600/30'
-                : 'text-slate-400 hover:text-white hover:bg-slate-800'
+                : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800'
             }`}
           >
             <Play className="w-4 h-4" />
@@ -177,7 +177,7 @@ export const AssetValuationView: React.FC = () => {
             className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
               activeTab === 'revaluation'
                 ? 'bg-amber-600 text-white shadow-lg shadow-amber-600/30'
-                : 'text-slate-400 hover:text-white hover:bg-slate-800'
+                : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800'
             }`}
           >
             <TrendingUp className="w-4 h-4" />
@@ -189,7 +189,7 @@ export const AssetValuationView: React.FC = () => {
             className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
               activeTab === 'impairment'
                 ? 'bg-amber-600 text-white shadow-lg shadow-amber-600/30'
-                : 'text-slate-400 hover:text-white hover:bg-slate-800'
+                : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800'
             }`}
           >
             <AlertOctagon className="w-4 h-4" />
@@ -201,7 +201,7 @@ export const AssetValuationView: React.FC = () => {
             className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
               activeTab === 'schedule'
                 ? 'bg-amber-600 text-white shadow-lg shadow-amber-600/30'
-                : 'text-slate-400 hover:text-white hover:bg-slate-800'
+                : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800'
             }`}
           >
             <Scale className="w-4 h-4" />
@@ -214,11 +214,11 @@ export const AssetValuationView: React.FC = () => {
       {activeTab === 'depreciation' && (
         <div className="space-y-6">
           {/* Execution Control Panel */}
-          <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl">
+          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 shadow-xl">
             <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
               <div>
-                <h3 className="text-base font-bold text-white">Execute Period Depreciation Batch</h3>
-                <p className="text-xs text-slate-400 mt-1">
+                <h3 className="text-base font-bold text-slate-900 dark:text-white">Execute Period Depreciation Batch</h3>
+                <p className="text-xs text-slate-600 dark:text-slate-400 mt-1">
                   Processes Straight-Line and Declining-Balance schedules across all {assets.length} active registered assets and generates GL Journal Vouchers.
                 </p>
               </div>
@@ -227,7 +227,7 @@ export const AssetValuationView: React.FC = () => {
                 <select
                   value={selectedPeriodMonth}
                   onChange={e => setSelectedPeriodMonth(Number(e.target.value))}
-                  className="bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-amber-500"
+                  className="bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 text-xs text-slate-900 dark:text-white focus:outline-none focus:border-amber-500"
                 >
                   <option value={8}>August (Period 8)</option>
                   <option value={9}>September (Period 9)</option>
@@ -239,7 +239,7 @@ export const AssetValuationView: React.FC = () => {
                 <select
                   value={selectedFiscalYear}
                   onChange={e => setSelectedFiscalYear(Number(e.target.value))}
-                  className="bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-amber-500"
+                  className="bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 text-xs text-slate-900 dark:text-white focus:outline-none focus:border-amber-500"
                 >
                   <option value={2026}>FY 2026</option>
                   <option value={2027}>FY 2027</option>
@@ -258,12 +258,12 @@ export const AssetValuationView: React.FC = () => {
           </div>
 
           {/* Historical Depreciation Runs Table */}
-          <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl space-y-4">
-            <h3 className="text-sm font-bold text-white">Historical Depreciation Ledger Runs</h3>
+          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 shadow-xl space-y-4">
+            <h3 className="text-sm font-bold text-slate-900 dark:text-white">Historical Depreciation Ledger Runs</h3>
 
             <div className="overflow-x-auto">
               <table className="w-full text-left text-xs">
-                <thead className="bg-slate-950 text-slate-400 uppercase font-mono tracking-wider border-b border-slate-800">
+                <thead className="bg-slate-50 dark:bg-slate-950 text-slate-600 dark:text-slate-400 uppercase font-mono tracking-wider border-b border-slate-200 dark:border-slate-800">
                   <tr>
                     <th className="py-3 px-4">Run Reference</th>
                     <th className="py-3 px-4">Accounting Period</th>
@@ -274,19 +274,19 @@ export const AssetValuationView: React.FC = () => {
                     <th className="py-3 px-4 text-center">Status</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-slate-800 text-slate-300">
+                <tbody className="divide-y divide-slate-200 dark:divide-slate-800 text-slate-700 dark:text-slate-300">
                   {depreciationRuns.map(run => (
-                    <tr key={run.id} className="hover:bg-slate-800/40 transition-colors">
-                      <td className="py-3.5 px-4 font-mono font-bold text-amber-400">{run.runNumber}</td>
-                      <td className="py-3.5 px-4 font-medium text-white">{run.periodName}</td>
-                      <td className="py-3.5 px-4 font-mono text-slate-400">{run.runDate}</td>
+                    <tr key={run.id} className="hover:bg-slate-100/70 dark:hover:bg-slate-800/40 transition-colors">
+                      <td className="py-3.5 px-4 font-mono font-bold text-amber-700 dark:text-amber-400">{run.runNumber}</td>
+                      <td className="py-3.5 px-4 font-medium text-slate-900 dark:text-white">{run.periodName}</td>
+                      <td className="py-3.5 px-4 font-mono text-slate-600 dark:text-slate-400">{run.runDate}</td>
                       <td className="py-3.5 px-4 font-mono">{run.totalAssetsDepreciated} Fixed Assets</td>
-                      <td className="py-3.5 px-4 text-right font-mono font-black text-rose-400">
+                      <td className="py-3.5 px-4 text-right font-mono font-black text-rose-600 dark:text-rose-400">
                         {currency} {run.totalDepreciationAmount.toLocaleString()}
                       </td>
-                      <td className="py-3.5 px-4 font-mono text-cyan-400">{run.glJournalVoucherNumber}</td>
+                      <td className="py-3.5 px-4 font-mono text-cyan-600 dark:text-cyan-400">{run.glJournalVoucherNumber}</td>
                       <td className="py-3.5 px-4 text-center">
-                        <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-950 text-emerald-400 border border-emerald-800">
+                        <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-50 dark:bg-emerald-950 text-emerald-600 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800">
                           {run.status}
                         </span>
                       </td>
@@ -301,53 +301,53 @@ export const AssetValuationView: React.FC = () => {
 
       {/* VIEW: REVALUATION RESERVE */}
       {activeTab === 'revaluation' && (
-        <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl space-y-6">
+        <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 shadow-xl space-y-6">
           <div>
-            <h3 className="text-base font-bold text-white">IAS 16 Asset Revaluation Model & Equity Reserves</h3>
-            <p className="text-xs text-slate-400">Track independent chartered appraisal increases credited to the Equity Revaluation Reserve.</p>
+            <h3 className="text-base font-bold text-slate-900 dark:text-white">IAS 16 Asset Revaluation Model & Equity Reserves</h3>
+            <p className="text-xs text-slate-600 dark:text-slate-400">Track independent chartered appraisal increases credited to the Equity Revaluation Reserve.</p>
           </div>
 
           <div className="space-y-4">
             {revaluations.map(rev => (
-              <div key={rev.id} className="bg-slate-950 border border-slate-800 rounded-2xl p-5 space-y-3">
-                <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 border-b border-slate-800/80 pb-3">
+              <div key={rev.id} className="bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-2xl p-5 space-y-3">
+                <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 border-b border-slate-200/80 dark:border-slate-800/80 pb-3">
                   <div>
                     <div className="flex items-center gap-2">
-                      <span className="font-mono text-xs font-bold text-amber-400 bg-amber-950 px-2 py-0.5 rounded border border-amber-800">
+                      <span className="font-mono text-xs font-bold text-amber-700 dark:text-amber-400 bg-amber-50 dark:bg-amber-950 px-2 py-0.5 rounded border border-amber-200 dark:border-amber-800">
                         {rev.revaluationNumber}
                       </span>
-                      <span className="text-xs font-bold text-emerald-400 bg-emerald-950 px-2 py-0.5 rounded border border-emerald-800">
+                      <span className="text-xs font-bold text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950 px-2 py-0.5 rounded border border-emerald-200 dark:border-emerald-800">
                         {rev.status}
                       </span>
                     </div>
-                    <h4 className="text-sm font-bold text-white mt-1">{rev.assetName}</h4>
-                    <span className="font-mono text-xs text-slate-500">{rev.assetTag} • Appraiser: {rev.appraiserName}</span>
+                    <h4 className="text-sm font-bold text-slate-900 dark:text-white mt-1">{rev.assetName}</h4>
+                    <span className="font-mono text-xs text-slate-500 dark:text-slate-400">{rev.assetTag} • Appraiser: {rev.appraiserName}</span>
                   </div>
 
                   <div className="text-right">
-                    <div className="text-[10px] text-slate-500 font-semibold uppercase">Revaluation Surplus</div>
-                    <div className="text-base font-black font-mono text-cyan-400">
+                    <div className="text-[10px] text-slate-500 dark:text-slate-400 font-semibold uppercase">Revaluation Surplus</div>
+                    <div className="text-base font-black font-mono text-cyan-600 dark:text-cyan-400">
                       +{currency} {rev.revaluationSurplus.toLocaleString()}
                     </div>
                   </div>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
-                  <div className="bg-slate-900/80 p-3 rounded-xl">
-                    <div className="text-slate-500">Historical Net Book Value:</div>
-                    <div className="font-mono font-bold text-slate-300">{currency} {rev.historicalNBV.toLocaleString()}</div>
+                  <div className="bg-white/80 dark:bg-slate-900/80 p-3 rounded-xl">
+                    <div className="text-slate-500 dark:text-slate-400">Historical Net Book Value:</div>
+                    <div className="font-mono font-bold text-slate-700 dark:text-slate-300">{currency} {rev.historicalNBV.toLocaleString()}</div>
                   </div>
-                  <div className="bg-slate-900/80 p-3 rounded-xl">
-                    <div className="text-slate-500">New Appraised Fair Value:</div>
-                    <div className="font-mono font-bold text-emerald-400">{currency} {rev.newAppraisedFairValue.toLocaleString()}</div>
+                  <div className="bg-white/80 dark:bg-slate-900/80 p-3 rounded-xl">
+                    <div className="text-slate-500 dark:text-slate-400">New Appraised Fair Value:</div>
+                    <div className="font-mono font-bold text-emerald-600 dark:text-emerald-400">{currency} {rev.newAppraisedFairValue.toLocaleString()}</div>
                   </div>
-                  <div className="bg-slate-900/80 p-3 rounded-xl">
-                    <div className="text-slate-500">Appraisal Method:</div>
-                    <div className="text-slate-300 font-medium">{rev.appraisalMethod.replace(/_/g, ' ')}</div>
+                  <div className="bg-white/80 dark:bg-slate-900/80 p-3 rounded-xl">
+                    <div className="text-slate-500 dark:text-slate-400">Appraisal Method:</div>
+                    <div className="text-slate-700 dark:text-slate-300 font-medium">{rev.appraisalMethod.replace(/_/g, ' ')}</div>
                   </div>
                 </div>
 
-                <p className="text-xs text-slate-400 pt-1 italic">{rev.notes}</p>
+                <p className="text-xs text-slate-600 dark:text-slate-400 pt-1 italic">{rev.notes}</p>
               </div>
             ))}
           </div>
@@ -356,60 +356,60 @@ export const AssetValuationView: React.FC = () => {
 
       {/* VIEW: IMPAIRMENT TESTING */}
       {activeTab === 'impairment' && (
-        <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl space-y-6">
+        <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 shadow-xl space-y-6">
           <div>
-            <h3 className="text-base font-bold text-white">IAS 36 Impairment Testing & Write-down Register</h3>
-            <p className="text-xs text-slate-400">
+            <h3 className="text-base font-bold text-slate-900 dark:text-white">IAS 36 Impairment Testing & Write-down Register</h3>
+            <p className="text-xs text-slate-600 dark:text-slate-400">
               Recoverable Amount = Max(Fair Value less Costs to Sell, Value in Use). When Carrying Value &gt; Recoverable Amount, an impairment loss is recognized.
             </p>
           </div>
 
           <div className="space-y-4">
             {impairmentTests.map(imp => (
-              <div key={imp.id} className="bg-slate-950 border border-slate-800 rounded-2xl p-5 space-y-3">
-                <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 border-b border-slate-800/80 pb-3">
+              <div key={imp.id} className="bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-2xl p-5 space-y-3">
+                <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 border-b border-slate-200/80 dark:border-slate-800/80 pb-3">
                   <div>
                     <div className="flex items-center gap-2">
-                      <span className="font-mono text-xs font-bold text-rose-400 bg-rose-950 px-2 py-0.5 rounded border border-rose-800">
+                      <span className="font-mono text-xs font-bold text-rose-600 dark:text-rose-400 bg-rose-50 dark:bg-rose-950 px-2 py-0.5 rounded border border-rose-200 dark:border-rose-800">
                         {imp.testReference}
                       </span>
-                      <span className="text-xs font-bold text-amber-400 bg-amber-950 px-2 py-0.5 rounded border border-amber-800">
+                      <span className="text-xs font-bold text-amber-700 dark:text-amber-400 bg-amber-50 dark:bg-amber-950 px-2 py-0.5 rounded border border-amber-200 dark:border-amber-800">
                         {imp.status}
                       </span>
                     </div>
-                    <h4 className="text-sm font-bold text-white mt-1">{imp.assetName}</h4>
-                    <span className="font-mono text-xs text-slate-500">{imp.assetTag} • Test Date: {imp.testDate}</span>
+                    <h4 className="text-sm font-bold text-slate-900 dark:text-white mt-1">{imp.assetName}</h4>
+                    <span className="font-mono text-xs text-slate-500 dark:text-slate-400">{imp.assetTag} • Test Date: {imp.testDate}</span>
                   </div>
 
                   <div className="text-right">
-                    <div className="text-[10px] text-slate-500 font-semibold uppercase">Impairment Loss (P&L)</div>
-                    <div className="text-base font-black font-mono text-rose-400">
+                    <div className="text-[10px] text-slate-500 dark:text-slate-400 font-semibold uppercase">Impairment Loss (P&L)</div>
+                    <div className="text-base font-black font-mono text-rose-600 dark:text-rose-400">
                       -{currency} {imp.impairmentLoss.toLocaleString()}
                     </div>
                   </div>
                 </div>
 
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-3 text-xs">
-                  <div className="bg-slate-900/80 p-2.5 rounded-xl">
-                    <div className="text-slate-500">Carrying Amount</div>
-                    <div className="font-mono font-bold text-slate-300">{currency} {imp.carryingAmount.toLocaleString()}</div>
+                  <div className="bg-white/80 dark:bg-slate-900/80 p-2.5 rounded-xl">
+                    <div className="text-slate-500 dark:text-slate-400">Carrying Amount</div>
+                    <div className="font-mono font-bold text-slate-700 dark:text-slate-300">{currency} {imp.carryingAmount.toLocaleString()}</div>
                   </div>
-                  <div className="bg-slate-900/80 p-2.5 rounded-xl">
-                    <div className="text-slate-500">FV less Costs to Sell</div>
-                    <div className="font-mono font-bold text-slate-300">{currency} {imp.fairValueLessCostsToSell.toLocaleString()}</div>
+                  <div className="bg-white/80 dark:bg-slate-900/80 p-2.5 rounded-xl">
+                    <div className="text-slate-500 dark:text-slate-400">FV less Costs to Sell</div>
+                    <div className="font-mono font-bold text-slate-700 dark:text-slate-300">{currency} {imp.fairValueLessCostsToSell.toLocaleString()}</div>
                   </div>
-                  <div className="bg-slate-900/80 p-2.5 rounded-xl">
-                    <div className="text-slate-500">Value In Use</div>
-                    <div className="font-mono font-bold text-slate-300">{currency} {imp.valueInUse.toLocaleString()}</div>
+                  <div className="bg-white/80 dark:bg-slate-900/80 p-2.5 rounded-xl">
+                    <div className="text-slate-500 dark:text-slate-400">Value In Use</div>
+                    <div className="font-mono font-bold text-slate-700 dark:text-slate-300">{currency} {imp.valueInUse.toLocaleString()}</div>
                   </div>
-                  <div className="bg-slate-900/80 p-2.5 rounded-xl">
-                    <div className="text-slate-500">Recoverable Amount</div>
-                    <div className="font-mono font-bold text-emerald-400">{currency} {imp.recoverableAmount.toLocaleString()}</div>
+                  <div className="bg-white/80 dark:bg-slate-900/80 p-2.5 rounded-xl">
+                    <div className="text-slate-500 dark:text-slate-400">Recoverable Amount</div>
+                    <div className="font-mono font-bold text-emerald-600 dark:text-emerald-400">{currency} {imp.recoverableAmount.toLocaleString()}</div>
                   </div>
                 </div>
 
-                <div className="text-xs text-slate-400 pt-1">
-                  <span className="text-slate-500">Trigger Event: </span> {imp.triggerEvent}
+                <div className="text-xs text-slate-600 dark:text-slate-400 pt-1">
+                  <span className="text-slate-500 dark:text-slate-400">Trigger Event: </span> {imp.triggerEvent}
                 </div>
               </div>
             ))}
@@ -419,15 +419,15 @@ export const AssetValuationView: React.FC = () => {
 
       {/* VIEW: COMPREHENSIVE VALUATION MATRIX */}
       {activeTab === 'schedule' && (
-        <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl space-y-6">
+        <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 shadow-xl space-y-6">
           <div>
-            <h3 className="text-base font-bold text-white">Fixed Asset Valuation Matrix</h3>
-            <p className="text-xs text-slate-400">Comparison of Historical Cost Basis vs. Net Book Value vs. Fair Value Assessment.</p>
+            <h3 className="text-base font-bold text-slate-900 dark:text-white">Fixed Asset Valuation Matrix</h3>
+            <p className="text-xs text-slate-600 dark:text-slate-400">Comparison of Historical Cost Basis vs. Net Book Value vs. Fair Value Assessment.</p>
           </div>
 
           <div className="overflow-x-auto">
             <table className="w-full text-left text-xs">
-              <thead className="bg-slate-950 text-slate-400 uppercase font-mono tracking-wider border-b border-slate-800">
+              <thead className="bg-slate-50 dark:bg-slate-950 text-slate-600 dark:text-slate-400 uppercase font-mono tracking-wider border-b border-slate-200 dark:border-slate-800">
                 <tr>
                   <th className="py-3 px-4">Asset Tag</th>
                   <th className="py-3 px-4">Asset Description</th>
@@ -438,22 +438,22 @@ export const AssetValuationView: React.FC = () => {
                   <th className="py-3 px-4 text-right">Revaluation Adj</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-800 text-slate-300">
+              <tbody className="divide-y divide-slate-200 dark:divide-slate-800 text-slate-700 dark:text-slate-300">
                 {assets.map(a => (
-                  <tr key={a.id} className="hover:bg-slate-800/40 transition-colors">
-                    <td className="py-3.5 px-4 font-mono font-bold text-amber-400">{a.assetTag}</td>
-                    <td className="py-3.5 px-4 font-medium text-white">{a.name}</td>
-                    <td className="py-3.5 px-4 text-slate-400">{a.categoryName}</td>
-                    <td className="py-3.5 px-4 text-right font-mono font-bold text-white">
+                  <tr key={a.id} className="hover:bg-slate-100/70 dark:hover:bg-slate-800/40 transition-colors">
+                    <td className="py-3.5 px-4 font-mono font-bold text-amber-700 dark:text-amber-400">{a.assetTag}</td>
+                    <td className="py-3.5 px-4 font-medium text-slate-900 dark:text-white">{a.name}</td>
+                    <td className="py-3.5 px-4 text-slate-600 dark:text-slate-400">{a.categoryName}</td>
+                    <td className="py-3.5 px-4 text-right font-mono font-bold text-slate-900 dark:text-white">
                       {currency} {(a.originalCost + a.additionalCosts).toLocaleString()}
                     </td>
-                    <td className="py-3.5 px-4 text-right font-mono text-rose-400">
+                    <td className="py-3.5 px-4 text-right font-mono text-rose-600 dark:text-rose-400">
                       ({a.accumulatedDepreciation.toLocaleString()})
                     </td>
-                    <td className="py-3.5 px-4 text-right font-mono font-black text-emerald-400">
+                    <td className="py-3.5 px-4 text-right font-mono font-black text-emerald-600 dark:text-emerald-400">
                       {currency} {a.netBookValue.toLocaleString()}
                     </td>
-                    <td className="py-3.5 px-4 text-right font-mono text-cyan-400">
+                    <td className="py-3.5 px-4 text-right font-mono text-cyan-600 dark:text-cyan-400">
                       {a.revaluationsTotal > 0 ? `+${currency} ${a.revaluationsTotal.toLocaleString()}` : '—'}
                     </td>
                   </tr>
@@ -467,12 +467,12 @@ export const AssetValuationView: React.FC = () => {
       {/* MODAL: REVALUATION */}
       {showRevalModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-fadeIn">
-          <div className="bg-slate-900 border border-slate-800 rounded-2xl w-full max-w-lg p-6 shadow-2xl space-y-6">
-            <div className="flex items-center justify-between pb-4 border-b border-slate-800">
-              <h3 className="text-lg font-black text-white">Asset Revaluation Under IAS 16</h3>
+          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl w-full max-w-lg p-6 shadow-2xl space-y-6">
+            <div className="flex items-center justify-between pb-4 border-b border-slate-200 dark:border-slate-800">
+              <h3 className="text-lg font-black text-slate-900 dark:text-white">Asset Revaluation Under IAS 16</h3>
               <button
                 onClick={() => setShowRevalModal(false)}
-                className="text-slate-400 hover:text-white text-sm font-bold cursor-pointer"
+                className="text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white text-sm font-bold cursor-pointer"
               >
                 ✕
               </button>
@@ -480,11 +480,11 @@ export const AssetValuationView: React.FC = () => {
 
             <form onSubmit={handleCreateRevaluation} className="space-y-4 text-xs">
               <div>
-                <label className="block text-slate-400 mb-1">Select Asset to Revalue *</label>
+                <label className="block text-slate-600 dark:text-slate-400 mb-1">Select Asset to Revalue *</label>
                 <select
                   value={revalForm.assetId}
                   onChange={e => setRevalForm({ ...revalForm, assetId: e.target.value })}
-                  className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-white"
+                  className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 text-slate-900 dark:text-white"
                 >
                   {assets.map(a => (
                     <option key={a.id} value={a.id}>{a.assetTag} — {a.name} (NBV: {currency} {a.netBookValue.toLocaleString()})</option>
@@ -493,53 +493,53 @@ export const AssetValuationView: React.FC = () => {
               </div>
 
               <div>
-                <label className="block text-slate-400 mb-1">Independent Valuation Firm / Appraiser *</label>
+                <label className="block text-slate-600 dark:text-slate-400 mb-1">Independent Valuation Firm / Appraiser *</label>
                 <input
                   type="text"
                   required
                   value={revalForm.appraiserName}
                   onChange={e => setRevalForm({ ...revalForm, appraiserName: e.target.value })}
-                  className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-white"
+                  className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 text-slate-900 dark:text-white"
                 />
               </div>
 
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-slate-400 mb-1">Appraised Fair Market Value ({currency}) *</label>
+                  <label className="block text-slate-600 dark:text-slate-400 mb-1">Appraised Fair Market Value ({currency}) *</label>
                   <input
                     type="number"
                     required
                     value={revalForm.newAppraisedFairValue}
                     onChange={e => setRevalForm({ ...revalForm, newAppraisedFairValue: Number(e.target.value) })}
-                    className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-white font-mono font-bold"
+                    className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 text-slate-900 dark:text-white font-mono font-bold"
                   />
                 </div>
                 <div>
-                  <label className="block text-slate-400 mb-1">Remaining Useful Life (Months)</label>
+                  <label className="block text-slate-600 dark:text-slate-400 mb-1">Remaining Useful Life (Months)</label>
                   <input
                     type="number"
                     value={revalForm.newUsefulLifeMonths}
                     onChange={e => setRevalForm({ ...revalForm, newUsefulLifeMonths: Number(e.target.value) })}
-                    className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-white font-mono"
+                    className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 text-slate-900 dark:text-white font-mono"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block text-slate-400 mb-1">Appraisal Basis / Notes</label>
+                <label className="block text-slate-600 dark:text-slate-400 mb-1">Appraisal Basis / Notes</label>
                 <textarea
                   rows={3}
                   value={revalForm.notes}
                   onChange={e => setRevalForm({ ...revalForm, notes: e.target.value })}
-                  className="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-white"
+                  className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl p-3 text-slate-900 dark:text-white"
                 />
               </div>
 
-              <div className="flex justify-end gap-3 pt-4 border-t border-slate-800">
+              <div className="flex justify-end gap-3 pt-4 border-t border-slate-200 dark:border-slate-800">
                 <button
                   type="button"
                   onClick={() => setShowRevalModal(false)}
-                  className="px-4 py-2 bg-slate-800 text-slate-300 rounded-xl font-bold cursor-pointer"
+                  className="px-4 py-2 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 rounded-xl font-bold cursor-pointer"
                 >
                   Cancel
                 </button>
@@ -558,12 +558,12 @@ export const AssetValuationView: React.FC = () => {
       {/* MODAL: IMPAIRMENT TEST */}
       {showImpairModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-fadeIn">
-          <div className="bg-slate-900 border border-slate-800 rounded-2xl w-full max-w-lg p-6 shadow-2xl space-y-6">
-            <div className="flex items-center justify-between pb-4 border-b border-slate-800">
-              <h3 className="text-lg font-black text-white">IAS 36 Impairment Write-Down Test</h3>
+          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl w-full max-w-lg p-6 shadow-2xl space-y-6">
+            <div className="flex items-center justify-between pb-4 border-b border-slate-200 dark:border-slate-800">
+              <h3 className="text-lg font-black text-slate-900 dark:text-white">IAS 36 Impairment Write-Down Test</h3>
               <button
                 onClick={() => setShowImpairModal(false)}
-                className="text-slate-400 hover:text-white text-sm font-bold cursor-pointer"
+                className="text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white text-sm font-bold cursor-pointer"
               >
                 ✕
               </button>
@@ -571,11 +571,11 @@ export const AssetValuationView: React.FC = () => {
 
             <form onSubmit={handleCreateImpairment} className="space-y-4 text-xs">
               <div>
-                <label className="block text-slate-400 mb-1">Select Asset to Test *</label>
+                <label className="block text-slate-600 dark:text-slate-400 mb-1">Select Asset to Test *</label>
                 <select
                   value={impairForm.assetId}
                   onChange={e => setImpairForm({ ...impairForm, assetId: e.target.value })}
-                  className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-white"
+                  className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 text-slate-900 dark:text-white"
                 >
                   {assets.map(a => (
                     <option key={a.id} value={a.id}>{a.assetTag} — {a.name} (Carrying: {currency} {a.netBookValue.toLocaleString()})</option>
@@ -585,41 +585,41 @@ export const AssetValuationView: React.FC = () => {
 
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-slate-400 mb-1">Fair Value less Selling Costs ({currency})</label>
+                  <label className="block text-slate-600 dark:text-slate-400 mb-1">Fair Value less Selling Costs ({currency})</label>
                   <input
                     type="number"
                     value={impairForm.fairValueLessCostsToSell}
                     onChange={e => setImpairForm({ ...impairForm, fairValueLessCostsToSell: Number(e.target.value) })}
-                    className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-white font-mono"
+                    className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 text-slate-900 dark:text-white font-mono"
                   />
                 </div>
                 <div>
-                  <label className="block text-slate-400 mb-1">Discounted Value in Use ({currency})</label>
+                  <label className="block text-slate-600 dark:text-slate-400 mb-1">Discounted Value in Use ({currency})</label>
                   <input
                     type="number"
                     value={impairForm.valueInUse}
                     onChange={e => setImpairForm({ ...impairForm, valueInUse: Number(e.target.value) })}
-                    className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-white font-mono"
+                    className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 text-slate-900 dark:text-white font-mono"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block text-slate-400 mb-1">Impairment Trigger Event *</label>
+                <label className="block text-slate-600 dark:text-slate-400 mb-1">Impairment Trigger Event *</label>
                 <textarea
                   rows={3}
                   required
                   value={impairForm.triggerEvent}
                   onChange={e => setImpairForm({ ...impairForm, triggerEvent: e.target.value })}
-                  className="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-white"
+                  className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl p-3 text-slate-900 dark:text-white"
                 />
               </div>
 
-              <div className="flex justify-end gap-3 pt-4 border-t border-slate-800">
+              <div className="flex justify-end gap-3 pt-4 border-t border-slate-200 dark:border-slate-800">
                 <button
                   type="button"
                   onClick={() => setShowImpairModal(false)}
-                  className="px-4 py-2 bg-slate-800 text-slate-300 rounded-xl font-bold cursor-pointer"
+                  className="px-4 py-2 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 rounded-xl font-bold cursor-pointer"
                 >
                   Cancel
                 </button>

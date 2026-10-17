@@ -89,25 +89,25 @@ const ProjectManagementRunnerInner: React.FC<ProjectManagementModuleRunnerProps>
   return (
     <div className="space-y-6 animate-fadeIn">
       {/* Module Level Header */}
-      <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl">
+      <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 shadow-xl">
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
           <div className="flex items-center gap-4">
             <button
               onClick={() => onNavigate({ view: 'dashboard' })}
               aria-label="Back to dashboard"
-              className="p-2.5 rounded-xl bg-slate-800 text-slate-400 hover:text-white hover:bg-slate-700 transition-colors cursor-pointer"
+              className="p-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors cursor-pointer"
             >
               <ArrowLeft className="w-5 h-5" />
             </button>
             <div>
               <div className="flex items-center gap-2">
-                <span className="text-xs uppercase font-bold tracking-widest text-purple-400 bg-purple-950/60 px-2.5 py-0.5 rounded-full border border-purple-800">
+                <span className="text-xs uppercase font-bold tracking-widest text-purple-600 dark:text-purple-400 bg-purple-50 dark:bg-purple-950/60 px-2.5 py-0.5 rounded-full border border-purple-200 dark:border-purple-800">
                   {module.code} — {module.category}
                 </span>
-                <span className="text-xs text-slate-400">Enterprise Edition</span>
+                <span className="text-xs text-slate-600 dark:text-slate-400">Enterprise Edition</span>
               </div>
-              <h1 className="text-2xl font-black text-white tracking-tight mt-1">{module.name}</h1>
-              <p className="text-xs text-slate-400 mt-0.5">{module.description}</p>
+              <h1 className="text-2xl font-black text-slate-900 dark:text-white tracking-tight mt-1">{module.name}</h1>
+              <p className="text-xs text-slate-600 dark:text-slate-400 mt-0.5">{module.description}</p>
             </div>
           </div>
 
@@ -116,25 +116,25 @@ const ProjectManagementRunnerInner: React.FC<ProjectManagementModuleRunnerProps>
               onClick={onToggleFavorite}
               className={`flex items-center gap-2 px-3 py-2 rounded-xl text-xs font-semibold border transition-all cursor-pointer ${
                 isFavorite
-                  ? 'bg-amber-950/40 text-amber-300 border-amber-800/80'
-                  : 'bg-slate-800 text-slate-300 border-slate-700 hover:bg-slate-700'
+                  ? 'bg-amber-50 dark:bg-amber-950/40 text-amber-800 dark:text-amber-300 border-amber-800/80'
+                  : 'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700'
               }`}
             >
-              <Star className={`w-3.5 h-3.5 ${isFavorite ? 'fill-amber-400 text-amber-400' : ''}`} />
+              <Star className={`w-3.5 h-3.5 ${isFavorite ? 'fill-amber-400 text-amber-700 dark:text-amber-400' : ''}`} />
               <span>{isFavorite ? 'Favorited' : 'Bookmark'}</span>
             </button>
 
             {/* Active Project Switcher */}
-            <div className="flex items-center gap-2 bg-slate-950 px-3 py-1.5 rounded-xl border border-slate-800">
-              <Building className="w-4 h-4 text-purple-400" />
+            <div className="flex items-center gap-2 bg-slate-50 dark:bg-slate-950 px-3 py-1.5 rounded-xl border border-slate-200 dark:border-slate-800">
+              <Building className="w-4 h-4 text-purple-600 dark:text-purple-400" />
               <select
                 value={selectedProject.id}
                 onChange={(e) => selectProject(e.target.value)}
                 aria-label="Select current project"
-                className="bg-transparent text-white font-mono text-xs font-bold focus:outline-none cursor-pointer"
+                className="bg-transparent text-slate-900 dark:text-white font-mono text-xs font-bold focus:outline-none cursor-pointer"
               >
                 {projects.map(p => (
-                  <option key={p.id} value={p.id} className="bg-slate-900 text-white">
+                  <option key={p.id} value={p.id} className="bg-white dark:bg-slate-900 text-slate-900 dark:text-white">
                     {p.projectCode} — {p.projectName}
                   </option>
                 ))}
@@ -144,13 +144,13 @@ const ProjectManagementRunnerInner: React.FC<ProjectManagementModuleRunnerProps>
         </div>
 
         {/* Functional Area Nav Strip */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2 mt-6 pt-5 border-t border-slate-800">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2 mt-6 pt-5 border-t border-slate-200 dark:border-slate-800">
           <button
             onClick={() => handleTabClick('10.01')}
             className={`flex items-center justify-center gap-2 p-3 rounded-xl text-xs font-bold transition-all cursor-pointer ${
               currentTab === '10.01'
                 ? 'bg-purple-600 text-white shadow-lg shadow-purple-600/30'
-                : 'bg-slate-950 border border-slate-800 text-slate-400 hover:text-white hover:bg-slate-800/60'
+                : 'bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100/60 dark:hover:bg-slate-800/60'
             }`}
           >
             <FolderKanban className="w-4 h-4" />
@@ -162,7 +162,7 @@ const ProjectManagementRunnerInner: React.FC<ProjectManagementModuleRunnerProps>
             className={`flex items-center justify-center gap-2 p-3 rounded-xl text-xs font-bold transition-all cursor-pointer ${
               currentTab === '10.02'
                 ? 'bg-purple-600 text-white shadow-lg shadow-purple-600/30'
-                : 'bg-slate-950 border border-slate-800 text-slate-400 hover:text-white hover:bg-slate-800/60'
+                : 'bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100/60 dark:hover:bg-slate-800/60'
             }`}
           >
             <Calendar className="w-4 h-4" />
@@ -174,7 +174,7 @@ const ProjectManagementRunnerInner: React.FC<ProjectManagementModuleRunnerProps>
             className={`flex items-center justify-center gap-2 p-3 rounded-xl text-xs font-bold transition-all cursor-pointer ${
               currentTab === '10.03'
                 ? 'bg-purple-600 text-white shadow-lg shadow-purple-600/30'
-                : 'bg-slate-950 border border-slate-800 text-slate-400 hover:text-white hover:bg-slate-800/60'
+                : 'bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100/60 dark:hover:bg-slate-800/60'
             }`}
           >
             <DollarSign className="w-4 h-4" />
@@ -186,7 +186,7 @@ const ProjectManagementRunnerInner: React.FC<ProjectManagementModuleRunnerProps>
             className={`flex items-center justify-center gap-2 p-3 rounded-xl text-xs font-bold transition-all cursor-pointer ${
               currentTab === '10.04'
                 ? 'bg-purple-600 text-white shadow-lg shadow-purple-600/30'
-                : 'bg-slate-950 border border-slate-800 text-slate-400 hover:text-white hover:bg-slate-800/60'
+                : 'bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100/60 dark:hover:bg-slate-800/60'
             }`}
           >
             <Truck className="w-4 h-4" />
@@ -198,7 +198,7 @@ const ProjectManagementRunnerInner: React.FC<ProjectManagementModuleRunnerProps>
             className={`flex items-center justify-center gap-2 p-3 rounded-xl text-xs font-bold transition-all cursor-pointer ${
               currentTab === '10.05'
                 ? 'bg-purple-600 text-white shadow-lg shadow-purple-600/30'
-                : 'bg-slate-950 border border-slate-800 text-slate-400 hover:text-white hover:bg-slate-800/60'
+                : 'bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100/60 dark:hover:bg-slate-800/60'
             }`}
           >
             <Receipt className="w-4 h-4" />
@@ -210,7 +210,7 @@ const ProjectManagementRunnerInner: React.FC<ProjectManagementModuleRunnerProps>
             className={`flex items-center justify-center gap-2 p-3 rounded-xl text-xs font-bold transition-all cursor-pointer ${
               currentTab === '10.06'
                 ? 'bg-purple-600 text-white shadow-lg shadow-purple-600/30'
-                : 'bg-slate-950 border border-slate-800 text-slate-400 hover:text-white hover:bg-slate-800/60'
+                : 'bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100/60 dark:hover:bg-slate-800/60'
             }`}
           >
             <TrendingUp className="w-4 h-4" />

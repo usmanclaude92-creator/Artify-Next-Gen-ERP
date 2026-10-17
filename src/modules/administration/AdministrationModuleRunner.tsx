@@ -148,13 +148,13 @@ export const AdministrationModuleRunner: React.FC<AdministrationModuleRunnerProp
     <AdministrationProvider>
       <div className="space-y-6 pb-12">
         {/* Module Header Bar */}
-        <div className="bg-white rounded-2xl p-5 border border-slate-200 shadow-2xs">
+        <div className="bg-white dark:bg-slate-900 rounded-2xl p-5 border border-slate-200 dark:border-slate-700 shadow-2xs">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
             <div className="flex items-center gap-3">
               {functionalArea && (
                 <button
                   onClick={() => onNavigate({ view: 'module', moduleId: 'administration' })}
-                  className="p-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 transition-colors cursor-pointer"
+                  className="p-2 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 transition-colors cursor-pointer"
                   title="Back to Administration Cockpit"
                 >
                   <ArrowLeft className="w-4 h-4" />
@@ -165,18 +165,18 @@ export const AdministrationModuleRunner: React.FC<AdministrationModuleRunnerProp
               </div>
               <div>
                 <div className="flex items-center gap-2">
-                  <h1 className="text-lg font-bold text-slate-900">
+                  <h1 className="text-lg font-bold text-slate-900 dark:text-slate-100">
                     {functionalArea ? functionalArea.name : '03 — Administration & General Business Management'}
                   </h1>
                   <button
                     onClick={onToggleFavorite}
-                    className="text-slate-400 hover:text-amber-500 transition-colors cursor-pointer"
+                    className="text-slate-600 dark:text-slate-400 hover:text-amber-500 dark:hover:text-amber-400 transition-colors cursor-pointer"
                     title={isFavorite ? 'Remove from favorites' : 'Add to favorites'}
                   >
-                    <Star className={`w-4 h-4 ${isFavorite ? 'fill-amber-400 text-amber-400' : ''}`} />
+                    <Star className={`w-4 h-4 ${isFavorite ? 'fill-amber-400 text-amber-700 dark:text-amber-400' : ''}`} />
                   </button>
                 </div>
-                <p className="text-xs text-slate-500">
+                <p className="text-xs text-slate-500 dark:text-slate-400">
                   {functionalArea ? functionalArea.description : 'Corporate office administration, mailroom, document archives, meeting MoMs, and service requests'}
                 </p>
               </div>
@@ -187,7 +187,7 @@ export const AdministrationModuleRunner: React.FC<AdministrationModuleRunnerProp
               <button
                 onClick={() => onNavigate({ view: 'module', moduleId: 'administration' })}
                 className={`px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-all cursor-pointer ${
-                  !functionalArea ? 'bg-slate-900 text-white shadow-xs' : 'bg-slate-100 text-slate-600 hover:text-slate-900'
+                  !functionalArea ? 'bg-slate-900 text-white shadow-xs' : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100'
                 }`}
               >
                 <LayoutDashboard className="w-3.5 h-3.5" />
@@ -203,7 +203,7 @@ export const AdministrationModuleRunner: React.FC<AdministrationModuleRunnerProp
                     handleAreaNavigate(e.target.value);
                   }
                 }}
-                className="px-3 py-1.5 rounded-lg border border-slate-200 text-xs font-semibold bg-white text-slate-700 focus:outline-none focus:ring-2 focus:ring-slate-900 cursor-pointer"
+                className="px-3 py-1.5 rounded-lg border border-slate-200 dark:border-slate-700 text-xs font-semibold bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 focus:outline-none focus:ring-2 focus:ring-slate-200 dark:focus:ring-slate-900 cursor-pointer"
               >
                 <option value="cockpit">Select Functional Area...</option>
                 <option value="office-admin">03.01 Office Administration</option>

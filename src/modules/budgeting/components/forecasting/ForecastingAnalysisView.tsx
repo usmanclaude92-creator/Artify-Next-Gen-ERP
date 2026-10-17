@@ -80,32 +80,32 @@ export const ForecastingAnalysisView: React.FC = () => {
   return (
     <div className="space-y-6">
       {/* Header & Sub-Nav */}
-      <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl">
+      <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 shadow-xl">
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
           <div>
             <div className="flex items-center gap-2">
-              <span className="px-2.5 py-0.5 rounded-full text-xs font-bold bg-emerald-950/80 text-emerald-400 border border-emerald-800">
+              <span className="px-2.5 py-0.5 rounded-full text-xs font-bold bg-emerald-50 dark:bg-emerald-950/80 text-emerald-600 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800">
                 11.05 FORECASTING & ANALYSIS
               </span>
-              <span className="text-xs text-slate-400">Budget vs Actuals, Rolling Forecasts & Stress Testing</span>
+              <span className="text-xs text-slate-600 dark:text-slate-400">Budget vs Actuals, Rolling Forecasts & Stress Testing</span>
             </div>
-            <h2 className="text-xl font-black text-white tracking-tight mt-1">
+            <h2 className="text-xl font-black text-slate-900 dark:text-white tracking-tight mt-1">
               Financial Variance Intelligence & Scenario Simulations
             </h2>
-            <p className="text-xs text-slate-400 mt-0.5">
+            <p className="text-xs text-slate-600 dark:text-slate-400 mt-0.5">
               Analyze multi-period variances (Budget vs Actual), maintain dynamic rolling forecasts, and simulate macroeconomic stress tests.
             </p>
           </div>
         </div>
 
         {/* Sub Nav Strip */}
-        <div className="flex items-center gap-2 mt-6 border-b border-slate-800 pb-3 overflow-x-auto">
+        <div className="flex items-center gap-2 mt-6 border-b border-slate-200 dark:border-slate-800 pb-3 overflow-x-auto">
           <button
             onClick={() => setActiveSubTab('bva')}
             className={`flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
               activeSubTab === 'bva'
                 ? 'bg-emerald-600 text-white shadow-md shadow-emerald-600/20'
-                : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/60'
+                : 'text-slate-600 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200 hover:bg-slate-100/60 dark:hover:bg-slate-800/60'
             }`}
           >
             <BarChart3 className="w-4 h-4" />
@@ -116,7 +116,7 @@ export const ForecastingAnalysisView: React.FC = () => {
             className={`flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
               activeSubTab === 'forecasting'
                 ? 'bg-emerald-600 text-white shadow-md shadow-emerald-600/20'
-                : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/60'
+                : 'text-slate-600 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200 hover:bg-slate-100/60 dark:hover:bg-slate-800/60'
             }`}
           >
             <TrendingUp className="w-4 h-4" />
@@ -127,7 +127,7 @@ export const ForecastingAnalysisView: React.FC = () => {
             className={`flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
               activeSubTab === 'rolling'
                 ? 'bg-emerald-600 text-white shadow-md shadow-emerald-600/20'
-                : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/60'
+                : 'text-slate-600 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200 hover:bg-slate-100/60 dark:hover:bg-slate-800/60'
             }`}
           >
             <RefreshCw className="w-4 h-4" />
@@ -138,7 +138,7 @@ export const ForecastingAnalysisView: React.FC = () => {
             className={`flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
               activeSubTab === 'scenario'
                 ? 'bg-emerald-600 text-white shadow-md shadow-emerald-600/20'
-                : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/60'
+                : 'text-slate-600 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200 hover:bg-slate-100/60 dark:hover:bg-slate-800/60'
             }`}
           >
             <Sliders className="w-4 h-4" />
@@ -152,48 +152,48 @@ export const ForecastingAnalysisView: React.FC = () => {
         <div className="space-y-6">
           {/* Variance KPI Cards */}
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-            <div className="bg-slate-900 border border-slate-800 rounded-2xl p-5 shadow-xl">
-              <span className="text-[10px] uppercase font-bold text-slate-500">Authorized Annual Budget</span>
-              <p className="text-xl font-mono font-black text-white mt-1">
-                {totalBudget.toLocaleString()} <span className="text-xs font-normal text-slate-400">{currency}</span>
+            <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-5 shadow-xl">
+              <span className="text-[10px] uppercase font-bold text-slate-500 dark:text-slate-400">Authorized Annual Budget</span>
+              <p className="text-xl font-mono font-black text-slate-900 dark:text-white mt-1">
+                {totalBudget.toLocaleString()} <span className="text-xs font-normal text-slate-600 dark:text-slate-400">{currency}</span>
               </p>
-              <span className="text-xs text-slate-400 mt-2 block">100% Board Baseline</span>
+              <span className="text-xs text-slate-600 dark:text-slate-400 mt-2 block">100% Board Baseline</span>
             </div>
 
-            <div className="bg-slate-900 border border-slate-800 rounded-2xl p-5 shadow-xl">
-              <span className="text-[10px] uppercase font-bold text-slate-500">Actual Posted Incurred</span>
-              <p className="text-xl font-mono font-black text-emerald-400 mt-1">
-                {totalActual.toLocaleString()} <span className="text-xs font-normal text-slate-400">{currency}</span>
+            <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-5 shadow-xl">
+              <span className="text-[10px] uppercase font-bold text-slate-500 dark:text-slate-400">Actual Posted Incurred</span>
+              <p className="text-xl font-mono font-black text-emerald-600 dark:text-emerald-400 mt-1">
+                {totalActual.toLocaleString()} <span className="text-xs font-normal text-slate-600 dark:text-slate-400">{currency}</span>
               </p>
-              <span className="text-xs text-slate-400 mt-2 block">GL postings cleared</span>
+              <span className="text-xs text-slate-600 dark:text-slate-400 mt-2 block">GL postings cleared</span>
             </div>
 
-            <div className="bg-slate-900 border border-slate-800 rounded-2xl p-5 shadow-xl">
-              <span className="text-[10px] uppercase font-bold text-slate-500">Committed / Encumbered</span>
-              <p className="text-xl font-mono font-black text-amber-400 mt-1">
-                {totalCommitted.toLocaleString()} <span className="text-xs font-normal text-slate-400">{currency}</span>
+            <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-5 shadow-xl">
+              <span className="text-[10px] uppercase font-bold text-slate-500 dark:text-slate-400">Committed / Encumbered</span>
+              <p className="text-xl font-mono font-black text-amber-700 dark:text-amber-400 mt-1">
+                {totalCommitted.toLocaleString()} <span className="text-xs font-normal text-slate-600 dark:text-slate-400">{currency}</span>
               </p>
-              <span className="text-xs text-slate-400 mt-2 block">Open POs & approved contracts</span>
+              <span className="text-xs text-slate-600 dark:text-slate-400 mt-2 block">Open POs & approved contracts</span>
             </div>
 
-            <div className="bg-slate-900 border border-slate-800 rounded-2xl p-5 shadow-xl">
-              <span className="text-[10px] uppercase font-bold text-slate-500">Net Favorable Variance</span>
-              <p className="text-xl font-mono font-black text-cyan-400 mt-1">
-                +{totalVariance.toLocaleString()} <span className="text-xs font-normal text-slate-400">{currency}</span>
+            <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-5 shadow-xl">
+              <span className="text-[10px] uppercase font-bold text-slate-500 dark:text-slate-400">Net Favorable Variance</span>
+              <p className="text-xl font-mono font-black text-cyan-600 dark:text-cyan-400 mt-1">
+                +{totalVariance.toLocaleString()} <span className="text-xs font-normal text-slate-600 dark:text-slate-400">{currency}</span>
               </p>
-              <span className="text-xs text-emerald-400 mt-2 block font-semibold">
+              <span className="text-xs text-emerald-600 dark:text-emerald-400 mt-2 block font-semibold">
                 +{variancePct}% Headroom Remaining
               </span>
             </div>
           </div>
 
           {/* BvA Breakdown Table */}
-          <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl">
-            <h3 className="text-base font-bold text-white mb-4">Line-by-Line Budget vs Actuals Analysis</h3>
+          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 shadow-xl">
+            <h3 className="text-base font-bold text-slate-900 dark:text-white mb-4">Line-by-Line Budget vs Actuals Analysis</h3>
             <div className="overflow-x-auto">
               <table className="w-full text-left text-xs border-collapse font-mono">
                 <thead>
-                  <tr className="bg-slate-950 text-slate-400 border-b border-slate-800 font-sans">
+                  <tr className="bg-slate-50 dark:bg-slate-950 text-slate-600 dark:text-slate-400 border-b border-slate-200 dark:border-slate-800 font-sans">
                     <th className="p-3 font-bold">GL Account & Line</th>
                     <th className="p-3 font-bold">Cost Center</th>
                     <th className="p-3 font-bold text-right">Authorized Budget</th>
@@ -204,7 +204,7 @@ export const ForecastingAnalysisView: React.FC = () => {
                     <th className="p-3 font-bold text-center">Variance (%)</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-slate-800/60">
+                <tbody className="divide-y divide-slate-200/60 dark:divide-slate-800/60">
                   {lineItems.map(item => {
                     const totalUsed = item.committedAmount + item.actualSpent;
                     const variance = item.annualBudget - totalUsed;
@@ -212,28 +212,28 @@ export const ForecastingAnalysisView: React.FC = () => {
                     const isFavorable = variance >= 0;
 
                     return (
-                      <tr key={item.id} className="hover:bg-slate-800/40 transition-colors">
+                      <tr key={item.id} className="hover:bg-slate-100/70 dark:hover:bg-slate-800/40 transition-colors">
                         <td className="p-3 font-sans">
-                          <span className="font-mono font-bold text-emerald-400">{item.accountCode}</span>
-                          <p className="text-white font-bold text-xs mt-0.5">{item.accountName}</p>
+                          <span className="font-mono font-bold text-emerald-600 dark:text-emerald-400">{item.accountCode}</span>
+                          <p className="text-slate-900 dark:text-white font-bold text-xs mt-0.5">{item.accountName}</p>
                         </td>
-                        <td className="p-3 font-sans text-slate-300">
-                          <span className="bg-slate-800 text-slate-300 px-2 py-0.5 rounded font-mono text-[10px] font-bold">
+                        <td className="p-3 font-sans text-slate-700 dark:text-slate-300">
+                          <span className="bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 px-2 py-0.5 rounded font-mono text-[10px] font-bold">
                             {item.costCenterCode}
                           </span>
                         </td>
-                        <td className="p-3 text-right font-bold text-white">{item.annualBudget.toLocaleString()} {currency}</td>
-                        <td className="p-3 text-right text-emerald-400">{item.actualSpent.toLocaleString()} {currency}</td>
-                        <td className="p-3 text-right text-amber-400">{item.committedAmount.toLocaleString()} {currency}</td>
-                        <td className="p-3 text-right font-bold text-slate-200">{totalUsed.toLocaleString()} {currency}</td>
-                        <td className={`p-3 text-right font-bold ${isFavorable ? 'text-cyan-400' : 'text-rose-400'}`}>
+                        <td className="p-3 text-right font-bold text-slate-900 dark:text-white">{item.annualBudget.toLocaleString()} {currency}</td>
+                        <td className="p-3 text-right text-emerald-600 dark:text-emerald-400">{item.actualSpent.toLocaleString()} {currency}</td>
+                        <td className="p-3 text-right text-amber-700 dark:text-amber-400">{item.committedAmount.toLocaleString()} {currency}</td>
+                        <td className="p-3 text-right font-bold text-slate-800 dark:text-slate-200">{totalUsed.toLocaleString()} {currency}</td>
+                        <td className={`p-3 text-right font-bold ${isFavorable ? 'text-cyan-600 dark:text-cyan-400' : 'text-rose-600 dark:text-rose-400'}`}>
                           {isFavorable ? '+' : ''}{variance.toLocaleString()} {currency}
                         </td>
                         <td className="p-3 text-center font-sans">
                           <span className={`px-2.5 py-0.5 rounded-full text-[11px] font-bold ${
                             isFavorable
-                              ? 'bg-emerald-950 text-emerald-400 border border-emerald-800'
-                              : 'bg-rose-950 text-rose-400 border border-rose-800'
+                              ? 'bg-emerald-50 dark:bg-emerald-950 text-emerald-600 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800'
+                              : 'bg-rose-50 dark:bg-rose-950 text-rose-600 dark:text-rose-400 border border-rose-200 dark:border-rose-800'
                           }`}>
                             {isFavorable ? `+${variancePercent}% Fav` : `${variancePercent}% Unfav`}
                           </span>
@@ -251,27 +251,27 @@ export const ForecastingAnalysisView: React.FC = () => {
       {/* 11.05.02: Year-End Landing Forecast */}
       {activeSubTab === 'forecasting' && (
         <div className="space-y-6">
-          <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl">
-            <h3 className="text-base font-bold text-white">Full-Year Projected Landing Model (Actuals + Run Rate)</h3>
-            <p className="text-xs text-slate-400 mt-1">Combines Q1/Q2 posted actuals, open commitments, and linear weighted run-rate through Q4.</p>
+          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 shadow-xl">
+            <h3 className="text-base font-bold text-slate-900 dark:text-white">Full-Year Projected Landing Model (Actuals + Run Rate)</h3>
+            <p className="text-xs text-slate-600 dark:text-slate-400 mt-1">Combines Q1/Q2 posted actuals, open commitments, and linear weighted run-rate through Q4.</p>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mt-6">
-              <div className="p-5 rounded-xl bg-slate-950 border border-slate-800">
-                <span className="text-[10px] text-slate-500 uppercase font-bold">Projected Net Revenue Landing</span>
-                <p className="text-2xl font-mono font-black text-emerald-400 mt-1">29,850,000 {currency}</p>
-                <p className="text-xs text-emerald-400 mt-2 font-semibold">+6.6% over Budget Target (28.0M)</p>
+              <div className="p-5 rounded-xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800">
+                <span className="text-[10px] text-slate-500 dark:text-slate-400 uppercase font-bold">Projected Net Revenue Landing</span>
+                <p className="text-2xl font-mono font-black text-emerald-600 dark:text-emerald-400 mt-1">29,850,000 {currency}</p>
+                <p className="text-xs text-emerald-600 dark:text-emerald-400 mt-2 font-semibold">+6.6% over Budget Target (28.0M)</p>
               </div>
 
-              <div className="p-5 rounded-xl bg-slate-950 border border-slate-800">
-                <span className="text-[10px] text-slate-500 uppercase font-bold">Projected Operating Expenses</span>
-                <p className="text-2xl font-mono font-black text-amber-400 mt-1">11,280,000 {currency}</p>
-                <p className="text-xs text-slate-400 mt-2">Within 1.8% of allocated envelope</p>
+              <div className="p-5 rounded-xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800">
+                <span className="text-[10px] text-slate-500 dark:text-slate-400 uppercase font-bold">Projected Operating Expenses</span>
+                <p className="text-2xl font-mono font-black text-amber-700 dark:text-amber-400 mt-1">11,280,000 {currency}</p>
+                <p className="text-xs text-slate-600 dark:text-slate-400 mt-2">Within 1.8% of allocated envelope</p>
               </div>
 
-              <div className="p-5 rounded-xl bg-slate-950 border border-slate-800">
-                <span className="text-[10px] text-slate-500 uppercase font-bold">Projected EBITDA Margin</span>
-                <p className="text-2xl font-mono font-black text-purple-400 mt-1">22.4% (6,680,000 {currency})</p>
-                <p className="text-xs text-purple-400 mt-2 font-semibold">Exceeds corporate hurdle by +140 bps</p>
+              <div className="p-5 rounded-xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800">
+                <span className="text-[10px] text-slate-500 dark:text-slate-400 uppercase font-bold">Projected EBITDA Margin</span>
+                <p className="text-2xl font-mono font-black text-purple-600 dark:text-purple-400 mt-1">22.4% (6,680,000 {currency})</p>
+                <p className="text-xs text-purple-600 dark:text-purple-400 mt-2 font-semibold">Exceeds corporate hurdle by +140 bps</p>
               </div>
             </div>
           </div>
@@ -281,14 +281,14 @@ export const ForecastingAnalysisView: React.FC = () => {
       {/* 11.05.03: Rolling 4Q Forecast */}
       {activeSubTab === 'rolling' && (
         <div className="space-y-6">
-          <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl">
-            <h3 className="text-base font-bold text-white">Rolling 4-Quarter Forward Financial Horizon</h3>
-            <p className="text-xs text-slate-400 mt-1">Continuous rolling outlook dynamically updating with each fiscal quarter close.</p>
+          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 shadow-xl">
+            <h3 className="text-base font-bold text-slate-900 dark:text-white">Rolling 4-Quarter Forward Financial Horizon</h3>
+            <p className="text-xs text-slate-600 dark:text-slate-400 mt-1">Continuous rolling outlook dynamically updating with each fiscal quarter close.</p>
 
             <div className="mt-6 overflow-x-auto">
               <table className="w-full text-left text-xs border-collapse font-mono">
                 <thead>
-                  <tr className="bg-slate-950 text-slate-400 border-b border-slate-800 font-sans">
+                  <tr className="bg-slate-50 dark:bg-slate-950 text-slate-600 dark:text-slate-400 border-b border-slate-200 dark:border-slate-800 font-sans">
                     <th className="p-3 font-bold">Metric / Financial Line</th>
                     <th className="p-3 font-bold text-right">Q3-2026 (Forecast)</th>
                     <th className="p-3 font-bold text-right">Q4-2026 (Forecast)</th>
@@ -297,46 +297,46 @@ export const ForecastingAnalysisView: React.FC = () => {
                     <th className="p-3 font-bold text-right">Rolling 4Q Total</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-slate-800/60">
-                  <tr className="hover:bg-slate-800/40">
-                    <td className="p-3 font-sans font-bold text-white">Commercial Revenue</td>
-                    <td className="p-3 text-right text-emerald-400">7,200,000 {currency}</td>
-                    <td className="p-3 text-right text-emerald-400">7,650,000 {currency}</td>
-                    <td className="p-3 text-right text-emerald-400">8,100,000 {currency}</td>
-                    <td className="p-3 text-right text-emerald-400">8,400,000 {currency}</td>
-                    <td className="p-3 text-right font-bold text-white">31,350,000 {currency}</td>
+                <tbody className="divide-y divide-slate-200/60 dark:divide-slate-800/60">
+                  <tr className="hover:bg-slate-100/70 dark:hover:bg-slate-800/40">
+                    <td className="p-3 font-sans font-bold text-slate-900 dark:text-white">Commercial Revenue</td>
+                    <td className="p-3 text-right text-emerald-600 dark:text-emerald-400">7,200,000 {currency}</td>
+                    <td className="p-3 text-right text-emerald-600 dark:text-emerald-400">7,650,000 {currency}</td>
+                    <td className="p-3 text-right text-emerald-600 dark:text-emerald-400">8,100,000 {currency}</td>
+                    <td className="p-3 text-right text-emerald-600 dark:text-emerald-400">8,400,000 {currency}</td>
+                    <td className="p-3 text-right font-bold text-slate-900 dark:text-white">31,350,000 {currency}</td>
                   </tr>
-                  <tr className="hover:bg-slate-800/40">
-                    <td className="p-3 font-sans font-bold text-white">Direct Production Cost (COGS)</td>
-                    <td className="p-3 text-right text-rose-400">(4,100,000) {currency}</td>
-                    <td className="p-3 text-right text-rose-400">(4,300,000) {currency}</td>
-                    <td className="p-3 text-right text-rose-400">(4,500,000) {currency}</td>
-                    <td className="p-3 text-right text-rose-400">(4,650,000) {currency}</td>
-                    <td className="p-3 text-right font-bold text-rose-400">(17,550,000) {currency}</td>
+                  <tr className="hover:bg-slate-100/70 dark:hover:bg-slate-800/40">
+                    <td className="p-3 font-sans font-bold text-slate-900 dark:text-white">Direct Production Cost (COGS)</td>
+                    <td className="p-3 text-right text-rose-600 dark:text-rose-400">(4,100,000) {currency}</td>
+                    <td className="p-3 text-right text-rose-600 dark:text-rose-400">(4,300,000) {currency}</td>
+                    <td className="p-3 text-right text-rose-600 dark:text-rose-400">(4,500,000) {currency}</td>
+                    <td className="p-3 text-right text-rose-600 dark:text-rose-400">(4,650,000) {currency}</td>
+                    <td className="p-3 text-right font-bold text-rose-600 dark:text-rose-400">(17,550,000) {currency}</td>
                   </tr>
-                  <tr className="hover:bg-slate-800/40">
-                    <td className="p-3 font-sans font-bold text-white">Gross Profit</td>
-                    <td className="p-3 text-right font-bold text-cyan-400">3,100,000 {currency}</td>
-                    <td className="p-3 text-right font-bold text-cyan-400">3,350,000 {currency}</td>
-                    <td className="p-3 text-right font-bold text-cyan-400">3,600,000 {currency}</td>
-                    <td className="p-3 text-right font-bold text-cyan-400">3,750,000 {currency}</td>
-                    <td className="p-3 text-right font-black text-cyan-400">13,800,000 {currency}</td>
+                  <tr className="hover:bg-slate-100/70 dark:hover:bg-slate-800/40">
+                    <td className="p-3 font-sans font-bold text-slate-900 dark:text-white">Gross Profit</td>
+                    <td className="p-3 text-right font-bold text-cyan-600 dark:text-cyan-400">3,100,000 {currency}</td>
+                    <td className="p-3 text-right font-bold text-cyan-600 dark:text-cyan-400">3,350,000 {currency}</td>
+                    <td className="p-3 text-right font-bold text-cyan-600 dark:text-cyan-400">3,600,000 {currency}</td>
+                    <td className="p-3 text-right font-bold text-cyan-600 dark:text-cyan-400">3,750,000 {currency}</td>
+                    <td className="p-3 text-right font-black text-cyan-600 dark:text-cyan-400">13,800,000 {currency}</td>
                   </tr>
-                  <tr className="hover:bg-slate-800/40">
-                    <td className="p-3 font-sans font-bold text-white">Operating Expenses (OPEX)</td>
-                    <td className="p-3 text-right text-amber-400">(1,450,000) {currency}</td>
-                    <td className="p-3 text-right text-amber-400">(1,500,000) {currency}</td>
-                    <td className="p-3 text-right text-amber-400">(1,550,000) {currency}</td>
-                    <td className="p-3 text-right text-amber-400">(1,600,000) {currency}</td>
-                    <td className="p-3 text-right font-bold text-amber-400">(6,100,000) {currency}</td>
+                  <tr className="hover:bg-slate-100/70 dark:hover:bg-slate-800/40">
+                    <td className="p-3 font-sans font-bold text-slate-900 dark:text-white">Operating Expenses (OPEX)</td>
+                    <td className="p-3 text-right text-amber-700 dark:text-amber-400">(1,450,000) {currency}</td>
+                    <td className="p-3 text-right text-amber-700 dark:text-amber-400">(1,500,000) {currency}</td>
+                    <td className="p-3 text-right text-amber-700 dark:text-amber-400">(1,550,000) {currency}</td>
+                    <td className="p-3 text-right text-amber-700 dark:text-amber-400">(1,600,000) {currency}</td>
+                    <td className="p-3 text-right font-bold text-amber-700 dark:text-amber-400">(6,100,000) {currency}</td>
                   </tr>
-                  <tr className="hover:bg-slate-800/40 bg-slate-950/60 font-bold">
-                    <td className="p-3 font-sans text-purple-400">Operating EBITDA</td>
-                    <td className="p-3 text-right text-purple-400">1,650,000 {currency}</td>
-                    <td className="p-3 text-right text-purple-400">1,850,000 {currency}</td>
-                    <td className="p-3 text-right text-purple-400">2,050,000 {currency}</td>
-                    <td className="p-3 text-right text-purple-400">2,150,000 {currency}</td>
-                    <td className="p-3 text-right font-black text-purple-400">7,700,000 {currency} (24.6%)</td>
+                  <tr className="hover:bg-slate-100/70 dark:hover:bg-slate-800/40 bg-slate-50/60 dark:bg-slate-950/60 font-bold">
+                    <td className="p-3 font-sans text-purple-600 dark:text-purple-400">Operating EBITDA</td>
+                    <td className="p-3 text-right text-purple-600 dark:text-purple-400">1,650,000 {currency}</td>
+                    <td className="p-3 text-right text-purple-600 dark:text-purple-400">1,850,000 {currency}</td>
+                    <td className="p-3 text-right text-purple-600 dark:text-purple-400">2,050,000 {currency}</td>
+                    <td className="p-3 text-right text-purple-600 dark:text-purple-400">2,150,000 {currency}</td>
+                    <td className="p-3 text-right font-black text-purple-600 dark:text-purple-400">7,700,000 {currency} (24.6%)</td>
                   </tr>
                 </tbody>
               </table>
@@ -359,34 +359,34 @@ export const ForecastingAnalysisView: React.FC = () => {
                   onClick={() => handleSelectScenario(sc.id)}
                   className={`p-5 rounded-2xl border transition-all cursor-pointer ${
                     isSelected
-                      ? 'bg-slate-900 border-emerald-500 ring-2 ring-emerald-500/20 shadow-xl'
-                      : 'bg-slate-900/60 border-slate-800 hover:border-slate-700'
+                      ? 'bg-white dark:bg-slate-900 border-emerald-500 ring-2 ring-emerald-500/20 shadow-xl'
+                      : 'bg-white/60 dark:bg-slate-900/60 border-slate-200 dark:border-slate-800 hover:border-slate-300 dark:hover:border-slate-700'
                   }`}
                 >
                   <div className="flex items-center justify-between">
-                    <span className="text-xs font-mono font-bold text-emerald-400 bg-emerald-950/60 px-2 py-0.5 rounded border border-emerald-800/60">
+                    <span className="text-xs font-mono font-bold text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/60 px-2 py-0.5 rounded border border-emerald-800/60">
                       {sc.scenarioCode}
                     </span>
                     <span className={`text-[10px] px-2 py-0.5 rounded font-bold ${
-                      sc.covenantComplianceRisk === 'Low' ? 'bg-emerald-950 text-emerald-400 border border-emerald-800' :
-                      sc.covenantComplianceRisk === 'Moderate' ? 'bg-amber-950 text-amber-400 border border-amber-800' :
-                      'bg-rose-950 text-rose-400 border border-rose-800'
+                      sc.covenantComplianceRisk === 'Low' ? 'bg-emerald-50 dark:bg-emerald-950 text-emerald-600 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800' :
+                      sc.covenantComplianceRisk === 'Moderate' ? 'bg-amber-50 dark:bg-amber-950 text-amber-700 dark:text-amber-400 border border-amber-200 dark:border-amber-800' :
+                      'bg-rose-50 dark:bg-rose-950 text-rose-600 dark:text-rose-400 border border-rose-200 dark:border-rose-800'
                     }`}>
                       {sc.covenantComplianceRisk} Risk
                     </span>
                   </div>
 
-                  <h3 className="text-sm font-bold text-white mt-3">{sc.scenarioName}</h3>
-                  <p className="text-xs text-slate-400 mt-1 line-clamp-2">{sc.description}</p>
+                  <h3 className="text-sm font-bold text-slate-900 dark:text-white mt-3">{sc.scenarioName}</h3>
+                  <p className="text-xs text-slate-600 dark:text-slate-400 mt-1 line-clamp-2">{sc.description}</p>
 
-                  <div className="mt-4 pt-3 border-t border-slate-800 grid grid-cols-2 gap-2 text-xs font-mono">
+                  <div className="mt-4 pt-3 border-t border-slate-200 dark:border-slate-800 grid grid-cols-2 gap-2 text-xs font-mono">
                     <div>
-                      <span className="text-[10px] text-slate-500 uppercase font-sans font-bold">Revenue</span>
-                      <p className="font-bold text-white">{sc.projectedRevenue.toLocaleString()} {currency}</p>
+                      <span className="text-[10px] text-slate-500 dark:text-slate-400 uppercase font-sans font-bold">Revenue</span>
+                      <p className="font-bold text-slate-900 dark:text-white">{sc.projectedRevenue.toLocaleString()} {currency}</p>
                     </div>
                     <div>
-                      <span className="text-[10px] text-slate-500 uppercase font-sans font-bold">EBITDA Margin</span>
-                      <p className="font-bold text-purple-400">{ebitdaMargin}%</p>
+                      <span className="text-[10px] text-slate-500 dark:text-slate-400 uppercase font-sans font-bold">EBITDA Margin</span>
+                      <p className="font-bold text-purple-600 dark:text-purple-400">{ebitdaMargin}%</p>
                     </div>
                   </div>
                 </div>
@@ -395,14 +395,14 @@ export const ForecastingAnalysisView: React.FC = () => {
           </div>
 
           {/* Interactive Sliders & Live Recalculation Engine */}
-          <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-5 border-b border-slate-800">
+          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 shadow-xl">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-5 border-b border-slate-200 dark:border-slate-800">
               <div>
                 <div className="flex items-center gap-2">
-                  <Sliders className="w-5 h-5 text-emerald-400" />
-                  <h3 className="text-base font-bold text-white">Dynamic Sensitivity & Stress Testing Parameters</h3>
+                  <Sliders className="w-5 h-5 text-emerald-600 dark:text-emerald-400" />
+                  <h3 className="text-base font-bold text-slate-900 dark:text-white">Dynamic Sensitivity & Stress Testing Parameters</h3>
                 </div>
-                <p className="text-xs text-slate-400 mt-1">
+                <p className="text-xs text-slate-600 dark:text-slate-400 mt-1">
                   Adjust macro levers to calculate instant impact on Enterprise Revenue, COGS, EBITDA, and Working Capital.
                 </p>
               </div>
@@ -421,10 +421,10 @@ export const ForecastingAnalysisView: React.FC = () => {
             {/* Sliders Grid */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
               {/* Revenue Delta */}
-              <div className="p-4 rounded-xl bg-slate-950 border border-slate-800">
+              <div className="p-4 rounded-xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800">
                 <div className="flex justify-between text-xs mb-2">
-                  <span className="font-bold text-slate-300">Sales Demand / Revenue Delta</span>
-                  <span className={`font-mono font-bold ${revenueDelta >= 0 ? 'text-emerald-400' : 'text-rose-400'}`}>
+                  <span className="font-bold text-slate-700 dark:text-slate-300">Sales Demand / Revenue Delta</span>
+                  <span className={`font-mono font-bold ${revenueDelta >= 0 ? 'text-emerald-600 dark:text-emerald-400' : 'text-rose-600 dark:text-rose-400'}`}>
                     {revenueDelta >= 0 ? `+${revenueDelta}` : revenueDelta}%
                   </span>
                 </div>
@@ -437,14 +437,14 @@ export const ForecastingAnalysisView: React.FC = () => {
                   onChange={(e) => setRevenueDelta(Number(e.target.value))}
                   className="w-full accent-emerald-500"
                 />
-                <span className="text-[10px] text-slate-500 block mt-1">Impacts top-line commercial contracts</span>
+                <span className="text-[10px] text-slate-500 dark:text-slate-400 block mt-1">Impacts top-line commercial contracts</span>
               </div>
 
               {/* Raw Material Inflation */}
-              <div className="p-4 rounded-xl bg-slate-950 border border-slate-800">
+              <div className="p-4 rounded-xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800">
                 <div className="flex justify-between text-xs mb-2">
-                  <span className="font-bold text-slate-300">COGS & Raw Material Inflation</span>
-                  <span className="font-mono font-bold text-rose-400">+{cogsInflation}%</span>
+                  <span className="font-bold text-slate-700 dark:text-slate-300">COGS & Raw Material Inflation</span>
+                  <span className="font-mono font-bold text-rose-600 dark:text-rose-400">+{cogsInflation}%</span>
                 </div>
                 <input
                   type="range"
@@ -455,14 +455,14 @@ export const ForecastingAnalysisView: React.FC = () => {
                   onChange={(e) => setCogsInflation(Number(e.target.value))}
                   className="w-full accent-rose-500"
                 />
-                <span className="text-[10px] text-slate-500 block mt-1">Directly increases manufacturing cost of goods</span>
+                <span className="text-[10px] text-slate-500 dark:text-slate-400 block mt-1">Directly increases manufacturing cost of goods</span>
               </div>
 
               {/* OPEX Adjustment */}
-              <div className="p-4 rounded-xl bg-slate-950 border border-slate-800">
+              <div className="p-4 rounded-xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800">
                 <div className="flex justify-between text-xs mb-2">
-                  <span className="font-bold text-slate-300">OPEX Overhead Adjustment</span>
-                  <span className={`font-mono font-bold ${opexAdjustment >= 0 ? 'text-rose-400' : 'text-emerald-400'}`}>
+                  <span className="font-bold text-slate-700 dark:text-slate-300">OPEX Overhead Adjustment</span>
+                  <span className={`font-mono font-bold ${opexAdjustment >= 0 ? 'text-rose-600 dark:text-rose-400' : 'text-emerald-600 dark:text-emerald-400'}`}>
                     {opexAdjustment >= 0 ? `+${opexAdjustment}` : opexAdjustment}%
                   </span>
                 </div>
@@ -475,14 +475,14 @@ export const ForecastingAnalysisView: React.FC = () => {
                   onChange={(e) => setOpexAdjustment(Number(e.target.value))}
                   className="w-full accent-amber-500"
                 />
-                <span className="text-[10px] text-slate-500 block mt-1">G&A, administrative overhead, and logistics</span>
+                <span className="text-[10px] text-slate-500 dark:text-slate-400 block mt-1">G&A, administrative overhead, and logistics</span>
               </div>
 
               {/* CAPEX Factor */}
-              <div className="p-4 rounded-xl bg-slate-950 border border-slate-800">
+              <div className="p-4 rounded-xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800">
                 <div className="flex justify-between text-xs mb-2">
-                  <span className="font-bold text-slate-300">CAPEX Execution Factor</span>
-                  <span className="font-mono font-bold text-cyan-400">{(capexFactor * 100).toFixed(0)}%</span>
+                  <span className="font-bold text-slate-700 dark:text-slate-300">CAPEX Execution Factor</span>
+                  <span className="font-mono font-bold text-cyan-600 dark:text-cyan-400">{(capexFactor * 100).toFixed(0)}%</span>
                 </div>
                 <input
                   type="range"
@@ -493,14 +493,14 @@ export const ForecastingAnalysisView: React.FC = () => {
                   onChange={(e) => setCapexFactor(Number(e.target.value))}
                   className="w-full accent-cyan-500"
                 />
-                <span className="text-[10px] text-slate-500 block mt-1">Capital investment deployment pacing</span>
+                <span className="text-[10px] text-slate-500 dark:text-slate-400 block mt-1">Capital investment deployment pacing</span>
               </div>
 
               {/* Interest Rate Shift */}
-              <div className="p-4 rounded-xl bg-slate-950 border border-slate-800">
+              <div className="p-4 rounded-xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800">
                 <div className="flex justify-between text-xs mb-2">
-                  <span className="font-bold text-slate-300">Benchmark Interest Rate Shift</span>
-                  <span className={`font-mono font-bold ${interestShiftBps >= 0 ? 'text-rose-400' : 'text-emerald-400'}`}>
+                  <span className="font-bold text-slate-700 dark:text-slate-300">Benchmark Interest Rate Shift</span>
+                  <span className={`font-mono font-bold ${interestShiftBps >= 0 ? 'text-rose-600 dark:text-rose-400' : 'text-emerald-600 dark:text-emerald-400'}`}>
                     {interestShiftBps >= 0 ? `+${interestShiftBps}` : interestShiftBps} bps
                   </span>
                 </div>
@@ -513,14 +513,14 @@ export const ForecastingAnalysisView: React.FC = () => {
                   onChange={(e) => setInterestShiftBps(Number(e.target.value))}
                   className="w-full accent-indigo-500"
                 />
-                <span className="text-[10px] text-slate-500 block mt-1">Bank borrowing & Sukuk financing service cost</span>
+                <span className="text-[10px] text-slate-500 dark:text-slate-400 block mt-1">Bank borrowing & Sukuk financing service cost</span>
               </div>
 
               {/* FX Fluctuation */}
-              <div className="p-4 rounded-xl bg-slate-950 border border-slate-800">
+              <div className="p-4 rounded-xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800">
                 <div className="flex justify-between text-xs mb-2">
-                  <span className="font-bold text-slate-300">FX Rate Impact (USD / EUR)</span>
-                  <span className={`font-mono font-bold ${fxDelta >= 0 ? 'text-emerald-400' : 'text-rose-400'}`}>
+                  <span className="font-bold text-slate-700 dark:text-slate-300">FX Rate Impact (USD / EUR)</span>
+                  <span className={`font-mono font-bold ${fxDelta >= 0 ? 'text-emerald-600 dark:text-emerald-400' : 'text-rose-600 dark:text-rose-400'}`}>
                     {fxDelta >= 0 ? `+${fxDelta}` : fxDelta}%
                   </span>
                 </div>
@@ -533,41 +533,41 @@ export const ForecastingAnalysisView: React.FC = () => {
                   onChange={(e) => setFxDelta(Number(e.target.value))}
                   className="w-full accent-purple-500"
                 />
-                <span className="text-[10px] text-slate-500 block mt-1">Impacts imported steel & overseas sales</span>
+                <span className="text-[10px] text-slate-500 dark:text-slate-400 block mt-1">Impacts imported steel & overseas sales</span>
               </div>
             </div>
 
             {/* Computed Scenario Results Dashboard */}
-            <div className="mt-8 pt-6 border-t border-slate-800">
-              <h4 className="text-xs uppercase font-bold text-slate-400 tracking-wider mb-4">
+            <div className="mt-8 pt-6 border-t border-slate-200 dark:border-slate-800">
+              <h4 className="text-xs uppercase font-bold text-slate-600 dark:text-slate-400 tracking-wider mb-4">
                 Simulated Financial Outcome for "{activeScenario.scenarioName}"
               </h4>
 
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-                <div className="p-4 rounded-xl bg-slate-950 border border-slate-800">
-                  <span className="text-[10px] text-slate-500 uppercase font-bold">Simulated Revenue</span>
-                  <p className="text-lg font-mono font-black text-white mt-1">
+                <div className="p-4 rounded-xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800">
+                  <span className="text-[10px] text-slate-500 dark:text-slate-400 uppercase font-bold">Simulated Revenue</span>
+                  <p className="text-lg font-mono font-black text-slate-900 dark:text-white mt-1">
                     {activeScenario.projectedRevenue.toLocaleString()} {currency}
                   </p>
                 </div>
 
-                <div className="p-4 rounded-xl bg-slate-950 border border-slate-800">
-                  <span className="text-[10px] text-slate-500 uppercase font-bold">Simulated Gross Margin</span>
-                  <p className="text-lg font-mono font-black text-cyan-400 mt-1">
+                <div className="p-4 rounded-xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800">
+                  <span className="text-[10px] text-slate-500 dark:text-slate-400 uppercase font-bold">Simulated Gross Margin</span>
+                  <p className="text-lg font-mono font-black text-cyan-600 dark:text-cyan-400 mt-1">
                     {activeScenario.projectedGrossProfit.toLocaleString()} {currency}
                   </p>
                 </div>
 
-                <div className="p-4 rounded-xl bg-slate-950 border border-slate-800">
-                  <span className="text-[10px] text-slate-500 uppercase font-bold">Operating EBITDA</span>
-                  <p className="text-lg font-mono font-black text-purple-400 mt-1">
+                <div className="p-4 rounded-xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800">
+                  <span className="text-[10px] text-slate-500 dark:text-slate-400 uppercase font-bold">Operating EBITDA</span>
+                  <p className="text-lg font-mono font-black text-purple-600 dark:text-purple-400 mt-1">
                     {activeScenario.projectedEbitda.toLocaleString()} {currency}
                   </p>
                 </div>
 
-                <div className="p-4 rounded-xl bg-slate-950 border border-slate-800">
-                  <span className="text-[10px] text-slate-500 uppercase font-bold">Projected Ending Cash</span>
-                  <p className="text-lg font-mono font-black text-emerald-400 mt-1">
+                <div className="p-4 rounded-xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800">
+                  <span className="text-[10px] text-slate-500 dark:text-slate-400 uppercase font-bold">Projected Ending Cash</span>
+                  <p className="text-lg font-mono font-black text-emerald-600 dark:text-emerald-400 mt-1">
                     {activeScenario.projectedEndingCash.toLocaleString()} {currency}
                   </p>
                 </div>

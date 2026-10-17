@@ -109,25 +109,25 @@ export const StockReturnsView: React.FC<StockReturnsViewProps> = ({
   return (
     <div className="space-y-6">
       {/* Header & Sub-Tabs */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-800 pb-4">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-200 dark:border-slate-800 pb-4">
         <div>
           <div className="flex items-center gap-2">
-            <span className="px-2 py-0.5 rounded text-[11px] font-mono font-bold bg-rose-950/60 text-rose-400 border border-rose-800/40">
+            <span className="px-2 py-0.5 rounded text-[11px] font-mono font-bold bg-rose-50 dark:bg-rose-950/60 text-rose-600 dark:text-rose-400 border border-rose-800/40">
               07.04
             </span>
-            <h2 className="text-xl font-bold text-white">Stock Returns & QC Inspection Workbench</h2>
+            <h2 className="text-xl font-bold text-slate-900 dark:text-white">Stock Returns & QC Inspection Workbench</h2>
           </div>
-          <p className="text-xs text-slate-400 mt-1">
+          <p className="text-xs text-slate-600 dark:text-slate-400 mt-1">
             Vendor purchase returns, customer RMA cases, credit/debit note linkage, and quarantine inspection
           </p>
         </div>
 
         <div className="flex items-center gap-2">
-          <div className="bg-slate-900 border border-slate-800 rounded-lg p-1 flex">
+          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-lg p-1 flex">
             <button
               onClick={() => setActiveTab('all')}
               className={`px-3 py-1.5 rounded-md text-xs font-medium transition-colors ${
-                activeTab === 'all' ? 'bg-rose-600 text-white shadow-sm' : 'text-slate-400 hover:text-slate-200'
+                activeTab === 'all' ? 'bg-rose-600 text-white shadow-sm' : 'text-slate-600 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200'
               }`}
             >
               All Returns ({returns.length})
@@ -135,7 +135,7 @@ export const StockReturnsView: React.FC<StockReturnsViewProps> = ({
             <button
               onClick={() => setActiveTab('customer_rma')}
               className={`px-3 py-1.5 rounded-md text-xs font-medium transition-colors ${
-                activeTab === 'customer_rma' ? 'bg-rose-600 text-white shadow-sm' : 'text-slate-400 hover:text-slate-200'
+                activeTab === 'customer_rma' ? 'bg-rose-600 text-white shadow-sm' : 'text-slate-600 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200'
               }`}
             >
               Customer RMA
@@ -143,7 +143,7 @@ export const StockReturnsView: React.FC<StockReturnsViewProps> = ({
             <button
               onClick={() => setActiveTab('vendor_returns')}
               className={`px-3 py-1.5 rounded-md text-xs font-medium transition-colors ${
-                activeTab === 'vendor_returns' ? 'bg-rose-600 text-white shadow-sm' : 'text-slate-400 hover:text-slate-200'
+                activeTab === 'vendor_returns' ? 'bg-rose-600 text-white shadow-sm' : 'text-slate-600 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200'
               }`}
             >
               Vendor Returns
@@ -151,7 +151,7 @@ export const StockReturnsView: React.FC<StockReturnsViewProps> = ({
             <button
               onClick={() => setActiveTab('qc_inspection')}
               className={`px-3 py-1.5 rounded-md text-xs font-medium transition-colors ${
-                activeTab === 'qc_inspection' ? 'bg-rose-600 text-white shadow-sm' : 'text-slate-400 hover:text-slate-200'
+                activeTab === 'qc_inspection' ? 'bg-rose-600 text-white shadow-sm' : 'text-slate-600 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200'
               }`}
             >
               QC Workbench
@@ -169,24 +169,24 @@ export const StockReturnsView: React.FC<StockReturnsViewProps> = ({
       </div>
 
       {/* Filter Bar */}
-      <div className="bg-slate-900/60 p-3 rounded-xl border border-slate-800 flex items-center gap-3">
+      <div className="bg-white/60 dark:bg-slate-900/60 p-3 rounded-xl border border-slate-200 dark:border-slate-800 flex items-center gap-3">
         <div className="relative flex-1">
-          <Search className="w-4 h-4 text-slate-400 absolute left-3 top-2.5" />
+          <Search className="w-4 h-4 text-slate-600 dark:text-slate-400 absolute left-3 top-2.5" />
           <input
             type="text"
             placeholder="Search return RMA #, customer/vendor, invoice #, or item description..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full bg-slate-800/80 border border-slate-700 rounded-lg pl-9 pr-3 py-1.5 text-xs text-slate-200 placeholder-slate-500 focus:outline-none focus:border-rose-500"
+            className="w-full bg-slate-100/80 dark:bg-slate-800/80 border border-slate-300 dark:border-slate-700 rounded-lg pl-9 pr-3 py-1.5 text-xs text-slate-800 dark:text-slate-200 placeholder-slate-500 focus:outline-none focus:border-rose-500"
           />
         </div>
       </div>
 
       {/* Returns Data Table */}
-      <div className="bg-slate-900/70 border border-slate-800 rounded-xl overflow-hidden shadow-sm">
+      <div className="bg-white/70 dark:bg-slate-900/70 border border-slate-200 dark:border-slate-800 rounded-xl overflow-hidden shadow-sm">
         <div className="overflow-x-auto">
-          <table className="w-full text-left text-xs text-slate-300">
-            <thead className="bg-slate-800/60 text-slate-400 font-semibold uppercase tracking-wider text-[10px] border-b border-slate-800">
+          <table className="w-full text-left text-xs text-slate-700 dark:text-slate-300">
+            <thead className="bg-slate-100/60 dark:bg-slate-800/60 text-slate-600 dark:text-slate-400 font-semibold uppercase tracking-wider text-[10px] border-b border-slate-200 dark:border-slate-800">
               <tr>
                 <th className="py-3 px-4">Return RMA & Date</th>
                 <th className="py-3 px-3">Return Class</th>
@@ -199,52 +199,52 @@ export const StockReturnsView: React.FC<StockReturnsViewProps> = ({
                 <th className="py-3 px-4 text-center">QC Action</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-800/60">
+            <tbody className="divide-y divide-slate-200/60 dark:divide-slate-800/60">
               {filteredReturns.map((ret) => (
                 <tr
                   key={ret.id}
                   onClick={() => setSelectedReturn(ret)}
-                  className="hover:bg-slate-800/40 cursor-pointer transition-colors"
+                  className="hover:bg-slate-100/70 dark:hover:bg-slate-800/40 cursor-pointer transition-colors"
                 >
                   <td className="py-3 px-4">
                     <div className="flex items-center gap-2">
-                      <div className="p-1.5 rounded bg-slate-800 border border-slate-700 text-rose-400">
+                      <div className="p-1.5 rounded bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-rose-600 dark:text-rose-400">
                         <RotateCcw className="w-4 h-4" />
                       </div>
                       <div>
-                        <span className="font-mono font-bold text-white text-xs">{ret.returnNumber}</span>
-                        <div className="text-[10px] text-slate-400 font-mono">{ret.returnDate}</div>
+                        <span className="font-mono font-bold text-slate-900 dark:text-white text-xs">{ret.returnNumber}</span>
+                        <div className="text-[10px] text-slate-600 dark:text-slate-400 font-mono">{ret.returnDate}</div>
                       </div>
                     </div>
                   </td>
                   <td className="py-3 px-3">
-                    <span className="px-2 py-0.5 rounded text-[10px] font-mono font-semibold bg-slate-800 border border-slate-700 text-slate-200">
+                    <span className="px-2 py-0.5 rounded text-[10px] font-mono font-semibold bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-800 dark:text-slate-200">
                       {ret.returnType === 'CUSTOMER_SALES_RETURN_RMA' ? 'Customer RMA' : 'Vendor Return'}
                     </span>
                   </td>
                   <td className="py-3 px-3">
-                    <span className="font-medium text-white">{ret.partnerName}</span>
+                    <span className="font-medium text-slate-900 dark:text-white">{ret.partnerName}</span>
                   </td>
                   <td className="py-3 px-3">
-                    <span className="font-mono text-cyan-400">{ret.originalDocNumber}</span>
+                    <span className="font-mono text-cyan-600 dark:text-cyan-400">{ret.originalDocNumber}</span>
                   </td>
                   <td className="py-3 px-3">
-                    <span className="text-slate-300">{ret.warehouseName}</span>
+                    <span className="text-slate-700 dark:text-slate-300">{ret.warehouseName}</span>
                   </td>
                   <td className="py-3 px-3">
-                    <span className="text-slate-300">{ret.reason.replace(/_/g, ' ')}</span>
+                    <span className="text-slate-700 dark:text-slate-300">{ret.reason.replace(/_/g, ' ')}</span>
                   </td>
-                  <td className="py-3 px-3 text-right font-mono font-bold text-emerald-400">
+                  <td className="py-3 px-3 text-right font-mono font-bold text-emerald-600 dark:text-emerald-400">
                     OMR {ret.totalRefundAmountOMR.toFixed(2)}
                   </td>
                   <td className="py-3 px-3">
                     <span
                       className={`px-2 py-0.5 rounded text-[10px] font-medium border ${
                         ret.status === 'QC_PASSED_RESTOCKED'
-                          ? 'bg-emerald-950/60 text-emerald-300 border-emerald-800/40'
+                          ? 'bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300 border-emerald-800/40'
                           : ret.status === 'UNDER_QC_INSPECTION'
-                          ? 'bg-amber-950/60 text-amber-300 border-amber-800/40'
-                          : 'bg-rose-950/60 text-rose-300 border-rose-800/40'
+                          ? 'bg-amber-50 dark:bg-amber-950/60 text-amber-800 dark:text-amber-300 border-amber-800/40'
+                          : 'bg-rose-50 dark:bg-rose-950/60 text-rose-700 dark:text-rose-300 border-rose-800/40'
                       }`}
                     >
                       {ret.status.replace(/_/g, ' ')}
@@ -263,7 +263,7 @@ export const StockReturnsView: React.FC<StockReturnsViewProps> = ({
                         <span>Inspect QC</span>
                       </button>
                     ) : (
-                      <span className="text-[10px] text-slate-400">Inspected</span>
+                      <span className="text-[10px] text-slate-600 dark:text-slate-400">Inspected</span>
                     )}
                   </td>
                 </tr>
@@ -276,52 +276,52 @@ export const StockReturnsView: React.FC<StockReturnsViewProps> = ({
       {/* QC INSPECTION MODAL */}
       {isInspectModalOpen && selectedReturn && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm">
-          <div className="bg-slate-900 border border-slate-800 rounded-2xl max-w-xl w-full p-6 shadow-2xl space-y-5">
-            <div className="flex items-center justify-between border-b border-slate-800 pb-3">
+          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl max-w-xl w-full p-6 shadow-2xl space-y-5">
+            <div className="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-3">
               <div className="flex items-center gap-2">
-                <div className="p-2 rounded-lg bg-rose-500/10 text-rose-400">
+                <div className="p-2 rounded-lg bg-rose-500/10 text-rose-600 dark:text-rose-400">
                   <ShieldCheck className="w-5 h-5" />
                 </div>
                 <div>
-                  <h3 className="text-base font-bold text-white">Quarantine Quality Control Inspection</h3>
-                  <span className="text-xs font-mono text-cyan-400">Case: {selectedReturn.returnNumber}</span>
+                  <h3 className="text-base font-bold text-slate-900 dark:text-white">Quarantine Quality Control Inspection</h3>
+                  <span className="text-xs font-mono text-cyan-600 dark:text-cyan-400">Case: {selectedReturn.returnNumber}</span>
                 </div>
               </div>
               <button
                 onClick={() => setIsInspectModalOpen(false)}
-                className="text-slate-400 hover:text-white"
+                className="text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
               >
                 ✕
               </button>
             </div>
 
             <form onSubmit={handleInspectSubmit} className="space-y-4 text-xs">
-              <div className="p-3 bg-slate-800/60 border border-slate-700 rounded-lg space-y-1">
-                <div className="text-slate-400">Inspecting Return Items:</div>
+              <div className="p-3 bg-slate-100/60 dark:bg-slate-800/60 border border-slate-300 dark:border-slate-700 rounded-lg space-y-1">
+                <div className="text-slate-600 dark:text-slate-400">Inspecting Return Items:</div>
                 {selectedReturn.lines.map((l, idx) => (
-                  <div key={idx} className="font-semibold text-white">
+                  <div key={idx} className="font-semibold text-slate-900 dark:text-white">
                     {l.quantityReturned} {l.uom} of {l.itemName} ({l.sku})
                   </div>
                 ))}
               </div>
 
               <div>
-                <label className="text-slate-300 block mb-1 font-medium">Lead QC Inspector</label>
+                <label className="text-slate-700 dark:text-slate-300 block mb-1 font-medium">Lead QC Inspector</label>
                 <input
                   type="text"
                   required
                   value={qcInspector}
                   onChange={(e) => setQcInspector(e.target.value)}
-                  className="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-white"
+                  className="w-full bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-lg px-3 py-2 text-slate-900 dark:text-white"
                 />
               </div>
 
               <div>
-                <label className="text-slate-300 block mb-1 font-medium">QC Disposition Routing Decision</label>
+                <label className="text-slate-700 dark:text-slate-300 block mb-1 font-medium">QC Disposition Routing Decision</label>
                 <select
                   value={qcDisposition}
                   onChange={(e) => setQcDisposition(e.target.value as ReturnDisposition)}
-                  className="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-white font-medium"
+                  className="w-full bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-lg px-3 py-2 text-slate-900 dark:text-white font-medium"
                 >
                   <option value="RESTOCK_PRISTINE">Pristine Condition — Restock to Prime Inventory</option>
                   <option value="SCRAP_DESTROY">Irreparable Defect — Scrap & Destroy</option>
@@ -331,22 +331,22 @@ export const StockReturnsView: React.FC<StockReturnsViewProps> = ({
               </div>
 
               <div>
-                <label className="text-slate-300 block mb-1 font-medium">Laboratory Findings & Inspection Notes</label>
+                <label className="text-slate-700 dark:text-slate-300 block mb-1 font-medium">Laboratory Findings & Inspection Notes</label>
                 <textarea
                   rows={3}
                   required
                   value={qcNotes}
                   onChange={(e) => setQcNotes(e.target.value)}
                   placeholder="Dimensional verification, pressure test results, metallurgical certificate review..."
-                  className="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-white"
+                  className="w-full bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-lg px-3 py-2 text-slate-900 dark:text-white"
                 />
               </div>
 
-              <div className="flex items-center justify-end gap-3 pt-4 border-t border-slate-800">
+              <div className="flex items-center justify-end gap-3 pt-4 border-t border-slate-200 dark:border-slate-800">
                 <button
                   type="button"
                   onClick={() => setIsInspectModalOpen(false)}
-                  className="px-4 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300"
+                  className="px-4 py-2 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300"
                 >
                   Cancel
                 </button>
@@ -365,17 +365,17 @@ export const StockReturnsView: React.FC<StockReturnsViewProps> = ({
       {/* CREATE RETURN MODAL */}
       {isCreateModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm">
-          <div className="bg-slate-900 border border-slate-800 rounded-2xl max-w-xl w-full p-6 shadow-2xl space-y-5">
-            <div className="flex items-center justify-between border-b border-slate-800 pb-3">
+          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl max-w-xl w-full p-6 shadow-2xl space-y-5">
+            <div className="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-3">
               <div className="flex items-center gap-2">
-                <div className="p-2 rounded-lg bg-rose-500/10 text-rose-400">
+                <div className="p-2 rounded-lg bg-rose-500/10 text-rose-600 dark:text-rose-400">
                   <RotateCcw className="w-5 h-5" />
                 </div>
-                <h3 className="text-base font-bold text-white">Initiate Stock Return (RMA)</h3>
+                <h3 className="text-base font-bold text-slate-900 dark:text-white">Initiate Stock Return (RMA)</h3>
               </div>
               <button
                 onClick={() => setIsCreateModalOpen(false)}
-                className="text-slate-400 hover:text-white"
+                className="text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
               >
                 ✕
               </button>
@@ -384,22 +384,22 @@ export const StockReturnsView: React.FC<StockReturnsViewProps> = ({
             <form onSubmit={handleCreateReturnSubmit} className="space-y-4 text-xs">
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="text-slate-300 block mb-1 font-medium">Return Class</label>
+                  <label className="text-slate-700 dark:text-slate-300 block mb-1 font-medium">Return Class</label>
                   <select
                     value={returnType}
                     onChange={(e) => setReturnType(e.target.value as ReturnType)}
-                    className="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-white font-medium"
+                    className="w-full bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-lg px-3 py-2 text-slate-900 dark:text-white font-medium"
                   >
                     <option value="CUSTOMER_SALES_RETURN_RMA">Customer Sales Return (RMA)</option>
                     <option value="VENDOR_PURCHASE_RETURN">Vendor Purchase Return</option>
                   </select>
                 </div>
                 <div>
-                  <label className="text-slate-300 block mb-1 font-medium">Defect / Reason</label>
+                  <label className="text-slate-700 dark:text-slate-300 block mb-1 font-medium">Defect / Reason</label>
                   <select
                     value={returnReason}
                     onChange={(e) => setReturnReason(e.target.value as ReturnReason)}
-                    className="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-white"
+                    className="w-full bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-lg px-3 py-2 text-slate-900 dark:text-white"
                   >
                     <option value="DEFECTIVE_OUT_OF_BOX">Defective / Non-Conforming</option>
                     <option value="WRONG_SPECIFICATION_DELIVERED">Wrong Specification Delivered</option>
@@ -410,33 +410,33 @@ export const StockReturnsView: React.FC<StockReturnsViewProps> = ({
               </div>
 
               <div>
-                <label className="text-slate-300 block mb-1 font-medium">Client / Vendor Organization</label>
+                <label className="text-slate-700 dark:text-slate-300 block mb-1 font-medium">Client / Vendor Organization</label>
                 <input
                   type="text"
                   required
                   value={partnerName}
                   onChange={(e) => setPartnerName(e.target.value)}
-                  className="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-white"
+                  className="w-full bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-lg px-3 py-2 text-slate-900 dark:text-white"
                 />
               </div>
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="text-slate-300 block mb-1 font-medium">Reference Invoice / PO #</label>
+                  <label className="text-slate-700 dark:text-slate-300 block mb-1 font-medium">Reference Invoice / PO #</label>
                   <input
                     type="text"
                     required
                     value={refDocNumber}
                     onChange={(e) => setRefDocNumber(e.target.value)}
-                    className="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-white font-mono"
+                    className="w-full bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-lg px-3 py-2 text-slate-900 dark:text-white font-mono"
                   />
                 </div>
                 <div>
-                  <label className="text-slate-300 block mb-1 font-medium">Quarantine Receiving Facility</label>
+                  <label className="text-slate-700 dark:text-slate-300 block mb-1 font-medium">Quarantine Receiving Facility</label>
                   <select
                     value={warehouseId}
                     onChange={(e) => setWarehouseId(e.target.value)}
-                    className="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-white"
+                    className="w-full bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-lg px-3 py-2 text-slate-900 dark:text-white"
                   >
                     {warehouses.map((w) => (
                       <option key={w.id} value={w.id}>{w.name}</option>
@@ -447,11 +447,11 @@ export const StockReturnsView: React.FC<StockReturnsViewProps> = ({
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="text-slate-300 block mb-1 font-medium">Material SKU</label>
+                  <label className="text-slate-700 dark:text-slate-300 block mb-1 font-medium">Material SKU</label>
                   <select
                     value={selectedSku}
                     onChange={(e) => setSelectedSku(e.target.value)}
-                    className="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-white"
+                    className="w-full bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-lg px-3 py-2 text-slate-900 dark:text-white"
                   >
                     {items.map((i) => (
                       <option key={i.id} value={i.sku}>{i.sku} — {i.name}</option>
@@ -459,22 +459,22 @@ export const StockReturnsView: React.FC<StockReturnsViewProps> = ({
                   </select>
                 </div>
                 <div>
-                  <label className="text-slate-300 block mb-1 font-medium">Returned Quantity</label>
+                  <label className="text-slate-700 dark:text-slate-300 block mb-1 font-medium">Returned Quantity</label>
                   <input
                     type="number"
                     required
                     value={returnQty}
                     onChange={(e) => setReturnQty(parseInt(e.target.value) || 0)}
-                    className="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-white font-mono"
+                    className="w-full bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-lg px-3 py-2 text-slate-900 dark:text-white font-mono"
                   />
                 </div>
               </div>
 
-              <div className="flex items-center justify-end gap-3 pt-4 border-t border-slate-800">
+              <div className="flex items-center justify-end gap-3 pt-4 border-t border-slate-200 dark:border-slate-800">
                 <button
                   type="button"
                   onClick={() => setIsCreateModalOpen(false)}
-                  className="px-4 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300"
+                  className="px-4 py-2 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300"
                 >
                   Cancel
                 </button>

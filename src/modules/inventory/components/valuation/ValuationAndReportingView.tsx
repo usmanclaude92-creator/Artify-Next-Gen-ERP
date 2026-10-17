@@ -38,25 +38,25 @@ export const ValuationAndReportingView: React.FC<ValuationAndReportingViewProps>
   return (
     <div className="space-y-6">
       {/* Header & Sub-Tabs */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-800 pb-4">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-200 dark:border-slate-800 pb-4">
         <div>
           <div className="flex items-center gap-2">
-            <span className="px-2 py-0.5 rounded text-[11px] font-mono font-bold bg-purple-950/60 text-purple-400 border border-purple-800/40">
+            <span className="px-2 py-0.5 rounded text-[11px] font-mono font-bold bg-purple-50 dark:bg-purple-950/60 text-purple-600 dark:text-purple-400 border border-purple-800/40">
               07.07
             </span>
-            <h2 className="text-xl font-bold text-white">Inventory Valuation & Analytical Ledgers</h2>
+            <h2 className="text-xl font-bold text-slate-900 dark:text-white">Inventory Valuation & Analytical Ledgers</h2>
           </div>
-          <p className="text-xs text-slate-400 mt-1">
+          <p className="text-xs text-slate-600 dark:text-slate-400 mt-1">
             FIFO asset costing layers, 6-bucket stock aging, SKU bin card registers, and ABC/XYZ analytics
           </p>
         </div>
 
         <div className="flex items-center gap-2">
-          <div className="bg-slate-900 border border-slate-800 rounded-lg p-1 flex">
+          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-lg p-1 flex">
             <button
               onClick={() => setActiveTab('valuation')}
               className={`px-3 py-1.5 rounded-md text-xs font-medium transition-colors ${
-                activeTab === 'valuation' ? 'bg-purple-600 text-white shadow-sm' : 'text-slate-400 hover:text-slate-200'
+                activeTab === 'valuation' ? 'bg-purple-600 text-white shadow-sm' : 'text-slate-600 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200'
               }`}
             >
               Cost Valuation Layers
@@ -64,7 +64,7 @@ export const ValuationAndReportingView: React.FC<ValuationAndReportingViewProps>
             <button
               onClick={() => setActiveTab('aging')}
               className={`px-3 py-1.5 rounded-md text-xs font-medium transition-colors ${
-                activeTab === 'aging' ? 'bg-purple-600 text-white shadow-sm' : 'text-slate-400 hover:text-slate-200'
+                activeTab === 'aging' ? 'bg-purple-600 text-white shadow-sm' : 'text-slate-600 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200'
               }`}
             >
               Stock Aging & Provisions
@@ -72,7 +72,7 @@ export const ValuationAndReportingView: React.FC<ValuationAndReportingViewProps>
             <button
               onClick={() => setActiveTab('bincard')}
               className={`px-3 py-1.5 rounded-md text-xs font-medium transition-colors ${
-                activeTab === 'bincard' ? 'bg-purple-600 text-white shadow-sm' : 'text-slate-400 hover:text-slate-200'
+                activeTab === 'bincard' ? 'bg-purple-600 text-white shadow-sm' : 'text-slate-600 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200'
               }`}
             >
               SKU Bin Card Ledger
@@ -80,7 +80,7 @@ export const ValuationAndReportingView: React.FC<ValuationAndReportingViewProps>
             <button
               onClick={() => setActiveTab('abc_xyz')}
               className={`px-3 py-1.5 rounded-md text-xs font-medium transition-colors ${
-                activeTab === 'abc_xyz' ? 'bg-purple-600 text-white shadow-sm' : 'text-slate-400 hover:text-slate-200'
+                activeTab === 'abc_xyz' ? 'bg-purple-600 text-white shadow-sm' : 'text-slate-600 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200'
               }`}
             >
               ABC / XYZ Matrix
@@ -93,36 +93,36 @@ export const ValuationAndReportingView: React.FC<ValuationAndReportingViewProps>
       {activeTab === 'valuation' && (
         <div className="space-y-4">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div className="bg-slate-900/70 border border-slate-800 rounded-xl p-4 shadow-sm">
-              <span className="text-xs font-semibold uppercase tracking-wider text-slate-400">Total Asset Valuation (FIFO)</span>
-              <div className="mt-2 text-2xl font-bold text-white font-mono">
+            <div className="bg-white/70 dark:bg-slate-900/70 border border-slate-200 dark:border-slate-800 rounded-xl p-4 shadow-sm">
+              <span className="text-xs font-semibold uppercase tracking-wider text-slate-600 dark:text-slate-400">Total Asset Valuation (FIFO)</span>
+              <div className="mt-2 text-2xl font-bold text-slate-900 dark:text-white font-mono">
                 OMR {stats.totalInventoryValuationOMR.toLocaleString(undefined, { minimumFractionDigits: 2 })}
               </div>
-              <span className="text-xs text-purple-400 mt-1 block">General Ledger Asset Code: 1410-00</span>
+              <span className="text-xs text-purple-600 dark:text-purple-400 mt-1 block">General Ledger Asset Code: 1410-00</span>
             </div>
 
-            <div className="bg-slate-900/70 border border-slate-800 rounded-xl p-4 shadow-sm">
-              <span className="text-xs font-semibold uppercase tracking-wider text-slate-400">Average Unit Carrying Cost</span>
-              <div className="mt-2 text-2xl font-bold text-cyan-400 font-mono">
+            <div className="bg-white/70 dark:bg-slate-900/70 border border-slate-200 dark:border-slate-800 rounded-xl p-4 shadow-sm">
+              <span className="text-xs font-semibold uppercase tracking-wider text-slate-600 dark:text-slate-400">Average Unit Carrying Cost</span>
+              <div className="mt-2 text-2xl font-bold text-cyan-600 dark:text-cyan-400 font-mono">
                 OMR {(stats.totalInventoryValuationOMR / (stats.totalPhysicalUnitsOnHand || 1)).toFixed(2)}
               </div>
-              <span className="text-xs text-slate-400 mt-1 block">Across {stats.totalSkuCount} active product lines</span>
+              <span className="text-xs text-slate-600 dark:text-slate-400 mt-1 block">Across {stats.totalSkuCount} active product lines</span>
             </div>
 
-            <div className="bg-slate-900/70 border border-slate-800 rounded-xl p-4 shadow-sm">
-              <span className="text-xs font-semibold uppercase tracking-wider text-slate-400">Inventory Turnover Ratio</span>
-              <div className="mt-2 text-2xl font-bold text-emerald-400 font-mono">
+            <div className="bg-white/70 dark:bg-slate-900/70 border border-slate-200 dark:border-slate-800 rounded-xl p-4 shadow-sm">
+              <span className="text-xs font-semibold uppercase tracking-wider text-slate-600 dark:text-slate-400">Inventory Turnover Ratio</span>
+              <div className="mt-2 text-2xl font-bold text-emerald-600 dark:text-emerald-400 font-mono">
                 {stats.averageInventoryTurnoverRatio}x
               </div>
-              <span className="text-xs text-slate-400 mt-1 block">Days Sales of Inventory (DSI): {stats.daysSalesOfInventory} Days</span>
+              <span className="text-xs text-slate-600 dark:text-slate-400 mt-1 block">Days Sales of Inventory (DSI): {stats.daysSalesOfInventory} Days</span>
             </div>
           </div>
 
           {/* SKU Valuation Table */}
-          <div className="bg-slate-900/70 border border-slate-800 rounded-xl overflow-hidden shadow-sm">
+          <div className="bg-white/70 dark:bg-slate-900/70 border border-slate-200 dark:border-slate-800 rounded-xl overflow-hidden shadow-sm">
             <div className="overflow-x-auto">
-              <table className="w-full text-left text-xs text-slate-300">
-                <thead className="bg-slate-800/60 text-slate-400 font-semibold uppercase tracking-wider text-[10px] border-b border-slate-800">
+              <table className="w-full text-left text-xs text-slate-700 dark:text-slate-300">
+                <thead className="bg-slate-100/60 dark:bg-slate-800/60 text-slate-600 dark:text-slate-400 font-semibold uppercase tracking-wider text-[10px] border-b border-slate-200 dark:border-slate-800">
                   <tr>
                     <th className="py-3 px-4">Material SKU & Description</th>
                     <th className="py-3 px-3">Valuation Method</th>
@@ -133,33 +133,33 @@ export const ValuationAndReportingView: React.FC<ValuationAndReportingViewProps>
                     <th className="py-3 px-3 text-right">Total Inventory Value</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-slate-800/60">
+                <tbody className="divide-y divide-slate-200/60 dark:divide-slate-800/60">
                   {items.map((item) => {
                     const totalVal = item.totalStockOnHand * item.unitCostOMR;
                     return (
-                      <tr key={item.id} className="hover:bg-slate-800/40 transition-colors">
+                      <tr key={item.id} className="hover:bg-slate-100/70 dark:hover:bg-slate-800/40 transition-colors">
                         <td className="py-3 px-4">
-                          <span className="font-mono font-bold text-cyan-400">{item.sku}</span>
-                          <div className="font-medium text-white text-xs">{item.name}</div>
+                          <span className="font-mono font-bold text-cyan-600 dark:text-cyan-400">{item.sku}</span>
+                          <div className="font-medium text-slate-900 dark:text-white text-xs">{item.name}</div>
                         </td>
                         <td className="py-3 px-3">
-                          <span className="px-2 py-0.5 rounded text-[10px] font-mono bg-slate-800 text-slate-300 border border-slate-700">
+                          <span className="px-2 py-0.5 rounded text-[10px] font-mono bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700">
                             {item.valuationMethod}
                           </span>
                         </td>
-                        <td className="py-3 px-3 text-right font-mono font-bold text-white">
+                        <td className="py-3 px-3 text-right font-mono font-bold text-slate-900 dark:text-white">
                           {item.totalStockOnHand.toLocaleString()} {item.baseUom}
                         </td>
-                        <td className="py-3 px-3 text-right font-mono text-slate-200">
+                        <td className="py-3 px-3 text-right font-mono text-slate-800 dark:text-slate-200">
                           OMR {item.unitCostOMR.toFixed(2)}
                         </td>
-                        <td className="py-3 px-3 text-right font-mono text-slate-400">
+                        <td className="py-3 px-3 text-right font-mono text-slate-600 dark:text-slate-400">
                           OMR {item.weightedAvgCostOMR.toFixed(2)}
                         </td>
-                        <td className="py-3 px-3 text-right font-mono text-slate-400">
+                        <td className="py-3 px-3 text-right font-mono text-slate-600 dark:text-slate-400">
                           OMR {item.standardCostOMR.toFixed(2)}
                         </td>
-                        <td className="py-3 px-3 text-right font-mono font-bold text-emerald-400">
+                        <td className="py-3 px-3 text-right font-mono font-bold text-emerald-600 dark:text-emerald-400">
                           OMR {totalVal.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                         </td>
                       </tr>
@@ -175,44 +175,44 @@ export const ValuationAndReportingView: React.FC<ValuationAndReportingViewProps>
       {/* TAB 2: 6-BUCKET STOCK AGING & WRITE-OFF PROVISIONS */}
       {activeTab === 'aging' && (
         <div className="space-y-4">
-          <div className="bg-slate-900/70 border border-slate-800 rounded-xl p-5 shadow-sm space-y-4">
-            <h3 className="text-sm font-semibold text-white">6-Tier Stock Aging Breakdown & Capital Tie-Up</h3>
+          <div className="bg-white/70 dark:bg-slate-900/70 border border-slate-200 dark:border-slate-800 rounded-xl p-5 shadow-sm space-y-4">
+            <h3 className="text-sm font-semibold text-slate-900 dark:text-white">6-Tier Stock Aging Breakdown & Capital Tie-Up</h3>
 
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
-              <div className="p-3 bg-emerald-950/20 border border-emerald-800/40 rounded-xl text-center">
-                <span className="text-[10px] text-emerald-400 uppercase font-semibold block">0 - 30 Days</span>
-                <span className="text-base font-bold font-mono text-white mt-1 block">OMR 1,420,500</span>
-                <span className="text-[10px] text-slate-400 mt-0.5 block">57.7% of total</span>
+              <div className="p-3 bg-emerald-50 dark:bg-emerald-950/20 border border-emerald-800/40 rounded-xl text-center">
+                <span className="text-[10px] text-emerald-600 dark:text-emerald-400 uppercase font-semibold block">0 - 30 Days</span>
+                <span className="text-base font-bold font-mono text-slate-900 dark:text-white mt-1 block">OMR 1,420,500</span>
+                <span className="text-[10px] text-slate-600 dark:text-slate-400 mt-0.5 block">57.7% of total</span>
               </div>
 
-              <div className="p-3 bg-cyan-950/20 border border-cyan-800/40 rounded-xl text-center">
-                <span className="text-[10px] text-cyan-400 uppercase font-semibold block">31 - 60 Days</span>
-                <span className="text-base font-bold font-mono text-white mt-1 block">OMR 510,200</span>
-                <span className="text-[10px] text-slate-400 mt-0.5 block">20.7% of total</span>
+              <div className="p-3 bg-cyan-50 dark:bg-cyan-950/20 border border-cyan-800/40 rounded-xl text-center">
+                <span className="text-[10px] text-cyan-600 dark:text-cyan-400 uppercase font-semibold block">31 - 60 Days</span>
+                <span className="text-base font-bold font-mono text-slate-900 dark:text-white mt-1 block">OMR 510,200</span>
+                <span className="text-[10px] text-slate-600 dark:text-slate-400 mt-0.5 block">20.7% of total</span>
               </div>
 
-              <div className="p-3 bg-indigo-950/20 border border-indigo-800/40 rounded-xl text-center">
-                <span className="text-[10px] text-indigo-400 uppercase font-semibold block">61 - 90 Days</span>
-                <span className="text-base font-bold font-mono text-white mt-1 block">OMR 285,400</span>
-                <span className="text-[10px] text-slate-400 mt-0.5 block">11.6% of total</span>
+              <div className="p-3 bg-indigo-50 dark:bg-indigo-950/20 border border-indigo-800/40 rounded-xl text-center">
+                <span className="text-[10px] text-indigo-600 dark:text-indigo-400 uppercase font-semibold block">61 - 90 Days</span>
+                <span className="text-base font-bold font-mono text-slate-900 dark:text-white mt-1 block">OMR 285,400</span>
+                <span className="text-[10px] text-slate-600 dark:text-slate-400 mt-0.5 block">11.6% of total</span>
               </div>
 
-              <div className="p-3 bg-amber-950/20 border border-amber-800/40 rounded-xl text-center">
-                <span className="text-[10px] text-amber-400 uppercase font-semibold block">91 - 180 Days</span>
-                <span className="text-base font-bold font-mono text-white mt-1 block">OMR 145,100</span>
-                <span className="text-[10px] text-slate-400 mt-0.5 block">5.9% of total</span>
+              <div className="p-3 bg-amber-50 dark:bg-amber-950/20 border border-amber-800/40 rounded-xl text-center">
+                <span className="text-[10px] text-amber-700 dark:text-amber-400 uppercase font-semibold block">91 - 180 Days</span>
+                <span className="text-base font-bold font-mono text-slate-900 dark:text-white mt-1 block">OMR 145,100</span>
+                <span className="text-[10px] text-slate-600 dark:text-slate-400 mt-0.5 block">5.9% of total</span>
               </div>
 
-              <div className="p-3 bg-orange-950/20 border border-orange-800/40 rounded-xl text-center">
-                <span className="text-[10px] text-orange-400 uppercase font-semibold block">181 - 365 Days</span>
-                <span className="text-base font-bold font-mono text-white mt-1 block">OMR 72,300</span>
-                <span className="text-[10px] text-slate-400 mt-0.5 block">2.9% of total</span>
+              <div className="p-3 bg-orange-50 dark:bg-orange-950/20 border border-orange-800/40 rounded-xl text-center">
+                <span className="text-[10px] text-orange-700 dark:text-orange-400 uppercase font-semibold block">181 - 365 Days</span>
+                <span className="text-base font-bold font-mono text-slate-900 dark:text-white mt-1 block">OMR 72,300</span>
+                <span className="text-[10px] text-slate-600 dark:text-slate-400 mt-0.5 block">2.9% of total</span>
               </div>
 
-              <div className="p-3 bg-rose-950/20 border border-rose-800/40 rounded-xl text-center">
-                <span className="text-[10px] text-rose-400 uppercase font-semibold block">&gt; 365 Days (Slow)</span>
-                <span className="text-base font-bold font-mono text-rose-400 mt-1 block">OMR 26,500</span>
-                <span className="text-[10px] text-slate-400 mt-0.5 block">1.1% provision</span>
+              <div className="p-3 bg-rose-50 dark:bg-rose-950/20 border border-rose-800/40 rounded-xl text-center">
+                <span className="text-[10px] text-rose-600 dark:text-rose-400 uppercase font-semibold block">&gt; 365 Days (Slow)</span>
+                <span className="text-base font-bold font-mono text-rose-600 dark:text-rose-400 mt-1 block">OMR 26,500</span>
+                <span className="text-[10px] text-slate-600 dark:text-slate-400 mt-0.5 block">1.1% provision</span>
               </div>
             </div>
           </div>
@@ -222,25 +222,25 @@ export const ValuationAndReportingView: React.FC<ValuationAndReportingViewProps>
       {/* TAB 3: SKU BIN CARD CHRONOLOGICAL RUNNING LEDGER */}
       {activeTab === 'bincard' && (
         <div className="space-y-4">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-slate-900/60 p-3 rounded-xl border border-slate-800">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-white/60 dark:bg-slate-900/60 p-3 rounded-xl border border-slate-200 dark:border-slate-800">
             <div className="flex items-center gap-3">
-              <label className="text-xs font-medium text-slate-300">Select Item / SKU Bin Card:</label>
+              <label className="text-xs font-medium text-slate-700 dark:text-slate-300">Select Item / SKU Bin Card:</label>
               <select
                 value={selectedSkuForBinCard}
                 onChange={(e) => setSelectedSkuForBinCard(e.target.value)}
-                className="bg-slate-800 border border-slate-700 rounded-lg px-3 py-1.5 text-xs text-white font-mono"
+                className="bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-lg px-3 py-1.5 text-xs text-slate-900 dark:text-white font-mono"
               >
                 {items.map((i) => (
                   <option key={i.id} value={i.sku}>{i.sku} — {i.name}</option>
                 ))}
               </select>
             </div>
-            <span className="text-xs font-mono text-cyan-400">Current Balance: {currentItemForBinCard.totalStockOnHand} {currentItemForBinCard.baseUom}</span>
+            <span className="text-xs font-mono text-cyan-600 dark:text-cyan-400">Current Balance: {currentItemForBinCard.totalStockOnHand} {currentItemForBinCard.baseUom}</span>
           </div>
 
-          <div className="bg-slate-900/70 border border-slate-800 rounded-xl overflow-hidden shadow-sm">
-            <table className="w-full text-left text-xs text-slate-300">
-              <thead className="bg-slate-800/60 text-slate-400 font-semibold uppercase tracking-wider text-[10px] border-b border-slate-800">
+          <div className="bg-white/70 dark:bg-slate-900/70 border border-slate-200 dark:border-slate-800 rounded-xl overflow-hidden shadow-sm">
+            <table className="w-full text-left text-xs text-slate-700 dark:text-slate-300">
+              <thead className="bg-slate-100/60 dark:bg-slate-800/60 text-slate-600 dark:text-slate-400 font-semibold uppercase tracking-wider text-[10px] border-b border-slate-200 dark:border-slate-800">
                 <tr>
                   <th className="py-3 px-4">Date & Time</th>
                   <th className="py-3 px-3">Voucher #</th>
@@ -251,33 +251,33 @@ export const ValuationAndReportingView: React.FC<ValuationAndReportingViewProps>
                   <th className="py-3 px-3">Authorizer Stamp</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-800/60 font-mono">
-                <tr className="bg-slate-800/20">
-                  <td className="py-3 px-4 text-slate-400">2026-01-01</td>
-                  <td className="py-3 px-3 text-sky-400">OPN-2026-0001</td>
-                  <td className="py-3 px-3 text-slate-300 font-sans">Opening Balance Migration</td>
-                  <td className="py-3 px-3 text-right text-emerald-400 font-bold">+50</td>
-                  <td className="py-3 px-3 text-right text-slate-500">—</td>
-                  <td className="py-3 px-3 text-right text-white font-bold">50</td>
-                  <td className="py-3 px-3 text-slate-400 font-sans">System Go-Live</td>
+              <tbody className="divide-y divide-slate-200/60 dark:divide-slate-800/60 font-mono">
+                <tr className="bg-slate-100/70 dark:bg-slate-800/20">
+                  <td className="py-3 px-4 text-slate-600 dark:text-slate-400">2026-01-01</td>
+                  <td className="py-3 px-3 text-sky-600 dark:text-sky-400">OPN-2026-0001</td>
+                  <td className="py-3 px-3 text-slate-700 dark:text-slate-300 font-sans">Opening Balance Migration</td>
+                  <td className="py-3 px-3 text-right text-emerald-600 dark:text-emerald-400 font-bold">+50</td>
+                  <td className="py-3 px-3 text-right text-slate-500 dark:text-slate-400">—</td>
+                  <td className="py-3 px-3 text-right text-slate-900 dark:text-white font-bold">50</td>
+                  <td className="py-3 px-3 text-slate-600 dark:text-slate-400 font-sans">System Go-Live</td>
                 </tr>
-                <tr className="hover:bg-slate-800/30">
-                  <td className="py-3 px-4 text-slate-400">2026-02-15</td>
-                  <td className="py-3 px-3 text-emerald-400">GRN-2026-00481</td>
-                  <td className="py-3 px-3 text-slate-300 font-sans">Goods Receipt (Vendor PO-991)</td>
-                  <td className="py-3 px-3 text-right text-emerald-400 font-bold">+20</td>
-                  <td className="py-3 px-3 text-right text-slate-500">—</td>
-                  <td className="py-3 px-3 text-right text-white font-bold">70</td>
-                  <td className="py-3 px-3 text-slate-400 font-sans">Said Al-Rawahi</td>
+                <tr className="hover:bg-slate-100/70 dark:hover:bg-slate-800/30">
+                  <td className="py-3 px-4 text-slate-600 dark:text-slate-400">2026-02-15</td>
+                  <td className="py-3 px-3 text-emerald-600 dark:text-emerald-400">GRN-2026-00481</td>
+                  <td className="py-3 px-3 text-slate-700 dark:text-slate-300 font-sans">Goods Receipt (Vendor PO-991)</td>
+                  <td className="py-3 px-3 text-right text-emerald-600 dark:text-emerald-400 font-bold">+20</td>
+                  <td className="py-3 px-3 text-right text-slate-500 dark:text-slate-400">—</td>
+                  <td className="py-3 px-3 text-right text-slate-900 dark:text-white font-bold">70</td>
+                  <td className="py-3 px-3 text-slate-600 dark:text-slate-400 font-sans">Said Al-Rawahi</td>
                 </tr>
-                <tr className="hover:bg-slate-800/30">
-                  <td className="py-3 px-4 text-slate-400">2026-02-18</td>
-                  <td className="py-3 px-3 text-amber-400">GIN-2026-00912</td>
-                  <td className="py-3 px-3 text-slate-300 font-sans">Goods Issue (PDO Job Order)</td>
-                  <td className="py-3 px-3 text-right text-slate-500">—</td>
-                  <td className="py-3 px-3 text-right text-amber-400 font-bold">-20</td>
-                  <td className="py-3 px-3 text-right text-white font-bold">{currentItemForBinCard.totalStockOnHand}</td>
-                  <td className="py-3 px-3 text-slate-400 font-sans">Khamis Al-Harthy</td>
+                <tr className="hover:bg-slate-100/70 dark:hover:bg-slate-800/30">
+                  <td className="py-3 px-4 text-slate-600 dark:text-slate-400">2026-02-18</td>
+                  <td className="py-3 px-3 text-amber-700 dark:text-amber-400">GIN-2026-00912</td>
+                  <td className="py-3 px-3 text-slate-700 dark:text-slate-300 font-sans">Goods Issue (PDO Job Order)</td>
+                  <td className="py-3 px-3 text-right text-slate-500 dark:text-slate-400">—</td>
+                  <td className="py-3 px-3 text-right text-amber-700 dark:text-amber-400 font-bold">-20</td>
+                  <td className="py-3 px-3 text-right text-slate-900 dark:text-white font-bold">{currentItemForBinCard.totalStockOnHand}</td>
+                  <td className="py-3 px-3 text-slate-600 dark:text-slate-400 font-sans">Khamis Al-Harthy</td>
                 </tr>
               </tbody>
             </table>
@@ -287,43 +287,43 @@ export const ValuationAndReportingView: React.FC<ValuationAndReportingViewProps>
 
       {/* TAB 4: ABC / XYZ CLASSIFICATION MATRIX */}
       {activeTab === 'abc_xyz' && (
-        <div className="bg-slate-900/70 border border-slate-800 rounded-xl p-5 shadow-sm space-y-5">
+        <div className="bg-white/70 dark:bg-slate-900/70 border border-slate-200 dark:border-slate-800 rounded-xl p-5 shadow-sm space-y-5">
           <div className="flex items-center justify-between">
             <div>
-              <h3 className="text-sm font-bold text-white">ABC-XYZ Dual Classification Matrix</h3>
-              <p className="text-xs text-slate-400">
+              <h3 className="text-sm font-bold text-slate-900 dark:text-white">ABC-XYZ Dual Classification Matrix</h3>
+              <p className="text-xs text-slate-600 dark:text-slate-400">
                 ABC = Annual Value Consumption (Pareto 80/15/5%) | XYZ = Demand Predictability & Volatility
               </p>
             </div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div className="p-4 bg-slate-800/50 border border-cyan-800/50 rounded-xl space-y-2">
+            <div className="p-4 bg-slate-100/70 dark:bg-slate-800/50 border border-cyan-800/50 rounded-xl space-y-2">
               <div className="flex items-center justify-between">
-                <span className="text-xs font-bold text-cyan-400 uppercase">Class AX (High Value, Steady Demand)</span>
-                <span className="px-1.5 py-0.5 rounded text-[10px] bg-cyan-950 text-cyan-300 border border-cyan-800">Auto-Replenish</span>
+                <span className="text-xs font-bold text-cyan-600 dark:text-cyan-400 uppercase">Class AX (High Value, Steady Demand)</span>
+                <span className="px-1.5 py-0.5 rounded text-[10px] bg-cyan-50 dark:bg-cyan-950 text-cyan-700 dark:text-cyan-300 border border-cyan-200 dark:border-cyan-800">Auto-Replenish</span>
               </div>
-              <p className="text-xs text-slate-300">
+              <p className="text-xs text-slate-700 dark:text-slate-300">
                 Pipes, Valves, High-Grade Flanges. Strict JIT replenishment with fixed min/max buffers.
               </p>
             </div>
 
-            <div className="p-4 bg-slate-800/50 border border-amber-800/50 rounded-xl space-y-2">
+            <div className="p-4 bg-slate-100/70 dark:bg-slate-800/50 border border-amber-800/50 rounded-xl space-y-2">
               <div className="flex items-center justify-between">
-                <span className="text-xs font-bold text-amber-400 uppercase">Class BY (Medium Value, Seasonal)</span>
-                <span className="px-1.5 py-0.5 rounded text-[10px] bg-amber-950 text-amber-300 border border-amber-800">Buffer Review</span>
+                <span className="text-xs font-bold text-amber-700 dark:text-amber-400 uppercase">Class BY (Medium Value, Seasonal)</span>
+                <span className="px-1.5 py-0.5 rounded text-[10px] bg-amber-50 dark:bg-amber-950 text-amber-800 dark:text-amber-300 border border-amber-200 dark:border-amber-800">Buffer Review</span>
               </div>
-              <p className="text-xs text-slate-300">
+              <p className="text-xs text-slate-700 dark:text-slate-300">
                 Motors, Gaskets, Pumps. Dynamic safety stock recalculated quarterly based on project trends.
               </p>
             </div>
 
-            <div className="p-4 bg-slate-800/50 border border-purple-800/50 rounded-xl space-y-2">
+            <div className="p-4 bg-slate-100/70 dark:bg-slate-800/50 border border-purple-800/50 rounded-xl space-y-2">
               <div className="flex items-center justify-between">
-                <span className="text-xs font-bold text-purple-400 uppercase">Class CZ (Low Value, Sporadic)</span>
-                <span className="px-1.5 py-0.5 rounded text-[10px] bg-purple-950 text-purple-300 border border-purple-800">On-Demand Order</span>
+                <span className="text-xs font-bold text-purple-600 dark:text-purple-400 uppercase">Class CZ (Low Value, Sporadic)</span>
+                <span className="px-1.5 py-0.5 rounded text-[10px] bg-purple-50 dark:bg-purple-950 text-purple-700 dark:text-purple-300 border border-purple-200 dark:border-purple-800">On-Demand Order</span>
               </div>
-              <p className="text-xs text-slate-300">
+              <p className="text-xs text-slate-700 dark:text-slate-300">
                 Specialized Fasteners, Custom Gaskets. Direct back-to-back purchase on confirmed client order.
               </p>
             </div>

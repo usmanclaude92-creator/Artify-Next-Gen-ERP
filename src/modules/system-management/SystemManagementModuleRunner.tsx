@@ -259,7 +259,7 @@ export const SystemManagementModuleRunner: React.FC<SystemManagementModuleRunner
                         functionalAreaId: functionalArea.id
                       })
                     }
-                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-indigo-50 dark:bg-indigo-950/60 hover:bg-indigo-100 text-indigo-700 dark:text-indigo-300 text-xs font-semibold cursor-pointer transition-colors border border-indigo-200 dark:border-indigo-800"
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-indigo-50 dark:bg-indigo-950/60 hover:bg-indigo-100 dark:hover:bg-indigo-500/20 text-indigo-700 dark:text-indigo-300 text-xs font-semibold cursor-pointer transition-colors border border-indigo-200 dark:border-indigo-800"
                     title="Back to Parent Level 2"
                   >
                     <span>{functionalArea.code} {functionalArea.name}</span>
@@ -295,7 +295,7 @@ export const SystemManagementModuleRunner: React.FC<SystemManagementModuleRunner
               >
                 <Star
                   className={`w-3.5 h-3.5 ${
-                    isFavorite ? 'text-amber-500 fill-amber-400' : 'text-slate-400'
+                    isFavorite ? 'text-amber-500 dark:text-amber-400 fill-amber-400' : 'text-slate-600 dark:text-slate-400'
                   }`}
                 />
                 <span>{isFavorite ? 'Favorited' : 'Favorite'}</span>

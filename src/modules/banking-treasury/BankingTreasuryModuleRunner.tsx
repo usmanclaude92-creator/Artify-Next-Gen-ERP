@@ -117,13 +117,13 @@ const BankingTreasuryContentRunner: React.FC<BankingTreasuryModuleRunnerProps> =
   return (
     <div className="space-y-5 pb-12">
       {/* 1. Module Header Bar */}
-      <div className="bg-white rounded-2xl p-5 border border-slate-200 shadow-2xs">
+      <div className="bg-white dark:bg-slate-900 rounded-2xl p-5 border border-slate-200 dark:border-slate-700 shadow-2xs">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div className="flex items-center gap-3">
             {functionalArea && (
               <button
                 onClick={() => onNavigate({ view: 'module', moduleId: 'banking-treasury' })}
-                className="p-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 transition-colors cursor-pointer"
+                className="p-2 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 transition-colors cursor-pointer"
                 title="Back to Banking & Treasury Dashboard"
               >
                 <ArrowLeft className="w-4 h-4" />
@@ -134,23 +134,23 @@ const BankingTreasuryContentRunner: React.FC<BankingTreasuryModuleRunnerProps> =
             </div>
             <div>
               <div className="flex items-center gap-2">
-                <h1 className="text-lg font-bold text-slate-900">
+                <h1 className="text-lg font-bold text-slate-900 dark:text-slate-100">
                   {functionalArea ? functionalArea.name : '04 — Banking & Treasury Management'}
                 </h1>
                 <button
                   onClick={onToggleFavorite}
-                  className="text-slate-400 hover:text-amber-500 transition-colors cursor-pointer"
+                  className="text-slate-600 dark:text-slate-400 hover:text-amber-500 dark:hover:text-amber-400 transition-colors cursor-pointer"
                   title={isFavorite ? 'Remove from favorites' : 'Add to favorites'}
                 >
-                  <Star className={`w-4 h-4 ${isFavorite ? 'fill-amber-400 text-amber-400' : ''}`} />
+                  <Star className={`w-4 h-4 ${isFavorite ? 'fill-amber-400 text-amber-700 dark:text-amber-400' : ''}`} />
                 </button>
                 {pendingApprovalsCount > 0 && (
-                  <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-rose-100 text-rose-800 animate-pulse">
+                  <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-rose-100 dark:bg-rose-500/20 text-rose-800 dark:text-rose-200 animate-pulse">
                     {pendingApprovalsCount} Approvals Pending
                   </span>
                 )}
               </div>
-              <p className="text-xs text-slate-500">
+              <p className="text-xs text-slate-500 dark:text-slate-400">
                 {functionalArea
                   ? functionalArea.description
                   : 'Institutional banking, cash vaults, multi-tier electronic payments, automated MT940 reconciliation, imprest petty cash, and 13-week cash flow modeling'}
@@ -163,7 +163,7 @@ const BankingTreasuryContentRunner: React.FC<BankingTreasuryModuleRunnerProps> =
             <button
               onClick={() => onNavigate({ view: 'module', moduleId: 'banking-treasury' })}
               className={`px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-all cursor-pointer ${
-                !functionalArea ? 'bg-slate-900 text-white shadow-xs' : 'bg-slate-100 text-slate-600 hover:text-slate-900'
+                !functionalArea ? 'bg-slate-900 text-white shadow-xs' : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100'
               }`}
             >
               <LayoutDashboard className="w-3.5 h-3.5" />
@@ -179,7 +179,7 @@ const BankingTreasuryContentRunner: React.FC<BankingTreasuryModuleRunnerProps> =
                   handleAreaNavigate(e.target.value);
                 }
               }}
-              className="px-3 py-1.5 rounded-lg border border-slate-200 text-xs font-semibold bg-white text-slate-700 focus:outline-none focus:ring-2 focus:ring-slate-900 cursor-pointer"
+              className="px-3 py-1.5 rounded-lg border border-slate-200 dark:border-slate-700 text-xs font-semibold bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 focus:outline-none focus:ring-2 focus:ring-slate-200 dark:focus:ring-slate-900 cursor-pointer"
             >
               <option value="dashboard">Select Functional Area...</option>
               <option value="bank-management">04.01 Bank Management & Mandates</option>

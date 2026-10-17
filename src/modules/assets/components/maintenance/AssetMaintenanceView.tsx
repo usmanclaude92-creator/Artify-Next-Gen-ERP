@@ -113,16 +113,16 @@ export const AssetMaintenanceView: React.FC = () => {
   return (
     <div className="space-y-6">
       {/* Top Header & Sub-Tabs */}
-      <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl">
+      <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 shadow-xl">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div>
             <div className="flex items-center gap-2">
-              <span className="px-2.5 py-0.5 rounded-full text-xs font-black bg-amber-950 text-amber-400 border border-amber-800">
+              <span className="px-2.5 py-0.5 rounded-full text-xs font-black bg-amber-50 dark:bg-amber-950 text-amber-700 dark:text-amber-400 border border-amber-200 dark:border-amber-800">
                 13.05
               </span>
-              <h2 className="text-xl font-black text-white">Asset Maintenance & Work Orders</h2>
+              <h2 className="text-xl font-black text-slate-900 dark:text-white">Asset Maintenance & Work Orders</h2>
             </div>
-            <p className="text-xs text-slate-400 mt-1">
+            <p className="text-xs text-slate-600 dark:text-slate-400 mt-1">
               Preventive maintenance cycles, corrective breakdown work orders, spare parts consumption, and capitalized overhaul rollups.
             </p>
           </div>
@@ -130,9 +130,9 @@ export const AssetMaintenanceView: React.FC = () => {
           <div className="flex items-center gap-3">
             <button
               onClick={() => setShowPmModal(true)}
-              className="flex items-center gap-2 px-3.5 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-xl text-xs font-bold border border-slate-700 transition-all cursor-pointer"
+              className="flex items-center gap-2 px-3.5 py-2 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-200 rounded-xl text-xs font-bold border border-slate-300 dark:border-slate-700 transition-all cursor-pointer"
             >
-              <Calendar className="w-4 h-4 text-cyan-400" />
+              <Calendar className="w-4 h-4 text-cyan-600 dark:text-cyan-400" />
               <span>Create PM Plan</span>
             </button>
 
@@ -147,13 +147,13 @@ export const AssetMaintenanceView: React.FC = () => {
         </div>
 
         {/* Sub Tabs */}
-        <div className="flex items-center gap-2 mt-6 pt-4 border-t border-slate-800 overflow-x-auto">
+        <div className="flex items-center gap-2 mt-6 pt-4 border-t border-slate-200 dark:border-slate-800 overflow-x-auto">
           <button
             onClick={() => setActiveTab('work_orders')}
             className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
               activeTab === 'work_orders'
                 ? 'bg-amber-600 text-white shadow-lg shadow-amber-600/30'
-                : 'text-slate-400 hover:text-white hover:bg-slate-800'
+                : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800'
             }`}
           >
             <Wrench className="w-4 h-4" />
@@ -165,7 +165,7 @@ export const AssetMaintenanceView: React.FC = () => {
             className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
               activeTab === 'pm_plans'
                 ? 'bg-amber-600 text-white shadow-lg shadow-amber-600/30'
-                : 'text-slate-400 hover:text-white hover:bg-slate-800'
+                : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800'
             }`}
           >
             <Calendar className="w-4 h-4" />
@@ -177,7 +177,7 @@ export const AssetMaintenanceView: React.FC = () => {
             className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
               activeTab === 'cost_rollup'
                 ? 'bg-amber-600 text-white shadow-lg shadow-amber-600/30'
-                : 'text-slate-400 hover:text-white hover:bg-slate-800'
+                : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800'
             }`}
           >
             <DollarSign className="w-4 h-4" />
@@ -190,31 +190,31 @@ export const AssetMaintenanceView: React.FC = () => {
       {activeTab === 'work_orders' && (
         <div className="space-y-4">
           {workOrders.map(wo => (
-            <div key={wo.id} className="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl space-y-4">
-              <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 border-b border-slate-800/80 pb-3">
+            <div key={wo.id} className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 shadow-xl space-y-4">
+              <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 border-b border-slate-200/80 dark:border-slate-800/80 pb-3">
                 <div className="flex items-center gap-3">
-                  <span className="font-mono text-xs font-bold text-amber-400 bg-amber-950 px-2.5 py-1 rounded border border-amber-800">
+                  <span className="font-mono text-xs font-bold text-amber-700 dark:text-amber-400 bg-amber-50 dark:bg-amber-950 px-2.5 py-1 rounded border border-amber-200 dark:border-amber-800">
                     {wo.workOrderNumber}
                   </span>
                   <div>
-                    <h4 className="text-sm font-bold text-white">{wo.title}</h4>
-                    <span className="font-mono text-xs text-slate-500">{wo.assetTag} • {wo.assetName}</span>
+                    <h4 className="text-sm font-bold text-slate-900 dark:text-white">{wo.title}</h4>
+                    <span className="font-mono text-xs text-slate-500 dark:text-slate-400">{wo.assetTag} • {wo.assetName}</span>
                   </div>
                 </div>
 
                 <div className="flex items-center gap-2">
                   <span className={`text-[10px] font-extrabold px-2.5 py-1 rounded uppercase tracking-wider ${
                     wo.priority === 'CRITICAL' || wo.priority === 'HIGH'
-                      ? 'bg-rose-950 text-rose-400 border border-rose-800 animate-pulse'
-                      : 'bg-slate-800 text-slate-300'
+                      ? 'bg-rose-50 dark:bg-rose-950 text-rose-600 dark:text-rose-400 border border-rose-200 dark:border-rose-800 animate-pulse'
+                      : 'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300'
                   }`}>
                     {wo.priority} PRIORITY
                   </span>
 
                   <span className={`text-[10px] font-bold px-2.5 py-1 rounded border ${
                     wo.status === 'COMPLETED'
-                      ? 'bg-emerald-950 text-emerald-400 border-emerald-800'
-                      : 'bg-amber-950 text-amber-400 border-amber-800'
+                      ? 'bg-emerald-50 dark:bg-emerald-950 text-emerald-600 dark:text-emerald-400 border-emerald-200 dark:border-emerald-800'
+                      : 'bg-amber-50 dark:bg-amber-950 text-amber-700 dark:text-amber-400 border-amber-200 dark:border-amber-800'
                   }`}>
                     {wo.status.replace(/_/g, ' ')}
                   </span>
@@ -234,25 +234,25 @@ export const AssetMaintenanceView: React.FC = () => {
                 </div>
               </div>
 
-              <p className="text-xs text-slate-300">{wo.description}</p>
+              <p className="text-xs text-slate-700 dark:text-slate-300">{wo.description}</p>
 
               {/* Cost & Technician Grid */}
               <div className="grid grid-cols-2 md:grid-cols-4 gap-3 text-xs">
-                <div className="bg-slate-950 p-3 rounded-xl">
-                  <div className="text-slate-500">Lead Technician</div>
-                  <div className="font-bold text-white mt-0.5">{wo.technicianName}</div>
+                <div className="bg-slate-50 dark:bg-slate-950 p-3 rounded-xl">
+                  <div className="text-slate-500 dark:text-slate-400">Lead Technician</div>
+                  <div className="font-bold text-slate-900 dark:text-white mt-0.5">{wo.technicianName}</div>
                 </div>
-                <div className="bg-slate-950 p-3 rounded-xl">
-                  <div className="text-slate-500">Spares Cost</div>
-                  <div className="font-mono font-bold text-slate-300 mt-0.5">{currency} {wo.sparePartsCost.toLocaleString()}</div>
+                <div className="bg-slate-50 dark:bg-slate-950 p-3 rounded-xl">
+                  <div className="text-slate-500 dark:text-slate-400">Spares Cost</div>
+                  <div className="font-mono font-bold text-slate-700 dark:text-slate-300 mt-0.5">{currency} {wo.sparePartsCost.toLocaleString()}</div>
                 </div>
-                <div className="bg-slate-950 p-3 rounded-xl">
-                  <div className="text-slate-500">Labor & Overhead</div>
-                  <div className="font-mono font-bold text-slate-300 mt-0.5">{currency} {(wo.laborCost + wo.contractorCost).toLocaleString()}</div>
+                <div className="bg-slate-50 dark:bg-slate-950 p-3 rounded-xl">
+                  <div className="text-slate-500 dark:text-slate-400">Labor & Overhead</div>
+                  <div className="font-mono font-bold text-slate-700 dark:text-slate-300 mt-0.5">{currency} {(wo.laborCost + wo.contractorCost).toLocaleString()}</div>
                 </div>
-                <div className="bg-slate-950 p-3 rounded-xl">
-                  <div className="text-slate-500">Accounting Treatment</div>
-                  <div className="font-bold text-amber-400 mt-0.5">
+                <div className="bg-slate-50 dark:bg-slate-950 p-3 rounded-xl">
+                  <div className="text-slate-500 dark:text-slate-400">Accounting Treatment</div>
+                  <div className="font-bold text-amber-700 dark:text-amber-400 mt-0.5">
                     {wo.isCapitalizedRepair ? 'CAPITALIZED OVERHAUL' : 'EXPENSED REPAIR'}
                   </div>
                 </div>
@@ -260,12 +260,12 @@ export const AssetMaintenanceView: React.FC = () => {
 
               {/* Parts consumed */}
               {wo.sparePartsUsed.length > 0 && (
-                <div className="bg-slate-950/60 p-3 rounded-xl border border-slate-800/80 text-xs">
-                  <div className="text-[10px] text-slate-500 font-bold uppercase mb-1.5">Consumed Spare Parts (Inventory Subledger)</div>
+                <div className="bg-slate-50/60 dark:bg-slate-950/60 p-3 rounded-xl border border-slate-200/80 dark:border-slate-800/80 text-xs">
+                  <div className="text-[10px] text-slate-500 dark:text-slate-400 font-bold uppercase mb-1.5">Consumed Spare Parts (Inventory Subledger)</div>
                   <div className="flex items-center gap-4 flex-wrap">
                     {wo.sparePartsUsed.map((p, idx) => (
-                      <span key={idx} className="font-mono text-slate-300">
-                        • {p.partName} (Qty: {p.quantity}) — <span className="text-amber-400">{currency} {p.totalCost.toLocaleString()}</span>
+                      <span key={idx} className="font-mono text-slate-700 dark:text-slate-300">
+                        • {p.partName} (Qty: {p.quantity}) — <span className="text-amber-700 dark:text-amber-400">{currency} {p.totalCost.toLocaleString()}</span>
                       </span>
                     ))}
                   </div>
@@ -278,15 +278,15 @@ export const AssetMaintenanceView: React.FC = () => {
 
       {/* VIEW: PM PLANS */}
       {activeTab === 'pm_plans' && (
-        <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl space-y-6">
+        <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 shadow-xl space-y-6">
           <div>
-            <h3 className="text-base font-bold text-white">Preventive Maintenance Schedules & Intervals</h3>
-            <p className="text-xs text-slate-400">Automated recurring service intervals triggered by operating hours or calendar dates.</p>
+            <h3 className="text-base font-bold text-slate-900 dark:text-white">Preventive Maintenance Schedules & Intervals</h3>
+            <p className="text-xs text-slate-600 dark:text-slate-400">Automated recurring service intervals triggered by operating hours or calendar dates.</p>
           </div>
 
           <div className="overflow-x-auto">
             <table className="w-full text-left text-xs">
-              <thead className="bg-slate-950 text-slate-400 uppercase font-mono tracking-wider border-b border-slate-800">
+              <thead className="bg-slate-50 dark:bg-slate-950 text-slate-600 dark:text-slate-400 uppercase font-mono tracking-wider border-b border-slate-200 dark:border-slate-800">
                 <tr>
                   <th className="py-3 px-4">Plan Code</th>
                   <th className="py-3 px-4">Asset Tag & Description</th>
@@ -297,20 +297,20 @@ export const AssetMaintenanceView: React.FC = () => {
                   <th className="py-3 px-4 text-center">Status</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-800 text-slate-300">
+              <tbody className="divide-y divide-slate-200 dark:divide-slate-800 text-slate-700 dark:text-slate-300">
                 {pmPlans.map(pm => (
-                  <tr key={pm.id} className="hover:bg-slate-800/40 transition-colors">
-                    <td className="py-3.5 px-4 font-mono font-bold text-amber-400">{pm.planCode}</td>
+                  <tr key={pm.id} className="hover:bg-slate-100/70 dark:hover:bg-slate-800/40 transition-colors">
+                    <td className="py-3.5 px-4 font-mono font-bold text-amber-700 dark:text-amber-400">{pm.planCode}</td>
                     <td className="py-3.5 px-4">
-                      <div className="font-bold text-white">{pm.assetName}</div>
-                      <div className="text-[10px] text-slate-500 font-mono">{pm.assetTag}</div>
+                      <div className="font-bold text-slate-900 dark:text-white">{pm.assetName}</div>
+                      <div className="text-[10px] text-slate-500 dark:text-slate-400 font-mono">{pm.assetTag}</div>
                     </td>
-                    <td className="py-3.5 px-4 font-medium text-white">{pm.title}</td>
+                    <td className="py-3.5 px-4 font-medium text-slate-900 dark:text-white">{pm.title}</td>
                     <td className="py-3.5 px-4 font-mono">{pm.frequency} ({pm.serviceIntervalHours} Hrs)</td>
-                    <td className="py-3.5 px-4 font-mono text-cyan-400 font-bold">{pm.nextScheduledDate}</td>
-                    <td className="py-3.5 px-4 text-slate-400">{pm.assignedVendor}</td>
+                    <td className="py-3.5 px-4 font-mono text-cyan-600 dark:text-cyan-400 font-bold">{pm.nextScheduledDate}</td>
+                    <td className="py-3.5 px-4 text-slate-600 dark:text-slate-400">{pm.assignedVendor}</td>
                     <td className="py-3.5 px-4 text-center">
-                      <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-950 text-emerald-400 border border-emerald-800">
+                      <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-50 dark:bg-emerald-950 text-emerald-600 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800">
                         {pm.status}
                       </span>
                     </td>
@@ -324,37 +324,37 @@ export const AssetMaintenanceView: React.FC = () => {
 
       {/* VIEW: COST ROLLUP & CAPITALIZATION */}
       {activeTab === 'cost_rollup' && (
-        <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl space-y-6">
+        <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 shadow-xl space-y-6">
           <div>
-            <h3 className="text-base font-bold text-white">Maintenance Cost Rollup & Overhaul Capitalization</h3>
-            <p className="text-xs text-slate-400">
+            <h3 className="text-base font-bold text-slate-900 dark:text-white">Maintenance Cost Rollup & Overhaul Capitalization</h3>
+            <p className="text-xs text-slate-600 dark:text-slate-400">
               Analysis of major component rebuilds capitalized into asset gross carrying value versus routine OPEX repairs.
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="bg-slate-950 border border-slate-800 rounded-2xl p-5 space-y-2">
-              <div className="text-slate-500 text-xs font-semibold uppercase">Total Spares Consumed</div>
-              <div className="text-2xl font-black font-mono text-white">
+            <div className="bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-2xl p-5 space-y-2">
+              <div className="text-slate-500 dark:text-slate-400 text-xs font-semibold uppercase">Total Spares Consumed</div>
+              <div className="text-2xl font-black font-mono text-slate-900 dark:text-white">
                 {currency} {workOrders.reduce((acc, wo) => acc + wo.sparePartsCost, 0).toLocaleString()}
               </div>
-              <p className="text-[11px] text-slate-500">Credited to Spare Parts Inventory</p>
+              <p className="text-[11px] text-slate-500 dark:text-slate-400">Credited to Spare Parts Inventory</p>
             </div>
 
-            <div className="bg-slate-950 border border-slate-800 rounded-2xl p-5 space-y-2">
-              <div className="text-slate-500 text-xs font-semibold uppercase">Expensed OPEX Repairs</div>
-              <div className="text-2xl font-black font-mono text-amber-400">
+            <div className="bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-2xl p-5 space-y-2">
+              <div className="text-slate-500 dark:text-slate-400 text-xs font-semibold uppercase">Expensed OPEX Repairs</div>
+              <div className="text-2xl font-black font-mono text-amber-700 dark:text-amber-400">
                 {currency} {workOrders.filter(w => !w.isCapitalizedRepair).reduce((acc, w) => acc + w.totalCost, 0).toLocaleString()}
               </div>
-              <p className="text-[11px] text-slate-500">Debited to P&L Machinery Maintenance Expense</p>
+              <p className="text-[11px] text-slate-500 dark:text-slate-400">Debited to P&L Machinery Maintenance Expense</p>
             </div>
 
-            <div className="bg-slate-950 border border-slate-800 rounded-2xl p-5 space-y-2">
-              <div className="text-slate-500 text-xs font-semibold uppercase">Capitalized Major Overhauls</div>
-              <div className="text-2xl font-black font-mono text-emerald-400">
+            <div className="bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-2xl p-5 space-y-2">
+              <div className="text-slate-500 dark:text-slate-400 text-xs font-semibold uppercase">Capitalized Major Overhauls</div>
+              <div className="text-2xl font-black font-mono text-emerald-600 dark:text-emerald-400">
                 {currency} {workOrders.filter(w => w.isCapitalizedRepair).reduce((acc, w) => acc + w.totalCost, 0).toLocaleString()}
               </div>
-              <p className="text-[11px] text-slate-500">Debited to Fixed Asset Cost Basis & Depreciated</p>
+              <p className="text-[11px] text-slate-500 dark:text-slate-400">Debited to Fixed Asset Cost Basis & Depreciated</p>
             </div>
           </div>
         </div>
@@ -363,12 +363,12 @@ export const AssetMaintenanceView: React.FC = () => {
       {/* MODAL: RAISE WORK ORDER */}
       {showWoModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-fadeIn">
-          <div className="bg-slate-900 border border-slate-800 rounded-2xl w-full max-w-xl p-6 shadow-2xl space-y-6">
-            <div className="flex items-center justify-between pb-4 border-b border-slate-800">
-              <h3 className="text-lg font-black text-white">Raise Maintenance Work Order</h3>
+          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl w-full max-w-xl p-6 shadow-2xl space-y-6">
+            <div className="flex items-center justify-between pb-4 border-b border-slate-200 dark:border-slate-800">
+              <h3 className="text-lg font-black text-slate-900 dark:text-white">Raise Maintenance Work Order</h3>
               <button
                 onClick={() => setShowWoModal(false)}
-                className="text-slate-400 hover:text-white text-sm font-bold cursor-pointer"
+                className="text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white text-sm font-bold cursor-pointer"
               >
                 ✕
               </button>
@@ -376,11 +376,11 @@ export const AssetMaintenanceView: React.FC = () => {
 
             <form onSubmit={handleCreateWO} className="space-y-4 text-xs">
               <div>
-                <label className="block text-slate-400 mb-1">Target Asset *</label>
+                <label className="block text-slate-600 dark:text-slate-400 mb-1">Target Asset *</label>
                 <select
                   value={woForm.assetId}
                   onChange={e => setWoForm({ ...woForm, assetId: e.target.value })}
-                  className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-white"
+                  className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 text-slate-900 dark:text-white"
                 >
                   {assets.map(a => (
                     <option key={a.id} value={a.id}>{a.assetTag} — {a.name} ({a.locationName})</option>
@@ -389,24 +389,24 @@ export const AssetMaintenanceView: React.FC = () => {
               </div>
 
               <div>
-                <label className="block text-slate-400 mb-1">Work Order Title *</label>
+                <label className="block text-slate-600 dark:text-slate-400 mb-1">Work Order Title *</label>
                 <input
                   type="text"
                   required
                   placeholder="e.g. Hydraulic Pump Overhaul & Filter Replacement"
                   value={woForm.title}
                   onChange={e => setWoForm({ ...woForm, title: e.target.value })}
-                  className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-white"
+                  className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 text-slate-900 dark:text-white"
                 />
               </div>
 
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-slate-400 mb-1">Work Order Type</label>
+                  <label className="block text-slate-600 dark:text-slate-400 mb-1">Work Order Type</label>
                   <select
                     value={woForm.type}
                     onChange={e => setWoForm({ ...woForm, type: e.target.value as any })}
-                    className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-white"
+                    className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 text-slate-900 dark:text-white"
                   >
                     <option value="PREVENTIVE">Preventive Maintenance</option>
                     <option value="CORRECTIVE">Corrective Repair</option>
@@ -415,11 +415,11 @@ export const AssetMaintenanceView: React.FC = () => {
                   </select>
                 </div>
                 <div>
-                  <label className="block text-slate-400 mb-1">Priority</label>
+                  <label className="block text-slate-600 dark:text-slate-400 mb-1">Priority</label>
                   <select
                     value={woForm.priority}
                     onChange={e => setWoForm({ ...woForm, priority: e.target.value as any })}
-                    className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-white"
+                    className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 text-slate-900 dark:text-white"
                   >
                     <option value="LOW">Low</option>
                     <option value="MEDIUM">Medium</option>
@@ -431,40 +431,40 @@ export const AssetMaintenanceView: React.FC = () => {
 
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-slate-400 mb-1">Lead Technician</label>
+                  <label className="block text-slate-600 dark:text-slate-400 mb-1">Lead Technician</label>
                   <input
                     type="text"
                     value={woForm.technicianName}
                     onChange={e => setWoForm({ ...woForm, technicianName: e.target.value })}
-                    className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-white"
+                    className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 text-slate-900 dark:text-white"
                   />
                 </div>
                 <div>
-                  <label className="block text-slate-400 mb-1">Estimated Spares Cost ({currency})</label>
+                  <label className="block text-slate-600 dark:text-slate-400 mb-1">Estimated Spares Cost ({currency})</label>
                   <input
                     type="number"
                     value={woForm.sparePartsCost}
                     onChange={e => setWoForm({ ...woForm, sparePartsCost: Number(e.target.value) })}
-                    className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-white font-mono"
+                    className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 text-slate-900 dark:text-white font-mono"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block text-slate-400 mb-1">Defect Description / Scope of Work</label>
+                <label className="block text-slate-600 dark:text-slate-400 mb-1">Defect Description / Scope of Work</label>
                 <textarea
                   rows={3}
                   value={woForm.description}
                   onChange={e => setWoForm({ ...woForm, description: e.target.value })}
-                  className="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-white"
+                  className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl p-3 text-slate-900 dark:text-white"
                 />
               </div>
 
-              <div className="flex justify-end gap-3 pt-4 border-t border-slate-800">
+              <div className="flex justify-end gap-3 pt-4 border-t border-slate-200 dark:border-slate-800">
                 <button
                   type="button"
                   onClick={() => setShowWoModal(false)}
-                  className="px-4 py-2 bg-slate-800 text-slate-300 rounded-xl font-bold cursor-pointer"
+                  className="px-4 py-2 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 rounded-xl font-bold cursor-pointer"
                 >
                   Cancel
                 </button>
@@ -483,12 +483,12 @@ export const AssetMaintenanceView: React.FC = () => {
       {/* MODAL: NEW PM PLAN */}
       {showPmModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-fadeIn">
-          <div className="bg-slate-900 border border-slate-800 rounded-2xl w-full max-w-lg p-6 shadow-2xl space-y-6">
-            <div className="flex items-center justify-between pb-4 border-b border-slate-800">
-              <h3 className="text-lg font-black text-white">Create Preventive Maintenance Plan</h3>
+          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl w-full max-w-lg p-6 shadow-2xl space-y-6">
+            <div className="flex items-center justify-between pb-4 border-b border-slate-200 dark:border-slate-800">
+              <h3 className="text-lg font-black text-slate-900 dark:text-white">Create Preventive Maintenance Plan</h3>
               <button
                 onClick={() => setShowPmModal(false)}
-                className="text-slate-400 hover:text-white text-sm font-bold cursor-pointer"
+                className="text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white text-sm font-bold cursor-pointer"
               >
                 ✕
               </button>
@@ -496,11 +496,11 @@ export const AssetMaintenanceView: React.FC = () => {
 
             <form onSubmit={handleCreatePM} className="space-y-4 text-xs">
               <div>
-                <label className="block text-slate-400 mb-1">Target Asset *</label>
+                <label className="block text-slate-600 dark:text-slate-400 mb-1">Target Asset *</label>
                 <select
                   value={pmForm.assetId}
                   onChange={e => setPmForm({ ...pmForm, assetId: e.target.value })}
-                  className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-white"
+                  className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 text-slate-900 dark:text-white"
                 >
                   {assets.map(a => (
                     <option key={a.id} value={a.id}>{a.assetTag} — {a.name}</option>
@@ -509,24 +509,24 @@ export const AssetMaintenanceView: React.FC = () => {
               </div>
 
               <div>
-                <label className="block text-slate-400 mb-1">PM Title / Service Plan *</label>
+                <label className="block text-slate-600 dark:text-slate-400 mb-1">PM Title / Service Plan *</label>
                 <input
                   type="text"
                   required
                   placeholder="e.g. 500-Hour Fluid & Filter Comprehensive Service"
                   value={pmForm.title}
                   onChange={e => setPmForm({ ...pmForm, title: e.target.value })}
-                  className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-white"
+                  className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 text-slate-900 dark:text-white"
                 />
               </div>
 
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-slate-400 mb-1">Frequency</label>
+                  <label className="block text-slate-600 dark:text-slate-400 mb-1">Frequency</label>
                   <select
                     value={pmForm.frequency}
                     onChange={e => setPmForm({ ...pmForm, frequency: e.target.value as any })}
-                    className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-white"
+                    className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 text-slate-900 dark:text-white"
                   >
                     <option value="MONTHLY">Monthly</option>
                     <option value="QUARTERLY">Quarterly</option>
@@ -535,21 +535,21 @@ export const AssetMaintenanceView: React.FC = () => {
                   </select>
                 </div>
                 <div>
-                  <label className="block text-slate-400 mb-1">Interval Hours</label>
+                  <label className="block text-slate-600 dark:text-slate-400 mb-1">Interval Hours</label>
                   <input
                     type="number"
                     value={pmForm.serviceIntervalHours}
                     onChange={e => setPmForm({ ...pmForm, serviceIntervalHours: Number(e.target.value) })}
-                    className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-white font-mono"
+                    className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 text-slate-900 dark:text-white font-mono"
                   />
                 </div>
               </div>
 
-              <div className="flex justify-end gap-3 pt-4 border-t border-slate-800">
+              <div className="flex justify-end gap-3 pt-4 border-t border-slate-200 dark:border-slate-800">
                 <button
                   type="button"
                   onClick={() => setShowPmModal(false)}
-                  className="px-4 py-2 bg-slate-800 text-slate-300 rounded-xl font-bold cursor-pointer"
+                  className="px-4 py-2 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 rounded-xl font-bold cursor-pointer"
                 >
                   Cancel
                 </button>

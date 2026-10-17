@@ -131,14 +131,14 @@ export const SiteWorkManagementView: React.FC = () => {
   return (
     <div className="space-y-6">
       {/* Top Banner */}
-      <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 text-white shadow-xl flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6">
+      <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 text-slate-900 dark:text-white shadow-xl flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6">
         <div className="space-y-2 max-w-2xl">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-400 text-xs font-semibold uppercase tracking-wider">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 text-xs font-semibold uppercase tracking-wider">
             <HardHat className="w-3.5 h-3.5" />
             Module 15.03 — Site & Work Management
           </div>
           <h2 className="text-2xl font-bold tracking-tight">Site Operations, Work Orders & Daily Site Diary</h2>
-          <p className="text-sm text-slate-400">
+          <p className="text-sm text-slate-600 dark:text-slate-400">
             Real-time daily site progress logging (DSR), manpower headcount, equipment utilization hours, task work orders, and critical path milestones.
           </p>
         </div>
@@ -146,7 +146,7 @@ export const SiteWorkManagementView: React.FC = () => {
         <div className="flex flex-wrap items-center gap-3">
           <button
             onClick={() => setShowAddWorkOrderModal(true)}
-            className="inline-flex items-center gap-2 bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 font-medium text-xs px-4 py-2.5 rounded-xl shadow transition-all"
+            className="inline-flex items-center gap-2 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-200 border border-slate-300 dark:border-slate-700 font-medium text-xs px-4 py-2.5 rounded-xl shadow transition-all"
           >
             <Plus className="w-4 h-4" />
             Issue Work Order
@@ -167,33 +167,33 @@ export const SiteWorkManagementView: React.FC = () => {
           <div>
             <span className="text-slate-500 dark:text-slate-400">Site Location</span>
             <p className="font-bold text-slate-900 dark:text-white text-sm mt-0.5">{selectedSite.siteName}</p>
-            <p className="text-[11px] text-slate-400 font-mono">{selectedSite.locationCoordinates}</p>
+            <p className="text-[11px] text-slate-600 dark:text-slate-400 font-mono">{selectedSite.locationCoordinates}</p>
           </div>
           <div>
             <span className="text-slate-500 dark:text-slate-400">Active Headcount Today</span>
             <p className="font-bold font-mono text-slate-900 dark:text-white text-base mt-0.5">
               {selectedSite.totalHeadcountToday} Personnel
             </p>
-            <p className="text-[11px] text-emerald-600">Full shift deployed</p>
+            <p className="text-[11px] text-emerald-600 dark:text-emerald-400">Full shift deployed</p>
           </div>
           <div>
             <span className="text-slate-500 dark:text-slate-400">Safe Man-Hours (No LTI)</span>
             <p className="font-bold font-mono text-emerald-600 dark:text-emerald-400 text-base mt-0.5">
               {selectedSite.safeManHoursSinceLTI.toLocaleString()} Hrs
             </p>
-            <p className="text-[11px] text-slate-400">HSE Gold Milestone</p>
+            <p className="text-[11px] text-slate-600 dark:text-slate-400">HSE Gold Milestone</p>
           </div>
           <div>
             <span className="text-slate-500 dark:text-slate-400">Active Plant & Cranes</span>
             <p className="font-bold font-mono text-slate-900 dark:text-white text-base mt-0.5">
               {selectedSite.activeEquipmentUnits} Units Operating
             </p>
-            <p className="text-[11px] text-slate-400">Staging: {selectedSite.stagingYardCapacityPct}% full</p>
+            <p className="text-[11px] text-slate-600 dark:text-slate-400">Staging: {selectedSite.stagingYardCapacityPct}% full</p>
           </div>
           <div>
             <span className="text-slate-500 dark:text-slate-400">Key Personnel</span>
             <p className="font-semibold text-slate-900 dark:text-white mt-0.5">PM: {selectedSite.projectManager}</p>
-            <p className="text-[11px] text-slate-400">RE: {selectedSite.residentEngineer}</p>
+            <p className="text-[11px] text-slate-600 dark:text-slate-400">RE: {selectedSite.residentEngineer}</p>
           </div>
         </div>
       )}
@@ -258,8 +258,8 @@ export const SiteWorkManagementView: React.FC = () => {
                     <span className="text-xs font-mono font-bold px-2.5 py-1 rounded bg-emerald-50 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-400">
                       {log.reportNumber}
                     </span>
-                    <span className="text-xs text-slate-500">Date: <strong>{log.reportDate}</strong></span>
-                    <span className="text-xs px-2 py-0.5 rounded-full bg-amber-50 dark:bg-amber-950 text-amber-600 font-medium">
+                    <span className="text-xs text-slate-500 dark:text-slate-400">Date: <strong>{log.reportDate}</strong></span>
+                    <span className="text-xs px-2 py-0.5 rounded-full bg-amber-50 dark:bg-amber-950 text-amber-600 dark:text-amber-400 font-medium">
                       {log.weatherCondition.replace(/_/g, ' ')} ({log.ambientTemperatureHighC}°C)
                     </span>
                   </div>
@@ -268,7 +268,7 @@ export const SiteWorkManagementView: React.FC = () => {
                   </h4>
                 </div>
 
-                <div className="text-xs text-slate-500">
+                <div className="text-xs text-slate-500 dark:text-slate-400">
                   Logged by: <span className="font-semibold text-slate-700 dark:text-slate-300">{log.loggedBy}</span>
                 </div>
               </div>
@@ -278,7 +278,7 @@ export const SiteWorkManagementView: React.FC = () => {
                 <div className="bg-slate-50 dark:bg-slate-800/40 p-4 rounded-xl border border-slate-100 dark:border-slate-800 space-y-2">
                   <div className="flex justify-between items-center font-bold text-slate-900 dark:text-white">
                     <span>Manpower Deployment</span>
-                    <span className="font-mono text-emerald-600">{log.manpowerLog.totalHeadcount} Workers Total</span>
+                    <span className="font-mono text-emerald-600 dark:text-emerald-400">{log.manpowerLog.totalHeadcount} Workers Total</span>
                   </div>
                   <div className="grid grid-cols-2 gap-2 text-slate-600 dark:text-slate-400 text-[11px] pt-1">
                     <div>Engineers: <strong>{log.manpowerLog.engineers}</strong></div>
@@ -292,7 +292,7 @@ export const SiteWorkManagementView: React.FC = () => {
                 <div className="bg-slate-50 dark:bg-slate-800/40 p-4 rounded-xl border border-slate-100 dark:border-slate-800 space-y-2">
                   <div className="flex justify-between items-center font-bold text-slate-900 dark:text-white">
                     <span>Heavy Plant & Equipment Hours</span>
-                    <span className="font-mono text-blue-600">{log.equipmentLog.length} Key Units</span>
+                    <span className="font-mono text-blue-600 dark:text-blue-400">{log.equipmentLog.length} Key Units</span>
                   </div>
                   <div className="space-y-1 text-[11px] text-slate-600 dark:text-slate-400">
                     {log.equipmentLog.map((eq, i) => (
@@ -343,7 +343,7 @@ export const SiteWorkManagementView: React.FC = () => {
                 <span className="text-xs font-mono font-bold text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/60 px-2 py-0.5 rounded">
                   {wo.workOrderNumber}
                 </span>
-                <span className="text-[11px] font-semibold px-2 py-0.5 rounded-full bg-blue-50 dark:bg-blue-950 text-blue-600">
+                <span className="text-[11px] font-semibold px-2 py-0.5 rounded-full bg-blue-50 dark:bg-blue-950 text-blue-600 dark:text-blue-400">
                   {wo.status}
                 </span>
               </div>
@@ -351,22 +351,22 @@ export const SiteWorkManagementView: React.FC = () => {
               <h4 className="font-bold text-slate-900 dark:text-white text-sm">
                 {wo.title}
               </h4>
-              <p className="text-xs text-slate-500">
+              <p className="text-xs text-slate-500 dark:text-slate-400">
                 <strong>Trade:</strong> {wo.tradePackage} • <strong>Zone:</strong> {wo.zoneLocation}
               </p>
-              <p className="text-xs text-slate-500">
+              <p className="text-xs text-slate-500 dark:text-slate-400">
                 <strong>Assigned:</strong> {wo.assignedCrewOrSubcontractor}
               </p>
 
               <div className="pt-3 border-t border-slate-100 dark:border-slate-800 space-y-2 text-xs">
                 <div className="flex justify-between">
-                  <span className="text-slate-500">Scheduled:</span>
+                  <span className="text-slate-500 dark:text-slate-400">Scheduled:</span>
                   <span className="text-slate-700 dark:text-slate-300">{wo.scheduledStartDate} → {wo.scheduledEndDate}</span>
                 </div>
                 <div className="space-y-1">
-                  <div className="flex justify-between text-slate-500">
+                  <div className="flex justify-between text-slate-500 dark:text-slate-400">
                     <span>Task Progress</span>
-                    <span className="font-bold text-emerald-600">{wo.progressPercent}%</span>
+                    <span className="font-bold text-emerald-600 dark:text-emerald-400">{wo.progressPercent}%</span>
                   </div>
                   <div className="w-full bg-slate-200 dark:bg-slate-700 h-2 rounded-full overflow-hidden">
                     <div className="bg-emerald-500 h-full rounded-full" style={{ width: `${wo.progressPercent}%` }} />
@@ -382,7 +382,7 @@ export const SiteWorkManagementView: React.FC = () => {
       {activeTab === 'milestones' && (
         <div className="overflow-x-auto bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm">
           <table className="w-full text-left text-xs">
-            <thead className="bg-slate-50 dark:bg-slate-800/60 text-slate-500 uppercase tracking-wider font-semibold border-b border-slate-200 dark:border-slate-800">
+            <thead className="bg-slate-50 dark:bg-slate-800/60 text-slate-500 dark:text-slate-400 uppercase tracking-wider font-semibold border-b border-slate-200 dark:border-slate-800">
               <tr>
                 <th className="py-3 px-4">Milestone Code</th>
                 <th className="py-3 px-4">Milestone Description</th>
@@ -404,7 +404,7 @@ export const SiteWorkManagementView: React.FC = () => {
                     {ms.title}
                   </td>
                   <td className="py-3.5 px-4 font-mono">{ms.targetDate}</td>
-                  <td className="py-3.5 px-4 font-mono text-slate-500">{ms.actualDate || '—'}</td>
+                  <td className="py-3.5 px-4 font-mono text-slate-500 dark:text-slate-400">{ms.actualDate || '—'}</td>
                   <td className="py-3.5 px-4 text-center font-bold">{ms.weightagePct}%</td>
                   <td className="py-3.5 px-4 text-right font-mono font-bold text-slate-900 dark:text-white">
                     {currency} {ms.associatedPaymentRelease.toLocaleString()}
@@ -415,7 +415,7 @@ export const SiteWorkManagementView: React.FC = () => {
                         Critical Path
                       </span>
                     ) : (
-                      <span className="text-slate-400">Standard</span>
+                      <span className="text-slate-600 dark:text-slate-400">Standard</span>
                     )}
                   </td>
                   <td className="py-3.5 px-4">
@@ -436,27 +436,27 @@ export const SiteWorkManagementView: React.FC = () => {
           {sites.map(site => (
             <div key={site.id} className="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
               <div className="flex justify-between items-start">
-                <span className="text-xs font-mono font-bold text-emerald-600 bg-emerald-50 dark:bg-emerald-950 px-2 py-1 rounded">
+                <span className="text-xs font-mono font-bold text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950 px-2 py-1 rounded">
                   {site.siteCode}
                 </span>
-                <span className="text-xs font-semibold px-2 py-0.5 rounded-full bg-blue-50 text-blue-600">
+                <span className="text-xs font-semibold px-2 py-0.5 rounded-full bg-blue-50 dark:bg-blue-500/10 text-blue-600 dark:text-blue-400">
                   {site.siteOfficeStatus}
                 </span>
               </div>
               <h4 className="text-lg font-bold text-slate-900 dark:text-white">{site.siteName}</h4>
-              <p className="text-xs text-slate-500">Permit: {site.accessPermitNumber}</p>
+              <p className="text-xs text-slate-500 dark:text-slate-400">Permit: {site.accessPermitNumber}</p>
               <div className="grid grid-cols-3 gap-3 pt-3 border-t border-slate-100 dark:border-slate-800 text-xs">
                 <div>
-                  <span className="text-slate-400">Headcount</span>
+                  <span className="text-slate-600 dark:text-slate-400">Headcount</span>
                   <p className="font-bold text-slate-900 dark:text-white">{site.totalHeadcountToday}</p>
                 </div>
                 <div>
-                  <span className="text-slate-400">Equipments</span>
+                  <span className="text-slate-600 dark:text-slate-400">Equipments</span>
                   <p className="font-bold text-slate-900 dark:text-white">{site.activeEquipmentUnits} Units</p>
                 </div>
                 <div>
-                  <span className="text-slate-400">LTI-Free Hours</span>
-                  <p className="font-bold text-emerald-600">{site.safeManHoursSinceLTI.toLocaleString()} h</p>
+                  <span className="text-slate-600 dark:text-slate-400">LTI-Free Hours</span>
+                  <p className="font-bold text-emerald-600 dark:text-emerald-400">{site.safeManHoursSinceLTI.toLocaleString()} h</p>
                 </div>
               </div>
             </div>
@@ -470,7 +470,7 @@ export const SiteWorkManagementView: React.FC = () => {
           <div className="bg-white dark:bg-slate-900 rounded-2xl max-w-lg w-full p-6 border border-slate-200 dark:border-slate-800 shadow-2xl space-y-4 text-xs">
             <div className="flex justify-between items-center border-b border-slate-100 dark:border-slate-800 pb-3">
               <h3 className="text-base font-bold text-slate-900 dark:text-white">Issue Site Work Order</h3>
-              <button onClick={() => setShowAddWorkOrderModal(false)} className="text-slate-400 hover:text-slate-600">✕</button>
+              <button onClick={() => setShowAddWorkOrderModal(false)} className="text-slate-600 dark:text-slate-400 hover:text-slate-600 dark:hover:text-slate-400">✕</button>
             </div>
 
             <form onSubmit={handleCreateWorkOrder} className="space-y-3">
@@ -542,7 +542,7 @@ export const SiteWorkManagementView: React.FC = () => {
                 <button
                   type="button"
                   onClick={() => setShowAddWorkOrderModal(false)}
-                  className="px-4 py-2 rounded-xl text-slate-600 dark:text-slate-300 hover:bg-slate-100"
+                  className="px-4 py-2 rounded-xl text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800"
                 >
                   Cancel
                 </button>
@@ -564,7 +564,7 @@ export const SiteWorkManagementView: React.FC = () => {
           <div className="bg-white dark:bg-slate-900 rounded-2xl max-w-lg w-full p-6 border border-slate-200 dark:border-slate-800 shadow-2xl space-y-4 text-xs">
             <div className="flex justify-between items-center border-b border-slate-100 dark:border-slate-800 pb-3">
               <h3 className="text-base font-bold text-slate-900 dark:text-white">Post Daily Site Diary (DSR)</h3>
-              <button onClick={() => setShowAddDailyLogModal(false)} className="text-slate-400 hover:text-slate-600">✕</button>
+              <button onClick={() => setShowAddDailyLogModal(false)} className="text-slate-600 dark:text-slate-400 hover:text-slate-600 dark:hover:text-slate-400">✕</button>
             </div>
 
             <form onSubmit={handleCreateDailyLog} className="space-y-3">
@@ -639,7 +639,7 @@ export const SiteWorkManagementView: React.FC = () => {
                 <button
                   type="button"
                   onClick={() => setShowAddDailyLogModal(false)}
-                  className="px-4 py-2 rounded-xl text-slate-600 dark:text-slate-300 hover:bg-slate-100"
+                  className="px-4 py-2 rounded-xl text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800"
                 >
                   Cancel
                 </button>

@@ -276,7 +276,7 @@ export const SalesCrmDashboardView: React.FC<SalesCrmDashboardViewProps> = ({
             {aiPrompt && (
               <button
                 onClick={() => setAiPrompt('')}
-                className="absolute right-3 top-3 text-xs text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 cursor-pointer"
+                className="absolute right-3 top-3 text-xs text-slate-600 dark:text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 cursor-pointer"
               >
                 Clear
               </button>
@@ -301,7 +301,7 @@ export const SalesCrmDashboardView: React.FC<SalesCrmDashboardViewProps> = ({
                 setAiPrompt(qp);
                 handleRunAiCopilot(qp);
               }}
-              className="text-xs px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-indigo-50 dark:bg-slate-800 dark:hover:bg-slate-750 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 transition-colors cursor-pointer"
+              className="text-xs px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-indigo-50 dark:bg-slate-800 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 transition-colors cursor-pointer"
             >
               💡 {qp}
             </button>
@@ -365,7 +365,7 @@ export const SalesCrmDashboardView: React.FC<SalesCrmDashboardViewProps> = ({
                       <td className="px-5 py-3.5">
                         <div className="font-semibold text-slate-900 dark:text-white">{opp.title}</div>
                         <div className="text-xs text-slate-500 dark:text-slate-400 flex items-center gap-1.5 mt-0.5">
-                          <Building2 className="w-3 h-3 text-indigo-500" />
+                          <Building2 className="w-3 h-3 text-indigo-500 dark:text-indigo-400" />
                           <span>{opp.customerName}</span>
                           <span className="text-slate-300 dark:text-slate-600">•</span>
                           <span>{opp.opportunityCode}</span>
@@ -437,56 +437,56 @@ export const SalesCrmDashboardView: React.FC<SalesCrmDashboardViewProps> = ({
                 desc: `${leads.length} Inbound inquiries`,
                 icon: Users,
                 fa: 'lead-management',
-                color: 'text-indigo-500'
+                color: 'text-indigo-500 dark:text-indigo-400'
               },
               {
                 title: '06.02 Customers',
                 desc: '360° Account Directory',
                 icon: Building2,
                 fa: 'customer-management',
-                color: 'text-blue-500'
+                color: 'text-blue-500 dark:text-blue-400'
               },
               {
                 title: '06.05 Quotations',
                 desc: `${quotations.length} CPQ Proposals`,
                 icon: FileText,
                 fa: 'sales-quotations',
-                color: 'text-emerald-500'
+                color: 'text-emerald-500 dark:text-emerald-400'
               },
               {
                 title: '06.06 Sales Orders',
                 desc: `${salesOrders.length} Confirmed LPOs`,
                 icon: ShoppingBag,
                 fa: 'sales-orders',
-                color: 'text-cyan-500'
+                color: 'text-cyan-500 dark:text-cyan-400'
               },
               {
                 title: '06.07 Delivery & Billing',
                 desc: 'DN & Tax Invoicing',
                 icon: Truck,
                 fa: 'delivery-billing',
-                color: 'text-amber-500'
+                color: 'text-amber-500 dark:text-amber-400'
               },
               {
                 title: '06.08 Customer Care',
                 desc: `${complaints.length} Service Tickets`,
                 icon: HelpCircle,
                 fa: 'customer-service',
-                color: 'text-rose-500'
+                color: 'text-rose-500 dark:text-rose-400'
               },
               {
                 title: '06.03 Pipeline',
                 desc: 'Kanban Stages',
                 icon: Layers,
                 fa: 'opportunity-management',
-                color: 'text-purple-500'
+                color: 'text-purple-500 dark:text-purple-400'
               },
               {
                 title: '06.04 Activities',
                 desc: 'Calls & Client Visits',
                 icon: Calendar,
                 fa: 'sales-activities',
-                color: 'text-teal-500'
+                color: 'text-teal-500 dark:text-teal-400'
               }
             ].map((card, i) => {
               const Icon = card.icon;
@@ -565,7 +565,7 @@ export const SalesCrmDashboardView: React.FC<SalesCrmDashboardViewProps> = ({
                         `**AI Lead Evaluation for ${lead.leadCode} (${lead.fullName}):**\n- **AI Fit Score:** ${res.score}/100\n- **Reasoning:** ${res.reasoning}\n- **Recommended Next Step:** ${res.action}`
                       );
                     }}
-                    className="p-1.5 rounded-lg bg-white dark:bg-slate-700 text-indigo-600 dark:text-indigo-400 hover:bg-indigo-50 border border-slate-200 dark:border-slate-600 text-xs shadow-2xs cursor-pointer"
+                    className="p-1.5 rounded-lg bg-white dark:bg-slate-700 text-indigo-600 dark:text-indigo-400 hover:bg-indigo-50 dark:hover:bg-indigo-500/10 border border-slate-200 dark:border-slate-600 text-xs shadow-2xs cursor-pointer"
                     title="Score with AI"
                   >
                     <Sparkles className="w-3.5 h-3.5" />

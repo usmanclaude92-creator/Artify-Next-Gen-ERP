@@ -86,49 +86,49 @@ export const BudgetAIAssistantModal: React.FC<Props> = ({ isOpen, onClose }) => 
 
   return (
     <div className="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-      <div className="bg-slate-900 border border-slate-800 rounded-2xl w-full max-w-2xl h-[650px] flex flex-col shadow-2xl animate-fadeIn">
+      <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl w-full max-w-2xl h-[650px] flex flex-col shadow-2xl animate-fadeIn">
         {/* Header */}
-        <div className="p-5 border-b border-slate-800 flex items-center justify-between">
+        <div className="p-5 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between">
           <div className="flex items-center gap-2.5">
             <div className="w-8 h-8 rounded-xl bg-emerald-600/20 border border-emerald-500/40 flex items-center justify-center">
-              <Sparkles className="w-4 h-4 text-emerald-400" />
+              <Sparkles className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
             </div>
             <div>
-              <h3 className="text-sm font-bold text-white flex items-center gap-2">
+              <h3 className="text-sm font-bold text-slate-900 dark:text-white flex items-center gap-2">
                 FP&A Financial Intelligence Copilot
-                <span className="text-[10px] px-2 py-0.5 rounded-full bg-emerald-950 text-emerald-400 border border-emerald-800 font-mono">
+                <span className="text-[10px] px-2 py-0.5 rounded-full bg-emerald-50 dark:bg-emerald-950 text-emerald-600 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800 font-mono">
                   Gemini Flash 2.5
                 </span>
               </h3>
-              <p className="text-xs text-slate-400">Real-time budget governance, variance root-cause analysis, and predictive modeling</p>
+              <p className="text-xs text-slate-600 dark:text-slate-400">Real-time budget governance, variance root-cause analysis, and predictive modeling</p>
             </div>
           </div>
 
           <button
             onClick={onClose}
-            className="p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition-all cursor-pointer"
+            className="p-1.5 rounded-lg text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 transition-all cursor-pointer"
           >
             <X className="w-5 h-5" />
           </button>
         </div>
 
         {/* Quick Action Pills */}
-        <div className="px-5 py-2.5 bg-slate-950 border-b border-slate-800 flex items-center gap-2 overflow-x-auto text-xs">
+        <div className="px-5 py-2.5 bg-slate-50 dark:bg-slate-950 border-b border-slate-200 dark:border-slate-800 flex items-center gap-2 overflow-x-auto text-xs">
           <button
             onClick={() => handleSendMessage('Analyze Cost Center burn rates and identify overspending risks')}
-            className="px-3 py-1 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-300 font-medium whitespace-nowrap cursor-pointer transition-colors"
+            className="px-3 py-1 rounded-full bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 font-medium whitespace-nowrap cursor-pointer transition-colors"
           >
             🔥 Cost Center Burn Risk
           </button>
           <button
             onClick={() => handleSendMessage('Evaluate CAPEX proposals IRR and payback rankings')}
-            className="px-3 py-1 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-300 font-medium whitespace-nowrap cursor-pointer transition-colors"
+            className="px-3 py-1 rounded-full bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 font-medium whitespace-nowrap cursor-pointer transition-colors"
           >
             💡 CAPEX Feasibility
           </button>
           <button
             onClick={() => handleSendMessage('Simulate +18% steel inflation impact on EBITDA')}
-            className="px-3 py-1 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-300 font-medium whitespace-nowrap cursor-pointer transition-colors"
+            className="px-3 py-1 rounded-full bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 font-medium whitespace-nowrap cursor-pointer transition-colors"
           >
             ⚡ Steel Inflation Stress Test
           </button>
@@ -145,7 +145,7 @@ export const BudgetAIAssistantModal: React.FC<Props> = ({ isOpen, onClose }) => 
                 className={`max-w-[85%] rounded-2xl p-4 text-xs leading-relaxed ${
                   m.role === 'user'
                     ? 'bg-emerald-600 text-white rounded-tr-none'
-                    : 'bg-slate-950 border border-slate-800 text-slate-200 rounded-tl-none font-sans'
+                    : 'bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 text-slate-800 dark:text-slate-200 rounded-tl-none font-sans'
                 }`}
               >
                 <div className="whitespace-pre-line">{m.text}</div>
@@ -158,8 +158,8 @@ export const BudgetAIAssistantModal: React.FC<Props> = ({ isOpen, onClose }) => 
 
           {isAnalyzing && (
             <div className="flex justify-start">
-              <div className="bg-slate-950 border border-slate-800 rounded-2xl rounded-tl-none p-3 text-xs text-slate-400 flex items-center gap-2">
-                <Sparkles className="w-3.5 h-3.5 text-emerald-400 animate-spin" />
+              <div className="bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-2xl rounded-tl-none p-3 text-xs text-slate-600 dark:text-slate-400 flex items-center gap-2">
+                <Sparkles className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400 animate-spin" />
                 <span>Analyzing financial ledger & running mathematical simulations...</span>
               </div>
             </div>
@@ -167,7 +167,7 @@ export const BudgetAIAssistantModal: React.FC<Props> = ({ isOpen, onClose }) => 
         </div>
 
         {/* Input Footer */}
-        <div className="p-4 border-t border-slate-800 bg-slate-950">
+        <div className="p-4 border-t border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950">
           <form
             onSubmit={(e) => {
               e.preventDefault();
@@ -180,7 +180,7 @@ export const BudgetAIAssistantModal: React.FC<Props> = ({ isOpen, onClose }) => 
               placeholder="Ask FP&A Copilot (e.g. 'Can we afford a 150k PO in CC-200?')..."
               value={inputQuery}
               onChange={(e) => setInputQuery(e.target.value)}
-              className="flex-1 bg-slate-900 border border-slate-800 rounded-xl px-4 py-2.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-emerald-500"
+              className="flex-1 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl px-4 py-2.5 text-xs text-slate-900 dark:text-white placeholder-slate-500 focus:outline-none focus:border-emerald-500"
             />
             <button
               type="submit"

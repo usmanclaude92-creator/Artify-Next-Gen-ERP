@@ -211,38 +211,38 @@ export const HrModuleRunner: React.FC<HrModuleRunnerProps> = ({
     <HrProvider>
       <div className="space-y-6">
         {/* Module Header Bar */}
-        <div className="bg-slate-900 border border-slate-800 rounded-3xl p-6 shadow-sm">
+        <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-sm">
           <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
             <div className="flex items-center gap-4">
               <button
                 onClick={() => onNavigate({ view: 'module', moduleId: 'hr' })}
-                className="p-2.5 rounded-2xl bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white transition-all shadow-sm"
+                className="p-2.5 rounded-2xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-all shadow-sm"
                 title="Back to HR Cockpit"
               >
                 <ArrowLeft className="w-5 h-5" />
               </button>
 
-              <div className="w-12 h-12 rounded-2xl bg-rose-500/10 border border-rose-500/20 flex items-center justify-center text-rose-400 font-bold shadow-inner">
+              <div className="w-12 h-12 rounded-2xl bg-rose-500/10 border border-rose-500/20 flex items-center justify-center text-rose-600 dark:text-rose-400 font-bold shadow-inner">
                 <Users className="w-6 h-6" />
               </div>
 
               <div>
                 <div className="flex items-center gap-2.5">
-                  <h1 className="text-xl font-bold text-white tracking-tight">
+                  <h1 className="text-xl font-bold text-slate-900 dark:text-white tracking-tight">
                     {module.code} — {module.name}
                   </h1>
                   <button
                     onClick={onToggleFavorite}
                     className={`p-1.5 rounded-xl transition-all ${
                       isFavorite
-                        ? 'text-amber-400 bg-amber-400/10'
-                        : 'text-slate-500 hover:text-slate-300 hover:bg-slate-800'
+                        ? 'text-amber-700 dark:text-amber-400 bg-amber-400/10'
+                        : 'text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800'
                     }`}
                   >
                     <Star className="w-4 h-4 fill-current" />
                   </button>
                 </div>
-                <p className="text-xs text-slate-400 mt-0.5">
+                <p className="text-xs text-slate-600 dark:text-slate-400 mt-0.5">
                   {functionalArea
                     ? `${functionalArea.code} ${functionalArea.name} ${process ? `› ${process.name}` : ''} ${transaction ? `› ${transaction.name}` : ''}`
                     : module.description}
@@ -257,7 +257,7 @@ export const HrModuleRunner: React.FC<HrModuleRunnerProps> = ({
                 className={`px-3 py-1.5 rounded-xl text-xs font-semibold transition-all flex items-center gap-1.5 whitespace-nowrap ${
                   !functionalArea
                     ? 'bg-rose-600 text-white shadow-sm shadow-rose-600/30'
-                    : 'bg-slate-800/80 hover:bg-slate-800 text-slate-400 hover:text-white'
+                    : 'bg-slate-100/80 dark:bg-slate-800/80 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
                 }`}
               >
                 <LayoutDashboard className="w-3.5 h-3.5" />
@@ -269,7 +269,7 @@ export const HrModuleRunner: React.FC<HrModuleRunnerProps> = ({
                 className={`px-3 py-1.5 rounded-xl text-xs font-semibold transition-all flex items-center gap-1.5 whitespace-nowrap ${
                   functionalArea?.id === 'employee-management'
                     ? 'bg-rose-600 text-white shadow-sm shadow-rose-600/30'
-                    : 'bg-slate-800/80 hover:bg-slate-800 text-slate-400 hover:text-white'
+                    : 'bg-slate-100/80 dark:bg-slate-800/80 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
                 }`}
               >
                 <Users className="w-3.5 h-3.5" />
@@ -281,7 +281,7 @@ export const HrModuleRunner: React.FC<HrModuleRunnerProps> = ({
                 className={`px-3 py-1.5 rounded-xl text-xs font-semibold transition-all flex items-center gap-1.5 whitespace-nowrap ${
                   functionalArea?.id === 'recruitment'
                     ? 'bg-rose-600 text-white shadow-sm shadow-rose-600/30'
-                    : 'bg-slate-800/80 hover:bg-slate-800 text-slate-400 hover:text-white'
+                    : 'bg-slate-100/80 dark:bg-slate-800/80 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
                 }`}
               >
                 <UserPlus className="w-3.5 h-3.5" />
@@ -293,7 +293,7 @@ export const HrModuleRunner: React.FC<HrModuleRunnerProps> = ({
                 className={`px-3 py-1.5 rounded-xl text-xs font-semibold transition-all flex items-center gap-1.5 whitespace-nowrap ${
                   functionalArea?.id === 'employee-onboarding'
                     ? 'bg-rose-600 text-white shadow-sm shadow-rose-600/30'
-                    : 'bg-slate-800/80 hover:bg-slate-800 text-slate-400 hover:text-white'
+                    : 'bg-slate-100/80 dark:bg-slate-800/80 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
                 }`}
               >
                 <UserCheck className="w-3.5 h-3.5" />
@@ -305,7 +305,7 @@ export const HrModuleRunner: React.FC<HrModuleRunnerProps> = ({
                 className={`px-3 py-1.5 rounded-xl text-xs font-semibold transition-all flex items-center gap-1.5 whitespace-nowrap ${
                   functionalArea?.id === 'attendance-leave'
                     ? 'bg-rose-600 text-white shadow-sm shadow-rose-600/30'
-                    : 'bg-slate-800/80 hover:bg-slate-800 text-slate-400 hover:text-white'
+                    : 'bg-slate-100/80 dark:bg-slate-800/80 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
                 }`}
               >
                 <Calendar className="w-3.5 h-3.5" />
@@ -317,7 +317,7 @@ export const HrModuleRunner: React.FC<HrModuleRunnerProps> = ({
                 className={`px-3 py-1.5 rounded-xl text-xs font-semibold transition-all flex items-center gap-1.5 whitespace-nowrap ${
                   functionalArea?.id === 'employee-benefits'
                     ? 'bg-rose-600 text-white shadow-sm shadow-rose-600/30'
-                    : 'bg-slate-800/80 hover:bg-slate-800 text-slate-400 hover:text-white'
+                    : 'bg-slate-100/80 dark:bg-slate-800/80 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
                 }`}
               >
                 <Heart className="w-3.5 h-3.5" />
@@ -329,7 +329,7 @@ export const HrModuleRunner: React.FC<HrModuleRunnerProps> = ({
                 className={`px-3 py-1.5 rounded-xl text-xs font-semibold transition-all flex items-center gap-1.5 whitespace-nowrap ${
                   functionalArea?.id === 'perf-development'
                     ? 'bg-rose-600 text-white shadow-sm shadow-rose-600/30'
-                    : 'bg-slate-800/80 hover:bg-slate-800 text-slate-400 hover:text-white'
+                    : 'bg-slate-100/80 dark:bg-slate-800/80 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
                 }`}
               >
                 <Award className="w-3.5 h-3.5" />
@@ -341,7 +341,7 @@ export const HrModuleRunner: React.FC<HrModuleRunnerProps> = ({
                 className={`px-3 py-1.5 rounded-xl text-xs font-semibold transition-all flex items-center gap-1.5 whitespace-nowrap ${
                   functionalArea?.id === 'employee-lifecycle'
                     ? 'bg-rose-600 text-white shadow-sm shadow-rose-600/30'
-                    : 'bg-slate-800/80 hover:bg-slate-800 text-slate-400 hover:text-white'
+                    : 'bg-slate-100/80 dark:bg-slate-800/80 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
                 }`}
               >
                 <Activity className="w-3.5 h-3.5" />

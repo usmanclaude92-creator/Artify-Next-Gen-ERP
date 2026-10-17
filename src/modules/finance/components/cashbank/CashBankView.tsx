@@ -55,24 +55,24 @@ export const CashBankView: React.FC = () => {
   return (
     <div className="space-y-6">
       {/* Top Banner */}
-      <div className="bg-slate-900 border border-slate-800 rounded-3xl p-6 text-white shadow-xl flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6">
+      <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 text-slate-900 dark:text-white shadow-xl flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6">
         <div className="space-y-2 max-w-2xl">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-400 text-xs font-semibold uppercase tracking-wider">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 text-xs font-semibold uppercase tracking-wider">
             <Landmark className="w-3.5 h-3.5" />
             Module 16.04 — Cash & Bank Accounting
           </div>
           <h2 className="text-2xl font-bold tracking-tight">Cash & Bank Accounting & Reconciliations</h2>
-          <p className="text-sm text-slate-400">
+          <p className="text-sm text-slate-600 dark:text-slate-400">
             Real-time multi-currency liquidity oversight, electronic wire transfers, petty cash imprest, and automated bank statement reconciliations.
           </p>
         </div>
 
-        <div className="text-right bg-slate-800/80 p-4 rounded-2xl border border-slate-700">
-          <span className="text-xs text-slate-400 font-medium block">Total Enterprise Liquidity</span>
-          <p className="text-2xl font-bold font-mono text-emerald-400">
+        <div className="text-right bg-slate-100/80 dark:bg-slate-800/80 p-4 rounded-2xl border border-slate-300 dark:border-slate-700">
+          <span className="text-xs text-slate-600 dark:text-slate-400 font-medium block">Total Enterprise Liquidity</span>
+          <p className="text-2xl font-bold font-mono text-emerald-600 dark:text-emerald-400">
             {currency} {totalLiquidityOMR.toLocaleString()}
           </p>
-          <span className="text-[10px] text-emerald-300">Across 3 Operating Institutions + Petty Cash</span>
+          <span className="text-[10px] text-emerald-700 dark:text-emerald-300">Across 3 Operating Institutions + Petty Cash</span>
         </div>
       </div>
 
@@ -131,34 +131,34 @@ export const CashBankView: React.FC = () => {
 
               <div>
                 <h3 className="font-bold text-base text-slate-900 dark:text-white">{acc.bankName}</h3>
-                <p className="text-xs text-slate-500">{acc.branch}</p>
-                <p className="text-xs font-mono text-slate-400 mt-1">A/C: {acc.accountNumber}</p>
+                <p className="text-xs text-slate-500 dark:text-slate-400">{acc.branch}</p>
+                <p className="text-xs font-mono text-slate-600 dark:text-slate-400 mt-1">A/C: {acc.accountNumber}</p>
               </div>
 
               <div className="space-y-2 pt-2 border-t border-slate-100 dark:border-slate-800 font-mono text-xs">
                 <div className="flex justify-between">
-                  <span className="text-slate-500 font-sans">GL Book Balance:</span>
+                  <span className="text-slate-500 dark:text-slate-400 font-sans">GL Book Balance:</span>
                   <strong className="text-slate-900 dark:text-white">
                     {acc.currency} {acc.currentBookBalance.toLocaleString()}
                   </strong>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-slate-500 font-sans">Bank Statement:</span>
+                  <span className="text-slate-500 dark:text-slate-400 font-sans">Bank Statement:</span>
                   <span className="text-slate-700 dark:text-slate-300">
                     {acc.currency} {acc.statementBalance.toLocaleString()}
                   </span>
                 </div>
                 <div className="flex justify-between text-[11px]">
-                  <span className="text-slate-400 font-sans">Reconciliation Variance:</span>
-                  <span className={acc.unreconciledDifference === 0 ? 'text-emerald-500 font-bold' : 'text-amber-500 font-bold'}>
+                  <span className="text-slate-600 dark:text-slate-400 font-sans">Reconciliation Variance:</span>
+                  <span className={acc.unreconciledDifference === 0 ? 'text-emerald-600 dark:text-emerald-500 font-bold' : 'text-amber-700 dark:text-amber-500 font-bold'}>
                     {acc.unreconciledDifference === 0 ? '✓ Balanced (0.00)' : `${acc.currency} ${acc.unreconciledDifference.toLocaleString()}`}
                   </span>
                 </div>
               </div>
 
-              <div className="pt-2 flex justify-between items-center text-[10px] text-slate-400 border-t border-slate-100 dark:border-slate-800">
+              <div className="pt-2 flex justify-between items-center text-[10px] text-slate-600 dark:text-slate-400 border-t border-slate-100 dark:border-slate-800">
                 <span>Last Reconciled: {acc.lastReconciledDate}</span>
-                <span className="text-emerald-600 font-semibold">{acc.accountType}</span>
+                <span className="text-emerald-600 dark:text-emerald-400 font-semibold">{acc.accountType}</span>
               </div>
             </div>
           ))}
@@ -183,7 +183,7 @@ export const CashBankView: React.FC = () => {
             </div>
 
             <div className="relative w-full sm:w-72">
-              <Search className="w-4 h-4 absolute left-3 top-2 text-slate-400" />
+              <Search className="w-4 h-4 absolute left-3 top-2 text-slate-600 dark:text-slate-400" />
               <input
                 type="text"
                 placeholder="Search transactions..."
@@ -198,7 +198,7 @@ export const CashBankView: React.FC = () => {
             <div className="overflow-x-auto">
               <table className="w-full text-left text-xs font-mono">
                 <thead>
-                  <tr className="bg-slate-50 dark:bg-slate-800/70 text-slate-500 font-sans font-semibold border-b border-slate-200 dark:border-slate-800">
+                  <tr className="bg-slate-50 dark:bg-slate-800/70 text-slate-500 dark:text-slate-400 font-sans font-semibold border-b border-slate-200 dark:border-slate-800">
                     <th className="py-3 px-4">Tx Date</th>
                     <th className="py-3 px-4">Reference</th>
                     <th className="py-3 px-4">Type</th>
@@ -219,21 +219,21 @@ export const CashBankView: React.FC = () => {
                         </span>
                       </td>
                       <td className="py-3 px-4 font-sans text-slate-800 dark:text-slate-200">{tx.description}</td>
-                      <td className="py-3 px-4 text-right text-emerald-600 font-bold">
+                      <td className="py-3 px-4 text-right text-emerald-600 dark:text-emerald-400 font-bold">
                         {tx.amount > 0 ? `${tx.currency} ${tx.amount.toLocaleString()}` : '-'}
                       </td>
-                      <td className="py-3 px-4 text-right text-red-500 font-bold">
+                      <td className="py-3 px-4 text-right text-red-600 dark:text-red-500 font-bold">
                         {tx.amount < 0 ? `${tx.currency} ${Math.abs(tx.amount).toLocaleString()}` : '-'}
                       </td>
                       <td className="py-3 px-4 text-center font-sans">
                         {tx.isReconciled ? (
-                          <span className="inline-flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-200">
+                          <span className="inline-flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full bg-emerald-50 dark:bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-500/30">
                             <CheckCheck className="w-3 h-3" /> Reconciled
                           </span>
                         ) : (
                           <button
                             onClick={() => reconcileBankTransaction(tx.id)}
-                            className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-amber-50 text-amber-600 border border-amber-200 hover:bg-amber-100 cursor-pointer"
+                            className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-amber-50 dark:bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-200 dark:border-amber-500/30 hover:bg-amber-100 dark:hover:bg-amber-500/20 cursor-pointer"
                           >
                             Reconcile Now
                           </button>
@@ -254,7 +254,7 @@ export const CashBankView: React.FC = () => {
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 pb-4 border-b border-slate-100 dark:border-slate-800">
             <div>
               <h3 className="text-base font-bold text-slate-900 dark:text-white">Bank Reconciliation Statement</h3>
-              <p className="text-xs text-slate-500">
+              <p className="text-xs text-slate-500 dark:text-slate-400">
                 Reconciling <strong>{selectedAccount.bankName}</strong> ({selectedAccount.accountNumber}) as of March 2026
               </p>
             </div>
@@ -275,19 +275,19 @@ export const CashBankView: React.FC = () => {
                 <span className="font-sans text-slate-600 dark:text-slate-400">Bank Statement Closing Balance:</span>
                 <strong className="text-slate-900 dark:text-white">{currency} {selectedAccount.statementBalance.toLocaleString()}</strong>
               </div>
-              <div className="flex justify-between py-1.5 border-b border-slate-200 dark:border-slate-700 text-emerald-600">
+              <div className="flex justify-between py-1.5 border-b border-slate-200 dark:border-slate-700 text-emerald-600 dark:text-emerald-400">
                 <span className="font-sans text-slate-600 dark:text-slate-400">Plus: Deposits in Transit:</span>
                 <span>+ {currency} 0</span>
               </div>
-              <div className="flex justify-between py-1.5 border-b border-slate-200 dark:border-slate-700 text-red-500">
+              <div className="flex justify-between py-1.5 border-b border-slate-200 dark:border-slate-700 text-red-600 dark:text-red-500">
                 <span className="font-sans text-slate-600 dark:text-slate-400">Less: Unpresented Outflow Cheques:</span>
                 <span>- {currency} 0</span>
               </div>
-              <div className="flex justify-between py-1.5 border-b border-slate-200 dark:border-slate-700 text-amber-500">
+              <div className="flex justify-between py-1.5 border-b border-slate-200 dark:border-slate-700 text-amber-700 dark:text-amber-500">
                 <span className="font-sans text-slate-600 dark:text-slate-400">Less: Unposted Bank Service Fees:</span>
                 <span>- {currency} 12,000</span>
               </div>
-              <div className="flex justify-between py-2 text-sm font-bold text-emerald-600 border-t-2 border-slate-300 dark:border-slate-600">
+              <div className="flex justify-between py-2 text-sm font-bold text-emerald-600 dark:text-emerald-400 border-t-2 border-slate-300 dark:border-slate-600">
                 <span className="font-sans text-slate-900 dark:text-white">Adjusted Bank Balance:</span>
                 <span>{currency} {selectedAccount.currentBookBalance.toLocaleString()}</span>
               </div>
@@ -295,7 +295,7 @@ export const CashBankView: React.FC = () => {
                 <span className="font-sans">General Ledger Book Balance:</span>
                 <span>{currency} {selectedAccount.currentBookBalance.toLocaleString()}</span>
               </div>
-              <div className="flex justify-between py-2 text-xs font-bold text-emerald-600 bg-emerald-50 dark:bg-emerald-950/50 p-2.5 rounded-xl border border-emerald-200">
+              <div className="flex justify-between py-2 text-xs font-bold text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/50 p-2.5 rounded-xl border border-emerald-200 dark:border-emerald-500/30">
                 <span className="font-sans">Reconciled Net Difference:</span>
                 <span>✓ 0.00 (PERFECT RECONCILIATION)</span>
               </div>
@@ -308,10 +308,10 @@ export const CashBankView: React.FC = () => {
                 <div className="p-3 rounded-xl bg-amber-50/50 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-800 text-xs flex justify-between items-center">
                   <div>
                     <span className="font-bold text-slate-900 dark:text-white block">CHG-BM-0326 — Bank Maintenance Fee</span>
-                    <span className="text-slate-500 font-mono">Date: 2026-03-05 • Swift & Token Fee</span>
+                    <span className="text-slate-500 dark:text-slate-400 font-mono">Date: 2026-03-05 • Swift & Token Fee</span>
                   </div>
                   <div className="text-right">
-                    <span className="font-bold font-mono text-red-600 block">- {currency} 12,000</span>
+                    <span className="font-bold font-mono text-red-600 dark:text-red-400 block">- {currency} 12,000</span>
                     <button
                       onClick={() => reconcileBankTransaction('bt-03')}
                       className="text-[10px] font-bold px-2.5 py-1 bg-amber-600 text-white rounded-lg hover:bg-amber-500 mt-1 cursor-pointer"

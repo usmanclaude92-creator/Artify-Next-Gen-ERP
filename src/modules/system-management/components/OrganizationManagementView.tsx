@@ -149,22 +149,22 @@ export const OrganizationManagementView: React.FC<{ activeTab?: string }> = ({ a
     {
       key: 'code',
       header: 'Code',
-      accessor: item => <span className="font-mono font-bold text-indigo-700">{item.code}</span>
+      accessor: item => <span className="font-mono font-bold text-indigo-700 dark:text-indigo-300">{item.code}</span>
     },
     {
       key: 'legalName',
       header: 'Legal Entity Name',
       accessor: item => (
         <div>
-          <div className="font-semibold text-slate-900 flex items-center gap-1.5">
+          <div className="font-semibold text-slate-900 dark:text-slate-100 flex items-center gap-1.5">
             {item.legalName}
             {item.isParent && (
-              <span className="px-1.5 py-0.5 rounded text-[10px] bg-purple-100 text-purple-700 font-bold">
+              <span className="px-1.5 py-0.5 rounded text-[10px] bg-purple-100 dark:bg-purple-500/20 text-purple-700 dark:text-purple-300 font-bold">
                 Holding Parent
               </span>
             )}
           </div>
-          <div className="text-[11px] text-slate-500">{item.tradingName || item.companyType}</div>
+          <div className="text-[11px] text-slate-500 dark:text-slate-400">{item.tradingName || item.companyType}</div>
         </div>
       )
     },
@@ -173,9 +173,9 @@ export const OrganizationManagementView: React.FC<{ activeTab?: string }> = ({ a
       header: 'Jurisdiction & Currency',
       accessor: item => (
         <div className="flex items-center gap-1.5">
-          <Globe2 className="w-3.5 h-3.5 text-slate-400" />
+          <Globe2 className="w-3.5 h-3.5 text-slate-500 dark:text-slate-400" />
           <span>
-            {item.country} (<strong className="text-slate-800">{item.currency}</strong>)
+            {item.country} (<strong className="text-slate-800 dark:text-slate-200">{item.currency}</strong>)
           </span>
         </div>
       )
@@ -184,9 +184,9 @@ export const OrganizationManagementView: React.FC<{ activeTab?: string }> = ({ a
       key: 'taxNumber',
       header: 'Tax / CR Number',
       accessor: item => (
-        <div className="font-mono text-slate-600">
+        <div className="font-mono text-slate-600 dark:text-slate-400">
           <div>VAT: {item.taxNumber}</div>
-          <div className="text-[10px] text-slate-400">CR: {item.registrationNumber}</div>
+          <div className="text-[10px] text-slate-500 dark:text-slate-400">CR: {item.registrationNumber}</div>
         </div>
       )
     },
@@ -202,15 +202,15 @@ export const OrganizationManagementView: React.FC<{ activeTab?: string }> = ({ a
     {
       key: 'code',
       header: 'Branch Code',
-      accessor: item => <span className="font-mono font-bold text-indigo-700">{item.code}</span>
+      accessor: item => <span className="font-mono font-bold text-indigo-700 dark:text-indigo-300">{item.code}</span>
     },
     {
       key: 'name',
       header: 'Branch Name',
       accessor: item => (
         <div>
-          <div className="font-semibold text-slate-900">{item.name}</div>
-          <div className="text-[11px] text-slate-500">{item.companyName}</div>
+          <div className="font-semibold text-slate-900 dark:text-slate-100">{item.name}</div>
+          <div className="text-[11px] text-slate-500 dark:text-slate-400">{item.companyName}</div>
         </div>
       )
     },
@@ -218,7 +218,7 @@ export const OrganizationManagementView: React.FC<{ activeTab?: string }> = ({ a
       key: 'isTaxBranch',
       header: 'Branch Classification',
       accessor: item => (
-        <span className="px-2 py-0.5 rounded-md bg-slate-100 text-slate-700 font-medium text-[11px]">
+        <span className="px-2 py-0.5 rounded-md bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-medium text-[11px]">
           {item.isTaxBranch ? 'Tax & Operational' : 'Operational Branch'}
         </span>
       )
@@ -227,8 +227,8 @@ export const OrganizationManagementView: React.FC<{ activeTab?: string }> = ({ a
       key: 'address',
       header: 'Location / Address',
       accessor: item => (
-        <div className="flex items-center gap-1 text-slate-600">
-          <MapPin className="w-3.5 h-3.5 text-slate-400" />
+        <div className="flex items-center gap-1 text-slate-600 dark:text-slate-400">
+          <MapPin className="w-3.5 h-3.5 text-slate-500 dark:text-slate-400" />
           <span>{item.address}</span>
         </div>
       )
@@ -236,7 +236,7 @@ export const OrganizationManagementView: React.FC<{ activeTab?: string }> = ({ a
     {
       key: 'manager',
       header: 'Branch Head',
-      accessor: item => <span className="text-slate-700 font-medium">{item.manager || '—'}</span>
+      accessor: item => <span className="text-slate-700 dark:text-slate-300 font-medium">{item.manager || '—'}</span>
     },
     {
       key: 'status',
@@ -250,18 +250,18 @@ export const OrganizationManagementView: React.FC<{ activeTab?: string }> = ({ a
     {
       key: 'code',
       header: 'Dept Code',
-      accessor: item => <span className="font-mono font-bold text-indigo-700">{item.code}</span>
+      accessor: item => <span className="font-mono font-bold text-indigo-700 dark:text-indigo-300">{item.code}</span>
     },
     {
       key: 'name',
       header: 'Department Name',
-      accessor: item => <span className="font-semibold text-slate-900">{item.name}</span>
+      accessor: item => <span className="font-semibold text-slate-900 dark:text-slate-100">{item.name}</span>
     },
     {
       key: 'costCenterCode',
       header: 'Cost Center',
       accessor: item => (
-        <span className="font-mono px-2 py-0.5 rounded bg-amber-50 text-amber-800 border border-amber-200 font-semibold">
+        <span className="font-mono px-2 py-0.5 rounded bg-amber-50 dark:bg-amber-500/10 text-amber-800 dark:text-amber-200 border border-amber-200 dark:border-amber-500/30 font-semibold">
           {item.costCenterCode}
         </span>
       )
@@ -269,7 +269,7 @@ export const OrganizationManagementView: React.FC<{ activeTab?: string }> = ({ a
     {
       key: 'departmentHead',
       header: 'Department Head',
-      accessor: item => <span className="text-slate-700 font-medium">{item.departmentHead || 'Unassigned'}</span>
+      accessor: item => <span className="text-slate-700 dark:text-slate-300 font-medium">{item.departmentHead || 'Unassigned'}</span>
     },
     {
       key: 'status',
@@ -314,13 +314,13 @@ export const OrganizationManagementView: React.FC<{ activeTab?: string }> = ({ a
       </div>
 
       {/* Tabs Bar */}
-      <div className="flex items-center gap-2 border-b border-slate-200 overflow-x-auto pb-1">
+      <div className="flex items-center gap-2 border-b border-slate-200 dark:border-slate-700 overflow-x-auto pb-1">
         <button
           onClick={() => setActiveTab('groups')}
           className={`flex items-center gap-2 px-4 py-2.5 rounded-lg text-xs font-semibold whitespace-nowrap transition-colors cursor-pointer ${
             activeTab === 'groups'
               ? 'bg-indigo-600 text-white shadow-xs'
-              : 'text-slate-600 hover:bg-slate-100'
+              : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800'
           }`}
         >
           <GitFork className="w-4 h-4" />
@@ -332,7 +332,7 @@ export const OrganizationManagementView: React.FC<{ activeTab?: string }> = ({ a
           className={`flex items-center gap-2 px-4 py-2.5 rounded-lg text-xs font-semibold whitespace-nowrap transition-colors cursor-pointer ${
             activeTab === 'companies'
               ? 'bg-indigo-600 text-white shadow-xs'
-              : 'text-slate-600 hover:bg-slate-100'
+              : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800'
           }`}
         >
           <Building2 className="w-4 h-4" />
@@ -344,7 +344,7 @@ export const OrganizationManagementView: React.FC<{ activeTab?: string }> = ({ a
           className={`flex items-center gap-2 px-4 py-2.5 rounded-lg text-xs font-semibold whitespace-nowrap transition-colors cursor-pointer ${
             activeTab === 'branches'
               ? 'bg-indigo-600 text-white shadow-xs'
-              : 'text-slate-600 hover:bg-slate-100'
+              : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800'
           }`}
         >
           <Building className="w-4 h-4" />
@@ -356,7 +356,7 @@ export const OrganizationManagementView: React.FC<{ activeTab?: string }> = ({ a
           className={`flex items-center gap-2 px-4 py-2.5 rounded-lg text-xs font-semibold whitespace-nowrap transition-colors cursor-pointer ${
             activeTab === 'departments'
               ? 'bg-indigo-600 text-white shadow-xs'
-              : 'text-slate-600 hover:bg-slate-100'
+              : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800'
           }`}
         >
           <Layers className="w-4 h-4" />
@@ -368,7 +368,7 @@ export const OrganizationManagementView: React.FC<{ activeTab?: string }> = ({ a
           className={`flex items-center gap-2 px-4 py-2.5 rounded-lg text-xs font-semibold whitespace-nowrap transition-colors cursor-pointer ${
             activeTab === 'operating-units'
               ? 'bg-indigo-600 text-white shadow-xs'
-              : 'text-slate-600 hover:bg-slate-100'
+              : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800'
           }`}
         >
           <TrendingUp className="w-4 h-4" />
@@ -380,7 +380,7 @@ export const OrganizationManagementView: React.FC<{ activeTab?: string }> = ({ a
           className={`flex items-center gap-2 px-4 py-2.5 rounded-lg text-xs font-semibold whitespace-nowrap transition-colors cursor-pointer ${
             activeTab === 'hierarchy'
               ? 'bg-indigo-600 text-white shadow-xs'
-              : 'text-slate-600 hover:bg-slate-100'
+              : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800'
           }`}
         >
           <Compass className="w-4 h-4" />
@@ -396,24 +396,24 @@ export const OrganizationManagementView: React.FC<{ activeTab?: string }> = ({ a
 
       {/* Tab 2: Hierarchy Tree */}
       {activeTab === 'hierarchy' && (
-        <div className="bg-white rounded-xl border border-slate-200 p-6 shadow-sm">
-          <div className="flex items-center justify-between border-b border-slate-200 pb-4 mb-6">
+        <div className="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-700 p-6 shadow-sm">
+          <div className="flex items-center justify-between border-b border-slate-200 dark:border-slate-700 pb-4 mb-6">
             <div>
-              <h3 className="text-base font-bold text-slate-900 flex items-center gap-2">
-                <Landmark className="w-5 h-5 text-indigo-600" />
+              <h3 className="text-base font-bold text-slate-900 dark:text-slate-100 flex items-center gap-2">
+                <Landmark className="w-5 h-5 text-indigo-600 dark:text-indigo-400" />
                 <span>{companyGroup.name}</span>
-                <span className="text-xs px-2 py-0.5 rounded bg-indigo-50 text-indigo-700 border border-indigo-200 font-mono">
+                <span className="text-xs px-2 py-0.5 rounded bg-indigo-50 dark:bg-indigo-500/10 text-indigo-700 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-500/30 font-mono">
                   {companyGroup.code}
                 </span>
               </h3>
-              <p className="text-xs text-slate-500 mt-1">
+              <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
                 Consolidated Group Currency: <strong>{companyGroup.currency}</strong> • Holding Entity ID:{' '}
                 {companyGroup.holdingCompanyId}
               </p>
             </div>
 
             <div className="flex items-center gap-2">
-              <span className="text-xs px-3 py-1 bg-emerald-50 text-emerald-700 border border-emerald-200 rounded-full font-semibold">
+              <span className="text-xs px-3 py-1 bg-emerald-50 dark:bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-500/30 rounded-full font-semibold">
                 Multi-Branch & Multi-GAAP Ready
               </span>
             </div>
@@ -424,34 +424,34 @@ export const OrganizationManagementView: React.FC<{ activeTab?: string }> = ({ a
             {companies.map(company => (
               <div
                 key={company.id}
-                className="border border-slate-200 rounded-xl p-4 bg-slate-50/50 hover:bg-slate-50 transition-all"
+                className="border border-slate-200 dark:border-slate-700 rounded-xl p-4 bg-slate-50/50 dark:bg-slate-800/50 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-all"
               >
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-200 pb-3">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-200 dark:border-slate-700 pb-3">
                   <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-lg bg-indigo-100 border border-indigo-200 flex items-center justify-center text-indigo-700 font-bold">
+                    <div className="w-10 h-10 rounded-lg bg-indigo-100 dark:bg-indigo-500/20 border border-indigo-200 dark:border-indigo-500/30 flex items-center justify-center text-indigo-700 dark:text-indigo-300 font-bold">
                       {company.code.substring(0, 3)}
                     </div>
                     <div>
                       <div className="flex items-center gap-2">
-                        <h4 className="font-bold text-slate-900 text-sm">{company.legalName}</h4>
+                        <h4 className="font-bold text-slate-900 dark:text-slate-100 text-sm">{company.legalName}</h4>
                         <StatusBadge status={company.status} size="sm" />
                       </div>
-                      <p className="text-xs text-slate-500">
+                      <p className="text-xs text-slate-500 dark:text-slate-400">
                         {company.country} • Currency: <strong>{company.currency}</strong> • Tax ID:{' '}
                         <span className="font-mono">{company.taxNumber}</span>
                       </p>
                     </div>
                   </div>
 
-                  <div className="text-xs text-slate-600">
+                  <div className="text-xs text-slate-600 dark:text-slate-400">
                     <span className="font-semibold">{branches.filter(b => b.companyId === company.id).length}</span> Branches •{' '}
                     <span className="font-semibold">{departments.filter(d => d.companyId === company.id).length}</span> Departments
                   </div>
                 </div>
 
                 {/* Sub-branches for this company */}
-                <div className="mt-4 pl-4 sm:pl-8 border-l-2 border-indigo-200 space-y-3">
-                  <div className="text-[11px] font-bold text-slate-500 uppercase tracking-wider">
+                <div className="mt-4 pl-4 sm:pl-8 border-l-2 border-indigo-200 dark:border-indigo-500/30 space-y-3">
+                  <div className="text-[11px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
                     Associated Operating Branches
                   </div>
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
@@ -460,18 +460,18 @@ export const OrganizationManagementView: React.FC<{ activeTab?: string }> = ({ a
                       .map(branch => (
                         <div
                           key={branch.id}
-                          className="bg-white border border-slate-200 rounded-lg p-3 shadow-2xs hover:border-indigo-300 transition-colors"
+                          className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg p-3 shadow-2xs hover:border-indigo-300 dark:hover:border-indigo-500/40 transition-colors"
                         >
                           <div className="flex items-start justify-between">
                             <div>
-                              <div className="font-semibold text-slate-800 text-xs">{branch.name}</div>
-                              <div className="text-[11px] text-slate-500 font-mono mt-0.5">{branch.code}</div>
+                              <div className="font-semibold text-slate-800 dark:text-slate-200 text-xs">{branch.name}</div>
+                              <div className="text-[11px] text-slate-500 dark:text-slate-400 font-mono mt-0.5">{branch.code}</div>
                             </div>
                             <StatusBadge status={branch.status} size="sm" />
                           </div>
-                          <div className="mt-2 pt-2 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-500">
+                          <div className="mt-2 pt-2 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-[11px] text-slate-500 dark:text-slate-400">
                             <span>{branch.address}</span>
-                            <span className="font-medium text-slate-700">{branch.isTaxBranch ? 'Tax Branch' : 'Standard'}</span>
+                            <span className="font-medium text-slate-700 dark:text-slate-300">{branch.isTaxBranch ? 'Tax Branch' : 'Standard'}</span>
                           </div>
                         </div>
                       ))}
@@ -526,11 +526,11 @@ export const OrganizationManagementView: React.FC<{ activeTab?: string }> = ({ a
 
       {/* Tab 5: Operating Units */}
       {activeTab === 'operating-units' && (
-        <div className="bg-white rounded-xl border border-slate-200 p-6 shadow-sm">
-          <div className="border-b border-slate-200 pb-4 mb-5 flex items-center justify-between">
+        <div className="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-700 p-6 shadow-sm">
+          <div className="border-b border-slate-200 dark:border-slate-700 pb-4 mb-5 flex items-center justify-between">
             <div>
-              <h3 className="text-base font-bold text-slate-900">Profit & Loss Operating Units</h3>
-              <p className="text-xs text-slate-500 mt-0.5">
+              <h3 className="text-base font-bold text-slate-900 dark:text-slate-100">Profit & Loss Operating Units</h3>
+              <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
                 Segment reporting units with autonomous balance sheet and income statement tracking
               </p>
             </div>
@@ -555,31 +555,31 @@ export const OrganizationManagementView: React.FC<{ activeTab?: string }> = ({ a
             {operatingUnits.map(ou => (
               <div
                 key={ou.id}
-                className="border border-slate-200 rounded-xl p-4 bg-slate-50/50 hover:bg-white transition-all shadow-xs flex flex-col justify-between"
+                className="border border-slate-200 dark:border-slate-700 rounded-xl p-4 bg-slate-50/50 dark:bg-slate-800/50 hover:bg-white dark:hover:bg-slate-900 transition-all shadow-xs flex flex-col justify-between"
               >
                 <div>
                   <div className="flex items-start justify-between">
                     <div>
-                      <span className="font-mono text-xs font-bold text-indigo-700">{ou.code}</span>
-                      <h4 className="font-bold text-slate-900 text-sm mt-0.5">{ou.name}</h4>
+                      <span className="font-mono text-xs font-bold text-indigo-700 dark:text-indigo-300">{ou.code}</span>
+                      <h4 className="font-bold text-slate-900 dark:text-slate-100 text-sm mt-0.5">{ou.name}</h4>
                     </div>
                     <StatusBadge status={ou.status} />
                   </div>
 
                   <div className="mt-4 space-y-2 text-xs">
-                    <div className="flex justify-between py-1 border-b border-slate-200/60">
-                      <span className="text-slate-500">Classification:</span>
-                      <span className="font-semibold text-slate-800">{ou.type}</span>
+                    <div className="flex justify-between py-1 border-b border-slate-200/60 dark:border-slate-700/60">
+                      <span className="text-slate-500 dark:text-slate-400">Classification:</span>
+                      <span className="font-semibold text-slate-800 dark:text-slate-200">{ou.type}</span>
                     </div>
-                    <div className="flex justify-between py-1 border-b border-slate-200/60">
-                      <span className="text-slate-500">Business Head:</span>
-                      <span className="font-semibold text-slate-800">{ou.manager}</span>
+                    <div className="flex justify-between py-1 border-b border-slate-200/60 dark:border-slate-700/60">
+                      <span className="text-slate-500 dark:text-slate-400">Business Head:</span>
+                      <span className="font-semibold text-slate-800 dark:text-slate-200">{ou.manager}</span>
                     </div>
                   </div>
                 </div>
 
-                <div className="mt-4 pt-3 border-t border-slate-200 flex items-center justify-between text-xs">
-                  <span className="text-emerald-700 font-medium flex items-center gap-1">
+                <div className="mt-4 pt-3 border-t border-slate-200 dark:border-slate-700 flex items-center justify-between text-xs">
+                  <span className="text-emerald-700 dark:text-emerald-300 font-medium flex items-center gap-1">
                     <CheckCircle2 className="w-3.5 h-3.5" /> Segregated Reporting
                   </span>
                   <button
@@ -588,7 +588,7 @@ export const OrganizationManagementView: React.FC<{ activeTab?: string }> = ({ a
                         status: ou.status === 'Active' ? 'Inactive' : 'Active'
                       })
                     }
-                    className="text-xs text-indigo-600 hover:text-indigo-800 font-semibold cursor-pointer"
+                    className="text-xs text-indigo-600 dark:text-indigo-400 hover:text-indigo-800 dark:hover:text-indigo-200 font-semibold cursor-pointer"
                   >
                     Toggle Status
                   </button>
@@ -610,42 +610,42 @@ export const OrganizationManagementView: React.FC<{ activeTab?: string }> = ({ a
       >
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
-            <label className="block text-slate-700 font-semibold mb-1">Company Code *</label>
+            <label className="block text-slate-700 dark:text-slate-300 font-semibold mb-1">Company Code *</label>
             <input
               type="text"
               required
               value={companyForm.code}
               onChange={e => setCompanyForm({ ...companyForm, code: e.target.value.toUpperCase() })}
               placeholder="e.g. ARTIFY-LOG"
-              className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg font-mono text-xs focus:ring-2 focus:ring-indigo-500"
+              className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-lg font-mono text-xs focus:ring-2 focus:ring-indigo-500"
             />
           </div>
 
           <div>
-            <label className="block text-slate-700 font-semibold mb-1">Industry Segment</label>
+            <label className="block text-slate-700 dark:text-slate-300 font-semibold mb-1">Industry Segment</label>
             <input
               type="text"
               value={companyForm.industrySegment}
               onChange={e => setCompanyForm({ ...companyForm, industrySegment: e.target.value })}
               placeholder="e.g. Manufacturing & Distribution"
-              className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-xs focus:ring-2 focus:ring-indigo-500"
+              className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-lg text-xs focus:ring-2 focus:ring-indigo-500"
             />
           </div>
 
           <div className="sm:col-span-2">
-            <label className="block text-slate-700 font-semibold mb-1">Legal Entity Name *</label>
+            <label className="block text-slate-700 dark:text-slate-300 font-semibold mb-1">Legal Entity Name *</label>
             <input
               type="text"
               required
               value={companyForm.legalName}
               onChange={e => setCompanyForm({ ...companyForm, legalName: e.target.value })}
               placeholder="e.g. Artify Logistics & Supply Chain SAOC"
-              className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-xs focus:ring-2 focus:ring-indigo-500"
+              className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-lg text-xs focus:ring-2 focus:ring-indigo-500"
             />
           </div>
 
           <div>
-            <label className="block text-slate-700 font-semibold mb-1">Jurisdiction / Country *</label>
+            <label className="block text-slate-700 dark:text-slate-300 font-semibold mb-1">Jurisdiction / Country *</label>
             <select
               value={companyForm.country}
               onChange={e => {
@@ -657,7 +657,7 @@ export const OrganizationManagementView: React.FC<{ activeTab?: string }> = ({ a
                 if (c === 'Kuwait') cur = 'KWD';
                 setCompanyForm({ ...companyForm, country: c, currency: cur });
               }}
-              className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-xs focus:ring-2 focus:ring-indigo-500"
+              className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-lg text-xs focus:ring-2 focus:ring-indigo-500"
             >
               <option value="Oman">Oman</option>
               <option value="United Arab Emirates">United Arab Emirates</option>
@@ -670,46 +670,46 @@ export const OrganizationManagementView: React.FC<{ activeTab?: string }> = ({ a
           </div>
 
           <div>
-            <label className="block text-slate-700 font-semibold mb-1">Functional Currency</label>
+            <label className="block text-slate-700 dark:text-slate-300 font-semibold mb-1">Functional Currency</label>
             <input
               type="text"
               value={companyForm.currency}
               onChange={e => setCompanyForm({ ...companyForm, currency: e.target.value.toUpperCase() })}
               placeholder="OMR, AED, USD..."
-              className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg font-mono text-xs focus:ring-2 focus:ring-indigo-500"
+              className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-lg font-mono text-xs focus:ring-2 focus:ring-indigo-500"
             />
           </div>
 
           <div>
-            <label className="block text-slate-700 font-semibold mb-1">Commercial Registration (CR)</label>
+            <label className="block text-slate-700 dark:text-slate-300 font-semibold mb-1">Commercial Registration (CR)</label>
             <input
               type="text"
               value={companyForm.registrationNumber}
               onChange={e => setCompanyForm({ ...companyForm, registrationNumber: e.target.value })}
               placeholder="e.g. CR-1049281"
-              className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-xs focus:ring-2 focus:ring-indigo-500"
+              className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-lg text-xs focus:ring-2 focus:ring-indigo-500"
             />
           </div>
 
           <div>
-            <label className="block text-slate-700 font-semibold mb-1">Tax / VAT Identification Number</label>
+            <label className="block text-slate-700 dark:text-slate-300 font-semibold mb-1">Tax / VAT Identification Number</label>
             <input
               type="text"
               value={companyForm.taxNumber}
               onChange={e => setCompanyForm({ ...companyForm, taxNumber: e.target.value })}
               placeholder="e.g. OM1100984920"
-              className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg font-mono text-xs focus:ring-2 focus:ring-indigo-500"
+              className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-lg font-mono text-xs focus:ring-2 focus:ring-indigo-500"
             />
           </div>
 
           <div className="sm:col-span-2">
-            <label className="block text-slate-700 font-semibold mb-1">Registered HQ Address</label>
+            <label className="block text-slate-700 dark:text-slate-300 font-semibold mb-1">Registered HQ Address</label>
             <input
               type="text"
               value={companyForm.address}
               onChange={e => setCompanyForm({ ...companyForm, address: e.target.value })}
               placeholder="Building, Street, City, P.O. Box"
-              className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-xs focus:ring-2 focus:ring-indigo-500"
+              className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-lg text-xs focus:ring-2 focus:ring-indigo-500"
             />
           </div>
         </div>
@@ -726,11 +726,11 @@ export const OrganizationManagementView: React.FC<{ activeTab?: string }> = ({ a
       >
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div className="sm:col-span-2">
-            <label className="block text-slate-700 font-semibold mb-1">Parent Company *</label>
+            <label className="block text-slate-700 dark:text-slate-300 font-semibold mb-1">Parent Company *</label>
             <select
               value={branchForm.companyId}
               onChange={e => setBranchForm({ ...branchForm, companyId: e.target.value })}
-              className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-xs focus:ring-2 focus:ring-indigo-500"
+              className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-lg text-xs focus:ring-2 focus:ring-indigo-500"
             >
               {companies.map(c => (
                 <option key={c.id} value={c.id}>
@@ -741,35 +741,35 @@ export const OrganizationManagementView: React.FC<{ activeTab?: string }> = ({ a
           </div>
 
           <div>
-            <label className="block text-slate-700 font-semibold mb-1">Branch Code *</label>
+            <label className="block text-slate-700 dark:text-slate-300 font-semibold mb-1">Branch Code *</label>
             <input
               type="text"
               required
               value={branchForm.code}
               onChange={e => setBranchForm({ ...branchForm, code: e.target.value.toUpperCase() })}
               placeholder="e.g. BR-OM-SOHAR"
-              className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg font-mono text-xs focus:ring-2 focus:ring-indigo-500"
+              className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-lg font-mono text-xs focus:ring-2 focus:ring-indigo-500"
             />
           </div>
 
           <div>
-            <label className="block text-slate-700 font-semibold mb-1">Branch Name *</label>
+            <label className="block text-slate-700 dark:text-slate-300 font-semibold mb-1">Branch Name *</label>
             <input
               type="text"
               required
               value={branchForm.name}
               onChange={e => setBranchForm({ ...branchForm, name: e.target.value })}
               placeholder="e.g. Sohar Industrial Distribution Hub"
-              className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-xs focus:ring-2 focus:ring-indigo-500"
+              className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-lg text-xs focus:ring-2 focus:ring-indigo-500"
             />
           </div>
 
           <div>
-            <label className="block text-slate-700 font-semibold mb-1">Site Classification</label>
+            <label className="block text-slate-700 dark:text-slate-300 font-semibold mb-1">Site Classification</label>
             <select
               value={branchForm.type}
               onChange={e => setBranchForm({ ...branchForm, type: e.target.value as any })}
-              className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-xs focus:ring-2 focus:ring-indigo-500"
+              className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-lg text-xs focus:ring-2 focus:ring-indigo-500"
             >
               <option value="Commercial Office">Commercial Office</option>
               <option value="Warehouse & Logistics">Warehouse & Logistics</option>
@@ -779,35 +779,35 @@ export const OrganizationManagementView: React.FC<{ activeTab?: string }> = ({ a
           </div>
 
           <div>
-            <label className="block text-slate-700 font-semibold mb-1">City & Country</label>
+            <label className="block text-slate-700 dark:text-slate-300 font-semibold mb-1">City & Country</label>
             <input
               type="text"
               value={branchForm.city}
               onChange={e => setBranchForm({ ...branchForm, city: e.target.value })}
               placeholder="e.g. Sohar"
-              className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-xs focus:ring-2 focus:ring-indigo-500"
+              className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-lg text-xs focus:ring-2 focus:ring-indigo-500"
             />
           </div>
 
           <div>
-            <label className="block text-slate-700 font-semibold mb-1">Branch Manager</label>
+            <label className="block text-slate-700 dark:text-slate-300 font-semibold mb-1">Branch Manager</label>
             <input
               type="text"
               value={branchForm.managerName}
               onChange={e => setBranchForm({ ...branchForm, managerName: e.target.value })}
               placeholder="e.g. Tariq Al-Habsi"
-              className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-xs focus:ring-2 focus:ring-indigo-500"
+              className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-lg text-xs focus:ring-2 focus:ring-indigo-500"
             />
           </div>
 
           <div>
-            <label className="block text-slate-700 font-semibold mb-1">Default Cost Center</label>
+            <label className="block text-slate-700 dark:text-slate-300 font-semibold mb-1">Default Cost Center</label>
             <input
               type="text"
               value={branchForm.costCenterCode}
               onChange={e => setBranchForm({ ...branchForm, costCenterCode: e.target.value })}
               placeholder="e.g. CC-BR-SOHAR"
-              className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg font-mono text-xs focus:ring-2 focus:ring-indigo-500"
+              className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-lg font-mono text-xs focus:ring-2 focus:ring-indigo-500"
             />
           </div>
         </div>
@@ -824,11 +824,11 @@ export const OrganizationManagementView: React.FC<{ activeTab?: string }> = ({ a
       >
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div className="sm:col-span-2">
-            <label className="block text-slate-700 font-semibold mb-1">Parent Company</label>
+            <label className="block text-slate-700 dark:text-slate-300 font-semibold mb-1">Parent Company</label>
             <select
               value={deptForm.companyId}
               onChange={e => setDeptForm({ ...deptForm, companyId: e.target.value })}
-              className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-xs"
+              className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-lg text-xs"
             >
               {companies.map(c => (
                 <option key={c.id} value={c.id}>
@@ -839,49 +839,49 @@ export const OrganizationManagementView: React.FC<{ activeTab?: string }> = ({ a
           </div>
 
           <div>
-            <label className="block text-slate-700 font-semibold mb-1">Department Code *</label>
+            <label className="block text-slate-700 dark:text-slate-300 font-semibold mb-1">Department Code *</label>
             <input
               type="text"
               required
               value={deptForm.code}
               onChange={e => setDeptForm({ ...deptForm, code: e.target.value.toUpperCase() })}
               placeholder="e.g. DEPT-ENG"
-              className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg font-mono text-xs"
+              className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-lg font-mono text-xs"
             />
           </div>
 
           <div>
-            <label className="block text-slate-700 font-semibold mb-1">Department Name *</label>
+            <label className="block text-slate-700 dark:text-slate-300 font-semibold mb-1">Department Name *</label>
             <input
               type="text"
               required
               value={deptForm.name}
               onChange={e => setDeptForm({ ...deptForm, name: e.target.value })}
               placeholder="e.g. Engineering & Maintenance"
-              className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-xs"
+              className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-lg text-xs"
             />
           </div>
 
           <div>
-            <label className="block text-slate-700 font-semibold mb-1">Cost Center Code *</label>
+            <label className="block text-slate-700 dark:text-slate-300 font-semibold mb-1">Cost Center Code *</label>
             <input
               type="text"
               required
               value={deptForm.costCenterCode}
               onChange={e => setDeptForm({ ...deptForm, costCenterCode: e.target.value.toUpperCase() })}
               placeholder="e.g. CC-7010"
-              className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg font-mono text-xs"
+              className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-lg font-mono text-xs"
             />
           </div>
 
           <div>
-            <label className="block text-slate-700 font-semibold mb-1">Head of Department</label>
+            <label className="block text-slate-700 dark:text-slate-300 font-semibold mb-1">Head of Department</label>
             <input
               type="text"
               value={deptForm.headOfDepartment}
               onChange={e => setDeptForm({ ...deptForm, headOfDepartment: e.target.value })}
               placeholder="e.g. Johnathan Miller"
-              className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-xs"
+              className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-lg text-xs"
             />
           </div>
         </div>

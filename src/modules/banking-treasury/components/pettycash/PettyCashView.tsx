@@ -187,14 +187,14 @@ export const PettyCashView: React.FC = () => {
   return (
     <div className="space-y-6">
       {/* Header Tabs & Actions */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white p-4 rounded-xl border border-slate-200 shadow-2xs">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white dark:bg-slate-900 p-4 rounded-xl border border-slate-200 dark:border-slate-700 shadow-2xs">
         <div className="flex items-center gap-1 overflow-x-auto">
           <button
             onClick={() => setActiveTab('accounts')}
             className={`px-3.5 py-2 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-all cursor-pointer ${
               activeTab === 'accounts'
                 ? 'bg-slate-900 text-white shadow-xs'
-                : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
+                : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-800'
             }`}
           >
             <Coins className="w-3.5 h-3.5" />
@@ -206,7 +206,7 @@ export const PettyCashView: React.FC = () => {
             className={`px-3.5 py-2 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-all cursor-pointer ${
               activeTab === 'advances'
                 ? 'bg-slate-900 text-white shadow-xs'
-                : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
+                : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-800'
             }`}
           >
             <User className="w-3.5 h-3.5" />
@@ -218,7 +218,7 @@ export const PettyCashView: React.FC = () => {
             className={`px-3.5 py-2 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-all cursor-pointer ${
               activeTab === 'expenses'
                 ? 'bg-slate-900 text-white shadow-xs'
-                : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
+                : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-800'
             }`}
           >
             <FileText className="w-3.5 h-3.5" />
@@ -230,7 +230,7 @@ export const PettyCashView: React.FC = () => {
             className={`px-3.5 py-2 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-all cursor-pointer ${
               activeTab === 'reconciliation'
                 ? 'bg-slate-900 text-white shadow-xs'
-                : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
+                : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-800'
             }`}
           >
             <CheckCheck className="w-3.5 h-3.5" />
@@ -240,13 +240,13 @@ export const PettyCashView: React.FC = () => {
 
         <div className="flex items-center gap-2">
           <div className="relative">
-            <Search className="w-3.5 h-3.5 absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
+            <Search className="w-3.5 h-3.5 absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 dark:text-slate-400" />
             <input
               type="text"
               placeholder="Search vouchers, staff..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="pl-8 pr-3 py-1.5 text-xs bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-slate-900 w-48 sm:w-60"
+              className="pl-8 pr-3 py-1.5 text-xs bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-slate-200 dark:focus:ring-slate-900 w-48 sm:w-60"
             />
           </div>
 
@@ -300,64 +300,64 @@ export const PettyCashView: React.FC = () => {
             return (
               <div
                 key={acc.id}
-                className="bg-white rounded-xl p-5 border border-slate-200 shadow-2xs hover:border-slate-300 transition-all flex flex-col justify-between"
+                className="bg-white dark:bg-slate-900 rounded-xl p-5 border border-slate-200 dark:border-slate-700 shadow-2xs hover:border-slate-300 dark:hover:border-slate-600 transition-all flex flex-col justify-between"
               >
                 <div>
                   <div className="flex items-start justify-between">
                     <div>
-                      <span className="font-mono text-[10px] font-bold text-slate-500 bg-slate-100 px-1.5 py-0.5 rounded">
+                      <span className="font-mono text-[10px] font-bold text-slate-500 dark:text-slate-400 bg-slate-100 dark:bg-slate-800 px-1.5 py-0.5 rounded">
                         {acc.fundCode}
                       </span>
-                      <h3 className="text-sm font-bold text-slate-900 mt-1">{acc.fundName}</h3>
-                      <p className="text-xs text-slate-500">{acc.locationOrDepartment}</p>
+                      <h3 className="text-sm font-bold text-slate-900 dark:text-slate-100 mt-1">{acc.fundName}</h3>
+                      <p className="text-xs text-slate-500 dark:text-slate-400">{acc.locationOrDepartment}</p>
                     </div>
-                    <span className="p-2 rounded-lg bg-orange-50 text-orange-600">
+                    <span className="p-2 rounded-lg bg-orange-50 dark:bg-orange-500/10 text-orange-600 dark:text-orange-400">
                       <Coins className="w-4 h-4" />
                     </span>
                   </div>
 
-                  <div className="mt-4 p-3 rounded-lg bg-slate-50 border border-slate-100">
-                    <span className="text-[10px] font-semibold text-slate-400 block uppercase">
+                  <div className="mt-4 p-3 rounded-lg bg-slate-50 dark:bg-slate-800/50 border border-slate-100 dark:border-slate-800">
+                    <span className="text-[10px] font-semibold text-slate-500 dark:text-slate-400 block uppercase">
                       Physical Cash in Float Box
                     </span>
-                    <div className="text-xl font-bold text-slate-900 mt-0.5">
+                    <div className="text-xl font-bold text-slate-900 dark:text-slate-100 mt-0.5">
                       {formatCurrency(acc.currentAvailableCashOMR)}
                     </div>
                   </div>
 
                   <div className="mt-3 space-y-1.5 text-xs">
-                    <div className="flex items-center justify-between text-slate-600">
-                      <span className="text-slate-400">Fixed Imprest Ceiling</span>
-                      <span className="font-bold text-slate-900">{formatCurrency(acc.imprestLimitOMR)}</span>
+                    <div className="flex items-center justify-between text-slate-600 dark:text-slate-400">
+                      <span className="text-slate-500 dark:text-slate-400">Fixed Imprest Ceiling</span>
+                      <span className="font-bold text-slate-900 dark:text-slate-100">{formatCurrency(acc.imprestLimitOMR)}</span>
                     </div>
-                    <div className="flex items-center justify-between text-slate-600">
-                      <span className="text-slate-400">Open Staff IOUs</span>
-                      <span className="text-amber-700 font-semibold">{formatCurrency(acc.openAdvancesIOUOMR)}</span>
+                    <div className="flex items-center justify-between text-slate-600 dark:text-slate-400">
+                      <span className="text-slate-500 dark:text-slate-400">Open Staff IOUs</span>
+                      <span className="text-amber-700 dark:text-amber-300 font-semibold">{formatCurrency(acc.openAdvancesIOUOMR)}</span>
                     </div>
-                    <div className="flex items-center justify-between text-slate-600">
-                      <span className="text-slate-400">Pending Expense Vouchers</span>
-                      <span className="text-indigo-700 font-semibold">
+                    <div className="flex items-center justify-between text-slate-600 dark:text-slate-400">
+                      <span className="text-slate-500 dark:text-slate-400">Pending Expense Vouchers</span>
+                      <span className="text-indigo-700 dark:text-indigo-300 font-semibold">
                         {formatCurrency(acc.pendingUnclaimedExpensesOMR)}
                       </span>
                     </div>
 
                     {/* Progress Bar */}
-                    <div className="w-full bg-slate-100 h-1.5 rounded-full overflow-hidden mt-2">
+                    <div className="w-full bg-slate-100 dark:bg-slate-800 h-1.5 rounded-full overflow-hidden mt-2">
                       <div
                         className={`h-full rounded-full ${availRatio < 30 ? 'bg-rose-500' : 'bg-emerald-500'}`}
                         style={{ width: `${availRatio}%` }}
                       />
                     </div>
-                    <div className="flex justify-between text-[10px] text-slate-400">
+                    <div className="flex justify-between text-[10px] text-slate-500 dark:text-slate-400">
                       <span>Available: {availRatio}%</span>
                       <span>Threshold: {formatCurrency(acc.replenishmentThresholdOMR)}</span>
                     </div>
                   </div>
                 </div>
 
-                <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-500">
+                <div className="mt-4 pt-3 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-[11px] text-slate-500 dark:text-slate-400">
                   <span>Custodian: {acc.custodianName}</span>
-                  <span className="font-mono text-slate-700">{acc.glAccountCode}</span>
+                  <span className="font-mono text-slate-700 dark:text-slate-300">{acc.glAccountCode}</span>
                 </div>
               </div>
             );
@@ -367,10 +367,10 @@ export const PettyCashView: React.FC = () => {
 
       {/* TAB 2: STAFF ADVANCES (IOUS) */}
       {activeTab === 'advances' && (
-        <div className="bg-white rounded-xl border border-slate-200 shadow-2xs overflow-hidden">
+        <div className="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-700 shadow-2xs overflow-hidden">
           <div className="overflow-x-auto">
             <table className="w-full text-left text-xs">
-              <thead className="bg-slate-50 text-slate-600 font-semibold border-b border-slate-200">
+              <thead className="bg-slate-50 dark:bg-slate-800/50 text-slate-600 dark:text-slate-400 font-semibold border-b border-slate-200 dark:border-slate-700">
                 <tr>
                   <th className="p-3.5">Advance # & Date</th>
                   <th className="p-3.5">Employee Name & ID</th>
@@ -382,29 +382,29 @@ export const PettyCashView: React.FC = () => {
                   <th className="p-3.5 text-center">Action</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-100">
+              <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
                 {filteredAdvances.map((adv) => (
-                  <tr key={adv.id} className="hover:bg-slate-50/70 transition-colors">
+                  <tr key={adv.id} className="hover:bg-slate-50/70 dark:hover:bg-slate-800/70 transition-colors">
                     <td className="p-3.5">
-                      <div className="font-mono font-bold text-slate-900">{adv.advanceNumber}</div>
-                      <div className="text-[11px] text-slate-500">{adv.advanceDate}</div>
+                      <div className="font-mono font-bold text-slate-900 dark:text-slate-100">{adv.advanceNumber}</div>
+                      <div className="text-[11px] text-slate-500 dark:text-slate-400">{adv.advanceDate}</div>
                     </td>
                     <td className="p-3.5">
-                      <div className="font-bold text-slate-900">{adv.employeeName}</div>
-                      <div className="text-[10px] text-slate-400 font-mono">{adv.employeeId}</div>
+                      <div className="font-bold text-slate-900 dark:text-slate-100">{adv.employeeName}</div>
+                      <div className="text-[10px] text-slate-500 dark:text-slate-400 font-mono">{adv.employeeId}</div>
                     </td>
-                    <td className="p-3.5 text-slate-700">{adv.department}</td>
-                    <td className="p-3.5 text-slate-700 max-w-xs truncate">{adv.purpose}</td>
-                    <td className="p-3.5 text-right font-bold text-slate-900 text-sm">
+                    <td className="p-3.5 text-slate-700 dark:text-slate-300">{adv.department}</td>
+                    <td className="p-3.5 text-slate-700 dark:text-slate-300 max-w-xs truncate">{adv.purpose}</td>
+                    <td className="p-3.5 text-right font-bold text-slate-900 dark:text-slate-100 text-sm">
                       {formatCurrency(adv.advanceAmountOMR)}
                     </td>
-                    <td className="p-3.5 font-mono text-slate-600">{adv.settlementDueDate}</td>
+                    <td className="p-3.5 font-mono text-slate-600 dark:text-slate-400">{adv.settlementDueDate}</td>
                     <td className="p-3.5 text-center">
                       <span
                         className={`px-2 py-0.5 rounded-full text-[10px] font-bold ${
                           adv.status === 'Settled'
-                            ? 'bg-emerald-100 text-emerald-800'
-                            : 'bg-amber-100 text-amber-800'
+                            ? 'bg-emerald-100 dark:bg-emerald-500/20 text-emerald-800 dark:text-emerald-200'
+                            : 'bg-amber-100 dark:bg-amber-500/20 text-amber-800 dark:text-amber-200'
                         }`}
                       >
                         {adv.status}
@@ -418,12 +418,12 @@ export const PettyCashView: React.FC = () => {
                             setSettleActualExp(adv.advanceAmountOMR * 0.8);
                             setSettleCashBack(adv.advanceAmountOMR * 0.2);
                           }}
-                          className="px-2 py-1 bg-indigo-50 text-indigo-700 hover:bg-indigo-100 rounded text-[11px] font-semibold cursor-pointer"
+                          className="px-2 py-1 bg-indigo-50 dark:bg-indigo-500/10 text-indigo-700 dark:text-indigo-300 hover:bg-indigo-100 dark:hover:bg-indigo-500/20 rounded text-[11px] font-semibold cursor-pointer"
                         >
                           Settle IOU
                         </button>
                       ) : (
-                        <span className="text-[10px] text-slate-400">Settled on {adv.settlementDate}</span>
+                        <span className="text-[10px] text-slate-500 dark:text-slate-400">Settled on {adv.settlementDate}</span>
                       )}
                     </td>
                   </tr>
@@ -436,10 +436,10 @@ export const PettyCashView: React.FC = () => {
 
       {/* TAB 3: EXPENSE CLAIMS / VOUCHERS */}
       {activeTab === 'expenses' && (
-        <div className="bg-white rounded-xl border border-slate-200 shadow-2xs overflow-hidden">
+        <div className="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-700 shadow-2xs overflow-hidden">
           <div className="overflow-x-auto">
             <table className="w-full text-left text-xs">
-              <thead className="bg-slate-50 text-slate-600 font-semibold border-b border-slate-200">
+              <thead className="bg-slate-50 dark:bg-slate-800/50 text-slate-600 dark:text-slate-400 font-semibold border-b border-slate-200 dark:border-slate-700">
                 <tr>
                   <th className="p-3.5">Voucher # & Date</th>
                   <th className="p-3.5">Payee / Merchant</th>
@@ -451,33 +451,33 @@ export const PettyCashView: React.FC = () => {
                   <th className="p-3.5 text-center">Status</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-100">
+              <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
                 {filteredExpenses.map((exp) => (
-                  <tr key={exp.id} className="hover:bg-slate-50/70 transition-colors">
+                  <tr key={exp.id} className="hover:bg-slate-50/70 dark:hover:bg-slate-800/70 transition-colors">
                     <td className="p-3.5">
-                      <div className="font-mono font-bold text-slate-900">{exp.voucherNumber}</div>
-                      <div className="text-[11px] text-slate-500">{exp.expenseDate}</div>
+                      <div className="font-mono font-bold text-slate-900 dark:text-slate-100">{exp.voucherNumber}</div>
+                      <div className="text-[11px] text-slate-500 dark:text-slate-400">{exp.expenseDate}</div>
                     </td>
                     <td className="p-3.5">
-                      <div className="font-bold text-slate-900">{exp.payeeOrMerchant}</div>
-                      <div className="text-[10px] text-slate-500">{exp.description}</div>
+                      <div className="font-bold text-slate-900 dark:text-slate-100">{exp.payeeOrMerchant}</div>
+                      <div className="text-[10px] text-slate-500 dark:text-slate-400">{exp.description}</div>
                     </td>
-                    <td className="p-3.5 font-mono text-slate-600">{exp.taxInvoiceNumber}</td>
+                    <td className="p-3.5 font-mono text-slate-600 dark:text-slate-400">{exp.taxInvoiceNumber}</td>
                     <td className="p-3.5">
-                      <div className="font-medium text-slate-800">{exp.expenseCategory}</div>
-                      <div className="text-[10px] text-slate-400 font-mono">{exp.glAccountCode}</div>
+                      <div className="font-medium text-slate-800 dark:text-slate-200">{exp.expenseCategory}</div>
+                      <div className="text-[10px] text-slate-500 dark:text-slate-400 font-mono">{exp.glAccountCode}</div>
                     </td>
-                    <td className="p-3.5 text-right font-medium text-slate-800">
+                    <td className="p-3.5 text-right font-medium text-slate-800 dark:text-slate-200">
                       {formatCurrency(exp.netAmountOMR)}
                     </td>
-                    <td className="p-3.5 text-right font-medium text-indigo-700">
+                    <td className="p-3.5 text-right font-medium text-indigo-700 dark:text-indigo-300">
                       {formatCurrency(exp.vatAmountOMR)}
                     </td>
-                    <td className="p-3.5 text-right font-bold text-slate-900 text-sm">
+                    <td className="p-3.5 text-right font-bold text-slate-900 dark:text-slate-100 text-sm">
                       {formatCurrency(exp.grossAmountOMR)}
                     </td>
                     <td className="p-3.5 text-center">
-                      <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-100 text-emerald-800">
+                      <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-100 dark:bg-emerald-500/20 text-emerald-800 dark:text-emerald-200">
                         {exp.status}
                       </span>
                     </td>
@@ -494,45 +494,45 @@ export const PettyCashView: React.FC = () => {
         <div className="space-y-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {pettyCashReconciliations.map((rec) => (
-              <div key={rec.id} className="bg-white rounded-xl p-5 border border-slate-200 shadow-2xs">
+              <div key={rec.id} className="bg-white dark:bg-slate-900 rounded-xl p-5 border border-slate-200 dark:border-slate-700 shadow-2xs">
                 <div className="flex items-start justify-between">
                   <div>
-                    <span className="font-mono text-[10px] font-bold text-slate-500 bg-slate-100 px-1.5 py-0.5 rounded">
+                    <span className="font-mono text-[10px] font-bold text-slate-500 dark:text-slate-400 bg-slate-100 dark:bg-slate-800 px-1.5 py-0.5 rounded">
                       {rec.reconciliationBatchNo}
                     </span>
-                    <h3 className="text-sm font-bold text-slate-900 mt-1">{rec.pettyCashAccountName}</h3>
-                    <p className="text-xs text-slate-500">Audit Period: {rec.periodEndDate}</p>
+                    <h3 className="text-sm font-bold text-slate-900 dark:text-slate-100 mt-1">{rec.pettyCashAccountName}</h3>
+                    <p className="text-xs text-slate-500 dark:text-slate-400">Audit Period: {rec.periodEndDate}</p>
                   </div>
-                  <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-100 text-emerald-800">
+                  <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-100 dark:bg-emerald-500/20 text-emerald-800 dark:text-emerald-200">
                     {rec.status}
                   </span>
                 </div>
 
                 <div className="grid grid-cols-3 gap-2 mt-4 text-xs">
-                  <div className="p-2 rounded-lg bg-slate-50 border border-slate-100">
-                    <span className="text-slate-400 block text-[10px]">Physical Cash</span>
-                    <span className="font-bold text-slate-900">{formatCurrency(rec.physicalCashCountedOMR)}</span>
+                  <div className="p-2 rounded-lg bg-slate-50 dark:bg-slate-800/50 border border-slate-100 dark:border-slate-800">
+                    <span className="text-slate-500 dark:text-slate-400 block text-[10px]">Physical Cash</span>
+                    <span className="font-bold text-slate-900 dark:text-slate-100">{formatCurrency(rec.physicalCashCountedOMR)}</span>
                   </div>
-                  <div className="p-2 rounded-lg bg-slate-50 border border-slate-100">
-                    <span className="text-slate-400 block text-[10px]">Vouchers Sum</span>
-                    <span className="font-bold text-slate-900">{formatCurrency(rec.vouchersSumOMR)}</span>
+                  <div className="p-2 rounded-lg bg-slate-50 dark:bg-slate-800/50 border border-slate-100 dark:border-slate-800">
+                    <span className="text-slate-500 dark:text-slate-400 block text-[10px]">Vouchers Sum</span>
+                    <span className="font-bold text-slate-900 dark:text-slate-100">{formatCurrency(rec.vouchersSumOMR)}</span>
                   </div>
-                  <div className="p-2 rounded-lg bg-slate-50 border border-slate-100">
-                    <span className="text-slate-400 block text-[10px]">Open IOUs</span>
-                    <span className="font-bold text-slate-900">{formatCurrency(rec.advancesSumOMR)}</span>
+                  <div className="p-2 rounded-lg bg-slate-50 dark:bg-slate-800/50 border border-slate-100 dark:border-slate-800">
+                    <span className="text-slate-500 dark:text-slate-400 block text-[10px]">Open IOUs</span>
+                    <span className="font-bold text-slate-900 dark:text-slate-100">{formatCurrency(rec.advancesSumOMR)}</span>
                   </div>
                 </div>
 
-                <div className="mt-3 p-3 rounded-lg bg-indigo-50/70 border border-indigo-100 flex items-center justify-between text-xs">
+                <div className="mt-3 p-3 rounded-lg bg-indigo-50/70 dark:bg-indigo-500/70 border border-indigo-100 dark:border-indigo-500/20 flex items-center justify-between text-xs">
                   <span className="font-semibold text-indigo-950">Replenishment Cheque Requested:</span>
-                  <span className="text-sm font-bold text-indigo-700">
+                  <span className="text-sm font-bold text-indigo-700 dark:text-indigo-300">
                     {formatCurrency(rec.replenishmentChequeRequestedOMR)}
                   </span>
                 </div>
 
-                <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-500">
+                <div className="mt-4 pt-3 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-[11px] text-slate-500 dark:text-slate-400">
                   <span>Auditor: {rec.auditedBy}</span>
-                  <span className="font-mono text-slate-700">Float: {formatCurrency(rec.floatLimitOMR)}</span>
+                  <span className="font-mono text-slate-700 dark:text-slate-300">Float: {formatCurrency(rec.floatLimitOMR)}</span>
                 </div>
               </div>
             ))}
@@ -542,74 +542,74 @@ export const PettyCashView: React.FC = () => {
 
       {/* MODAL: ADD IMPREST FUND */}
       {showAddAccountModal && (
-        <div className="fixed inset-0 bg-slate-900/40 backdrop-blur-xs flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-2xl max-w-lg w-full p-6 shadow-xl border border-slate-200">
-            <h3 className="text-base font-bold text-slate-900 mb-4">Add Petty Cash Float Account</h3>
+        <div className="fixed inset-0 bg-white/40 dark:bg-slate-900/40 backdrop-blur-xs flex items-center justify-center z-50 p-4">
+          <div className="bg-white dark:bg-slate-900 rounded-2xl max-w-lg w-full p-6 shadow-xl border border-slate-200 dark:border-slate-700">
+            <h3 className="text-base font-bold text-slate-900 dark:text-slate-100 mb-4">Add Petty Cash Float Account</h3>
             <form onSubmit={handleCreateAccount} className="space-y-4">
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="text-xs font-semibold text-slate-700 block mb-1">Fund Code *</label>
+                  <label className="text-xs font-semibold text-slate-700 dark:text-slate-300 block mb-1">Fund Code *</label>
                   <input
                     type="text"
                     required
                     placeholder="e.g. PC-SAL-01"
                     value={newFundCode}
                     onChange={(e) => setNewFundCode(e.target.value)}
-                    className="w-full text-xs p-2.5 border border-slate-200 rounded-lg focus:ring-2 focus:ring-slate-900 focus:outline-none"
+                    className="w-full text-xs p-2.5 border border-slate-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-slate-200 dark:focus:ring-slate-900 focus:outline-none"
                   />
                 </div>
                 <div>
-                  <label className="text-xs font-semibold text-slate-700 block mb-1">Imprest Ceiling (OMR) *</label>
+                  <label className="text-xs font-semibold text-slate-700 dark:text-slate-300 block mb-1">Imprest Ceiling (OMR) *</label>
                   <input
                     type="number"
                     required
                     value={newImprestLimit}
                     onChange={(e) => setNewImprestLimit(Number(e.target.value))}
-                    className="w-full text-xs p-2.5 border border-slate-200 rounded-lg focus:ring-2 focus:ring-slate-900 focus:outline-none font-bold"
+                    className="w-full text-xs p-2.5 border border-slate-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-slate-200 dark:focus:ring-slate-900 focus:outline-none font-bold"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="text-xs font-semibold text-slate-700 block mb-1">Fund Name *</label>
+                <label className="text-xs font-semibold text-slate-700 dark:text-slate-300 block mb-1">Fund Name *</label>
                 <input
                   type="text"
                   required
                   placeholder="e.g. Salalah Regional Office Operating Petty Cash"
                   value={newFundName}
                   onChange={(e) => setNewFundName(e.target.value)}
-                  className="w-full text-xs p-2.5 border border-slate-200 rounded-lg focus:ring-2 focus:ring-slate-900 focus:outline-none"
+                  className="w-full text-xs p-2.5 border border-slate-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-slate-200 dark:focus:ring-slate-900 focus:outline-none"
                 />
               </div>
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="text-xs font-semibold text-slate-700 block mb-1">Custodian Name *</label>
+                  <label className="text-xs font-semibold text-slate-700 dark:text-slate-300 block mb-1">Custodian Name *</label>
                   <input
                     type="text"
                     required
                     placeholder="e.g. Salim Al-Ghafri"
                     value={newCustodianName}
                     onChange={(e) => setNewCustodianName(e.target.value)}
-                    className="w-full text-xs p-2.5 border border-slate-200 rounded-lg focus:ring-2 focus:ring-slate-900 focus:outline-none"
+                    className="w-full text-xs p-2.5 border border-slate-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-slate-200 dark:focus:ring-slate-900 focus:outline-none"
                   />
                 </div>
                 <div>
-                  <label className="text-xs font-semibold text-slate-700 block mb-1">Location / Dept</label>
+                  <label className="text-xs font-semibold text-slate-700 dark:text-slate-300 block mb-1">Location / Dept</label>
                   <input
                     type="text"
                     value={newLocation}
                     onChange={(e) => setNewLocation(e.target.value)}
-                    className="w-full text-xs p-2.5 border border-slate-200 rounded-lg focus:ring-2 focus:ring-slate-900 focus:outline-none"
+                    className="w-full text-xs p-2.5 border border-slate-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-slate-200 dark:focus:ring-slate-900 focus:outline-none"
                   />
                 </div>
               </div>
 
-              <div className="flex items-center justify-end gap-2 pt-4 border-t border-slate-100">
+              <div className="flex items-center justify-end gap-2 pt-4 border-t border-slate-100 dark:border-slate-800">
                 <button
                   type="button"
                   onClick={() => setShowAddAccountModal(false)}
-                  className="px-4 py-2 rounded-lg text-xs font-semibold text-slate-600 hover:bg-slate-100 cursor-pointer"
+                  className="px-4 py-2 rounded-lg text-xs font-semibold text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 cursor-pointer"
                 >
                   Cancel
                 </button>
@@ -627,16 +627,16 @@ export const PettyCashView: React.FC = () => {
 
       {/* MODAL: ISSUE ADVANCE (IOU) */}
       {showAdvanceModal && (
-        <div className="fixed inset-0 bg-slate-900/40 backdrop-blur-xs flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-2xl max-w-lg w-full p-6 shadow-xl border border-slate-200">
-            <h3 className="text-base font-bold text-slate-900 mb-4">Issue Staff Petty Cash Advance (IOU)</h3>
+        <div className="fixed inset-0 bg-white/40 dark:bg-slate-900/40 backdrop-blur-xs flex items-center justify-center z-50 p-4">
+          <div className="bg-white dark:bg-slate-900 rounded-2xl max-w-lg w-full p-6 shadow-xl border border-slate-200 dark:border-slate-700">
+            <h3 className="text-base font-bold text-slate-900 dark:text-slate-100 mb-4">Issue Staff Petty Cash Advance (IOU)</h3>
             <form onSubmit={handleIssueAdvance} className="space-y-4">
               <div>
-                <label className="text-xs font-semibold text-slate-700 block mb-1">Disbursing Float *</label>
+                <label className="text-xs font-semibold text-slate-700 dark:text-slate-300 block mb-1">Disbursing Float *</label>
                 <select
                   value={advAccountId}
                   onChange={(e) => setAdvAccountId(e.target.value)}
-                  className="w-full text-xs p-2.5 border border-slate-200 rounded-lg focus:ring-2 focus:ring-slate-900 focus:outline-none"
+                  className="w-full text-xs p-2.5 border border-slate-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-slate-200 dark:focus:ring-slate-900 focus:outline-none"
                 >
                   {pettyCashAccounts.map((a) => (
                     <option key={a.id} value={a.id}>
@@ -648,68 +648,68 @@ export const PettyCashView: React.FC = () => {
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="text-xs font-semibold text-slate-700 block mb-1">Employee Name *</label>
+                  <label className="text-xs font-semibold text-slate-700 dark:text-slate-300 block mb-1">Employee Name *</label>
                   <input
                     type="text"
                     required
                     placeholder="e.g. Tariq Al-Habsi"
                     value={advEmpName}
                     onChange={(e) => setAdvEmpName(e.target.value)}
-                    className="w-full text-xs p-2.5 border border-slate-200 rounded-lg focus:ring-2 focus:ring-slate-900 focus:outline-none"
+                    className="w-full text-xs p-2.5 border border-slate-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-slate-200 dark:focus:ring-slate-900 focus:outline-none"
                   />
                 </div>
                 <div>
-                  <label className="text-xs font-semibold text-slate-700 block mb-1">Advance Amount (OMR) *</label>
+                  <label className="text-xs font-semibold text-slate-700 dark:text-slate-300 block mb-1">Advance Amount (OMR) *</label>
                   <input
                     type="number"
                     step="0.001"
                     required
                     value={advAmount}
                     onChange={(e) => setAdvAmount(Number(e.target.value))}
-                    className="w-full text-xs p-2.5 border border-slate-200 rounded-lg focus:ring-2 focus:ring-slate-900 focus:outline-none font-bold"
+                    className="w-full text-xs p-2.5 border border-slate-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-slate-200 dark:focus:ring-slate-900 focus:outline-none font-bold"
                   />
                 </div>
               </div>
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="text-xs font-semibold text-slate-700 block mb-1">Department</label>
+                  <label className="text-xs font-semibold text-slate-700 dark:text-slate-300 block mb-1">Department</label>
                   <input
                     type="text"
                     value={advDept}
                     onChange={(e) => setAdvDept(e.target.value)}
-                    className="w-full text-xs p-2.5 border border-slate-200 rounded-lg focus:ring-2 focus:ring-slate-900 focus:outline-none"
+                    className="w-full text-xs p-2.5 border border-slate-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-slate-200 dark:focus:ring-slate-900 focus:outline-none"
                   />
                 </div>
                 <div>
-                  <label className="text-xs font-semibold text-slate-700 block mb-1">Settlement Deadline</label>
+                  <label className="text-xs font-semibold text-slate-700 dark:text-slate-300 block mb-1">Settlement Deadline</label>
                   <input
                     type="date"
                     required
                     value={advDueDate}
                     onChange={(e) => setAdvDueDate(e.target.value)}
-                    className="w-full text-xs p-2.5 border border-slate-200 rounded-lg focus:ring-2 focus:ring-slate-900 focus:outline-none"
+                    className="w-full text-xs p-2.5 border border-slate-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-slate-200 dark:focus:ring-slate-900 focus:outline-none"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="text-xs font-semibold text-slate-700 block mb-1">Purpose of Advance</label>
+                <label className="text-xs font-semibold text-slate-700 dark:text-slate-300 block mb-1">Purpose of Advance</label>
                 <input
                   type="text"
                   required
                   placeholder="e.g. Local transport & courier fees for legal attestation"
                   value={advPurpose}
                   onChange={(e) => setAdvPurpose(e.target.value)}
-                  className="w-full text-xs p-2.5 border border-slate-200 rounded-lg focus:ring-2 focus:ring-slate-900 focus:outline-none"
+                  className="w-full text-xs p-2.5 border border-slate-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-slate-200 dark:focus:ring-slate-900 focus:outline-none"
                 />
               </div>
 
-              <div className="flex items-center justify-end gap-2 pt-4 border-t border-slate-100">
+              <div className="flex items-center justify-end gap-2 pt-4 border-t border-slate-100 dark:border-slate-800">
                 <button
                   type="button"
                   onClick={() => setShowAdvanceModal(false)}
-                  className="px-4 py-2 rounded-lg text-xs font-semibold text-slate-600 hover:bg-slate-100 cursor-pointer"
+                  className="px-4 py-2 rounded-lg text-xs font-semibold text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 cursor-pointer"
                 >
                   Cancel
                 </button>
@@ -727,17 +727,17 @@ export const PettyCashView: React.FC = () => {
 
       {/* MODAL: SETTLE ADVANCE (IOU) */}
       {settlingAdvance && (
-        <div className="fixed inset-0 bg-slate-900/40 backdrop-blur-xs flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-2xl max-w-lg w-full p-6 shadow-xl border border-slate-200">
-            <h3 className="text-base font-bold text-slate-900 mb-2">Settle Staff Advance (IOU)</h3>
-            <p className="text-xs text-slate-500 mb-4">
-              Settling IOU <strong className="text-slate-800">{settlingAdvance.advanceNumber}</strong> for {settlingAdvance.employeeName} (Total: {formatCurrency(settlingAdvance.advanceAmountOMR)}).
+        <div className="fixed inset-0 bg-white/40 dark:bg-slate-900/40 backdrop-blur-xs flex items-center justify-center z-50 p-4">
+          <div className="bg-white dark:bg-slate-900 rounded-2xl max-w-lg w-full p-6 shadow-xl border border-slate-200 dark:border-slate-700">
+            <h3 className="text-base font-bold text-slate-900 dark:text-slate-100 mb-2">Settle Staff Advance (IOU)</h3>
+            <p className="text-xs text-slate-500 dark:text-slate-400 mb-4">
+              Settling IOU <strong className="text-slate-800 dark:text-slate-200">{settlingAdvance.advanceNumber}</strong> for {settlingAdvance.employeeName} (Total: {formatCurrency(settlingAdvance.advanceAmountOMR)}).
             </p>
 
             <form onSubmit={handleSettleAdvanceSubmit} className="space-y-4">
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="text-xs font-semibold text-slate-700 block mb-1">Actual Expense Spent (OMR) *</label>
+                  <label className="text-xs font-semibold text-slate-700 dark:text-slate-300 block mb-1">Actual Expense Spent (OMR) *</label>
                   <input
                     type="number"
                     step="0.001"
@@ -748,27 +748,27 @@ export const PettyCashView: React.FC = () => {
                       setSettleActualExp(exp);
                       setSettleCashBack(Math.max(0, settlingAdvance.advanceAmountOMR - exp));
                     }}
-                    className="w-full text-xs p-2.5 border border-slate-200 rounded-lg focus:ring-2 focus:ring-slate-900 focus:outline-none font-bold"
+                    className="w-full text-xs p-2.5 border border-slate-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-slate-200 dark:focus:ring-slate-900 focus:outline-none font-bold"
                   />
                 </div>
                 <div>
-                  <label className="text-xs font-semibold text-slate-700 block mb-1">Cash Returned to Float (OMR) *</label>
+                  <label className="text-xs font-semibold text-slate-700 dark:text-slate-300 block mb-1">Cash Returned to Float (OMR) *</label>
                   <input
                     type="number"
                     step="0.001"
                     required
                     value={settleCashBack}
                     onChange={(e) => setSettleCashBack(Number(e.target.value))}
-                    className="w-full text-xs p-2.5 border border-slate-200 rounded-lg focus:ring-2 focus:ring-slate-900 focus:outline-none font-bold text-emerald-700"
+                    className="w-full text-xs p-2.5 border border-slate-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-slate-200 dark:focus:ring-slate-900 focus:outline-none font-bold text-emerald-700 dark:text-emerald-300"
                   />
                 </div>
               </div>
 
-              <div className="flex items-center justify-end gap-2 pt-4 border-t border-slate-100">
+              <div className="flex items-center justify-end gap-2 pt-4 border-t border-slate-100 dark:border-slate-800">
                 <button
                   type="button"
                   onClick={() => setSettlingAdvance(null)}
-                  className="px-4 py-2 rounded-lg text-xs font-semibold text-slate-600 hover:bg-slate-100 cursor-pointer"
+                  className="px-4 py-2 rounded-lg text-xs font-semibold text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 cursor-pointer"
                 >
                   Cancel
                 </button>
@@ -786,16 +786,16 @@ export const PettyCashView: React.FC = () => {
 
       {/* MODAL: SUBMIT EXPENSE CLAIM */}
       {showExpenseModal && (
-        <div className="fixed inset-0 bg-slate-900/40 backdrop-blur-xs flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-2xl max-w-lg w-full p-6 shadow-xl border border-slate-200">
-            <h3 className="text-base font-bold text-slate-900 mb-4">Record Petty Cash Expense Voucher</h3>
+        <div className="fixed inset-0 bg-white/40 dark:bg-slate-900/40 backdrop-blur-xs flex items-center justify-center z-50 p-4">
+          <div className="bg-white dark:bg-slate-900 rounded-2xl max-w-lg w-full p-6 shadow-xl border border-slate-200 dark:border-slate-700">
+            <h3 className="text-base font-bold text-slate-900 dark:text-slate-100 mb-4">Record Petty Cash Expense Voucher</h3>
             <form onSubmit={handleSubmitExpense} className="space-y-4">
               <div>
-                <label className="text-xs font-semibold text-slate-700 block mb-1">Petty Cash Float *</label>
+                <label className="text-xs font-semibold text-slate-700 dark:text-slate-300 block mb-1">Petty Cash Float *</label>
                 <select
                   value={expAccountId}
                   onChange={(e) => setExpAccountId(e.target.value)}
-                  className="w-full text-xs p-2.5 border border-slate-200 rounded-lg focus:ring-2 focus:ring-slate-900 focus:outline-none"
+                  className="w-full text-xs p-2.5 border border-slate-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-slate-200 dark:focus:ring-slate-900 focus:outline-none"
                 >
                   {pettyCashAccounts.map((a) => (
                     <option key={a.id} value={a.id}>
@@ -807,31 +807,31 @@ export const PettyCashView: React.FC = () => {
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="text-xs font-semibold text-slate-700 block mb-1">Payee / Merchant *</label>
+                  <label className="text-xs font-semibold text-slate-700 dark:text-slate-300 block mb-1">Payee / Merchant *</label>
                   <input
                     type="text"
                     required
                     placeholder="e.g. Al-Maha Petrol Station"
                     value={expPayee}
                     onChange={(e) => setExpPayee(e.target.value)}
-                    className="w-full text-xs p-2.5 border border-slate-200 rounded-lg focus:ring-2 focus:ring-slate-900 focus:outline-none"
+                    className="w-full text-xs p-2.5 border border-slate-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-slate-200 dark:focus:ring-slate-900 focus:outline-none"
                   />
                 </div>
                 <div>
-                  <label className="text-xs font-semibold text-slate-700 block mb-1">Tax Invoice #</label>
+                  <label className="text-xs font-semibold text-slate-700 dark:text-slate-300 block mb-1">Tax Invoice #</label>
                   <input
                     type="text"
                     placeholder="TAX-INV-99218"
                     value={expTaxInv}
                     onChange={(e) => setExpTaxInv(e.target.value)}
-                    className="w-full text-xs p-2.5 border border-slate-200 rounded-lg focus:ring-2 focus:ring-slate-900 focus:outline-none font-mono"
+                    className="w-full text-xs p-2.5 border border-slate-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-slate-200 dark:focus:ring-slate-900 focus:outline-none font-mono"
                   />
                 </div>
               </div>
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="text-xs font-semibold text-slate-700 block mb-1">Gross Amount (OMR) *</label>
+                  <label className="text-xs font-semibold text-slate-700 dark:text-slate-300 block mb-1">Gross Amount (OMR) *</label>
                   <input
                     type="number"
                     step="0.001"
@@ -842,27 +842,27 @@ export const PettyCashView: React.FC = () => {
                       setExpGross(val);
                       setExpVat(Number((val * 0.05).toFixed(3)));
                     }}
-                    className="w-full text-xs p-2.5 border border-slate-200 rounded-lg focus:ring-2 focus:ring-slate-900 focus:outline-none font-bold"
+                    className="w-full text-xs p-2.5 border border-slate-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-slate-200 dark:focus:ring-slate-900 focus:outline-none font-bold"
                   />
                 </div>
                 <div>
-                  <label className="text-xs font-semibold text-slate-700 block mb-1">VAT 5% (OMR)</label>
+                  <label className="text-xs font-semibold text-slate-700 dark:text-slate-300 block mb-1">VAT 5% (OMR)</label>
                   <input
                     type="number"
                     step="0.001"
                     value={expVat}
                     onChange={(e) => setExpVat(Number(e.target.value))}
-                    className="w-full text-xs p-2.5 border border-slate-200 rounded-lg focus:ring-2 focus:ring-slate-900 focus:outline-none font-bold text-indigo-700"
+                    className="w-full text-xs p-2.5 border border-slate-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-slate-200 dark:focus:ring-slate-900 focus:outline-none font-bold text-indigo-700 dark:text-indigo-300"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="text-xs font-semibold text-slate-700 block mb-1">Expense Category</label>
+                <label className="text-xs font-semibold text-slate-700 dark:text-slate-300 block mb-1">Expense Category</label>
                 <select
                   value={expCategory}
                   onChange={(e) => setExpCategory(e.target.value)}
-                  className="w-full text-xs p-2.5 border border-slate-200 rounded-lg focus:ring-2 focus:ring-slate-900 focus:outline-none"
+                  className="w-full text-xs p-2.5 border border-slate-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-slate-200 dark:focus:ring-slate-900 focus:outline-none"
                 >
                   <option value="Office Refreshments & Hospitality">Office Refreshments & Hospitality</option>
                   <option value="Vehicle Fuel & Toll Charges">Vehicle Fuel & Toll Charges</option>
@@ -872,21 +872,21 @@ export const PettyCashView: React.FC = () => {
               </div>
 
               <div>
-                <label className="text-xs font-semibold text-slate-700 block mb-1">Description / Memo</label>
+                <label className="text-xs font-semibold text-slate-700 dark:text-slate-300 block mb-1">Description / Memo</label>
                 <input
                   type="text"
                   placeholder="Monthly project client refreshments meeting"
                   value={expDesc}
                   onChange={(e) => setExpDesc(e.target.value)}
-                  className="w-full text-xs p-2.5 border border-slate-200 rounded-lg focus:ring-2 focus:ring-slate-900 focus:outline-none"
+                  className="w-full text-xs p-2.5 border border-slate-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-slate-200 dark:focus:ring-slate-900 focus:outline-none"
                 />
               </div>
 
-              <div className="flex items-center justify-end gap-2 pt-4 border-t border-slate-100">
+              <div className="flex items-center justify-end gap-2 pt-4 border-t border-slate-100 dark:border-slate-800">
                 <button
                   type="button"
                   onClick={() => setShowExpenseModal(false)}
-                  className="px-4 py-2 rounded-lg text-xs font-semibold text-slate-600 hover:bg-slate-100 cursor-pointer"
+                  className="px-4 py-2 rounded-lg text-xs font-semibold text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 cursor-pointer"
                 >
                   Cancel
                 </button>
@@ -904,16 +904,16 @@ export const PettyCashView: React.FC = () => {
 
       {/* MODAL: RECONCILIATION AUDIT */}
       {showReconModal && (
-        <div className="fixed inset-0 bg-slate-900/40 backdrop-blur-xs flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-2xl max-w-lg w-full p-6 shadow-xl border border-slate-200">
-            <h3 className="text-base font-bold text-slate-900 mb-4">Petty Cash Physical Audit & Reimbursement</h3>
+        <div className="fixed inset-0 bg-white/40 dark:bg-slate-900/40 backdrop-blur-xs flex items-center justify-center z-50 p-4">
+          <div className="bg-white dark:bg-slate-900 rounded-2xl max-w-lg w-full p-6 shadow-xl border border-slate-200 dark:border-slate-700">
+            <h3 className="text-base font-bold text-slate-900 dark:text-slate-100 mb-4">Petty Cash Physical Audit & Reimbursement</h3>
             <form onSubmit={handleCreateReconciliationSubmit} className="space-y-4">
               <div>
-                <label className="text-xs font-semibold text-slate-700 block mb-1">Select Float Account *</label>
+                <label className="text-xs font-semibold text-slate-700 dark:text-slate-300 block mb-1">Select Float Account *</label>
                 <select
                   value={reconAccountId}
                   onChange={(e) => setReconAccountId(e.target.value)}
-                  className="w-full text-xs p-2.5 border border-slate-200 rounded-lg focus:ring-2 focus:ring-slate-900 focus:outline-none"
+                  className="w-full text-xs p-2.5 border border-slate-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-slate-200 dark:focus:ring-slate-900 focus:outline-none"
                 >
                   {pettyCashAccounts.map((a) => (
                     <option key={a.id} value={a.id}>
@@ -924,37 +924,37 @@ export const PettyCashView: React.FC = () => {
               </div>
 
               <div>
-                <label className="text-xs font-semibold text-slate-700 block mb-1">Physical Cash Counted in Box (OMR) *</label>
+                <label className="text-xs font-semibold text-slate-700 dark:text-slate-300 block mb-1">Physical Cash Counted in Box (OMR) *</label>
                 <input
                   type="number"
                   step="0.001"
                   required
                   value={reconCountedCash}
                   onChange={(e) => setReconCountedCash(Number(e.target.value))}
-                  className="w-full text-xs p-2.5 border border-slate-200 rounded-lg focus:ring-2 focus:ring-slate-900 focus:outline-none font-bold text-base"
+                  className="w-full text-xs p-2.5 border border-slate-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-slate-200 dark:focus:ring-slate-900 focus:outline-none font-bold text-base"
                 />
               </div>
 
-              <div className="p-3 bg-slate-50 rounded-xl border border-slate-200 text-xs space-y-1">
+              <div className="p-3 bg-slate-50 dark:bg-slate-800/50 rounded-xl border border-slate-200 dark:border-slate-700 text-xs space-y-1">
                 <div className="flex justify-between">
-                  <span className="text-slate-500">Unclaimed Vouchers:</span>
-                  <span className="font-bold text-slate-800">
+                  <span className="text-slate-500 dark:text-slate-400">Unclaimed Vouchers:</span>
+                  <span className="font-bold text-slate-800 dark:text-slate-200">
                     {formatCurrency(pettyCashAccounts.find((a) => a.id === reconAccountId)?.pendingUnclaimedExpensesOMR || 0)}
                   </span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-slate-500">Open Advances (IOUs):</span>
-                  <span className="font-bold text-slate-800">
+                  <span className="text-slate-500 dark:text-slate-400">Open Advances (IOUs):</span>
+                  <span className="font-bold text-slate-800 dark:text-slate-200">
                     {formatCurrency(pettyCashAccounts.find((a) => a.id === reconAccountId)?.openAdvancesIOUOMR || 0)}
                   </span>
                 </div>
               </div>
 
-              <div className="flex items-center justify-end gap-2 pt-4 border-t border-slate-100">
+              <div className="flex items-center justify-end gap-2 pt-4 border-t border-slate-100 dark:border-slate-800">
                 <button
                   type="button"
                   onClick={() => setShowReconModal(false)}
-                  className="px-4 py-2 rounded-lg text-xs font-semibold text-slate-600 hover:bg-slate-100 cursor-pointer"
+                  className="px-4 py-2 rounded-lg text-xs font-semibold text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 cursor-pointer"
                 >
                   Cancel
                 </button>

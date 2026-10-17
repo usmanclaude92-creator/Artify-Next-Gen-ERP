@@ -105,7 +105,7 @@ export const SalesActivitiesView: React.FC<SalesActivitiesViewProps> = ({
               <span className="px-2.5 py-0.5 rounded-full bg-teal-50 dark:bg-teal-950 text-teal-600 dark:text-teal-400 text-xs font-semibold">
                 Functional Area 06.04
               </span>
-              <span className="text-xs text-slate-500">Commercial Engagements & Follow-ups</span>
+              <span className="text-xs text-slate-500 dark:text-slate-400">Commercial Engagements & Follow-ups</span>
             </div>
             <h2 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white mt-1">
               Sales Activities, Client Meetings & Tasks
@@ -151,7 +151,7 @@ export const SalesActivitiesView: React.FC<SalesActivitiesViewProps> = ({
       {/* Filter and Search */}
       <div className="flex gap-3">
         <div className="relative flex-1">
-          <Search className="w-4 h-4 absolute left-3.5 top-3 text-slate-400" />
+          <Search className="w-4 h-4 absolute left-3.5 top-3 text-slate-600 dark:text-slate-400" />
           <input
             type="text"
             value={searchQuery}
@@ -214,7 +214,7 @@ export const SalesActivitiesView: React.FC<SalesActivitiesViewProps> = ({
 
                     <div className="flex flex-wrap items-center gap-2 text-xs text-slate-500 dark:text-slate-400">
                       <span className="flex items-center gap-1 font-medium text-slate-700 dark:text-slate-300">
-                        <Building2 className="w-3.5 h-3.5 text-teal-500" />
+                        <Building2 className="w-3.5 h-3.5 text-teal-500 dark:text-teal-400" />
                         {act.customerName}
                       </span>
                       <span>•</span>
@@ -237,10 +237,10 @@ export const SalesActivitiesView: React.FC<SalesActivitiesViewProps> = ({
 
                 <div className="text-right shrink-0 space-y-1">
                   <div className="flex items-center sm:justify-end gap-1.5 text-xs text-slate-600 dark:text-slate-400 font-medium">
-                    <Calendar className="w-3.5 h-3.5 text-teal-500" />
+                    <Calendar className="w-3.5 h-3.5 text-teal-500 dark:text-teal-400" />
                     <span>Due: {act.dueDate}</span>
                   </div>
-                  <div className="text-[11px] text-slate-400">Owner: {act.assignedToName}</div>
+                  <div className="text-[11px] text-slate-600 dark:text-slate-400">Owner: {act.assignedToName}</div>
                 </div>
               </div>
             </div>
@@ -248,7 +248,7 @@ export const SalesActivitiesView: React.FC<SalesActivitiesViewProps> = ({
         })}
 
         {filteredActivities.length === 0 && (
-          <div className="p-12 text-center text-slate-400 bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800">
+          <div className="p-12 text-center text-slate-600 dark:text-slate-400 bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800">
             No activities matching current filter criteria.
           </div>
         )}

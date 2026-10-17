@@ -19,17 +19,17 @@ export const BiFilterBar: React.FC<BiFilterBarProps> = ({
   const { filters, setFilters } = useBI();
 
   return (
-    <div className="bg-white border border-slate-200 rounded-xl p-3 shadow-xs space-y-3">
+    <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl p-3 shadow-xs space-y-3">
       <div className="flex flex-wrap items-center justify-between gap-3">
         {/* Left Side: Filter Selectors */}
         <div className="flex flex-wrap items-center gap-2.5">
           {/* Period Selector */}
-          <div className="flex items-center gap-1.5 bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-1.5">
-            <Calendar className="w-4 h-4 text-slate-500" />
+          <div className="flex items-center gap-1.5 bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-lg px-2.5 py-1.5">
+            <Calendar className="w-4 h-4 text-slate-500 dark:text-slate-400" />
             <select
               value={filters.period}
               onChange={e => setFilters(prev => ({ ...prev, period: e.target.value as PeriodFilter }))}
-              className="bg-transparent text-xs font-semibold text-slate-800 focus:outline-hidden cursor-pointer"
+              className="bg-transparent text-xs font-semibold text-slate-800 dark:text-slate-200 focus:outline-hidden cursor-pointer"
             >
               <option value="this_month">This Month (August 2026)</option>
               <option value="last_month">Last Month (July 2026)</option>
@@ -43,12 +43,12 @@ export const BiFilterBar: React.FC<BiFilterBarProps> = ({
           </div>
 
           {/* Company / Legal Entity */}
-          <div className="flex items-center gap-1.5 bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-1.5">
-            <Building2 className="w-4 h-4 text-slate-500" />
+          <div className="flex items-center gap-1.5 bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-lg px-2.5 py-1.5">
+            <Building2 className="w-4 h-4 text-slate-500 dark:text-slate-400" />
             <select
               value={filters.companyId}
               onChange={e => setFilters(prev => ({ ...prev, companyId: e.target.value }))}
-              className="bg-transparent text-xs font-semibold text-slate-800 focus:outline-hidden cursor-pointer"
+              className="bg-transparent text-xs font-semibold text-slate-800 dark:text-slate-200 focus:outline-hidden cursor-pointer"
             >
               <option value="comp-all">All Consolidated Entities</option>
               <option value="comp-01">Artify Group Holdings SAOG</option>
@@ -58,12 +58,12 @@ export const BiFilterBar: React.FC<BiFilterBarProps> = ({
           </div>
 
           {/* Branch / Operating Site */}
-          <div className="flex items-center gap-1.5 bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-1.5">
-            <MapPin className="w-4 h-4 text-slate-500" />
+          <div className="flex items-center gap-1.5 bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-lg px-2.5 py-1.5">
+            <MapPin className="w-4 h-4 text-slate-500 dark:text-slate-400" />
             <select
               value={filters.branchId || 'all'}
               onChange={e => setFilters(prev => ({ ...prev, branchId: e.target.value }))}
-              className="bg-transparent text-xs font-semibold text-slate-800 focus:outline-hidden cursor-pointer"
+              className="bg-transparent text-xs font-semibold text-slate-800 dark:text-slate-200 focus:outline-hidden cursor-pointer"
             >
               <option value="all">All Operating Branches</option>
               <option value="branch-01">Muscat HQ & Capital Region</option>
@@ -74,12 +74,12 @@ export const BiFilterBar: React.FC<BiFilterBarProps> = ({
           </div>
 
           {/* Reporting Currency */}
-          <div className="flex items-center gap-1.5 bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-1.5">
-            <DollarSign className="w-4 h-4 text-slate-500" />
+          <div className="flex items-center gap-1.5 bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-lg px-2.5 py-1.5">
+            <DollarSign className="w-4 h-4 text-slate-500 dark:text-slate-400" />
             <select
               value={filters.currency}
               onChange={e => setFilters(prev => ({ ...prev, currency: e.target.value as CurrencyCode }))}
-              className="bg-transparent text-xs font-bold text-indigo-700 focus:outline-hidden cursor-pointer"
+              className="bg-transparent text-xs font-bold text-indigo-700 dark:text-indigo-300 focus:outline-hidden cursor-pointer"
             >
               <option value="OMR">OMR (Omani Rial - Base)</option>
               <option value="USD">USD ($ US Dollar @ 2.60)</option>
@@ -92,12 +92,12 @@ export const BiFilterBar: React.FC<BiFilterBarProps> = ({
 
           {/* Comparison Baseline */}
           {showComparison && (
-            <div className="hidden lg:flex items-center gap-1.5 bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-1.5">
-              <span className="text-[11px] text-slate-500 font-medium">Compare vs:</span>
+            <div className="hidden lg:flex items-center gap-1.5 bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-lg px-2.5 py-1.5">
+              <span className="text-[11px] text-slate-500 dark:text-slate-400 font-medium">Compare vs:</span>
               <select
                 value={filters.comparisonPeriod || 'previous_period'}
                 onChange={e => setFilters(prev => ({ ...prev, comparisonPeriod: e.target.value as any }))}
-                className="bg-transparent text-xs font-semibold text-slate-800 focus:outline-hidden cursor-pointer"
+                className="bg-transparent text-xs font-semibold text-slate-800 dark:text-slate-200 focus:outline-hidden cursor-pointer"
               >
                 <option value="previous_period">Prior Period (Sequential)</option>
                 <option value="previous_year">Prior Year Same Period (YoY)</option>
@@ -114,7 +114,7 @@ export const BiFilterBar: React.FC<BiFilterBarProps> = ({
             <button
               onClick={onRefresh}
               title="Refresh Analytics Dataset"
-              className="p-1.5 text-slate-600 hover:text-slate-900 hover:bg-slate-100 rounded-lg border border-slate-200 transition-colors"
+              className="p-1.5 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700 transition-colors"
             >
               <RefreshCw className="w-4 h-4" />
             </button>
@@ -124,7 +124,7 @@ export const BiFilterBar: React.FC<BiFilterBarProps> = ({
             <button
               onClick={onPrint}
               title="Print Executive Statement"
-              className="p-1.5 text-slate-600 hover:text-slate-900 hover:bg-slate-100 rounded-lg border border-slate-200 transition-colors"
+              className="p-1.5 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700 transition-colors"
             >
               <Printer className="w-4 h-4" />
             </button>

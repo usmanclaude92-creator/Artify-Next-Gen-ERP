@@ -51,13 +51,13 @@ export const ScheduledReportsView: React.FC = () => {
       <DemoDataBanner moduleSource="Module 02.27 Automated Report Distribution & Dispatch Scheduler" />
 
       {/* Control Header */}
-      <div className="flex flex-wrap items-center justify-between gap-3 bg-white border border-slate-200 rounded-xl p-4 shadow-xs">
+      <div className="flex flex-wrap items-center justify-between gap-3 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl p-4 shadow-xs">
         <div>
-          <h2 className="text-sm font-bold text-slate-900 flex items-center gap-2">
-            <Clock className="w-4 h-4 text-indigo-600" />
+          <h2 className="text-sm font-bold text-slate-900 dark:text-slate-100 flex items-center gap-2">
+            <Clock className="w-4 h-4 text-indigo-600 dark:text-indigo-400" />
             Automated Report Distribution Schedules
           </h2>
-          <p className="text-xs text-slate-500">
+          <p className="text-xs text-slate-500 dark:text-slate-400">
             Configure periodic email broadcasts of financial, operational, and executive briefing dossiers.
           </p>
         </div>
@@ -72,18 +72,18 @@ export const ScheduledReportsView: React.FC = () => {
       </div>
 
       {dispatchAlert && (
-        <div className="p-3 bg-emerald-50 border border-emerald-200 text-emerald-900 rounded-xl text-xs flex items-center gap-2 animate-fade-in">
-          <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+        <div className="p-3 bg-emerald-50 dark:bg-emerald-500/10 border border-emerald-200 dark:border-emerald-500/30 text-emerald-900 dark:text-emerald-100 rounded-xl text-xs flex items-center gap-2 animate-fade-in">
+          <CheckCircle2 className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0" />
           <span>{dispatchAlert}</span>
         </div>
       )}
 
       {/* Scheduled Table */}
-      <div className="bg-white border border-slate-200 rounded-xl p-5 shadow-xs">
+      <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl p-5 shadow-xs">
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs border-collapse">
             <thead>
-              <tr className="border-b border-slate-200 bg-slate-50 text-slate-600">
+              <tr className="border-b border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/50 text-slate-600 dark:text-slate-400">
                 <th className="py-2.5 px-3 font-semibold">Report Package</th>
                 <th className="py-2.5 px-3 font-semibold">Cadence & Time</th>
                 <th className="py-2.5 px-3 font-semibold">Recipient Group</th>
@@ -94,34 +94,34 @@ export const ScheduledReportsView: React.FC = () => {
                 <th className="py-2.5 px-3 text-right">Actions</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-100">
+            <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
               {scheduledReports.map(sched => (
-                <tr key={sched.id} className="hover:bg-slate-50">
+                <tr key={sched.id} className="hover:bg-slate-50 dark:hover:bg-slate-800/50">
                   <td className="py-3 px-3">
-                    <span className="font-bold text-slate-900 block">{sched.reportTitle}</span>
+                    <span className="font-bold text-slate-900 dark:text-slate-100 block">{sched.reportTitle}</span>
                   </td>
-                  <td className="py-3 px-3 text-slate-700 font-medium">
+                  <td className="py-3 px-3 text-slate-700 dark:text-slate-300 font-medium">
                     {sched.frequency} at {sched.deliveryTime}
                   </td>
-                  <td className="py-3 px-3 text-slate-600 max-w-xs truncate">
+                  <td className="py-3 px-3 text-slate-600 dark:text-slate-400 max-w-xs truncate">
                     {sched.recipients.join(', ')}
                   </td>
                   <td className="py-3 px-3 text-center">
-                    <span className="font-mono text-[10px] font-bold text-indigo-700 bg-indigo-50 px-2 py-0.5 rounded">
+                    <span className="font-mono text-[10px] font-bold text-indigo-700 dark:text-indigo-300 bg-indigo-50 dark:bg-indigo-500/10 px-2 py-0.5 rounded">
                       {sched.format}
                     </span>
                   </td>
-                  <td className="py-3 px-3 font-mono text-center text-slate-500">{sched.lastRunAt || 'Never'}</td>
-                  <td className="py-3 px-3 font-mono text-center text-indigo-900 font-semibold">{sched.nextRunAt}</td>
+                  <td className="py-3 px-3 font-mono text-center text-slate-500 dark:text-slate-400">{sched.lastRunAt || 'Never'}</td>
+                  <td className="py-3 px-3 font-mono text-center text-indigo-900 dark:text-indigo-100 font-semibold">{sched.nextRunAt}</td>
                   <td className="py-3 px-3 text-center">
-                    <span className="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-100 text-emerald-800">
+                    <span className="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-100 dark:bg-emerald-500/20 text-emerald-800 dark:text-emerald-200">
                       {sched.status}
                     </span>
                   </td>
                   <td className="py-3 px-3 text-right">
                     <button
                       onClick={() => handleManualDispatch(sched.id, sched.reportTitle)}
-                      className="inline-flex items-center gap-1 px-2.5 py-1 text-[11px] font-semibold text-indigo-700 bg-indigo-50 hover:bg-indigo-100 rounded-lg transition-colors"
+                      className="inline-flex items-center gap-1 px-2.5 py-1 text-[11px] font-semibold text-indigo-700 dark:text-indigo-300 bg-indigo-50 dark:bg-indigo-500/10 hover:bg-indigo-100 dark:hover:bg-indigo-500/20 rounded-lg transition-colors"
                       title="Trigger immediate email dispatch"
                     >
                       <Send className="w-3 h-3" />
@@ -137,34 +137,34 @@ export const ScheduledReportsView: React.FC = () => {
 
       {/* Add Schedule Modal */}
       {showAddModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/50 backdrop-blur-xs">
-          <div className="bg-white rounded-2xl border border-slate-200 shadow-2xl max-w-lg w-full p-6 space-y-4">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-white/50 dark:bg-slate-900/50 backdrop-blur-xs">
+          <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-2xl max-w-lg w-full p-6 space-y-4">
             <div className="flex items-center justify-between">
-              <h3 className="text-sm font-bold text-slate-900">Schedule Automatic Report Dispatch</h3>
-              <button onClick={() => setShowAddModal(false)} className="text-slate-400 text-xs">
+              <h3 className="text-sm font-bold text-slate-900 dark:text-slate-100">Schedule Automatic Report Dispatch</h3>
+              <button onClick={() => setShowAddModal(false)} className="text-slate-500 dark:text-slate-400 text-xs">
                 Cancel
               </button>
             </div>
 
             <form onSubmit={handleCreateSchedule} className="space-y-3 text-xs">
               <div>
-                <label className="block text-slate-600 font-semibold mb-1">Report Package Title</label>
+                <label className="block text-slate-600 dark:text-slate-400 font-semibold mb-1">Report Package Title</label>
                 <input
                   type="text"
                   required
                   value={newSchedule.reportTitle}
                   onChange={e => setNewSchedule(prev => ({ ...prev, reportTitle: e.target.value }))}
-                  className="w-full p-2 bg-slate-50 border border-slate-200 rounded-lg font-semibold"
+                  className="w-full p-2 bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-lg font-semibold"
                 />
               </div>
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-slate-600 font-semibold mb-1">Frequency Cadence</label>
+                  <label className="block text-slate-600 dark:text-slate-400 font-semibold mb-1">Frequency Cadence</label>
                   <select
                     value={newSchedule.frequency}
                     onChange={e => setNewSchedule(prev => ({ ...prev, frequency: e.target.value as any }))}
-                    className="w-full p-2 bg-slate-50 border border-slate-200 rounded-lg"
+                    className="w-full p-2 bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-lg"
                   >
                     <option value="Daily">Daily</option>
                     <option value="Weekly">Weekly</option>
@@ -174,18 +174,18 @@ export const ScheduledReportsView: React.FC = () => {
                 </div>
 
                 <div>
-                  <label className="block text-slate-600 font-semibold mb-1">Dispatch Time (GST)</label>
+                  <label className="block text-slate-600 dark:text-slate-400 font-semibold mb-1">Dispatch Time (GST)</label>
                   <input
                     type="text"
                     value={newSchedule.deliveryTime}
                     onChange={e => setNewSchedule(prev => ({ ...prev, deliveryTime: e.target.value }))}
-                    className="w-full p-2 bg-slate-50 border border-slate-200 rounded-lg font-mono"
+                    className="w-full p-2 bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-lg font-mono"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block text-slate-600 font-semibold mb-1">Recipient Email List (comma-separated)</label>
+                <label className="block text-slate-600 dark:text-slate-400 font-semibold mb-1">Recipient Email List (comma-separated)</label>
                 <textarea
                   rows={2}
                   required
@@ -201,16 +201,16 @@ export const ScheduledReportsView: React.FC = () => {
                       recipients: e.target.value.split(',').map(s => s.trim())
                     }))
                   }
-                  className="w-full p-2 bg-slate-50 border border-slate-200 rounded-lg"
+                  className="w-full p-2 bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-lg"
                 />
               </div>
 
               <div>
-                <label className="block text-slate-600 font-semibold mb-1">Attachment Format</label>
+                <label className="block text-slate-600 dark:text-slate-400 font-semibold mb-1">Attachment Format</label>
                 <select
                   value={newSchedule.format}
                   onChange={e => setNewSchedule(prev => ({ ...prev, format: e.target.value as any }))}
-                  className="w-full p-2 bg-slate-50 border border-slate-200 rounded-lg"
+                  className="w-full p-2 bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-lg"
                 >
                   <option value="PDF">Formatted Executive PDF</option>
                   <option value="Excel">Raw Data Excel Workbook (.xlsx)</option>
@@ -218,11 +218,11 @@ export const ScheduledReportsView: React.FC = () => {
                 </select>
               </div>
 
-              <div className="flex justify-end gap-2 pt-2 border-t border-slate-100">
+              <div className="flex justify-end gap-2 pt-2 border-t border-slate-100 dark:border-slate-800">
                 <button
                   type="button"
                   onClick={() => setShowAddModal(false)}
-                  className="px-3 py-1.5 text-slate-600 hover:bg-slate-100 rounded-lg"
+                  className="px-3 py-1.5 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg"
                 >
                   Cancel
                 </button>

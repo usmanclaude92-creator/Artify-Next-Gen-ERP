@@ -296,7 +296,7 @@ export const OrganizationalStructureView: React.FC<OrganizationalStructureViewPr
       {/* Filter and Search Bar */}
       <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-4 shadow-xs flex flex-col sm:flex-row items-center justify-between gap-3">
         <div className="relative w-full sm:w-80">
-          <Search className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
+          <Search className="w-4 h-4 text-slate-600 dark:text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
           <input
             type="text"
             value={searchQuery}
@@ -380,7 +380,7 @@ export const OrganizationalStructureView: React.FC<OrganizationalStructureViewPr
                     </td>
                     <td className="px-4 py-3.5">
                       <span className="inline-flex items-center gap-1 font-semibold text-slate-700 dark:text-slate-300">
-                        <Users className="w-3.5 h-3.5 text-slate-400" />
+                        <Users className="w-3.5 h-3.5 text-slate-600 dark:text-slate-400" />
                         {dept.employeeCount} staff
                       </span>
                     </td>
@@ -389,7 +389,7 @@ export const OrganizationalStructureView: React.FC<OrganizationalStructureViewPr
                         className={`inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-semibold border ${
                           dept.status === 'Active'
                             ? 'bg-emerald-50 text-emerald-700 border-emerald-200 dark:bg-emerald-950/60 dark:text-emerald-300 dark:border-emerald-800'
-                            : 'bg-slate-100 text-slate-600 border-slate-200'
+                            : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 border-slate-200 dark:border-slate-700'
                         }`}
                       >
                         {dept.status}
@@ -398,7 +398,7 @@ export const OrganizationalStructureView: React.FC<OrganizationalStructureViewPr
                     <td className="px-4 py-3.5 text-right">
                       <button
                         onClick={() => handleEditDept(dept)}
-                        className="p-1.5 text-slate-500 hover:text-indigo-600 dark:hover:text-indigo-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-md transition-colors cursor-pointer"
+                        className="p-1.5 text-slate-500 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-md transition-colors cursor-pointer"
                       >
                         <Edit2 className="w-4 h-4" />
                       </button>
@@ -441,7 +441,7 @@ export const OrganizationalStructureView: React.FC<OrganizationalStructureViewPr
                       </span>
                     </div>
                   </div>
-                  <span className="text-[10px] px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 font-semibold">
+                  <span className="text-[10px] px-2 py-0.5 rounded-full bg-emerald-50 dark:bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-500/30 font-semibold">
                     {unit.status}
                   </span>
                 </div>
@@ -467,7 +467,7 @@ export const OrganizationalStructureView: React.FC<OrganizationalStructureViewPr
         <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl shadow-xs p-6">
           <div className="border-b border-slate-200 dark:border-slate-800 pb-4 mb-6">
             <h2 className="text-base font-bold text-slate-900 dark:text-slate-100 flex items-center gap-2">
-              <Users className="w-5 h-5 text-indigo-600" />
+              <Users className="w-5 h-5 text-indigo-600 dark:text-indigo-400" />
               <span>Section Setup & Operational Sub-Teams</span>
             </h2>
             <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
@@ -482,7 +482,7 @@ export const OrganizationalStructureView: React.FC<OrganizationalStructureViewPr
                 className="border border-slate-200 dark:border-slate-800 rounded-xl p-4 bg-slate-50/50 dark:bg-slate-800/40"
               >
                 <div className="flex items-center gap-2 font-bold text-slate-900 dark:text-slate-100 text-xs border-b border-slate-200 dark:border-slate-700 pb-2 mb-3">
-                  <Layers className="w-4 h-4 text-emerald-600" />
+                  <Layers className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
                   <span>{d.name} ({d.code})</span>
                 </div>
                 <div className="space-y-2">
@@ -490,13 +490,13 @@ export const OrganizationalStructureView: React.FC<OrganizationalStructureViewPr
                     <span className="font-medium text-slate-700 dark:text-slate-300">
                       SEC-0{idx + 1}A: Core Operations Team
                     </span>
-                    <span className="text-[10px] text-slate-500">Lead: {d.departmentHead}</span>
+                    <span className="text-[10px] text-slate-500 dark:text-slate-400">Lead: {d.departmentHead}</span>
                   </div>
                   <div className="flex items-center justify-between text-xs p-2 bg-white dark:bg-slate-900 rounded-lg border border-slate-200/80 dark:border-slate-700/60">
                     <span className="font-medium text-slate-700 dark:text-slate-300">
                       SEC-0{idx + 1}B: Compliance & Quality Cell
                     </span>
-                    <span className="text-[10px] text-slate-500">4 Members</span>
+                    <span className="text-[10px] text-slate-500 dark:text-slate-400">4 Members</span>
                   </div>
                 </div>
               </div>
@@ -510,7 +510,7 @@ export const OrganizationalStructureView: React.FC<OrganizationalStructureViewPr
         <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl shadow-xs p-6">
           <div className="border-b border-slate-200 dark:border-slate-800 pb-4 mb-6">
             <h2 className="text-base font-bold text-slate-900 dark:text-slate-100 flex items-center gap-2">
-              <GitFork className="w-5 h-5 text-indigo-600" />
+              <GitFork className="w-5 h-5 text-indigo-600 dark:text-indigo-400" />
               <span>Hierarchical Executive Reporting Organogram</span>
             </h2>
             <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
@@ -546,11 +546,11 @@ export const OrganizationalStructureView: React.FC<OrganizationalStructureViewPr
                     .map(branch => (
                       <div key={branch.id} className="space-y-2">
                         <div className="flex items-center gap-2 bg-slate-100 dark:bg-slate-800/80 p-2.5 rounded-lg border border-slate-200 dark:border-slate-700">
-                          <Building className="w-4 h-4 text-sky-600" />
+                          <Building className="w-4 h-4 text-sky-600 dark:text-sky-400" />
                           <span className="font-bold text-xs text-slate-900 dark:text-slate-100">
                             {branch.name} ({branch.code})
                           </span>
-                          <span className="text-[11px] text-slate-500">
+                          <span className="text-[11px] text-slate-500 dark:text-slate-400">
                             • Mgr: {branch.manager}
                           </span>
                         </div>
@@ -565,15 +565,15 @@ export const OrganizationalStructureView: React.FC<OrganizationalStructureViewPr
                                 className="flex items-center justify-between text-xs bg-white dark:bg-slate-900 px-3 py-1.5 rounded-md border border-slate-200 dark:border-slate-800"
                               >
                                 <div className="flex items-center gap-2">
-                                  <Layers className="w-3.5 h-3.5 text-emerald-600" />
+                                  <Layers className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
                                   <span className="font-semibold text-slate-800 dark:text-slate-200">
                                     {dept.name}
                                   </span>
-                                  <span className="font-mono text-[10px] text-slate-400">
+                                  <span className="font-mono text-[10px] text-slate-600 dark:text-slate-400">
                                     ({dept.costCenterCode})
                                   </span>
                                 </div>
-                                <span className="text-[11px] text-slate-500">
+                                <span className="text-[11px] text-slate-500 dark:text-slate-400">
                                   Head: {dept.departmentHead}
                                 </span>
                               </div>
@@ -590,16 +590,16 @@ export const OrganizationalStructureView: React.FC<OrganizationalStructureViewPr
 
       {/* Department Modal */}
       {isDeptModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/50 backdrop-blur-xs p-4">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-white/50 dark:bg-slate-900/50 backdrop-blur-xs p-4">
           <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl shadow-xl w-full max-w-lg overflow-hidden">
             <div className="px-6 py-4 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between">
               <h3 className="font-bold text-slate-900 dark:text-slate-100 text-sm flex items-center gap-2">
-                <Layers className="w-4 h-4 text-emerald-600" />
+                <Layers className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
                 <span>{editingDept ? 'Edit Cost Center Department' : 'Create Department'}</span>
               </h3>
               <button
                 onClick={() => setIsDeptModalOpen(false)}
-                className="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 cursor-pointer"
+                className="text-slate-600 dark:text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 cursor-pointer"
               >
                 <X className="w-5 h-5" />
               </button>

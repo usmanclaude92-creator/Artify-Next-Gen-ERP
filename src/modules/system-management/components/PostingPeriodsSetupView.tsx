@@ -308,10 +308,10 @@ export const PostingPeriodsSetupView: React.FC<PostingPeriodsSetupViewProps> = (
                       <span
                         className={`inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold border ${
                           period.overallStatus === 'Open'
-                            ? 'bg-emerald-50 text-emerald-700 border-emerald-200 dark:bg-emerald-950/60 dark:text-emerald-300'
+                            ? 'bg-emerald-50 text-emerald-700 border-emerald-200 dark:border-emerald-500/30 dark:bg-emerald-950/60 dark:text-emerald-300'
                             : period.overallStatus === 'Closed'
-                            ? 'bg-slate-100 text-slate-700 border-slate-200'
-                            : 'bg-rose-50 text-rose-700 border-rose-200'
+                            ? 'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border-slate-200 dark:border-slate-700'
+                            : 'bg-rose-50 dark:bg-rose-500/10 text-rose-700 dark:text-rose-300 border-rose-200 dark:border-rose-500/30'
                         }`}
                       >
                         {period.overallStatus.toUpperCase()}
@@ -321,14 +321,14 @@ export const PostingPeriodsSetupView: React.FC<PostingPeriodsSetupViewProps> = (
                       {period.overallStatus === 'Open' ? (
                         <button
                           onClick={() => handleOpenLockDialog(period, 'lock')}
-                          className="px-2.5 py-1 text-xs font-semibold rounded bg-amber-50 hover:bg-amber-100 text-amber-700 border border-amber-200 transition-colors cursor-pointer"
+                          className="px-2.5 py-1 text-xs font-semibold rounded bg-amber-50 dark:bg-amber-500/10 hover:bg-amber-100 dark:hover:bg-amber-500/20 text-amber-700 dark:text-amber-300 border border-amber-200 dark:border-amber-500/30 transition-colors cursor-pointer"
                         >
                           Lock Period
                         </button>
                       ) : (
                         <button
                           onClick={() => handleOpenLockDialog(period, 'unlock')}
-                          className="px-2.5 py-1 text-xs font-semibold rounded bg-emerald-50 hover:bg-emerald-100 text-emerald-700 border border-emerald-200 transition-colors cursor-pointer"
+                          className="px-2.5 py-1 text-xs font-semibold rounded bg-emerald-50 dark:bg-emerald-500/10 hover:bg-emerald-100 dark:hover:bg-emerald-500/20 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-500/30 transition-colors cursor-pointer"
                         >
                           Unlock
                         </button>
@@ -347,7 +347,7 @@ export const PostingPeriodsSetupView: React.FC<PostingPeriodsSetupViewProps> = (
         <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl shadow-xs p-6 space-y-6">
           <div className="border-b border-slate-200 dark:border-slate-800 pb-4">
             <h2 className="text-base font-bold text-slate-900 dark:text-slate-100 flex items-center gap-2">
-              <Layers className="w-5 h-5 text-indigo-600" />
+              <Layers className="w-5 h-5 text-indigo-600 dark:text-indigo-400" />
               <span>Sub-Ledger Granular Posting Matrix</span>
             </h2>
             <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
@@ -374,8 +374,8 @@ export const PostingPeriodsSetupView: React.FC<PostingPeriodsSetupViewProps> = (
                   <span
                     className={`inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold ${
                       period.overallStatus === 'Open'
-                        ? 'bg-emerald-100 text-emerald-800'
-                        : 'bg-slate-200 text-slate-700'
+                        ? 'bg-emerald-100 dark:bg-emerald-500/20 text-emerald-800 dark:text-emerald-200'
+                        : 'bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300'
                     }`}
                   >
                     {period.overallStatus}
@@ -414,7 +414,7 @@ export const PostingPeriodsSetupView: React.FC<PostingPeriodsSetupViewProps> = (
                           className={`w-full py-1 text-xs font-bold rounded cursor-pointer transition-colors ${
                             status === 'Open'
                               ? 'bg-emerald-600 text-white hover:bg-emerald-700'
-                              : 'bg-slate-200 text-slate-700 hover:bg-slate-300'
+                              : 'bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300 hover:bg-slate-300 dark:hover:bg-slate-600'
                           }`}
                         >
                           {status.toUpperCase()}
@@ -434,7 +434,7 @@ export const PostingPeriodsSetupView: React.FC<PostingPeriodsSetupViewProps> = (
         <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl shadow-xs p-6 space-y-6">
           <div className="border-b border-slate-200 dark:border-slate-800 pb-4">
             <h2 className="text-base font-bold text-slate-900 dark:text-slate-100 flex items-center gap-2">
-              <ShieldCheck className="w-5 h-5 text-indigo-600" />
+              <ShieldCheck className="w-5 h-5 text-indigo-600 dark:text-indigo-400" />
               <span>Period Hard-Lock & Statutory Audit Registry</span>
             </h2>
             <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
@@ -450,12 +450,12 @@ export const PostingPeriodsSetupView: React.FC<PostingPeriodsSetupViewProps> = (
               >
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2.5">
-                    <Lock className="w-4 h-4 text-rose-600" />
+                    <Lock className="w-4 h-4 text-rose-600 dark:text-rose-400" />
                     <div>
                       <h4 className="font-bold text-xs text-slate-900 dark:text-slate-100">
                         {lock.periodName} — Hard-Locked by {lock.lockedBy}
                       </h4>
-                      <span className="text-[11px] text-slate-500">
+                      <span className="text-[11px] text-slate-500 dark:text-slate-400">
                         Timestamp: {lock.lockedAt} • Reason: {lock.lockReason}
                       </span>
                     </div>
@@ -463,7 +463,7 @@ export const PostingPeriodsSetupView: React.FC<PostingPeriodsSetupViewProps> = (
 
                   <button
                     onClick={() => handleOpenLockDialog(postingPeriods[0], 'unlock')}
-                    className="px-3 py-1.5 text-xs font-semibold rounded-lg bg-indigo-50 text-indigo-700 hover:bg-indigo-100 border border-indigo-200 transition-colors cursor-pointer"
+                    className="px-3 py-1.5 text-xs font-semibold rounded-lg bg-indigo-50 dark:bg-indigo-500/10 text-indigo-700 dark:text-indigo-300 hover:bg-indigo-100 dark:hover:bg-indigo-500/20 border border-indigo-200 dark:border-indigo-500/30 transition-colors cursor-pointer"
                   >
                     Request Emergency Unlock
                   </button>
@@ -476,18 +476,18 @@ export const PostingPeriodsSetupView: React.FC<PostingPeriodsSetupViewProps> = (
 
       {/* Lock / Unlock Confirmation Dialog */}
       {isLockModalOpen && selectedPeriodForLock && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/50 backdrop-blur-xs p-4">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-white/50 dark:bg-slate-900/50 backdrop-blur-xs p-4">
           <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl shadow-xl w-full max-w-md overflow-hidden">
             <div className="px-6 py-4 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between">
               <h3 className="font-bold text-slate-900 dark:text-slate-100 text-sm flex items-center gap-2">
-                <Lock className="w-4 h-4 text-amber-600" />
+                <Lock className="w-4 h-4 text-amber-600 dark:text-amber-400" />
                 <span>
                   {lockActionType === 'lock' ? 'Lock Posting Period' : 'Unlock Posting Period'}
                 </span>
               </h3>
               <button
                 onClick={() => setIsLockModalOpen(false)}
-                className="text-slate-400 hover:text-slate-600 cursor-pointer"
+                className="text-slate-600 dark:text-slate-400 hover:text-slate-600 dark:hover:text-slate-400 cursor-pointer"
               >
                 <X className="w-5 h-5" />
               </button>
@@ -526,7 +526,7 @@ export const PostingPeriodsSetupView: React.FC<PostingPeriodsSetupViewProps> = (
                 </button>
                 <button
                   type="submit"
-                  className={`px-4 py-2 text-xs font-semibold text-white rounded-lg shadow-xs cursor-pointer ${
+                  className={`px-4 py-2 text-xs font-semibold text-slate-900 dark:text-white rounded-lg shadow-xs cursor-pointer ${
                     lockActionType === 'lock'
                       ? 'bg-amber-600 hover:bg-amber-700'
                       : 'bg-emerald-600 hover:bg-emerald-700'

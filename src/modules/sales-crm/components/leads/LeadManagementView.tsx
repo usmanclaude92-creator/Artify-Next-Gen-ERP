@@ -137,7 +137,7 @@ export const LeadManagementView: React.FC<LeadManagementViewProps> = ({
               <span className="px-2.5 py-0.5 rounded-full bg-indigo-50 dark:bg-indigo-950 text-indigo-600 dark:text-indigo-400 text-xs font-semibold">
                 Functional Area 06.01
               </span>
-              <span className="text-xs text-slate-500">Lead Pipeline & Qualification</span>
+              <span className="text-xs text-slate-500 dark:text-slate-400">Lead Pipeline & Qualification</span>
             </div>
             <h2 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white mt-1">
               Lead Management & Qualification Engine
@@ -191,7 +191,7 @@ export const LeadManagementView: React.FC<LeadManagementViewProps> = ({
       {/* Filter and Search Bar */}
       <div className="flex flex-col sm:flex-row gap-3">
         <div className="relative flex-1">
-          <Search className="w-4 h-4 absolute left-3.5 top-3 text-slate-400" />
+          <Search className="w-4 h-4 absolute left-3.5 top-3 text-slate-600 dark:text-slate-400" />
           <input
             type="text"
             value={searchQuery}
@@ -248,10 +248,10 @@ export const LeadManagementView: React.FC<LeadManagementViewProps> = ({
                   <td className="px-5 py-3.5">
                     <div className="font-bold text-slate-900 dark:text-white flex items-center gap-1.5">
                       <span>{lead.fullName}</span>
-                      <span className="text-[11px] font-normal text-slate-400">({lead.jobTitle})</span>
+                      <span className="text-[11px] font-normal text-slate-600 dark:text-slate-400">({lead.jobTitle})</span>
                     </div>
                     <div className="text-xs text-slate-500 dark:text-slate-400 flex items-center gap-1.5 mt-0.5">
-                      <Building2 className="w-3.5 h-3.5 text-indigo-500" />
+                      <Building2 className="w-3.5 h-3.5 text-indigo-500 dark:text-indigo-400" />
                       <span className="font-medium text-slate-700 dark:text-slate-300">{lead.companyName}</span>
                       <span className="text-slate-300 dark:text-slate-600">•</span>
                       <span>{lead.leadCode}</span>
@@ -279,7 +279,7 @@ export const LeadManagementView: React.FC<LeadManagementViewProps> = ({
                   </td>
                   <td className="px-4 py-3.5 text-xs text-slate-700 dark:text-slate-300">
                     <div className="font-medium">{lead.assignedRepName}</div>
-                    <div className="text-[10px] text-slate-400">{lead.city}, Oman</div>
+                    <div className="text-[10px] text-slate-600 dark:text-slate-400">{lead.city}, Oman</div>
                   </td>
                   <td className="px-4 py-3.5">
                     <span
@@ -314,7 +314,7 @@ export const LeadManagementView: React.FC<LeadManagementViewProps> = ({
                         scoreLeadAI(lead.id);
                         setSelectedLead(lead);
                       }}
-                      className="p-1.5 rounded-lg bg-indigo-50 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-400 hover:bg-indigo-100 border border-indigo-200 dark:border-indigo-800 text-xs cursor-pointer"
+                      className="p-1.5 rounded-lg bg-indigo-50 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-400 hover:bg-indigo-100 dark:hover:bg-indigo-500/20 border border-indigo-200 dark:border-indigo-800 text-xs cursor-pointer"
                       title="AI Score & Insights"
                     >
                       <Sparkles className="w-3.5 h-3.5" />

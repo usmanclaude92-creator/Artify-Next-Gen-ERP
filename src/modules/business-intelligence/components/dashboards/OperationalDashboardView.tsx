@@ -79,13 +79,13 @@ export const OperationalDashboardView: React.FC = () => {
       {/* Transaction Queues & Delays */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Transaction Queue Table (2 cols) */}
-        <div className="lg:col-span-2 bg-white border border-slate-200 rounded-xl p-5 shadow-xs">
+        <div className="lg:col-span-2 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl p-5 shadow-xs">
           <div className="flex items-center justify-between mb-4">
             <div>
-              <h3 className="text-sm font-bold text-slate-900">Enterprise Workload & Approval Queues</h3>
-              <p className="text-xs text-slate-500">Live operational transaction backlog and average turnaround</p>
+              <h3 className="text-sm font-bold text-slate-900 dark:text-slate-100">Enterprise Workload & Approval Queues</h3>
+              <p className="text-xs text-slate-500 dark:text-slate-400">Live operational transaction backlog and average turnaround</p>
             </div>
-            <span className="text-xs font-mono font-semibold text-slate-500 bg-slate-100 px-2 py-1 rounded">
+            <span className="text-xs font-mono font-semibold text-slate-500 dark:text-slate-400 bg-slate-100 dark:bg-slate-800 px-2 py-1 rounded">
               Auto-refresh 30s
             </span>
           </div>
@@ -94,7 +94,7 @@ export const OperationalDashboardView: React.FC = () => {
             {operationalQueues.map((q, idx) => (
               <div
                 key={idx}
-                className="p-3 bg-slate-50 border border-slate-200 rounded-xl flex flex-wrap items-center justify-between gap-3 hover:bg-slate-100/70 transition-colors"
+                className="p-3 bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-xl flex flex-wrap items-center justify-between gap-3 hover:bg-slate-100/70 dark:hover:bg-slate-800/70 transition-colors"
               >
                 <div>
                   <div className="flex items-center gap-2">
@@ -107,29 +107,29 @@ export const OperationalDashboardView: React.FC = () => {
                           : 'bg-emerald-500'
                       }`}
                     />
-                    <span className="text-xs font-bold text-slate-900">{q.name}</span>
+                    <span className="text-xs font-bold text-slate-900 dark:text-slate-100">{q.name}</span>
                   </div>
-                  <div className="text-[11px] text-slate-500 mt-1 flex items-center gap-3">
+                  <div className="text-[11px] text-slate-500 dark:text-slate-400 mt-1 flex items-center gap-3">
                     <span>
-                      Avg SLA: <strong className="text-slate-700">{q.slaAvgHours} hrs</strong>
+                      Avg SLA: <strong className="text-slate-700 dark:text-slate-300">{q.slaAvgHours} hrs</strong>
                     </span>
                     <span>
-                      Priority: <strong className="text-slate-700">{q.priority}</strong>
+                      Priority: <strong className="text-slate-700 dark:text-slate-300">{q.priority}</strong>
                     </span>
                   </div>
                 </div>
 
                 <div className="flex items-center gap-3">
-                  <span className="font-mono text-sm font-bold text-slate-900 bg-white border border-slate-200 px-2.5 py-1 rounded-lg">
+                  <span className="font-mono text-sm font-bold text-slate-900 dark:text-slate-100 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 px-2.5 py-1 rounded-lg">
                     {q.count} items
                   </span>
                   <span
                     className={`text-[10px] font-bold px-2 py-0.5 rounded ${
                       q.status === 'Critical Delay'
-                        ? 'bg-rose-100 text-rose-800'
+                        ? 'bg-rose-100 dark:bg-rose-500/20 text-rose-800 dark:text-rose-200'
                         : q.status === 'Warning SLA'
-                        ? 'bg-amber-100 text-amber-800'
-                        : 'bg-emerald-100 text-emerald-800'
+                        ? 'bg-amber-100 dark:bg-amber-500/20 text-amber-800 dark:text-amber-200'
+                        : 'bg-emerald-100 dark:bg-emerald-500/20 text-emerald-800 dark:text-emerald-200'
                     }`}
                   >
                     {q.status}
@@ -141,32 +141,32 @@ export const OperationalDashboardView: React.FC = () => {
         </div>
 
         {/* System & Telemetry Health (1 col) */}
-        <div className="bg-white border border-slate-200 rounded-xl p-5 shadow-xs space-y-4 flex flex-col justify-between">
+        <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl p-5 shadow-xs space-y-4 flex flex-col justify-between">
           <div>
-            <h3 className="text-sm font-bold text-slate-900 mb-1 flex items-center gap-2">
-              <Server className="w-4 h-4 text-indigo-600" />
+            <h3 className="text-sm font-bold text-slate-900 dark:text-slate-100 mb-1 flex items-center gap-2">
+              <Server className="w-4 h-4 text-indigo-600 dark:text-indigo-400" />
               Engine & Microservice Health
             </h3>
-            <p className="text-xs text-slate-500 mb-4">Core compute and integration telemetry</p>
+            <p className="text-xs text-slate-500 dark:text-slate-400 mb-4">Core compute and integration telemetry</p>
 
             <div className="space-y-3">
               {systemHealthTelemetry.map(s => (
-                <div key={s.service} className="p-2.5 rounded-lg border border-slate-100 bg-slate-50 text-xs space-y-1">
+                <div key={s.service} className="p-2.5 rounded-lg border border-slate-100 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/50 text-xs space-y-1">
                   <div className="flex justify-between items-center">
-                    <span className="font-semibold text-slate-800">{s.service}</span>
-                    <span className="font-mono font-bold text-emerald-700">{s.uptime}</span>
+                    <span className="font-semibold text-slate-800 dark:text-slate-200">{s.service}</span>
+                    <span className="font-mono font-bold text-emerald-700 dark:text-emerald-300">{s.uptime}</span>
                   </div>
-                  <div className="flex justify-between items-center text-[10px] text-slate-500">
+                  <div className="flex justify-between items-center text-[10px] text-slate-500 dark:text-slate-400">
                     <span>Latency: {s.latencyMs}ms</span>
-                    <span className="text-emerald-600 font-semibold">{s.status}</span>
+                    <span className="text-emerald-600 dark:text-emerald-400 font-semibold">{s.status}</span>
                   </div>
                 </div>
               ))}
             </div>
           </div>
 
-          <div className="p-3 bg-indigo-50 border border-indigo-200 rounded-xl text-xs text-indigo-900 flex items-center gap-2">
-            <Zap className="w-4 h-4 text-indigo-600 shrink-0" />
+          <div className="p-3 bg-indigo-50 dark:bg-indigo-500/10 border border-indigo-200 dark:border-indigo-500/30 rounded-xl text-xs text-indigo-900 dark:text-indigo-100 flex items-center gap-2">
+            <Zap className="w-4 h-4 text-indigo-600 dark:text-indigo-400 shrink-0" />
             <span>Zero queued deadlock events detected in last 24-hour transaction log.</span>
           </div>
         </div>

@@ -208,7 +208,7 @@ export const SalesQuotationsView: React.FC<SalesQuotationsViewProps> = ({
               <span className="px-2.5 py-0.5 rounded-full bg-emerald-50 dark:bg-emerald-950 text-emerald-600 dark:text-emerald-400 text-xs font-semibold">
                 Functional Area 06.05
               </span>
-              <span className="text-xs text-slate-500">Configure, Price, Quote (CPQ) Engine</span>
+              <span className="text-xs text-slate-500 dark:text-slate-400">Configure, Price, Quote (CPQ) Engine</span>
             </div>
             <h2 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white mt-1">
               Sales Quotations, Pricing & Commercial Approvals
@@ -265,7 +265,7 @@ export const SalesQuotationsView: React.FC<SalesQuotationsViewProps> = ({
         <div className="lg:col-span-5 space-y-4">
           <div className="flex gap-2">
             <div className="relative flex-1">
-              <Search className="w-4 h-4 absolute left-3 top-3 text-slate-400" />
+              <Search className="w-4 h-4 absolute left-3 top-3 text-slate-600 dark:text-slate-400" />
               <input
                 type="text"
                 value={searchQuery}
@@ -298,7 +298,7 @@ export const SalesQuotationsView: React.FC<SalesQuotationsViewProps> = ({
                   className={`p-4 rounded-2xl border transition-all cursor-pointer text-left ${
                     isSelected
                       ? 'bg-emerald-50/70 dark:bg-emerald-950/40 border-emerald-400 dark:border-emerald-700 shadow-sm ring-1 ring-emerald-400/50'
-                      : 'bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800 hover:border-slate-300'
+                      : 'bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800 hover:border-slate-300 dark:hover:border-slate-600'
                   }`}
                 >
                   <div className="flex items-start justify-between">
@@ -326,13 +326,13 @@ export const SalesQuotationsView: React.FC<SalesQuotationsViewProps> = ({
                   </div>
 
                   <div className="flex items-center justify-between text-xs mt-2 pt-2 border-t border-slate-100 dark:border-slate-800">
-                    <span className="text-slate-500">Total (incl. 5% VAT):</span>
+                    <span className="text-slate-500 dark:text-slate-400">Total (incl. 5% VAT):</span>
                     <span className="font-bold text-slate-900 dark:text-white">
                       OMR {quote.totalAmountOMR.toLocaleString()}
                     </span>
                   </div>
 
-                  <div className="flex items-center justify-between text-[11px] text-slate-400 mt-1">
+                  <div className="flex items-center justify-between text-[11px] text-slate-600 dark:text-slate-400 mt-1">
                     <span>Valid until: {quote.validUntilDate}</span>
                     <span className="font-semibold text-emerald-600 dark:text-emerald-400">
                       Margin: {quote.grossMarginPercentage.toFixed(1)}%
@@ -390,7 +390,7 @@ export const SalesQuotationsView: React.FC<SalesQuotationsViewProps> = ({
 
                   <button
                     onClick={() => window.print()}
-                    className="p-2 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200 text-xs cursor-pointer"
+                    className="p-2 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 text-xs cursor-pointer"
                     title="Print Formal Quotation"
                   >
                     <Printer className="w-4 h-4" />
@@ -401,19 +401,19 @@ export const SalesQuotationsView: React.FC<SalesQuotationsViewProps> = ({
               {/* Commercial Terms Strip */}
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 p-3.5 rounded-xl bg-slate-50 dark:bg-slate-800/60 text-xs">
                 <div>
-                  <span className="text-slate-400 block font-medium">Payment Terms</span>
+                  <span className="text-slate-600 dark:text-slate-400 block font-medium">Payment Terms</span>
                   <span className="font-bold text-slate-900 dark:text-white mt-0.5 block">
                     {selectedQuote.paymentTerms}
                   </span>
                 </div>
                 <div>
-                  <span className="text-slate-400 block font-medium">Delivery Lead Time</span>
+                  <span className="text-slate-600 dark:text-slate-400 block font-medium">Delivery Lead Time</span>
                   <span className="font-bold text-slate-900 dark:text-white mt-0.5 block">
                     {selectedQuote.deliveryLeadTime}
                   </span>
                 </div>
                 <div>
-                  <span className="text-slate-400 block font-medium">Incoterms</span>
+                  <span className="text-slate-600 dark:text-slate-400 block font-medium">Incoterms</span>
                   <span className="font-bold text-slate-900 dark:text-white mt-0.5 block">
                     {selectedQuote.incoterms}
                   </span>
@@ -422,7 +422,7 @@ export const SalesQuotationsView: React.FC<SalesQuotationsViewProps> = ({
 
               {/* Line Items Table */}
               <div>
-                <h4 className="font-bold text-xs uppercase tracking-wider text-slate-500 mb-2">
+                <h4 className="font-bold text-xs uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-2">
                   Quotation Line Items & Specifications
                 </h4>
                 <div className="overflow-x-auto border border-slate-200 dark:border-slate-800 rounded-xl">
@@ -440,7 +440,7 @@ export const SalesQuotationsView: React.FC<SalesQuotationsViewProps> = ({
                         <tr key={line.id}>
                           <td className="px-3.5 py-2.5">
                             <div className="font-semibold text-slate-900 dark:text-white">{line.description}</div>
-                            <div className="text-[10px] text-slate-400 font-mono">{line.itemCode}</div>
+                            <div className="text-[10px] text-slate-600 dark:text-slate-400 font-mono">{line.itemCode}</div>
                           </td>
                           <td className="px-3 py-2.5 text-center">
                             {line.quantity} {line.uom}
@@ -495,7 +495,7 @@ export const SalesQuotationsView: React.FC<SalesQuotationsViewProps> = ({
               </div>
             </div>
           ) : (
-            <div className="p-12 text-center text-slate-400 bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800">
+            <div className="p-12 text-center text-slate-600 dark:text-slate-400 bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800">
               Select a quotation to inspect line items and pricing breakdown.
             </div>
           )}

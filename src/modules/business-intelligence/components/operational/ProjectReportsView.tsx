@@ -32,19 +32,19 @@ export const ProjectReportsView: React.FC = () => {
         onExport={handleExport}
       />
 
-      <div className="bg-white border border-slate-200 rounded-xl p-5 shadow-xs">
-        <div className="pb-4 mb-4 border-b border-slate-100">
-          <h3 className="text-sm font-bold text-slate-900 flex items-center gap-2">
-            <Briefcase className="w-4 h-4 text-indigo-600" />
+      <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl p-5 shadow-xs">
+        <div className="pb-4 mb-4 border-b border-slate-100 dark:border-slate-800">
+          <h3 className="text-sm font-bold text-slate-900 dark:text-slate-100 flex items-center gap-2">
+            <Briefcase className="w-4 h-4 text-indigo-600 dark:text-indigo-400" />
             EPC & Infrastructure Project Earned Value Performance
           </h3>
-          <p className="text-xs text-slate-500">Contract values, cost performance index (CPI), schedule performance (SPI), and recognized margins</p>
+          <p className="text-xs text-slate-500 dark:text-slate-400">Contract values, cost performance index (CPI), schedule performance (SPI), and recognized margins</p>
         </div>
 
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs border-collapse">
             <thead>
-              <tr className="border-b border-slate-200 bg-slate-50 text-slate-600">
+              <tr className="border-b border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/50 text-slate-600 dark:text-slate-400">
                 <th className="py-2.5 px-3 font-semibold">Project Code & Title</th>
                 <th className="py-2.5 px-3 font-semibold">Client Name</th>
                 <th className="py-2.5 px-3 font-semibold">Project Manager</th>
@@ -57,33 +57,33 @@ export const ProjectReportsView: React.FC = () => {
                 <th className="py-2.5 px-3 text-center">Health</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-100">
+            <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
               {projectData.map(row => (
-                <tr key={row.id} className="hover:bg-slate-50">
+                <tr key={row.id} className="hover:bg-slate-50 dark:hover:bg-slate-800/50">
                   <td className="py-2.5 px-3">
-                    <span className="font-bold text-slate-900 block">{row.projectName}</span>
-                    <span className="text-[10px] text-slate-400 font-mono">{row.projectCode}</span>
+                    <span className="font-bold text-slate-900 dark:text-slate-100 block">{row.projectName}</span>
+                    <span className="text-[10px] text-slate-500 dark:text-slate-400 font-mono">{row.projectCode}</span>
                   </td>
-                  <td className="py-2.5 px-3 text-slate-700 font-medium">{row.clientName}</td>
-                  <td className="py-2.5 px-3 text-slate-600">{row.projectManager}</td>
-                  <td className="py-2.5 px-3 font-mono font-bold text-right text-slate-900">
+                  <td className="py-2.5 px-3 text-slate-700 dark:text-slate-300 font-medium">{row.clientName}</td>
+                  <td className="py-2.5 px-3 text-slate-600 dark:text-slate-400">{row.projectManager}</td>
+                  <td className="py-2.5 px-3 font-mono font-bold text-right text-slate-900 dark:text-slate-100">
                     {formatCurrency(row.contractValueOMR)}
                   </td>
-                  <td className="py-2.5 px-3 font-mono text-right text-slate-600">
+                  <td className="py-2.5 px-3 font-mono text-right text-slate-600 dark:text-slate-400">
                     {formatCurrency(row.actualCostOMR)}
                   </td>
-                  <td className="py-2.5 px-3 font-mono font-bold text-right text-indigo-900">{row.progressPercent}%</td>
-                  <td className="py-2.5 px-3 font-mono text-center font-bold text-emerald-700">{row.cpi}</td>
-                  <td className="py-2.5 px-3 font-mono text-center font-bold text-indigo-700">{row.spi}</td>
-                  <td className="py-2.5 px-3 font-mono font-bold text-right text-emerald-700">{row.marginPercent}%</td>
+                  <td className="py-2.5 px-3 font-mono font-bold text-right text-indigo-900 dark:text-indigo-100">{row.progressPercent}%</td>
+                  <td className="py-2.5 px-3 font-mono text-center font-bold text-emerald-700 dark:text-emerald-300">{row.cpi}</td>
+                  <td className="py-2.5 px-3 font-mono text-center font-bold text-indigo-700 dark:text-indigo-300">{row.spi}</td>
+                  <td className="py-2.5 px-3 font-mono font-bold text-right text-emerald-700 dark:text-emerald-300">{row.marginPercent}%</td>
                   <td className="py-2.5 px-3 text-center">
                     <span
                       className={`inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold ${
                         row.health === 'Green'
-                          ? 'bg-emerald-100 text-emerald-800'
+                          ? 'bg-emerald-100 dark:bg-emerald-500/20 text-emerald-800 dark:text-emerald-200'
                           : row.health === 'Amber'
-                          ? 'bg-amber-100 text-amber-800'
-                          : 'bg-rose-100 text-rose-800'
+                          ? 'bg-amber-100 dark:bg-amber-500/20 text-amber-800 dark:text-amber-200'
+                          : 'bg-rose-100 dark:bg-rose-500/20 text-rose-800 dark:text-rose-200'
                       }`}
                     >
                       {row.health}

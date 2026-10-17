@@ -119,67 +119,67 @@ export const ExecutiveDashboardView: React.FC = () => {
 
       {/* Row 2: Secondary Operational Metrics */}
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
-        <div className="bg-white border border-slate-200 rounded-xl p-3 shadow-xs">
-          <span className="text-[11px] font-semibold text-slate-500 block">Inventory Valuation</span>
-          <span className="text-sm font-bold font-mono text-slate-900 mt-1 block">
+        <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl p-3 shadow-xs">
+          <span className="text-[11px] font-semibold text-slate-500 dark:text-slate-400 block">Inventory Valuation</span>
+          <span className="text-sm font-bold font-mono text-slate-900 dark:text-slate-100 mt-1 block">
             {formatCurrency(executiveMetrics.inventoryValuation)}
           </span>
-          <span className="text-[10px] text-emerald-600 font-semibold mt-0.5 block">Turnover: 6.2x</span>
+          <span className="text-[10px] text-emerald-600 dark:text-emerald-400 font-semibold mt-0.5 block">Turnover: 6.2x</span>
         </div>
 
-        <div className="bg-white border border-slate-200 rounded-xl p-3 shadow-xs">
-          <span className="text-[11px] font-semibold text-slate-500 block">Active Capital Projects</span>
-          <span className="text-sm font-bold font-mono text-slate-900 mt-1 block">
+        <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl p-3 shadow-xs">
+          <span className="text-[11px] font-semibold text-slate-500 dark:text-slate-400 block">Active Capital Projects</span>
+          <span className="text-sm font-bold font-mono text-slate-900 dark:text-slate-100 mt-1 block">
             {executiveMetrics.activeProjectsCount} Projects
           </span>
-          <span className="text-[10px] text-indigo-600 font-semibold mt-0.5 block">
+          <span className="text-[10px] text-indigo-600 dark:text-indigo-400 font-semibold mt-0.5 block">
             Avg Margin: {executiveMetrics.averageProjectMarginPercent}%
           </span>
         </div>
 
-        <div className="bg-white border border-slate-200 rounded-xl p-3 shadow-xs">
-          <span className="text-[11px] font-semibold text-slate-500 block">DSO (Collection Cycle)</span>
-          <span className="text-sm font-bold font-mono text-slate-900 mt-1 block">
+        <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl p-3 shadow-xs">
+          <span className="text-[11px] font-semibold text-slate-500 dark:text-slate-400 block">DSO (Collection Cycle)</span>
+          <span className="text-sm font-bold font-mono text-slate-900 dark:text-slate-100 mt-1 block">
             {executiveMetrics.daysSalesOutstanding} Days
           </span>
-          <span className="text-[10px] text-emerald-600 font-semibold mt-0.5 block">Target: 45 Days</span>
+          <span className="text-[10px] text-emerald-600 dark:text-emerald-400 font-semibold mt-0.5 block">Target: 45 Days</span>
         </div>
 
-        <div className="bg-white border border-slate-200 rounded-xl p-3 shadow-xs">
-          <span className="text-[11px] font-semibold text-slate-500 block">DPO (Payable Terms)</span>
-          <span className="text-sm font-bold font-mono text-slate-900 mt-1 block">
+        <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl p-3 shadow-xs">
+          <span className="text-[11px] font-semibold text-slate-500 dark:text-slate-400 block">DPO (Payable Terms)</span>
+          <span className="text-sm font-bold font-mono text-slate-900 dark:text-slate-100 mt-1 block">
             {executiveMetrics.daysPayableOutstanding} Days
           </span>
-          <span className="text-[10px] text-slate-500 font-semibold mt-0.5 block">Optimal Terms</span>
+          <span className="text-[10px] text-slate-500 dark:text-slate-400 font-semibold mt-0.5 block">Optimal Terms</span>
         </div>
 
-        <div className="bg-white border border-slate-200 rounded-xl p-3 shadow-xs">
-          <span className="text-[11px] font-semibold text-slate-500 block">Strategic KPI Health</span>
-          <span className="text-sm font-bold font-mono text-emerald-700 mt-1 block">
+        <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl p-3 shadow-xs">
+          <span className="text-[11px] font-semibold text-slate-500 dark:text-slate-400 block">Strategic KPI Health</span>
+          <span className="text-sm font-bold font-mono text-emerald-700 dark:text-emerald-300 mt-1 block">
             {executiveMetrics.kpiAchievementRate}%
           </span>
-          <span className="text-[10px] text-emerald-600 font-semibold mt-0.5 block">91.4% Target Met</span>
+          <span className="text-[10px] text-emerald-600 dark:text-emerald-400 font-semibold mt-0.5 block">91.4% Target Met</span>
         </div>
 
-        <div className="bg-white border border-slate-200 rounded-xl p-3 shadow-xs">
-          <span className="text-[11px] font-semibold text-slate-500 block">Outstanding Approvals</span>
-          <span className="text-sm font-bold font-mono text-amber-700 mt-1 block">
+        <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl p-3 shadow-xs">
+          <span className="text-[11px] font-semibold text-slate-500 dark:text-slate-400 block">Outstanding Approvals</span>
+          <span className="text-sm font-bold font-mono text-amber-700 dark:text-amber-300 mt-1 block">
             {executiveMetrics.outstandingApprovalsCount} Pending
           </span>
-          <span className="text-[10px] text-amber-600 font-semibold mt-0.5 block">Avg SLA: 3.2 hrs</span>
+          <span className="text-[10px] text-amber-600 dark:text-amber-400 font-semibold mt-0.5 block">Avg SLA: 3.2 hrs</span>
         </div>
       </div>
 
       {/* Row 3: Visual Trends & Department Allocations */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Monthly Revenue vs Expenses Chart (2 Columns) */}
-        <div className="lg:col-span-2 bg-white border border-slate-200 rounded-xl p-5 shadow-xs flex flex-col justify-between">
+        <div className="lg:col-span-2 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl p-5 shadow-xs flex flex-col justify-between">
           <div className="flex items-center justify-between mb-4">
             <div>
-              <h3 className="text-sm font-bold text-slate-900">Revenue, Operating Expenses & Profit Trajectory</h3>
-              <p className="text-xs text-slate-500">Monthly breakdown for FY2026 in {currencySymbol}</p>
+              <h3 className="text-sm font-bold text-slate-900 dark:text-slate-100">Revenue, Operating Expenses & Profit Trajectory</h3>
+              <p className="text-xs text-slate-500 dark:text-slate-400">Monthly breakdown for FY2026 in {currencySymbol}</p>
             </div>
-            <span className="text-xs font-mono font-semibold text-indigo-700 bg-indigo-50 px-2 py-1 rounded">
+            <span className="text-xs font-mono font-semibold text-indigo-700 dark:text-indigo-300 bg-indigo-50 dark:bg-indigo-500/10 px-2 py-1 rounded">
               Trend: +12.4% YoY
             </span>
           </div>
@@ -219,10 +219,10 @@ export const ExecutiveDashboardView: React.FC = () => {
         </div>
 
         {/* Operating Expenses by Department (1 Column) */}
-        <div className="bg-white border border-slate-200 rounded-xl p-5 shadow-xs flex flex-col justify-between">
+        <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl p-5 shadow-xs flex flex-col justify-between">
           <div className="mb-4">
-            <h3 className="text-sm font-bold text-slate-900">Operating Expenses by Department</h3>
-            <p className="text-xs text-slate-500">Distribution of OPEX allocations</p>
+            <h3 className="text-sm font-bold text-slate-900 dark:text-slate-100">Operating Expenses by Department</h3>
+            <p className="text-xs text-slate-500 dark:text-slate-400">Distribution of OPEX allocations</p>
           </div>
 
           <div className="h-52 w-full flex items-center justify-center">
@@ -252,9 +252,9 @@ export const ExecutiveDashboardView: React.FC = () => {
               <div key={dept.department} className="flex items-center justify-between">
                 <div className="flex items-center gap-1.5 truncate">
                   <span className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: PIE_COLORS[i % PIE_COLORS.length] }} />
-                  <span className="text-slate-600 truncate">{dept.department}</span>
+                  <span className="text-slate-600 dark:text-slate-400 truncate">{dept.department}</span>
                 </div>
-                <span className="font-mono font-semibold text-slate-800">{dept.share}%</span>
+                <span className="font-mono font-semibold text-slate-800 dark:text-slate-200">{dept.share}%</span>
               </div>
             ))}
           </div>
@@ -264,26 +264,26 @@ export const ExecutiveDashboardView: React.FC = () => {
       {/* Row 4: Regional Revenue & Top Strategic Accounts */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Regional Branch Performance */}
-        <div className="bg-white border border-slate-200 rounded-xl p-5 shadow-xs">
+        <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl p-5 shadow-xs">
           <div className="flex items-center justify-between mb-4">
             <div>
-              <h3 className="text-sm font-bold text-slate-900">Regional Branch Revenue Contribution</h3>
-              <p className="text-xs text-slate-500">Performance across Sultanate operating hubs</p>
+              <h3 className="text-sm font-bold text-slate-900 dark:text-slate-100">Regional Branch Revenue Contribution</h3>
+              <p className="text-xs text-slate-500 dark:text-slate-400">Performance across Sultanate operating hubs</p>
             </div>
-            <Building2 className="w-4 h-4 text-slate-400" />
+            <Building2 className="w-4 h-4 text-slate-500 dark:text-slate-400" />
           </div>
 
           <div className="space-y-3.5">
             {revenueByBranch.map(branch => (
               <div key={branch.branch} className="space-y-1.5">
                 <div className="flex justify-between text-xs">
-                  <span className="font-semibold text-slate-800">{branch.branch}</span>
+                  <span className="font-semibold text-slate-800 dark:text-slate-200">{branch.branch}</span>
                   <div className="flex items-center gap-2">
-                    <span className="font-mono font-bold text-slate-900">{formatCurrency(branch.revenue)}</span>
-                    <span className="text-[11px] font-semibold text-emerald-600 bg-emerald-50 px-1 rounded">{branch.growth}</span>
+                    <span className="font-mono font-bold text-slate-900 dark:text-slate-100">{formatCurrency(branch.revenue)}</span>
+                    <span className="text-[11px] font-semibold text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-500/10 px-1 rounded">{branch.growth}</span>
                   </div>
                 </div>
-                <div className="w-full bg-slate-100 rounded-full h-2 overflow-hidden">
+                <div className="w-full bg-slate-100 dark:bg-slate-800 rounded-full h-2 overflow-hidden">
                   <div
                     className="bg-indigo-600 h-full rounded-full transition-all duration-500"
                     style={{ width: `${branch.percent}%` }}
@@ -295,30 +295,30 @@ export const ExecutiveDashboardView: React.FC = () => {
         </div>
 
         {/* Top Strategic Client Accounts */}
-        <div className="bg-white border border-slate-200 rounded-xl p-5 shadow-xs">
+        <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl p-5 shadow-xs">
           <div className="flex items-center justify-between mb-4">
             <div>
-              <h3 className="text-sm font-bold text-slate-900">Top Strategic Client Partnerships</h3>
-              <p className="text-xs text-slate-500">Tier 1 accounts, revenue contribution and DSO</p>
+              <h3 className="text-sm font-bold text-slate-900 dark:text-slate-100">Top Strategic Client Partnerships</h3>
+              <p className="text-xs text-slate-500 dark:text-slate-400">Tier 1 accounts, revenue contribution and DSO</p>
             </div>
-            <Briefcase className="w-4 h-4 text-slate-400" />
+            <Briefcase className="w-4 h-4 text-slate-500 dark:text-slate-400" />
           </div>
 
           <div className="space-y-2.5">
             {customerAnalytics.slice(0, 4).map((cust, i) => (
-              <div key={cust.customerCode} className="p-2.5 rounded-lg border border-slate-100 bg-slate-50/70 flex items-center justify-between">
+              <div key={cust.customerCode} className="p-2.5 rounded-lg border border-slate-100 dark:border-slate-800 bg-slate-50/70 dark:bg-slate-800/70 flex items-center justify-between">
                 <div>
-                  <div className="text-xs font-semibold text-slate-900 flex items-center gap-1.5">
-                    <span className="font-mono text-[10px] text-slate-400">#{i + 1}</span>
+                  <div className="text-xs font-semibold text-slate-900 dark:text-slate-100 flex items-center gap-1.5">
+                    <span className="font-mono text-[10px] text-slate-500 dark:text-slate-400">#{i + 1}</span>
                     {cust.customerName}
                   </div>
-                  <div className="text-[11px] text-slate-500 mt-0.5">
-                    Tier: <strong className="text-slate-700">{cust.tier}</strong> • Margin: <strong className="text-emerald-700">{cust.ytdGrossMarginPercent}%</strong>
+                  <div className="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">
+                    Tier: <strong className="text-slate-700 dark:text-slate-300">{cust.tier}</strong> • Margin: <strong className="text-emerald-700 dark:text-emerald-300">{cust.ytdGrossMarginPercent}%</strong>
                   </div>
                 </div>
                 <div className="text-right">
-                  <div className="text-xs font-mono font-bold text-indigo-900">{formatCurrency(cust.ytdRevenueOMR)}</div>
-                  <div className="text-[10px] text-slate-500 font-mono">DSO: {cust.daysSalesOutstanding}d</div>
+                  <div className="text-xs font-mono font-bold text-indigo-900 dark:text-indigo-100">{formatCurrency(cust.ytdRevenueOMR)}</div>
+                  <div className="text-[10px] text-slate-500 dark:text-slate-400 font-mono">DSO: {cust.daysSalesOutstanding}d</div>
                 </div>
               </div>
             ))}

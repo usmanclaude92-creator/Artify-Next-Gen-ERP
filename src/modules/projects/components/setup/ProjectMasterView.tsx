@@ -470,50 +470,50 @@ export const ProjectMasterView: React.FC<ProjectMasterViewProps> = ({
     switch (status) {
       case 'ACTIVE_IN_PROGRESS':
         return (
-          <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-emerald-950/80 text-emerald-300 border border-emerald-800">
+          <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-emerald-50 dark:bg-emerald-950/80 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800">
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
             Active
           </span>
         );
       case 'PLANNING':
         return (
-          <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-blue-950/80 text-blue-300 border border-blue-800">
-            <Clock className="w-3 h-3 text-blue-400" />
+          <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-blue-50 dark:bg-blue-950/80 text-blue-700 dark:text-blue-300 border border-blue-200 dark:border-blue-800">
+            <Clock className="w-3 h-3 text-blue-600 dark:text-blue-400" />
             Planning
           </span>
         );
       case 'PROPOSED':
         return (
-          <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-purple-950/80 text-purple-300 border border-purple-800">
-            <Info className="w-3 h-3 text-purple-400" />
+          <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-purple-50 dark:bg-purple-950/80 text-purple-700 dark:text-purple-300 border border-purple-200 dark:border-purple-800">
+            <Info className="w-3 h-3 text-purple-600 dark:text-purple-400" />
             Proposed
           </span>
         );
       case 'ON_HOLD':
         return (
-          <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-amber-950/80 text-amber-300 border border-amber-800">
-            <AlertTriangle className="w-3 h-3 text-amber-400" />
+          <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-amber-50 dark:bg-amber-950/80 text-amber-800 dark:text-amber-300 border border-amber-200 dark:border-amber-800">
+            <AlertTriangle className="w-3 h-3 text-amber-700 dark:text-amber-400" />
             On Hold
           </span>
         );
       case 'SUBSTANTIALLY_COMPLETE':
         return (
-          <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-indigo-950/80 text-indigo-300 border border-indigo-800">
-            <CheckCircle2 className="w-3 h-3 text-indigo-400" />
+          <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-indigo-50 dark:bg-indigo-950/80 text-indigo-700 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-800">
+            <CheckCircle2 className="w-3 h-3 text-indigo-600 dark:text-indigo-400" />
             Substantial Comp.
           </span>
         );
       case 'CLOSED':
         return (
-          <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-slate-800 text-slate-300 border border-slate-700">
-            <ShieldCheck className="w-3 h-3 text-slate-400" />
+          <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700">
+            <ShieldCheck className="w-3 h-3 text-slate-600 dark:text-slate-400" />
             Closed Out
           </span>
         );
       case 'CANCELLED':
         return (
-          <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-rose-950/80 text-rose-300 border border-rose-800">
-            <XCircle className="w-3 h-3 text-rose-400" />
+          <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-rose-50 dark:bg-rose-950/80 text-rose-700 dark:text-rose-300 border border-rose-200 dark:border-rose-800">
+            <XCircle className="w-3 h-3 text-rose-600 dark:text-rose-400" />
             Cancelled
           </span>
         );
@@ -527,25 +527,25 @@ export const ProjectMasterView: React.FC<ProjectMasterViewProps> = ({
     switch (priority) {
       case 'CRITICAL_FAST_TRACK':
         return (
-          <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-rose-950/90 text-rose-300 border border-rose-800 tracking-wider uppercase">
+          <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-rose-50 dark:bg-rose-950/90 text-rose-700 dark:text-rose-300 border border-rose-200 dark:border-rose-800 tracking-wider uppercase">
             Critical Fast-Track
           </span>
         );
       case 'HIGH':
         return (
-          <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-amber-950/90 text-amber-300 border border-amber-800">
+          <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-amber-50 dark:bg-amber-950/90 text-amber-800 dark:text-amber-300 border border-amber-200 dark:border-amber-800">
             High
           </span>
         );
       case 'MEDIUM':
         return (
-          <span className="px-2 py-0.5 rounded text-[10px] font-semibold bg-slate-800 text-slate-300 border border-slate-700">
+          <span className="px-2 py-0.5 rounded text-[10px] font-semibold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700">
             Medium
           </span>
         );
       case 'LOW':
         return (
-          <span className="px-2 py-0.5 rounded text-[10px] font-semibold bg-slate-900 text-slate-400 border border-slate-800">
+          <span className="px-2 py-0.5 rounded text-[10px] font-semibold bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-400 border border-slate-200 dark:border-slate-800">
             Low
           </span>
         );
@@ -561,40 +561,40 @@ export const ProjectMasterView: React.FC<ProjectMasterViewProps> = ({
         <div
           className={`fixed bottom-6 right-6 z-50 px-4 py-3 rounded-xl shadow-2xl flex items-center gap-3 border text-sm font-semibold animate-slideUp ${
             toastMessage.type === 'warning'
-              ? 'bg-amber-950 text-amber-200 border-amber-700'
+              ? 'bg-amber-50 dark:bg-amber-950 text-amber-900 dark:text-amber-200 border-amber-300 dark:border-amber-700'
               : toastMessage.type === 'info'
-              ? 'bg-blue-950 text-blue-200 border-blue-700'
-              : 'bg-emerald-950 text-emerald-200 border-emerald-700'
+              ? 'bg-blue-50 dark:bg-blue-950 text-blue-800 dark:text-blue-200 border-blue-300 dark:border-blue-700'
+              : 'bg-emerald-50 dark:bg-emerald-950 text-emerald-800 dark:text-emerald-200 border-emerald-300 dark:border-emerald-700'
           }`}
         >
           {toastMessage.type === 'warning' ? (
-            <AlertTriangle className="w-5 h-5 text-amber-400 shrink-0" />
+            <AlertTriangle className="w-5 h-5 text-amber-700 dark:text-amber-400 shrink-0" />
           ) : (
-            <CheckCircle2 className="w-5 h-5 text-emerald-400 shrink-0" />
+            <CheckCircle2 className="w-5 h-5 text-emerald-600 dark:text-emerald-400 shrink-0" />
           )}
           <span>{toastMessage.text}</span>
         </div>
       )}
 
       {/* Header Banner & Action Bar */}
-      <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl relative overflow-hidden">
+      <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 shadow-xl relative overflow-hidden">
         <div className="absolute top-0 right-0 w-96 h-96 bg-purple-600/5 rounded-full blur-3xl -mr-20 -mt-20 pointer-events-none" />
 
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 relative z-10">
           <div>
             <div className="flex items-center gap-2 mb-1">
-              <span className="font-mono text-xs font-bold text-purple-400 bg-purple-950/70 px-2.5 py-0.5 rounded border border-purple-800">
+              <span className="font-mono text-xs font-bold text-purple-600 dark:text-purple-400 bg-purple-50 dark:bg-purple-950/70 px-2.5 py-0.5 rounded border border-purple-200 dark:border-purple-800">
                 10.01.01.01
               </span>
-              <span className="text-xs text-slate-400 font-semibold uppercase tracking-wider">
+              <span className="text-xs text-slate-600 dark:text-slate-400 font-semibold uppercase tracking-wider">
                 Enterprise Project Master Register
               </span>
             </div>
-            <h1 className="text-xl lg:text-2xl font-bold text-white tracking-tight flex items-center gap-3">
-              <FolderKanban className="w-7 h-7 text-purple-400" />
+            <h1 className="text-xl lg:text-2xl font-bold text-slate-900 dark:text-white tracking-tight flex items-center gap-3">
+              <FolderKanban className="w-7 h-7 text-purple-600 dark:text-purple-400" />
               Project Master Entities & Charters
             </h1>
-            <p className="text-xs text-slate-400 mt-1 max-w-3xl">
+            <p className="text-xs text-slate-600 dark:text-slate-400 mt-1 max-w-3xl">
               Centralized repository for multi-company project charters, commercial contracts, organizational cost center assignments, leadership assignments, and physical WBS milestones.
             </p>
           </div>
@@ -602,10 +602,10 @@ export const ProjectMasterView: React.FC<ProjectMasterViewProps> = ({
           <div className="flex flex-wrap items-center gap-2.5">
             <button
               onClick={handleExportCSV}
-              className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold cursor-pointer border border-slate-700 transition-colors shadow-sm"
+              className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-200 text-xs font-semibold cursor-pointer border border-slate-300 dark:border-slate-700 transition-colors shadow-sm"
               title="Export filtered project master register to CSV"
             >
-              <FileSpreadsheet className="w-4 h-4 text-emerald-400" />
+              <FileSpreadsheet className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
               <span>Export CSV</span>
             </button>
 
@@ -620,69 +620,69 @@ export const ProjectMasterView: React.FC<ProjectMasterViewProps> = ({
         </div>
 
         {/* Portfolio KPI Summary Strip */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 mt-6 pt-5 border-t border-slate-800">
-          <div className="bg-slate-950/60 border border-slate-800/80 rounded-xl p-3">
-            <div className="flex items-center justify-between text-slate-400 text-xs font-medium">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 mt-6 pt-5 border-t border-slate-200 dark:border-slate-800">
+          <div className="bg-slate-50/60 dark:bg-slate-950/60 border border-slate-200/80 dark:border-slate-800/80 rounded-xl p-3">
+            <div className="flex items-center justify-between text-slate-600 dark:text-slate-400 text-xs font-medium">
               <span>Total Portfolio</span>
-              <Building2 className="w-3.5 h-3.5 text-purple-400" />
+              <Building2 className="w-3.5 h-3.5 text-purple-600 dark:text-purple-400" />
             </div>
-            <div className="text-lg font-bold text-white mt-1">
+            <div className="text-lg font-bold text-slate-900 dark:text-white mt-1">
               {portfolioKPIs.totalCount}{' '}
-              <span className="text-xs font-normal text-slate-400">Projects</span>
+              <span className="text-xs font-normal text-slate-600 dark:text-slate-400">Projects</span>
             </div>
-            <div className="text-[11px] text-slate-500 mt-0.5">
+            <div className="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">
               {portfolioKPIs.activeCount} Active • {portfolioKPIs.planningCount} Planning
             </div>
           </div>
 
-          <div className="bg-slate-950/60 border border-slate-800/80 rounded-xl p-3">
-            <div className="flex items-center justify-between text-slate-400 text-xs font-medium">
+          <div className="bg-slate-50/60 dark:bg-slate-950/60 border border-slate-200/80 dark:border-slate-800/80 rounded-xl p-3">
+            <div className="flex items-center justify-between text-slate-600 dark:text-slate-400 text-xs font-medium">
               <span>Awarded Contract Value</span>
-              <DollarSign className="w-3.5 h-3.5 text-emerald-400" />
+              <DollarSign className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
             </div>
-            <div className="text-lg font-bold text-emerald-400 mt-1">
+            <div className="text-lg font-bold text-emerald-600 dark:text-emerald-400 mt-1">
               OMR {(portfolioKPIs.totalContractValue / 1000000).toFixed(2)}M
             </div>
-            <div className="text-[11px] text-slate-500 mt-0.5">
+            <div className="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">
               Portfolio Base Currency Sum
             </div>
           </div>
 
-          <div className="bg-slate-950/60 border border-slate-800/80 rounded-xl p-3">
-            <div className="flex items-center justify-between text-slate-400 text-xs font-medium">
+          <div className="bg-slate-50/60 dark:bg-slate-950/60 border border-slate-200/80 dark:border-slate-800/80 rounded-xl p-3">
+            <div className="flex items-center justify-between text-slate-600 dark:text-slate-400 text-xs font-medium">
               <span>Baseline Cost Budget</span>
-              <Briefcase className="w-3.5 h-3.5 text-blue-400" />
+              <Briefcase className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" />
             </div>
-            <div className="text-lg font-bold text-blue-300 mt-1">
+            <div className="text-lg font-bold text-blue-700 dark:text-blue-300 mt-1">
               OMR {(portfolioKPIs.totalBaselineBudget / 1000000).toFixed(2)}M
             </div>
-            <div className="text-[11px] text-slate-500 mt-0.5">
+            <div className="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">
               Approved Cost Commitment
             </div>
           </div>
 
-          <div className="bg-slate-950/60 border border-slate-800/80 rounded-xl p-3">
-            <div className="flex items-center justify-between text-slate-400 text-xs font-medium">
+          <div className="bg-slate-50/60 dark:bg-slate-950/60 border border-slate-200/80 dark:border-slate-800/80 rounded-xl p-3">
+            <div className="flex items-center justify-between text-slate-600 dark:text-slate-400 text-xs font-medium">
               <span>Avg Execution Progress</span>
-              <TrendingUp className="w-3.5 h-3.5 text-purple-400" />
+              <TrendingUp className="w-3.5 h-3.5 text-purple-600 dark:text-purple-400" />
             </div>
-            <div className="text-lg font-bold text-purple-300 mt-1">
+            <div className="text-lg font-bold text-purple-700 dark:text-purple-300 mt-1">
               {portfolioKPIs.avgProgress}%
             </div>
-            <div className="text-[11px] text-slate-500 mt-0.5">
+            <div className="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">
               Across All Active Sites
             </div>
           </div>
 
-          <div className="bg-slate-950/60 border border-slate-800/80 rounded-xl p-3 col-span-2 sm:col-span-1">
-            <div className="flex items-center justify-between text-slate-400 text-xs font-medium">
+          <div className="bg-slate-50/60 dark:bg-slate-950/60 border border-slate-200/80 dark:border-slate-800/80 rounded-xl p-3 col-span-2 sm:col-span-1">
+            <div className="flex items-center justify-between text-slate-600 dark:text-slate-400 text-xs font-medium">
               <span>Billed Invoices (To Date)</span>
-              <CheckCircle2 className="w-3.5 h-3.5 text-amber-400" />
+              <CheckCircle2 className="w-3.5 h-3.5 text-amber-700 dark:text-amber-400" />
             </div>
-            <div className="text-lg font-bold text-amber-300 mt-1">
+            <div className="text-lg font-bold text-amber-800 dark:text-amber-300 mt-1">
               OMR {(portfolioKPIs.totalBilled / 1000000).toFixed(2)}M
             </div>
-            <div className="text-[11px] text-slate-500 mt-0.5">
+            <div className="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">
               Certified Progress Billing
             </div>
           </div>
@@ -690,11 +690,11 @@ export const ProjectMasterView: React.FC<ProjectMasterViewProps> = ({
       </div>
 
       {/* Advanced Filters & Search Bar */}
-      <div className="bg-slate-900 border border-slate-800 rounded-2xl p-5 shadow-lg space-y-4">
+      <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-5 shadow-lg space-y-4">
         {/* Main Search and Quick Controls */}
         <div className="flex flex-col md:flex-row gap-3 items-center justify-between">
           <div className="relative flex-1 w-full">
-            <Search className="w-4 h-4 absolute left-3.5 top-3 text-slate-400" />
+            <Search className="w-4 h-4 absolute left-3.5 top-3 text-slate-600 dark:text-slate-400" />
             <input
               type="text"
               placeholder="Search by code, title, client principal, PM, branch, or contract #..."
@@ -703,12 +703,12 @@ export const ProjectMasterView: React.FC<ProjectMasterViewProps> = ({
                 setSearchTerm(e.target.value);
                 setCurrentPage(1);
               }}
-              className="w-full bg-slate-950 border border-slate-800 text-slate-200 text-xs sm:text-sm rounded-xl pl-10 pr-4 py-2.5 focus:ring-2 focus:ring-purple-500 focus:outline-none placeholder:text-slate-500 font-sans"
+              className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 text-slate-800 dark:text-slate-200 text-xs sm:text-sm rounded-xl pl-10 pr-4 py-2.5 focus:ring-2 focus:ring-purple-500 focus:outline-none placeholder:text-slate-500 dark:placeholder:text-slate-400 font-sans"
             />
             {searchTerm && (
               <button
                 onClick={() => setSearchTerm('')}
-                className="absolute right-3 top-3 text-slate-400 hover:text-white"
+                className="absolute right-3 top-3 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
               >
                 <X className="w-4 h-4" />
               </button>
@@ -717,13 +717,13 @@ export const ProjectMasterView: React.FC<ProjectMasterViewProps> = ({
 
           <div className="flex items-center gap-2 w-full md:w-auto justify-between md:justify-end">
             {/* View Mode Toggle */}
-            <div className="flex items-center bg-slate-950 p-1 rounded-xl border border-slate-800">
+            <div className="flex items-center bg-slate-50 dark:bg-slate-950 p-1 rounded-xl border border-slate-200 dark:border-slate-800">
               <button
                 onClick={() => setViewMode('TABLE')}
                 className={`px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-all cursor-pointer ${
                   viewMode === 'TABLE'
                     ? 'bg-purple-600 text-white shadow-md'
-                    : 'text-slate-400 hover:text-slate-200'
+                    : 'text-slate-600 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200'
                 }`}
                 title="Grid / Data Table View"
               >
@@ -735,7 +735,7 @@ export const ProjectMasterView: React.FC<ProjectMasterViewProps> = ({
                 className={`px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-all cursor-pointer ${
                   viewMode === 'CARDS'
                     ? 'bg-purple-600 text-white shadow-md'
-                    : 'text-slate-400 hover:text-slate-200'
+                    : 'text-slate-600 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200'
                 }`}
                 title="Cards / Visual Bento View"
               >
@@ -748,10 +748,10 @@ export const ProjectMasterView: React.FC<ProjectMasterViewProps> = ({
             {hasActiveFilters && (
               <button
                 onClick={handleResetFilters}
-                className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold cursor-pointer border border-slate-700 transition-colors"
+                className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 text-xs font-semibold cursor-pointer border border-slate-300 dark:border-slate-700 transition-colors"
                 title="Clear all filters"
               >
-                <RefreshCw className="w-3.5 h-3.5 text-purple-400" />
+                <RefreshCw className="w-3.5 h-3.5 text-purple-600 dark:text-purple-400" />
                 <span>Reset</span>
               </button>
             )}
@@ -762,8 +762,8 @@ export const ProjectMasterView: React.FC<ProjectMasterViewProps> = ({
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 pt-2">
           {/* Company Filter */}
           <div className="space-y-1">
-            <label className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider flex items-center gap-1">
-              <Building className="w-3 h-3 text-purple-400" />
+            <label className="text-[11px] font-semibold text-slate-600 dark:text-slate-400 uppercase tracking-wider flex items-center gap-1">
+              <Building className="w-3 h-3 text-purple-600 dark:text-purple-400" />
               <span>Company / Entity</span>
             </label>
             <select
@@ -772,7 +772,7 @@ export const ProjectMasterView: React.FC<ProjectMasterViewProps> = ({
                 setSelectedCompanyFilter(e.target.value);
                 setCurrentPage(1);
               }}
-              className="w-full bg-slate-950 border border-slate-800 text-slate-200 text-xs rounded-xl px-3 py-2 focus:ring-2 focus:ring-purple-500 focus:outline-none cursor-pointer"
+              className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 text-slate-800 dark:text-slate-200 text-xs rounded-xl px-3 py-2 focus:ring-2 focus:ring-purple-500 focus:outline-none cursor-pointer"
             >
               <option value="ALL">All Legal Entities ({projects.length})</option>
               {companies.map(comp => {
@@ -788,8 +788,8 @@ export const ProjectMasterView: React.FC<ProjectMasterViewProps> = ({
 
           {/* Status Filter */}
           <div className="space-y-1">
-            <label className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider flex items-center gap-1">
-              <Clock className="w-3 h-3 text-blue-400" />
+            <label className="text-[11px] font-semibold text-slate-600 dark:text-slate-400 uppercase tracking-wider flex items-center gap-1">
+              <Clock className="w-3 h-3 text-blue-600 dark:text-blue-400" />
               <span>Lifecycle Status</span>
             </label>
             <select
@@ -798,7 +798,7 @@ export const ProjectMasterView: React.FC<ProjectMasterViewProps> = ({
                 setSelectedStatusFilter(e.target.value);
                 setCurrentPage(1);
               }}
-              className="w-full bg-slate-950 border border-slate-800 text-slate-200 text-xs rounded-xl px-3 py-2 focus:ring-2 focus:ring-purple-500 focus:outline-none cursor-pointer"
+              className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 text-slate-800 dark:text-slate-200 text-xs rounded-xl px-3 py-2 focus:ring-2 focus:ring-purple-500 focus:outline-none cursor-pointer"
             >
               <option value="ALL">All Statuses ({projects.length})</option>
               <option value="ACTIVE_IN_PROGRESS">Active in Progress ({projects.filter(p => p.status === 'ACTIVE_IN_PROGRESS').length})</option>
@@ -813,8 +813,8 @@ export const ProjectMasterView: React.FC<ProjectMasterViewProps> = ({
 
           {/* Branch Filter */}
           <div className="space-y-1">
-            <label className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider flex items-center gap-1">
-              <MapPin className="w-3 h-3 text-emerald-400" />
+            <label className="text-[11px] font-semibold text-slate-600 dark:text-slate-400 uppercase tracking-wider flex items-center gap-1">
+              <MapPin className="w-3 h-3 text-emerald-600 dark:text-emerald-400" />
               <span>Regional Branch</span>
             </label>
             <select
@@ -823,7 +823,7 @@ export const ProjectMasterView: React.FC<ProjectMasterViewProps> = ({
                 setSelectedBranchFilter(e.target.value);
                 setCurrentPage(1);
               }}
-              className="w-full bg-slate-950 border border-slate-800 text-slate-200 text-xs rounded-xl px-3 py-2 focus:ring-2 focus:ring-purple-500 focus:outline-none cursor-pointer"
+              className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 text-slate-800 dark:text-slate-200 text-xs rounded-xl px-3 py-2 focus:ring-2 focus:ring-purple-500 focus:outline-none cursor-pointer"
             >
               <option value="ALL">All Regional Branches</option>
               {branches.map(branch => (
@@ -836,8 +836,8 @@ export const ProjectMasterView: React.FC<ProjectMasterViewProps> = ({
 
           {/* Priority Filter */}
           <div className="space-y-1">
-            <label className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider flex items-center gap-1">
-              <AlertTriangle className="w-3 h-3 text-amber-400" />
+            <label className="text-[11px] font-semibold text-slate-600 dark:text-slate-400 uppercase tracking-wider flex items-center gap-1">
+              <AlertTriangle className="w-3 h-3 text-amber-700 dark:text-amber-400" />
               <span>Priority Level</span>
             </label>
             <select
@@ -846,7 +846,7 @@ export const ProjectMasterView: React.FC<ProjectMasterViewProps> = ({
                 setSelectedPriorityFilter(e.target.value);
                 setCurrentPage(1);
               }}
-              className="w-full bg-slate-950 border border-slate-800 text-slate-200 text-xs rounded-xl px-3 py-2 focus:ring-2 focus:ring-purple-500 focus:outline-none cursor-pointer"
+              className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 text-slate-800 dark:text-slate-200 text-xs rounded-xl px-3 py-2 focus:ring-2 focus:ring-purple-500 focus:outline-none cursor-pointer"
             >
               <option value="ALL">All Priorities</option>
               <option value="CRITICAL_FAST_TRACK">Critical Fast-Track</option>
@@ -858,8 +858,8 @@ export const ProjectMasterView: React.FC<ProjectMasterViewProps> = ({
 
           {/* Project Type Filter */}
           <div className="space-y-1">
-            <label className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider flex items-center gap-1">
-              <Tag className="w-3 h-3 text-rose-400" />
+            <label className="text-[11px] font-semibold text-slate-600 dark:text-slate-400 uppercase tracking-wider flex items-center gap-1">
+              <Tag className="w-3 h-3 text-rose-600 dark:text-rose-400" />
               <span>Sector & Type</span>
             </label>
             <select
@@ -868,7 +868,7 @@ export const ProjectMasterView: React.FC<ProjectMasterViewProps> = ({
                 setSelectedTypeFilter(e.target.value);
                 setCurrentPage(1);
               }}
-              className="w-full bg-slate-950 border border-slate-800 text-slate-200 text-xs rounded-xl px-3 py-2 focus:ring-2 focus:ring-purple-500 focus:outline-none cursor-pointer"
+              className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 text-slate-800 dark:text-slate-200 text-xs rounded-xl px-3 py-2 focus:ring-2 focus:ring-purple-500 focus:outline-none cursor-pointer"
             >
               <option value="ALL">All Project Types</option>
               <option value="EPC_COMMERCIAL">EPC Commercial Plant</option>
@@ -883,32 +883,32 @@ export const ProjectMasterView: React.FC<ProjectMasterViewProps> = ({
         </div>
 
         {/* Active Filter Chips & Summary */}
-        <div className="flex flex-wrap items-center justify-between gap-2 pt-2 border-t border-slate-800 text-xs text-slate-400">
+        <div className="flex flex-wrap items-center justify-between gap-2 pt-2 border-t border-slate-200 dark:border-slate-800 text-xs text-slate-600 dark:text-slate-400">
           <div className="flex flex-wrap items-center gap-2">
-            <span className="font-semibold text-slate-300">Showing {filteredProjects.length} of {projects.length} Projects:</span>
+            <span className="font-semibold text-slate-700 dark:text-slate-300">Showing {filteredProjects.length} of {projects.length} Projects:</span>
             {selectedCompanyFilter !== 'ALL' && (
-              <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-purple-950/70 text-purple-300 border border-purple-800 text-[11px]">
+              <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-purple-50 dark:bg-purple-950/70 text-purple-700 dark:text-purple-300 border border-purple-200 dark:border-purple-800 text-[11px]">
                 Company: {selectedCompanyFilter}
                 <X
-                  className="w-3 h-3 cursor-pointer hover:text-white"
+                  className="w-3 h-3 cursor-pointer hover:text-slate-900 dark:hover:text-white"
                   onClick={() => setSelectedCompanyFilter('ALL')}
                 />
               </span>
             )}
             {selectedStatusFilter !== 'ALL' && (
-              <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-blue-950/70 text-blue-300 border border-blue-800 text-[11px]">
+              <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-blue-50 dark:bg-blue-950/70 text-blue-700 dark:text-blue-300 border border-blue-200 dark:border-blue-800 text-[11px]">
                 Status: {selectedStatusFilter}
                 <X
-                  className="w-3 h-3 cursor-pointer hover:text-white"
+                  className="w-3 h-3 cursor-pointer hover:text-slate-900 dark:hover:text-white"
                   onClick={() => setSelectedStatusFilter('ALL')}
                 />
               </span>
             )}
             {selectedBranchFilter !== 'ALL' && (
-              <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-emerald-950/70 text-emerald-300 border border-emerald-800 text-[11px]">
+              <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-emerald-50 dark:bg-emerald-950/70 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800 text-[11px]">
                 Branch: {selectedBranchFilter}
                 <X
-                  className="w-3 h-3 cursor-pointer hover:text-white"
+                  className="w-3 h-3 cursor-pointer hover:text-slate-900 dark:hover:text-white"
                   onClick={() => setSelectedBranchFilter('ALL')}
                 />
               </span>
@@ -916,8 +916,8 @@ export const ProjectMasterView: React.FC<ProjectMasterViewProps> = ({
           </div>
 
           {selectedProjectIds.length > 0 && (
-            <div className="flex items-center gap-2 bg-purple-950/40 px-3 py-1 rounded-lg border border-purple-800/80">
-              <span className="text-purple-300 font-semibold text-[11px]">
+            <div className="flex items-center gap-2 bg-purple-50 dark:bg-purple-950/40 px-3 py-1 rounded-lg border border-purple-800/80">
+              <span className="text-purple-700 dark:text-purple-300 font-semibold text-[11px]">
                 {selectedProjectIds.length} Selected
               </span>
               <button
@@ -928,7 +928,7 @@ export const ProjectMasterView: React.FC<ProjectMasterViewProps> = ({
                     showToast(`Archived ${selectedProjectIds.length} projects.`);
                   }
                 }}
-                className="text-rose-400 hover:text-rose-300 text-[11px] font-bold cursor-pointer ml-2"
+                className="text-rose-600 dark:text-rose-400 hover:text-rose-700 dark:hover:text-rose-300 text-[11px] font-bold cursor-pointer ml-2"
               >
                 Bulk Delete
               </button>
@@ -941,10 +941,10 @@ export const ProjectMasterView: React.FC<ProjectMasterViewProps> = ({
       {/* VIEW 1: DATA TABLE VIEW */}
       {/* ========================================== */}
       {viewMode === 'TABLE' && (
-        <div className="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-xl">
+        <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden shadow-xl">
           <div className="overflow-x-auto">
-            <table className="w-full text-left text-xs text-slate-300">
-              <thead className="bg-slate-950/90 text-[11px] uppercase tracking-wider text-slate-400 border-b border-slate-800">
+            <table className="w-full text-left text-xs text-slate-700 dark:text-slate-300">
+              <thead className="bg-slate-50/90 dark:bg-slate-950/90 text-[11px] uppercase tracking-wider text-slate-600 dark:text-slate-400 border-b border-slate-200 dark:border-slate-800">
                 <tr>
                   <th className="py-3.5 px-4 w-10 text-center">
                     <input
@@ -954,11 +954,11 @@ export const ProjectMasterView: React.FC<ProjectMasterViewProps> = ({
                         selectedProjectIds.length === paginatedProjects.length
                       }
                       onChange={handleToggleSelectAll}
-                      className="rounded bg-slate-800 border-slate-700 text-purple-600 focus:ring-purple-500 cursor-pointer"
+                      className="rounded bg-slate-100 dark:bg-slate-800 border-slate-300 dark:border-slate-700 text-purple-600 dark:text-purple-400 focus:ring-purple-500 cursor-pointer"
                     />
                   </th>
                   <th
-                    className="py-3.5 px-4 cursor-pointer hover:text-white transition-colors"
+                    className="py-3.5 px-4 cursor-pointer hover:text-slate-900 dark:hover:text-white transition-colors"
                     onClick={() => {
                       if (sortBy === 'projectCode') {
                         setSortDirection(prev => (prev === 'asc' ? 'desc' : 'asc'));
@@ -970,11 +970,11 @@ export const ProjectMasterView: React.FC<ProjectMasterViewProps> = ({
                   >
                     <div className="flex items-center gap-1.5">
                       <span>Project Code</span>
-                      <ArrowUpDown className="w-3 h-3 text-slate-500" />
+                      <ArrowUpDown className="w-3 h-3 text-slate-500 dark:text-slate-400" />
                     </div>
                   </th>
                   <th
-                    className="py-3.5 px-4 cursor-pointer hover:text-white transition-colors"
+                    className="py-3.5 px-4 cursor-pointer hover:text-slate-900 dark:hover:text-white transition-colors"
                     onClick={() => {
                       if (sortBy === 'projectName') {
                         setSortDirection(prev => (prev === 'asc' ? 'desc' : 'asc'));
@@ -986,12 +986,12 @@ export const ProjectMasterView: React.FC<ProjectMasterViewProps> = ({
                   >
                     <div className="flex items-center gap-1.5">
                       <span>Project Title & Client</span>
-                      <ArrowUpDown className="w-3 h-3 text-slate-500" />
+                      <ArrowUpDown className="w-3 h-3 text-slate-500 dark:text-slate-400" />
                     </div>
                   </th>
                   <th className="py-3.5 px-4">Company & Branch</th>
                   <th
-                    className="py-3.5 px-4 text-right cursor-pointer hover:text-white transition-colors"
+                    className="py-3.5 px-4 text-right cursor-pointer hover:text-slate-900 dark:hover:text-white transition-colors"
                     onClick={() => {
                       if (sortBy === 'contractValue') {
                         setSortDirection(prev => (prev === 'asc' ? 'desc' : 'asc'));
@@ -1003,12 +1003,12 @@ export const ProjectMasterView: React.FC<ProjectMasterViewProps> = ({
                   >
                     <div className="flex items-center justify-end gap-1.5">
                       <span>Contract Value</span>
-                      <ArrowUpDown className="w-3 h-3 text-slate-500" />
+                      <ArrowUpDown className="w-3 h-3 text-slate-500 dark:text-slate-400" />
                     </div>
                   </th>
                   <th className="py-3.5 px-4">Project Manager</th>
                   <th
-                    className="py-3.5 px-4 cursor-pointer hover:text-white transition-colors"
+                    className="py-3.5 px-4 cursor-pointer hover:text-slate-900 dark:hover:text-white transition-colors"
                     onClick={() => {
                       if (sortBy === 'overallProgressPercent') {
                         setSortDirection(prev => (prev === 'asc' ? 'desc' : 'asc'));
@@ -1020,23 +1020,23 @@ export const ProjectMasterView: React.FC<ProjectMasterViewProps> = ({
                   >
                     <div className="flex items-center gap-1.5">
                       <span>Execution Progress</span>
-                      <ArrowUpDown className="w-3 h-3 text-slate-500" />
+                      <ArrowUpDown className="w-3 h-3 text-slate-500 dark:text-slate-400" />
                     </div>
                   </th>
                   <th className="py-3.5 px-4">Status & Priority</th>
                   <th className="py-3.5 px-4 text-right">Actions</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-800/60">
+              <tbody className="divide-y divide-slate-200/60 dark:divide-slate-800/60">
                 {paginatedProjects.length === 0 ? (
                   <tr>
-                    <td colSpan={9} className="py-12 text-center text-slate-500">
-                      <FolderKanban className="w-12 h-12 mx-auto text-slate-700 mb-2" />
-                      <p className="text-sm font-semibold text-slate-400">No project masters match your criteria</p>
-                      <p className="text-xs text-slate-500 mt-1">Try adjusting your filters or search keywords.</p>
+                    <td colSpan={9} className="py-12 text-center text-slate-500 dark:text-slate-400">
+                      <FolderKanban className="w-12 h-12 mx-auto text-slate-700 dark:text-slate-300 mb-2" />
+                      <p className="text-sm font-semibold text-slate-600 dark:text-slate-400">No project masters match your criteria</p>
+                      <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">Try adjusting your filters or search keywords.</p>
                       <button
                         onClick={handleResetFilters}
-                        className="mt-3 px-3 py-1.5 rounded-lg bg-purple-950 text-purple-300 border border-purple-800 text-xs font-semibold cursor-pointer hover:bg-purple-900"
+                        className="mt-3 px-3 py-1.5 rounded-lg bg-purple-50 dark:bg-purple-950 text-purple-700 dark:text-purple-300 border border-purple-200 dark:border-purple-800 text-xs font-semibold cursor-pointer hover:bg-purple-900"
                       >
                         Clear All Filters
                       </button>
@@ -1051,8 +1051,8 @@ export const ProjectMasterView: React.FC<ProjectMasterViewProps> = ({
                     return (
                       <tr
                         key={project.id}
-                        className={`hover:bg-slate-800/40 transition-colors group ${
-                          isSelected ? 'bg-purple-950/20' : ''
+                        className={`hover:bg-slate-100/70 dark:hover:bg-slate-800/40 transition-colors group ${
+                          isSelected ? 'bg-purple-50 dark:bg-purple-950/20' : ''
                         }`}
                       >
                         {/* Checkbox */}
@@ -1061,7 +1061,7 @@ export const ProjectMasterView: React.FC<ProjectMasterViewProps> = ({
                             type="checkbox"
                             checked={isChecked}
                             onChange={() => handleToggleSelectRow(project.id)}
-                            className="rounded bg-slate-800 border-slate-700 text-purple-600 focus:ring-purple-500 cursor-pointer"
+                            className="rounded bg-slate-100 dark:bg-slate-800 border-slate-300 dark:border-slate-700 text-purple-600 dark:text-purple-400 focus:ring-purple-500 cursor-pointer"
                           />
                         </td>
 
@@ -1076,7 +1076,7 @@ export const ProjectMasterView: React.FC<ProjectMasterViewProps> = ({
                               className={`font-mono text-xs font-bold px-2 py-0.5 rounded border transition-colors cursor-pointer ${
                                 isSelected
                                   ? 'bg-purple-600 text-white border-purple-500'
-                                  : 'bg-slate-950 text-purple-400 border-slate-800 hover:border-purple-600'
+                                  : 'bg-slate-50 dark:bg-slate-950 text-purple-600 dark:text-purple-400 border-slate-200 dark:border-slate-800 hover:border-purple-600'
                               }`}
                               title="Click to set as current active project"
                             >
@@ -1091,7 +1091,7 @@ export const ProjectMasterView: React.FC<ProjectMasterViewProps> = ({
                         {/* Title & Client Principal */}
                         <td className="py-3.5 px-4">
                           <div>
-                            <div className="font-bold text-slate-100 hover:text-purple-300 transition-colors cursor-pointer flex items-center gap-1.5"
+                            <div className="font-bold text-slate-900 dark:text-slate-100 hover:text-purple-700 dark:hover:text-purple-300 transition-colors cursor-pointer flex items-center gap-1.5"
                               onClick={() => {
                                 setDrawerProject(project);
                                 setShow360Drawer(true);
@@ -1099,11 +1099,11 @@ export const ProjectMasterView: React.FC<ProjectMasterViewProps> = ({
                             >
                               <span>{project.projectName}</span>
                             </div>
-                            <div className="text-[11px] text-slate-400 flex items-center gap-1.5 mt-0.5">
-                              <Building2 className="w-3 h-3 text-slate-500" />
-                              <span className="text-slate-300 font-medium">{project.clientEntity}</span>
-                              <span className="text-slate-600">•</span>
-                              <span className="font-mono text-slate-500 text-[10px]">{project.contractNumber}</span>
+                            <div className="text-[11px] text-slate-600 dark:text-slate-400 flex items-center gap-1.5 mt-0.5">
+                              <Building2 className="w-3 h-3 text-slate-500 dark:text-slate-400" />
+                              <span className="text-slate-700 dark:text-slate-300 font-medium">{project.clientEntity}</span>
+                              <span className="text-slate-500 dark:text-slate-400">•</span>
+                              <span className="font-mono text-slate-500 dark:text-slate-400 text-[10px]">{project.contractNumber}</span>
                             </div>
                           </div>
                         </td>
@@ -1111,14 +1111,14 @@ export const ProjectMasterView: React.FC<ProjectMasterViewProps> = ({
                         {/* Company & Branch */}
                         <td className="py-3.5 px-4 whitespace-nowrap">
                           <div className="space-y-0.5">
-                            <div className="font-semibold text-slate-300 text-xs flex items-center gap-1">
-                              <Building className="w-3 h-3 text-purple-400 shrink-0" />
+                            <div className="font-semibold text-slate-700 dark:text-slate-300 text-xs flex items-center gap-1">
+                              <Building className="w-3 h-3 text-purple-600 dark:text-purple-400 shrink-0" />
                               <span className="truncate max-w-[160px]" title={companyName}>
                                 {companyName}
                               </span>
                             </div>
-                            <div className="text-[11px] text-slate-500 flex items-center gap-1">
-                              <MapPin className="w-3 h-3 text-slate-600 shrink-0" />
+                            <div className="text-[11px] text-slate-500 dark:text-slate-400 flex items-center gap-1">
+                              <MapPin className="w-3 h-3 text-slate-500 dark:text-slate-400 shrink-0" />
                               <span className="truncate max-w-[160px]" title={project.branch}>
                                 {project.branch}
                               </span>
@@ -1128,23 +1128,23 @@ export const ProjectMasterView: React.FC<ProjectMasterViewProps> = ({
 
                         {/* Contract Value */}
                         <td className="py-3.5 px-4 text-right whitespace-nowrap">
-                          <div className="font-mono font-bold text-emerald-400 text-xs">
+                          <div className="font-mono font-bold text-emerald-600 dark:text-emerald-400 text-xs">
                             {project.currency} {project.contractValue?.toLocaleString()}
                           </div>
-                          <div className="text-[10px] text-slate-500 font-mono">
+                          <div className="text-[10px] text-slate-500 dark:text-slate-400 font-mono">
                             Budget: {project.currency} {project.totalBudget?.toLocaleString()}
                           </div>
                         </td>
 
                         {/* Project Manager */}
                         <td className="py-3.5 px-4 whitespace-nowrap">
-                          <div className="flex items-center gap-1.5 text-xs text-slate-300">
-                            <User className="w-3.5 h-3.5 text-blue-400" />
+                          <div className="flex items-center gap-1.5 text-xs text-slate-700 dark:text-slate-300">
+                            <User className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" />
                             <span className="truncate max-w-[140px]" title={project.projectManager}>
                               {project.projectManager}
                             </span>
                           </div>
-                          <div className="text-[11px] text-slate-500">
+                          <div className="text-[11px] text-slate-500 dark:text-slate-400">
                             Start: {project.startDate}
                           </div>
                         </td>
@@ -1153,10 +1153,10 @@ export const ProjectMasterView: React.FC<ProjectMasterViewProps> = ({
                         <td className="py-3.5 px-4 whitespace-nowrap w-36">
                           <div className="space-y-1">
                             <div className="flex justify-between text-[11px]">
-                              <span className="font-bold text-purple-300">{project.overallProgressPercent}%</span>
-                              <span className="text-slate-500 text-[10px]">Target: {project.targetCompletionDate}</span>
+                              <span className="font-bold text-purple-700 dark:text-purple-300">{project.overallProgressPercent}%</span>
+                              <span className="text-slate-500 dark:text-slate-400 text-[10px]">Target: {project.targetCompletionDate}</span>
                             </div>
-                            <div className="w-full bg-slate-800 rounded-full h-1.5 overflow-hidden">
+                            <div className="w-full bg-slate-100 dark:bg-slate-800 rounded-full h-1.5 overflow-hidden">
                               <div
                                 className="bg-gradient-to-r from-purple-500 to-indigo-500 h-1.5 rounded-full"
                                 style={{ width: `${project.overallProgressPercent}%` }}
@@ -1181,18 +1181,18 @@ export const ProjectMasterView: React.FC<ProjectMasterViewProps> = ({
                                 setDrawerProject(project);
                                 setShow360Drawer(true);
                               }}
-                              className="p-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white transition-colors cursor-pointer"
+                              className="p-1.5 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-colors cursor-pointer"
                               title="Quick 360 Inspection Drawer"
                             >
-                              <Eye className="w-3.5 h-3.5 text-blue-400" />
+                              <Eye className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" />
                             </button>
 
                             <button
                               onClick={() => handleOpenEditModal(project)}
-                              className="p-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white transition-colors cursor-pointer"
+                              className="p-1.5 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-colors cursor-pointer"
                               title="Edit Project Charter"
                             >
-                              <Edit3 className="w-3.5 h-3.5 text-purple-400" />
+                              <Edit3 className="w-3.5 h-3.5 text-purple-600 dark:text-purple-400" />
                             </button>
 
                             <button
@@ -1202,7 +1202,7 @@ export const ProjectMasterView: React.FC<ProjectMasterViewProps> = ({
                                   showToast(`Project ${project.projectCode} archived.`, 'info');
                                 }
                               }}
-                              className="p-1.5 rounded-lg bg-slate-800 hover:bg-rose-950 text-slate-400 hover:text-rose-300 transition-colors cursor-pointer"
+                              className="p-1.5 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-rose-50 dark:hover:bg-rose-950 text-slate-600 dark:text-slate-400 hover:text-rose-700 dark:hover:text-rose-300 transition-colors cursor-pointer"
                               title="Archive Project"
                             >
                               <Trash2 className="w-3.5 h-3.5" />
@@ -1218,7 +1218,7 @@ export const ProjectMasterView: React.FC<ProjectMasterViewProps> = ({
           </div>
 
           {/* Pagination Controls */}
-          <div className="p-4 border-t border-slate-800 bg-slate-950/60 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs text-slate-400">
+          <div className="p-4 border-t border-slate-200 dark:border-slate-800 bg-slate-50/60 dark:bg-slate-950/60 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs text-slate-600 dark:text-slate-400">
             <div>
               Showing {filteredProjects.length === 0 ? 0 : (currentPage - 1) * itemsPerPage + 1} to{' '}
               {Math.min(currentPage * itemsPerPage, filteredProjects.length)} of {filteredProjects.length} Projects
@@ -1228,7 +1228,7 @@ export const ProjectMasterView: React.FC<ProjectMasterViewProps> = ({
               <button
                 disabled={currentPage === 1}
                 onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
-                className="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer transition-colors"
+                className="px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer transition-colors"
               >
                 Previous
               </button>
@@ -1240,7 +1240,7 @@ export const ProjectMasterView: React.FC<ProjectMasterViewProps> = ({
                   className={`w-8 h-8 rounded-lg font-semibold cursor-pointer transition-colors ${
                     currentPage === page
                       ? 'bg-purple-600 text-white'
-                      : 'bg-slate-900 text-slate-400 hover:bg-slate-800 hover:text-slate-200'
+                      : 'bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-slate-800 dark:hover:text-slate-200'
                   }`}
                 >
                   {page}
@@ -1250,7 +1250,7 @@ export const ProjectMasterView: React.FC<ProjectMasterViewProps> = ({
               <button
                 disabled={currentPage === totalPages}
                 onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
-                className="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer transition-colors"
+                className="px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer transition-colors"
               >
                 Next
               </button>
@@ -1271,17 +1271,17 @@ export const ProjectMasterView: React.FC<ProjectMasterViewProps> = ({
             return (
               <div
                 key={project.id}
-                className={`bg-slate-900 border rounded-2xl p-5 shadow-xl transition-all duration-300 flex flex-col justify-between relative overflow-hidden ${
+                className={`bg-white dark:bg-slate-900 border rounded-2xl p-5 shadow-xl transition-all duration-300 flex flex-col justify-between relative overflow-hidden ${
                   isSelected
                     ? 'border-purple-500/80 ring-1 ring-purple-500/40 shadow-purple-950/20'
-                    : 'border-slate-800 hover:border-slate-700'
+                    : 'border-slate-200 dark:border-slate-800 hover:border-slate-300 dark:hover:border-slate-700'
                 }`}
               >
                 <div className="space-y-4">
                   {/* Top Bar */}
                   <div className="flex items-start justify-between gap-2">
                     <div className="flex items-center gap-2">
-                      <span className="font-mono text-xs font-bold text-purple-400 bg-purple-950/80 px-2.5 py-0.5 rounded border border-purple-800">
+                      <span className="font-mono text-xs font-bold text-purple-600 dark:text-purple-400 bg-purple-50 dark:bg-purple-950/80 px-2.5 py-0.5 rounded border border-purple-200 dark:border-purple-800">
                         {project.projectCode}
                       </span>
                       {renderPriorityBadge(project.priority)}
@@ -1292,7 +1292,7 @@ export const ProjectMasterView: React.FC<ProjectMasterViewProps> = ({
                   {/* Title & Scope */}
                   <div>
                     <h3
-                      className="font-bold text-white text-base hover:text-purple-300 transition-colors cursor-pointer line-clamp-2"
+                      className="font-bold text-slate-900 dark:text-white text-base hover:text-purple-700 dark:hover:text-purple-300 transition-colors cursor-pointer line-clamp-2"
                       onClick={() => {
                         setDrawerProject(project);
                         setShow360Drawer(true);
@@ -1300,39 +1300,39 @@ export const ProjectMasterView: React.FC<ProjectMasterViewProps> = ({
                     >
                       {project.projectName}
                     </h3>
-                    <p className="text-xs text-slate-400 flex items-center gap-1.5 mt-1">
-                      <Building2 className="w-3.5 h-3.5 text-purple-400 shrink-0" />
-                      <span className="font-semibold text-slate-300 truncate">{project.clientEntity}</span>
+                    <p className="text-xs text-slate-600 dark:text-slate-400 flex items-center gap-1.5 mt-1">
+                      <Building2 className="w-3.5 h-3.5 text-purple-600 dark:text-purple-400 shrink-0" />
+                      <span className="font-semibold text-slate-700 dark:text-slate-300 truncate">{project.clientEntity}</span>
                     </p>
                   </div>
 
                   {/* Company & Branch Cardlet */}
-                  <div className="bg-slate-950/70 border border-slate-800/80 rounded-xl p-3 text-xs space-y-1.5">
-                    <div className="flex items-center justify-between text-slate-300">
-                      <span className="text-slate-500 text-[11px]">Operating Entity:</span>
-                      <span className="font-semibold truncate max-w-[180px] text-purple-300">{companyName}</span>
+                  <div className="bg-slate-50/70 dark:bg-slate-950/70 border border-slate-200/80 dark:border-slate-800/80 rounded-xl p-3 text-xs space-y-1.5">
+                    <div className="flex items-center justify-between text-slate-700 dark:text-slate-300">
+                      <span className="text-slate-500 dark:text-slate-400 text-[11px]">Operating Entity:</span>
+                      <span className="font-semibold truncate max-w-[180px] text-purple-700 dark:text-purple-300">{companyName}</span>
                     </div>
-                    <div className="flex items-center justify-between text-slate-300">
-                      <span className="text-slate-500 text-[11px]">Regional Branch:</span>
-                      <span className="truncate max-w-[180px] text-slate-300">{project.branch}</span>
+                    <div className="flex items-center justify-between text-slate-700 dark:text-slate-300">
+                      <span className="text-slate-500 dark:text-slate-400 text-[11px]">Regional Branch:</span>
+                      <span className="truncate max-w-[180px] text-slate-700 dark:text-slate-300">{project.branch}</span>
                     </div>
-                    <div className="flex items-center justify-between text-slate-300">
-                      <span className="text-slate-500 text-[11px]">Project Manager:</span>
-                      <span className="truncate max-w-[180px] text-blue-300 font-medium">{project.projectManager}</span>
+                    <div className="flex items-center justify-between text-slate-700 dark:text-slate-300">
+                      <span className="text-slate-500 dark:text-slate-400 text-[11px]">Project Manager:</span>
+                      <span className="truncate max-w-[180px] text-blue-700 dark:text-blue-300 font-medium">{project.projectManager}</span>
                     </div>
                   </div>
 
                   {/* Financial & Schedule Metrics */}
                   <div className="grid grid-cols-2 gap-2 text-xs">
-                    <div className="bg-slate-950/40 border border-slate-800/60 p-2.5 rounded-xl">
-                      <span className="text-[10px] text-slate-500 uppercase tracking-wider block">Contract Value</span>
-                      <span className="font-mono font-bold text-emerald-400 text-sm">
+                    <div className="bg-slate-50/40 dark:bg-slate-950/40 border border-slate-200/60 dark:border-slate-800/60 p-2.5 rounded-xl">
+                      <span className="text-[10px] text-slate-500 dark:text-slate-400 uppercase tracking-wider block">Contract Value</span>
+                      <span className="font-mono font-bold text-emerald-600 dark:text-emerald-400 text-sm">
                         {project.currency} {(project.contractValue / 1000).toLocaleString()}k
                       </span>
                     </div>
-                    <div className="bg-slate-950/40 border border-slate-800/60 p-2.5 rounded-xl">
-                      <span className="text-[10px] text-slate-500 uppercase tracking-wider block">Target Date</span>
-                      <span className="font-mono text-slate-300 text-xs block mt-0.5">
+                    <div className="bg-slate-50/40 dark:bg-slate-950/40 border border-slate-200/60 dark:border-slate-800/60 p-2.5 rounded-xl">
+                      <span className="text-[10px] text-slate-500 dark:text-slate-400 uppercase tracking-wider block">Target Date</span>
+                      <span className="font-mono text-slate-700 dark:text-slate-300 text-xs block mt-0.5">
                         {project.targetCompletionDate}
                       </span>
                     </div>
@@ -1341,10 +1341,10 @@ export const ProjectMasterView: React.FC<ProjectMasterViewProps> = ({
                   {/* Progress Bar */}
                   <div className="space-y-1.5">
                     <div className="flex justify-between text-xs">
-                      <span className="text-slate-400">Execution Progress</span>
-                      <span className="font-bold text-purple-300">{project.overallProgressPercent}%</span>
+                      <span className="text-slate-600 dark:text-slate-400">Execution Progress</span>
+                      <span className="font-bold text-purple-700 dark:text-purple-300">{project.overallProgressPercent}%</span>
                     </div>
-                    <div className="w-full bg-slate-800 rounded-full h-2 overflow-hidden">
+                    <div className="w-full bg-slate-100 dark:bg-slate-800 rounded-full h-2 overflow-hidden">
                       <div
                         className="bg-gradient-to-r from-purple-500 to-indigo-500 h-2 rounded-full"
                         style={{ width: `${project.overallProgressPercent}%` }}
@@ -1354,7 +1354,7 @@ export const ProjectMasterView: React.FC<ProjectMasterViewProps> = ({
                 </div>
 
                 {/* Card Actions */}
-                <div className="flex items-center justify-between gap-2 pt-4 mt-4 border-t border-slate-800/80">
+                <div className="flex items-center justify-between gap-2 pt-4 mt-4 border-t border-slate-200/80 dark:border-slate-800/80">
                   <button
                     onClick={() => {
                       setSelectedProject(project);
@@ -1363,7 +1363,7 @@ export const ProjectMasterView: React.FC<ProjectMasterViewProps> = ({
                     className={`flex-1 py-1.5 px-3 rounded-xl text-xs font-bold transition-all cursor-pointer ${
                       isSelected
                         ? 'bg-purple-600 text-white shadow-md'
-                        : 'bg-slate-800 hover:bg-slate-700 text-slate-200'
+                        : 'bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-200'
                     }`}
                   >
                     {isSelected ? 'Active Context' : 'Select Project'}
@@ -1375,17 +1375,17 @@ export const ProjectMasterView: React.FC<ProjectMasterViewProps> = ({
                         setDrawerProject(project);
                         setShow360Drawer(true);
                       }}
-                      className="p-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white cursor-pointer"
+                      className="p-2 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white cursor-pointer"
                       title="Inspect 360 Details"
                     >
-                      <Eye className="w-3.5 h-3.5 text-blue-400" />
+                      <Eye className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" />
                     </button>
                     <button
                       onClick={() => handleOpenEditModal(project)}
-                      className="p-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white cursor-pointer"
+                      className="p-2 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white cursor-pointer"
                       title="Edit Charter"
                     >
-                      <Edit3 className="w-3.5 h-3.5 text-purple-400" />
+                      <Edit3 className="w-3.5 h-3.5 text-purple-600 dark:text-purple-400" />
                     </button>
                   </div>
                 </div>
@@ -1399,19 +1399,19 @@ export const ProjectMasterView: React.FC<ProjectMasterViewProps> = ({
       {/* MODAL: COMPREHENSIVE DATA ENTRY FORM */}
       {/* ========================================== */}
       {showDataEntryModal && (
-        <div className="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md flex items-center justify-center p-3 sm:p-6 overflow-y-auto animate-fadeIn">
-          <div className="bg-slate-900 border border-slate-800 rounded-2xl w-full max-w-4xl shadow-2xl overflow-hidden flex flex-col max-h-[92vh]">
+        <div className="fixed inset-0 z-50 bg-slate-50/80 dark:bg-slate-950/80 backdrop-blur-md flex items-center justify-center p-3 sm:p-6 overflow-y-auto animate-fadeIn">
+          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl w-full max-w-4xl shadow-2xl overflow-hidden flex flex-col max-h-[92vh]">
             {/* Modal Header */}
-            <div className="p-5 border-b border-slate-800 bg-slate-950/80 flex items-center justify-between">
+            <div className="p-5 border-b border-slate-200 dark:border-slate-800 bg-slate-50/80 dark:bg-slate-950/80 flex items-center justify-between">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-xl bg-purple-600/20 border border-purple-500/30 flex items-center justify-center text-purple-400">
+                <div className="w-10 h-10 rounded-xl bg-purple-600/20 border border-purple-500/30 flex items-center justify-center text-purple-600 dark:text-purple-400">
                   <FolderKanban className="w-5 h-5" />
                 </div>
                 <div>
-                  <h2 className="text-lg font-bold text-white">
+                  <h2 className="text-lg font-bold text-slate-900 dark:text-white">
                     {formMode === 'CREATE' ? 'New Project Master Charter' : `Edit Charter: ${formData.projectCode}`}
                   </h2>
-                  <p className="text-xs text-slate-400">
+                  <p className="text-xs text-slate-600 dark:text-slate-400">
                     Comprehensive enterprise data entry across contract, scoping, leadership, and budgets.
                   </p>
                 </div>
@@ -1419,20 +1419,20 @@ export const ProjectMasterView: React.FC<ProjectMasterViewProps> = ({
 
               <button
                 onClick={() => setShowDataEntryModal(false)}
-                className="p-2 rounded-xl bg-slate-800 text-slate-400 hover:text-white hover:bg-slate-700 transition-colors cursor-pointer"
+                className="p-2 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors cursor-pointer"
               >
                 <X className="w-5 h-5" />
               </button>
             </div>
 
             {/* Modal Sub-Tabs */}
-            <div className="flex overflow-x-auto border-b border-slate-800 bg-slate-950/40 px-4 gap-2 py-2">
+            <div className="flex overflow-x-auto border-b border-slate-200 dark:border-slate-800 bg-slate-50/40 dark:bg-slate-950/40 px-4 gap-2 py-2">
               <button
                 onClick={() => setActiveFormTab('CHARTER')}
                 className={`px-3 py-1.5 rounded-lg text-xs font-bold whitespace-nowrap transition-colors cursor-pointer flex items-center gap-1.5 ${
                   activeFormTab === 'CHARTER'
                     ? 'bg-purple-600 text-white'
-                    : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/50'
+                    : 'text-slate-600 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200 hover:bg-slate-100/70 dark:hover:bg-slate-800/50'
                 }`}
               >
                 <FolderKanban className="w-3.5 h-3.5" />
@@ -1443,7 +1443,7 @@ export const ProjectMasterView: React.FC<ProjectMasterViewProps> = ({
                 className={`px-3 py-1.5 rounded-lg text-xs font-bold whitespace-nowrap transition-colors cursor-pointer flex items-center gap-1.5 ${
                   activeFormTab === 'ORGANIZATION'
                     ? 'bg-purple-600 text-white'
-                    : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/50'
+                    : 'text-slate-600 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200 hover:bg-slate-100/70 dark:hover:bg-slate-800/50'
                 }`}
               >
                 <Building className="w-3.5 h-3.5" />
@@ -1454,7 +1454,7 @@ export const ProjectMasterView: React.FC<ProjectMasterViewProps> = ({
                 className={`px-3 py-1.5 rounded-lg text-xs font-bold whitespace-nowrap transition-colors cursor-pointer flex items-center gap-1.5 ${
                   activeFormTab === 'COMMERCIAL'
                     ? 'bg-purple-600 text-white'
-                    : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/50'
+                    : 'text-slate-600 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200 hover:bg-slate-100/70 dark:hover:bg-slate-800/50'
                 }`}
               >
                 <DollarSign className="w-3.5 h-3.5" />
@@ -1465,7 +1465,7 @@ export const ProjectMasterView: React.FC<ProjectMasterViewProps> = ({
                 className={`px-3 py-1.5 rounded-lg text-xs font-bold whitespace-nowrap transition-colors cursor-pointer flex items-center gap-1.5 ${
                   activeFormTab === 'LEADERSHIP'
                     ? 'bg-purple-600 text-white'
-                    : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/50'
+                    : 'text-slate-600 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200 hover:bg-slate-100/70 dark:hover:bg-slate-800/50'
                 }`}
               >
                 <User className="w-3.5 h-3.5" />
@@ -1476,7 +1476,7 @@ export const ProjectMasterView: React.FC<ProjectMasterViewProps> = ({
                 className={`px-3 py-1.5 rounded-lg text-xs font-bold whitespace-nowrap transition-colors cursor-pointer flex items-center gap-1.5 ${
                   activeFormTab === 'TIMELINE'
                     ? 'bg-purple-600 text-white'
-                    : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/50'
+                    : 'text-slate-600 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200 hover:bg-slate-100/70 dark:hover:bg-slate-800/50'
                 }`}
               >
                 <Calendar className="w-3.5 h-3.5" />
@@ -1487,7 +1487,7 @@ export const ProjectMasterView: React.FC<ProjectMasterViewProps> = ({
                 className={`px-3 py-1.5 rounded-lg text-xs font-bold whitespace-nowrap transition-colors cursor-pointer flex items-center gap-1.5 ${
                   activeFormTab === 'BUDGET'
                     ? 'bg-purple-600 text-white'
-                    : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/50'
+                    : 'text-slate-600 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200 hover:bg-slate-100/70 dark:hover:bg-slate-800/50'
                 }`}
               >
                 <Percent className="w-3.5 h-3.5" />
@@ -1503,8 +1503,8 @@ export const ProjectMasterView: React.FC<ProjectMasterViewProps> = ({
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                     <div className="space-y-1">
                       <div className="flex justify-between items-center">
-                        <label className="text-xs font-semibold text-slate-300">
-                          Project Code <span className="text-rose-400">*</span>
+                        <label className="text-xs font-semibold text-slate-700 dark:text-slate-300">
+                          Project Code <span className="text-rose-600 dark:text-rose-400">*</span>
                         </label>
                         {formMode === 'CREATE' && (
                           <button
@@ -1518,7 +1518,7 @@ export const ProjectMasterView: React.FC<ProjectMasterViewProps> = ({
                                 }));
                               }
                             }}
-                            className="text-[10px] text-purple-400 hover:underline"
+                            className="text-[10px] text-purple-600 dark:text-purple-400 hover:underline"
                           >
                             {autoGenCode ? 'Manual Code' : 'Auto Generate'}
                           </button>
@@ -1529,43 +1529,43 @@ export const ProjectMasterView: React.FC<ProjectMasterViewProps> = ({
                         value={formData.projectCode}
                         onChange={e => setFormData(prev => ({ ...prev, projectCode: e.target.value }))}
                         disabled={formMode === 'CREATE' && autoGenCode}
-                        className={`w-full bg-slate-950 border rounded-xl px-3 py-2 text-xs font-mono text-white focus:ring-2 focus:ring-purple-500 focus:outline-none ${
-                          formValidationErrors.projectCode ? 'border-rose-500' : 'border-slate-800'
+                        className={`w-full bg-slate-50 dark:bg-slate-950 border rounded-xl px-3 py-2 text-xs font-mono text-slate-900 dark:text-white focus:ring-2 focus:ring-purple-500 focus:outline-none ${
+                          formValidationErrors.projectCode ? 'border-rose-500' : 'border-slate-200 dark:border-slate-800'
                         }`}
                       />
                       {formValidationErrors.projectCode && (
-                        <p className="text-[10px] text-rose-400">{formValidationErrors.projectCode}</p>
+                        <p className="text-[10px] text-rose-600 dark:text-rose-400">{formValidationErrors.projectCode}</p>
                       )}
                     </div>
 
                     <div className="md:col-span-2 space-y-1">
-                      <label className="text-xs font-semibold text-slate-300">
-                        Project Name / Title <span className="text-rose-400">*</span>
+                      <label className="text-xs font-semibold text-slate-700 dark:text-slate-300">
+                        Project Name / Title <span className="text-rose-600 dark:text-rose-400">*</span>
                       </label>
                       <input
                         type="text"
                         placeholder="e.g. Duqm Refinery Cryogenic Nitrogen Plant Extension"
                         value={formData.projectName}
                         onChange={e => setFormData(prev => ({ ...prev, projectName: e.target.value }))}
-                        className={`w-full bg-slate-950 border rounded-xl px-3 py-2 text-xs text-white focus:ring-2 focus:ring-purple-500 focus:outline-none ${
-                          formValidationErrors.projectName ? 'border-rose-500' : 'border-slate-800'
+                        className={`w-full bg-slate-50 dark:bg-slate-950 border rounded-xl px-3 py-2 text-xs text-slate-900 dark:text-white focus:ring-2 focus:ring-purple-500 focus:outline-none ${
+                          formValidationErrors.projectName ? 'border-rose-500' : 'border-slate-200 dark:border-slate-800'
                         }`}
                       />
                       {formValidationErrors.projectName && (
-                        <p className="text-[10px] text-rose-400">{formValidationErrors.projectName}</p>
+                        <p className="text-[10px] text-rose-600 dark:text-rose-400">{formValidationErrors.projectName}</p>
                       )}
                     </div>
                   </div>
 
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                     <div className="space-y-1">
-                      <label className="text-xs font-semibold text-slate-300">
+                      <label className="text-xs font-semibold text-slate-700 dark:text-slate-300">
                         Project Classification Taxonomy
                       </label>
                       <select
                         value={formData.projectClassificationId}
                         onChange={e => handleClassificationChange(e.target.value)}
-                        className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-slate-200 focus:ring-2 focus:ring-purple-500 focus:outline-none cursor-pointer"
+                        className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 text-xs text-slate-800 dark:text-slate-200 focus:ring-2 focus:ring-purple-500 focus:outline-none cursor-pointer"
                       >
                         {classifications.map(cls => (
                           <option key={cls.id} value={cls.id}>
@@ -1576,13 +1576,13 @@ export const ProjectMasterView: React.FC<ProjectMasterViewProps> = ({
                     </div>
 
                     <div className="space-y-1">
-                      <label className="text-xs font-semibold text-slate-300">
+                      <label className="text-xs font-semibold text-slate-700 dark:text-slate-300">
                         Project Sector & Type
                       </label>
                       <select
                         value={formData.projectType}
                         onChange={e => setFormData(prev => ({ ...prev, projectType: e.target.value as ProjectType }))}
-                        className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-slate-200 focus:ring-2 focus:ring-purple-500 focus:outline-none cursor-pointer"
+                        className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 text-xs text-slate-800 dark:text-slate-200 focus:ring-2 focus:ring-purple-500 focus:outline-none cursor-pointer"
                       >
                         <option value="EPC_COMMERCIAL">EPC Commercial Plant</option>
                         <option value="OIL_GAS_FACILITY">Oil & Gas Facility</option>
@@ -1595,13 +1595,13 @@ export const ProjectMasterView: React.FC<ProjectMasterViewProps> = ({
                     </div>
 
                     <div className="space-y-1">
-                      <label className="text-xs font-semibold text-slate-300">
+                      <label className="text-xs font-semibold text-slate-700 dark:text-slate-300">
                         Priority Level
                       </label>
                       <select
                         value={formData.priority}
                         onChange={e => setFormData(prev => ({ ...prev, priority: e.target.value as ProjectPriority }))}
-                        className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-slate-200 focus:ring-2 focus:ring-purple-500 focus:outline-none cursor-pointer"
+                        className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 text-xs text-slate-800 dark:text-slate-200 focus:ring-2 focus:ring-purple-500 focus:outline-none cursor-pointer"
                       >
                         <option value="CRITICAL_FAST_TRACK">Critical Fast-Track</option>
                         <option value="HIGH">High Priority</option>
@@ -1613,13 +1613,13 @@ export const ProjectMasterView: React.FC<ProjectMasterViewProps> = ({
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div className="space-y-1">
-                      <label className="text-xs font-semibold text-slate-300">
+                      <label className="text-xs font-semibold text-slate-700 dark:text-slate-300">
                         Lifecycle Status
                       </label>
                       <select
                         value={formData.status}
                         onChange={e => setFormData(prev => ({ ...prev, status: e.target.value as ProjectStatus }))}
-                        className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-slate-200 focus:ring-2 focus:ring-purple-500 focus:outline-none cursor-pointer"
+                        className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 text-xs text-slate-800 dark:text-slate-200 focus:ring-2 focus:ring-purple-500 focus:outline-none cursor-pointer"
                       >
                         <option value="PROPOSED">Proposed</option>
                         <option value="PLANNING">Planning</option>
@@ -1632,7 +1632,7 @@ export const ProjectMasterView: React.FC<ProjectMasterViewProps> = ({
                     </div>
 
                     <div className="space-y-1">
-                      <label className="text-xs font-semibold text-slate-300">
+                      <label className="text-xs font-semibold text-slate-700 dark:text-slate-300">
                         Custom Search Tags & Keywords
                       </label>
                       <div className="flex items-center gap-2">
@@ -1647,12 +1647,12 @@ export const ProjectMasterView: React.FC<ProjectMasterViewProps> = ({
                               handleAddCustomTag();
                             }
                           }}
-                          className="flex-1 bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-white focus:ring-2 focus:ring-purple-500 focus:outline-none"
+                          className="flex-1 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 text-xs text-slate-900 dark:text-white focus:ring-2 focus:ring-purple-500 focus:outline-none"
                         />
                         <button
                           type="button"
                           onClick={handleAddCustomTag}
-                          className="px-3 py-2 rounded-xl bg-slate-800 text-slate-200 text-xs font-semibold hover:bg-slate-700 cursor-pointer"
+                          className="px-3 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 text-xs font-semibold hover:bg-slate-200 dark:hover:bg-slate-700 cursor-pointer"
                         >
                           Add
                         </button>
@@ -1661,11 +1661,11 @@ export const ProjectMasterView: React.FC<ProjectMasterViewProps> = ({
                         {formData.customTags.map(tag => (
                           <span
                             key={tag}
-                            className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-md bg-purple-950 text-purple-300 border border-purple-800 text-[11px]"
+                            className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-md bg-purple-50 dark:bg-purple-950 text-purple-700 dark:text-purple-300 border border-purple-200 dark:border-purple-800 text-[11px]"
                           >
                             {tag}
                             <X
-                              className="w-3 h-3 cursor-pointer hover:text-white"
+                              className="w-3 h-3 cursor-pointer hover:text-slate-900 dark:hover:text-white"
                               onClick={() => handleRemoveCustomTag(tag)}
                             />
                           </span>
@@ -1679,9 +1679,9 @@ export const ProjectMasterView: React.FC<ProjectMasterViewProps> = ({
               {/* TAB 2: ORGANIZATIONAL HIERARCHY & COST SCOPING */}
               {activeFormTab === 'ORGANIZATION' && (
                 <div className="space-y-4">
-                  <div className="p-4 bg-slate-950/60 border border-slate-800 rounded-xl text-xs text-slate-400 space-y-1">
-                    <p className="font-semibold text-white flex items-center gap-2">
-                      <ShieldCheck className="w-4 h-4 text-purple-400" />
+                  <div className="p-4 bg-slate-50/60 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800 rounded-xl text-xs text-slate-600 dark:text-slate-400 space-y-1">
+                    <p className="font-semibold text-slate-900 dark:text-white flex items-center gap-2">
+                      <ShieldCheck className="w-4 h-4 text-purple-600 dark:text-purple-400" />
                       Multi-Tenant Enterprise Organizational Context
                     </p>
                     <p>
@@ -1691,13 +1691,13 @@ export const ProjectMasterView: React.FC<ProjectMasterViewProps> = ({
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div className="space-y-1">
-                      <label className="text-xs font-semibold text-slate-300">
-                        Operating Legal Entity (Company) <span className="text-rose-400">*</span>
+                      <label className="text-xs font-semibold text-slate-700 dark:text-slate-300">
+                        Operating Legal Entity (Company) <span className="text-rose-600 dark:text-rose-400">*</span>
                       </label>
                       <select
                         value={formData.company}
                         onChange={e => setFormData(prev => ({ ...prev, company: e.target.value }))}
-                        className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-slate-200 focus:ring-2 focus:ring-purple-500 focus:outline-none cursor-pointer"
+                        className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 text-xs text-slate-800 dark:text-slate-200 focus:ring-2 focus:ring-purple-500 focus:outline-none cursor-pointer"
                       >
                         {companies.map(comp => (
                           <option key={comp} value={comp}>
@@ -1708,13 +1708,13 @@ export const ProjectMasterView: React.FC<ProjectMasterViewProps> = ({
                     </div>
 
                     <div className="space-y-1">
-                      <label className="text-xs font-semibold text-slate-300">
-                        Regional Branch / Operating Center <span className="text-rose-400">*</span>
+                      <label className="text-xs font-semibold text-slate-700 dark:text-slate-300">
+                        Regional Branch / Operating Center <span className="text-rose-600 dark:text-rose-400">*</span>
                       </label>
                       <select
                         value={formData.branch}
                         onChange={e => setFormData(prev => ({ ...prev, branch: e.target.value }))}
-                        className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-slate-200 focus:ring-2 focus:ring-purple-500 focus:outline-none cursor-pointer"
+                        className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 text-xs text-slate-800 dark:text-slate-200 focus:ring-2 focus:ring-purple-500 focus:outline-none cursor-pointer"
                       >
                         {branches.map(b => (
                           <option key={b} value={b}>
@@ -1727,13 +1727,13 @@ export const ProjectMasterView: React.FC<ProjectMasterViewProps> = ({
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div className="space-y-1">
-                      <label className="text-xs font-semibold text-slate-300">
+                      <label className="text-xs font-semibold text-slate-700 dark:text-slate-300">
                         Operating Department
                       </label>
                       <select
                         value={formData.department}
                         onChange={e => setFormData(prev => ({ ...prev, department: e.target.value }))}
-                        className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-slate-200 focus:ring-2 focus:ring-purple-500 focus:outline-none cursor-pointer"
+                        className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 text-xs text-slate-800 dark:text-slate-200 focus:ring-2 focus:ring-purple-500 focus:outline-none cursor-pointer"
                       >
                         {departments.map(d => (
                           <option key={d} value={d}>
@@ -1744,13 +1744,13 @@ export const ProjectMasterView: React.FC<ProjectMasterViewProps> = ({
                     </div>
 
                     <div className="space-y-1">
-                      <label className="text-xs font-semibold text-slate-300">
+                      <label className="text-xs font-semibold text-slate-700 dark:text-slate-300">
                         Assigned ERP Cost Center
                       </label>
                       <select
                         value={formData.costCenter}
                         onChange={e => setFormData(prev => ({ ...prev, costCenter: e.target.value }))}
-                        className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-slate-200 focus:ring-2 focus:ring-purple-500 focus:outline-none cursor-pointer"
+                        className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 text-xs text-slate-800 dark:text-slate-200 focus:ring-2 focus:ring-purple-500 focus:outline-none cursor-pointer"
                       >
                         {costCenters.map(cc => (
                           <option key={cc} value={cc}>
@@ -1768,13 +1768,13 @@ export const ProjectMasterView: React.FC<ProjectMasterViewProps> = ({
                 <div className="space-y-4">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div className="space-y-1">
-                      <label className="text-xs font-semibold text-slate-300">
-                        Client Principal Entity <span className="text-rose-400">*</span>
+                      <label className="text-xs font-semibold text-slate-700 dark:text-slate-300">
+                        Client Principal Entity <span className="text-rose-600 dark:text-rose-400">*</span>
                       </label>
                       <select
                         value={formData.clientEntity}
                         onChange={e => setFormData(prev => ({ ...prev, clientEntity: e.target.value }))}
-                        className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-slate-200 focus:ring-2 focus:ring-purple-500 focus:outline-none cursor-pointer"
+                        className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 text-xs text-slate-800 dark:text-slate-200 focus:ring-2 focus:ring-purple-500 focus:outline-none cursor-pointer"
                       >
                         {clientEntities.map(client => (
                           <option key={client} value={client}>
@@ -1785,60 +1785,60 @@ export const ProjectMasterView: React.FC<ProjectMasterViewProps> = ({
                     </div>
 
                     <div className="space-y-1">
-                      <label className="text-xs font-semibold text-slate-300">
+                      <label className="text-xs font-semibold text-slate-700 dark:text-slate-300">
                         Contract Reference / Award Letter #
                       </label>
                       <input
                         type="text"
                         value={formData.contractNumber}
                         onChange={e => setFormData(prev => ({ ...prev, contractNumber: e.target.value }))}
-                        className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs font-mono text-white focus:ring-2 focus:ring-purple-500 focus:outline-none"
+                        className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 text-xs font-mono text-slate-900 dark:text-white focus:ring-2 focus:ring-purple-500 focus:outline-none"
                       />
                     </div>
                   </div>
 
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                     <div className="space-y-1">
-                      <label className="text-xs font-semibold text-slate-300">
+                      <label className="text-xs font-semibold text-slate-700 dark:text-slate-300">
                         Client Representative
                       </label>
                       <input
                         type="text"
                         value={formData.clientContactPerson}
                         onChange={e => setFormData(prev => ({ ...prev, clientContactPerson: e.target.value }))}
-                        className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-white focus:ring-2 focus:ring-purple-500 focus:outline-none"
+                        className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 text-xs text-slate-900 dark:text-white focus:ring-2 focus:ring-purple-500 focus:outline-none"
                       />
                     </div>
 
                     <div className="space-y-1">
-                      <label className="text-xs font-semibold text-slate-300">
+                      <label className="text-xs font-semibold text-slate-700 dark:text-slate-300">
                         Client Email
                       </label>
                       <input
                         type="email"
                         value={formData.clientEmail}
                         onChange={e => setFormData(prev => ({ ...prev, clientEmail: e.target.value }))}
-                        className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-white focus:ring-2 focus:ring-purple-500 focus:outline-none"
+                        className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 text-xs text-slate-900 dark:text-white focus:ring-2 focus:ring-purple-500 focus:outline-none"
                       />
                     </div>
 
                     <div className="space-y-1">
-                      <label className="text-xs font-semibold text-slate-300">
+                      <label className="text-xs font-semibold text-slate-700 dark:text-slate-300">
                         Client Phone Number
                       </label>
                       <input
                         type="text"
                         value={formData.clientPhone}
                         onChange={e => setFormData(prev => ({ ...prev, clientPhone: e.target.value }))}
-                        className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-white focus:ring-2 focus:ring-purple-500 focus:outline-none"
+                        className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 text-xs text-slate-900 dark:text-white focus:ring-2 focus:ring-purple-500 focus:outline-none"
                       />
                     </div>
                   </div>
 
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                     <div className="space-y-1">
-                      <label className="text-xs font-semibold text-slate-300">
-                        Awarded Contract Value <span className="text-rose-400">*</span>
+                      <label className="text-xs font-semibold text-slate-700 dark:text-slate-300">
+                        Awarded Contract Value <span className="text-rose-600 dark:text-rose-400">*</span>
                       </label>
                       <input
                         type="number"
@@ -1846,23 +1846,23 @@ export const ProjectMasterView: React.FC<ProjectMasterViewProps> = ({
                         step="1000"
                         value={formData.contractValue}
                         onChange={e => setFormData(prev => ({ ...prev, contractValue: parseFloat(e.target.value) || 0 }))}
-                        className={`w-full bg-slate-950 border rounded-xl px-3 py-2 text-xs font-mono font-bold text-emerald-400 focus:ring-2 focus:ring-purple-500 focus:outline-none ${
-                          formValidationErrors.contractValue ? 'border-rose-500' : 'border-slate-800'
+                        className={`w-full bg-slate-50 dark:bg-slate-950 border rounded-xl px-3 py-2 text-xs font-mono font-bold text-emerald-600 dark:text-emerald-400 focus:ring-2 focus:ring-purple-500 focus:outline-none ${
+                          formValidationErrors.contractValue ? 'border-rose-500' : 'border-slate-200 dark:border-slate-800'
                         }`}
                       />
                       {formValidationErrors.contractValue && (
-                        <p className="text-[10px] text-rose-400">{formValidationErrors.contractValue}</p>
+                        <p className="text-[10px] text-rose-600 dark:text-rose-400">{formValidationErrors.contractValue}</p>
                       )}
                     </div>
 
                     <div className="space-y-1">
-                      <label className="text-xs font-semibold text-slate-300">
+                      <label className="text-xs font-semibold text-slate-700 dark:text-slate-300">
                         Contract Currency
                       </label>
                       <select
                         value={formData.currency}
                         onChange={e => setFormData(prev => ({ ...prev, currency: e.target.value }))}
-                        className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs font-mono font-bold text-slate-200 focus:ring-2 focus:ring-purple-500 focus:outline-none cursor-pointer"
+                        className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 text-xs font-mono font-bold text-slate-800 dark:text-slate-200 focus:ring-2 focus:ring-purple-500 focus:outline-none cursor-pointer"
                       >
                         {currencies.map(curr => (
                           <option key={curr} value={curr}>
@@ -1873,13 +1873,13 @@ export const ProjectMasterView: React.FC<ProjectMasterViewProps> = ({
                     </div>
 
                     <div className="space-y-1">
-                      <label className="text-xs font-semibold text-slate-300">
+                      <label className="text-xs font-semibold text-slate-700 dark:text-slate-300">
                         Billing Method
                       </label>
                       <select
                         value={formData.billingMethod}
                         onChange={e => setFormData(prev => ({ ...prev, billingMethod: e.target.value as BillingMethod }))}
-                        className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-slate-200 focus:ring-2 focus:ring-purple-500 focus:outline-none cursor-pointer"
+                        className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 text-xs text-slate-800 dark:text-slate-200 focus:ring-2 focus:ring-purple-500 focus:outline-none cursor-pointer"
                       >
                         <option value="PROGRESS_PERCENT_COMPLETION">Progress % Completion (IPC)</option>
                         <option value="MILESTONE_DELIVERABLE">Milestone Deliverables</option>
@@ -1897,13 +1897,13 @@ export const ProjectMasterView: React.FC<ProjectMasterViewProps> = ({
                 <div className="space-y-4">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div className="space-y-1">
-                      <label className="text-xs font-semibold text-slate-300">
-                        Assigned Project Manager (PM) <span className="text-rose-400">*</span>
+                      <label className="text-xs font-semibold text-slate-700 dark:text-slate-300">
+                        Assigned Project Manager (PM) <span className="text-rose-600 dark:text-rose-400">*</span>
                       </label>
                       <select
                         value={formData.projectManager}
                         onChange={e => setFormData(prev => ({ ...prev, projectManager: e.target.value }))}
-                        className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-slate-200 focus:ring-2 focus:ring-purple-500 focus:outline-none cursor-pointer"
+                        className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 text-xs text-slate-800 dark:text-slate-200 focus:ring-2 focus:ring-purple-500 focus:outline-none cursor-pointer"
                       >
                         {projectManagers.map(pm => (
                           <option key={pm} value={pm}>
@@ -1914,13 +1914,13 @@ export const ProjectMasterView: React.FC<ProjectMasterViewProps> = ({
                     </div>
 
                     <div className="space-y-1">
-                      <label className="text-xs font-semibold text-slate-300">
-                        Assigned Lead Site Engineer <span className="text-rose-400">*</span>
+                      <label className="text-xs font-semibold text-slate-700 dark:text-slate-300">
+                        Assigned Lead Site Engineer <span className="text-rose-600 dark:text-rose-400">*</span>
                       </label>
                       <select
                         value={formData.siteEngineer}
                         onChange={e => setFormData(prev => ({ ...prev, siteEngineer: e.target.value }))}
-                        className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-slate-200 focus:ring-2 focus:ring-purple-500 focus:outline-none cursor-pointer"
+                        className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 text-xs text-slate-800 dark:text-slate-200 focus:ring-2 focus:ring-purple-500 focus:outline-none cursor-pointer"
                       >
                         {siteEngineers.map(se => (
                           <option key={se} value={se}>
@@ -1932,17 +1932,17 @@ export const ProjectMasterView: React.FC<ProjectMasterViewProps> = ({
                   </div>
 
                   <div className="space-y-1">
-                    <label className="text-xs font-semibold text-slate-300">
+                    <label className="text-xs font-semibold text-slate-700 dark:text-slate-300">
                       Physical Site Location / Berth / Coordinates
                     </label>
                     <div className="relative">
-                      <MapPin className="w-4 h-4 absolute left-3 top-2.5 text-rose-400" />
+                      <MapPin className="w-4 h-4 absolute left-3 top-2.5 text-rose-600 dark:text-rose-400" />
                       <input
                         type="text"
                         placeholder="e.g. Sohar Port Industrial Zone, Quay 4, Berth 12 (24.498° N, 56.634° E)"
                         value={formData.location}
                         onChange={e => setFormData(prev => ({ ...prev, location: e.target.value }))}
-                        className="w-full bg-slate-950 border border-slate-800 rounded-xl pl-9 pr-3 py-2 text-xs text-white focus:ring-2 focus:ring-purple-500 focus:outline-none"
+                        className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl pl-9 pr-3 py-2 text-xs text-slate-900 dark:text-white focus:ring-2 focus:ring-purple-500 focus:outline-none"
                       />
                     </div>
                   </div>
@@ -1954,44 +1954,44 @@ export const ProjectMasterView: React.FC<ProjectMasterViewProps> = ({
                 <div className="space-y-4">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div className="space-y-1">
-                      <label className="text-xs font-semibold text-slate-300">
-                        Notice to Proceed (NTP) / Start Date <span className="text-rose-400">*</span>
+                      <label className="text-xs font-semibold text-slate-700 dark:text-slate-300">
+                        Notice to Proceed (NTP) / Start Date <span className="text-rose-600 dark:text-rose-400">*</span>
                       </label>
                       <input
                         type="date"
                         value={formData.startDate}
                         onChange={e => setFormData(prev => ({ ...prev, startDate: e.target.value }))}
-                        className={`w-full bg-slate-950 border rounded-xl px-3 py-2 text-xs font-mono text-white focus:ring-2 focus:ring-purple-500 focus:outline-none ${
-                          formValidationErrors.startDate ? 'border-rose-500' : 'border-slate-800'
+                        className={`w-full bg-slate-50 dark:bg-slate-950 border rounded-xl px-3 py-2 text-xs font-mono text-slate-900 dark:text-white focus:ring-2 focus:ring-purple-500 focus:outline-none ${
+                          formValidationErrors.startDate ? 'border-rose-500' : 'border-slate-200 dark:border-slate-800'
                         }`}
                       />
                       {formValidationErrors.startDate && (
-                        <p className="text-[10px] text-rose-400">{formValidationErrors.startDate}</p>
+                        <p className="text-[10px] text-rose-600 dark:text-rose-400">{formValidationErrors.startDate}</p>
                       )}
                     </div>
 
                     <div className="space-y-1">
-                      <label className="text-xs font-semibold text-slate-300">
-                        Target Contractual Completion Date <span className="text-rose-400">*</span>
+                      <label className="text-xs font-semibold text-slate-700 dark:text-slate-300">
+                        Target Contractual Completion Date <span className="text-rose-600 dark:text-rose-400">*</span>
                       </label>
                       <input
                         type="date"
                         value={formData.targetCompletionDate}
                         onChange={e => setFormData(prev => ({ ...prev, targetCompletionDate: e.target.value }))}
-                        className={`w-full bg-slate-950 border rounded-xl px-3 py-2 text-xs font-mono text-white focus:ring-2 focus:ring-purple-500 focus:outline-none ${
-                          formValidationErrors.targetCompletionDate ? 'border-rose-500' : 'border-slate-800'
+                        className={`w-full bg-slate-50 dark:bg-slate-950 border rounded-xl px-3 py-2 text-xs font-mono text-slate-900 dark:text-white focus:ring-2 focus:ring-purple-500 focus:outline-none ${
+                          formValidationErrors.targetCompletionDate ? 'border-rose-500' : 'border-slate-200 dark:border-slate-800'
                         }`}
                       />
                       {formValidationErrors.targetCompletionDate && (
-                        <p className="text-[10px] text-rose-400">{formValidationErrors.targetCompletionDate}</p>
+                        <p className="text-[10px] text-rose-600 dark:text-rose-400">{formValidationErrors.targetCompletionDate}</p>
                       )}
                     </div>
                   </div>
 
                   {formData.startDate && formData.targetCompletionDate && (
-                    <div className="p-3 bg-slate-950/60 border border-slate-800 rounded-xl text-xs flex items-center justify-between text-slate-400 font-mono">
+                    <div className="p-3 bg-slate-50/60 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800 rounded-xl text-xs flex items-center justify-between text-slate-600 dark:text-slate-400 font-mono">
                       <span>Calculated Calendar Duration:</span>
-                      <span className="text-purple-300 font-bold">
+                      <span className="text-purple-700 dark:text-purple-300 font-bold">
                         {Math.max(
                           0,
                           Math.ceil(
@@ -2023,8 +2023,8 @@ export const ProjectMasterView: React.FC<ProjectMasterViewProps> = ({
                 <div className="space-y-4">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div className="space-y-1">
-                      <label className="text-xs font-semibold text-slate-300">
-                        Approved Total Baseline Cost Budget <span className="text-rose-400">*</span>
+                      <label className="text-xs font-semibold text-slate-700 dark:text-slate-300">
+                        Approved Total Baseline Cost Budget <span className="text-rose-600 dark:text-rose-400">*</span>
                       </label>
                       <input
                         type="number"
@@ -2032,17 +2032,17 @@ export const ProjectMasterView: React.FC<ProjectMasterViewProps> = ({
                         step="1000"
                         value={formData.totalBudget}
                         onChange={e => setFormData(prev => ({ ...prev, totalBudget: parseFloat(e.target.value) || 0 }))}
-                        className={`w-full bg-slate-950 border rounded-xl px-3 py-2 text-xs font-mono font-bold text-blue-300 focus:ring-2 focus:ring-purple-500 focus:outline-none ${
-                          formValidationErrors.totalBudget ? 'border-rose-500' : 'border-slate-800'
+                        className={`w-full bg-slate-50 dark:bg-slate-950 border rounded-xl px-3 py-2 text-xs font-mono font-bold text-blue-700 dark:text-blue-300 focus:ring-2 focus:ring-purple-500 focus:outline-none ${
+                          formValidationErrors.totalBudget ? 'border-rose-500' : 'border-slate-200 dark:border-slate-800'
                         }`}
                       />
                       {formValidationErrors.totalBudget && (
-                        <p className="text-[10px] text-rose-400">{formValidationErrors.totalBudget}</p>
+                        <p className="text-[10px] text-rose-600 dark:text-rose-400">{formValidationErrors.totalBudget}</p>
                       )}
                     </div>
 
                     <div className="space-y-1">
-                      <label className="text-xs font-semibold text-slate-300">
+                      <label className="text-xs font-semibold text-slate-700 dark:text-slate-300">
                         Standard Retention Rate Withheld (%)
                       </label>
                       <input
@@ -2052,34 +2052,34 @@ export const ProjectMasterView: React.FC<ProjectMasterViewProps> = ({
                         step="0.5"
                         value={formData.retentionWithheldPercent}
                         onChange={e => setFormData(prev => ({ ...prev, retentionWithheldPercent: parseFloat(e.target.value) || 0 }))}
-                        className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs font-mono text-white focus:ring-2 focus:ring-purple-500 focus:outline-none"
+                        className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 text-xs font-mono text-slate-900 dark:text-white focus:ring-2 focus:ring-purple-500 focus:outline-none"
                       />
                     </div>
                   </div>
 
                   {/* Computed Margin Analysis */}
-                  <div className="p-4 bg-slate-950 border border-slate-800 rounded-xl space-y-2 text-xs">
-                    <div className="font-semibold text-slate-200">Commercial Margin Analysis:</div>
+                  <div className="p-4 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl space-y-2 text-xs">
+                    <div className="font-semibold text-slate-800 dark:text-slate-200">Commercial Margin Analysis:</div>
                     <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 pt-1">
                       <div>
-                        <span className="text-slate-500 text-[11px] block">Contract Revenue:</span>
-                        <span className="font-mono text-emerald-400 font-bold">
+                        <span className="text-slate-500 dark:text-slate-400 text-[11px] block">Contract Revenue:</span>
+                        <span className="font-mono text-emerald-600 dark:text-emerald-400 font-bold">
                           {formData.currency} {formData.contractValue?.toLocaleString()}
                         </span>
                       </div>
                       <div>
-                        <span className="text-slate-500 text-[11px] block">Baseline Budget:</span>
-                        <span className="font-mono text-blue-300 font-bold">
+                        <span className="text-slate-500 dark:text-slate-400 text-[11px] block">Baseline Budget:</span>
+                        <span className="font-mono text-blue-700 dark:text-blue-300 font-bold">
                           {formData.currency} {formData.totalBudget?.toLocaleString()}
                         </span>
                       </div>
                       <div>
-                        <span className="text-slate-500 text-[11px] block">Expected Gross Margin:</span>
+                        <span className="text-slate-500 dark:text-slate-400 text-[11px] block">Expected Gross Margin:</span>
                         <span
                           className={`font-mono font-bold ${
                             formData.contractValue - formData.totalBudget >= 0
-                              ? 'text-purple-300'
-                              : 'text-rose-400'
+                              ? 'text-purple-700 dark:text-purple-300'
+                              : 'text-rose-600 dark:text-rose-400'
                           }`}
                         >
                           {formData.contractValue > 0
@@ -2099,11 +2099,11 @@ export const ProjectMasterView: React.FC<ProjectMasterViewProps> = ({
               )}
 
               {/* Form Actions Footer */}
-              <div className="pt-4 border-t border-slate-800 flex items-center justify-between">
+              <div className="pt-4 border-t border-slate-200 dark:border-slate-800 flex items-center justify-between">
                 <button
                   type="button"
                   onClick={() => setShowDataEntryModal(false)}
-                  className="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold cursor-pointer transition-colors"
+                  className="px-4 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 text-xs font-semibold cursor-pointer transition-colors"
                 >
                   Cancel
                 </button>
@@ -2117,7 +2117,7 @@ export const ProjectMasterView: React.FC<ProjectMasterViewProps> = ({
                         const nextIndex = tabs.indexOf(activeFormTab) + 1;
                         if (nextIndex < tabs.length) setActiveFormTab(tabs[nextIndex]);
                       }}
-                      className="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-purple-300 text-xs font-bold cursor-pointer transition-colors"
+                      className="px-4 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-purple-700 dark:text-purple-300 text-xs font-bold cursor-pointer transition-colors"
                     >
                       Next Section &rarr;
                     </button>
@@ -2140,90 +2140,90 @@ export const ProjectMasterView: React.FC<ProjectMasterViewProps> = ({
       {/* DRAWER: PROJECT 360 COMPREHENSIVE VIEW */}
       {/* ========================================== */}
       {show360Drawer && drawerProject && (
-        <div className="fixed inset-0 z-50 bg-slate-950/70 backdrop-blur-sm flex justify-end animate-fadeIn">
-          <div className="bg-slate-900 border-l border-slate-800 w-full max-w-2xl h-full shadow-2xl p-6 overflow-y-auto space-y-6 flex flex-col justify-between">
+        <div className="fixed inset-0 z-50 bg-slate-50/70 dark:bg-slate-950/70 backdrop-blur-sm flex justify-end animate-fadeIn">
+          <div className="bg-white dark:bg-slate-900 border-l border-slate-200 dark:border-slate-800 w-full max-w-2xl h-full shadow-2xl p-6 overflow-y-auto space-y-6 flex flex-col justify-between">
             <div className="space-y-6">
               {/* Header */}
-              <div className="flex items-start justify-between pb-4 border-b border-slate-800">
+              <div className="flex items-start justify-between pb-4 border-b border-slate-200 dark:border-slate-800">
                 <div>
                   <div className="flex items-center gap-2">
-                    <span className="font-mono text-xs font-bold text-purple-400 bg-purple-950/80 px-2.5 py-0.5 rounded border border-purple-800">
+                    <span className="font-mono text-xs font-bold text-purple-600 dark:text-purple-400 bg-purple-50 dark:bg-purple-950/80 px-2.5 py-0.5 rounded border border-purple-200 dark:border-purple-800">
                       {drawerProject.projectCode}
                     </span>
                     {renderStatusBadge(drawerProject.status)}
                     {renderPriorityBadge(drawerProject.priority)}
                   </div>
-                  <h2 className="text-xl font-bold text-white mt-2">{drawerProject.projectName}</h2>
-                  <p className="text-xs text-slate-400 mt-0.5">
-                    Operating Entity: <strong className="text-slate-300">{drawerProject.company || companies[0]}</strong>
+                  <h2 className="text-xl font-bold text-slate-900 dark:text-white mt-2">{drawerProject.projectName}</h2>
+                  <p className="text-xs text-slate-600 dark:text-slate-400 mt-0.5">
+                    Operating Entity: <strong className="text-slate-700 dark:text-slate-300">{drawerProject.company || companies[0]}</strong>
                   </p>
                 </div>
 
                 <button
                   onClick={() => setShow360Drawer(false)}
-                  className="p-2 rounded-xl bg-slate-800 text-slate-400 hover:text-white cursor-pointer"
+                  className="p-2 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white cursor-pointer"
                 >
                   <X className="w-5 h-5" />
                 </button>
               </div>
 
               {/* Commercial & Contractual Summary */}
-              <div className="bg-slate-950/60 border border-slate-800 rounded-xl p-4 space-y-3">
-                <h4 className="font-semibold text-white text-xs uppercase tracking-wider flex items-center gap-1.5">
-                  <DollarSign className="w-4 h-4 text-emerald-400" />
+              <div className="bg-slate-50/60 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800 rounded-xl p-4 space-y-3">
+                <h4 className="font-semibold text-slate-900 dark:text-white text-xs uppercase tracking-wider flex items-center gap-1.5">
+                  <DollarSign className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
                   <span>Commercial Terms & Client Reference</span>
                 </h4>
                 <div className="grid grid-cols-2 gap-3 text-xs">
                   <div>
-                    <span className="text-slate-500 block text-[11px]">Client Principal:</span>
-                    <span className="font-bold text-slate-200">{drawerProject.clientEntity}</span>
+                    <span className="text-slate-500 dark:text-slate-400 block text-[11px]">Client Principal:</span>
+                    <span className="font-bold text-slate-800 dark:text-slate-200">{drawerProject.clientEntity}</span>
                   </div>
                   <div>
-                    <span className="text-slate-500 block text-[11px]">Contract Reference #:</span>
-                    <span className="font-mono text-slate-300">{drawerProject.contractNumber}</span>
+                    <span className="text-slate-500 dark:text-slate-400 block text-[11px]">Contract Reference #:</span>
+                    <span className="font-mono text-slate-700 dark:text-slate-300">{drawerProject.contractNumber}</span>
                   </div>
                   <div>
-                    <span className="text-slate-500 block text-[11px]">Awarded Contract Value:</span>
-                    <span className="font-mono font-bold text-emerald-400">
+                    <span className="text-slate-500 dark:text-slate-400 block text-[11px]">Awarded Contract Value:</span>
+                    <span className="font-mono font-bold text-emerald-600 dark:text-emerald-400">
                       {drawerProject.currency} {drawerProject.contractValue?.toLocaleString()}
                     </span>
                   </div>
                   <div>
-                    <span className="text-slate-500 block text-[11px]">Baseline Cost Budget:</span>
-                    <span className="font-mono font-bold text-blue-300">
+                    <span className="text-slate-500 dark:text-slate-400 block text-[11px]">Baseline Cost Budget:</span>
+                    <span className="font-mono font-bold text-blue-700 dark:text-blue-300">
                       {drawerProject.currency} {drawerProject.totalBudget?.toLocaleString()}
                     </span>
                   </div>
                   <div>
-                    <span className="text-slate-500 block text-[11px]">Billing Method:</span>
-                    <span className="text-slate-300">{drawerProject.billingMethod}</span>
+                    <span className="text-slate-500 dark:text-slate-400 block text-[11px]">Billing Method:</span>
+                    <span className="text-slate-700 dark:text-slate-300">{drawerProject.billingMethod}</span>
                   </div>
                   <div>
-                    <span className="text-slate-500 block text-[11px]">Retention Rate:</span>
-                    <span className="text-slate-300">{drawerProject.retentionWithheldPercent}%</span>
+                    <span className="text-slate-500 dark:text-slate-400 block text-[11px]">Retention Rate:</span>
+                    <span className="text-slate-700 dark:text-slate-300">{drawerProject.retentionWithheldPercent}%</span>
                   </div>
                 </div>
               </div>
 
               {/* Leadership & Location */}
-              <div className="bg-slate-950/60 border border-slate-800 rounded-xl p-4 space-y-3">
-                <h4 className="font-semibold text-white text-xs uppercase tracking-wider flex items-center gap-1.5">
-                  <User className="w-4 h-4 text-blue-400" />
+              <div className="bg-slate-50/60 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800 rounded-xl p-4 space-y-3">
+                <h4 className="font-semibold text-slate-900 dark:text-white text-xs uppercase tracking-wider flex items-center gap-1.5">
+                  <User className="w-4 h-4 text-blue-600 dark:text-blue-400" />
                   <span>Execution Team & Site Coordinates</span>
                 </h4>
                 <div className="grid grid-cols-2 gap-3 text-xs">
                   <div>
-                    <span className="text-slate-500 block text-[11px]">Project Manager:</span>
-                    <span className="font-semibold text-slate-200">{drawerProject.projectManager}</span>
+                    <span className="text-slate-500 dark:text-slate-400 block text-[11px]">Project Manager:</span>
+                    <span className="font-semibold text-slate-800 dark:text-slate-200">{drawerProject.projectManager}</span>
                   </div>
                   <div>
-                    <span className="text-slate-500 block text-[11px]">Lead Site Engineer:</span>
-                    <span className="font-semibold text-slate-200">{drawerProject.siteEngineer}</span>
+                    <span className="text-slate-500 dark:text-slate-400 block text-[11px]">Lead Site Engineer:</span>
+                    <span className="font-semibold text-slate-800 dark:text-slate-200">{drawerProject.siteEngineer}</span>
                   </div>
                   <div className="col-span-2">
-                    <span className="text-slate-500 block text-[11px]">Physical Site Location:</span>
-                    <span className="text-slate-300 flex items-center gap-1 mt-0.5">
-                      <MapPin className="w-3.5 h-3.5 text-rose-400 shrink-0" />
+                    <span className="text-slate-500 dark:text-slate-400 block text-[11px]">Physical Site Location:</span>
+                    <span className="text-slate-700 dark:text-slate-300 flex items-center gap-1 mt-0.5">
+                      <MapPin className="w-3.5 h-3.5 text-rose-600 dark:text-rose-400 shrink-0" />
                       {drawerProject.location}
                     </span>
                   </div>
@@ -2231,13 +2231,13 @@ export const ProjectMasterView: React.FC<ProjectMasterViewProps> = ({
               </div>
 
               {/* Phases & WBS Summary */}
-              <div className="bg-slate-950/60 border border-slate-800 rounded-xl p-4 space-y-3">
+              <div className="bg-slate-50/60 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800 rounded-xl p-4 space-y-3">
                 <div className="flex items-center justify-between">
-                  <h4 className="font-semibold text-white text-xs uppercase tracking-wider flex items-center gap-1.5">
-                    <Layers className="w-4 h-4 text-purple-400" />
+                  <h4 className="font-semibold text-slate-900 dark:text-white text-xs uppercase tracking-wider flex items-center gap-1.5">
+                    <Layers className="w-4 h-4 text-purple-600 dark:text-purple-400" />
                     <span>Project Phases ({drawerProject.phases?.length || 0})</span>
                   </h4>
-                  <span className="text-xs text-purple-300 font-bold">
+                  <span className="text-xs text-purple-700 dark:text-purple-300 font-bold">
                     {drawerProject.overallProgressPercent}% Total
                   </span>
                 </div>
@@ -2247,19 +2247,19 @@ export const ProjectMasterView: React.FC<ProjectMasterViewProps> = ({
                     {drawerProject.phases.map(phase => (
                       <div
                         key={phase.id}
-                        className="bg-slate-900 border border-slate-800 p-2.5 rounded-xl text-xs space-y-1"
+                        className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-2.5 rounded-xl text-xs space-y-1"
                       >
-                        <div className="flex justify-between font-semibold text-slate-200">
+                        <div className="flex justify-between font-semibold text-slate-800 dark:text-slate-200">
                           <span>{phase.phaseName}</span>
-                          <span className="font-mono text-purple-400">{phase.completionPercent}%</span>
+                          <span className="font-mono text-purple-600 dark:text-purple-400">{phase.completionPercent}%</span>
                         </div>
-                        <div className="w-full bg-slate-800 rounded-full h-1.5 overflow-hidden">
+                        <div className="w-full bg-slate-100 dark:bg-slate-800 rounded-full h-1.5 overflow-hidden">
                           <div
                             className="bg-purple-500 h-1.5 rounded-full"
                             style={{ width: `${phase.completionPercent}%` }}
                           />
                         </div>
-                        <div className="flex justify-between text-[10px] text-slate-500">
+                        <div className="flex justify-between text-[10px] text-slate-500 dark:text-slate-400">
                           <span>Budget: {drawerProject.currency} {phase.budgetAllocated.toLocaleString()}</span>
                           <span>Weight: {phase.weightagePercent}%</span>
                         </div>
@@ -2267,13 +2267,13 @@ export const ProjectMasterView: React.FC<ProjectMasterViewProps> = ({
                     ))}
                   </div>
                 ) : (
-                  <p className="text-xs text-slate-500 italic">No milestone phases defined yet for this charter.</p>
+                  <p className="text-xs text-slate-500 dark:text-slate-400 italic">No milestone phases defined yet for this charter.</p>
                 )}
               </div>
             </div>
 
             {/* Drawer Actions */}
-            <div className="pt-4 border-t border-slate-800 flex items-center gap-2">
+            <div className="pt-4 border-t border-slate-200 dark:border-slate-800 flex items-center gap-2">
               <button
                 onClick={() => {
                   setSelectedProject(drawerProject);
@@ -2289,7 +2289,7 @@ export const ProjectMasterView: React.FC<ProjectMasterViewProps> = ({
                   setShow360Drawer(false);
                   handleOpenEditModal(drawerProject);
                 }}
-                className="px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold cursor-pointer transition-colors"
+                className="px-4 py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-200 text-xs font-semibold cursor-pointer transition-colors"
               >
                 Edit Charter
               </button>

@@ -121,14 +121,14 @@ export const CapaManagementView: React.FC = () => {
   return (
     <div className="space-y-6">
       {/* Sub-Header Tabs */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 bg-slate-900 border border-slate-800 rounded-2xl p-4 shadow-xl">
-        <div className="flex items-center gap-2 p-1 bg-slate-950 rounded-xl border border-slate-800 overflow-x-auto">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-4 shadow-xl">
+        <div className="flex items-center gap-2 p-1 bg-slate-50 dark:bg-slate-950 rounded-xl border border-slate-200 dark:border-slate-800 overflow-x-auto">
           <button
             onClick={() => setActiveTab('8D_WORKBENCH')}
             className={`flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-bold transition-all whitespace-nowrap cursor-pointer ${
               activeTab === '8D_WORKBENCH'
                 ? 'bg-teal-600 text-white shadow-lg shadow-teal-600/30'
-                : 'text-slate-400 hover:text-slate-200'
+                : 'text-slate-600 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200'
             }`}
           >
             <Flame className="w-3.5 h-3.5" />
@@ -140,7 +140,7 @@ export const CapaManagementView: React.FC = () => {
             className={`flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-bold transition-all whitespace-nowrap cursor-pointer ${
               activeTab === 'FIVE_WHYS'
                 ? 'bg-teal-600 text-white shadow-lg shadow-teal-600/30'
-                : 'text-slate-400 hover:text-slate-200'
+                : 'text-slate-600 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200'
             }`}
           >
             <HelpCircle className="w-3.5 h-3.5" />
@@ -152,7 +152,7 @@ export const CapaManagementView: React.FC = () => {
             className={`flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-bold transition-all whitespace-nowrap cursor-pointer ${
               activeTab === 'FISHBONE'
                 ? 'bg-teal-600 text-white shadow-lg shadow-teal-600/30'
-                : 'text-slate-400 hover:text-slate-200'
+                : 'text-slate-600 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200'
             }`}
           >
             <GitBranch className="w-3.5 h-3.5" />
@@ -164,7 +164,7 @@ export const CapaManagementView: React.FC = () => {
             className={`flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-bold transition-all whitespace-nowrap cursor-pointer ${
               activeTab === 'FMEA_MATRIX'
                 ? 'bg-teal-600 text-white shadow-lg shadow-teal-600/30'
-                : 'text-slate-400 hover:text-slate-200'
+                : 'text-slate-600 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200'
             }`}
           >
             <ShieldAlert className="w-3.5 h-3.5" />
@@ -204,25 +204,25 @@ export const CapaManagementView: React.FC = () => {
                   onClick={() => setSelectedCapa(capa)}
                   className={`p-4 rounded-2xl border transition-all cursor-pointer ${
                     isSelected
-                      ? 'bg-slate-900 border-teal-500 shadow-xl shadow-teal-500/10'
-                      : 'bg-slate-900/60 border-slate-800 hover:border-slate-700 hover:bg-slate-900'
+                      ? 'bg-white dark:bg-slate-900 border-teal-500 shadow-xl shadow-teal-500/10'
+                      : 'bg-white/60 dark:bg-slate-900/60 border-slate-200 dark:border-slate-800 hover:border-slate-300 dark:hover:border-slate-700 hover:bg-white dark:hover:bg-slate-900'
                   }`}
                 >
                   <div className="flex items-center justify-between mb-1.5">
-                    <span className="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-teal-950 text-teal-400 border border-teal-800">
+                    <span className="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-teal-50 dark:bg-teal-950 text-teal-600 dark:text-teal-400 border border-teal-200 dark:border-teal-800">
                       {capa.capaNumber}
                     </span>
-                    <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-slate-800 text-slate-300">
+                    <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">
                       {capa.currentEightDStage.replace('_', ' ')}
                     </span>
                   </div>
 
-                  <h4 className="text-xs font-bold text-white leading-snug">{capa.title}</h4>
-                  <div className="text-[11px] text-slate-400 mt-1">Champion: {capa.championName}</div>
+                  <h4 className="text-xs font-bold text-slate-900 dark:text-white leading-snug">{capa.title}</h4>
+                  <div className="text-[11px] text-slate-600 dark:text-slate-400 mt-1">Champion: {capa.championName}</div>
 
-                  <div className="flex items-center justify-between text-[11px] text-slate-400 mt-3 pt-2 border-t border-slate-800/80">
-                    <span className="text-amber-400 font-medium">Linked: {capa.linkedNcrId}</span>
-                    <span className="font-mono text-slate-500">Target: {capa.targetResolutionDate}</span>
+                  <div className="flex items-center justify-between text-[11px] text-slate-600 dark:text-slate-400 mt-3 pt-2 border-t border-slate-200/80 dark:border-slate-800/80">
+                    <span className="text-amber-700 dark:text-amber-400 font-medium">Linked: {capa.linkedNcrId}</span>
+                    <span className="font-mono text-slate-500 dark:text-slate-400">Target: {capa.targetResolutionDate}</span>
                   </div>
                 </div>
               );
@@ -231,22 +231,22 @@ export const CapaManagementView: React.FC = () => {
 
           {/* 8D Stage Flow Detailed View */}
           {selectedCapa ? (
-            <div className="lg:col-span-2 bg-slate-900 border border-slate-800 rounded-2xl p-6 space-y-6 shadow-xl">
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-800 pb-4">
+            <div className="lg:col-span-2 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 space-y-6 shadow-xl">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-200 dark:border-slate-800 pb-4">
                 <div>
                   <div className="flex items-center gap-2">
-                    <span className="text-xs font-mono font-bold text-teal-400 bg-teal-950 px-2.5 py-0.5 rounded border border-teal-800">
+                    <span className="text-xs font-mono font-bold text-teal-600 dark:text-teal-400 bg-teal-50 dark:bg-teal-950 px-2.5 py-0.5 rounded border border-teal-200 dark:border-teal-800">
                       {selectedCapa.capaNumber}
                     </span>
-                    <span className="text-xs font-bold px-2 py-0.5 rounded bg-slate-800 text-slate-300">
+                    <span className="text-xs font-bold px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">
                       Source: {selectedCapa.sourceType}
                     </span>
                   </div>
-                  <h3 className="text-lg font-black text-white mt-1">{selectedCapa.title}</h3>
-                  <div className="text-xs text-slate-400">Champion: {selectedCapa.championName} • Resolution Target: {selectedCapa.targetResolutionDate}</div>
+                  <h3 className="text-lg font-black text-slate-900 dark:text-white mt-1">{selectedCapa.title}</h3>
+                  <div className="text-xs text-slate-600 dark:text-slate-400">Champion: {selectedCapa.championName} • Resolution Target: {selectedCapa.targetResolutionDate}</div>
                 </div>
 
-                <span className="px-3 py-1 rounded-full text-xs font-black bg-amber-950 text-amber-400 border border-amber-800 shrink-0">
+                <span className="px-3 py-1 rounded-full text-xs font-black bg-amber-50 dark:bg-amber-950 text-amber-700 dark:text-amber-400 border border-amber-200 dark:border-amber-800 shrink-0">
                   {selectedCapa.status}
                 </span>
               </div>
@@ -260,7 +260,7 @@ export const CapaManagementView: React.FC = () => {
                     className={`p-2 rounded-xl text-center border transition-all cursor-pointer ${
                       selectedEightDStep === step.key
                         ? 'bg-teal-600 border-teal-500 text-white shadow-lg shadow-teal-600/30'
-                        : 'bg-slate-950 border-slate-800 text-slate-400 hover:text-white'
+                        : 'bg-slate-50 dark:bg-slate-950 border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
                     }`}
                   >
                     <div className="text-xs font-black font-mono">{step.num}</div>
@@ -270,27 +270,27 @@ export const CapaManagementView: React.FC = () => {
               </div>
 
               {/* Selected 8D Stage Detail Canvas */}
-              <div className="p-5 bg-slate-950 rounded-2xl border border-slate-800 space-y-4">
-                <div className="flex items-center justify-between border-b border-slate-800 pb-3">
+              <div className="p-5 bg-slate-50 dark:bg-slate-950 rounded-2xl border border-slate-200 dark:border-slate-800 space-y-4">
+                <div className="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-3">
                   <div className="space-y-0.5">
-                    <span className="text-xs font-bold text-teal-400 font-mono">
+                    <span className="text-xs font-bold text-teal-600 dark:text-teal-400 font-mono">
                       {eightDStepsInfo.find(s => s.key === selectedEightDStep)?.num} -{' '}
                       {eightDStepsInfo.find(s => s.key === selectedEightDStep)?.title}
                     </span>
-                    <p className="text-xs text-slate-400">
+                    <p className="text-xs text-slate-600 dark:text-slate-400">
                       {eightDStepsInfo.find(s => s.key === selectedEightDStep)?.desc}
                     </p>
                   </div>
-                  <CheckCircle2 className="w-5 h-5 text-emerald-400" />
+                  <CheckCircle2 className="w-5 h-5 text-emerald-600 dark:text-emerald-400" />
                 </div>
 
                 {selectedEightDStep === 'D1_TEAM' && (
                   <div className="space-y-2 text-xs">
-                    <span className="text-slate-400 font-bold uppercase">Assigned 8D Problem Solving Team:</span>
+                    <span className="text-slate-600 dark:text-slate-400 font-bold uppercase">Assigned 8D Problem Solving Team:</span>
                     <div className="flex flex-wrap gap-2 pt-1">
                       {selectedCapa.d1Team.map((member, idx) => (
-                        <span key={idx} className="flex items-center gap-1.5 px-3 py-1.5 bg-slate-900 border border-slate-800 rounded-xl text-white font-medium">
-                          <Users className="w-3.5 h-3.5 text-teal-400" />
+                        <span key={idx} className="flex items-center gap-1.5 px-3 py-1.5 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl text-slate-900 dark:text-white font-medium">
+                          <Users className="w-3.5 h-3.5 text-teal-600 dark:text-teal-400" />
                           <span>{member}</span>
                         </span>
                       ))}
@@ -300,8 +300,8 @@ export const CapaManagementView: React.FC = () => {
 
                 {selectedEightDStep === 'D2_PROBLEM_STATEMENT' && (
                   <div className="space-y-2 text-xs">
-                    <span className="text-slate-400 font-bold uppercase">5W2H Problem Boundary Definition:</span>
-                    <p className="text-slate-200 leading-relaxed bg-slate-900 p-3 rounded-xl border border-slate-800">
+                    <span className="text-slate-600 dark:text-slate-400 font-bold uppercase">5W2H Problem Boundary Definition:</span>
+                    <p className="text-slate-800 dark:text-slate-200 leading-relaxed bg-white dark:bg-slate-900 p-3 rounded-xl border border-slate-200 dark:border-slate-800">
                       {selectedCapa.d2ProblemStatement || selectedCapa.problemStatement}
                     </p>
                   </div>
@@ -309,8 +309,8 @@ export const CapaManagementView: React.FC = () => {
 
                 {selectedEightDStep === 'D3_CONTAINMENT' && (
                   <div className="space-y-2 text-xs">
-                    <span className="text-slate-400 font-bold uppercase">Interim Containment Actions (ICA):</span>
-                    <p className="text-amber-300 leading-relaxed bg-slate-900 p-3 rounded-xl border border-slate-800">
+                    <span className="text-slate-600 dark:text-slate-400 font-bold uppercase">Interim Containment Actions (ICA):</span>
+                    <p className="text-amber-800 dark:text-amber-300 leading-relaxed bg-white dark:bg-slate-900 p-3 rounded-xl border border-slate-200 dark:border-slate-800">
                       {selectedCapa.d3ContainmentAction}
                     </p>
                   </div>
@@ -318,8 +318,8 @@ export const CapaManagementView: React.FC = () => {
 
                 {selectedEightDStep === 'D4_ROOT_CAUSE' && (
                   <div className="space-y-2 text-xs">
-                    <span className="text-slate-400 font-bold uppercase">Verified Root Cause:</span>
-                    <p className="text-rose-300 leading-relaxed bg-slate-900 p-3 rounded-xl border border-slate-800">
+                    <span className="text-slate-600 dark:text-slate-400 font-bold uppercase">Verified Root Cause:</span>
+                    <p className="text-rose-700 dark:text-rose-300 leading-relaxed bg-white dark:bg-slate-900 p-3 rounded-xl border border-slate-200 dark:border-slate-800">
                       {selectedCapa.d4RootCauseSummary}
                     </p>
                   </div>
@@ -327,8 +327,8 @@ export const CapaManagementView: React.FC = () => {
 
                 {selectedEightDStep === 'D5_PERMANENT_CORRECTIVE_ACTIONS' && (
                   <div className="space-y-2 text-xs">
-                    <span className="text-slate-400 font-bold uppercase">Permanent Corrective Action (PCA):</span>
-                    <p className="text-emerald-300 leading-relaxed bg-slate-900 p-3 rounded-xl border border-slate-800">
+                    <span className="text-slate-600 dark:text-slate-400 font-bold uppercase">Permanent Corrective Action (PCA):</span>
+                    <p className="text-emerald-700 dark:text-emerald-300 leading-relaxed bg-white dark:bg-slate-900 p-3 rounded-xl border border-slate-200 dark:border-slate-800">
                       {selectedCapa.d5PermanentCorrectiveAction}
                     </p>
                   </div>
@@ -336,8 +336,8 @@ export const CapaManagementView: React.FC = () => {
 
                 {selectedEightDStep === 'D6_VALIDATE_IMPLEMENTATION' && (
                   <div className="space-y-2 text-xs">
-                    <span className="text-slate-400 font-bold uppercase">Validation & CPk Capability:</span>
-                    <p className="text-teal-300 leading-relaxed bg-slate-900 p-3 rounded-xl border border-slate-800">
+                    <span className="text-slate-600 dark:text-slate-400 font-bold uppercase">Validation & CPk Capability:</span>
+                    <p className="text-teal-700 dark:text-teal-300 leading-relaxed bg-white dark:bg-slate-900 p-3 rounded-xl border border-slate-200 dark:border-slate-800">
                       {selectedCapa.d6ValidationResults}
                     </p>
                   </div>
@@ -345,8 +345,8 @@ export const CapaManagementView: React.FC = () => {
 
                 {selectedEightDStep === 'D7_PREVENT_RECURRENCE' && (
                   <div className="space-y-2 text-xs">
-                    <span className="text-slate-400 font-bold uppercase">Systemic Prevention & SOP Modifications:</span>
-                    <p className="text-slate-200 leading-relaxed bg-slate-900 p-3 rounded-xl border border-slate-800">
+                    <span className="text-slate-600 dark:text-slate-400 font-bold uppercase">Systemic Prevention & SOP Modifications:</span>
+                    <p className="text-slate-800 dark:text-slate-200 leading-relaxed bg-white dark:bg-slate-900 p-3 rounded-xl border border-slate-200 dark:border-slate-800">
                       {selectedCapa.d7PreventiveSystemChanges}
                     </p>
                   </div>
@@ -354,8 +354,8 @@ export const CapaManagementView: React.FC = () => {
 
                 {selectedEightDStep === 'D8_RECOGNIZE_TEAM' && (
                   <div className="space-y-2 text-xs">
-                    <span className="text-slate-400 font-bold uppercase">Team Recognition & Closure Signoff:</span>
-                    <p className="text-slate-200 leading-relaxed bg-slate-900 p-3 rounded-xl border border-slate-800">
+                    <span className="text-slate-600 dark:text-slate-400 font-bold uppercase">Team Recognition & Closure Signoff:</span>
+                    <p className="text-slate-800 dark:text-slate-200 leading-relaxed bg-white dark:bg-slate-900 p-3 rounded-xl border border-slate-200 dark:border-slate-800">
                       {selectedCapa.d8ClosureNotes}
                     </p>
                   </div>
@@ -363,7 +363,7 @@ export const CapaManagementView: React.FC = () => {
               </div>
             </div>
           ) : (
-            <div className="lg:col-span-2 bg-slate-900 border border-slate-800 rounded-2xl p-8 text-center text-slate-500 text-xs">
+            <div className="lg:col-span-2 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-8 text-center text-slate-500 dark:text-slate-400 text-xs">
               Select an 8D CAPA project to view lifecycle gates.
             </div>
           )}
@@ -372,13 +372,13 @@ export const CapaManagementView: React.FC = () => {
 
       {/* TAB 2: 5-WHYS ROOT CAUSE TREE */}
       {activeTab === 'FIVE_WHYS' && selectedCapa && (
-        <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 space-y-6 shadow-xl">
-          <div className="border-b border-slate-800 pb-3">
-            <h3 className="text-base font-bold text-white flex items-center gap-2">
-              <HelpCircle className="w-5 h-5 text-teal-400" />
+        <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 space-y-6 shadow-xl">
+          <div className="border-b border-slate-200 dark:border-slate-800 pb-3">
+            <h3 className="text-base font-bold text-slate-900 dark:text-white flex items-center gap-2">
+              <HelpCircle className="w-5 h-5 text-teal-600 dark:text-teal-400" />
               <span>5-Whys Root Cause Analytical Tree: {selectedCapa.capaNumber}</span>
             </h3>
-            <p className="text-xs text-slate-400">Drill down sequentially from symptom to fundamental systemic root cause</p>
+            <p className="text-xs text-slate-600 dark:text-slate-400">Drill down sequentially from symptom to fundamental systemic root cause</p>
           </div>
 
           <div className="space-y-3">
@@ -387,29 +387,29 @@ export const CapaManagementView: React.FC = () => {
                 key={idx}
                 className={`p-4 rounded-xl border space-y-2 ${
                   idx === selectedCapa.fiveWhys.length - 1
-                    ? 'bg-rose-950/30 border-rose-800 shadow-lg shadow-rose-950/40'
-                    : 'bg-slate-950 border-slate-800'
+                    ? 'bg-rose-50 dark:bg-rose-950/30 border-rose-200 dark:border-rose-800 shadow-lg shadow-rose-950/40'
+                    : 'bg-slate-50 dark:bg-slate-950 border-slate-200 dark:border-slate-800'
                 }`}
               >
                 <div className="flex items-center justify-between">
-                  <span className="text-xs font-black font-mono px-2 py-0.5 rounded bg-slate-800 text-teal-400">
+                  <span className="text-xs font-black font-mono px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-teal-600 dark:text-teal-400">
                     Why #{w.whyNumber}
                   </span>
                   {idx === selectedCapa.fiveWhys.length - 1 && (
-                    <span className="text-[10px] font-black uppercase tracking-wider text-rose-400 px-2 py-0.5 rounded bg-rose-950 border border-rose-800">
+                    <span className="text-[10px] font-black uppercase tracking-wider text-rose-600 dark:text-rose-400 px-2 py-0.5 rounded bg-rose-50 dark:bg-rose-950 border border-rose-200 dark:border-rose-800">
                       ROOT CAUSE DISCOVERED
                     </span>
                   )}
                 </div>
 
-                <div className="text-xs font-bold text-white flex items-center gap-2">
-                  <span className="text-slate-400">Q:</span>
+                <div className="text-xs font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                  <span className="text-slate-600 dark:text-slate-400">Q:</span>
                   <span>{w.question}</span>
                 </div>
 
-                <div className="text-xs text-slate-300 flex items-center gap-2 pt-1 border-t border-slate-800/80">
-                  <span className="text-teal-400 font-bold">A:</span>
-                  <span className={idx === selectedCapa.fiveWhys.length - 1 ? 'font-bold text-rose-300' : ''}>
+                <div className="text-xs text-slate-700 dark:text-slate-300 flex items-center gap-2 pt-1 border-t border-slate-200/80 dark:border-slate-800/80">
+                  <span className="text-teal-600 dark:text-teal-400 font-bold">A:</span>
+                  <span className={idx === selectedCapa.fiveWhys.length - 1 ? 'font-bold text-rose-700 dark:text-rose-300' : ''}>
                     {w.answer}
                   </span>
                 </div>
@@ -421,31 +421,31 @@ export const CapaManagementView: React.FC = () => {
 
       {/* TAB 3: ISHIKAWA FISHBONE DIAGRAM (6M) */}
       {activeTab === 'FISHBONE' && selectedCapa && (
-        <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 space-y-6 shadow-xl">
-          <div className="flex items-center justify-between border-b border-slate-800 pb-3">
+        <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 space-y-6 shadow-xl">
+          <div className="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-3">
             <div>
-              <h3 className="text-base font-bold text-white flex items-center gap-2">
-                <GitBranch className="w-5 h-5 text-teal-400" />
+              <h3 className="text-base font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                <GitBranch className="w-5 h-5 text-teal-600 dark:text-teal-400" />
                 <span>Ishikawa Fishbone Cause & Effect Diagram (6M Framework)</span>
               </h3>
-              <p className="text-xs text-slate-400">Target Defect: {selectedCapa.title}</p>
+              <p className="text-xs text-slate-600 dark:text-slate-400">Target Defect: {selectedCapa.title}</p>
             </div>
-            <span className="px-3 py-1 rounded-full text-xs font-mono font-bold bg-teal-950 text-teal-400 border border-teal-800">
+            <span className="px-3 py-1 rounded-full text-xs font-mono font-bold bg-teal-50 dark:bg-teal-950 text-teal-600 dark:text-teal-400 border border-teal-200 dark:border-teal-800">
               6M Method
             </span>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {selectedCapa.ishikawaCategories.map((cat, idx) => (
-              <div key={idx} className="bg-slate-950 p-4 rounded-xl border border-slate-800 space-y-2">
-                <div className="text-xs font-bold text-teal-400 uppercase tracking-wider flex items-center justify-between">
+              <div key={idx} className="bg-slate-50 dark:bg-slate-950 p-4 rounded-xl border border-slate-200 dark:border-slate-800 space-y-2">
+                <div className="text-xs font-bold text-teal-600 dark:text-teal-400 uppercase tracking-wider flex items-center justify-between">
                   <span>{cat.category}</span>
-                  <span className="text-[10px] text-slate-500 font-mono">{cat.causes.length} Factors</span>
+                  <span className="text-[10px] text-slate-500 dark:text-slate-400 font-mono">{cat.causes.length} Factors</span>
                 </div>
-                <ul className="space-y-1.5 text-xs text-slate-300">
+                <ul className="space-y-1.5 text-xs text-slate-700 dark:text-slate-300">
                   {cat.causes.map((c, cIdx) => (
                     <li key={cIdx} className="flex items-start gap-1.5">
-                      <span className="text-teal-500">•</span>
+                      <span className="text-teal-600 dark:text-teal-500">•</span>
                       <span>{c}</span>
                     </li>
                   ))}
@@ -458,26 +458,26 @@ export const CapaManagementView: React.FC = () => {
 
       {/* TAB 4: FMEA RISK MATRIX & RPN CALCULATOR */}
       {activeTab === 'FMEA_MATRIX' && (
-        <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 space-y-6 shadow-xl">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-800 pb-4">
+        <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 space-y-6 shadow-xl">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-200 dark:border-slate-800 pb-4">
             <div>
-              <h3 className="text-base font-bold text-white flex items-center gap-2">
-                <ShieldAlert className="w-5 h-5 text-teal-400" />
+              <h3 className="text-base font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                <ShieldAlert className="w-5 h-5 text-teal-600 dark:text-teal-400" />
                 <span>Failure Mode and Effects Analysis (FMEA Matrix)</span>
               </h3>
-              <p className="text-xs text-slate-400">Risk Priority Number (RPN) = Severity (S) × Occurrence (O) × Detection (D)</p>
+              <p className="text-xs text-slate-600 dark:text-slate-400">Risk Priority Number (RPN) = Severity (S) × Occurrence (O) × Detection (D)</p>
             </div>
 
             <div className="flex items-center gap-2 text-xs">
-              <span className="px-2 py-0.5 rounded bg-rose-950 text-rose-400 font-bold border border-rose-800">RPN &gt; 120 (High Risk)</span>
-              <span className="px-2 py-0.5 rounded bg-amber-950 text-amber-400 font-bold border border-amber-800">RPN 60-120 (Medium)</span>
+              <span className="px-2 py-0.5 rounded bg-rose-50 dark:bg-rose-950 text-rose-600 dark:text-rose-400 font-bold border border-rose-200 dark:border-rose-800">RPN &gt; 120 (High Risk)</span>
+              <span className="px-2 py-0.5 rounded bg-amber-50 dark:bg-amber-950 text-amber-700 dark:text-amber-400 font-bold border border-amber-200 dark:border-amber-800">RPN 60-120 (Medium)</span>
             </div>
           </div>
 
           <div className="overflow-x-auto">
             <table className="w-full text-left text-xs border-collapse">
               <thead>
-                <tr className="border-b border-slate-800 text-slate-400 bg-slate-950 font-semibold">
+                <tr className="border-b border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400 bg-slate-50 dark:bg-slate-950 font-semibold">
                   <th className="py-3 px-3">Process Step</th>
                   <th className="py-3 px-3">Potential Failure Mode</th>
                   <th className="py-3 px-3">Failure Effect</th>
@@ -489,31 +489,31 @@ export const CapaManagementView: React.FC = () => {
                   <th className="py-3 px-3">Status</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-800/60 font-sans">
+              <tbody className="divide-y divide-slate-200/60 dark:divide-slate-800/60 font-sans">
                 {fmeaRecords.map(item => (
-                  <tr key={item.id} className="hover:bg-slate-800/30 transition-colors">
-                    <td className="py-3 px-3 font-bold text-white">{item.processStep}</td>
-                    <td className="py-3 px-3 text-slate-200">{item.potentialFailureMode}</td>
-                    <td className="py-3 px-3 text-slate-400">{item.potentialEffectOfFailure}</td>
-                    <td className="py-3 px-2 font-mono text-center text-rose-400 font-bold">{item.severityScoreS}</td>
-                    <td className="py-3 px-2 font-mono text-center text-amber-400 font-bold">{item.occurrenceScoreO}</td>
-                    <td className="py-3 px-2 font-mono text-center text-teal-400 font-bold">{item.detectionScoreD}</td>
+                  <tr key={item.id} className="hover:bg-slate-100/70 dark:hover:bg-slate-800/30 transition-colors">
+                    <td className="py-3 px-3 font-bold text-slate-900 dark:text-white">{item.processStep}</td>
+                    <td className="py-3 px-3 text-slate-800 dark:text-slate-200">{item.potentialFailureMode}</td>
+                    <td className="py-3 px-3 text-slate-600 dark:text-slate-400">{item.potentialEffectOfFailure}</td>
+                    <td className="py-3 px-2 font-mono text-center text-rose-600 dark:text-rose-400 font-bold">{item.severityScoreS}</td>
+                    <td className="py-3 px-2 font-mono text-center text-amber-700 dark:text-amber-400 font-bold">{item.occurrenceScoreO}</td>
+                    <td className="py-3 px-2 font-mono text-center text-teal-600 dark:text-teal-400 font-bold">{item.detectionScoreD}</td>
                     <td className="py-3 px-3 text-center">
                       <span
                         className={`px-2.5 py-1 rounded-full font-mono font-black text-xs ${
                           item.riskPriorityNumberRpn >= 120
-                            ? 'bg-rose-950 text-rose-400 border border-rose-800'
+                            ? 'bg-rose-50 dark:bg-rose-950 text-rose-600 dark:text-rose-400 border border-rose-200 dark:border-rose-800'
                             : item.riskPriorityNumberRpn >= 60
-                            ? 'bg-amber-950 text-amber-400 border border-amber-800'
-                            : 'bg-emerald-950 text-emerald-400 border border-emerald-800'
+                            ? 'bg-amber-50 dark:bg-amber-950 text-amber-700 dark:text-amber-400 border border-amber-200 dark:border-amber-800'
+                            : 'bg-emerald-50 dark:bg-emerald-950 text-emerald-600 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800'
                         }`}
                       >
                         {item.riskPriorityNumberRpn}
                       </span>
                     </td>
-                    <td className="py-3 px-3 text-slate-300 font-medium">{item.recommendedAction}</td>
+                    <td className="py-3 px-3 text-slate-700 dark:text-slate-300 font-medium">{item.recommendedAction}</td>
                     <td className="py-3 px-3">
-                      <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-slate-800 text-slate-300">
+                      <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">
                         {item.status}
                       </span>
                     </td>
@@ -528,13 +528,13 @@ export const CapaManagementView: React.FC = () => {
       {/* MODAL: ADD FMEA RECORD */}
       {showAddFmeaModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
-          <div className="bg-slate-900 border border-slate-800 rounded-3xl w-full max-w-xl p-6 shadow-2xl space-y-4">
-            <div className="flex items-center justify-between border-b border-slate-800 pb-3">
-              <h3 className="text-base font-bold text-white flex items-center gap-2">
-                <ShieldAlert className="w-5 h-5 text-teal-400" />
+          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl w-full max-w-xl p-6 shadow-2xl space-y-4">
+            <div className="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-3">
+              <h3 className="text-base font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                <ShieldAlert className="w-5 h-5 text-teal-600 dark:text-teal-400" />
                 <span>Add Process FMEA Failure Mode</span>
               </h3>
-              <button onClick={() => setShowAddFmeaModal(false)} className="text-slate-400 hover:text-white cursor-pointer">
+              <button onClick={() => setShowAddFmeaModal(false)} className="text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white cursor-pointer">
                 <X className="w-5 h-5" />
               </button>
             </div>
@@ -542,97 +542,97 @@ export const CapaManagementView: React.FC = () => {
             <form onSubmit={handleCreateFmea} className="space-y-4 text-xs">
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="text-slate-400 block mb-1">Process Step *</label>
+                  <label className="text-slate-600 dark:text-slate-400 block mb-1">Process Step *</label>
                   <input
                     type="text"
                     required
                     placeholder="e.g. Automated Robotic TIG Welding"
                     value={fmeaForm.processStep}
                     onChange={e => setFmeaForm({ ...fmeaForm, processStep: e.target.value })}
-                    className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-white focus:border-teal-500"
+                    className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 text-slate-900 dark:text-white focus:border-teal-500"
                   />
                 </div>
                 <div>
-                  <label className="text-slate-400 block mb-1">Potential Failure Mode *</label>
+                  <label className="text-slate-600 dark:text-slate-400 block mb-1">Potential Failure Mode *</label>
                   <input
                     type="text"
                     required
                     placeholder="e.g. Shielding gas flow loss during weld"
                     value={fmeaForm.potentialFailureMode}
                     onChange={e => setFmeaForm({ ...fmeaForm, potentialFailureMode: e.target.value })}
-                    className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-white focus:border-teal-500"
+                    className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 text-slate-900 dark:text-white focus:border-teal-500"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="text-slate-400 block mb-1">Potential Effect on Product / Customer</label>
+                <label className="text-slate-600 dark:text-slate-400 block mb-1">Potential Effect on Product / Customer</label>
                 <input
                   type="text"
                   required
                   placeholder="e.g. Porosity causing hydraulic pressure drop in service"
                   value={fmeaForm.potentialEffectOfFailure}
                   onChange={e => setFmeaForm({ ...fmeaForm, potentialEffectOfFailure: e.target.value })}
-                  className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-white"
+                  className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 text-slate-900 dark:text-white"
                 />
               </div>
 
-              <div className="grid grid-cols-3 gap-3 p-3 bg-slate-950 rounded-xl border border-slate-800">
+              <div className="grid grid-cols-3 gap-3 p-3 bg-slate-50 dark:bg-slate-950 rounded-xl border border-slate-200 dark:border-slate-800">
                 <div>
-                  <label className="text-slate-400 block mb-1 text-[11px] font-bold">Severity (S: 1-10)</label>
+                  <label className="text-slate-600 dark:text-slate-400 block mb-1 text-[11px] font-bold">Severity (S: 1-10)</label>
                   <input
                     type="number"
                     min="1"
                     max="10"
                     value={fmeaForm.severityScoreS}
                     onChange={e => setFmeaForm({ ...fmeaForm, severityScoreS: parseInt(e.target.value) || 1 })}
-                    className="w-full bg-slate-900 border border-slate-800 rounded-lg px-2.5 py-1.5 text-white font-mono text-center"
+                    className="w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-lg px-2.5 py-1.5 text-slate-900 dark:text-white font-mono text-center"
                   />
                 </div>
                 <div>
-                  <label className="text-slate-400 block mb-1 text-[11px] font-bold">Occurrence (O: 1-10)</label>
+                  <label className="text-slate-600 dark:text-slate-400 block mb-1 text-[11px] font-bold">Occurrence (O: 1-10)</label>
                   <input
                     type="number"
                     min="1"
                     max="10"
                     value={fmeaForm.occurrenceScoreO}
                     onChange={e => setFmeaForm({ ...fmeaForm, occurrenceScoreO: parseInt(e.target.value) || 1 })}
-                    className="w-full bg-slate-900 border border-slate-800 rounded-lg px-2.5 py-1.5 text-white font-mono text-center"
+                    className="w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-lg px-2.5 py-1.5 text-slate-900 dark:text-white font-mono text-center"
                   />
                 </div>
                 <div>
-                  <label className="text-slate-400 block mb-1 text-[11px] font-bold">Detection (D: 1-10)</label>
+                  <label className="text-slate-600 dark:text-slate-400 block mb-1 text-[11px] font-bold">Detection (D: 1-10)</label>
                   <input
                     type="number"
                     min="1"
                     max="10"
                     value={fmeaForm.detectionScoreD}
                     onChange={e => setFmeaForm({ ...fmeaForm, detectionScoreD: parseInt(e.target.value) || 1 })}
-                    className="w-full bg-slate-900 border border-slate-800 rounded-lg px-2.5 py-1.5 text-white font-mono text-center"
+                    className="w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-lg px-2.5 py-1.5 text-slate-900 dark:text-white font-mono text-center"
                   />
                 </div>
               </div>
 
-              <div className="text-center font-mono text-xs font-bold text-teal-400">
+              <div className="text-center font-mono text-xs font-bold text-teal-600 dark:text-teal-400">
                 Calculated RPN = {fmeaForm.severityScoreS * fmeaForm.occurrenceScoreO * fmeaForm.detectionScoreD}
               </div>
 
               <div>
-                <label className="text-slate-400 block mb-1">Recommended Corrective Action / Poka-Yoke</label>
+                <label className="text-slate-600 dark:text-slate-400 block mb-1">Recommended Corrective Action / Poka-Yoke</label>
                 <textarea
                   rows={2}
                   value={fmeaForm.recommendedAction}
                   onChange={e => setFmeaForm({ ...fmeaForm, recommendedAction: e.target.value })}
                   placeholder="Install digital flow sensor interlock that auto-shuts torch when gas pressure drops..."
-                  className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-white"
+                  className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 text-slate-900 dark:text-white"
                 />
               </div>
 
-              <div className="flex justify-end gap-3 pt-3 border-t border-slate-800">
+              <div className="flex justify-end gap-3 pt-3 border-t border-slate-200 dark:border-slate-800">
                 <button
                   type="button"
                   onClick={() => setShowAddFmeaModal(false)}
-                  className="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-xl font-bold cursor-pointer"
+                  className="px-4 py-2 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 rounded-xl font-bold cursor-pointer"
                 >
                   Cancel
                 </button>

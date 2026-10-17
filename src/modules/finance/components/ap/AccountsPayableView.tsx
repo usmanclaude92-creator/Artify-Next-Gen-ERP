@@ -116,14 +116,14 @@ export const AccountsPayableView: React.FC = () => {
   return (
     <div className="space-y-6">
       {/* Top Banner */}
-      <div className="bg-slate-900 border border-slate-800 rounded-3xl p-6 text-white shadow-xl flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6">
+      <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 text-slate-900 dark:text-white shadow-xl flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6">
         <div className="space-y-2 max-w-2xl">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/20 text-amber-400 text-xs font-semibold uppercase tracking-wider">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/20 text-amber-700 dark:text-amber-400 text-xs font-semibold uppercase tracking-wider">
             <ArrowDownRight className="w-3.5 h-3.5" />
             Module 16.02 — Accounts Payable (AP)
           </div>
           <h2 className="text-2xl font-bold tracking-tight">Accounts Payable & Supplier Sub-ledger</h2>
-          <p className="text-sm text-slate-400">
+          <p className="text-sm text-slate-600 dark:text-slate-400">
             3-Way matching (PO vs GRN vs Invoice), 5% Input VAT recovery, dual-tier approval routing, automatic GL booking, and payment maturity schedule.
           </p>
         </div>
@@ -142,27 +142,27 @@ export const AccountsPayableView: React.FC = () => {
       {/* KPI Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
         <div className="bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm">
-          <span className="text-xs text-slate-500 font-medium">Total Open AP Payables</span>
+          <span className="text-xs text-slate-500 dark:text-slate-400 font-medium">Total Open AP Payables</span>
           <p className="text-xl font-bold font-mono text-slate-900 dark:text-white mt-1">
             {currency} {totalOutstandingAP.toLocaleString()}
           </p>
-          <span className="text-[11px] text-amber-600 font-semibold">Across {supplierInvoices.length} supplier accounts</span>
+          <span className="text-[11px] text-amber-600 dark:text-amber-400 font-semibold">Across {supplierInvoices.length} supplier accounts</span>
         </div>
 
         <div className="bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm">
-          <span className="text-xs text-slate-500 font-medium">Verified & Approved for GL Post</span>
+          <span className="text-xs text-slate-500 dark:text-slate-400 font-medium">Verified & Approved for GL Post</span>
           <p className="text-xl font-bold font-mono text-emerald-600 dark:text-emerald-400 mt-1">
             {currency} {totalVerifiedPendingPost.toLocaleString()}
           </p>
-          <span className="text-[11px] text-slate-500">Ready for automated GL journal creation</span>
+          <span className="text-[11px] text-slate-500 dark:text-slate-400">Ready for automated GL journal creation</span>
         </div>
 
         <div className="bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm">
-          <span className="text-xs text-slate-500 font-medium">Input VAT Recoverable (5%)</span>
+          <span className="text-xs text-slate-500 dark:text-slate-400 font-medium">Input VAT Recoverable (5%)</span>
           <p className="text-xl font-bold font-mono text-blue-600 dark:text-blue-400 mt-1">
             {currency} {supplierInvoices.reduce((s, i) => s + i.vatAmount, 0).toLocaleString()}
           </p>
-          <span className="text-[11px] text-emerald-600 font-semibold">100% Tax Compliant</span>
+          <span className="text-[11px] text-emerald-600 dark:text-emerald-400 font-semibold">100% Tax Compliant</span>
         </div>
       </div>
 
@@ -176,7 +176,7 @@ export const AccountsPayableView: React.FC = () => {
               className={`px-3 py-1.5 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
                 statusFilter === st
                   ? 'bg-amber-600 text-white shadow-md'
-                  : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-200'
+                  : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-700'
               }`}
             >
               {st.replace('_', ' ')}
@@ -185,7 +185,7 @@ export const AccountsPayableView: React.FC = () => {
         </div>
 
         <div className="relative w-full sm:w-72">
-          <Search className="w-4 h-4 absolute left-3 top-2.5 text-slate-400" />
+          <Search className="w-4 h-4 absolute left-3 top-2.5 text-slate-600 dark:text-slate-400" />
           <input
             type="text"
             placeholder="Search vendor, invoice #, PO..."
@@ -213,28 +213,28 @@ export const AccountsPayableView: React.FC = () => {
                     <span className="font-bold text-slate-900 dark:text-white text-sm">
                       {inv.vendorName}
                     </span>
-                    <span className="text-xs text-slate-500 font-mono font-normal">
+                    <span className="text-xs text-slate-500 dark:text-slate-400 font-mono font-normal">
                       (Inv #{inv.invoiceNumber})
                     </span>
                     {inv.is3WayMatched && (
-                      <span className="inline-flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-200">
+                      <span className="inline-flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full bg-emerald-50 dark:bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-500/30">
                         <ShieldCheck className="w-3 h-3" /> 3-Way Matched
                       </span>
                     )}
                   </div>
-                  <p className="text-xs text-slate-500">
-                    VAT No: <strong className="font-mono">{inv.vendorVatNo}</strong> • Invoice Date: <strong>{inv.invoiceDate}</strong> • Due: <strong className="text-amber-600">{inv.dueDate}</strong> ({inv.paymentTerms})
+                  <p className="text-xs text-slate-500 dark:text-slate-400">
+                    VAT No: <strong className="font-mono">{inv.vendorVatNo}</strong> • Invoice Date: <strong>{inv.invoiceDate}</strong> • Due: <strong className="text-amber-600 dark:text-amber-400">{inv.dueDate}</strong> ({inv.paymentTerms})
                   </p>
                 </div>
               </div>
 
               <div className="flex items-center gap-4">
                 <div className="text-right">
-                  <span className="text-[10px] text-slate-400 font-medium">Grand Total (incl 5% VAT)</span>
+                  <span className="text-[10px] text-slate-600 dark:text-slate-400 font-medium">Grand Total (incl 5% VAT)</span>
                   <p className="text-sm font-bold font-mono text-slate-900 dark:text-white">
                     {currency} {inv.grandTotal.toLocaleString()}
                   </p>
-                  <span className="text-[10px] text-slate-500 font-mono">
+                  <span className="text-[10px] text-slate-500 dark:text-slate-400 font-mono">
                     Bal Due: {currency} {inv.balanceDue.toLocaleString()}
                   </span>
                 </div>
@@ -244,8 +244,8 @@ export const AccountsPayableView: React.FC = () => {
                     inv.status === 'POSTED'
                       ? 'bg-emerald-50 text-emerald-600 dark:bg-emerald-950/40 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800'
                       : inv.status === 'APPROVED'
-                      ? 'bg-blue-50 text-blue-600 border border-blue-200'
-                      : 'bg-amber-50 text-amber-600 border border-amber-200'
+                      ? 'bg-blue-50 dark:bg-blue-500/10 text-blue-600 dark:text-blue-400 border border-blue-200 dark:border-blue-500/30'
+                      : 'bg-amber-50 dark:bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-200 dark:border-amber-500/30'
                   }`}
                 >
                   {inv.status}
@@ -270,7 +270,7 @@ export const AccountsPayableView: React.FC = () => {
                     </button>
                   )}
                   {inv.status === 'POSTED' && inv.glVoucherId && (
-                    <span className="text-[10px] font-mono text-emerald-600 bg-emerald-50 dark:bg-emerald-950/40 px-2 py-1 rounded-lg border border-emerald-200">
+                    <span className="text-[10px] font-mono text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/40 px-2 py-1 rounded-lg border border-emerald-200 dark:border-emerald-500/30">
                       GL Voucher Linked
                     </span>
                   )}
@@ -281,19 +281,19 @@ export const AccountsPayableView: React.FC = () => {
             {/* Line Items Breakdown */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs bg-slate-50 dark:bg-slate-800/30 p-3 rounded-xl">
               <div>
-                <span className="text-slate-400 block text-[10px]">Purchase Order & GRN Link:</span>
+                <span className="text-slate-600 dark:text-slate-400 block text-[10px]">Purchase Order & GRN Link:</span>
                 <strong className="text-slate-700 dark:text-slate-300 font-mono">
                   {inv.poNumber || 'Standalone Service'} {inv.grnNumber ? `› ${inv.grnNumber}` : ''}
                 </strong>
               </div>
               <div>
-                <span className="text-slate-400 block text-[10px]">Net Taxable Base & 5% VAT:</span>
+                <span className="text-slate-600 dark:text-slate-400 block text-[10px]">Net Taxable Base & 5% VAT:</span>
                 <span className="text-slate-700 dark:text-slate-300 font-mono">
                   Base: {currency} {inv.subTotal.toLocaleString()} + VAT: {currency} {inv.vatAmount.toLocaleString()}
                 </span>
               </div>
               <div>
-                <span className="text-slate-400 block text-[10px]">Approval Signoff:</span>
+                <span className="text-slate-600 dark:text-slate-400 block text-[10px]">Approval Signoff:</span>
                 <span className="text-slate-700 dark:text-slate-300 font-medium">
                   {inv.approvalStatus === 'APPROVED_L2' ? '✓ CFO Salim Al-Harthy' : '⏳ Pending Management Signoff'}
                 </span>
@@ -307,12 +307,12 @@ export const AccountsPayableView: React.FC = () => {
       {showCreateModal && (
         <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
           <div className="bg-white dark:bg-slate-900 rounded-3xl max-w-2xl w-full border border-slate-200 dark:border-slate-800 shadow-2xl overflow-hidden flex flex-col">
-            <div className="p-6 bg-slate-900 text-white flex justify-between items-center border-b border-slate-800">
+            <div className="p-6 bg-white dark:bg-slate-900 text-slate-900 dark:text-white flex justify-between items-center border-b border-slate-200 dark:border-slate-800">
               <div>
                 <h3 className="text-lg font-bold">Register Supplier Tax Invoice (AP)</h3>
-                <p className="text-xs text-slate-400">3-Way match verification and VAT computation</p>
+                <p className="text-xs text-slate-600 dark:text-slate-400">3-Way match verification and VAT computation</p>
               </div>
-              <button onClick={() => setShowCreateModal(false)} className="text-slate-400 hover:text-white text-xl">✕</button>
+              <button onClick={() => setShowCreateModal(false)} className="text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white text-xl">✕</button>
             </div>
 
             <form onSubmit={handleCreateInvoice} className="p-6 space-y-4 text-xs">
@@ -433,16 +433,16 @@ export const AccountsPayableView: React.FC = () => {
               {/* Tax summary calculation */}
               <div className="bg-slate-50 dark:bg-slate-800/60 p-4 rounded-xl space-y-1.5 font-mono text-xs border border-slate-200 dark:border-slate-700">
                 <div className="flex justify-between">
-                  <span className="text-slate-500 font-sans">Net Subtotal:</span>
+                  <span className="text-slate-500 dark:text-slate-400 font-sans">Net Subtotal:</span>
                   <span className="font-bold">{currency} {subTotal.toLocaleString()}</span>
                 </div>
-                <div className="flex justify-between text-blue-600">
+                <div className="flex justify-between text-blue-600 dark:text-blue-400">
                   <span className="font-sans">Input VAT (5% Standard Oman):</span>
                   <span className="font-bold">+ {currency} {vatAmount.toLocaleString()}</span>
                 </div>
                 <div className="flex justify-between text-sm font-bold pt-2 border-t border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white">
                   <span className="font-sans">Grand Total Payable:</span>
-                  <span className="text-amber-600">{currency} {grandTotal.toLocaleString()}</span>
+                  <span className="text-amber-600 dark:text-amber-400">{currency} {grandTotal.toLocaleString()}</span>
                 </div>
               </div>
 

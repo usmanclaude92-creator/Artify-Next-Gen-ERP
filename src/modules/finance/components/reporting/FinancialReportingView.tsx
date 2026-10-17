@@ -135,7 +135,7 @@ export const FinancialReportingView: React.FC<{ initialReport?: ReportId }> = ({
         </div>
 
         <div className="flex items-center gap-2 text-xs">
-          <Calendar className="w-4 h-4 text-slate-400" />
+          <Calendar className="w-4 h-4 text-slate-600 dark:text-slate-400" />
           <select
             value={reportPeriod}
             onChange={e => setReportPeriod(e.target.value)}
@@ -155,8 +155,8 @@ export const FinancialReportingView: React.FC<{ initialReport?: ReportId }> = ({
             <h3 className="text-xl font-bold text-slate-900 dark:text-white uppercase tracking-wider">
               Artify Enterprise LLC — Oman
             </h3>
-            <p className="text-sm font-semibold text-rose-600 mt-1">Statement of Comprehensive Income (P&L)</p>
-            <p className="text-xs text-slate-400 font-mono">For the Period Ended 31 March 2026 • Currency: {currency}</p>
+            <p className="text-sm font-semibold text-rose-600 dark:text-rose-400 mt-1">Statement of Comprehensive Income (P&L)</p>
+            <p className="text-xs text-slate-600 dark:text-slate-400 font-mono">For the Period Ended 31 March 2026 • Currency: {currency}</p>
           </div>
 
           <div className="space-y-4 font-mono text-xs">
@@ -178,7 +178,7 @@ export const FinancialReportingView: React.FC<{ initialReport?: ReportId }> = ({
             <div className="pt-2 border-t border-slate-100 dark:border-slate-800">
               <div className="flex justify-between font-bold text-sm text-slate-900 dark:text-white py-1">
                 <span>COST OF SALES & SITE DIRECT EXPENSES</span>
-                <span className="text-red-500">- ({currency} {costOfSales.toLocaleString()})</span>
+                <span className="text-red-500 dark:text-red-400">- ({currency} {costOfSales.toLocaleString()})</span>
               </div>
               <div className="pl-4 space-y-1 text-slate-600 dark:text-slate-400">
                 <div className="flex justify-between">
@@ -191,14 +191,14 @@ export const FinancialReportingView: React.FC<{ initialReport?: ReportId }> = ({
             {/* Gross Profit */}
             <div className="flex justify-between font-bold text-sm text-slate-900 dark:text-white py-2 px-3 bg-slate-50 dark:bg-slate-800/60 rounded-xl">
               <span className="font-sans">GROSS PROFIT</span>
-              <span className="text-emerald-600">{currency} {grossProfit.toLocaleString()} ({((grossProfit / totalRevenue) * 100).toFixed(1)}%)</span>
+              <span className="text-emerald-600 dark:text-emerald-400">{currency} {grossProfit.toLocaleString()} ({((grossProfit / totalRevenue) * 100).toFixed(1)}%)</span>
             </div>
 
             {/* Operating Expenses */}
             <div className="pt-2">
               <div className="flex justify-between font-bold text-sm text-slate-900 dark:text-white py-1">
                 <span>OPERATING & ADMINISTRATIVE EXPENSES</span>
-                <span className="text-red-500">- ({currency} {operatingExpenses.toLocaleString()})</span>
+                <span className="text-red-500 dark:text-red-400">- ({currency} {operatingExpenses.toLocaleString()})</span>
               </div>
               <div className="pl-4 space-y-1 text-slate-600 dark:text-slate-400">
                 <div className="flex justify-between">
@@ -228,8 +228,8 @@ export const FinancialReportingView: React.FC<{ initialReport?: ReportId }> = ({
             <h3 className="text-xl font-bold text-slate-900 dark:text-white uppercase tracking-wider">
               Artify Enterprise LLC — Oman
             </h3>
-            <p className="text-sm font-semibold text-rose-600 mt-1">Statement of Financial Position (Balance Sheet)</p>
-            <p className="text-xs text-slate-400 font-mono">As of 31 March 2026 • Currency: {currency}</p>
+            <p className="text-sm font-semibold text-rose-600 dark:text-rose-400 mt-1">Statement of Financial Position (Balance Sheet)</p>
+            <p className="text-xs text-slate-600 dark:text-slate-400 font-mono">As of 31 March 2026 • Currency: {currency}</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 font-mono text-xs">
@@ -246,7 +246,7 @@ export const FinancialReportingView: React.FC<{ initialReport?: ReportId }> = ({
                     <span>Property, Plant & Equipment (PPE)</span>
                     <span>{currency} 8,500,000</span>
                   </div>
-                  <div className="flex justify-between text-red-500">
+                  <div className="flex justify-between text-red-500 dark:text-red-400">
                     <span>Less: Accumulated Depreciation</span>
                     <span>- ({currency} 1,250,000)</span>
                   </div>
@@ -279,9 +279,9 @@ export const FinancialReportingView: React.FC<{ initialReport?: ReportId }> = ({
                 </div>
               </div>
 
-              <div className="flex justify-between font-bold text-sm text-slate-900 dark:text-white py-2 px-3 bg-emerald-50 dark:bg-emerald-950/40 rounded-xl border border-emerald-200">
+              <div className="flex justify-between font-bold text-sm text-slate-900 dark:text-white py-2 px-3 bg-emerald-50 dark:bg-emerald-950/40 rounded-xl border border-emerald-200 dark:border-emerald-500/30">
                 <span className="font-sans">TOTAL ASSETS</span>
-                <span className="text-emerald-600">{currency} {totalAssets.toLocaleString()}</span>
+                <span className="text-emerald-600 dark:text-emerald-400">{currency} {totalAssets.toLocaleString()}</span>
               </div>
             </div>
 
@@ -302,7 +302,7 @@ export const FinancialReportingView: React.FC<{ initialReport?: ReportId }> = ({
                     <span>Retained Earnings & Reserves (3020)</span>
                     <span>{currency} 3,850,000</span>
                   </div>
-                  <div className="flex justify-between text-rose-600">
+                  <div className="flex justify-between text-rose-600 dark:text-rose-400">
                     <span>Current Year Net Income</span>
                     <span>{currency} {netIncome.toLocaleString()}</span>
                   </div>
@@ -327,9 +327,9 @@ export const FinancialReportingView: React.FC<{ initialReport?: ReportId }> = ({
                 </div>
               </div>
 
-              <div className="flex justify-between font-bold text-sm text-slate-900 dark:text-white py-2 px-3 bg-blue-50 dark:bg-blue-950/40 rounded-xl border border-blue-200">
+              <div className="flex justify-between font-bold text-sm text-slate-900 dark:text-white py-2 px-3 bg-blue-50 dark:bg-blue-950/40 rounded-xl border border-blue-200 dark:border-blue-500/30">
                 <span className="font-sans">TOTAL EQUITY & LIAB.</span>
-                <span className="text-blue-600">{currency} {totalEquityAndLiabilities.toLocaleString()}</span>
+                <span className="text-blue-600 dark:text-blue-400">{currency} {totalEquityAndLiabilities.toLocaleString()}</span>
               </div>
             </div>
           </div>
@@ -342,10 +342,10 @@ export const FinancialReportingView: React.FC<{ initialReport?: ReportId }> = ({
           <div className="p-5 border-b border-slate-100 dark:border-slate-800 flex justify-between items-center">
             <div>
               <h3 className="text-base font-bold text-slate-900 dark:text-white">Trial Balance Worksheet</h3>
-              <p className="text-xs text-slate-500">Opening balances, period movements, and balanced closing positions</p>
+              <p className="text-xs text-slate-500 dark:text-slate-400">Opening balances, period movements, and balanced closing positions</p>
             </div>
             {isTrialBalanceInSync && (
-              <span className="inline-flex items-center gap-1 text-xs font-bold px-3 py-1 bg-emerald-50 text-emerald-600 border border-emerald-200 rounded-full">
+              <span className="inline-flex items-center gap-1 text-xs font-bold px-3 py-1 bg-emerald-50 dark:bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-500/30 rounded-full">
                 <CheckCircle2 className="w-4 h-4" /> Perfect Zero-Variance Proof
               </span>
             )}
@@ -354,7 +354,7 @@ export const FinancialReportingView: React.FC<{ initialReport?: ReportId }> = ({
           <div className="overflow-x-auto">
             <table className="w-full text-left text-xs font-mono">
               <thead>
-                <tr className="bg-slate-50 dark:bg-slate-800/70 text-slate-500 font-sans font-semibold border-b border-slate-200 dark:border-slate-800">
+                <tr className="bg-slate-50 dark:bg-slate-800/70 text-slate-500 dark:text-slate-400 font-sans font-semibold border-b border-slate-200 dark:border-slate-800">
                   <th className="py-3 px-4">Account Code</th>
                   <th className="py-3 px-4">Account Title</th>
                   <th className="py-3 px-4">Class</th>
@@ -366,9 +366,9 @@ export const FinancialReportingView: React.FC<{ initialReport?: ReportId }> = ({
               <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
                 {chartOfAccounts.map(acc => (
                   <tr key={acc.id} className="hover:bg-slate-50 dark:hover:bg-slate-800/40">
-                    <td className="py-3 px-4 font-bold text-rose-600">{acc.code}</td>
+                    <td className="py-3 px-4 font-bold text-rose-600 dark:text-rose-400">{acc.code}</td>
                     <td className="py-3 px-4 font-sans font-medium text-slate-900 dark:text-white">{acc.name}</td>
-                    <td className="py-3 px-4 font-sans text-slate-500">{acc.accountClass}</td>
+                    <td className="py-3 px-4 font-sans text-slate-500 dark:text-slate-400">{acc.accountClass}</td>
                     <td className="py-3 px-4 text-right text-slate-900 dark:text-white">
                       {acc.currentDebit > 0 ? `${currency} ${acc.currentDebit.toLocaleString()}` : '-'}
                     </td>
@@ -382,9 +382,9 @@ export const FinancialReportingView: React.FC<{ initialReport?: ReportId }> = ({
                 ))}
                 <tr className="bg-slate-100 dark:bg-slate-800 font-bold border-t-2 border-slate-300 dark:border-slate-600 text-sm">
                   <td colSpan={3} className="py-3 px-4 font-sans uppercase">Total Trial Balance Proof:</td>
-                  <td className="py-3 px-4 text-right text-emerald-600">{currency} {totalDebit.toLocaleString()}</td>
-                  <td className="py-3 px-4 text-right text-emerald-600">{currency} {totalCredit.toLocaleString()}</td>
-                  <td className="py-3 px-4 text-right text-rose-600">✓ Balanced</td>
+                  <td className="py-3 px-4 text-right text-emerald-600 dark:text-emerald-400">{currency} {totalDebit.toLocaleString()}</td>
+                  <td className="py-3 px-4 text-right text-emerald-600 dark:text-emerald-400">{currency} {totalCredit.toLocaleString()}</td>
+                  <td className="py-3 px-4 text-right text-rose-600 dark:text-rose-400">✓ Balanced</td>
                 </tr>
               </tbody>
             </table>
@@ -399,7 +399,7 @@ export const FinancialReportingView: React.FC<{ initialReport?: ReportId }> = ({
             <h3 className="text-lg font-bold text-slate-900 dark:text-white uppercase">
               Sultanate of Oman — Tax Authority (Oman VAT Return)
             </h3>
-            <p className="text-xs text-slate-400 font-mono mt-1">Form VAT-01 • Tax Period: Q1 2026 • Taxpayer TIN: OM110029841</p>
+            <p className="text-xs text-slate-600 dark:text-slate-400 font-mono mt-1">Form VAT-01 • Tax Period: Q1 2026 • Taxpayer TIN: OM110029841</p>
           </div>
 
           <div className="space-y-4 text-xs font-mono">
@@ -412,7 +412,7 @@ export const FinancialReportingView: React.FC<{ initialReport?: ReportId }> = ({
                 <span>Standard 5% Taxable Supplies Base:</span>
                 <span>{currency} {(totalOutputVAT * 20).toLocaleString()}</span>
               </div>
-              <div className="flex justify-between pl-3 text-blue-600 font-bold border-t border-slate-200 dark:border-slate-700 pt-1">
+              <div className="flex justify-between pl-3 text-blue-600 dark:text-blue-400 font-bold border-t border-slate-200 dark:border-slate-700 pt-1">
                 <span>Total Output Tax Due:</span>
                 <span>{currency} {totalOutputVAT.toLocaleString()}</span>
               </div>
@@ -427,7 +427,7 @@ export const FinancialReportingView: React.FC<{ initialReport?: ReportId }> = ({
                 <span>Standard 5% Taxable Incurred Purchases Base:</span>
                 <span>{currency} {(totalInputVAT * 20).toLocaleString()}</span>
               </div>
-              <div className="flex justify-between pl-3 text-emerald-600 font-bold border-t border-slate-200 dark:border-slate-700 pt-1">
+              <div className="flex justify-between pl-3 text-emerald-600 dark:text-emerald-400 font-bold border-t border-slate-200 dark:border-slate-700 pt-1">
                 <span>Total Input Tax Recoverable:</span>
                 <span>{currency} {totalInputVAT.toLocaleString()}</span>
               </div>
@@ -449,25 +449,25 @@ export const FinancialReportingView: React.FC<{ initialReport?: ReportId }> = ({
             <h3 className="text-lg font-bold text-slate-900 dark:text-white uppercase">
               Statement of Cash Flows (IAS 7)
             </h3>
-            <p className="text-xs text-slate-400 font-mono mt-1">For Period Ended 31 March 2026 • Direct / Indirect Method</p>
+            <p className="text-xs text-slate-600 dark:text-slate-400 font-mono mt-1">For Period Ended 31 March 2026 • Direct / Indirect Method</p>
           </div>
 
           <div className="space-y-3 text-xs font-mono">
             <div className="flex justify-between font-bold text-slate-900 dark:text-white py-1">
               <span>CASH FLOWS FROM OPERATING ACTIVITIES</span>
-              <span className="text-emerald-600">+ {currency} 1,420,000</span>
+              <span className="text-emerald-600 dark:text-emerald-400">+ {currency} 1,420,000</span>
             </div>
             <div className="flex justify-between font-bold text-slate-900 dark:text-white py-1">
               <span>CASH FLOWS FROM INVESTING ACTIVITIES (PPE & CAPEX)</span>
-              <span className="text-red-500">- {currency} 450,000</span>
+              <span className="text-red-500 dark:text-red-400">- {currency} 450,000</span>
             </div>
             <div className="flex justify-between font-bold text-slate-900 dark:text-white py-1">
               <span>CASH FLOWS FROM FINANCING ACTIVITIES (Dividends & Loans)</span>
               <span className="text-slate-600 dark:text-slate-400">- {currency} 120,000</span>
             </div>
-            <div className="flex justify-between font-bold text-sm text-slate-900 dark:text-white py-3 px-4 bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 rounded-2xl">
+            <div className="flex justify-between font-bold text-sm text-slate-900 dark:text-white py-3 px-4 bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-500/30 rounded-2xl">
               <span className="font-sans">NET INCREASE IN CASH & CASH EQUIVALENTS</span>
-              <span className="text-emerald-600">+{currency} 850,000</span>
+              <span className="text-emerald-600 dark:text-emerald-400">+{currency} 850,000</span>
             </div>
           </div>
         </div>

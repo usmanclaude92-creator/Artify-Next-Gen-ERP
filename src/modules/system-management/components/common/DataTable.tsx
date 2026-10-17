@@ -175,18 +175,18 @@ export function DataTable<T extends Record<string, any>>({
   };
 
   return (
-    <div className="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden flex flex-col">
+    <div className="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm overflow-hidden flex flex-col">
       {/* Header bar */}
       {(title || onAddClick) && (
-        <div className="p-4 sm:p-5 border-b border-slate-200 flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-slate-50/50">
+        <div className="p-4 sm:p-5 border-b border-slate-200 dark:border-slate-700 flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-slate-50/50 dark:bg-slate-800/50">
           <div>
-            {title && <h3 className="text-base font-semibold text-slate-900">{title}</h3>}
-            {subtitle && <p className="text-xs text-slate-500 mt-0.5">{subtitle}</p>}
+            {title && <h3 className="text-base font-semibold text-slate-900 dark:text-slate-100">{title}</h3>}
+            {subtitle && <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">{subtitle}</p>}
           </div>
 
           <div className="flex items-center gap-2 flex-wrap">
             {batchActions && selectedIds.size > 0 && (
-              <div className="flex items-center gap-2 mr-2 bg-indigo-50 border border-indigo-200 px-3 py-1.5 rounded-lg text-xs font-medium text-indigo-700">
+              <div className="flex items-center gap-2 mr-2 bg-indigo-50 dark:bg-indigo-500/10 border border-indigo-200 dark:border-indigo-500/30 px-3 py-1.5 rounded-lg text-xs font-medium text-indigo-700 dark:text-indigo-300">
                 <span>{selectedIds.size} selected</span>
                 {batchActions.map((action, idx) => (
                   <button
@@ -210,10 +210,10 @@ export function DataTable<T extends Record<string, any>>({
 
             <button
               onClick={exportToCsv}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 border border-slate-300 rounded-lg text-xs font-medium text-slate-700 bg-white hover:bg-slate-50 transition-colors shadow-xs"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 border border-slate-300 dark:border-slate-600 rounded-lg text-xs font-medium text-slate-700 dark:text-slate-300 bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors shadow-xs"
               title="Export filtered records to CSV"
             >
-              <Download className="w-3.5 h-3.5 text-slate-500" />
+              <Download className="w-3.5 h-3.5 text-slate-500 dark:text-slate-400" />
               <span>Export CSV</span>
             </button>
 
@@ -231,9 +231,9 @@ export function DataTable<T extends Record<string, any>>({
       )}
 
       {/* Filter and search controls */}
-      <div className="p-4 border-b border-slate-200 bg-white flex flex-col md:flex-row gap-3 items-stretch md:items-center justify-between">
+      <div className="p-4 border-b border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 flex flex-col md:flex-row gap-3 items-stretch md:items-center justify-between">
         <div className="relative flex-1 max-w-md">
-          <Search className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
+          <Search className="w-4 h-4 text-slate-500 dark:text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
           <input
             type="text"
             value={searchTerm}
@@ -242,12 +242,12 @@ export function DataTable<T extends Record<string, any>>({
               setCurrentPage(1);
             }}
             placeholder={searchPlaceholder}
-            className="w-full pl-9 pr-3 py-1.5 bg-slate-50 border border-slate-200 rounded-lg text-xs text-slate-800 placeholder-slate-400 focus:outline-hidden focus:ring-2 focus:ring-indigo-500 focus:bg-white transition-all"
+            className="w-full pl-9 pr-3 py-1.5 bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-lg text-xs text-slate-800 dark:text-slate-200 placeholder-slate-400 focus:outline-hidden focus:ring-2 focus:ring-indigo-500 focus:bg-white dark:focus:bg-slate-900 transition-all"
           />
           {searchTerm && (
             <button
               onClick={() => setSearchTerm('')}
-              className="absolute right-2.5 top-1/2 -translate-y-1/2 text-xs text-slate-400 hover:text-slate-600"
+              className="absolute right-2.5 top-1/2 -translate-y-1/2 text-xs text-slate-600 dark:text-slate-400 hover:text-slate-600 dark:hover:text-slate-400"
             >
               ×
             </button>
@@ -258,14 +258,14 @@ export function DataTable<T extends Record<string, any>>({
           {filterOptions &&
             filterOptions.map(filter => (
               <div key={filter.key} className="flex items-center gap-1.5">
-                <span className="text-xs text-slate-500 font-medium">{filter.label}:</span>
+                <span className="text-xs text-slate-500 dark:text-slate-400 font-medium">{filter.label}:</span>
                 <select
                   value={selectedFilters[filter.key] || 'ALL'}
                   onChange={e => {
                     setSelectedFilters(prev => ({ ...prev, [filter.key]: e.target.value }));
                     setCurrentPage(1);
                   }}
-                  className="bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-1 text-xs text-slate-700 focus:outline-hidden focus:ring-2 focus:ring-indigo-500 cursor-pointer"
+                  className="bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-lg px-2.5 py-1 text-xs text-slate-700 dark:text-slate-300 focus:outline-hidden focus:ring-2 focus:ring-indigo-500 cursor-pointer"
                 >
                   <option value="ALL">All {filter.label}</option>
                   {filter.options.map(opt => (
@@ -277,7 +277,7 @@ export function DataTable<T extends Record<string, any>>({
               </div>
             ))}
 
-          <div className="flex items-center gap-1.5 ml-auto text-xs text-slate-500">
+          <div className="flex items-center gap-1.5 ml-auto text-xs text-slate-500 dark:text-slate-400">
             <span>Show:</span>
             <select
               value={pageSize}
@@ -285,7 +285,7 @@ export function DataTable<T extends Record<string, any>>({
                 setPageSize(Number(e.target.value));
                 setCurrentPage(1);
               }}
-              className="bg-slate-50 border border-slate-200 rounded-lg px-2 py-1 text-xs text-slate-700 focus:outline-hidden focus:ring-2 focus:ring-indigo-500 cursor-pointer"
+              className="bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-lg px-2 py-1 text-xs text-slate-700 dark:text-slate-300 focus:outline-hidden focus:ring-2 focus:ring-indigo-500 cursor-pointer"
             >
               <option value={5}>5</option>
               <option value={10}>10</option>
@@ -300,14 +300,14 @@ export function DataTable<T extends Record<string, any>>({
       <div className="overflow-x-auto flex-1 min-h-[220px]">
         <table className="w-full text-left border-collapse text-xs">
           <thead>
-            <tr className="bg-slate-50/80 border-b border-slate-200 text-slate-600 font-semibold uppercase tracking-wider text-[10px]">
+            <tr className="bg-slate-50/80 dark:bg-slate-800/80 border-b border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-400 font-semibold uppercase tracking-wider text-[10px]">
               {batchActions && (
                 <th className="py-3 px-4 w-10">
                   <input
                     type="checkbox"
                     checked={paginatedData.length > 0 && selectedIds.size === paginatedData.length}
                     onChange={toggleSelectAll}
-                    className="rounded border-slate-300 text-indigo-600 focus:ring-indigo-500 cursor-pointer"
+                    className="rounded border-slate-300 dark:border-slate-600 text-indigo-600 dark:text-indigo-400 focus:ring-indigo-500 cursor-pointer"
                   />
                 </th>
               )}
@@ -315,14 +315,14 @@ export function DataTable<T extends Record<string, any>>({
                 <th
                   key={col.key}
                   onClick={() => (col.sortable !== false ? handleSort(col.key) : undefined)}
-                  className={`py-3 px-4 select-none ${col.sortable !== false ? 'cursor-pointer hover:bg-slate-100/60' : ''} ${
+                  className={`py-3 px-4 select-none ${col.sortable !== false ? 'cursor-pointer hover:bg-slate-100/60 dark:hover:bg-slate-800/60' : ''} ${
                     col.className || ''
                   }`}
                 >
                   <div className="flex items-center gap-1">
                     <span>{col.header}</span>
                     {col.sortable !== false && sortKey === col.key && (
-                      <span>{sortDirection === 'asc' ? <ChevronUp className="w-3 h-3 text-indigo-600" /> : <ChevronDown className="w-3 h-3 text-indigo-600" />}</span>
+                      <span>{sortDirection === 'asc' ? <ChevronUp className="w-3 h-3 text-indigo-600 dark:text-indigo-400" /> : <ChevronDown className="w-3 h-3 text-indigo-600 dark:text-indigo-400" />}</span>
                     )}
                   </div>
                 </th>
@@ -330,14 +330,14 @@ export function DataTable<T extends Record<string, any>>({
               {actionRenderer && <th className="py-3 px-4 text-right w-24">Actions</th>}
             </tr>
           </thead>
-          <tbody className="divide-y divide-slate-100">
+          <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
             {paginatedData.length === 0 ? (
               <tr>
-                <td colSpan={columns.length + (batchActions ? 1 : 0) + (actionRenderer ? 1 : 0)} className="py-12 text-center text-slate-400">
+                <td colSpan={columns.length + (batchActions ? 1 : 0) + (actionRenderer ? 1 : 0)} className="py-12 text-center text-slate-500 dark:text-slate-400">
                   <div className="flex flex-col items-center justify-center">
-                    <Filter className="w-8 h-8 text-slate-300 mb-2 stroke-1" />
-                    <p className="text-sm font-medium text-slate-600">No matching records found</p>
-                    <p className="text-xs text-slate-400 mt-1">Try refining your search query or filter options</p>
+                    <Filter className="w-8 h-8 text-slate-400 dark:text-slate-300 mb-2 stroke-1" />
+                    <p className="text-sm font-medium text-slate-600 dark:text-slate-400">No matching records found</p>
+                    <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">Try refining your search query or filter options</p>
                   </div>
                 </td>
               </tr>
@@ -349,8 +349,8 @@ export function DataTable<T extends Record<string, any>>({
                   <tr
                     key={id}
                     onClick={() => onRowClick && onRowClick(item)}
-                    className={`hover:bg-slate-50/80 transition-colors ${
-                      isSelected ? 'bg-indigo-50/40' : ''
+                    className={`hover:bg-slate-50/80 dark:hover:bg-slate-800/80 transition-colors ${
+                      isSelected ? 'bg-indigo-50/40 dark:bg-indigo-500/40' : ''
                     } ${onRowClick ? 'cursor-pointer' : ''}`}
                   >
                     {batchActions && (
@@ -359,12 +359,12 @@ export function DataTable<T extends Record<string, any>>({
                           type="checkbox"
                           checked={isSelected}
                           onChange={() => toggleSelectItem(id)}
-                          className="rounded border-slate-300 text-indigo-600 focus:ring-indigo-500 cursor-pointer"
+                          className="rounded border-slate-300 dark:border-slate-600 text-indigo-600 dark:text-indigo-400 focus:ring-indigo-500 cursor-pointer"
                         />
                       </td>
                     )}
                     {columns.map(col => (
-                      <td key={col.key} className={`py-3 px-4 text-slate-700 ${col.className || ''}`}>
+                      <td key={col.key} className={`py-3 px-4 text-slate-700 dark:text-slate-300 ${col.className || ''}`}>
                         {col.accessor ? col.accessor(item) : item[col.key]}
                       </td>
                     ))}
@@ -382,36 +382,36 @@ export function DataTable<T extends Record<string, any>>({
       </div>
 
       {/* Pagination Footer */}
-      <div className="p-3.5 border-t border-slate-200 bg-slate-50/50 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-500">
+      <div className="p-3.5 border-t border-slate-200 dark:border-slate-700 bg-slate-50/50 dark:bg-slate-800/50 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-500 dark:text-slate-400">
         <div>
           Showing{' '}
-          <span className="font-semibold text-slate-700">
+          <span className="font-semibold text-slate-700 dark:text-slate-300">
             {filteredData.length === 0 ? 0 : (currentPage - 1) * pageSize + 1}
           </span>{' '}
           to{' '}
-          <span className="font-semibold text-slate-700">
+          <span className="font-semibold text-slate-700 dark:text-slate-300">
             {Math.min(currentPage * pageSize, filteredData.length)}
           </span>{' '}
-          of <span className="font-semibold text-slate-700">{filteredData.length}</span> entries
+          of <span className="font-semibold text-slate-700 dark:text-slate-300">{filteredData.length}</span> entries
         </div>
 
         <div className="flex items-center gap-1.5">
           <button
             onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
             disabled={currentPage === 1}
-            className="p-1.5 rounded-md border border-slate-200 bg-white hover:bg-slate-50 disabled:opacity-40 disabled:cursor-not-allowed text-slate-600 transition-colors"
+            className="p-1.5 rounded-md border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800/50 disabled:opacity-40 disabled:cursor-not-allowed text-slate-600 dark:text-slate-400 transition-colors"
           >
             <ChevronLeft className="w-4 h-4" />
           </button>
 
-          <span className="px-3 py-1 font-medium text-slate-700 bg-white border border-slate-200 rounded-md">
+          <span className="px-3 py-1 font-medium text-slate-700 dark:text-slate-300 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-md">
             Page {currentPage} of {totalPages}
           </span>
 
           <button
             onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
             disabled={currentPage === totalPages}
-            className="p-1.5 rounded-md border border-slate-200 bg-white hover:bg-slate-50 disabled:opacity-40 disabled:cursor-not-allowed text-slate-600 transition-colors"
+            className="p-1.5 rounded-md border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800/50 disabled:opacity-40 disabled:cursor-not-allowed text-slate-600 dark:text-slate-400 transition-colors"
           >
             <ChevronRight className="w-4 h-4" />
           </button>

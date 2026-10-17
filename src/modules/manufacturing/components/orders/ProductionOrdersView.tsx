@@ -170,14 +170,14 @@ export const ProductionOrdersView: React.FC<ProductionOrdersViewProps> = ({
   return (
     <div className="space-y-6">
       {/* Top Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-slate-900 border border-slate-800 p-4 rounded-xl">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-4 rounded-xl">
         <div className="flex items-center gap-2">
-          <span className="p-2 rounded-lg bg-orange-500/10 text-orange-400">
+          <span className="p-2 rounded-lg bg-orange-500/10 text-orange-700 dark:text-orange-400">
             <ClipboardList className="w-5 h-5" />
           </span>
           <div>
-            <h2 className="text-lg font-bold text-white">08.03 — Production Orders & Material Staging</h2>
-            <p className="text-xs text-slate-400">
+            <h2 className="text-lg font-bold text-slate-900 dark:text-white">08.03 — Production Orders & Material Staging</h2>
+            <p className="text-xs text-slate-600 dark:text-slate-400">
               Discrete work order lifecycle, shop floor traveler routing, material pick & issue vouchers, and returns.
             </p>
           </div>
@@ -195,13 +195,13 @@ export const ProductionOrdersView: React.FC<ProductionOrdersViewProps> = ({
       </div>
 
       {/* Tabs */}
-      <div className="flex border-b border-slate-800 gap-6">
+      <div className="flex border-b border-slate-200 dark:border-slate-800 gap-6">
         <button
           onClick={() => setActiveTab('orders')}
           className={`pb-3 text-sm font-semibold border-b-2 transition-all flex items-center gap-2 ${
             activeTab === 'orders'
-              ? 'border-orange-500 text-orange-400'
-              : 'border-transparent text-slate-400 hover:text-slate-200'
+              ? 'border-orange-500 text-orange-700 dark:text-orange-400'
+              : 'border-transparent text-slate-600 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200'
           }`}
         >
           <ClipboardList className="w-4 h-4" />
@@ -211,8 +211,8 @@ export const ProductionOrdersView: React.FC<ProductionOrdersViewProps> = ({
           onClick={() => setActiveTab('traveler')}
           className={`pb-3 text-sm font-semibold border-b-2 transition-all flex items-center gap-2 ${
             activeTab === 'traveler'
-              ? 'border-orange-500 text-orange-400'
-              : 'border-transparent text-slate-400 hover:text-slate-200'
+              ? 'border-orange-500 text-orange-700 dark:text-orange-400'
+              : 'border-transparent text-slate-600 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200'
           }`}
         >
           <FileText className="w-4 h-4" />
@@ -222,8 +222,8 @@ export const ProductionOrdersView: React.FC<ProductionOrdersViewProps> = ({
           onClick={() => setActiveTab('issue')}
           className={`pb-3 text-sm font-semibold border-b-2 transition-all flex items-center gap-2 ${
             activeTab === 'issue'
-              ? 'border-orange-500 text-orange-400'
-              : 'border-transparent text-slate-400 hover:text-slate-200'
+              ? 'border-orange-500 text-orange-700 dark:text-orange-400'
+              : 'border-transparent text-slate-600 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200'
           }`}
         >
           <Layers className="w-4 h-4" />
@@ -233,8 +233,8 @@ export const ProductionOrdersView: React.FC<ProductionOrdersViewProps> = ({
           onClick={() => setActiveTab('return')}
           className={`pb-3 text-sm font-semibold border-b-2 transition-all flex items-center gap-2 ${
             activeTab === 'return'
-              ? 'border-orange-500 text-orange-400'
-              : 'border-transparent text-slate-400 hover:text-slate-200'
+              ? 'border-orange-500 text-orange-700 dark:text-orange-400'
+              : 'border-transparent text-slate-600 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200'
           }`}
         >
           <RotateCcw className="w-4 h-4" />
@@ -249,19 +249,19 @@ export const ProductionOrdersView: React.FC<ProductionOrdersViewProps> = ({
           <div className="space-y-4">
             <div className="flex gap-2">
               <div className="relative flex-1">
-                <Search className="w-4 h-4 absolute left-3 top-3 text-slate-500" />
+                <Search className="w-4 h-4 absolute left-3 top-3 text-slate-500 dark:text-slate-400" />
                 <input
                   type="text"
                   placeholder="Search order #, customer, product..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full pl-9 pr-4 py-2 bg-slate-900 border border-slate-800 rounded-lg text-xs text-white placeholder-slate-500 focus:outline-none focus:border-orange-500"
+                  className="w-full pl-9 pr-4 py-2 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-lg text-xs text-slate-900 dark:text-white placeholder-slate-500 focus:outline-none focus:border-orange-500"
                 />
               </div>
               <select
                 value={statusFilter}
                 onChange={(e) => setStatusFilter(e.target.value)}
-                className="px-3 py-2 bg-slate-900 border border-slate-800 rounded-lg text-xs text-slate-300 focus:outline-none"
+                className="px-3 py-2 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-lg text-xs text-slate-700 dark:text-slate-300 focus:outline-none"
               >
                 <option value="ALL">All Status</option>
                 <option value="RELEASED">Released</option>
@@ -277,30 +277,30 @@ export const ProductionOrdersView: React.FC<ProductionOrdersViewProps> = ({
                   onClick={() => setSelectedOrderId(wo.id)}
                   className={`p-3.5 rounded-xl border cursor-pointer transition-all ${
                     selectedOrder?.id === wo.id
-                      ? 'bg-orange-500/10 border-orange-500/40 text-white'
-                      : 'bg-slate-900/80 border-slate-800 hover:border-slate-700 text-slate-300'
+                      ? 'bg-orange-500/10 border-orange-500/40 text-slate-900 dark:text-white'
+                      : 'bg-white/80 dark:bg-slate-900/80 border-slate-200 dark:border-slate-800 hover:border-slate-300 dark:hover:border-slate-700 text-slate-700 dark:text-slate-300'
                   }`}
                 >
                   <div className="flex items-center justify-between">
-                    <span className="font-mono text-xs font-bold text-orange-400">{wo.orderNumber}</span>
+                    <span className="font-mono text-xs font-bold text-orange-700 dark:text-orange-400">{wo.orderNumber}</span>
                     <span
                       className={`px-2 py-0.5 rounded text-[10px] font-bold ${
                         wo.status === 'IN_PROGRESS'
-                          ? 'bg-emerald-500/20 text-emerald-300'
+                          ? 'bg-emerald-500/20 text-emerald-700 dark:text-emerald-300'
                           : wo.status === 'RELEASED'
-                          ? 'bg-cyan-500/20 text-cyan-300'
-                          : 'bg-slate-800 text-slate-300'
+                          ? 'bg-cyan-500/20 text-cyan-700 dark:text-cyan-300'
+                          : 'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300'
                       }`}
                     >
                       {wo.status}
                     </span>
                   </div>
-                  <h4 className="text-xs font-semibold text-white mt-1 line-clamp-1">{wo.productName}</h4>
-                  <div className="flex items-center justify-between text-[11px] text-slate-400 mt-2">
+                  <h4 className="text-xs font-semibold text-slate-900 dark:text-white mt-1 line-clamp-1">{wo.productName}</h4>
+                  <div className="flex items-center justify-between text-[11px] text-slate-600 dark:text-slate-400 mt-2">
                     <span>
                       {wo.completedQuantity} / {wo.plannedQuantity} {wo.uom}
                     </span>
-                    <span className="font-bold text-slate-300">{wo.customerName || 'Stock Build'}</span>
+                    <span className="font-bold text-slate-700 dark:text-slate-300">{wo.customerName || 'Stock Build'}</span>
                   </div>
                 </div>
               ))}
@@ -310,21 +310,21 @@ export const ProductionOrdersView: React.FC<ProductionOrdersViewProps> = ({
           {/* Right Detail Execution Card */}
           <div className="lg:col-span-2 space-y-4">
             {selectedOrder && (
-              <div className="bg-slate-900 border border-slate-800 rounded-xl p-5 space-y-6">
+              <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-5 space-y-6">
                 {/* Header info */}
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-800 pb-4">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-200 dark:border-slate-800 pb-4">
                   <div>
                     <div className="flex items-center gap-2">
-                      <span className="font-mono font-bold text-orange-400 text-sm">{selectedOrder.orderNumber}</span>
-                      <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-slate-800 text-slate-300">
+                      <span className="font-mono font-bold text-orange-700 dark:text-orange-400 text-sm">{selectedOrder.orderNumber}</span>
+                      <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">
                         {selectedOrder.priority}
                       </span>
                     </div>
-                    <h3 className="text-base font-bold text-white mt-1">{selectedOrder.productName}</h3>
-                    <p className="text-xs text-slate-400 mt-0.5">
-                      Customer: <strong className="text-slate-200">{selectedOrder.customerName || 'Stock Build'}</strong> • Lot:{' '}
-                      <span className="font-mono text-slate-300">{selectedOrder.targetLotNumber}</span> • Ref:{' '}
-                      <span className="text-slate-300">{selectedOrder.sourceReference}</span>
+                    <h3 className="text-base font-bold text-slate-900 dark:text-white mt-1">{selectedOrder.productName}</h3>
+                    <p className="text-xs text-slate-600 dark:text-slate-400 mt-0.5">
+                      Customer: <strong className="text-slate-800 dark:text-slate-200">{selectedOrder.customerName || 'Stock Build'}</strong> • Lot:{' '}
+                      <span className="font-mono text-slate-700 dark:text-slate-300">{selectedOrder.targetLotNumber}</span> • Ref:{' '}
+                      <span className="text-slate-700 dark:text-slate-300">{selectedOrder.sourceReference}</span>
                     </p>
                   </div>
 
@@ -348,7 +348,7 @@ export const ProductionOrdersView: React.FC<ProductionOrdersViewProps> = ({
                     )}
                     <button
                       onClick={() => setShowIssueModal(true)}
-                      className="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-medium rounded-lg border border-slate-700 flex items-center gap-1.5"
+                      className="px-3 py-1.5 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-200 text-xs font-medium rounded-lg border border-slate-300 dark:border-slate-700 flex items-center gap-1.5"
                     >
                       <Layers className="w-3.5 h-3.5" /> Issue Materials
                     </button>
@@ -357,7 +357,7 @@ export const ProductionOrdersView: React.FC<ProductionOrdersViewProps> = ({
 
                 {/* Operations Traveler Sequence */}
                 <div className="space-y-3">
-                  <h4 className="text-xs font-bold text-slate-200 uppercase tracking-wider">
+                  <h4 className="text-xs font-bold text-slate-800 dark:text-slate-200 uppercase tracking-wider">
                     Routing Operations Dispatch & Sign-Off
                   </h4>
 
@@ -365,35 +365,35 @@ export const ProductionOrdersView: React.FC<ProductionOrdersViewProps> = ({
                     {selectedOrder.operations.map((op) => (
                       <div
                         key={op.stepNumber}
-                        className="p-3.5 rounded-xl bg-slate-950 border border-slate-800 flex flex-col sm:flex-row sm:items-center justify-between gap-3"
+                        className="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 flex flex-col sm:flex-row sm:items-center justify-between gap-3"
                       >
                         <div className="flex items-center gap-3">
                           <div
                             className={`w-8 h-8 rounded-lg flex items-center justify-center font-bold text-xs ${
                               op.status === 'COMPLETED'
-                                ? 'bg-emerald-500/20 text-emerald-300'
+                                ? 'bg-emerald-500/20 text-emerald-700 dark:text-emerald-300'
                                 : op.status === 'IN_PROGRESS' || op.status === 'RUNNING'
-                                ? 'bg-orange-500/20 text-orange-300 animate-pulse'
-                                : 'bg-slate-800 text-slate-400'
+                                ? 'bg-orange-500/20 text-orange-800 dark:text-orange-300 animate-pulse'
+                                : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400'
                             }`}
                           >
                             {op.stepNumber}
                           </div>
                           <div>
-                            <h5 className="text-xs font-bold text-white">{op.operationName}</h5>
-                            <p className="text-[11px] text-slate-400">
-                              Work Center: <strong className="text-slate-300">{op.workCenterName}</strong> • Operator:{' '}
-                              <span className="text-slate-300">{op.operatorName || 'Unassigned'}</span>
+                            <h5 className="text-xs font-bold text-slate-900 dark:text-white">{op.operationName}</h5>
+                            <p className="text-[11px] text-slate-600 dark:text-slate-400">
+                              Work Center: <strong className="text-slate-700 dark:text-slate-300">{op.workCenterName}</strong> • Operator:{' '}
+                              <span className="text-slate-700 dark:text-slate-300">{op.operatorName || 'Unassigned'}</span>
                             </p>
                           </div>
                         </div>
 
                         <div className="flex items-center gap-3 self-end sm:self-center">
                           <div className="text-right text-xs">
-                            <div className="font-bold text-white">
+                            <div className="font-bold text-slate-900 dark:text-white">
                               {op.completedQuantity} / {selectedOrder.plannedQuantity} {selectedOrder.uom}
                             </div>
-                            <span className="text-[10px] text-slate-500">{op.actualHours} hrs logged</span>
+                            <span className="text-[10px] text-slate-500 dark:text-slate-400">{op.actualHours} hrs logged</span>
                           </div>
 
                           {op.status !== 'COMPLETED' && (
@@ -405,13 +405,13 @@ export const ProductionOrdersView: React.FC<ProductionOrdersViewProps> = ({
                                   actualHours: op.plannedHours
                                 })
                               }
-                              className="px-2.5 py-1 rounded bg-slate-800 hover:bg-emerald-600 text-slate-300 hover:text-white text-[11px] font-semibold transition-all"
+                              className="px-2.5 py-1 rounded bg-slate-100 dark:bg-slate-800 hover:bg-emerald-600 text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white text-[11px] font-semibold transition-all"
                             >
                               Sign Off
                             </button>
                           )}
                           {op.status === 'COMPLETED' && (
-                            <span className="p-1 rounded bg-emerald-500/10 text-emerald-400">
+                            <span className="p-1 rounded bg-emerald-500/10 text-emerald-600 dark:text-emerald-400">
                               <CheckCircle2 className="w-5 h-5" />
                             </span>
                           )}
@@ -423,26 +423,26 @@ export const ProductionOrdersView: React.FC<ProductionOrdersViewProps> = ({
 
                 {/* Material Staging Checklist */}
                 <div className="space-y-2">
-                  <h4 className="text-xs font-bold text-slate-200 uppercase tracking-wider">
+                  <h4 className="text-xs font-bold text-slate-800 dark:text-slate-200 uppercase tracking-wider">
                     Raw Material Issue Status ({selectedOrder.materialRequirements.length} Items)
                   </h4>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                     {selectedOrder.materialRequirements.map((mat) => (
                       <div
                         key={mat.id}
-                        className="p-2.5 rounded-lg bg-slate-950 border border-slate-800 text-xs flex items-center justify-between"
+                        className="p-2.5 rounded-lg bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 text-xs flex items-center justify-between"
                       >
                         <div>
-                          <div className="font-semibold text-white">{mat.itemName}</div>
-                          <span className="text-[10px] text-slate-500 font-mono">{mat.itemCode}</span>
+                          <div className="font-semibold text-slate-900 dark:text-white">{mat.itemName}</div>
+                          <span className="text-[10px] text-slate-500 dark:text-slate-400 font-mono">{mat.itemCode}</span>
                         </div>
                         <div className="text-right">
-                          <div className="font-bold text-slate-200">
+                          <div className="font-bold text-slate-800 dark:text-slate-200">
                             {mat.issuedQty} / {mat.requiredQty} {mat.uom}
                           </div>
                           <span
                             className={`text-[9px] font-bold uppercase ${
-                              mat.isFullyIssued ? 'text-emerald-400' : 'text-amber-400'
+                              mat.isFullyIssued ? 'text-emerald-600 dark:text-emerald-400' : 'text-amber-700 dark:text-amber-400'
                             }`}
                           >
                             {mat.isFullyIssued ? 'Issued to WIP' : 'Pending Staging'}
@@ -460,60 +460,60 @@ export const ProductionOrdersView: React.FC<ProductionOrdersViewProps> = ({
 
       {/* TAB 2: Shop Floor Traveler Card */}
       {activeTab === 'traveler' && selectedOrder && (
-        <div className="bg-slate-900 border border-slate-800 rounded-xl p-6 space-y-6 max-w-4xl mx-auto">
-          <div className="flex items-center justify-between border-b border-slate-800 pb-4">
+        <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-6 space-y-6 max-w-4xl mx-auto">
+          <div className="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-4">
             <div>
               <div className="flex items-center gap-2">
-                <span className="px-2 py-0.5 bg-orange-500/10 text-orange-400 font-mono text-xs font-bold rounded">
+                <span className="px-2 py-0.5 bg-orange-500/10 text-orange-700 dark:text-orange-400 font-mono text-xs font-bold rounded">
                   OFFICIAL SHOP FLOOR TRAVELER
                 </span>
-                <span className="text-xs text-slate-400">PDO Qualified Plant Spec</span>
+                <span className="text-xs text-slate-600 dark:text-slate-400">PDO Qualified Plant Spec</span>
               </div>
-              <h3 className="text-xl font-bold text-white mt-1">{selectedOrder.orderNumber}</h3>
-              <p className="text-xs text-slate-400">
-                Product: <strong className="text-slate-200">{selectedOrder.productName}</strong>
+              <h3 className="text-xl font-bold text-slate-900 dark:text-white mt-1">{selectedOrder.orderNumber}</h3>
+              <p className="text-xs text-slate-600 dark:text-slate-400">
+                Product: <strong className="text-slate-800 dark:text-slate-200">{selectedOrder.productName}</strong>
               </p>
             </div>
             <button
               onClick={() => window.print()}
-              className="px-3.5 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 font-medium text-xs rounded-lg border border-slate-700 flex items-center gap-2"
+              className="px-3.5 py-2 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-200 font-medium text-xs rounded-lg border border-slate-300 dark:border-slate-700 flex items-center gap-2"
             >
               <Printer className="w-4 h-4" />
               Print Traveler Badge
             </button>
           </div>
 
-          <div className="grid grid-cols-3 gap-3 bg-slate-950 p-4 rounded-xl border border-slate-800 text-xs">
+          <div className="grid grid-cols-3 gap-3 bg-slate-50 dark:bg-slate-950 p-4 rounded-xl border border-slate-200 dark:border-slate-800 text-xs">
             <div>
-              <span className="text-slate-500">Planned Batch:</span>
-              <div className="font-bold text-white mt-0.5">{selectedOrder.plannedQuantity} {selectedOrder.uom}</div>
+              <span className="text-slate-500 dark:text-slate-400">Planned Batch:</span>
+              <div className="font-bold text-slate-900 dark:text-white mt-0.5">{selectedOrder.plannedQuantity} {selectedOrder.uom}</div>
             </div>
             <div>
-              <span className="text-slate-500">Target Batch / Lot:</span>
-              <div className="font-mono font-bold text-orange-400 mt-0.5">{selectedOrder.targetLotNumber}</div>
+              <span className="text-slate-500 dark:text-slate-400">Target Batch / Lot:</span>
+              <div className="font-mono font-bold text-orange-700 dark:text-orange-400 mt-0.5">{selectedOrder.targetLotNumber}</div>
             </div>
             <div>
-              <span className="text-slate-500">Supervisor:</span>
-              <div className="font-bold text-slate-200 mt-0.5">{selectedOrder.supervisor}</div>
+              <span className="text-slate-500 dark:text-slate-400">Supervisor:</span>
+              <div className="font-bold text-slate-800 dark:text-slate-200 mt-0.5">{selectedOrder.supervisor}</div>
             </div>
           </div>
 
           {/* Sequential Checkpoints */}
           <div className="space-y-3">
-            <h4 className="text-xs font-bold text-slate-200 uppercase tracking-wider">
+            <h4 className="text-xs font-bold text-slate-800 dark:text-slate-200 uppercase tracking-wider">
               Mandatory Quality Hold-Points & Operator Verification
             </h4>
-            <div className="border border-slate-800 rounded-xl overflow-hidden divide-y divide-slate-800">
+            <div className="border border-slate-200 dark:border-slate-800 rounded-xl overflow-hidden divide-y divide-slate-200 dark:divide-slate-800">
               {selectedOrder.operations.map((op) => (
-                <div key={op.stepNumber} className="p-3 bg-slate-950/60 flex items-center justify-between text-xs">
+                <div key={op.stepNumber} className="p-3 bg-slate-50/60 dark:bg-slate-950/60 flex items-center justify-between text-xs">
                   <div className="flex items-center gap-3">
-                    <span className="font-mono font-bold text-orange-400">Op {op.stepNumber}</span>
-                    <span className="font-semibold text-white">{op.operationName}</span>
-                    <span className="text-slate-400 text-[11px]">({op.workCenterName})</span>
+                    <span className="font-mono font-bold text-orange-700 dark:text-orange-400">Op {op.stepNumber}</span>
+                    <span className="font-semibold text-slate-900 dark:text-white">{op.operationName}</span>
+                    <span className="text-slate-600 dark:text-slate-400 text-[11px]">({op.workCenterName})</span>
                   </div>
                   <div className="flex items-center gap-4">
-                    <span className="font-mono text-slate-400">{op.plannedHours} planned hrs</span>
-                    <div className="w-32 border-b border-dashed border-slate-600 text-center text-[10px] text-slate-500">
+                    <span className="font-mono text-slate-600 dark:text-slate-400">{op.plannedHours} planned hrs</span>
+                    <div className="w-32 border-b border-dashed border-slate-300 dark:border-slate-600 text-center text-[10px] text-slate-500 dark:text-slate-400">
                       Operator Signature
                     </div>
                   </div>
@@ -526,11 +526,11 @@ export const ProductionOrdersView: React.FC<ProductionOrdersViewProps> = ({
 
       {/* TAB 3: Material Issue */}
       {activeTab === 'issue' && (
-        <div className="bg-slate-900 border border-slate-800 rounded-xl p-5 space-y-4">
+        <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-5 space-y-4">
           <div className="flex items-center justify-between">
             <div>
-              <h3 className="text-sm font-bold text-white">Material Issue Vouchers (Warehouse to WIP)</h3>
-              <p className="text-xs text-slate-400">
+              <h3 className="text-sm font-bold text-slate-900 dark:text-white">Material Issue Vouchers (Warehouse to WIP)</h3>
+              <p className="text-xs text-slate-600 dark:text-slate-400">
                 Log inventory deductions from raw materials storage into active shop floor WIP ledgers.
               </p>
             </div>
@@ -542,15 +542,15 @@ export const ProductionOrdersView: React.FC<ProductionOrdersViewProps> = ({
             </button>
           </div>
 
-          <div className="p-4 rounded-xl bg-slate-950 border border-slate-800 text-xs space-y-2">
+          <div className="p-4 rounded-xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 text-xs space-y-2">
             <div className="flex justify-between">
-              <span className="font-mono font-bold text-orange-400">MIV-2026-0041</span>
-              <span className="text-emerald-400 font-bold">POSTED TO WIP</span>
+              <span className="font-mono font-bold text-orange-700 dark:text-orange-400">MIV-2026-0041</span>
+              <span className="text-emerald-600 dark:text-emerald-400 font-bold">POSTED TO WIP</span>
             </div>
-            <p className="text-slate-300 font-semibold">
+            <p className="text-slate-700 dark:text-slate-300 font-semibold">
               WO-2026-0081: 20 pcs ASTM A105 Forgings + Inconel Seats issued to Sohar Line A.
             </p>
-            <div className="flex justify-between text-slate-500 text-[11px]">
+            <div className="flex justify-between text-slate-500 dark:text-slate-400 text-[11px]">
               <span>Issued By: Said Al-Rawahi</span>
               <span>Total Value: OMR 19,700.00</span>
             </div>
@@ -560,25 +560,25 @@ export const ProductionOrdersView: React.FC<ProductionOrdersViewProps> = ({
 
       {/* TAB 4: Material Return */}
       {activeTab === 'return' && (
-        <div className="bg-slate-900 border border-slate-800 rounded-xl p-5 space-y-4">
+        <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-5 space-y-4">
           <div className="flex items-center justify-between">
             <div>
-              <h3 className="text-sm font-bold text-white">Material Return Vouchers (WIP to Warehouse)</h3>
-              <p className="text-xs text-slate-400">
+              <h3 className="text-sm font-bold text-slate-900 dark:text-white">Material Return Vouchers (WIP to Warehouse)</h3>
+              <p className="text-xs text-slate-600 dark:text-slate-400">
                 Credit unconsumed materials, offcuts, or rejected lots back to inventory stores.
               </p>
             </div>
           </div>
 
-          <div className="p-4 rounded-xl bg-slate-950 border border-slate-800 text-xs space-y-2">
+          <div className="p-4 rounded-xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 text-xs space-y-2">
             <div className="flex justify-between">
-              <span className="font-mono font-bold text-orange-400">MRV-2026-0012</span>
-              <span className="text-emerald-400 font-bold">POSTED INVENTORY CREDIT</span>
+              <span className="font-mono font-bold text-orange-700 dark:text-orange-400">MRV-2026-0012</span>
+              <span className="text-emerald-600 dark:text-emerald-400 font-bold">POSTED INVENTORY CREDIT</span>
             </div>
-            <p className="text-slate-300 font-semibold">
+            <p className="text-slate-700 dark:text-slate-300 font-semibold">
               WO-2026-0083: 2 sets Viton Hydraulic Seals returned from Cleanroom Assembly.
             </p>
-            <div className="flex justify-between text-slate-500 text-[11px]">
+            <div className="flex justify-between text-slate-500 dark:text-slate-400 text-[11px]">
               <span>Returned By: Eng. Said Al-Hajri</span>
               <span>Credit Value: OMR 70.00</span>
             </div>
@@ -589,15 +589,15 @@ export const ProductionOrdersView: React.FC<ProductionOrdersViewProps> = ({
       {/* Create Work Order Modal */}
       {showCreateModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4">
-          <div className="bg-slate-900 border border-slate-800 rounded-2xl max-w-lg w-full p-6 space-y-4 shadow-2xl">
-            <h3 className="text-base font-bold text-white">Release New Production Work Order</h3>
+          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl max-w-lg w-full p-6 space-y-4 shadow-2xl">
+            <h3 className="text-base font-bold text-slate-900 dark:text-white">Release New Production Work Order</h3>
             <form onSubmit={handleCreateOrder} className="space-y-3 text-xs">
               <div>
-                <label className="block text-slate-400 mb-1">Target Product Bill of Materials (BOM) *</label>
+                <label className="block text-slate-600 dark:text-slate-400 mb-1">Target Product Bill of Materials (BOM) *</label>
                 <select
                   value={selectedBomId}
                   onChange={(e) => setSelectedBomId(e.target.value)}
-                  className="w-full px-3 py-2 bg-slate-950 border border-slate-800 rounded-lg text-white"
+                  className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-lg text-slate-900 dark:text-white"
                 >
                   {boms.map((b) => (
                     <option key={b.id} value={b.id}>
@@ -609,22 +609,22 @@ export const ProductionOrdersView: React.FC<ProductionOrdersViewProps> = ({
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-slate-400 mb-1">Planned Quantity *</label>
+                  <label className="block text-slate-600 dark:text-slate-400 mb-1">Planned Quantity *</label>
                   <input
                     type="number"
                     min="1"
                     required
                     value={plannedQty}
                     onChange={(e) => setPlannedQty(Number(e.target.value))}
-                    className="w-full px-3 py-2 bg-slate-950 border border-slate-800 rounded-lg text-white font-bold"
+                    className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-lg text-slate-900 dark:text-white font-bold"
                   />
                 </div>
                 <div>
-                  <label className="block text-slate-400 mb-1">Order Priority</label>
+                  <label className="block text-slate-600 dark:text-slate-400 mb-1">Order Priority</label>
                   <select
                     value={orderPriority}
                     onChange={(e) => setOrderPriority(e.target.value as WorkOrderPriority)}
-                    className="w-full px-3 py-2 bg-slate-950 border border-slate-800 rounded-lg text-white"
+                    className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-lg text-slate-900 dark:text-white"
                   >
                     <option value="LOW">Low</option>
                     <option value="NORMAL">Normal</option>
@@ -636,51 +636,51 @@ export const ProductionOrdersView: React.FC<ProductionOrdersViewProps> = ({
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-slate-400 mb-1">Customer Name</label>
+                  <label className="block text-slate-600 dark:text-slate-400 mb-1">Customer Name</label>
                   <input
                     type="text"
                     value={customerName}
                     onChange={(e) => setCustomerName(e.target.value)}
-                    className="w-full px-3 py-2 bg-slate-950 border border-slate-800 rounded-lg text-white"
+                    className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-lg text-slate-900 dark:text-white"
                   />
                 </div>
                 <div>
-                  <label className="block text-slate-400 mb-1">Sales Ref / PO #</label>
+                  <label className="block text-slate-600 dark:text-slate-400 mb-1">Sales Ref / PO #</label>
                   <input
                     type="text"
                     value={sourceRef}
                     onChange={(e) => setSourceRef(e.target.value)}
-                    className="w-full px-3 py-2 bg-slate-950 border border-slate-800 rounded-lg text-white font-mono"
+                    className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-lg text-slate-900 dark:text-white font-mono"
                   />
                 </div>
               </div>
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-slate-400 mb-1">Scheduled Start</label>
+                  <label className="block text-slate-600 dark:text-slate-400 mb-1">Scheduled Start</label>
                   <input
                     type="date"
                     value={startDate}
                     onChange={(e) => setStartDate(e.target.value)}
-                    className="w-full px-3 py-2 bg-slate-950 border border-slate-800 rounded-lg text-white"
+                    className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-lg text-slate-900 dark:text-white"
                   />
                 </div>
                 <div>
-                  <label className="block text-slate-400 mb-1">Scheduled Finish</label>
+                  <label className="block text-slate-600 dark:text-slate-400 mb-1">Scheduled Finish</label>
                   <input
                     type="date"
                     value={endDate}
                     onChange={(e) => setEndDate(e.target.value)}
-                    className="w-full px-3 py-2 bg-slate-950 border border-slate-800 rounded-lg text-white"
+                    className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-lg text-slate-900 dark:text-white"
                   />
                 </div>
               </div>
 
-              <div className="flex justify-end gap-2 pt-3 border-t border-slate-800">
+              <div className="flex justify-end gap-2 pt-3 border-t border-slate-200 dark:border-slate-800">
                 <button
                   type="button"
                   onClick={() => setShowCreateModal(false)}
-                  className="px-4 py-2 bg-slate-800 text-slate-300 rounded-lg hover:bg-slate-700"
+                  className="px-4 py-2 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700"
                 >
                   Cancel
                 </button>
@@ -699,31 +699,31 @@ export const ProductionOrdersView: React.FC<ProductionOrdersViewProps> = ({
       {/* Material Issue Modal */}
       {showIssueModal && selectedOrder && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4">
-          <div className="bg-slate-900 border border-slate-800 rounded-2xl max-w-lg w-full p-6 space-y-4 shadow-2xl">
-            <h3 className="text-base font-bold text-white">Generate Material Issue Voucher</h3>
-            <p className="text-xs text-slate-400">
+          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl max-w-lg w-full p-6 space-y-4 shadow-2xl">
+            <h3 className="text-base font-bold text-slate-900 dark:text-white">Generate Material Issue Voucher</h3>
+            <p className="text-xs text-slate-600 dark:text-slate-400">
               Dispatch raw materials from warehouse inventory to Work-In-Progress for {selectedOrder.orderNumber}.
             </p>
             <form onSubmit={handleIssueSubmit} className="space-y-3 text-xs">
-              <div className="max-h-60 overflow-y-auto space-y-2 border border-slate-800 rounded-lg p-2.5 bg-slate-950">
+              <div className="max-h-60 overflow-y-auto space-y-2 border border-slate-200 dark:border-slate-800 rounded-lg p-2.5 bg-slate-50 dark:bg-slate-950">
                 {selectedOrder.materialRequirements.map((mat) => (
-                  <div key={mat.id} className="flex justify-between items-center text-xs p-1.5 border-b border-slate-800/60">
+                  <div key={mat.id} className="flex justify-between items-center text-xs p-1.5 border-b border-slate-200/60 dark:border-slate-800/60">
                     <div>
-                      <div className="font-semibold text-white">{mat.itemName}</div>
-                      <span className="text-[10px] text-slate-500">{mat.itemCode}</span>
+                      <div className="font-semibold text-slate-900 dark:text-white">{mat.itemName}</div>
+                      <span className="text-[10px] text-slate-500 dark:text-slate-400">{mat.itemCode}</span>
                     </div>
-                    <span className="font-mono text-emerald-400 font-bold">
+                    <span className="font-mono text-emerald-600 dark:text-emerald-400 font-bold">
                       {mat.requiredQty - mat.issuedQty} {mat.uom} to issue
                     </span>
                   </div>
                 ))}
               </div>
 
-              <div className="flex justify-end gap-2 pt-3 border-t border-slate-800">
+              <div className="flex justify-end gap-2 pt-3 border-t border-slate-200 dark:border-slate-800">
                 <button
                   type="button"
                   onClick={() => setShowIssueModal(false)}
-                  className="px-4 py-2 bg-slate-800 text-slate-300 rounded-lg hover:bg-slate-700"
+                  className="px-4 py-2 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700"
                 >
                   Cancel
                 </button>

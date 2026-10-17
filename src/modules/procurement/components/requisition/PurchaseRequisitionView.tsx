@@ -136,23 +136,23 @@ export const PurchaseRequisitionView: React.FC = () => {
   return (
     <div className="space-y-6">
       {/* Top Header & Search Bar */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white p-4 rounded-2xl border border-slate-200 shadow-2xs">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white dark:bg-slate-900 p-4 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-2xs">
         <div className="flex items-center gap-3 flex-1">
           <div className="relative flex-1 max-w-md">
-            <Search className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
+            <Search className="w-4 h-4 text-slate-500 dark:text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
             <input
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search by PR #, description, department, or requestor..."
-              className="w-full pl-9 pr-3 py-2 text-xs border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-slate-900"
+              className="w-full pl-9 pr-3 py-2 text-xs border border-slate-200 dark:border-slate-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-slate-200 dark:focus:ring-slate-900"
             />
           </div>
 
           <select
             value={filterStatus}
             onChange={(e) => setFilterStatus(e.target.value)}
-            className="text-xs p-2 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-slate-900 bg-white font-medium text-slate-700 cursor-pointer"
+            className="text-xs p-2 border border-slate-200 dark:border-slate-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-slate-200 dark:focus:ring-slate-900 bg-white dark:bg-slate-900 font-medium text-slate-700 dark:text-slate-300 cursor-pointer"
           >
             <option value="ALL">All Requisition Statuses</option>
             <option value="Submitted">Submitted / In Review</option>
@@ -174,11 +174,11 @@ export const PurchaseRequisitionView: React.FC = () => {
       </div>
 
       {/* PR Table List */}
-      <div className="bg-white rounded-2xl border border-slate-200 shadow-2xs overflow-hidden">
+      <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-2xs overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs">
             <thead>
-              <tr className="bg-slate-50 text-slate-500 uppercase tracking-wider text-[10px] border-b border-slate-200">
+              <tr className="bg-slate-50 dark:bg-slate-800/50 text-slate-500 dark:text-slate-400 uppercase tracking-wider text-[10px] border-b border-slate-200 dark:border-slate-700">
                 <th className="py-3 px-4">PR Number</th>
                 <th className="py-3 px-4">Requestor & Dept</th>
                 <th className="py-3 px-4">Purpose & Line Items</th>
@@ -189,42 +189,42 @@ export const PurchaseRequisitionView: React.FC = () => {
                 <th className="py-3 px-4 text-right">Actions</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-100">
+            <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
               {filteredPrs.length === 0 ? (
                 <tr>
-                  <td colSpan={8} className="py-8 text-center text-slate-400 text-xs">
+                  <td colSpan={8} className="py-8 text-center text-slate-500 dark:text-slate-400 text-xs">
                     No purchase requisitions found matching criteria.
                   </td>
                 </tr>
               ) : (
                 filteredPrs.map((pr) => (
-                  <tr key={pr.id} className="hover:bg-slate-50/70 transition-colors">
+                  <tr key={pr.id} className="hover:bg-slate-50/70 dark:hover:bg-slate-800/70 transition-colors">
                     <td className="py-3 px-4">
-                      <span className="font-mono font-bold text-slate-900">{pr.prNumber}</span>
-                      <div className="text-[10px] text-slate-400">{pr.requestDate}</div>
+                      <span className="font-mono font-bold text-slate-900 dark:text-slate-100">{pr.prNumber}</span>
+                      <div className="text-[10px] text-slate-500 dark:text-slate-400">{pr.requestDate}</div>
                     </td>
                     <td className="py-3 px-4">
-                      <div className="font-semibold text-slate-900">{pr.requestorName}</div>
-                      <div className="text-[11px] text-slate-500">{pr.department}</div>
+                      <div className="font-semibold text-slate-900 dark:text-slate-100">{pr.requestorName}</div>
+                      <div className="text-[11px] text-slate-500 dark:text-slate-400">{pr.department}</div>
                     </td>
                     <td className="py-3 px-4 max-w-xs">
-                      <div className="font-medium text-slate-900 truncate">{pr.purpose}</div>
-                      <div className="text-[11px] text-slate-500">
+                      <div className="font-medium text-slate-900 dark:text-slate-100 truncate">{pr.purpose}</div>
+                      <div className="text-[11px] text-slate-500 dark:text-slate-400">
                         {pr.lines.length} Line Item(s) • {pr.lines[0]?.itemDescription}
                       </div>
                     </td>
-                    <td className="py-3 px-4 text-slate-700 font-medium">{pr.requiredDeliveryDate}</td>
-                    <td className="py-3 px-4 text-right font-bold text-slate-900">
+                    <td className="py-3 px-4 text-slate-700 dark:text-slate-300 font-medium">{pr.requiredDeliveryDate}</td>
+                    <td className="py-3 px-4 text-right font-bold text-slate-900 dark:text-slate-100">
                       {formatOMR(pr.totalEstimatedAmountOMR)}
                     </td>
                     <td className="py-3 px-4">
                       <span
                         className={`px-2 py-0.5 rounded-full text-[10px] font-semibold ${
                           pr.priority === 'Urgent / Critical'
-                            ? 'bg-rose-100 text-rose-800'
+                            ? 'bg-rose-100 dark:bg-rose-500/20 text-rose-800 dark:text-rose-200'
                             : pr.priority === 'High'
-                            ? 'bg-amber-100 text-amber-800'
-                            : 'bg-slate-100 text-slate-700'
+                            ? 'bg-amber-100 dark:bg-amber-500/20 text-amber-800 dark:text-amber-200'
+                            : 'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300'
                         }`}
                       >
                         {pr.priority}
@@ -234,14 +234,14 @@ export const PurchaseRequisitionView: React.FC = () => {
                       <span
                         className={`px-2.5 py-0.5 rounded-full text-[10px] font-bold ${
                           pr.status === 'Approved'
-                            ? 'bg-emerald-100 text-emerald-800'
+                            ? 'bg-emerald-100 dark:bg-emerald-500/20 text-emerald-800 dark:text-emerald-200'
                             : pr.status === 'Converted to PO'
-                            ? 'bg-blue-100 text-blue-800'
+                            ? 'bg-blue-100 dark:bg-blue-500/20 text-blue-800 dark:text-blue-200'
                             : pr.status === 'Converted to RFQ'
-                            ? 'bg-cyan-100 text-cyan-800'
+                            ? 'bg-cyan-100 dark:bg-cyan-500/20 text-cyan-800 dark:text-cyan-200'
                             : pr.status === 'Rejected'
-                            ? 'bg-rose-100 text-rose-800'
-                            : 'bg-amber-100 text-amber-800'
+                            ? 'bg-rose-100 dark:bg-rose-500/20 text-rose-800 dark:text-rose-200'
+                            : 'bg-amber-100 dark:bg-amber-500/20 text-amber-800 dark:text-amber-200'
                         }`}
                       >
                         {pr.status}
@@ -250,7 +250,7 @@ export const PurchaseRequisitionView: React.FC = () => {
                     <td className="py-3 px-4 text-right">
                       <button
                         onClick={() => setSelectedPr(pr)}
-                        className="px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold transition-colors cursor-pointer"
+                        className="px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 text-xs font-semibold transition-colors cursor-pointer"
                       >
                         Details
                       </button>
@@ -265,62 +265,62 @@ export const PurchaseRequisitionView: React.FC = () => {
 
       {/* PR DETAILS & WORKFLOW MODAL */}
       {selectedPr && (
-        <div className="fixed inset-0 z-50 bg-slate-900/50 backdrop-blur-xs flex items-center justify-center p-4">
-          <div className="bg-white rounded-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto p-6 border border-slate-200 shadow-xl space-y-5">
-            <div className="flex items-center justify-between border-b border-slate-100 pb-3">
+        <div className="fixed inset-0 z-50 bg-white/50 dark:bg-slate-900/50 backdrop-blur-xs flex items-center justify-center p-4">
+          <div className="bg-white dark:bg-slate-900 rounded-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto p-6 border border-slate-200 dark:border-slate-700 shadow-xl space-y-5">
+            <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-3">
               <div>
                 <div className="flex items-center gap-2">
-                  <span className="font-mono text-sm font-bold text-slate-900">{selectedPr.prNumber}</span>
-                  <span className="px-2 py-0.5 rounded-full text-xs font-bold bg-slate-100 text-slate-800">
+                  <span className="font-mono text-sm font-bold text-slate-900 dark:text-slate-100">{selectedPr.prNumber}</span>
+                  <span className="px-2 py-0.5 rounded-full text-xs font-bold bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200">
                     {selectedPr.status}
                   </span>
                 </div>
-                <p className="text-xs text-slate-500 mt-0.5">
+                <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
                   Requested on {selectedPr.requestDate} by {selectedPr.requestorName} ({selectedPr.department})
                 </p>
               </div>
               <button
                 onClick={() => setSelectedPr(null)}
-                className="text-slate-400 hover:text-slate-600 font-bold text-sm cursor-pointer"
+                className="text-slate-600 dark:text-slate-400 hover:text-slate-600 dark:hover:text-slate-400 font-bold text-sm cursor-pointer"
               >
                 ✕
               </button>
             </div>
 
             {/* General Information Grid */}
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 bg-slate-50 p-4 rounded-xl text-xs">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 bg-slate-50 dark:bg-slate-800/50 p-4 rounded-xl text-xs">
               <div>
-                <span className="text-[10px] uppercase font-semibold text-slate-400 block">Cost Center</span>
-                <span className="font-bold text-slate-800">{selectedPr.costCenter}</span>
+                <span className="text-[10px] uppercase font-semibold text-slate-500 dark:text-slate-400 block">Cost Center</span>
+                <span className="font-bold text-slate-800 dark:text-slate-200">{selectedPr.costCenter}</span>
               </div>
               <div>
-                <span className="text-[10px] uppercase font-semibold text-slate-400 block">Project Code</span>
-                <span className="font-bold text-slate-800">{selectedPr.projectCode || 'N/A — Operational'}</span>
+                <span className="text-[10px] uppercase font-semibold text-slate-500 dark:text-slate-400 block">Project Code</span>
+                <span className="font-bold text-slate-800 dark:text-slate-200">{selectedPr.projectCode || 'N/A — Operational'}</span>
               </div>
               <div>
-                <span className="text-[10px] uppercase font-semibold text-slate-400 block">Delivery Deadline</span>
-                <span className="font-bold text-slate-800">{selectedPr.requiredDeliveryDate}</span>
+                <span className="text-[10px] uppercase font-semibold text-slate-500 dark:text-slate-400 block">Delivery Deadline</span>
+                <span className="font-bold text-slate-800 dark:text-slate-200">{selectedPr.requiredDeliveryDate}</span>
               </div>
               <div>
-                <span className="text-[10px] uppercase font-semibold text-slate-400 block">Total Est. Value</span>
-                <span className="font-bold text-slate-900">{formatOMR(selectedPr.totalEstimatedAmountOMR)}</span>
+                <span className="text-[10px] uppercase font-semibold text-slate-500 dark:text-slate-400 block">Total Est. Value</span>
+                <span className="font-bold text-slate-900 dark:text-slate-100">{formatOMR(selectedPr.totalEstimatedAmountOMR)}</span>
               </div>
             </div>
 
             {/* Purpose & Justification */}
             <div className="space-y-1 text-xs">
-              <span className="font-semibold text-slate-700 block">Procurement Scope & Purpose:</span>
-              <p className="p-3 bg-slate-50 rounded-lg text-slate-800">{selectedPr.purpose}</p>
-              <span className="font-semibold text-slate-700 block mt-2">Business Justification:</span>
-              <p className="p-3 bg-slate-50 rounded-lg text-slate-800">{selectedPr.justification}</p>
+              <span className="font-semibold text-slate-700 dark:text-slate-300 block">Procurement Scope & Purpose:</span>
+              <p className="p-3 bg-slate-50 dark:bg-slate-800/50 rounded-lg text-slate-800 dark:text-slate-200">{selectedPr.purpose}</p>
+              <span className="font-semibold text-slate-700 dark:text-slate-300 block mt-2">Business Justification:</span>
+              <p className="p-3 bg-slate-50 dark:bg-slate-800/50 rounded-lg text-slate-800 dark:text-slate-200">{selectedPr.justification}</p>
             </div>
 
             {/* Line Items Table */}
             <div className="space-y-2">
-              <span className="text-xs font-bold text-slate-900">Requisition Line Items</span>
-              <div className="overflow-x-auto border border-slate-200 rounded-xl">
+              <span className="text-xs font-bold text-slate-900 dark:text-slate-100">Requisition Line Items</span>
+              <div className="overflow-x-auto border border-slate-200 dark:border-slate-700 rounded-xl">
                 <table className="w-full text-left text-xs">
-                  <thead className="bg-slate-50 text-slate-500 uppercase text-[10px]">
+                  <thead className="bg-slate-50 dark:bg-slate-800/50 text-slate-500 dark:text-slate-400 uppercase text-[10px]">
                     <tr>
                       <th className="p-2.5">Item Description</th>
                       <th className="p-2.5">Category</th>
@@ -330,17 +330,17 @@ export const PurchaseRequisitionView: React.FC = () => {
                       <th className="p-2.5">Preferred Supplier</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-slate-100">
+                  <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
                     {selectedPr.lines.map((l) => (
                       <tr key={l.id}>
-                        <td className="p-2.5 font-medium text-slate-900">{l.itemDescription}</td>
-                        <td className="p-2.5 text-slate-600">{l.category}</td>
-                        <td className="p-2.5 text-right font-medium text-slate-800">
+                        <td className="p-2.5 font-medium text-slate-900 dark:text-slate-100">{l.itemDescription}</td>
+                        <td className="p-2.5 text-slate-600 dark:text-slate-400">{l.category}</td>
+                        <td className="p-2.5 text-right font-medium text-slate-800 dark:text-slate-200">
                           {l.quantity} {l.unitOfMeasure}
                         </td>
-                        <td className="p-2.5 text-right text-slate-700">{formatOMR(l.estimatedUnitPrice)}</td>
-                        <td className="p-2.5 text-right font-bold text-slate-900">{formatOMR(l.lineTotal)}</td>
-                        <td className="p-2.5 text-slate-600">{l.preferredSupplierName || 'Open Vendor Pool'}</td>
+                        <td className="p-2.5 text-right text-slate-700 dark:text-slate-300">{formatOMR(l.estimatedUnitPrice)}</td>
+                        <td className="p-2.5 text-right font-bold text-slate-900 dark:text-slate-100">{formatOMR(l.lineTotal)}</td>
+                        <td className="p-2.5 text-slate-600 dark:text-slate-400">{l.preferredSupplierName || 'Open Vendor Pool'}</td>
                       </tr>
                     ))}
                   </tbody>
@@ -349,20 +349,20 @@ export const PurchaseRequisitionView: React.FC = () => {
             </div>
 
             {/* Workflow Action Bar */}
-            <div className="flex flex-wrap items-center justify-between gap-3 pt-4 border-t border-slate-100">
+            <div className="flex flex-wrap items-center justify-between gap-3 pt-4 border-t border-slate-100 dark:border-slate-800">
               <div>
                 {selectedPr.approvedBy && (
-                  <div className="text-[11px] text-emerald-700 font-medium">
+                  <div className="text-[11px] text-emerald-700 dark:text-emerald-300 font-medium">
                     ✓ Approved by {selectedPr.approvedBy} on {selectedPr.approvedDate}
                   </div>
                 )}
                 {selectedPr.convertedPoNumber && (
-                  <div className="text-[11px] text-blue-700 font-bold">
+                  <div className="text-[11px] text-blue-700 dark:text-blue-300 font-bold">
                     Linked PO: {selectedPr.convertedPoNumber}
                   </div>
                 )}
                 {selectedPr.convertedRfqNumber && (
-                  <div className="text-[11px] text-cyan-700 font-bold">
+                  <div className="text-[11px] text-cyan-700 dark:text-cyan-300 font-bold">
                     Linked RFQ: {selectedPr.convertedRfqNumber}
                   </div>
                 )}
@@ -376,7 +376,7 @@ export const PurchaseRequisitionView: React.FC = () => {
                         rejectRequisition(selectedPr.id, 'Procurement Committee', 'Budget allocation review pending.');
                         setSelectedPr(null);
                       }}
-                      className="px-3 py-2 rounded-xl bg-rose-50 hover:bg-rose-100 text-rose-700 text-xs font-semibold transition-colors cursor-pointer"
+                      className="px-3 py-2 rounded-xl bg-rose-50 dark:bg-rose-500/10 hover:bg-rose-100 dark:hover:bg-rose-500/20 text-rose-700 dark:text-rose-300 text-xs font-semibold transition-colors cursor-pointer"
                     >
                       Reject PR
                     </button>
@@ -425,13 +425,13 @@ export const PurchaseRequisitionView: React.FC = () => {
 
       {/* CREATE PR MODAL */}
       {showCreateModal && (
-        <div className="fixed inset-0 z-50 bg-slate-900/50 backdrop-blur-xs flex items-center justify-center p-4">
-          <div className="bg-white rounded-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto p-6 border border-slate-200 shadow-xl space-y-4">
-            <div className="flex items-center justify-between border-b border-slate-100 pb-3">
-              <h3 className="text-sm font-bold text-slate-900">Create Purchase Requisition (PR)</h3>
+        <div className="fixed inset-0 z-50 bg-white/50 dark:bg-slate-900/50 backdrop-blur-xs flex items-center justify-center p-4">
+          <div className="bg-white dark:bg-slate-900 rounded-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto p-6 border border-slate-200 dark:border-slate-700 shadow-xl space-y-4">
+            <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-3">
+              <h3 className="text-sm font-bold text-slate-900 dark:text-slate-100">Create Purchase Requisition (PR)</h3>
               <button
                 onClick={() => setShowCreateModal(false)}
-                className="text-slate-400 hover:text-slate-600 font-bold text-sm cursor-pointer"
+                className="text-slate-600 dark:text-slate-400 hover:text-slate-600 dark:hover:text-slate-400 font-bold text-sm cursor-pointer"
               >
                 ✕
               </button>
@@ -440,52 +440,52 @@ export const PurchaseRequisitionView: React.FC = () => {
             <form onSubmit={handleCreateSubmit} className="space-y-4 text-xs">
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                 <div>
-                  <label className="font-semibold text-slate-700 block mb-1">Department</label>
+                  <label className="font-semibold text-slate-700 dark:text-slate-300 block mb-1">Department</label>
                   <input
                     type="text"
                     value={prDept}
                     onChange={(e) => setPrDept(e.target.value)}
-                    className="w-full p-2 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-slate-900"
+                    className="w-full p-2 border border-slate-200 dark:border-slate-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-slate-200 dark:focus:ring-slate-900"
                   />
                 </div>
                 <div>
-                  <label className="font-semibold text-slate-700 block mb-1">Cost Center Code</label>
+                  <label className="font-semibold text-slate-700 dark:text-slate-300 block mb-1">Cost Center Code</label>
                   <input
                     type="text"
                     value={prCostCenter}
                     onChange={(e) => setPrCostCenter(e.target.value)}
-                    className="w-full p-2 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-slate-900"
+                    className="w-full p-2 border border-slate-200 dark:border-slate-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-slate-200 dark:focus:ring-slate-900"
                   />
                 </div>
                 <div>
-                  <label className="font-semibold text-slate-700 block mb-1">Project Code</label>
+                  <label className="font-semibold text-slate-700 dark:text-slate-300 block mb-1">Project Code</label>
                   <input
                     type="text"
                     value={prProject}
                     onChange={(e) => setPrProject(e.target.value)}
                     placeholder="e.g. PROJ-SOHAR-SUBSTATION"
-                    className="w-full p-2 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-slate-900"
+                    className="w-full p-2 border border-slate-200 dark:border-slate-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-slate-200 dark:focus:ring-slate-900"
                   />
                 </div>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                 <div>
-                  <label className="font-semibold text-slate-700 block mb-1">Required Delivery Date</label>
+                  <label className="font-semibold text-slate-700 dark:text-slate-300 block mb-1">Required Delivery Date</label>
                   <input
                     type="date"
                     required
                     value={prRequiredDate}
                     onChange={(e) => setPrRequiredDate(e.target.value)}
-                    className="w-full p-2 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-slate-900"
+                    className="w-full p-2 border border-slate-200 dark:border-slate-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-slate-200 dark:focus:ring-slate-900"
                   />
                 </div>
                 <div>
-                  <label className="font-semibold text-slate-700 block mb-1">Priority Level</label>
+                  <label className="font-semibold text-slate-700 dark:text-slate-300 block mb-1">Priority Level</label>
                   <select
                     value={prPriority}
                     onChange={(e) => setPrPriority(e.target.value as PriorityLevel)}
-                    className="w-full p-2 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-slate-900"
+                    className="w-full p-2 border border-slate-200 dark:border-slate-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-slate-200 dark:focus:ring-slate-900"
                   >
                     <option value="Standard">Standard</option>
                     <option value="Medium">Medium</option>
@@ -494,11 +494,11 @@ export const PurchaseRequisitionView: React.FC = () => {
                   </select>
                 </div>
                 <div>
-                  <label className="font-semibold text-slate-700 block mb-1">Currency</label>
+                  <label className="font-semibold text-slate-700 dark:text-slate-300 block mb-1">Currency</label>
                   <select
                     value={prCurrency}
                     onChange={(e) => setPrCurrency(e.target.value as CurrencyCode)}
-                    className="w-full p-2 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-slate-900"
+                    className="w-full p-2 border border-slate-200 dark:border-slate-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-slate-200 dark:focus:ring-slate-900"
                   >
                     <option value="OMR">OMR — Omani Rial</option>
                     <option value="USD">USD — US Dollar</option>
@@ -508,25 +508,25 @@ export const PurchaseRequisitionView: React.FC = () => {
               </div>
 
               <div>
-                <label className="font-semibold text-slate-700 block mb-1">Scope & Purpose Summary</label>
+                <label className="font-semibold text-slate-700 dark:text-slate-300 block mb-1">Scope & Purpose Summary</label>
                 <input
                   type="text"
                   required
                   value={prPurpose}
                   onChange={(e) => setPrPurpose(e.target.value)}
                   placeholder="e.g. Procurement of high-voltage underground copper cables for Sohar substation upgrade..."
-                  className="w-full p-2 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-slate-900"
+                  className="w-full p-2 border border-slate-200 dark:border-slate-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-slate-200 dark:focus:ring-slate-900"
                 />
               </div>
 
               {/* Line Items Section */}
-              <div className="space-y-2 pt-2 border-t border-slate-100">
+              <div className="space-y-2 pt-2 border-t border-slate-100 dark:border-slate-800">
                 <div className="flex items-center justify-between">
-                  <span className="font-bold text-slate-900">Line Items</span>
+                  <span className="font-bold text-slate-900 dark:text-slate-100">Line Items</span>
                   <button
                     type="button"
                     onClick={addLine}
-                    className="text-xs font-semibold text-indigo-600 hover:text-indigo-800 flex items-center gap-1 cursor-pointer"
+                    className="text-xs font-semibold text-indigo-600 dark:text-indigo-400 hover:text-indigo-800 dark:hover:text-indigo-200 flex items-center gap-1 cursor-pointer"
                   >
                     <Plus className="w-3.5 h-3.5" />
                     <span>Add Item</span>
@@ -535,14 +535,14 @@ export const PurchaseRequisitionView: React.FC = () => {
 
                 <div className="space-y-3">
                   {lines.map((line, idx) => (
-                    <div key={idx} className="p-3 bg-slate-50 rounded-xl border border-slate-200 space-y-2">
+                    <div key={idx} className="p-3 bg-slate-50 dark:bg-slate-800/50 rounded-xl border border-slate-200 dark:border-slate-700 space-y-2">
                       <div className="flex items-center justify-between">
-                        <span className="font-bold text-[11px] text-slate-700">Line #{idx + 1}</span>
+                        <span className="font-bold text-[11px] text-slate-700 dark:text-slate-300">Line #{idx + 1}</span>
                         {lines.length > 1 && (
                           <button
                             type="button"
                             onClick={() => removeLine(idx)}
-                            className="text-rose-500 hover:text-rose-700 cursor-pointer"
+                            className="text-rose-500 dark:text-rose-400 hover:text-rose-700 dark:hover:text-rose-300 cursor-pointer"
                           >
                             <Trash2 className="w-3.5 h-3.5" />
                           </button>
@@ -561,7 +561,7 @@ export const PurchaseRequisitionView: React.FC = () => {
                               updated[idx].itemDescription = e.target.value;
                               setLines(updated);
                             }}
-                            className="w-full p-2 border border-slate-200 rounded-lg bg-white"
+                            className="w-full p-2 border border-slate-200 dark:border-slate-700 rounded-lg bg-white dark:bg-slate-900"
                           />
                         </div>
                         <div>
@@ -576,7 +576,7 @@ export const PurchaseRequisitionView: React.FC = () => {
                               updated[idx].quantity = Number(e.target.value);
                               setLines(updated);
                             }}
-                            className="w-full p-2 border border-slate-200 rounded-lg bg-white"
+                            className="w-full p-2 border border-slate-200 dark:border-slate-700 rounded-lg bg-white dark:bg-slate-900"
                           />
                         </div>
                         <div>
@@ -591,7 +591,7 @@ export const PurchaseRequisitionView: React.FC = () => {
                               updated[idx].estimatedUnitPrice = Number(e.target.value);
                               setLines(updated);
                             }}
-                            className="w-full p-2 border border-slate-200 rounded-lg bg-white"
+                            className="w-full p-2 border border-slate-200 dark:border-slate-700 rounded-lg bg-white dark:bg-slate-900"
                           />
                         </div>
                       </div>
@@ -600,11 +600,11 @@ export const PurchaseRequisitionView: React.FC = () => {
                 </div>
               </div>
 
-              <div className="flex items-center justify-end gap-2 pt-4 border-t border-slate-100">
+              <div className="flex items-center justify-end gap-2 pt-4 border-t border-slate-100 dark:border-slate-800">
                 <button
                   type="button"
                   onClick={() => setShowCreateModal(false)}
-                  className="px-3 py-2 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold cursor-pointer"
+                  className="px-3 py-2 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 font-semibold cursor-pointer"
                 >
                   Cancel
                 </button>

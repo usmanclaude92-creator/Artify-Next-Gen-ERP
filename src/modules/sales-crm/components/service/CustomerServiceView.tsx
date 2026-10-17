@@ -108,7 +108,7 @@ export const CustomerServiceView: React.FC<CustomerServiceViewProps> = ({
               <span className="px-2.5 py-0.5 rounded-full bg-rose-50 dark:bg-rose-950 text-rose-600 dark:text-rose-400 text-xs font-semibold">
                 Functional Area 06.08
               </span>
-              <span className="text-xs text-slate-500">Post-Sales Support, Field Service & CRM Analytics</span>
+              <span className="text-xs text-slate-500 dark:text-slate-400">Post-Sales Support, Field Service & CRM Analytics</span>
             </div>
             <h2 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white mt-1">
               Customer Complaints, Field Service & CSAT Analytics
@@ -154,35 +154,35 @@ export const CustomerServiceView: React.FC<CustomerServiceViewProps> = ({
       {/* KPI Cards */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
         <div className="p-4 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
-          <div className="text-xs text-slate-500 font-semibold uppercase">Open SLA Tickets</div>
+          <div className="text-xs text-slate-500 dark:text-slate-400 font-semibold uppercase">Open SLA Tickets</div>
           <div className="text-xl font-bold text-rose-600 dark:text-rose-400 mt-1">
             {complaints.filter((c) => c.status !== 'Resolved').length} Active
           </div>
-          <div className="text-[11px] text-slate-400 mt-0.5">Average SLA: 24h</div>
+          <div className="text-[11px] text-slate-600 dark:text-slate-400 mt-0.5">Average SLA: 24h</div>
         </div>
 
         <div className="p-4 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
-          <div className="text-xs text-slate-500 font-semibold uppercase">Customer CSAT Index</div>
+          <div className="text-xs text-slate-500 dark:text-slate-400 font-semibold uppercase">Customer CSAT Index</div>
           <div className="text-xl font-bold text-emerald-600 dark:text-emerald-400 mt-1">
             {stats.customerSatisfactionIndex}%
           </div>
-          <div className="text-[11px] text-emerald-500 mt-0.5">94% Positive Feedback</div>
+          <div className="text-[11px] text-emerald-500 dark:text-emerald-400 mt-0.5">94% Positive Feedback</div>
         </div>
 
         <div className="p-4 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
-          <div className="text-xs text-slate-500 font-semibold uppercase">Net Promoter Score</div>
+          <div className="text-xs text-slate-500 dark:text-slate-400 font-semibold uppercase">Net Promoter Score</div>
           <div className="text-xl font-bold text-purple-600 dark:text-purple-400 mt-1">
             +68 NPS
           </div>
-          <div className="text-[11px] text-purple-500 mt-0.5">Top-quartile in Oman EPC</div>
+          <div className="text-[11px] text-purple-500 dark:text-purple-400 mt-0.5">Top-quartile in Oman EPC</div>
         </div>
 
         <div className="p-4 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
-          <div className="text-xs text-slate-500 font-semibold uppercase">First-Contact Resolution</div>
+          <div className="text-xs text-slate-500 dark:text-slate-400 font-semibold uppercase">First-Contact Resolution</div>
           <div className="text-xl font-bold text-blue-600 dark:text-blue-400 mt-1">
             89.4%
           </div>
-          <div className="text-[11px] text-blue-500 mt-0.5">Field tech response</div>
+          <div className="text-[11px] text-blue-500 dark:text-blue-400 mt-0.5">Field tech response</div>
         </div>
       </div>
 
@@ -193,7 +193,7 @@ export const CustomerServiceView: React.FC<CustomerServiceViewProps> = ({
             <h3 className="font-bold text-slate-900 dark:text-white text-base">
               06.08.01 Incident & Complaint SLA Tracker
             </h3>
-            <span className="text-xs text-slate-500">{complaints.length} Tickets Registered</span>
+            <span className="text-xs text-slate-500 dark:text-slate-400">{complaints.length} Tickets Registered</span>
           </div>
 
           <div className="p-4 space-y-3">
@@ -252,10 +252,10 @@ export const CustomerServiceView: React.FC<CustomerServiceViewProps> = ({
                     </div>
 
                     <div className="text-right shrink-0 space-y-2">
-                      <div className="text-xs text-slate-500">
+                      <div className="text-xs text-slate-500 dark:text-slate-400">
                         Target: <span className="font-bold text-slate-900 dark:text-white">{comp.targetResolutionDate}</span>
                       </div>
-                      <div className="text-[11px] text-slate-400">Assigned: {comp.assignedEngineer}</div>
+                      <div className="text-[11px] text-slate-600 dark:text-slate-400">Assigned: {comp.assignedEngineer}</div>
 
                       {!isResolved ? (
                         <div>
@@ -271,7 +271,7 @@ export const CustomerServiceView: React.FC<CustomerServiceViewProps> = ({
                               <div className="flex justify-end gap-1">
                                 <button
                                   onClick={() => setResolvingId(null)}
-                                  className="px-2 py-1 text-xs text-slate-500"
+                                  className="px-2 py-1 text-xs text-slate-500 dark:text-slate-400"
                                 >
                                   Cancel
                                 </button>
@@ -311,50 +311,50 @@ export const CustomerServiceView: React.FC<CustomerServiceViewProps> = ({
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 space-y-3">
             <div className="flex items-center gap-2">
-              <Smile className="w-5 h-5 text-emerald-600" />
+              <Smile className="w-5 h-5 text-emerald-600 dark:text-emerald-400" />
               <h4 className="font-bold text-sm text-slate-900 dark:text-white">
                 06.08.03 CSAT Feedback Survey Summary
               </h4>
             </div>
-            <p className="text-xs text-slate-500">Post-commissioning and delivery satisfaction survey ratings</p>
+            <p className="text-xs text-slate-500 dark:text-slate-400">Post-commissioning and delivery satisfaction survey ratings</p>
 
             <div className="space-y-2.5 pt-2">
               <div className="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/50 text-xs flex justify-between items-center">
                 <span>Product Quality & Specification Compliance</span>
-                <span className="font-bold text-emerald-600">4.9 / 5.0 ★</span>
+                <span className="font-bold text-emerald-600 dark:text-emerald-400">4.9 / 5.0 ★</span>
               </div>
               <div className="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/50 text-xs flex justify-between items-center">
                 <span>On-Time Delivery to PDO Marmul & Nimr Sites</span>
-                <span className="font-bold text-emerald-600">4.7 / 5.0 ★</span>
+                <span className="font-bold text-emerald-600 dark:text-emerald-400">4.7 / 5.0 ★</span>
               </div>
               <div className="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/50 text-xs flex justify-between items-center">
                 <span>Field Engineer Commissioning & Technical Support</span>
-                <span className="font-bold text-emerald-600">4.9 / 5.0 ★</span>
+                <span className="font-bold text-emerald-600 dark:text-emerald-400">4.9 / 5.0 ★</span>
               </div>
             </div>
           </div>
 
           <div className="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 space-y-3">
             <div className="flex items-center gap-2">
-              <BarChart3 className="w-5 h-5 text-indigo-600" />
+              <BarChart3 className="w-5 h-5 text-indigo-600 dark:text-indigo-400" />
               <h4 className="font-bold text-sm text-slate-900 dark:text-white">
                 06.08.04 Commercial Win/Loss & Sales Cycle
               </h4>
             </div>
-            <p className="text-xs text-slate-500">Executive metrics across Sultanate energy & infrastructure accounts</p>
+            <p className="text-xs text-slate-500 dark:text-slate-400">Executive metrics across Sultanate energy & infrastructure accounts</p>
 
             <div className="space-y-2.5 pt-2">
               <div className="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/50 text-xs flex justify-between items-center">
                 <span>Average Deal Sales Cycle Duration</span>
-                <span className="font-bold text-indigo-600">48 Days (Inquiry to PO)</span>
+                <span className="font-bold text-indigo-600 dark:text-indigo-400">48 Days (Inquiry to PO)</span>
               </div>
               <div className="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/50 text-xs flex justify-between items-center">
                 <span>Primary Reason for Won Deals</span>
-                <span className="font-bold text-indigo-600">Local Assembly & ICV 100% Score</span>
+                <span className="font-bold text-indigo-600 dark:text-indigo-400">Local Assembly & ICV 100% Score</span>
               </div>
               <div className="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/50 text-xs flex justify-between items-center">
                 <span>Customer Retention / Repeat Order Rate</span>
-                <span className="font-bold text-emerald-600">92.3%</span>
+                <span className="font-bold text-emerald-600 dark:text-emerald-400">92.3%</span>
               </div>
             </div>
           </div>

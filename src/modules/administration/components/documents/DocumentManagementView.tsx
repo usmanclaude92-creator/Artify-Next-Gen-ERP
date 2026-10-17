@@ -114,24 +114,24 @@ export const DocumentManagementView: React.FC<DocumentManagementViewProps> = ({ 
   return (
     <div className="space-y-6">
       {/* Header & Tabs */}
-      <div className="bg-white rounded-2xl p-5 border border-slate-200 shadow-2xs">
+      <div className="bg-white dark:bg-slate-900 rounded-2xl p-5 border border-slate-200 dark:border-slate-700 shadow-2xs">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-xl bg-slate-900 text-white flex items-center justify-center font-bold text-sm">
               03.03
             </div>
             <div>
-              <h2 className="text-lg font-bold text-slate-900">Document Management & Archiving (DMS)</h2>
-              <p className="text-xs text-slate-500">Document control, lock checkout/checkin, version histories, and regulatory cold archives</p>
+              <h2 className="text-lg font-bold text-slate-900 dark:text-slate-100">Document Management & Archiving (DMS)</h2>
+              <p className="text-xs text-slate-500 dark:text-slate-400">Document control, lock checkout/checkin, version histories, and regulatory cold archives</p>
             </div>
           </div>
 
           <div className="flex items-center gap-2 flex-wrap">
-            <div className="flex bg-slate-100 p-1 rounded-xl">
+            <div className="flex bg-slate-100 dark:bg-slate-800 p-1 rounded-xl">
               <button
                 onClick={() => setActiveTab('active')}
                 className={`px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-all cursor-pointer ${
-                  activeTab === 'active' ? 'bg-white text-slate-900 shadow-xs' : 'text-slate-600 hover:text-slate-900'
+                  activeTab === 'active' ? 'bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100 shadow-xs' : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100'
                 }`}
               >
                 <Folder className="w-3.5 h-3.5" />
@@ -140,19 +140,19 @@ export const DocumentManagementView: React.FC<DocumentManagementViewProps> = ({ 
               <button
                 onClick={() => setActiveTab('checkout')}
                 className={`px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-all cursor-pointer ${
-                  activeTab === 'checkout' ? 'bg-white text-slate-900 shadow-xs' : 'text-slate-600 hover:text-slate-900'
+                  activeTab === 'checkout' ? 'bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100 shadow-xs' : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100'
                 }`}
               >
-                <Lock className="w-3.5 h-3.5 text-amber-600" />
+                <Lock className="w-3.5 h-3.5 text-amber-600 dark:text-amber-400" />
                 <span>Checked Out ({documents.filter(d => d.isCheckedOut).length})</span>
               </button>
               <button
                 onClick={() => setActiveTab('archived')}
                 className={`px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-all cursor-pointer ${
-                  activeTab === 'archived' ? 'bg-white text-slate-900 shadow-xs' : 'text-slate-600 hover:text-slate-900'
+                  activeTab === 'archived' ? 'bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100 shadow-xs' : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100'
                 }`}
               >
-                <Archive className="w-3.5 h-3.5 text-slate-600" />
+                <Archive className="w-3.5 h-3.5 text-slate-600 dark:text-slate-400" />
                 <span>Cold Storage Archive ({documents.filter(d => d.isArchived).length})</span>
               </button>
             </div>
@@ -168,22 +168,22 @@ export const DocumentManagementView: React.FC<DocumentManagementViewProps> = ({ 
         </div>
 
         {/* Filter & Search Bar */}
-        <div className="mt-4 pt-4 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-between gap-3">
+        <div className="mt-4 pt-4 border-t border-slate-100 dark:border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-3">
           <div className="flex items-center gap-2 w-full sm:w-auto">
             <div className="relative w-full sm:w-80">
-              <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
+              <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 dark:text-slate-400" />
               <input
                 type="text"
                 value={searchTerm}
                 onChange={e => setSearchTerm(e.target.value)}
                 placeholder="Search doc #, title, SOP tag, or department..."
-                className="w-full pl-9 pr-3 py-1.5 rounded-lg border border-slate-200 text-xs focus:outline-none focus:ring-2 focus:ring-slate-900"
+                className="w-full pl-9 pr-3 py-1.5 rounded-lg border border-slate-200 dark:border-slate-700 text-xs focus:outline-none focus:ring-2 focus:ring-slate-200 dark:focus:ring-slate-900"
               />
             </div>
             <select
               value={categoryFilter}
               onChange={e => setCategoryFilter(e.target.value)}
-              className="p-1.5 rounded-lg border border-slate-200 text-xs bg-white focus:outline-none hidden md:block"
+              className="p-1.5 rounded-lg border border-slate-200 dark:border-slate-700 text-xs bg-white dark:bg-slate-900 focus:outline-none hidden md:block"
             >
               <option value="all">All Categories</option>
               <option value="Policy & SOP">Policy & SOP</option>
@@ -192,7 +192,7 @@ export const DocumentManagementView: React.FC<DocumentManagementViewProps> = ({ 
               <option value="Compliance & Legal">Compliance & Legal</option>
             </select>
           </div>
-          <div className="text-xs text-slate-500 hidden sm:block">
+          <div className="text-xs text-slate-500 dark:text-slate-400 hidden sm:block">
             {filteredDocuments.length} registered documents in current view
           </div>
         </div>
@@ -200,10 +200,10 @@ export const DocumentManagementView: React.FC<DocumentManagementViewProps> = ({ 
 
       {/* Main Grid: Doc List + Details */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <div className="lg:col-span-2 bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-2xs">
+        <div className="lg:col-span-2 bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-700 overflow-hidden shadow-2xs">
           <div className="overflow-x-auto">
-            <table className="w-full text-left text-xs text-slate-700">
-              <thead className="bg-slate-50 text-slate-500 border-b border-slate-200 uppercase font-semibold text-[10px] tracking-wider">
+            <table className="w-full text-left text-xs text-slate-700 dark:text-slate-300">
+              <thead className="bg-slate-50 dark:bg-slate-800/50 text-slate-500 dark:text-slate-400 border-b border-slate-200 dark:border-slate-700 uppercase font-semibold text-[10px] tracking-wider">
                 <tr>
                   <th className="p-3.5">Doc Number</th>
                   <th className="p-3.5">Title & Taxonomy</th>
@@ -213,50 +213,50 @@ export const DocumentManagementView: React.FC<DocumentManagementViewProps> = ({ 
                   <th className="p-3.5 text-right">Action</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-100">
+              <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
                 {filteredDocuments.map(doc => (
                   <tr
                     key={doc.id}
                     onClick={() => setSelectedDoc(doc)}
-                    className={`hover:bg-slate-50/70 cursor-pointer transition-colors ${
-                      selectedDoc?.id === doc.id ? 'bg-indigo-50/40' : ''
+                    className={`hover:bg-slate-50/70 dark:hover:bg-slate-800/70 cursor-pointer transition-colors ${
+                      selectedDoc?.id === doc.id ? 'bg-indigo-50/40 dark:bg-indigo-500/40' : ''
                     }`}
                   >
-                    <td className="p-3.5 font-mono font-bold text-indigo-700">
+                    <td className="p-3.5 font-mono font-bold text-indigo-700 dark:text-indigo-300">
                       <div>{doc.documentNumber}</div>
-                      <div className="text-[10px] text-slate-400 font-sans">{doc.fileType} • {doc.fileSize}</div>
+                      <div className="text-[10px] text-slate-500 dark:text-slate-400 font-sans">{doc.fileType} • {doc.fileSize}</div>
                     </td>
                     <td className="p-3.5 max-w-xs">
-                      <div className="font-bold text-slate-900 truncate">{doc.title}</div>
-                      <div className="text-[11px] text-slate-500">{doc.category} • {doc.department}</div>
+                      <div className="font-bold text-slate-900 dark:text-slate-100 truncate">{doc.title}</div>
+                      <div className="text-[11px] text-slate-500 dark:text-slate-400">{doc.category} • {doc.department}</div>
                     </td>
                     <td className="p-3.5">
                       <span className={`px-2 py-0.5 rounded text-[10px] font-bold ${
-                        doc.classification === 'Restricted' ? 'bg-rose-100 text-rose-800' :
-                        doc.classification === 'Confidential' ? 'bg-amber-100 text-amber-800' :
-                        'bg-slate-100 text-slate-700'
+                        doc.classification === 'Restricted' ? 'bg-rose-100 dark:bg-rose-500/20 text-rose-800 dark:text-rose-200' :
+                        doc.classification === 'Confidential' ? 'bg-amber-100 dark:bg-amber-500/20 text-amber-800 dark:text-amber-200' :
+                        'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300'
                       }`}>
                         {doc.classification}
                       </span>
                     </td>
-                    <td className="p-3.5 font-mono font-bold text-slate-900">{doc.currentVersion}</td>
+                    <td className="p-3.5 font-mono font-bold text-slate-900 dark:text-slate-100">{doc.currentVersion}</td>
                     <td className="p-3.5">
                       {doc.isCheckedOut ? (
-                        <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-bold bg-amber-100 text-amber-800">
+                        <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-bold bg-amber-100 dark:bg-amber-500/20 text-amber-800 dark:text-amber-200">
                           <Lock className="w-3 h-3" /> Locked
                         </span>
                       ) : doc.isArchived ? (
-                        <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-bold bg-slate-100 text-slate-700">
+                        <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-bold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">
                           <Archive className="w-3 h-3" /> Archived
                         </span>
                       ) : (
-                        <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-100 text-emerald-800">
+                        <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-100 dark:bg-emerald-500/20 text-emerald-800 dark:text-emerald-200">
                           <CheckCircle2 className="w-3 h-3" /> Active
                         </span>
                       )}
                     </td>
                     <td className="p-3.5 text-right">
-                      <ChevronRight className="w-4 h-4 text-slate-400 ml-auto" />
+                      <ChevronRight className="w-4 h-4 text-slate-500 dark:text-slate-400 ml-auto" />
                     </td>
                   </tr>
                 ))}
@@ -266,78 +266,78 @@ export const DocumentManagementView: React.FC<DocumentManagementViewProps> = ({ 
         </div>
 
         {/* Right Detail Pane */}
-        <div className="bg-white rounded-2xl border border-slate-200 p-5 shadow-2xs flex flex-col justify-between">
+        <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-700 p-5 shadow-2xs flex flex-col justify-between">
           {selectedDoc ? (
             <div className="space-y-4 text-xs">
-              <div className="flex items-center justify-between pb-3 border-b border-slate-100">
-                <span className="font-mono text-xs font-bold text-indigo-700">{selectedDoc.documentNumber}</span>
-                <span className="text-[11px] text-slate-500 font-mono">Current: {selectedDoc.currentVersion}</span>
+              <div className="flex items-center justify-between pb-3 border-b border-slate-100 dark:border-slate-800">
+                <span className="font-mono text-xs font-bold text-indigo-700 dark:text-indigo-300">{selectedDoc.documentNumber}</span>
+                <span className="text-[11px] text-slate-500 dark:text-slate-400 font-mono">Current: {selectedDoc.currentVersion}</span>
               </div>
 
               <div>
-                <h3 className="text-sm font-bold text-slate-900">{selectedDoc.title}</h3>
-                <p className="text-slate-600 mt-1 leading-relaxed bg-slate-50 p-2.5 rounded-xl border border-slate-100">
+                <h3 className="text-sm font-bold text-slate-900 dark:text-slate-100">{selectedDoc.title}</h3>
+                <p className="text-slate-600 dark:text-slate-400 mt-1 leading-relaxed bg-slate-50 dark:bg-slate-800/50 p-2.5 rounded-xl border border-slate-100 dark:border-slate-800">
                   {selectedDoc.description || 'Enterprise document master record.'}
                 </p>
               </div>
 
               <div className="grid grid-cols-2 gap-2 text-[11px] pt-1">
                 <div>
-                  <span className="text-slate-400 block">Department</span>
-                  <span className="font-semibold text-slate-800">{selectedDoc.department}</span>
+                  <span className="text-slate-500 dark:text-slate-400 block">Department</span>
+                  <span className="font-semibold text-slate-800 dark:text-slate-200">{selectedDoc.department}</span>
                 </div>
                 <div>
-                  <span className="text-slate-400 block">Owner / Custodian</span>
-                  <span className="font-semibold text-slate-800">{selectedDoc.ownerName}</span>
+                  <span className="text-slate-500 dark:text-slate-400 block">Owner / Custodian</span>
+                  <span className="font-semibold text-slate-800 dark:text-slate-200">{selectedDoc.ownerName}</span>
                 </div>
                 <div>
-                  <span className="text-slate-400 block">Registered Date</span>
-                  <span className="font-semibold text-slate-800">{selectedDoc.registrationDate}</span>
+                  <span className="text-slate-500 dark:text-slate-400 block">Registered Date</span>
+                  <span className="font-semibold text-slate-800 dark:text-slate-200">{selectedDoc.registrationDate}</span>
                 </div>
                 <div>
-                  <span className="text-slate-400 block">Retention Expiry</span>
-                  <span className="font-semibold text-slate-800">{selectedDoc.retentionExpiryDate}</span>
+                  <span className="text-slate-500 dark:text-slate-400 block">Retention Expiry</span>
+                  <span className="font-semibold text-slate-800 dark:text-slate-200">{selectedDoc.retentionExpiryDate}</span>
                 </div>
               </div>
 
               {/* Version History */}
               <div>
-                <h4 className="text-[11px] font-bold text-slate-700 uppercase tracking-wider mb-2 flex items-center gap-1">
+                <h4 className="text-[11px] font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-2 flex items-center gap-1">
                   <History className="w-3 h-3" /> Version History & Rollback Logs
                 </h4>
                 <div className="space-y-2 max-h-40 overflow-y-auto pr-1">
                   {selectedDoc.versions.map((ver, idx) => (
-                    <div key={idx} className="p-2.5 rounded-xl bg-slate-50 border border-slate-200 flex items-start justify-between">
+                    <div key={idx} className="p-2.5 rounded-xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 flex items-start justify-between">
                       <div>
                         <div className="flex items-center gap-1.5">
-                          <span className="font-mono font-bold text-indigo-700">{ver.version}</span>
-                          <span className="text-[10px] text-slate-400">{ver.uploadedAt} by {ver.uploadedBy}</span>
+                          <span className="font-mono font-bold text-indigo-700 dark:text-indigo-300">{ver.version}</span>
+                          <span className="text-[10px] text-slate-500 dark:text-slate-400">{ver.uploadedAt} by {ver.uploadedBy}</span>
                         </div>
-                        <p className="text-[11px] text-slate-600 mt-0.5">{ver.changeSummary}</p>
+                        <p className="text-[11px] text-slate-600 dark:text-slate-400 mt-0.5">{ver.changeSummary}</p>
                       </div>
-                      <span className="text-[10px] text-slate-400 font-mono">{ver.fileSize}</span>
+                      <span className="text-[10px] text-slate-500 dark:text-slate-400 font-mono">{ver.fileSize}</span>
                     </div>
                   ))}
                 </div>
               </div>
 
               {/* Document Lock Status / Control */}
-              <div className="p-3 rounded-xl bg-slate-50 border border-slate-200">
+              <div className="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700">
                 <div className="flex items-center justify-between mb-1.5">
-                  <span className="font-semibold text-slate-800">Checkout & Version Control</span>
+                  <span className="font-semibold text-slate-800 dark:text-slate-200">Checkout & Version Control</span>
                   {selectedDoc.isCheckedOut ? (
-                    <span className="text-amber-700 font-bold text-[11px] flex items-center gap-1">
+                    <span className="text-amber-700 dark:text-amber-300 font-bold text-[11px] flex items-center gap-1">
                       <Lock className="w-3 h-3" /> Locked for edit
                     </span>
                   ) : (
-                    <span className="text-emerald-700 font-bold text-[11px] flex items-center gap-1">
+                    <span className="text-emerald-700 dark:text-emerald-300 font-bold text-[11px] flex items-center gap-1">
                       <Unlock className="w-3 h-3" /> Ready for checkout
                     </span>
                   )}
                 </div>
                 {selectedDoc.isCheckedOut && (
-                  <p className="text-[11px] text-slate-500 mb-2">
-                    Checked out by: <strong className="text-slate-800">{selectedDoc.checkedOutBy}</strong>
+                  <p className="text-[11px] text-slate-500 dark:text-slate-400 mb-2">
+                    Checked out by: <strong className="text-slate-800 dark:text-slate-200">{selectedDoc.checkedOutBy}</strong>
                   </p>
                 )}
 
@@ -369,7 +369,7 @@ export const DocumentManagementView: React.FC<DocumentManagementViewProps> = ({ 
                 {!selectedDoc.isArchived ? (
                   <button
                     onClick={() => archiveDocument(selectedDoc.id)}
-                    className="flex-1 py-1.5 border border-slate-300 hover:bg-slate-100 text-slate-700 rounded-lg font-semibold text-xs cursor-pointer flex items-center justify-center gap-1"
+                    className="flex-1 py-1.5 border border-slate-300 dark:border-slate-600 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300 rounded-lg font-semibold text-xs cursor-pointer flex items-center justify-center gap-1"
                   >
                     <Archive className="w-3 h-3" /> Move to Cold Archive
                   </button>
@@ -384,9 +384,9 @@ export const DocumentManagementView: React.FC<DocumentManagementViewProps> = ({ 
               </div>
             </div>
           ) : (
-            <div className="flex flex-col items-center justify-center text-center p-8 text-slate-400 my-auto">
+            <div className="flex flex-col items-center justify-center text-center p-8 text-slate-500 dark:text-slate-400 my-auto">
               <Folder className="w-10 h-10 mb-2 stroke-1" />
-              <p className="font-semibold text-slate-600">Select a document</p>
+              <p className="font-semibold text-slate-600 dark:text-slate-400">Select a document</p>
               <p className="text-xs">View version history, metadata, and perform checkout / checkin locks</p>
             </div>
           )}
@@ -396,28 +396,28 @@ export const DocumentManagementView: React.FC<DocumentManagementViewProps> = ({ 
       {/* Upload/Register Modal */}
       {showUploadModal && (
         <div className="fixed inset-0 bg-black/40 backdrop-blur-xs flex items-center justify-center p-4 z-50 animate-in fade-in">
-          <div className="bg-white rounded-2xl p-6 w-full max-w-lg shadow-xl border border-slate-200">
-            <h3 className="text-base font-bold text-slate-900 mb-4">Register Document in Central DMS</h3>
+          <div className="bg-white dark:bg-slate-900 rounded-2xl p-6 w-full max-w-lg shadow-xl border border-slate-200 dark:border-slate-700">
+            <h3 className="text-base font-bold text-slate-900 dark:text-slate-100 mb-4">Register Document in Central DMS</h3>
             <form onSubmit={handleCreateDocument} className="space-y-4 text-xs">
               <div>
-                <label className="block text-slate-700 font-semibold mb-1">Document Title / Policy Name</label>
+                <label className="block text-slate-700 dark:text-slate-300 font-semibold mb-1">Document Title / Policy Name</label>
                 <input
                   type="text"
                   required
                   value={newTitle}
                   onChange={e => setNewTitle(e.target.value)}
                   placeholder="e.g. Standard Operating Procedure: Corporate Travel & Fleet Security"
-                  className="w-full p-2.5 rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-slate-900"
+                  className="w-full p-2.5 rounded-lg border border-slate-300 dark:border-slate-600 focus:outline-none focus:ring-2 focus:ring-slate-200 dark:focus:ring-slate-900"
                 />
               </div>
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-slate-700 font-semibold mb-1">Category</label>
+                  <label className="block text-slate-700 dark:text-slate-300 font-semibold mb-1">Category</label>
                   <select
                     value={newCategory}
                     onChange={e => setNewCategory(e.target.value)}
-                    className="w-full p-2.5 rounded-lg border border-slate-300 focus:outline-none"
+                    className="w-full p-2.5 rounded-lg border border-slate-300 dark:border-slate-600 focus:outline-none"
                   >
                     <option value="Policy & SOP">Policy & SOP</option>
                     <option value="Board Resolution">Board Resolution</option>
@@ -428,11 +428,11 @@ export const DocumentManagementView: React.FC<DocumentManagementViewProps> = ({ 
                   </select>
                 </div>
                 <div>
-                  <label className="block text-slate-700 font-semibold mb-1">Classification Tier</label>
+                  <label className="block text-slate-700 dark:text-slate-300 font-semibold mb-1">Classification Tier</label>
                   <select
                     value={newClassification}
                     onChange={e => setNewClassification(e.target.value)}
-                    className="w-full p-2.5 rounded-lg border border-slate-300 focus:outline-none"
+                    className="w-full p-2.5 rounded-lg border border-slate-300 dark:border-slate-600 focus:outline-none"
                   >
                     <option value="Public">Public</option>
                     <option value="Internal Use">Internal Use</option>
@@ -444,20 +444,20 @@ export const DocumentManagementView: React.FC<DocumentManagementViewProps> = ({ 
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-slate-700 font-semibold mb-1">Owning Department</label>
+                  <label className="block text-slate-700 dark:text-slate-300 font-semibold mb-1">Owning Department</label>
                   <input
                     type="text"
                     value={newDepartment}
                     onChange={e => setNewDepartment(e.target.value)}
-                    className="w-full p-2.5 rounded-lg border border-slate-300 focus:outline-none"
+                    className="w-full p-2.5 rounded-lg border border-slate-300 dark:border-slate-600 focus:outline-none"
                   />
                 </div>
                 <div>
-                  <label className="block text-slate-700 font-semibold mb-1">Retention Policy (Years)</label>
+                  <label className="block text-slate-700 dark:text-slate-300 font-semibold mb-1">Retention Policy (Years)</label>
                   <select
                     value={newRetentionYears}
                     onChange={e => setNewRetentionYears(parseInt(e.target.value))}
-                    className="w-full p-2.5 rounded-lg border border-slate-300 focus:outline-none"
+                    className="w-full p-2.5 rounded-lg border border-slate-300 dark:border-slate-600 focus:outline-none"
                   >
                     <option value={5}>5 Years (Standard Operations)</option>
                     <option value={10}>10 Years (Commercial Contracts)</option>
@@ -467,13 +467,13 @@ export const DocumentManagementView: React.FC<DocumentManagementViewProps> = ({ 
               </div>
 
               <div>
-                <label className="block text-slate-700 font-semibold mb-1">Abstract & Scope</label>
+                <label className="block text-slate-700 dark:text-slate-300 font-semibold mb-1">Abstract & Scope</label>
                 <textarea
                   rows={3}
                   value={newDescription}
                   onChange={e => setNewDescription(e.target.value)}
                   placeholder="Summary of document purpose and governing mandate..."
-                  className="w-full p-2.5 rounded-lg border border-slate-300 focus:outline-none"
+                  className="w-full p-2.5 rounded-lg border border-slate-300 dark:border-slate-600 focus:outline-none"
                 />
               </div>
 
@@ -483,18 +483,18 @@ export const DocumentManagementView: React.FC<DocumentManagementViewProps> = ({ 
                   id="legalHoldCheck"
                   checked={newLegalHold}
                   onChange={e => setNewLegalHold(e.target.checked)}
-                  className="rounded border-slate-300"
+                  className="rounded border-slate-300 dark:border-slate-600"
                 />
-                <label htmlFor="legalHoldCheck" className="text-slate-700 font-medium cursor-pointer">
+                <label htmlFor="legalHoldCheck" className="text-slate-700 dark:text-slate-300 font-medium cursor-pointer">
                   Apply immutable Legal Hold (prevents deletion or routine archiving)
                 </label>
               </div>
 
-              <div className="flex justify-end gap-2 pt-4 border-t border-slate-100">
+              <div className="flex justify-end gap-2 pt-4 border-t border-slate-100 dark:border-slate-800">
                 <button
                   type="button"
                   onClick={() => setShowUploadModal(false)}
-                  className="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg font-semibold cursor-pointer"
+                  className="px-4 py-2 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 rounded-lg font-semibold cursor-pointer"
                 >
                   Cancel
                 </button>
@@ -513,37 +513,37 @@ export const DocumentManagementView: React.FC<DocumentManagementViewProps> = ({ 
       {/* Checkin Modal */}
       {showCheckinModal && (
         <div className="fixed inset-0 bg-black/40 backdrop-blur-xs flex items-center justify-center p-4 z-50 animate-in fade-in">
-          <div className="bg-white rounded-2xl p-6 w-full max-w-md shadow-xl border border-slate-200">
-            <h3 className="text-base font-bold text-slate-900 mb-4">Checkin New Version</h3>
+          <div className="bg-white dark:bg-slate-900 rounded-2xl p-6 w-full max-w-md shadow-xl border border-slate-200 dark:border-slate-700">
+            <h3 className="text-base font-bold text-slate-900 dark:text-slate-100 mb-4">Checkin New Version</h3>
             <form onSubmit={handleCheckin} className="space-y-4 text-xs">
               <div>
-                <label className="block text-slate-700 font-semibold mb-1">New Version Tag</label>
+                <label className="block text-slate-700 dark:text-slate-300 font-semibold mb-1">New Version Tag</label>
                 <input
                   type="text"
                   required
                   value={checkinVersion}
                   onChange={e => setCheckinVersion(e.target.value)}
-                  className="w-full p-2.5 rounded-lg border border-slate-300 focus:outline-none"
+                  className="w-full p-2.5 rounded-lg border border-slate-300 dark:border-slate-600 focus:outline-none"
                 />
               </div>
 
               <div>
-                <label className="block text-slate-700 font-semibold mb-1">Changelog / Revision Notes</label>
+                <label className="block text-slate-700 dark:text-slate-300 font-semibold mb-1">Changelog / Revision Notes</label>
                 <textarea
                   rows={3}
                   required
                   value={checkinSummary}
                   onChange={e => setCheckinSummary(e.target.value)}
                   placeholder="Describe exact modifications made in this revision..."
-                  className="w-full p-2.5 rounded-lg border border-slate-300 focus:outline-none"
+                  className="w-full p-2.5 rounded-lg border border-slate-300 dark:border-slate-600 focus:outline-none"
                 />
               </div>
 
-              <div className="flex justify-end gap-2 pt-4 border-t border-slate-100">
+              <div className="flex justify-end gap-2 pt-4 border-t border-slate-100 dark:border-slate-800">
                 <button
                   type="button"
                   onClick={() => setShowCheckinModal(false)}
-                  className="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg font-semibold cursor-pointer"
+                  className="px-4 py-2 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 rounded-lg font-semibold cursor-pointer"
                 >
                   Cancel
                 </button>

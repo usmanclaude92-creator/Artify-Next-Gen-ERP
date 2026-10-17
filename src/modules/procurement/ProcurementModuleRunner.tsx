@@ -99,13 +99,13 @@ export const ProcurementModuleRunner: React.FC<ProcurementModuleRunnerProps> = (
     <ProcurementProvider>
       <div className="space-y-6 pb-12">
         {/* Module Header Bar */}
-        <div className="bg-white rounded-2xl p-5 border border-slate-200 shadow-2xs">
+        <div className="bg-white dark:bg-slate-900 rounded-2xl p-5 border border-slate-200 dark:border-slate-700 shadow-2xs">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
             <div className="flex items-center gap-3">
               {functionalArea && (
                 <button
                   onClick={() => onNavigate({ view: 'module', moduleId: 'procurement' })}
-                  className="p-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 transition-colors cursor-pointer"
+                  className="p-2 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 transition-colors cursor-pointer"
                   title="Back to Procurement Dashboard"
                 >
                   <ArrowLeft className="w-4 h-4" />
@@ -113,17 +113,17 @@ export const ProcurementModuleRunner: React.FC<ProcurementModuleRunnerProps> = (
               )}
               <div>
                 <div className="flex items-center gap-2">
-                  <span className="font-mono text-xs font-bold text-teal-700 bg-teal-50 px-2 py-0.5 rounded-md border border-teal-200">
+                  <span className="font-mono text-xs font-bold text-teal-700 dark:text-teal-300 bg-teal-50 dark:bg-teal-500/10 px-2 py-0.5 rounded-md border border-teal-200 dark:border-teal-500/30">
                     {functionalArea ? functionalArea.code : module.code}
                   </span>
-                  <span className="text-xs text-slate-400 font-medium">
+                  <span className="text-xs text-slate-500 dark:text-slate-400 font-medium">
                     {module.category} • Phase {module.phaseNumber}
                   </span>
                 </div>
-                <h1 className="text-xl font-bold text-slate-900 mt-1">
+                <h1 className="text-xl font-bold text-slate-900 dark:text-slate-100 mt-1">
                   {functionalArea ? functionalArea.name : module.name}
                 </h1>
-                <p className="text-xs text-slate-500 mt-0.5">
+                <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
                   {functionalArea ? functionalArea.description : module.description}
                 </p>
               </div>
@@ -134,8 +134,8 @@ export const ProcurementModuleRunner: React.FC<ProcurementModuleRunnerProps> = (
                 onClick={onToggleFavorite}
                 className={`p-2.5 rounded-xl border transition-colors cursor-pointer ${
                   isFavorite
-                    ? 'bg-amber-50 border-amber-200 text-amber-600'
-                    : 'bg-slate-50 border-slate-200 text-slate-400 hover:text-slate-600'
+                    ? 'bg-amber-50 dark:bg-amber-500/10 border-amber-200 dark:border-amber-500/30 text-amber-600 dark:text-amber-400'
+                    : 'bg-slate-50 dark:bg-slate-800/50 border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-400 hover:text-slate-600 dark:hover:text-slate-400'
                 }`}
                 title={isFavorite ? 'Remove from favorites' : 'Add to favorites'}
               >
@@ -145,7 +145,7 @@ export const ProcurementModuleRunner: React.FC<ProcurementModuleRunnerProps> = (
               {functionalArea && (
                 <button
                   onClick={() => onNavigate({ view: 'module', moduleId: 'procurement' })}
-                  className="px-3.5 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold flex items-center gap-1.5 transition-colors cursor-pointer"
+                  className="px-3.5 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 text-xs font-semibold flex items-center gap-1.5 transition-colors cursor-pointer"
                 >
                   <LayoutDashboard className="w-3.5 h-3.5" />
                   <span>Module Overview</span>
@@ -155,13 +155,13 @@ export const ProcurementModuleRunner: React.FC<ProcurementModuleRunnerProps> = (
           </div>
 
           {/* Quick Sub-navigation Bar for Functional Areas */}
-          <div className="flex items-center gap-2 overflow-x-auto pt-4 mt-4 border-t border-slate-100 no-scrollbar">
+          <div className="flex items-center gap-2 overflow-x-auto pt-4 mt-4 border-t border-slate-100 dark:border-slate-800 no-scrollbar">
             <button
               onClick={() => onNavigate({ view: 'module', moduleId: 'procurement' })}
               className={`px-3 py-1.5 rounded-xl text-xs font-semibold shrink-0 transition-colors cursor-pointer ${
                 !functionalArea
                   ? 'bg-teal-700 text-white shadow-xs'
-                  : 'bg-slate-50 text-slate-600 hover:bg-slate-100 hover:text-slate-900'
+                  : 'bg-slate-50 dark:bg-slate-800/50 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-slate-100'
               }`}
             >
               Executive Cockpit
@@ -181,7 +181,7 @@ export const ProcurementModuleRunner: React.FC<ProcurementModuleRunnerProps> = (
                   className={`px-3 py-1.5 rounded-xl text-xs font-semibold shrink-0 transition-colors cursor-pointer ${
                     isActive
                       ? 'bg-teal-700 text-white shadow-xs'
-                      : 'bg-slate-50 text-slate-600 hover:bg-slate-100 hover:text-slate-900'
+                      : 'bg-slate-50 dark:bg-slate-800/50 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-slate-100'
                   }`}
                 >
                   <span className="font-mono opacity-70 mr-1.5">{fa.code}</span>

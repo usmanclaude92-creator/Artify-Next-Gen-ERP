@@ -33,15 +33,15 @@ export const AuditTrailMonitoringView: React.FC<{ activeTab?: string }> = ({ act
     {
       key: 'timestamp',
       header: 'Timestamp (UTC)',
-      accessor: item => <span className="font-mono text-[11px] text-slate-500">{item.timestamp}</span>
+      accessor: item => <span className="font-mono text-[11px] text-slate-500 dark:text-slate-400">{item.timestamp}</span>
     },
     {
       key: 'userName',
       header: 'Actor / User Identity',
       accessor: item => (
         <div>
-          <div className="font-semibold text-slate-900">{item.userName}</div>
-          <div className="text-[11px] text-slate-500 font-mono">Role: {item.userRole}</div>
+          <div className="font-semibold text-slate-900 dark:text-slate-100">{item.userName}</div>
+          <div className="text-[11px] text-slate-500 dark:text-slate-400 font-mono">Role: {item.userRole}</div>
         </div>
       )
     },
@@ -49,11 +49,11 @@ export const AuditTrailMonitoringView: React.FC<{ activeTab?: string }> = ({ act
       key: 'action',
       header: 'Action',
       accessor: item => {
-        let style = 'bg-slate-100 text-slate-800';
-        if (item.action === 'CREATE') style = 'bg-emerald-100 text-emerald-800 font-bold';
-        if (item.action === 'UPDATE') style = 'bg-indigo-100 text-indigo-800 font-bold';
-        if (item.action === 'DELETE' || item.action === 'REVOKE') style = 'bg-rose-100 text-rose-800 font-bold';
-        if (item.action === 'LOCK' || item.action === 'UNLOCK') style = 'bg-amber-100 text-amber-800 font-bold';
+        let style = 'bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200';
+        if (item.action === 'CREATE') style = 'bg-emerald-100 dark:bg-emerald-500/20 text-emerald-800 dark:text-emerald-200 font-bold';
+        if (item.action === 'UPDATE') style = 'bg-indigo-100 dark:bg-indigo-500/20 text-indigo-800 dark:text-indigo-200 font-bold';
+        if (item.action === 'DELETE' || item.action === 'REVOKE') style = 'bg-rose-100 dark:bg-rose-500/20 text-rose-800 dark:text-rose-200 font-bold';
+        if (item.action === 'LOCK' || item.action === 'UNLOCK') style = 'bg-amber-100 dark:bg-amber-500/20 text-amber-800 dark:text-amber-200 font-bold';
 
         return (
           <span className={`px-2 py-0.5 rounded font-mono text-[10px] uppercase tracking-wider ${style}`}>
@@ -67,8 +67,8 @@ export const AuditTrailMonitoringView: React.FC<{ activeTab?: string }> = ({ act
       header: 'Entity & Record ID',
       accessor: item => (
         <div>
-          <span className="font-semibold text-slate-800">{item.entity}</span>
-          <div className="font-mono text-[10px] text-indigo-700">#{item.recordId}</div>
+          <span className="font-semibold text-slate-800 dark:text-slate-200">{item.entity}</span>
+          <div className="font-mono text-[10px] text-indigo-700 dark:text-indigo-300">#{item.recordId}</div>
         </div>
       )
     },
@@ -76,7 +76,7 @@ export const AuditTrailMonitoringView: React.FC<{ activeTab?: string }> = ({ act
       key: 'details',
       header: 'Audit Narrative Details',
       accessor: item => (
-        <span className="text-slate-600 text-xs truncate max-w-sm block">{item.details}</span>
+        <span className="text-slate-600 dark:text-slate-400 text-xs truncate max-w-sm block">{item.details}</span>
       )
     },
     {
@@ -91,30 +91,30 @@ export const AuditTrailMonitoringView: React.FC<{ activeTab?: string }> = ({ act
     {
       key: 'timestamp',
       header: 'Login Timestamp',
-      accessor: item => <span className="font-mono text-[11px] text-slate-500">{item.timestamp}</span>
+      accessor: item => <span className="font-mono text-[11px] text-slate-500 dark:text-slate-400">{item.timestamp}</span>
     },
     {
       key: 'username',
       header: 'User Account',
       accessor: item => (
         <div>
-          <div className="font-semibold text-slate-900">{item.fullName}</div>
-          <div className="text-[11px] text-slate-500 font-mono">@{item.username}</div>
+          <div className="font-semibold text-slate-900 dark:text-slate-100">{item.fullName}</div>
+          <div className="text-[11px] text-slate-500 dark:text-slate-400 font-mono">@{item.username}</div>
         </div>
       )
     },
     {
       key: 'device',
       header: 'Device & Client',
-      accessor: item => <span className="font-mono text-xs text-slate-700">{item.browser} • {item.device}</span>
+      accessor: item => <span className="font-mono text-xs text-slate-700 dark:text-slate-300">{item.browser} • {item.device}</span>
     },
     {
       key: 'ipAddress',
       header: 'Source IP & Geolocation',
       accessor: item => (
         <div>
-          <div className="font-mono text-xs font-semibold text-slate-800">{item.ipAddress}</div>
-          <div className="text-[11px] text-slate-500">{item.location}</div>
+          <div className="font-mono text-xs font-semibold text-slate-800 dark:text-slate-200">{item.ipAddress}</div>
+          <div className="text-[11px] text-slate-500 dark:text-slate-400">{item.location}</div>
         </div>
       )
     },
@@ -125,8 +125,8 @@ export const AuditTrailMonitoringView: React.FC<{ activeTab?: string }> = ({ act
         <span
           className={`px-2 py-0.5 rounded text-[11px] font-semibold ${
             item.result === 'Success'
-              ? 'bg-emerald-50 text-emerald-700 border border-emerald-200'
-              : 'bg-rose-50 text-rose-700 border border-rose-200'
+              ? 'bg-emerald-50 dark:bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-500/30'
+              : 'bg-rose-50 dark:bg-rose-500/10 text-rose-700 dark:text-rose-300 border border-rose-200 dark:border-rose-500/30'
           }`}
         >
           {item.result}
@@ -144,37 +144,37 @@ export const AuditTrailMonitoringView: React.FC<{ activeTab?: string }> = ({ act
           value={auditTrail.length}
           status="positive"
           description="Immutable Append-Only Log"
-          icon={<History className="w-5 h-5 text-indigo-600" />}
+          icon={<History className="w-5 h-5 text-indigo-600 dark:text-indigo-400" />}
         />
         <MetricCard
           label="Audit Integrity Status"
           value="100% Cryptographic"
           status="positive"
           description="SHA-256 Chained Integrity"
-          icon={<ShieldCheck className="w-5 h-5 text-emerald-600" />}
+          icon={<ShieldCheck className="w-5 h-5 text-emerald-600 dark:text-emerald-400" />}
         />
         <MetricCard
           label="Recorded User Sessions"
           value={loginHistory.length}
           status="neutral"
           description="Active & Archived Logins"
-          icon={<LogIn className="w-5 h-5 text-indigo-600" />}
+          icon={<LogIn className="w-5 h-5 text-indigo-600 dark:text-indigo-400" />}
         />
         <MetricCard
           label="Authentication Failures"
           value={loginHistory.filter(l => l.status === 'Failed').length}
           status="warning"
           description="Suspicious Anomaly Flags"
-          icon={<ShieldAlert className="w-5 h-5 text-rose-600" />}
+          icon={<ShieldAlert className="w-5 h-5 text-rose-600 dark:text-rose-400" />}
         />
       </div>
 
       {/* Tabs */}
-      <div className="flex items-center gap-2 border-b border-slate-200 overflow-x-auto pb-1">
+      <div className="flex items-center gap-2 border-b border-slate-200 dark:border-slate-700 overflow-x-auto pb-1">
         <button
           onClick={() => setActiveTab('events')}
           className={`flex items-center gap-2 px-4 py-2.5 rounded-lg text-xs font-semibold whitespace-nowrap transition-colors cursor-pointer ${
-            activeTab === 'events' ? 'bg-indigo-600 text-white shadow-xs' : 'text-slate-600 hover:bg-slate-100'
+            activeTab === 'events' ? 'bg-indigo-600 text-white shadow-xs' : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800'
           }`}
         >
           <History className="w-4 h-4" />
@@ -184,7 +184,7 @@ export const AuditTrailMonitoringView: React.FC<{ activeTab?: string }> = ({ act
         <button
           onClick={() => setActiveTab('logins')}
           className={`flex items-center gap-2 px-4 py-2.5 rounded-lg text-xs font-semibold whitespace-nowrap transition-colors cursor-pointer ${
-            activeTab === 'logins' ? 'bg-indigo-600 text-white shadow-xs' : 'text-slate-600 hover:bg-slate-100'
+            activeTab === 'logins' ? 'bg-indigo-600 text-white shadow-xs' : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800'
           }`}
         >
           <LogIn className="w-4 h-4" />
@@ -223,7 +223,7 @@ export const AuditTrailMonitoringView: React.FC<{ activeTab?: string }> = ({ act
                 setSelectedAuditItem(item);
                 setIsDetailModalOpen(true);
               }}
-              className="inline-flex items-center gap-1 px-2.5 py-1 rounded bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium text-xs cursor-pointer"
+              className="inline-flex items-center gap-1 px-2.5 py-1 rounded bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 font-medium text-xs cursor-pointer"
             >
               <Eye className="w-3.5 h-3.5" />
               <span>Diff</span>
@@ -260,30 +260,30 @@ export const AuditTrailMonitoringView: React.FC<{ activeTab?: string }> = ({ act
           maxWidth="2xl"
         >
           <div className="space-y-4">
-            <div className="grid grid-cols-2 gap-3 p-3 bg-slate-50 border border-slate-200 rounded-xl text-xs">
+            <div className="grid grid-cols-2 gap-3 p-3 bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-xl text-xs">
               <div>
-                <span className="text-slate-500 font-medium">Actor:</span>
-                <div className="font-bold text-slate-800 mt-0.5">
+                <span className="text-slate-500 dark:text-slate-400 font-medium">Actor:</span>
+                <div className="font-bold text-slate-800 dark:text-slate-200 mt-0.5">
                   {selectedAuditItem.userName} ({selectedAuditItem.userRole})
                 </div>
               </div>
               <div>
-                <span className="text-slate-500 font-medium">Committed At:</span>
-                <div className="font-mono text-slate-800 mt-0.5">{selectedAuditItem.timestamp}</div>
+                <span className="text-slate-500 dark:text-slate-400 font-medium">Committed At:</span>
+                <div className="font-mono text-slate-800 dark:text-slate-200 mt-0.5">{selectedAuditItem.timestamp}</div>
               </div>
               <div>
-                <span className="text-slate-500 font-medium">Action Performed:</span>
-                <div className="font-bold text-indigo-700 mt-0.5">{selectedAuditItem.action}</div>
+                <span className="text-slate-500 dark:text-slate-400 font-medium">Action Performed:</span>
+                <div className="font-bold text-indigo-700 dark:text-indigo-300 mt-0.5">{selectedAuditItem.action}</div>
               </div>
               <div>
-                <span className="text-slate-500 font-medium">Record ID:</span>
-                <div className="font-mono font-bold text-slate-800 mt-0.5">{selectedAuditItem.recordId}</div>
+                <span className="text-slate-500 dark:text-slate-400 font-medium">Record ID:</span>
+                <div className="font-mono font-bold text-slate-800 dark:text-slate-200 mt-0.5">{selectedAuditItem.recordId}</div>
               </div>
             </div>
 
             <div className="text-xs">
-              <span className="text-slate-500 font-medium">Audit Narrative:</span>
-              <div className="p-2.5 bg-slate-50 border border-slate-200 rounded-lg text-slate-800 mt-1">
+              <span className="text-slate-500 dark:text-slate-400 font-medium">Audit Narrative:</span>
+              <div className="p-2.5 bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-lg text-slate-800 dark:text-slate-200 mt-1">
                 {selectedAuditItem.details}
               </div>
             </div>

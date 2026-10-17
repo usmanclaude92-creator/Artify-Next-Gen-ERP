@@ -179,7 +179,7 @@ export const SalesCrmModuleRunner: React.FC<SalesCrmModuleRunnerProps> = ({
                   <span className="font-mono text-xs font-bold text-indigo-700 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950/80 px-2 py-0.5 rounded-md border border-indigo-200 dark:border-indigo-800">
                     {functionalArea ? functionalArea.code : module.code}
                   </span>
-                  <span className="text-xs text-slate-400 font-medium">
+                  <span className="text-xs text-slate-600 dark:text-slate-400 font-medium">
                     {module.category} • Phase {module.phaseNumber}
                   </span>
                 </div>
@@ -198,7 +198,7 @@ export const SalesCrmModuleRunner: React.FC<SalesCrmModuleRunnerProps> = ({
                 className={`p-2.5 rounded-xl border transition-colors cursor-pointer ${
                   isFavorite
                     ? 'bg-amber-50 dark:bg-amber-950/40 border-amber-200 dark:border-amber-800 text-amber-600 dark:text-amber-400'
-                    : 'bg-slate-50 dark:bg-slate-800 border-slate-200 dark:border-slate-700 text-slate-400 hover:text-slate-600'
+                    : 'bg-slate-50 dark:bg-slate-800 border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-400 hover:text-slate-600 dark:hover:text-slate-400'
                 }`}
                 title={isFavorite ? 'Remove from favorites' : 'Add to favorites'}
               >

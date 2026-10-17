@@ -179,24 +179,24 @@ export const OfficeAdministrationView: React.FC<OfficeAdministrationViewProps> =
   return (
     <div className="space-y-6">
       {/* Top Banner with Navigation Tabs */}
-      <div className="bg-white rounded-2xl p-5 border border-slate-200 shadow-2xs">
+      <div className="bg-white dark:bg-slate-900 rounded-2xl p-5 border border-slate-200 dark:border-slate-700 shadow-2xs">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-xl bg-slate-900 text-white flex items-center justify-center font-bold text-sm">
               03.01
             </div>
             <div>
-              <h2 className="text-lg font-bold text-slate-900">Office Administration & Facility Hub</h2>
-              <p className="text-xs text-slate-500">Manage notices, office services, stationery allocation, and facility work orders</p>
+              <h2 className="text-lg font-bold text-slate-900 dark:text-slate-100">Office Administration & Facility Hub</h2>
+              <p className="text-xs text-slate-500 dark:text-slate-400">Manage notices, office services, stationery allocation, and facility work orders</p>
             </div>
           </div>
 
           <div className="flex items-center gap-2 flex-wrap">
-            <div className="flex bg-slate-100 p-1 rounded-xl">
+            <div className="flex bg-slate-100 dark:bg-slate-800 p-1 rounded-xl">
               <button
                 onClick={() => setActiveTab('notices')}
                 className={`px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-all cursor-pointer ${
-                  activeTab === 'notices' ? 'bg-white text-slate-900 shadow-xs' : 'text-slate-600 hover:text-slate-900'
+                  activeTab === 'notices' ? 'bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100 shadow-xs' : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100'
                 }`}
               >
                 <Bell className="w-3.5 h-3.5" />
@@ -205,7 +205,7 @@ export const OfficeAdministrationView: React.FC<OfficeAdministrationViewProps> =
               <button
                 onClick={() => setActiveTab('services')}
                 className={`px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-all cursor-pointer ${
-                  activeTab === 'services' ? 'bg-white text-slate-900 shadow-xs' : 'text-slate-600 hover:text-slate-900'
+                  activeTab === 'services' ? 'bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100 shadow-xs' : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100'
                 }`}
               >
                 <Briefcase className="w-3.5 h-3.5" />
@@ -214,7 +214,7 @@ export const OfficeAdministrationView: React.FC<OfficeAdministrationViewProps> =
               <button
                 onClick={() => setActiveTab('stationery')}
                 className={`px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-all cursor-pointer ${
-                  activeTab === 'stationery' ? 'bg-white text-slate-900 shadow-xs' : 'text-slate-600 hover:text-slate-900'
+                  activeTab === 'stationery' ? 'bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100 shadow-xs' : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100'
                 }`}
               >
                 <BookOpen className="w-3.5 h-3.5" />
@@ -223,7 +223,7 @@ export const OfficeAdministrationView: React.FC<OfficeAdministrationViewProps> =
               <button
                 onClick={() => setActiveTab('facilities')}
                 className={`px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-all cursor-pointer ${
-                  activeTab === 'facilities' ? 'bg-white text-slate-900 shadow-xs' : 'text-slate-600 hover:text-slate-900'
+                  activeTab === 'facilities' ? 'bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100 shadow-xs' : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100'
                 }`}
               >
                 <Wrench className="w-3.5 h-3.5" />
@@ -234,15 +234,15 @@ export const OfficeAdministrationView: React.FC<OfficeAdministrationViewProps> =
         </div>
 
         {/* Search & Action Bar */}
-        <div className="mt-4 pt-4 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-between gap-3">
+        <div className="mt-4 pt-4 border-t border-slate-100 dark:border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-3">
           <div className="relative w-full sm:w-80">
-            <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
+            <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 dark:text-slate-400" />
             <input
               type="text"
               value={searchTerm}
               onChange={e => setSearchTerm(e.target.value)}
               placeholder="Search office records..."
-              className="w-full pl-9 pr-3 py-1.5 rounded-lg border border-slate-200 text-xs focus:outline-none focus:ring-2 focus:ring-slate-900"
+              className="w-full pl-9 pr-3 py-1.5 rounded-lg border border-slate-200 dark:border-slate-700 text-xs focus:outline-none focus:ring-2 focus:ring-slate-200 dark:focus:ring-slate-900"
             />
           </div>
 
@@ -293,38 +293,38 @@ export const OfficeAdministrationView: React.FC<OfficeAdministrationViewProps> =
           {filteredNotices.map(notice => (
             <div
               key={notice.id}
-              className={`bg-white rounded-2xl p-5 border transition-all flex flex-col justify-between ${
-                notice.isPinned ? 'border-indigo-300 ring-1 ring-indigo-200' : 'border-slate-200'
+              className={`bg-white dark:bg-slate-900 rounded-2xl p-5 border transition-all flex flex-col justify-between ${
+                notice.isPinned ? 'border-indigo-300 dark:border-indigo-500/40 ring-1 ring-indigo-200 dark:ring-indigo-500/30' : 'border-slate-200 dark:border-slate-700'
               }`}
             >
               <div>
                 <div className="flex items-center justify-between gap-2 mb-2">
                   <div className="flex items-center gap-1.5">
                     <span className={`text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded ${
-                      notice.priority === 'Critical' ? 'bg-rose-100 text-rose-700' :
-                      notice.priority === 'Important' ? 'bg-amber-100 text-amber-800' :
-                      'bg-slate-100 text-slate-700'
+                      notice.priority === 'Critical' ? 'bg-rose-100 dark:bg-rose-500/20 text-rose-700 dark:text-rose-300' :
+                      notice.priority === 'Important' ? 'bg-amber-100 dark:bg-amber-500/20 text-amber-800 dark:text-amber-200' :
+                      'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300'
                     }`}>
                       {notice.category} • {notice.priority}
                     </span>
                     {notice.isPinned && (
-                      <span className="text-[10px] font-bold bg-indigo-50 text-indigo-700 px-1.5 py-0.5 rounded">Pinned</span>
+                      <span className="text-[10px] font-bold bg-indigo-50 dark:bg-indigo-500/10 text-indigo-700 dark:text-indigo-300 px-1.5 py-0.5 rounded">Pinned</span>
                     )}
                   </div>
                   <button
                     onClick={() => deleteNotice(notice.id)}
-                    className="text-slate-400 hover:text-rose-600 p-1 cursor-pointer"
+                    className="text-slate-600 dark:text-slate-400 hover:text-rose-600 dark:hover:text-rose-400 p-1 cursor-pointer"
                     title="Delete notice"
                   >
                     <Trash2 className="w-3.5 h-3.5" />
                   </button>
                 </div>
 
-                <h3 className="text-sm font-bold text-slate-900 mb-2 leading-snug">{notice.title}</h3>
-                <p className="text-xs text-slate-600 leading-relaxed line-clamp-4 mb-4">{notice.content}</p>
+                <h3 className="text-sm font-bold text-slate-900 dark:text-slate-100 mb-2 leading-snug">{notice.title}</h3>
+                <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed line-clamp-4 mb-4">{notice.content}</p>
               </div>
 
-              <div className="pt-3 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-500">
+              <div className="pt-3 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-[11px] text-slate-500 dark:text-slate-400">
                 <span className="flex items-center gap-1">
                   <Building2 className="w-3 h-3" /> {notice.targetAudience}
                 </span>
@@ -337,14 +337,14 @@ export const OfficeAdministrationView: React.FC<OfficeAdministrationViewProps> =
 
       {/* Tab 2: Office Services */}
       {activeTab === 'services' && (
-        <div className="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-2xs">
-          <div className="p-4 bg-slate-50/70 border-b border-slate-200 flex items-center justify-between">
-            <h3 className="text-xs font-bold text-slate-900 uppercase tracking-wider">Office Service Orders Register</h3>
-            <span className="text-xs text-slate-500">{filteredServices.length} records</span>
+        <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-700 overflow-hidden shadow-2xs">
+          <div className="p-4 bg-slate-50/70 dark:bg-slate-800/70 border-b border-slate-200 dark:border-slate-700 flex items-center justify-between">
+            <h3 className="text-xs font-bold text-slate-900 dark:text-slate-100 uppercase tracking-wider">Office Service Orders Register</h3>
+            <span className="text-xs text-slate-500 dark:text-slate-400">{filteredServices.length} records</span>
           </div>
           <div className="overflow-x-auto">
-            <table className="w-full text-left text-xs text-slate-700">
-              <thead className="bg-slate-50 text-slate-500 border-b border-slate-200 uppercase font-semibold text-[10px] tracking-wider">
+            <table className="w-full text-left text-xs text-slate-700 dark:text-slate-300">
+              <thead className="bg-slate-50 dark:bg-slate-800/50 text-slate-500 dark:text-slate-400 border-b border-slate-200 dark:border-slate-700 uppercase font-semibold text-[10px] tracking-wider">
                 <tr>
                   <th className="p-3.5">Order No</th>
                   <th className="p-3.5">Service Type</th>
@@ -356,20 +356,20 @@ export const OfficeAdministrationView: React.FC<OfficeAdministrationViewProps> =
                   <th className="p-3.5 text-right">Actions</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-100">
+              <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
                 {filteredServices.map(srv => (
-                  <tr key={srv.id} className="hover:bg-slate-50/50">
-                    <td className="p-3.5 font-mono font-bold text-indigo-700">{srv.orderNumber}</td>
+                  <tr key={srv.id} className="hover:bg-slate-50/50 dark:hover:bg-slate-800/50">
+                    <td className="p-3.5 font-mono font-bold text-indigo-700 dark:text-indigo-300">{srv.orderNumber}</td>
                     <td className="p-3.5 font-medium">{srv.serviceType}</td>
-                    <td className="p-3.5 max-w-xs truncate text-slate-900 font-semibold">{srv.title}</td>
+                    <td className="p-3.5 max-w-xs truncate text-slate-900 dark:text-slate-100 font-semibold">{srv.title}</td>
                     <td className="p-3.5">{srv.requestedBy} ({srv.department})</td>
                     <td className="p-3.5">{srv.location}</td>
                     <td className="p-3.5">{srv.scheduledDate}</td>
                     <td className="p-3.5">
                       <span className={`px-2 py-0.5 rounded text-[10px] font-bold ${
-                        srv.status === 'Approved' ? 'bg-emerald-100 text-emerald-800' :
-                        srv.status === 'In Progress' ? 'bg-blue-100 text-blue-800' :
-                        'bg-amber-100 text-amber-800'
+                        srv.status === 'Approved' ? 'bg-emerald-100 dark:bg-emerald-500/20 text-emerald-800 dark:text-emerald-200' :
+                        srv.status === 'In Progress' ? 'bg-blue-100 dark:bg-blue-500/20 text-blue-800 dark:text-blue-200' :
+                        'bg-amber-100 dark:bg-amber-500/20 text-amber-800 dark:text-amber-200'
                       }`}>
                         {srv.status}
                       </span>
@@ -406,24 +406,24 @@ export const OfficeAdministrationView: React.FC<OfficeAdministrationViewProps> =
           {/* Stock SKUs Inventory */}
           <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4">
             {stationeryItems.map(item => (
-              <div key={item.id} className="bg-white rounded-2xl p-4 border border-slate-200 shadow-2xs flex flex-col justify-between">
+              <div key={item.id} className="bg-white dark:bg-slate-900 rounded-2xl p-4 border border-slate-200 dark:border-slate-700 shadow-2xs flex flex-col justify-between">
                 <div>
-                  <div className="flex items-center justify-between text-[10px] text-slate-500 font-mono mb-1">
+                  <div className="flex items-center justify-between text-[10px] text-slate-500 dark:text-slate-400 font-mono mb-1">
                     <span>{item.itemCode}</span>
-                    <span className="bg-slate-100 px-1.5 py-0.5 rounded">{item.unitOfMeasure}</span>
+                    <span className="bg-slate-100 dark:bg-slate-800 px-1.5 py-0.5 rounded">{item.unitOfMeasure}</span>
                   </div>
-                  <h4 className="text-xs font-bold text-slate-900 line-clamp-2 mb-2">{item.itemName}</h4>
+                  <h4 className="text-xs font-bold text-slate-900 dark:text-slate-100 line-clamp-2 mb-2">{item.itemName}</h4>
                 </div>
-                <div className="pt-2 border-t border-slate-100 flex items-center justify-between">
+                <div className="pt-2 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between">
                   <div>
-                    <p className="text-[10px] text-slate-400">Available</p>
-                    <p className={`text-sm font-extrabold ${item.availableStock <= item.reorderLevel ? 'text-rose-600' : 'text-slate-900'}`}>
+                    <p className="text-[10px] text-slate-500 dark:text-slate-400">Available</p>
+                    <p className={`text-sm font-extrabold ${item.availableStock <= item.reorderLevel ? 'text-rose-600 dark:text-rose-400' : 'text-slate-900 dark:text-slate-100'}`}>
                       {item.availableStock}
                     </p>
                   </div>
                   <div className="text-right">
-                    <p className="text-[10px] text-slate-400">Unit Cost</p>
-                    <p className="text-xs font-bold text-indigo-700">{formatCurrency(item.unitCostOMR)}</p>
+                    <p className="text-[10px] text-slate-500 dark:text-slate-400">Unit Cost</p>
+                    <p className="text-xs font-bold text-indigo-700 dark:text-indigo-300">{formatCurrency(item.unitCostOMR)}</p>
                   </div>
                 </div>
               </div>
@@ -431,14 +431,14 @@ export const OfficeAdministrationView: React.FC<OfficeAdministrationViewProps> =
           </div>
 
           {/* Stationery Requisition List */}
-          <div className="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-2xs">
-            <div className="p-4 bg-slate-50/70 border-b border-slate-200 flex items-center justify-between">
-              <h3 className="text-xs font-bold text-slate-900 uppercase tracking-wider">Department Stationery Requisitions</h3>
-              <span className="text-xs text-slate-500">{filteredStationeryReqs.length} requests</span>
+          <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-700 overflow-hidden shadow-2xs">
+            <div className="p-4 bg-slate-50/70 dark:bg-slate-800/70 border-b border-slate-200 dark:border-slate-700 flex items-center justify-between">
+              <h3 className="text-xs font-bold text-slate-900 dark:text-slate-100 uppercase tracking-wider">Department Stationery Requisitions</h3>
+              <span className="text-xs text-slate-500 dark:text-slate-400">{filteredStationeryReqs.length} requests</span>
             </div>
             <div className="overflow-x-auto">
-              <table className="w-full text-left text-xs text-slate-700">
-                <thead className="bg-slate-50 text-slate-500 border-b border-slate-200 uppercase font-semibold text-[10px] tracking-wider">
+              <table className="w-full text-left text-xs text-slate-700 dark:text-slate-300">
+                <thead className="bg-slate-50 dark:bg-slate-800/50 text-slate-500 dark:text-slate-400 border-b border-slate-200 dark:border-slate-700 uppercase font-semibold text-[10px] tracking-wider">
                   <tr>
                     <th className="p-3.5">Req No</th>
                     <th className="p-3.5">Department / User</th>
@@ -448,27 +448,27 @@ export const OfficeAdministrationView: React.FC<OfficeAdministrationViewProps> =
                     <th className="p-3.5 text-right">Actions</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-slate-100">
+                <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
                   {filteredStationeryReqs.map(req => (
-                    <tr key={req.id} className="hover:bg-slate-50/50">
-                      <td className="p-3.5 font-mono font-bold text-indigo-700">{req.requestNumber}</td>
+                    <tr key={req.id} className="hover:bg-slate-50/50 dark:hover:bg-slate-800/50">
+                      <td className="p-3.5 font-mono font-bold text-indigo-700 dark:text-indigo-300">{req.requestNumber}</td>
                       <td className="p-3.5">
-                        <span className="font-semibold text-slate-900">{req.requesterName}</span>
-                        <div className="text-[11px] text-slate-500">{req.department} • {req.requestDate}</div>
+                        <span className="font-semibold text-slate-900 dark:text-slate-100">{req.requesterName}</span>
+                        <div className="text-[11px] text-slate-500 dark:text-slate-400">{req.department} • {req.requestDate}</div>
                       </td>
                       <td className="p-3.5">
                         {req.items.map(it => (
-                          <div key={it.itemId} className="text-slate-800">
-                            • {it.itemName} <span className="font-bold text-indigo-700">({it.quantityRequested} pcs)</span>
+                          <div key={it.itemId} className="text-slate-800 dark:text-slate-200">
+                            • {it.itemName} <span className="font-bold text-indigo-700 dark:text-indigo-300">({it.quantityRequested} pcs)</span>
                           </div>
                         ))}
                       </td>
-                      <td className="p-3.5 font-bold text-slate-900">{formatCurrency(req.totalCostOMR)}</td>
+                      <td className="p-3.5 font-bold text-slate-900 dark:text-slate-100">{formatCurrency(req.totalCostOMR)}</td>
                       <td className="p-3.5">
                         <span className={`px-2 py-0.5 rounded text-[10px] font-bold ${
-                          req.status === 'Completed' ? 'bg-emerald-100 text-emerald-800' :
-                          req.status === 'Approved' ? 'bg-blue-100 text-blue-800' :
-                          'bg-amber-100 text-amber-800'
+                          req.status === 'Completed' ? 'bg-emerald-100 dark:bg-emerald-500/20 text-emerald-800 dark:text-emerald-200' :
+                          req.status === 'Approved' ? 'bg-blue-100 dark:bg-blue-500/20 text-blue-800 dark:text-blue-200' :
+                          'bg-amber-100 dark:bg-amber-500/20 text-amber-800 dark:text-amber-200'
                         }`}>
                           {req.status}
                         </span>
@@ -484,7 +484,7 @@ export const OfficeAdministrationView: React.FC<OfficeAdministrationViewProps> =
                           </button>
                         )}
                         {req.status === 'Completed' && (
-                          <span className="text-[11px] text-slate-400">Fulfilled by {req.issuedBy}</span>
+                          <span className="text-[11px] text-slate-500 dark:text-slate-400">Fulfilled by {req.issuedBy}</span>
                         )}
                       </td>
                     </tr>
@@ -498,14 +498,14 @@ export const OfficeAdministrationView: React.FC<OfficeAdministrationViewProps> =
 
       {/* Tab 4: Facility Work Orders */}
       {activeTab === 'facilities' && (
-        <div className="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-2xs">
-          <div className="p-4 bg-slate-50/70 border-b border-slate-200 flex items-center justify-between">
-            <h3 className="text-xs font-bold text-slate-900 uppercase tracking-wider">Facilities Maintenance Work Orders</h3>
-            <span className="text-xs text-slate-500">{filteredFacilities.length} work orders</span>
+        <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-700 overflow-hidden shadow-2xs">
+          <div className="p-4 bg-slate-50/70 dark:bg-slate-800/70 border-b border-slate-200 dark:border-slate-700 flex items-center justify-between">
+            <h3 className="text-xs font-bold text-slate-900 dark:text-slate-100 uppercase tracking-wider">Facilities Maintenance Work Orders</h3>
+            <span className="text-xs text-slate-500 dark:text-slate-400">{filteredFacilities.length} work orders</span>
           </div>
           <div className="overflow-x-auto">
-            <table className="w-full text-left text-xs text-slate-700">
-              <thead className="bg-slate-50 text-slate-500 border-b border-slate-200 uppercase font-semibold text-[10px] tracking-wider">
+            <table className="w-full text-left text-xs text-slate-700 dark:text-slate-300">
+              <thead className="bg-slate-50 dark:bg-slate-800/50 text-slate-500 dark:text-slate-400 border-b border-slate-200 dark:border-slate-700 uppercase font-semibold text-[10px] tracking-wider">
                 <tr>
                   <th className="p-3.5">WO Number</th>
                   <th className="p-3.5">Title & Location</th>
@@ -516,20 +516,20 @@ export const OfficeAdministrationView: React.FC<OfficeAdministrationViewProps> =
                   <th className="p-3.5 text-right">Actions</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-100">
+              <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
                 {filteredFacilities.map(wo => (
-                  <tr key={wo.id} className="hover:bg-slate-50/50">
-                    <td className="p-3.5 font-mono font-bold text-indigo-700">{wo.workOrderNumber}</td>
+                  <tr key={wo.id} className="hover:bg-slate-50/50 dark:hover:bg-slate-800/50">
+                    <td className="p-3.5 font-mono font-bold text-indigo-700 dark:text-indigo-300">{wo.workOrderNumber}</td>
                     <td className="p-3.5">
-                      <div className="font-bold text-slate-900">{wo.title}</div>
-                      <div className="text-[11px] text-slate-500">{wo.facilityLocation}</div>
+                      <div className="font-bold text-slate-900 dark:text-slate-100">{wo.title}</div>
+                      <div className="text-[11px] text-slate-500 dark:text-slate-400">{wo.facilityLocation}</div>
                     </td>
                     <td className="p-3.5 font-medium">{wo.category}</td>
                     <td className="p-3.5">
                       <span className={`px-2 py-0.5 rounded text-[10px] font-bold ${
-                        wo.priority === 'Urgent' ? 'bg-rose-100 text-rose-800' :
-                        wo.priority === 'High' ? 'bg-amber-100 text-amber-800' :
-                        'bg-slate-100 text-slate-700'
+                        wo.priority === 'Urgent' ? 'bg-rose-100 dark:bg-rose-500/20 text-rose-800 dark:text-rose-200' :
+                        wo.priority === 'High' ? 'bg-amber-100 dark:bg-amber-500/20 text-amber-800 dark:text-amber-200' :
+                        'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300'
                       }`}>
                         {wo.priority}
                       </span>
@@ -537,9 +537,9 @@ export const OfficeAdministrationView: React.FC<OfficeAdministrationViewProps> =
                     <td className="p-3.5">{wo.assignedTechnician || 'Unassigned'}</td>
                     <td className="p-3.5">
                       <span className={`px-2 py-0.5 rounded text-[10px] font-bold ${
-                        wo.status === 'Completed' ? 'bg-emerald-100 text-emerald-800' :
-                        wo.status === 'In Progress' ? 'bg-blue-100 text-blue-800' :
-                        'bg-slate-100 text-slate-700'
+                        wo.status === 'Completed' ? 'bg-emerald-100 dark:bg-emerald-500/20 text-emerald-800 dark:text-emerald-200' :
+                        wo.status === 'In Progress' ? 'bg-blue-100 dark:bg-blue-500/20 text-blue-800 dark:text-blue-200' :
+                        'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300'
                       }`}>
                         {wo.status}
                       </span>
@@ -566,28 +566,28 @@ export const OfficeAdministrationView: React.FC<OfficeAdministrationViewProps> =
       {/* Notice Modal */}
       {showNoticeModal && (
         <div className="fixed inset-0 bg-black/40 backdrop-blur-xs flex items-center justify-center p-4 z-50 animate-in fade-in">
-          <div className="bg-white rounded-2xl p-6 w-full max-w-lg shadow-xl border border-slate-200">
-            <h3 className="text-base font-bold text-slate-900 mb-4">Post Corporate Administrative Bulletin</h3>
+          <div className="bg-white dark:bg-slate-900 rounded-2xl p-6 w-full max-w-lg shadow-xl border border-slate-200 dark:border-slate-700">
+            <h3 className="text-base font-bold text-slate-900 dark:text-slate-100 mb-4">Post Corporate Administrative Bulletin</h3>
             <form onSubmit={handleCreateNotice} className="space-y-4 text-xs">
               <div>
-                <label className="block text-slate-700 font-semibold mb-1">Notice Headline</label>
+                <label className="block text-slate-700 dark:text-slate-300 font-semibold mb-1">Notice Headline</label>
                 <input
                   type="text"
                   required
                   value={newNotice.title}
                   onChange={e => setNewNotice({ ...newNotice, title: e.target.value })}
                   placeholder="e.g. Muscat HQ Energy Policy Updates"
-                  className="w-full p-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-slate-900 focus:outline-none"
+                  className="w-full p-2.5 rounded-lg border border-slate-300 dark:border-slate-600 focus:ring-2 focus:ring-slate-200 dark:focus:ring-slate-900 focus:outline-none"
                 />
               </div>
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-slate-700 font-semibold mb-1">Category</label>
+                  <label className="block text-slate-700 dark:text-slate-300 font-semibold mb-1">Category</label>
                   <select
                     value={newNotice.category}
                     onChange={e => setNewNotice({ ...newNotice, category: e.target.value as any })}
-                    className="w-full p-2.5 rounded-lg border border-slate-300 focus:outline-none"
+                    className="w-full p-2.5 rounded-lg border border-slate-300 dark:border-slate-600 focus:outline-none"
                   >
                     <option value="General">General</option>
                     <option value="Security">Security</option>
@@ -597,11 +597,11 @@ export const OfficeAdministrationView: React.FC<OfficeAdministrationViewProps> =
                   </select>
                 </div>
                 <div>
-                  <label className="block text-slate-700 font-semibold mb-1">Target Audience</label>
+                  <label className="block text-slate-700 dark:text-slate-300 font-semibold mb-1">Target Audience</label>
                   <select
                     value={newNotice.targetAudience}
                     onChange={e => setNewNotice({ ...newNotice, targetAudience: e.target.value as any })}
-                    className="w-full p-2.5 rounded-lg border border-slate-300 focus:outline-none"
+                    className="w-full p-2.5 rounded-lg border border-slate-300 dark:border-slate-600 focus:outline-none"
                   >
                     <option value="All Employees">All Employees</option>
                     <option value="Muscat HQ">Muscat HQ</option>
@@ -613,14 +613,14 @@ export const OfficeAdministrationView: React.FC<OfficeAdministrationViewProps> =
               </div>
 
               <div>
-                <label className="block text-slate-700 font-semibold mb-1">Notice Content</label>
+                <label className="block text-slate-700 dark:text-slate-300 font-semibold mb-1">Notice Content</label>
                 <textarea
                   rows={4}
                   required
                   value={newNotice.content}
                   onChange={e => setNewNotice({ ...newNotice, content: e.target.value })}
                   placeholder="Details of the announcement..."
-                  className="w-full p-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-slate-900 focus:outline-none"
+                  className="w-full p-2.5 rounded-lg border border-slate-300 dark:border-slate-600 focus:ring-2 focus:ring-slate-200 dark:focus:ring-slate-900 focus:outline-none"
                 />
               </div>
 
@@ -630,18 +630,18 @@ export const OfficeAdministrationView: React.FC<OfficeAdministrationViewProps> =
                   id="pinCheck"
                   checked={newNotice.isPinned}
                   onChange={e => setNewNotice({ ...newNotice, isPinned: e.target.checked })}
-                  className="rounded border-slate-300"
+                  className="rounded border-slate-300 dark:border-slate-600"
                 />
-                <label htmlFor="pinCheck" className="text-slate-700 font-medium cursor-pointer">
+                <label htmlFor="pinCheck" className="text-slate-700 dark:text-slate-300 font-medium cursor-pointer">
                   Pin this bulletin to the top of the board
                 </label>
               </div>
 
-              <div className="flex justify-end gap-2 pt-4 border-t border-slate-100">
+              <div className="flex justify-end gap-2 pt-4 border-t border-slate-100 dark:border-slate-800">
                 <button
                   type="button"
                   onClick={() => setShowNoticeModal(false)}
-                  className="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg font-semibold cursor-pointer"
+                  className="px-4 py-2 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 rounded-lg font-semibold cursor-pointer"
                 >
                   Cancel
                 </button>
@@ -660,15 +660,15 @@ export const OfficeAdministrationView: React.FC<OfficeAdministrationViewProps> =
       {/* Stationery Requisition Modal */}
       {showStationeryModal && (
         <div className="fixed inset-0 bg-black/40 backdrop-blur-xs flex items-center justify-center p-4 z-50 animate-in fade-in">
-          <div className="bg-white rounded-2xl p-6 w-full max-w-md shadow-xl border border-slate-200">
-            <h3 className="text-base font-bold text-slate-900 mb-4">Request Stationery Supplies</h3>
+          <div className="bg-white dark:bg-slate-900 rounded-2xl p-6 w-full max-w-md shadow-xl border border-slate-200 dark:border-slate-700">
+            <h3 className="text-base font-bold text-slate-900 dark:text-slate-100 mb-4">Request Stationery Supplies</h3>
             <form onSubmit={handleCreateStationery} className="space-y-4 text-xs">
               <div>
-                <label className="block text-slate-700 font-semibold mb-1">Select Item SKU</label>
+                <label className="block text-slate-700 dark:text-slate-300 font-semibold mb-1">Select Item SKU</label>
                 <select
                   value={newStationery.itemId}
                   onChange={e => setNewStationery({ ...newStationery, itemId: e.target.value })}
-                  className="w-full p-2.5 rounded-lg border border-slate-300 focus:outline-none"
+                  className="w-full p-2.5 rounded-lg border border-slate-300 dark:border-slate-600 focus:outline-none"
                 >
                   {stationeryItems.map(item => (
                     <option key={item.id} value={item.id}>
@@ -680,43 +680,43 @@ export const OfficeAdministrationView: React.FC<OfficeAdministrationViewProps> =
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-slate-700 font-semibold mb-1">Quantity Requested</label>
+                  <label className="block text-slate-700 dark:text-slate-300 font-semibold mb-1">Quantity Requested</label>
                   <input
                     type="number"
                     min={1}
                     max={50}
                     value={newStationery.quantity}
                     onChange={e => setNewStationery({ ...newStationery, quantity: parseInt(e.target.value) || 1 })}
-                    className="w-full p-2.5 rounded-lg border border-slate-300 focus:outline-none"
+                    className="w-full p-2.5 rounded-lg border border-slate-300 dark:border-slate-600 focus:outline-none"
                   />
                 </div>
                 <div>
-                  <label className="block text-slate-700 font-semibold mb-1">Department</label>
+                  <label className="block text-slate-700 dark:text-slate-300 font-semibold mb-1">Department</label>
                   <input
                     type="text"
                     value={newStationery.department}
                     onChange={e => setNewStationery({ ...newStationery, department: e.target.value })}
-                    className="w-full p-2.5 rounded-lg border border-slate-300 focus:outline-none"
+                    className="w-full p-2.5 rounded-lg border border-slate-300 dark:border-slate-600 focus:outline-none"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block text-slate-700 font-semibold mb-1">Operational Purpose</label>
+                <label className="block text-slate-700 dark:text-slate-300 font-semibold mb-1">Operational Purpose</label>
                 <textarea
                   rows={2}
                   value={newStationery.purpose}
                   onChange={e => setNewStationery({ ...newStationery, purpose: e.target.value })}
                   placeholder="e.g. Preparing tender submission dossiers..."
-                  className="w-full p-2.5 rounded-lg border border-slate-300 focus:outline-none"
+                  className="w-full p-2.5 rounded-lg border border-slate-300 dark:border-slate-600 focus:outline-none"
                 />
               </div>
 
-              <div className="flex justify-end gap-2 pt-4 border-t border-slate-100">
+              <div className="flex justify-end gap-2 pt-4 border-t border-slate-100 dark:border-slate-800">
                 <button
                   type="button"
                   onClick={() => setShowStationeryModal(false)}
-                  className="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg font-semibold cursor-pointer"
+                  className="px-4 py-2 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 rounded-lg font-semibold cursor-pointer"
                 >
                   Cancel
                 </button>
@@ -735,28 +735,28 @@ export const OfficeAdministrationView: React.FC<OfficeAdministrationViewProps> =
       {/* Facility Order Modal */}
       {showFacilityModal && (
         <div className="fixed inset-0 bg-black/40 backdrop-blur-xs flex items-center justify-center p-4 z-50 animate-in fade-in">
-          <div className="bg-white rounded-2xl p-6 w-full max-w-lg shadow-xl border border-slate-200">
-            <h3 className="text-base font-bold text-slate-900 mb-4">Create Facility Maintenance Work Order</h3>
+          <div className="bg-white dark:bg-slate-900 rounded-2xl p-6 w-full max-w-lg shadow-xl border border-slate-200 dark:border-slate-700">
+            <h3 className="text-base font-bold text-slate-900 dark:text-slate-100 mb-4">Create Facility Maintenance Work Order</h3>
             <form onSubmit={handleCreateFacilityOrder} className="space-y-4 text-xs">
               <div>
-                <label className="block text-slate-700 font-semibold mb-1">Work Order Title</label>
+                <label className="block text-slate-700 dark:text-slate-300 font-semibold mb-1">Work Order Title</label>
                 <input
                   type="text"
                   required
                   value={newFacilityOrder.title}
                   onChange={e => setNewFacilityOrder({ ...newFacilityOrder, title: e.target.value })}
                   placeholder="e.g. AC Thermostat Repair in Level 4 Conference Room"
-                  className="w-full p-2.5 rounded-lg border border-slate-300 focus:outline-none"
+                  className="w-full p-2.5 rounded-lg border border-slate-300 dark:border-slate-600 focus:outline-none"
                 />
               </div>
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-slate-700 font-semibold mb-1">Category</label>
+                  <label className="block text-slate-700 dark:text-slate-300 font-semibold mb-1">Category</label>
                   <select
                     value={newFacilityOrder.category}
                     onChange={e => setNewFacilityOrder({ ...newFacilityOrder, category: e.target.value as any })}
-                    className="w-full p-2.5 rounded-lg border border-slate-300 focus:outline-none"
+                    className="w-full p-2.5 rounded-lg border border-slate-300 dark:border-slate-600 focus:outline-none"
                   >
                     <option value="HVAC & Climate">HVAC & Climate</option>
                     <option value="Electrical">Electrical</option>
@@ -767,11 +767,11 @@ export const OfficeAdministrationView: React.FC<OfficeAdministrationViewProps> =
                   </select>
                 </div>
                 <div>
-                  <label className="block text-slate-700 font-semibold mb-1">Priority</label>
+                  <label className="block text-slate-700 dark:text-slate-300 font-semibold mb-1">Priority</label>
                   <select
                     value={newFacilityOrder.priority}
                     onChange={e => setNewFacilityOrder({ ...newFacilityOrder, priority: e.target.value as any })}
-                    className="w-full p-2.5 rounded-lg border border-slate-300 focus:outline-none"
+                    className="w-full p-2.5 rounded-lg border border-slate-300 dark:border-slate-600 focus:outline-none"
                   >
                     <option value="Low">Low</option>
                     <option value="Medium">Medium</option>
@@ -782,33 +782,33 @@ export const OfficeAdministrationView: React.FC<OfficeAdministrationViewProps> =
               </div>
 
               <div>
-                <label className="block text-slate-700 font-semibold mb-1">Facility Location</label>
+                <label className="block text-slate-700 dark:text-slate-300 font-semibold mb-1">Facility Location</label>
                 <input
                   type="text"
                   required
                   value={newFacilityOrder.facilityLocation}
                   onChange={e => setNewFacilityOrder({ ...newFacilityOrder, facilityLocation: e.target.value })}
                   placeholder="e.g. Muscat HQ — Level 4 East Wing"
-                  className="w-full p-2.5 rounded-lg border border-slate-300 focus:outline-none"
+                  className="w-full p-2.5 rounded-lg border border-slate-300 dark:border-slate-600 focus:outline-none"
                 />
               </div>
 
               <div>
-                <label className="block text-slate-700 font-semibold mb-1">Fault Description & Scope</label>
+                <label className="block text-slate-700 dark:text-slate-300 font-semibold mb-1">Fault Description & Scope</label>
                 <textarea
                   rows={3}
                   value={newFacilityOrder.description}
                   onChange={e => setNewFacilityOrder({ ...newFacilityOrder, description: e.target.value })}
                   placeholder="Provide complete breakdown of the maintenance required..."
-                  className="w-full p-2.5 rounded-lg border border-slate-300 focus:outline-none"
+                  className="w-full p-2.5 rounded-lg border border-slate-300 dark:border-slate-600 focus:outline-none"
                 />
               </div>
 
-              <div className="flex justify-end gap-2 pt-4 border-t border-slate-100">
+              <div className="flex justify-end gap-2 pt-4 border-t border-slate-100 dark:border-slate-800">
                 <button
                   type="button"
                   onClick={() => setShowFacilityModal(false)}
-                  className="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg font-semibold cursor-pointer"
+                  className="px-4 py-2 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 rounded-lg font-semibold cursor-pointer"
                 >
                   Cancel
                 </button>
