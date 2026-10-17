@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, lazy, Suspense } from 'react';
 import {
   ERPRouteState,
   ERPUserRole,
@@ -32,23 +32,23 @@ import { ModuleLandingView } from './components/pages/ModuleLandingView';
 import { FunctionalAreaView } from './components/pages/FunctionalAreaView';
 import { ProcessView } from './components/pages/ProcessView';
 import { PlaceholderPageView } from './components/pages/PlaceholderPageView';
-import { SystemManagementModuleRunner } from './modules/system-management/SystemManagementModuleRunner';
-import { BusinessIntelligenceModuleRunner } from './modules/business-intelligence/BusinessIntelligenceModuleRunner';
-import { AdministrationModuleRunner } from './modules/administration/AdministrationModuleRunner';
-import { BankingTreasuryModuleRunner } from './modules/banking-treasury/BankingTreasuryModuleRunner';
-import { ProcurementModuleRunner } from './modules/procurement/ProcurementModuleRunner';
-import { SalesCrmModuleRunner } from './modules/sales-crm/SalesCrmModuleRunner';
-import { InventoryModuleRunner } from './modules/inventory/InventoryModuleRunner';
-import { ManufacturingModuleRunner } from './modules/manufacturing/ManufacturingModuleRunner';
-import { HrModuleRunner } from './modules/hr/HrModuleRunner';
-import { ProjectManagementModuleRunner } from './modules/projects/ProjectManagementModuleRunner';
-import { BudgetingModuleRunner } from './modules/budgeting/BudgetingModuleRunner';
-import { ScmModuleRunner } from './modules/scm/ScmModuleRunner';
-import { AssetModuleRunner } from './modules/assets/AssetModuleRunner';
-import { QualityModuleRunner } from './modules/quality/QualityModuleRunner';
-import { ConstructionModuleRunner } from './modules/construction/ConstructionModuleRunner';
-import { FinanceModuleRunner } from './modules/finance/FinanceModuleRunner';
-import { ComplianceModuleRunner } from './modules/compliance/ComplianceModuleRunner';
+const SystemManagementModuleRunner = lazy(() => import('./modules/system-management/SystemManagementModuleRunner').then(m => ({ default: m.SystemManagementModuleRunner })));
+const BusinessIntelligenceModuleRunner = lazy(() => import('./modules/business-intelligence/BusinessIntelligenceModuleRunner').then(m => ({ default: m.BusinessIntelligenceModuleRunner })));
+const AdministrationModuleRunner = lazy(() => import('./modules/administration/AdministrationModuleRunner').then(m => ({ default: m.AdministrationModuleRunner })));
+const BankingTreasuryModuleRunner = lazy(() => import('./modules/banking-treasury/BankingTreasuryModuleRunner').then(m => ({ default: m.BankingTreasuryModuleRunner })));
+const ProcurementModuleRunner = lazy(() => import('./modules/procurement/ProcurementModuleRunner').then(m => ({ default: m.ProcurementModuleRunner })));
+const SalesCrmModuleRunner = lazy(() => import('./modules/sales-crm/SalesCrmModuleRunner').then(m => ({ default: m.SalesCrmModuleRunner })));
+const InventoryModuleRunner = lazy(() => import('./modules/inventory/InventoryModuleRunner').then(m => ({ default: m.InventoryModuleRunner })));
+const ManufacturingModuleRunner = lazy(() => import('./modules/manufacturing/ManufacturingModuleRunner').then(m => ({ default: m.ManufacturingModuleRunner })));
+const HrModuleRunner = lazy(() => import('./modules/hr/HrModuleRunner').then(m => ({ default: m.HrModuleRunner })));
+const ProjectManagementModuleRunner = lazy(() => import('./modules/projects/ProjectManagementModuleRunner').then(m => ({ default: m.ProjectManagementModuleRunner })));
+const BudgetingModuleRunner = lazy(() => import('./modules/budgeting/BudgetingModuleRunner').then(m => ({ default: m.BudgetingModuleRunner })));
+const ScmModuleRunner = lazy(() => import('./modules/scm/ScmModuleRunner').then(m => ({ default: m.ScmModuleRunner })));
+const AssetModuleRunner = lazy(() => import('./modules/assets/AssetModuleRunner').then(m => ({ default: m.AssetModuleRunner })));
+const QualityModuleRunner = lazy(() => import('./modules/quality/QualityModuleRunner').then(m => ({ default: m.QualityModuleRunner })));
+const ConstructionModuleRunner = lazy(() => import('./modules/construction/ConstructionModuleRunner').then(m => ({ default: m.ConstructionModuleRunner })));
+const FinanceModuleRunner = lazy(() => import('./modules/finance/FinanceModuleRunner').then(m => ({ default: m.FinanceModuleRunner })));
+const ComplianceModuleRunner = lazy(() => import('./modules/compliance/ComplianceModuleRunner').then(m => ({ default: m.ComplianceModuleRunner })));
 
 export default function App() {
   const [routeState, setRouteState] = useState<ERPRouteState>({ view: 'dashboard' });
@@ -242,6 +242,7 @@ export default function App() {
         {/* Dynamic Viewport Container */}
         <main className="flex-1 overflow-y-auto py-6 sm:py-8">
           <div className="w-[90%] mx-auto">
+            <Suspense fallback={<div className="py-24 text-center text-sm text-slate-500 dark:text-slate-400">Loading module…</div>}>
             {/* View 1: Executive Dashboard */}
             {routeState.view === 'dashboard' && (
               <DashboardView
@@ -1802,6 +1803,7 @@ export default function App() {
                 />
               )
             )}
+            </Suspense>
           </div>
         </main>
       </div>
