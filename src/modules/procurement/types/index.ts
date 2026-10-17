@@ -332,6 +332,9 @@ export interface GRNLineItem {
   storageWarehouseId: string;
   storageBinLocation: string;
   inspectionResult: 'Pending' | 'Passed' | 'Rejected' | 'Conditional';
+  itemCode?: string;
+  quarantineQty?: number;
+  qcInspectionStatus?: string;
 }
 
 export interface GoodsReceiptNote {
@@ -348,8 +351,12 @@ export interface GoodsReceiptNote {
   vehicleNumber?: string;
   receivedByWarehouseOfficer: string;
   warehouseLocation: string;
-  status: 'Draft' | 'Under Inspection' | 'Accepted' | 'Discrepancy / Partial' | 'Posted to Stock';
+  status: 'Draft' | 'Received' | 'Under Inspection' | 'Accepted' | 'Discrepancy / Partial' | 'Posted to Stock';
   totalDeliveredValueOMR: number;
+  overallQcStatus?: string;
+  qcInspector?: string;
+  inspectionDate?: string;
+  qcReportSummary?: string;
   lines: GRNLineItem[];
   discrepancyRemarks?: string;
 }
@@ -420,7 +427,7 @@ export interface PurchaseInvoice {
   totalInvoiceAmountOMR: number;
   threeWayMatchResult?: 'Full 3-Way Match Passed' | 'Variance Within Tolerance' | 'Price Discrepancy' | 'Quantity Discrepancy' | 'Pending Matching';
   priceTolerancePercentage?: number; // e.g. 2%
-  status: 'Draft' | 'Under Verification' | 'Matched' | 'Approved for Payment' | 'On Hold' | 'Posted to AP' | 'Paid';
+  status: 'Draft' | 'Under Verification' | 'Pending 3-Way Match' | 'Matched' | 'Approved for Payment' | 'On Hold' | 'Posted to AP' | 'Paid';
   paymentReference?: string;
   apGlAccount?: string;
   verifiedBy?: string;
@@ -600,4 +607,19 @@ export interface SupplierEvaluationRecord {
 }
 
 export type EvaluationScorecard = SupplierEvaluationRecord;
-export type ServiceEntrySheet = GoodsReceiptNote;
+export interface ServiceEntrySheet {
+  id: string;
+  sesNumber: string;
+  sesTitle: string;
+  poNumber: string;
+  supplierName: string;
+  serviceStartDate: string;
+  serviceEndDate: string;
+  serviceHoursLogged: number;
+  serviceAmountClaimedOMR: number;
+  serviceAmountApprovedOMR: number;
+  serviceProviderLead: string;
+  supervisingEngineer: string;
+  status: 'Pending Verification' | 'Verified & Approved' | 'Rejected';
+  verifiedDeliverables: string;
+}

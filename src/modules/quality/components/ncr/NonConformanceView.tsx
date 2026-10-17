@@ -234,7 +234,7 @@ export const NonConformanceView: React.FC = () => {
                       {selectedNcr.ncrNumber}
                     </span>
                     <span className="text-xs font-bold px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">
-                      {selectedNcr.origin.replace('_', ' ')}
+                      {(selectedNcr.origin ?? 'IN_PROCESS').replace('_', ' ')}
                     </span>
                   </div>
                   <h3 className="text-lg font-black text-slate-900 dark:text-white mt-1">{selectedNcr.title}</h3>
@@ -296,15 +296,15 @@ export const NonConformanceView: React.FC = () => {
                 {/* Approvals Checklist */}
                 <div className="grid grid-cols-3 gap-3 text-xs pt-3 border-t border-slate-200/80 dark:border-slate-800/80">
                   <div className="flex items-center gap-2 text-slate-700 dark:text-slate-300">
-                    <CheckCircle2 className={`w-4 h-4 ${selectedNcr.mrbSignatures.qualityApproved ? 'text-emerald-600 dark:text-emerald-400' : 'text-slate-500 dark:text-slate-400'}`} />
+                    <CheckCircle2 className={`w-4 h-4 ${selectedNcr.mrbSignatures?.qualityApproved ? 'text-emerald-600 dark:text-emerald-400' : 'text-slate-500 dark:text-slate-400'}`} />
                     <span>Quality Lead Sign</span>
                   </div>
                   <div className="flex items-center gap-2 text-slate-700 dark:text-slate-300">
-                    <CheckCircle2 className={`w-4 h-4 ${selectedNcr.mrbSignatures.engineeringApproved ? 'text-emerald-600 dark:text-emerald-400' : 'text-slate-500 dark:text-slate-400'}`} />
+                    <CheckCircle2 className={`w-4 h-4 ${selectedNcr.mrbSignatures?.engineeringApproved ? 'text-emerald-600 dark:text-emerald-400' : 'text-slate-500 dark:text-slate-400'}`} />
                     <span>Chief Engineer Sign</span>
                   </div>
                   <div className="flex items-center gap-2 text-slate-700 dark:text-slate-300">
-                    <CheckCircle2 className={`w-4 h-4 ${selectedNcr.mrbSignatures.operationsApproved ? 'text-emerald-600 dark:text-emerald-400' : 'text-slate-500 dark:text-slate-400'}`} />
+                    <CheckCircle2 className={`w-4 h-4 ${selectedNcr.mrbSignatures?.operationsApproved ? 'text-emerald-600 dark:text-emerald-400' : 'text-slate-500 dark:text-slate-400'}`} />
                     <span>Plant Manager Sign</span>
                   </div>
                 </div>

@@ -62,7 +62,7 @@ export const TraceabilityView: React.FC<TraceabilityViewProps> = ({
       s.serialNumber.toLowerCase().includes(searchTerm.toLowerCase()) ||
       s.sku.toLowerCase().includes(searchTerm.toLowerCase()) ||
       s.itemName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      s.warrantyNumber?.toLowerCase().includes(searchTerm.toLowerCase());
+      (s.warrantyNumber ?? s.grnNumber)?.toLowerCase().includes(searchTerm.toLowerCase());
     return matchesSearch;
   });
 
@@ -83,8 +83,7 @@ export const TraceabilityView: React.FC<TraceabilityViewProps> = ({
       expiryDate: expDate,
       heatNumber,
       millTestCertNumber: millCert,
-      qaApprovalStatus: 'PASSED',
-      qaApprovedByName: 'Salim Al-Busaidi'
+      qaApprovalStatus: 'PASSED'
     });
 
     setIsNewBatchModalOpen(false);
@@ -265,7 +264,7 @@ export const TraceabilityView: React.FC<TraceabilityViewProps> = ({
                         </span>
                       </td>
                       <td className="py-3 px-3 font-mono text-slate-700 dark:text-slate-300">{s.warrantyExpiryDate || '—'}</td>
-                      <td className="py-3 px-3 font-mono text-cyan-600 dark:text-cyan-400">{s.warrantyNumber || '—'}</td>
+                      <td className="py-3 px-3 font-mono text-cyan-600 dark:text-cyan-400">{s.warrantyNumber || s.grnNumber || '—'}</td>
                     </tr>
                   ))}
                 </tbody>

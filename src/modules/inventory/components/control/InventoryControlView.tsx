@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useInventoryStore } from '../../services/inventoryStore';
-import { StockReservation, CycleCountCampaign, CycleCountLine } from '../../types';
+import { StockReservation, CycleCountCampaign, InventoryCountLine } from '../../types';
 import {
   Sliders,
   Plus,
@@ -32,14 +32,14 @@ export const InventoryControlView: React.FC<InventoryControlViewProps> = ({
 }) => {
   const {
     reservations,
-    cycleCounts,
+    counts: cycleCounts,
     items,
     warehouses,
-    createReservation,
-    releaseReservation,
-    createCycleCount,
-    recordCountLine,
-    reconcileCycleCount
+    createStockReservation,
+    cancelReservation,
+    createInventoryCount,
+    submitCountResults,
+    reconcileAndAdjustCount
   } = useInventoryStore();
 
   const [activeTab, setActiveTab] = useState<'reservations' | 'reorder_points' | 'eoq_minmax' | 'cycle_counts'>(initialTab);
@@ -76,21 +76,25 @@ export const InventoryControlView: React.FC<InventoryControlViewProps> = ({
     const item = items.find((i) => i.sku === reserveSku) || items[0];
     const wh = warehouses.find((w) => w.id === reserveWh);
 
-    createReservation({
-      referenceType: 'SALES_ORDER',
+    const today = new Date().toISOString().split('T')[0];
+    createStockReservation({
+      reservationType: 'SALES_ORDER',
       referenceDocNumber: reserveRef,
-      targetEntityName: reserveTarget,
-      reservationType: reserveType,
+      customerIdOrProject: reserveTarget,
       itemId: item.id,
       sku: item.sku,
       itemName: item.name,
       warehouseId: reserveWh,
       warehouseName: wh?.name || 'Warehouse',
       reservedQuantity: reserveQty,
+      issuedQuantity: 0,
+      remainingQuantity: reserveQty,
       uom: item.baseUom,
-      status: 'ALLOCATED',
+      reservedDate: today,
       expiryDate: new Date(Date.now() + 30 * 86400000).toISOString().split('T')[0],
-      createdByName: 'Said Al-Rawahi'
+      status: 'RESERVED',
+      priority: reserveType === 'HARD_ALLOCATION' ? 'HIGH' : 'NORMAL',
+      createdBy: 'Said Al-Rawahi'
     });
 
     setIsReserveModalOpen(false);
@@ -99,33 +103,40 @@ export const InventoryControlView: React.FC<InventoryControlViewProps> = ({
   const handleCreateCountSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const wh = warehouses[0];
-    const lines: CycleCountLine[] = items.map((itm) => ({
+    const today = new Date().toISOString().split('T')[0];
+    const lines: InventoryCountLine[] = items.map((itm) => ({
       id: `cntline-${itm.id}-${Date.now()}`,
       itemId: itm.id,
       sku: itm.sku,
       itemName: itm.name,
       uom: itm.baseUom,
+      warehouseId: wh.id,
+      binLocationCode: '',
       systemQuantity: itm.totalStockOnHand,
       countedQuantity: itm.totalStockOnHand, // default same, user can edit
       varianceQuantity: 0,
       varianceValueOMR: 0,
       unitCostOMR: itm.unitCostOMR,
-      status: 'COUNTED'
+      recountRequired: false
     }));
 
-    createCycleCount({
+    createInventoryCount({
       title: `Q1-2026 Scheduled Blind Cycle Count (${wh.code})`,
+      countType: 'CYCLE_COUNT_ABC',
       warehouseId: wh.id,
       warehouseName: wh.name,
-      abcClassification: 'A',
-      frequency: 'MONTHLY',
+      status: 'IN_PROGRESS',
+      scheduledDate: today,
+      countStartedAt: today,
+      leadAuditor: 'Khamis Al-Harthy (Senior Internal Auditor)',
+      counters: [],
       lines,
-      toleranceThresholdPercent: 1.0,
-      totalLinesCount: lines.length,
-      linesCounted: lines.length,
+      totalSystemItems: lines.length,
+      totalCountedItems: lines.length,
+      totalVariancesFound: 0,
       totalVarianceValueOMR: 0,
-      status: 'COUNTING_IN_PROGRESS',
-      assignedAuditorName: 'Khamis Al-Harthy (Senior Internal Auditor)'
+      accuracyRatePercent: 100,
+      notes: 'Tolerance threshold 1.0%'
     });
 
     setIsCycleCountModalOpen(false);
@@ -231,12 +242,12 @@ export const InventoryControlView: React.FC<InventoryControlViewProps> = ({
                       </td>
                       <td className="py-3 px-3">
                         <span className="px-2 py-0.5 rounded text-[10px] font-mono bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700">
-                          {res.reservationType === 'HARD_ALLOCATION' ? 'Hard Allocation' : 'Soft Allocation'}
+                          {res.priority === 'HIGH' || res.priority === 'CRITICAL' ? 'Hard Allocation' : 'Soft Allocation'}
                         </span>
                       </td>
                       <td className="py-3 px-3">
-                        <span className="font-semibold text-slate-900 dark:text-white">{res.targetEntityName}</span>
-                        <div className="text-[10px] text-cyan-600 dark:text-cyan-400 font-mono">{res.referenceType}: {res.referenceDocNumber}</div>
+                        <span className="font-semibold text-slate-900 dark:text-white">{res.customerIdOrProject}</span>
+                        <div className="text-[10px] text-cyan-600 dark:text-cyan-400 font-mono">{res.reservationType.replace(/_/g, ' ')}: {res.referenceDocNumber}</div>
                       </td>
                       <td className="py-3 px-3">
                         <span className="font-mono text-cyan-600 dark:text-cyan-400">{res.sku}</span>
@@ -253,9 +264,9 @@ export const InventoryControlView: React.FC<InventoryControlViewProps> = ({
                         </span>
                       </td>
                       <td className="py-3 px-4 text-center">
-                        {res.status === 'ALLOCATED' && (
+                        {(res.status === 'RESERVED' || res.status === 'PARTIALLY_ISSUED') && (
                           <button
-                            onClick={() => releaseReservation(res.id)}
+                            onClick={() => cancelReservation(res.id)}
                             className="px-2.5 py-1 rounded text-[10px] font-medium bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-200 border border-slate-300 dark:border-slate-700"
                           >
                             Release
@@ -450,19 +461,19 @@ export const InventoryControlView: React.FC<InventoryControlViewProps> = ({
               >
                 <div className="flex items-start justify-between">
                   <div>
-                    <span className="text-[10px] font-mono font-bold text-amber-700 dark:text-amber-400">{cc.campaignNumber}</span>
+                    <span className="text-[10px] font-mono font-bold text-amber-700 dark:text-amber-400">{cc.countNumber}</span>
                     <h4 className="text-sm font-bold text-slate-900 dark:text-white mt-0.5">{cc.title}</h4>
                     <span className="text-xs text-slate-600 dark:text-slate-400">{cc.warehouseName}</span>
                   </div>
                   <span className="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700">
-                    ABC Class {cc.abcClassification}
+                    {cc.countType.replace(/_/g, ' ')}
                   </span>
                 </div>
 
                 <div className="grid grid-cols-3 gap-2 text-xs font-mono">
                   <div className="bg-slate-100/60 dark:bg-slate-800/60 p-2 rounded">
                     <span className="text-slate-600 dark:text-slate-400 text-[10px] block">Audit Lines</span>
-                    <span className="text-slate-900 dark:text-white font-bold">{cc.totalLinesCount} SKUs</span>
+                    <span className="text-slate-900 dark:text-white font-bold">{cc.lines.length} SKUs</span>
                   </div>
                   <div className="bg-slate-100/60 dark:bg-slate-800/60 p-2 rounded">
                     <span className="text-slate-600 dark:text-slate-400 text-[10px] block">Variance Value</span>
@@ -475,7 +486,7 @@ export const InventoryControlView: React.FC<InventoryControlViewProps> = ({
                 </div>
 
                 <div className="pt-2 border-t border-slate-200 dark:border-slate-800 flex items-center justify-between text-xs text-slate-600 dark:text-slate-400">
-                  <span>Auditor: {cc.assignedAuditorName}</span>
+                  <span>Auditor: {cc.leadAuditor}</span>
                   <span className="text-amber-700 dark:text-amber-400 font-medium">Open Count Sheet →</span>
                 </div>
               </div>
@@ -585,7 +596,7 @@ export const InventoryControlView: React.FC<InventoryControlViewProps> = ({
           <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto p-6 shadow-2xl space-y-5">
             <div className="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-3">
               <div>
-                <span className="text-xs font-mono font-bold text-amber-700 dark:text-amber-400">{selectedCountCampaign.campaignNumber}</span>
+                <span className="text-xs font-mono font-bold text-amber-700 dark:text-amber-400">{selectedCountCampaign.countNumber}</span>
                 <h3 className="text-base font-bold text-slate-900 dark:text-white">{selectedCountCampaign.title}</h3>
               </div>
               <button onClick={() => setSelectedCountCampaign(null)} className="text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white">✕</button>
@@ -620,7 +631,7 @@ export const InventoryControlView: React.FC<InventoryControlViewProps> = ({
                             value={l.countedQuantity}
                             onChange={(e) => {
                               const val = parseFloat(e.target.value) || 0;
-                              recordCountLine(selectedCountCampaign.id, l.id, val);
+                              submitCountResults(selectedCountCampaign.id, [{ lineId: l.id, countedQty: val }]);
                             }}
                             className="w-16 bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded px-1.5 py-0.5 text-right font-mono text-slate-900 dark:text-white text-xs"
                           />
@@ -639,7 +650,7 @@ export const InventoryControlView: React.FC<InventoryControlViewProps> = ({
             </div>
 
             <div className="flex items-center justify-between pt-3 border-t border-slate-200 dark:border-slate-800">
-              <span className="text-xs text-slate-600 dark:text-slate-400">Tolerance Limit: ±{selectedCountCampaign.toleranceThresholdPercent}%</span>
+              <span className="text-xs text-slate-600 dark:text-slate-400">Tolerance Limit: ±1.0%</span>
               <div className="flex gap-2">
                 <button
                   onClick={() => setSelectedCountCampaign(null)}
@@ -649,7 +660,7 @@ export const InventoryControlView: React.FC<InventoryControlViewProps> = ({
                 </button>
                 <button
                   onClick={() => {
-                    reconcileCycleCount(selectedCountCampaign.id);
+                    reconcileAndAdjustCount(selectedCountCampaign.id, 'Khamis Al-Harthy');
                     setSelectedCountCampaign(null);
                   }}
                   className="px-4 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold"

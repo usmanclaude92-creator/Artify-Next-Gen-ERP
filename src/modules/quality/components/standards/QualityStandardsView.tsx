@@ -502,7 +502,7 @@ export const QualityStandardsView: React.FC = () => {
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-slate-200/60 dark:divide-slate-800/60">
-                      {selectedSpec.parameters.map(param => (
+                      {(selectedSpec.parameters ?? []).map(param => (
                         <tr key={param.id} className="hover:bg-slate-100/70 dark:hover:bg-slate-800/30 transition-colors">
                           <td className="py-3 px-3 font-bold text-slate-900 dark:text-white">{param.name}</td>
                           <td className="py-3 px-3 font-mono text-slate-600 dark:text-slate-400">{param.unit}</td>

@@ -60,7 +60,7 @@ export const PurchaseReturnsView: React.FC = () => {
         unitPriceOMR: Number(returnAmount) / 2,
         lineTotalOMR: Number(returnAmount),
         reasonForReturn: returnReason,
-        batchNumber: grn.lines[0]?.batchOrLotNumber
+        batchNumber: grn.lines[0]?.batchNumber
       }
     ];
 

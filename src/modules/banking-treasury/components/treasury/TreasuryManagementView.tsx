@@ -376,20 +376,20 @@ export const TreasuryManagementView: React.FC = () => {
                 </thead>
                 <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
                   {cashFlowForecast.map((w) => (
-                    <tr key={w.id} className="hover:bg-slate-50/70 dark:hover:bg-slate-800/70 transition-colors">
+                    <tr key={w.weekNumber} className="hover:bg-slate-50/70 dark:hover:bg-slate-800/70 transition-colors">
                       <td className="p-3.5 font-bold text-slate-900 dark:text-slate-100">{w.weekLabel}</td>
                       <td className="p-3.5 text-right font-medium text-slate-700 dark:text-slate-300">{formatCurrency(w.openingTreasuryBalance)}</td>
                       <td className="p-3.5 text-right text-emerald-700 dark:text-emerald-300 font-bold">
                         {formatCurrency(w.projectedInflows.totalInflow)}
                       </td>
                       <td className="p-3.5 text-right text-rose-700 dark:text-rose-300 font-medium">
-                        {formatCurrency(w.projectedOutflows.vendorPayments)}
+                        {formatCurrency(w.projectedOutflows.vendorPayables)}
                       </td>
                       <td className="p-3.5 text-right text-slate-600 dark:text-slate-400">
-                        {formatCurrency(w.projectedOutflows.payrollWpsDisbursements + w.projectedOutflows.taxAndVatRemittance)}
+                        {formatCurrency(w.projectedOutflows.wpsPayrollSalaries + w.projectedOutflows.statutoryTaxesAndVAT)}
                       </td>
                       <td className="p-3.5 text-right text-slate-600 dark:text-slate-400">
-                        {formatCurrency(w.projectedOutflows.debtServiceAndInterest)}
+                        {formatCurrency(w.projectedOutflows.bankFacilityInterestAndPrincipal)}
                       </td>
                       <td className="p-3.5 text-right font-bold text-slate-900 dark:text-slate-100 text-sm">
                         {formatCurrency(w.closingTreasuryBalance)}
@@ -478,7 +478,7 @@ export const TreasuryManagementView: React.FC = () => {
                       <p className="text-xs text-slate-500 dark:text-slate-400">{fac.bankName}</p>
                     </div>
                     <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-100 dark:bg-emerald-500/20 text-emerald-800 dark:text-emerald-200">
-                      {fac.status}
+                      {fac.renewalStatus}
                     </span>
                   </div>
 
@@ -514,7 +514,7 @@ export const TreasuryManagementView: React.FC = () => {
 
                   <div className="mt-3 p-2.5 rounded-lg bg-slate-50 dark:bg-slate-800/50 border border-slate-100 dark:border-slate-800 text-[11px] text-slate-600 dark:text-slate-400">
                     <span className="text-[10px] font-semibold text-slate-500 dark:text-slate-400 block uppercase">Covenants</span>
-                    <p className="line-clamp-2">{fac.covenantsDescription}</p>
+                    <p className="line-clamp-2">{fac.securityCollateralDetails}</p>
                   </div>
                 </div>
 
@@ -551,31 +551,31 @@ export const TreasuryManagementView: React.FC = () => {
                   <tr key={audit.id} className="hover:bg-slate-50/70 dark:hover:bg-slate-800/70 transition-colors">
                     <td className="p-3.5">
                       <div className="font-mono font-bold text-slate-900 dark:text-slate-100">{audit.auditRefNumber}</div>
-                      <div className="text-[11px] text-slate-500 dark:text-slate-400">{audit.chargeDate}</div>
+                      <div className="text-[11px] text-slate-500 dark:text-slate-400">{audit.billingMonth}</div>
                     </td>
                     <td className="p-3.5">
-                      <div className="font-bold text-slate-900 dark:text-slate-100">{audit.bankAccountName}</div>
-                      <div className="font-mono text-[10px] text-slate-500 dark:text-slate-400">{audit.statementLineRef}</div>
+                      <div className="font-bold text-slate-900 dark:text-slate-100">{audit.bankName}</div>
+                      <div className="font-mono text-[10px] text-slate-500 dark:text-slate-400">{audit.auditRefNumber}</div>
                     </td>
                     <td className="p-3.5 text-slate-800 dark:text-slate-200 font-medium">{audit.chargeCategory}</td>
                     <td className="p-3.5 text-right font-bold text-slate-900 dark:text-slate-100">
-                      {formatCurrency(audit.bankChargedAmountOMR)}
+                      {formatCurrency(audit.billedAmountOMR)}
                     </td>
                     <td className="p-3.5 text-right font-medium text-slate-700 dark:text-slate-300">
-                      {formatCurrency(audit.scheduledAgreedTariffOMR)}
+                      {formatCurrency(audit.contractAgreedAmountOMR)}
                     </td>
                     <td className="p-3.5 text-right font-bold text-rose-700 dark:text-rose-300">
-                      {audit.varianceOverchargedOMR > 0 ? formatCurrency(audit.varianceOverchargedOMR) : '0.000'}
+                      {audit.varianceDiscrepancyOMR > 0 ? formatCurrency(audit.varianceDiscrepancyOMR) : '0.000'}
                     </td>
                     <td className="p-3.5 text-center">
                       <span
                         className={`px-2 py-0.5 rounded-full text-[10px] font-bold ${
-                          audit.auditStatus === 'Verified OK'
+                          audit.auditConclusion === 'Accurate as per Schedule'
                             ? 'bg-emerald-100 dark:bg-emerald-500/20 text-emerald-800 dark:text-emerald-200'
                             : 'bg-amber-100 dark:bg-amber-500/20 text-amber-800 dark:text-amber-200'
                         }`}
                       >
-                        {audit.auditStatus}
+                        {audit.auditConclusion}
                       </span>
                     </td>
                   </tr>
@@ -643,7 +643,7 @@ export const TreasuryManagementView: React.FC = () => {
                               ? 'bg-emerald-100 dark:bg-emerald-500/20 text-emerald-800 dark:text-emerald-200'
                               : pdc.status === 'Deposited'
                               ? 'bg-blue-100 dark:bg-blue-500/20 text-blue-800 dark:text-blue-200'
-                              : pdc.status === 'Bounced / Returned'
+                              : pdc.status === 'Bounced' || pdc.status === 'Returned'
                               ? 'bg-rose-100 dark:bg-rose-500/20 text-rose-800 dark:text-rose-200'
                               : 'bg-purple-100 dark:bg-purple-500/20 text-purple-800 dark:text-purple-200'
                           }`}
@@ -671,7 +671,7 @@ export const TreasuryManagementView: React.FC = () => {
                               Mark Cleared
                             </button>
                             <button
-                              onClick={() => updatePDCStatus(pdc.id, 'Bounced / Returned')}
+                              onClick={() => updatePDCStatus(pdc.id, 'Bounced')}
                               className="px-2 py-1 bg-rose-50 dark:bg-rose-500/10 text-rose-700 dark:text-rose-300 hover:bg-rose-100 dark:hover:bg-rose-500/20 rounded text-[10px] font-semibold cursor-pointer"
                             >
                               Bounce

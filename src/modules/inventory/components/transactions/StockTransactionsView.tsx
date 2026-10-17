@@ -35,7 +35,7 @@ export const StockTransactionsView: React.FC<StockTransactionsViewProps> = ({
     binLocations,
     createTransaction,
     approveTransaction,
-    completeTransaction
+    postTransaction
   } = useInventoryStore();
 
   const [activeTab, setActiveTab] = useState<'all' | 'receipts' | 'issues' | 'transfers' | 'adjustments' | 'opening'>(initialTab);
@@ -57,14 +57,14 @@ export const StockTransactionsView: React.FC<StockTransactionsViewProps> = ({
   const filteredTransactions = transactions.filter((tx) => {
     const matchesSearch =
       tx.transactionNumber.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      tx.referenceDocNumber?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      tx.sourceDocumentNumber?.toLowerCase().includes(searchTerm.toLowerCase()) ||
       tx.lines.some((l) => l.itemName.toLowerCase().includes(searchTerm.toLowerCase()) || l.sku.toLowerCase().includes(searchTerm.toLowerCase()));
 
-    if (activeTab === 'receipts') return matchesSearch && tx.transactionType === 'GOODS_RECEIPT';
-    if (activeTab === 'issues') return matchesSearch && tx.transactionType === 'GOODS_ISSUE';
-    if (activeTab === 'transfers') return matchesSearch && tx.transactionType === 'STOCK_TRANSFER';
-    if (activeTab === 'adjustments') return matchesSearch && tx.transactionType === 'STOCK_ADJUSTMENT';
-    if (activeTab === 'opening') return matchesSearch && tx.transactionType === 'OPENING_STOCK';
+    if (activeTab === 'receipts') return matchesSearch && tx.type === 'GOODS_RECEIPT';
+    if (activeTab === 'issues') return matchesSearch && tx.type === 'GOODS_ISSUE';
+    if (activeTab === 'transfers') return matchesSearch && tx.type === 'STOCK_TRANSFER';
+    if (activeTab === 'adjustments') return matchesSearch && tx.type === 'STOCK_ADJUSTMENT';
+    if (activeTab === 'opening') return matchesSearch && tx.type === 'OPENING_STOCK';
     return matchesSearch;
   });
 
@@ -228,11 +228,11 @@ export const StockTransactionsView: React.FC<StockTransactionsViewProps> = ({
                   <td className="py-3 px-4">
                     <div className="flex items-center gap-2">
                       <div className="p-1.5 rounded bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-emerald-600 dark:text-emerald-400">
-                        {tx.transactionType === 'GOODS_RECEIPT' && <ArrowDownLeft className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />}
-                        {tx.transactionType === 'GOODS_ISSUE' && <ArrowUpRight className="w-4 h-4 text-amber-700 dark:text-amber-400" />}
-                        {tx.transactionType === 'STOCK_TRANSFER' && <Truck className="w-4 h-4 text-cyan-600 dark:text-cyan-400" />}
-                        {tx.transactionType === 'STOCK_ADJUSTMENT' && <Repeat className="w-4 h-4 text-purple-600 dark:text-purple-400" />}
-                        {tx.transactionType === 'OPENING_STOCK' && <Package className="w-4 h-4 text-sky-600 dark:text-sky-400" />}
+                        {tx.type === 'GOODS_RECEIPT' && <ArrowDownLeft className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />}
+                        {tx.type === 'GOODS_ISSUE' && <ArrowUpRight className="w-4 h-4 text-amber-700 dark:text-amber-400" />}
+                        {tx.type === 'STOCK_TRANSFER' && <Truck className="w-4 h-4 text-cyan-600 dark:text-cyan-400" />}
+                        {tx.type === 'STOCK_ADJUSTMENT' && <Repeat className="w-4 h-4 text-purple-600 dark:text-purple-400" />}
+                        {tx.type === 'OPENING_STOCK' && <Package className="w-4 h-4 text-sky-600 dark:text-sky-400" />}
                       </div>
                       <div>
                         <span className="font-mono font-bold text-slate-900 dark:text-white text-xs">{tx.transactionNumber}</span>
@@ -242,39 +242,39 @@ export const StockTransactionsView: React.FC<StockTransactionsViewProps> = ({
                   </td>
                   <td className="py-3 px-3">
                     <span className="px-2 py-0.5 rounded text-[10px] font-mono font-semibold bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-800 dark:text-slate-200">
-                      {tx.transactionType.replace('_', ' ')}
+                      {tx.type.replace('_', ' ')}
                     </span>
                   </td>
                   <td className="py-3 px-3">
                     <span className="text-xs text-slate-700 dark:text-slate-300 font-medium">
-                      {tx.sourceWarehouseName || '— (External Supplier)'}
+                      {tx.fromWarehouseName || '— (External Supplier)'}
                     </span>
                   </td>
                   <td className="py-3 px-3">
                     <span className="text-xs text-slate-700 dark:text-slate-300 font-medium">
-                      {tx.targetWarehouseName || '— (Job / Customer)'}
+                      {tx.toWarehouseName || '— (Job / Customer)'}
                     </span>
                   </td>
                   <td className="py-3 px-3">
-                    <span className="text-xs text-slate-700 dark:text-slate-300 block">{tx.reasonCode.replace(/_/g, ' ')}</span>
-                    {tx.referenceDocNumber && (
-                      <span className="text-[10px] font-mono text-cyan-600 dark:text-cyan-400">Ref: {tx.referenceDocNumber}</span>
+                    <span className="text-xs text-slate-700 dark:text-slate-300 block">{(tx.reasonCode ?? 'N/A').replace(/_/g, ' ')}</span>
+                    {tx.sourceDocumentNumber && (
+                      <span className="text-[10px] font-mono text-cyan-600 dark:text-cyan-400">Ref: {tx.sourceDocumentNumber}</span>
                     )}
                   </td>
                   <td className="py-3 px-3 text-right font-mono font-bold text-slate-900 dark:text-white">
                     {tx.lines.reduce((acc, l) => acc + l.quantity, 0)} Units
                   </td>
                   <td className="py-3 px-3 text-right font-mono font-bold text-emerald-600 dark:text-emerald-400">
-                    OMR {tx.totalAmountOMR.toFixed(2)}
+                    OMR {tx.totalValueOMR.toFixed(2)}
                   </td>
                   <td className="py-3 px-3">
                     <span
                       className={`px-2 py-0.5 rounded text-[10px] font-medium border ${
-                        tx.status === 'COMPLETED'
+                        tx.status === 'POSTED'
                           ? 'bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300 border-emerald-800/40'
                           : tx.status === 'APPROVED'
                           ? 'bg-cyan-50 dark:bg-cyan-950/60 text-cyan-700 dark:text-cyan-300 border-cyan-800/40'
-                          : tx.status === 'IN_TRANSIT'
+                          : tx.status === 'PENDING_APPROVAL'
                           ? 'bg-indigo-50 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-300 border-indigo-800/40'
                           : 'bg-amber-50 dark:bg-amber-950/60 text-amber-800 dark:text-amber-300 border-amber-800/40'
                       }`}
@@ -286,7 +286,7 @@ export const StockTransactionsView: React.FC<StockTransactionsViewProps> = ({
                     <div className="flex items-center justify-center gap-1">
                       {tx.status === 'DRAFT' && (
                         <button
-                          onClick={() => approveTransaction(tx.id)}
+                          onClick={() => approveTransaction(tx.id, 'Said Al-Rawahi')}
                           className="px-2 py-0.5 rounded text-[10px] font-medium bg-emerald-700 hover:bg-emerald-600 text-white"
                         >
                           Approve
@@ -294,7 +294,7 @@ export const StockTransactionsView: React.FC<StockTransactionsViewProps> = ({
                       )}
                       {tx.status === 'APPROVED' && (
                         <button
-                          onClick={() => completeTransaction(tx.id)}
+                          onClick={() => postTransaction(tx.id)}
                           className="px-2 py-0.5 rounded text-[10px] font-medium bg-cyan-700 hover:bg-cyan-600 text-white"
                         >
                           Complete
@@ -499,7 +499,7 @@ export const StockTransactionsView: React.FC<StockTransactionsViewProps> = ({
             <div className="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-3">
               <div>
                 <span className="text-xs font-mono font-bold text-emerald-600 dark:text-emerald-400">{selectedTxForDetail.transactionNumber}</span>
-                <h3 className="text-base font-bold text-slate-900 dark:text-white">{selectedTxForDetail.transactionType.replace('_', ' ')}</h3>
+                <h3 className="text-base font-bold text-slate-900 dark:text-white">{selectedTxForDetail.type.replace('_', ' ')}</h3>
               </div>
               <button
                 onClick={() => setSelectedTxForDetail(null)}
@@ -512,11 +512,11 @@ export const StockTransactionsView: React.FC<StockTransactionsViewProps> = ({
             <div className="grid grid-cols-2 gap-3 text-xs">
               <div className="p-3 bg-slate-100/60 dark:bg-slate-800/60 rounded-lg">
                 <span className="text-slate-600 dark:text-slate-400 block">Source Facility</span>
-                <span className="font-semibold text-slate-900 dark:text-white">{selectedTxForDetail.sourceWarehouseName || 'External Vendor / Migration'}</span>
+                <span className="font-semibold text-slate-900 dark:text-white">{selectedTxForDetail.fromWarehouseName || 'External Vendor / Migration'}</span>
               </div>
               <div className="p-3 bg-slate-100/60 dark:bg-slate-800/60 rounded-lg">
                 <span className="text-slate-600 dark:text-slate-400 block">Target Facility</span>
-                <span className="font-semibold text-slate-900 dark:text-white">{selectedTxForDetail.targetWarehouseName || 'Project Job Order / Client'}</span>
+                <span className="font-semibold text-slate-900 dark:text-white">{selectedTxForDetail.toWarehouseName || 'Project Job Order / Client'}</span>
               </div>
             </div>
 

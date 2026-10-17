@@ -28,7 +28,7 @@ export const BondsGuaranteesView: React.FC = () => {
     selectedContractId,
     contracts,
     currency,
-    addBond
+    addBondGuarantee
   } = useConstructionStore();
 
   const [activeTab, setActiveTab] = useState<'all-bonds' | 'expiry-alerts' | 'collateral-margin'>('all-bonds');
@@ -48,32 +48,38 @@ export const BondsGuaranteesView: React.FC = () => {
 
   const totalActiveExposure = contractBonds
     .filter(b => b.status === 'ACTIVE')
-    .reduce((acc, b) => acc + b.bondAmount, 0);
+    .reduce((acc, b) => acc + b.instrumentValue, 0);
 
   const totalCollateralMargin = contractBonds
     .filter(b => b.status === 'ACTIVE')
-    .reduce((acc, b) => acc + b.collateralMarginAmount, 0);
+    .reduce((acc, b) => acc + b.marginCashCollateralHeld, 0);
 
   const handleCreateBond = (e: React.FormEvent) => {
     e.preventDefault();
     if (!newBondNumber) return;
 
-    addBond({
-      bondNumber: newBondNumber,
+    addBondGuarantee({
+      instrumentNumber: newBondNumber,
       contractId: selectedContractId,
       bondType: newBondType,
+      title: `${newBondType.replace(/_/g, ' ')} — ${newBondNumber}`,
       issuingBank: newIssuingBank,
       beneficiaryName: newBeneficiary,
       currency,
-      bondAmount: Number(newBondAmount),
+      instrumentValue: Number(newBondAmount),
+      percentageOfContract: selectedContract?.originalContractValue
+        ? (Number(newBondAmount) / selectedContract.originalContractValue) * 100
+        : 0,
       issueDate: newIssueDate,
-      expiryDate: newExpiryDate,
-      claimPeriodDaysAfterExpiry: 30,
-      autoExtensionClause: true,
-      collateralMarginPercentage: 10,
-      collateralMarginAmount: Number(newBondAmount) * 0.10,
-      commissionFeeRatePct: 1.25,
-      status: 'ACTIVE'
+      originalExpiryDate: newExpiryDate,
+      currentExpiryDate: newExpiryDate,
+      claimPeriodDays: 30,
+      renewalAlertDaysBefore: 60,
+      marginCashCollateralHeld: Number(newBondAmount) * 0.1,
+      bankCommissionFeeAnnualPct: 1.25,
+      status: 'ACTIVE',
+      linkedMilestoneRelease: '',
+      physicalDocumentLocation: ''
     });
 
     setShowAddBondModal(false);
@@ -169,7 +175,7 @@ export const BondsGuaranteesView: React.FC = () => {
             >
               <div className="flex justify-between items-start">
                 <span className="text-xs font-mono font-bold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950/60 px-2.5 py-1 rounded">
-                  {bond.bondNumber}
+                  {bond.instrumentNumber}
                 </span>
                 <span className="text-[11px] font-semibold px-2.5 py-1 rounded-full bg-emerald-50 dark:bg-emerald-950 text-emerald-600 dark:text-emerald-400">
                   {bond.status}
@@ -189,20 +195,20 @@ export const BondsGuaranteesView: React.FC = () => {
               <div className="p-4 bg-slate-50 dark:bg-slate-800/40 rounded-xl border border-slate-100 dark:border-slate-800 space-y-2 text-xs">
                 <div className="flex justify-between font-bold">
                   <span>Guarantee Face Value:</span>
-                  <span className="font-mono text-slate-900 dark:text-white">{bond.currency} {bond.bondAmount.toLocaleString()}</span>
+                  <span className="font-mono text-slate-900 dark:text-white">{bond.currency} {bond.instrumentValue.toLocaleString()}</span>
                 </div>
                 <div className="flex justify-between text-slate-500 dark:text-slate-400">
                   <span>Validity Period:</span>
-                  <span className="font-mono">{bond.issueDate} → {bond.expiryDate}</span>
+                  <span className="font-mono">{bond.issueDate} → {bond.currentExpiryDate}</span>
                 </div>
                 <div className="flex justify-between text-slate-500 dark:text-slate-400">
                   <span>Cash Margin (10%):</span>
-                  <span className="font-mono text-indigo-600 dark:text-indigo-400">{bond.currency} {bond.collateralMarginAmount.toLocaleString()}</span>
+                  <span className="font-mono text-indigo-600 dark:text-indigo-400">{bond.currency} {bond.marginCashCollateralHeld.toLocaleString()}</span>
                 </div>
               </div>
 
               <div className="flex justify-between items-center text-xs text-slate-500 dark:text-slate-400 pt-2 border-t border-slate-100 dark:border-slate-800">
-                <span>Commission: {bond.commissionFeeRatePct}% p.a.</span>
+                <span>Commission: {bond.bankCommissionFeeAnnualPct}% p.a.</span>
                 <span className="text-emerald-600 dark:text-emerald-400 font-semibold">Auto-Extension Clause Active</span>
               </div>
             </div>
@@ -228,12 +234,12 @@ export const BondsGuaranteesView: React.FC = () => {
             <tbody className="divide-y divide-slate-100 dark:divide-slate-800 text-slate-700 dark:text-slate-300">
               {contractBonds.map(b => (
                 <tr key={b.id} className="hover:bg-slate-50/50 dark:hover:bg-slate-800/40">
-                  <td className="py-3.5 px-4 font-mono font-bold text-indigo-600 dark:text-indigo-400">{b.bondNumber}</td>
+                  <td className="py-3.5 px-4 font-mono font-bold text-indigo-600 dark:text-indigo-400">{b.instrumentNumber}</td>
                   <td className="py-3.5 px-4 font-medium text-slate-900 dark:text-white">{b.bondType.replace(/_/g, ' ')}</td>
                   <td className="py-3.5 px-4">{b.issuingBank}</td>
-                  <td className="py-3.5 px-4 text-right font-mono font-bold text-slate-900 dark:text-white">{currency} {b.bondAmount.toLocaleString()}</td>
-                  <td className="py-3.5 px-4 text-right font-mono text-indigo-600 dark:text-indigo-400 font-semibold">{currency} {b.collateralMarginAmount.toLocaleString()}</td>
-                  <td className="py-3.5 px-4 text-right font-mono font-semibold">{currency} {(b.bondAmount * 0.0125).toLocaleString()}</td>
+                  <td className="py-3.5 px-4 text-right font-mono font-bold text-slate-900 dark:text-white">{currency} {b.instrumentValue.toLocaleString()}</td>
+                  <td className="py-3.5 px-4 text-right font-mono text-indigo-600 dark:text-indigo-400 font-semibold">{currency} {b.marginCashCollateralHeld.toLocaleString()}</td>
+                  <td className="py-3.5 px-4 text-right font-mono font-semibold">{currency} {(b.instrumentValue * 0.0125).toLocaleString()}</td>
                   <td className="py-3.5 px-4">
                     <span className="px-2 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-50 dark:bg-emerald-950 text-emerald-600 dark:text-emerald-400">
                       {b.status}

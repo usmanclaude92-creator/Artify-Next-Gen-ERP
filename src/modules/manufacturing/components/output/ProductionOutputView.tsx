@@ -38,7 +38,7 @@ export const ProductionOutputView: React.FC<ProductionOutputViewProps> = ({
     scrapRecords,
     workOrders,
     recordProductionReceipt,
-    recordScrap
+    logScrapDefect
   } = useManufacturingStore();
 
   const [activeTab, setActiveTab] = useState<'receipts' | 'byproducts' | 'scrap' | 'closeout'>(initialTab);
@@ -54,7 +54,7 @@ export const ProductionOutputView: React.FC<ProductionOutputViewProps> = ({
   // New Scrap state
   const [scrapWorkOrderId, setScrapWorkOrderId] = useState(workOrders[0]?.id || '');
   const [scrapQty, setScrapQty] = useState(1);
-  const [scrapReason, setScrapReason] = useState<ScrapReasonCode>('MACHINING_OUT_OF_TOLERANCE');
+  const [scrapReason, setScrapReason] = useState<ScrapReasonCode>('MACHINING_TOLERANCE_ERROR');
   const [scrapSeverity, setScrapSeverity] = useState<DefectSeverity>('MAJOR');
   const [defectDesc, setDefectDesc] = useState('');
   const [fiveWhys, setFiveWhys] = useState('');
@@ -65,6 +65,8 @@ export const ProductionOutputView: React.FC<ProductionOutputViewProps> = ({
     e.preventDefault();
     if (!selectedWo) return;
 
+    const today = new Date().toISOString().split('T')[0];
+    const unitCost = selectedWo.totalStandardCostOMR / selectedWo.plannedQuantity;
     recordProductionReceipt({
       workOrderId: selectedWo.id,
       workOrderNumber: selectedWo.orderNumber,
@@ -72,15 +74,16 @@ export const ProductionOutputView: React.FC<ProductionOutputViewProps> = ({
       productName: selectedWo.productName,
       receivedQuantity: Number(receiptQty),
       uom: selectedWo.uom,
-      targetWarehouseId: targetWarehouse,
       lotBatchNumber: selectedWo.targetLotNumber,
-      qcInspectionStatus: 'APPROVED_AND_RELEASED',
-      qcCertificateNumber: `QC-PASS-2026-${Math.floor(mockRandom() * 9000) + 1000}`,
-      inspectorName: inspector,
-      unitCostOMR: selectedWo.totalStandardCostOMR / selectedWo.plannedQuantity,
-      totalInventoryValuationOMR:
-        (selectedWo.totalStandardCostOMR / selectedWo.plannedQuantity) * Number(receiptQty),
-      status: 'POSTED_TO_INVENTORY'
+      manufactureDate: today,
+      targetWarehouse,
+      targetBinLocation: 'BIN-FG-01',
+      inspectedBy: inspector,
+      qcReleaseStatus: 'RELEASED_PRIME',
+      unitCostOMR: unitCost,
+      totalInventoryValuationOMR: unitCost * Number(receiptQty),
+      receivedDate: today,
+      createdByName: inspector
     });
 
     setShowReceiptModal(false);
@@ -91,22 +94,24 @@ export const ProductionOutputView: React.FC<ProductionOutputViewProps> = ({
     const wo = workOrders.find((w) => w.id === scrapWorkOrderId) || workOrders[0];
     if (!wo) return;
 
-    recordScrap({
+    logScrapDefect({
       workOrderId: wo.id,
       workOrderNumber: wo.orderNumber,
-      itemCode: wo.productSku,
-      itemName: wo.productName,
-      scrapQuantity: Number(scrapQty),
+      productSku: wo.productSku,
+      productName: wo.productName,
+      operationStep: 1,
+      operationName: 'Machining',
+      workCenterName: 'Heavy CNC Milling Bay 1',
+      scrappedQuantity: Number(scrapQty),
       uom: wo.uom,
       reasonCode: scrapReason,
-      severity: scrapSeverity,
-      workCenterName: 'Heavy CNC Milling Bay 1',
-      operatorName: 'Mahmoud Al-Zadjali',
       defectDescription: defectDesc || 'Out of dimension tolerance on internal bore',
-      rootCauseFiveWhys: fiveWhys ? [fiveWhys] : ['Tooling edge chipped during high-speed pass'],
+      rootCauseAnalysis: fiveWhys || 'Tooling edge chipped during high-speed pass',
+      estimatedScrapValueLossOMR: Number(scrapQty) * 120.0,
       correctiveActionTaken: 'Replaced carbide inserts and re-calibrated spindle offsets',
-      estimatedScrapValueLossOMR: Number(scrapQty) * 120.00,
-      dispositionAction: 'SCRAP_RECYCLE'
+      recordedBy: 'Mahmoud Al-Zadjali',
+      recordedDate: new Date().toISOString().split('T')[0],
+      disposition: 'SCRAP_RECYCLE'
     });
 
     setShowScrapModal(false);
@@ -244,7 +249,7 @@ export const ProductionOutputView: React.FC<ProductionOutputViewProps> = ({
                     </td>
                     <td className="p-3 text-center">
                       <span className="px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 text-[10px] font-bold border border-emerald-500/20">
-                        {rec.qcInspectionStatus.replace(/_/g, ' ')}
+                        {rec.qcReleaseStatus.replace(/_/g, ' ')}
                       </span>
                     </td>
                   </tr>
@@ -331,17 +336,17 @@ export const ProductionOutputView: React.FC<ProductionOutputViewProps> = ({
               >
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                   <div className="flex items-center gap-2">
-                    <span className="font-mono font-bold text-rose-600 dark:text-rose-400 text-xs">{sc.scrapNumber}</span>
+                    <span className="font-mono font-bold text-rose-600 dark:text-rose-400 text-xs">{sc.scrapVoucherNumber}</span>
                     <span className="px-2 py-0.5 rounded bg-rose-500/20 text-rose-700 dark:text-rose-300 text-[10px] font-bold">
-                      {sc.severity} DEFECT
+                      {sc.disposition.replace(/_/g, ' ')}
                     </span>
-                    <span className="text-xs font-bold text-slate-900 dark:text-white">{sc.itemName}</span>
+                    <span className="text-xs font-bold text-slate-900 dark:text-white">{sc.productName}</span>
                   </div>
                   <div className="text-right">
                     <span className="text-xs text-rose-600 dark:text-rose-400 font-bold font-mono">
                       -OMR {sc.estimatedScrapValueLossOMR.toFixed(2)} Loss
                     </span>
-                    <div className="text-[10px] text-slate-500 dark:text-slate-400">{sc.loggedDate}</div>
+                    <div className="text-[10px] text-slate-500 dark:text-slate-400">{sc.recordedDate}</div>
                   </div>
                 </div>
 
@@ -358,7 +363,7 @@ export const ProductionOutputView: React.FC<ProductionOutputViewProps> = ({
                   <div>
                     <span className="text-slate-600 dark:text-slate-400 font-medium">CAPA / Root Cause (5-Whys):</span>
                     <ul className="list-disc list-inside text-slate-700 dark:text-slate-300 mt-0.5 space-y-0.5">
-                      {sc.rootCauseFiveWhys.map((why, i) => (
+                      {sc.rootCauseAnalysis.split(/\n|; /).map((why, i) => (
                         <li key={i}>{why}</li>
                       ))}
                     </ul>
@@ -535,11 +540,11 @@ export const ProductionOutputView: React.FC<ProductionOutputViewProps> = ({
                     onChange={(e) => setScrapReason(e.target.value as ScrapReasonCode)}
                     className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-lg text-slate-900 dark:text-white"
                   >
-                    <option value="MACHINING_OUT_OF_TOLERANCE">Machining Out of Tolerance</option>
-                    <option value="WELDING_POROSITY_DEFECT">Welding Porosity Defect</option>
-                    <option value="HEAT_TREATMENT_CRACK">Heat Treatment Crack</option>
-                    <option value="MATERIAL_INCLUSION">Raw Material Inclusion</option>
-                    <option value="OPERATOR_SETUP_ERROR">Operator Setup Error</option>
+                    <option value="MACHINING_TOLERANCE_ERROR">Machining Out of Tolerance</option>
+                    <option value="EQUIPMENT_MALFUNCTION">Welding Porosity Defect</option>
+                    <option value="THERMAL_DISTORTION">Heat Treatment Crack</option>
+                    <option value="RAW_MATERIAL_FLAW">Raw Material Inclusion</option>
+                    <option value="OPERATOR_ERROR">Operator Setup Error</option>
                   </select>
                 </div>
               </div>

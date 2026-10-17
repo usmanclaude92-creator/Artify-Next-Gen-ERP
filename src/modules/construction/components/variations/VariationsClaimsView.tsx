@@ -27,12 +27,12 @@ export const VariationsClaimsView: React.FC = () => {
   const {
     variations,
     claims,
-    eotRecords,
+    eots: eotRecords,
     selectedContractId,
     contracts,
     currency,
-    addVariation,
-    addClaim
+    addVariationOrder,
+    addContractClaim
   } = useConstructionStore();
 
   const [activeTab, setActiveTab] = useState<'variations' | 'claims' | 'eot' | 'ld-calculator'>('variations');
@@ -62,10 +62,10 @@ export const VariationsClaimsView: React.FC = () => {
   const contractEot = eotRecords.filter(e => e.contractId === selectedContractId);
 
   const totalApprovedVos = contractVos
-    .filter(v => v.status === 'APPROVED_BY_CLIENT' || v.status === 'INCORPORATED_IN_IPC')
-    .reduce((acc, v) => acc + v.approvedAmount, 0);
+    .filter(v => v.status === 'APPROVED' || v.status === 'EXECUTED')
+    .reduce((acc, v) => acc + v.finalAgreedAmount, 0);
 
-  const totalApprovedEotDays = contractEot.reduce((acc, e) => acc + e.approvedDaysByEmployer, 0);
+  const totalApprovedEotDays = contractEot.reduce((acc, e) => acc + e.delayDaysApprovedByEmployer, 0);
 
   // Liquidated damages parameters
   const ldPerDay = selectedContract?.liquidatedDamagesPerDay || 4000;
@@ -77,19 +77,21 @@ export const VariationsClaimsView: React.FC = () => {
     e.preventDefault();
     if (!newVoNumber || !newVoTitle) return;
 
-    addVariation({
-      variationNumber: newVoNumber,
+    addVariationOrder({
+      voNumber: newVoNumber,
       contractId: selectedContractId,
       title: newVoTitle,
-      variationType: newVoType,
-      initiatedBy: 'EMPLOYER_INSTRUCTION',
-      instructionDate: new Date().toISOString().split('T')[0],
-      proposedAmount: Number(newVoProposed),
+      originatingParty: 'CLIENT_REQUEST',
+      dateInitiated: new Date().toISOString().split('T')[0],
+      dateApproved: new Date().toISOString().split('T')[0],
+      contractorProposedAmount: Number(newVoProposed),
       engineerEvaluatedAmount: Number(newVoProposed) * 0.95,
-      approvedAmount: Number(newVoProposed) * 0.95,
-      scheduleImpactDays: Number(newVoDays),
-      status: 'APPROVED_BY_CLIENT',
-      scopeJustification: newVoJustification || 'Structural and architectural revisions as per client instruction.'
+      finalAgreedAmount: Number(newVoProposed) * 0.95,
+      extensionOfTimeDaysGranted: Number(newVoDays),
+      scopeDescription: `${newVoType.replace(/_/g, ' ')} — ${newVoTitle}`,
+      technicalJustification: newVoJustification || 'Structural and architectural revisions as per client instruction.',
+      boqItemsAddedCount: 0,
+      status: 'APPROVED'
     });
 
     setShowAddVoModal(false);
@@ -101,20 +103,22 @@ export const VariationsClaimsView: React.FC = () => {
     e.preventDefault();
     if (!newClaimNumber || !newClaimTitle) return;
 
-    addClaim({
+    const today = new Date().toISOString().split('T')[0];
+    addContractClaim({
       claimNumber: newClaimNumber,
       contractId: selectedContractId,
-      fidicClauseReference: newClaimClause,
-      claimTitle: newClaimTitle,
-      eventDate: new Date().toISOString().split('T')[0],
-      noticeDateClause20_1: new Date().toISOString().split('T')[0],
-      substantiationSubmissionDate: new Date().toISOString().split('T')[0],
-      claimedCost: Number(newClaimCost),
-      claimedEOTDays: Number(newClaimEot),
-      engineerAssessedCost: Number(newClaimCost) * 0.8,
-      engineerAssessedEOTDays: Number(newClaimEot) * 0.8,
-      status: 'UNDER_ENGINEER_EVALUATION',
-      disputeResolutionStage: 'CONSULTANT_EVALUATION'
+      title: newClaimTitle,
+      fidicClauseReference: newClaimClause.replace(/_/g, ' '),
+      claimCategory: 'PROLONGATION_AND_DISRUPTION',
+      noticeOfClaimDate: today,
+      fullParticularsSubmissionDate: today,
+      claimedFinancialQuantum: Number(newClaimCost),
+      claimedTimeExtensionDays: Number(newClaimEot),
+      engineerDeterminedAmount: Number(newClaimCost) * 0.8,
+      engineerDeterminedEOTDays: Number(newClaimEot) * 0.8,
+      narrativeSummary: newClaimTitle,
+      status: 'UNDER_DETERMINATION',
+      disputeAdjudicationBoardInvolved: false
     });
 
     setShowAddClaimModal(false);
@@ -249,17 +253,17 @@ export const VariationsClaimsView: React.FC = () => {
                 {contractVos.map(vo => (
                   <tr key={vo.id} className="hover:bg-slate-50/50 dark:hover:bg-slate-800/40">
                     <td className="py-3.5 px-4 font-mono font-bold text-rose-600 dark:text-rose-400">
-                      {vo.variationNumber}
+                      {vo.voNumber}
                     </td>
                     <td className="py-3.5 px-4 font-medium text-slate-900 dark:text-white max-w-xs">
                       <div>{vo.title}</div>
-                      <div className="text-[11px] text-slate-600 dark:text-slate-400 truncate">{vo.scopeJustification}</div>
+                      <div className="text-[11px] text-slate-600 dark:text-slate-400 truncate">{vo.technicalJustification}</div>
                     </td>
-                    <td className="py-3.5 px-4 text-slate-500 dark:text-slate-400">{vo.initiatedBy.replace(/_/g, ' ')}</td>
-                    <td className="py-3.5 px-4 text-right font-mono font-semibold">{currency} {vo.proposedAmount.toLocaleString()}</td>
+                    <td className="py-3.5 px-4 text-slate-500 dark:text-slate-400">{vo.originatingParty.replace(/_/g, ' ')}</td>
+                    <td className="py-3.5 px-4 text-right font-mono font-semibold">{currency} {vo.contractorProposedAmount.toLocaleString()}</td>
                     <td className="py-3.5 px-4 text-right font-mono text-blue-600 dark:text-blue-400 font-semibold">{currency} {vo.engineerEvaluatedAmount.toLocaleString()}</td>
-                    <td className="py-3.5 px-4 text-right font-mono font-bold text-emerald-600 dark:text-emerald-400">{currency} {vo.approvedAmount.toLocaleString()}</td>
-                    <td className="py-3.5 px-4 text-center font-bold font-mono">+{vo.scheduleImpactDays} d</td>
+                    <td className="py-3.5 px-4 text-right font-mono font-bold text-emerald-600 dark:text-emerald-400">{currency} {vo.finalAgreedAmount.toLocaleString()}</td>
+                    <td className="py-3.5 px-4 text-center font-bold font-mono">+{vo.extensionOfTimeDaysGranted} d</td>
                     <td className="py-3.5 px-4">
                       <span className="px-2 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-50 dark:bg-emerald-950 text-emerald-600 dark:text-emerald-400">
                         {vo.status}
@@ -291,10 +295,10 @@ export const VariationsClaimsView: React.FC = () => {
                 <div>
                   <span className="text-xs font-mono font-semibold text-slate-600 dark:text-slate-400">{claim.fidicClauseReference}</span>
                   <h4 className="text-base font-bold text-slate-900 dark:text-white mt-0.5">
-                    {claim.claimTitle}
+                    {claim.title}
                   </h4>
                   <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
-                    Event Date: <strong>{claim.eventDate}</strong> • 28-Day Notice: <strong>{claim.noticeDateClause20_1}</strong> (Compliant)
+                    Event Date: <strong>{claim.noticeOfClaimDate}</strong> • 28-Day Notice: <strong>{claim.fullParticularsSubmissionDate}</strong> (Compliant)
                   </p>
                 </div>
 
@@ -302,25 +306,25 @@ export const VariationsClaimsView: React.FC = () => {
                   <div>
                     <span className="text-slate-500 dark:text-slate-400">Claimed Cost</span>
                     <p className="font-mono font-bold text-slate-900 dark:text-white mt-0.5">
-                      {currency} {claim.claimedCost.toLocaleString()}
+                      {currency} {claim.claimedFinancialQuantum.toLocaleString()}
                     </p>
                   </div>
                   <div>
                     <span className="text-slate-500 dark:text-slate-400">Claimed EOT</span>
                     <p className="font-mono font-bold text-slate-900 dark:text-white mt-0.5">
-                      +{claim.claimedEOTDays} Calendar Days
+                      +{claim.claimedTimeExtensionDays} Calendar Days
                     </p>
                   </div>
                   <div>
                     <span className="text-slate-500 dark:text-slate-400">Engineer Assessed</span>
                     <p className="font-mono font-bold text-emerald-600 dark:text-emerald-400 mt-0.5">
-                      {currency} {claim.engineerAssessedCost.toLocaleString()}
+                      {currency} {claim.engineerDeterminedAmount.toLocaleString()}
                     </p>
                   </div>
                   <div>
                     <span className="text-slate-500 dark:text-slate-400">Assessed EOT</span>
                     <p className="font-mono font-bold text-blue-600 dark:text-blue-400 mt-0.5">
-                      +{claim.engineerAssessedEOTDays} Calendar Days
+                      +{claim.engineerDeterminedEOTDays} Calendar Days
                     </p>
                   </div>
                 </div>
@@ -348,12 +352,12 @@ export const VariationsClaimsView: React.FC = () => {
             <tbody className="divide-y divide-slate-100 dark:divide-slate-800 text-slate-700 dark:text-slate-300">
               {contractEot.map(eot => (
                 <tr key={eot.id} className="hover:bg-slate-50/50 dark:hover:bg-slate-800/40">
-                  <td className="py-3.5 px-4 font-mono font-bold text-rose-600 dark:text-rose-400">{eot.eotReferenceNumber}</td>
-                  <td className="py-3.5 px-4 font-medium text-slate-900 dark:text-white max-w-sm">{eot.causeOfDelay}</td>
-                  <td className="py-3.5 px-4 text-center font-mono font-semibold">+{eot.daysClaimedByContractor} d</td>
-                  <td className="py-3.5 px-4 text-center font-mono text-blue-600 dark:text-blue-400 font-semibold">+{eot.recommendedDaysByEngineer} d</td>
-                  <td className="py-3.5 px-4 text-center font-mono font-bold text-emerald-600 dark:text-emerald-400">+{eot.approvedDaysByEmployer} d</td>
-                  <td className="py-3.5 px-4 font-mono font-semibold text-slate-900 dark:text-white">{eot.newContractualCompletionDate}</td>
+                  <td className="py-3.5 px-4 font-mono font-bold text-rose-600 dark:text-rose-400">{eot.eotNumber}</td>
+                  <td className="py-3.5 px-4 font-medium text-slate-900 dark:text-white max-w-sm">{eot.eventDescription}</td>
+                  <td className="py-3.5 px-4 text-center font-mono font-semibold">+{eot.delayDaysClaimed} d</td>
+                  <td className="py-3.5 px-4 text-center font-mono text-blue-600 dark:text-blue-400 font-semibold">+{eot.delayDaysRecommendedByEngineer} d</td>
+                  <td className="py-3.5 px-4 text-center font-mono font-bold text-emerald-600 dark:text-emerald-400">+{eot.delayDaysApprovedByEmployer} d</td>
+                  <td className="py-3.5 px-4 font-mono font-semibold text-slate-900 dark:text-white">{eot.revisedContractualCompletionDate}</td>
                   <td className="py-3.5 px-4">
                     <span className="px-2 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-50 dark:bg-emerald-950 text-emerald-600 dark:text-emerald-400">
                       {eot.status}

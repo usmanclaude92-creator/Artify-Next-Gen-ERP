@@ -19,11 +19,11 @@ import { mockRandom } from '@/src/utils/mockRandom';
 export const PurchaseInvoiceView: React.FC = () => {
   const {
     invoices,
-    createPurchaseInvoice,
+    registerPurchaseInvoice,
     runThreeWayMatch,
-    approvePurchaseInvoice,
+    approveInvoiceForPayment,
     purchaseOrders,
-    grns,
+    goodsReceipts,
     suppliers
   } = useProcurement();
 
@@ -50,7 +50,7 @@ export const PurchaseInvoiceView: React.FC = () => {
     if (!po) return;
 
     const supp = suppliers.find((s) => s.id === po.supplierId);
-    const grn = grns.find((g) => g.poId === po.id);
+    const grn = goodsReceipts.find((g) => g.poId === po.id);
 
     const lines: InvoiceLineItem[] = [
       {
@@ -70,27 +70,26 @@ export const PurchaseInvoiceView: React.FC = () => {
       }
     ];
 
-    const newInv = createPurchaseInvoice({
+    const newInv = registerPurchaseInvoice({
       supplierInvoiceNumber: invNumber || `INV-TAX-${Math.floor(100000 + mockRandom() * 900000)}`,
+      vendorInvoiceNumber: invNumber || undefined,
       poId: po.id,
       poNumber: po.poNumber,
       grnId: grn?.id,
       grnNumber: grn?.grnNumber,
       supplierId: po.supplierId,
       supplierName: po.supplierName,
-      supplierTaxId: supp?.taxIdentificationNumber || 'OM-VAT-100293849',
+      supplierVatNumber: supp?.taxIdentificationNumber || 'OM-VAT-100293849',
       invoiceDate: invDate,
       dueDate: invDueDate,
       currency: 'OMR',
       exchangeRate: 1.0,
-      subtotalAmount: Number(subtotal),
+      netSubtotal: Number(subtotal),
+      subtotalOMR: Number(subtotal),
       vatAmount: Number(vatAmount),
-      withholdingTaxAmount: 0,
-      grandTotalAmount: Number(subtotal) + Number(vatAmount),
-      paymentTerms: po.paymentTerms,
-      threeWayMatchStatus: 'Matched',
-      toleranceVariancePercentage: 0,
-      status: 'Pending 3-Way Match',
+      totalInvoiceAmount: Number(subtotal) + Number(vatAmount),
+      priceTolerancePercentage: 0,
+      status: 'Under Verification',
       lines
     });
 
@@ -102,10 +101,9 @@ export const PurchaseInvoiceView: React.FC = () => {
 
   const filteredInvoices = invoices.filter(
     (i) =>
-      i.invoiceSystemNumber.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      i.supplierInvoiceNumber.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      i.supplierName.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      i.poNumber.toLowerCase().includes(searchQuery.toLowerCase())
+      [i.invoiceNumber, i.supplierInvoiceNumber ?? i.vendorInvoiceNumber, i.supplierName, i.poNumber].some((v) =>
+        (v ?? '').toLowerCase().includes(searchQuery.toLowerCase())
+      )
   );
 
   return (
@@ -185,32 +183,32 @@ export const PurchaseInvoiceView: React.FC = () => {
                 {filteredInvoices.map((inv) => (
                   <tr key={inv.id} className="hover:bg-slate-50/70 dark:hover:bg-slate-800/70 transition-colors">
                     <td className="py-3 px-4">
-                      <div className="font-mono font-bold text-slate-900 dark:text-slate-100">{inv.invoiceSystemNumber}</div>
-                      <div className="text-[10px] text-slate-500 dark:text-slate-400">{inv.supplierInvoiceNumber}</div>
+                      <div className="font-mono font-bold text-slate-900 dark:text-slate-100">{inv.invoiceNumber}</div>
+                      <div className="text-[10px] text-slate-500 dark:text-slate-400">{inv.supplierInvoiceNumber ?? inv.vendorInvoiceNumber}</div>
                     </td>
                     <td className="py-3 px-4">
                       <div className="font-bold text-slate-900 dark:text-slate-100">{inv.supplierName}</div>
-                      <div className="text-[10px] text-slate-500 dark:text-slate-400 font-mono">{inv.supplierTaxId}</div>
+                      <div className="text-[10px] text-slate-500 dark:text-slate-400 font-mono">{inv.supplierVatNumber}</div>
                     </td>
                     <td className="py-3 px-4 font-mono text-slate-700 dark:text-slate-300">
                       <div>{inv.poNumber}</div>
                       <div className="text-[10px] text-indigo-600 dark:text-indigo-400 font-semibold">{inv.grnNumber || 'No GRN'}</div>
                     </td>
                     <td className="py-3 px-4 text-slate-700 dark:text-slate-300">{inv.dueDate}</td>
-                    <td className="py-3 px-4 text-right text-slate-700 dark:text-slate-300">{formatOMR(inv.subtotalAmount)}</td>
+                    <td className="py-3 px-4 text-right text-slate-700 dark:text-slate-300">{formatOMR(inv.netSubtotal)}</td>
                     <td className="py-3 px-4 text-right text-slate-700 dark:text-slate-300">{formatOMR(inv.vatAmount)}</td>
                     <td className="py-3 px-4 text-right font-bold text-slate-900 dark:text-slate-100">
-                      {formatOMR(inv.grandTotalAmountOMR)}
+                      {formatOMR(inv.totalInvoiceAmountOMR)}
                     </td>
                     <td className="py-3 px-4">
                       <span
                         className={`px-2 py-0.5 rounded-full text-[10px] font-bold ${
-                          inv.threeWayMatchStatus === 'Matched'
+                          inv.threeWayMatchResult === 'Full 3-Way Match Passed'
                             ? 'bg-emerald-100 dark:bg-emerald-500/20 text-emerald-800 dark:text-emerald-200'
                             : 'bg-rose-100 dark:bg-rose-500/20 text-rose-800 dark:text-rose-200'
                         }`}
                       >
-                        {inv.threeWayMatchStatus}
+                        {inv.threeWayMatchResult}
                       </span>
                     </td>
                     <td className="py-3 px-4">
@@ -259,19 +257,19 @@ export const PurchaseInvoiceView: React.FC = () => {
               <div key={inv.id} className="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 space-y-3 text-xs">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
-                    <span className="font-mono font-bold text-slate-900 dark:text-slate-100">{inv.invoiceSystemNumber}</span>
+                    <span className="font-mono font-bold text-slate-900 dark:text-slate-100">{inv.invoiceNumber}</span>
                     <span className="text-slate-600 dark:text-slate-400 font-semibold">• {inv.supplierName}</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <span className="text-xs font-bold text-slate-900 dark:text-slate-100">{formatOMR(inv.grandTotalAmountOMR)}</span>
+                    <span className="text-xs font-bold text-slate-900 dark:text-slate-100">{formatOMR(inv.totalInvoiceAmountOMR)}</span>
                     <span
                       className={`px-2 py-0.5 rounded-full text-[10px] font-bold ${
-                        inv.threeWayMatchStatus === 'Matched'
+                        inv.threeWayMatchResult === 'Full 3-Way Match Passed'
                           ? 'bg-emerald-100 dark:bg-emerald-500/20 text-emerald-800 dark:text-emerald-200'
                           : 'bg-rose-100 dark:bg-rose-500/20 text-rose-800 dark:text-rose-200'
                       }`}
                     >
-                      {inv.threeWayMatchStatus}
+                      {inv.threeWayMatchResult}
                     </span>
                   </div>
                 </div>
@@ -290,8 +288,8 @@ export const PurchaseInvoiceView: React.FC = () => {
                   </div>
                   <div>
                     <div className="text-[10px] uppercase font-bold text-slate-500 dark:text-slate-400">Step 3: Supplier Tax Invoice</div>
-                    <div className="font-mono font-bold text-emerald-600 dark:text-emerald-400 mt-1">{inv.supplierInvoiceNumber}</div>
-                    <div className="text-[11px] text-slate-600 dark:text-slate-400">Variance: {inv.toleranceVariancePercentage}%</div>
+                    <div className="font-mono font-bold text-emerald-600 dark:text-emerald-400 mt-1">{inv.supplierInvoiceNumber ?? inv.vendorInvoiceNumber}</div>
+                    <div className="text-[11px] text-slate-600 dark:text-slate-400">Variance: {inv.priceTolerancePercentage}%</div>
                   </div>
                 </div>
 
@@ -299,7 +297,7 @@ export const PurchaseInvoiceView: React.FC = () => {
                   <span className="text-slate-500 dark:text-slate-400">Oman VAT 5% verified: {formatOMR(inv.vatAmount)}</span>
                   {inv.status !== 'Approved for Payment' && (
                     <button
-                      onClick={() => approvePurchaseInvoice(inv.id, 'AP Lead Specialist')}
+                      onClick={() => approveInvoiceForPayment(inv.id, 'AP Lead Specialist')}
                       className="px-3 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white font-semibold shadow-xs cursor-pointer"
                     >
                       Approve for AP Disbursement
@@ -403,7 +401,7 @@ export const PurchaseInvoiceView: React.FC = () => {
               <div>
                 <div className="flex items-center gap-2">
                   <span className="font-mono text-sm font-bold text-slate-900 dark:text-slate-100">
-                    {selectedInvoice.invoiceSystemNumber}
+                    {selectedInvoice.invoiceNumber}
                   </span>
                   <span className="px-2 py-0.5 rounded-full text-xs font-bold bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200">
                     {selectedInvoice.status}
@@ -422,15 +420,15 @@ export const PurchaseInvoiceView: React.FC = () => {
             <div className="grid grid-cols-3 gap-3 bg-slate-50 dark:bg-slate-800/50 p-3 rounded-xl">
               <div>
                 <span className="text-[10px] uppercase font-semibold text-slate-500 dark:text-slate-400 block">Vendor Invoice Ref</span>
-                <span className="font-bold text-slate-800 dark:text-slate-200">{selectedInvoice.supplierInvoiceNumber}</span>
+                <span className="font-bold text-slate-800 dark:text-slate-200">{selectedInvoice.supplierInvoiceNumber ?? selectedInvoice.vendorInvoiceNumber}</span>
               </div>
               <div>
                 <span className="text-[10px] uppercase font-semibold text-slate-500 dark:text-slate-400 block">Tax Registration #</span>
-                <span className="font-bold text-slate-800 dark:text-slate-200">{selectedInvoice.supplierTaxId}</span>
+                <span className="font-bold text-slate-800 dark:text-slate-200">{selectedInvoice.supplierVatNumber}</span>
               </div>
               <div>
                 <span className="text-[10px] uppercase font-semibold text-slate-500 dark:text-slate-400 block">Grand Total</span>
-                <span className="font-bold text-emerald-700 dark:text-emerald-300">{formatOMR(selectedInvoice.grandTotalAmountOMR)}</span>
+                <span className="font-bold text-emerald-700 dark:text-emerald-300">{formatOMR(selectedInvoice.totalInvoiceAmountOMR)}</span>
               </div>
             </div>
 
@@ -464,12 +462,12 @@ export const PurchaseInvoiceView: React.FC = () => {
 
             <div className="flex items-center justify-between pt-3 border-t border-slate-100 dark:border-slate-800">
               <div className="text-slate-500 dark:text-slate-400">
-                Match Status: <span className="font-bold text-emerald-700 dark:text-emerald-300">{selectedInvoice.threeWayMatchStatus}</span>
+                Match Status: <span className="font-bold text-emerald-700 dark:text-emerald-300">{selectedInvoice.threeWayMatchResult}</span>
               </div>
               {selectedInvoice.status !== 'Approved for Payment' && (
                 <button
                   onClick={() => {
-                    approvePurchaseInvoice(selectedInvoice.id, 'AP Lead Specialist');
+                    approveInvoiceForPayment(selectedInvoice.id, 'AP Lead Specialist');
                     setSelectedInvoice(null);
                   }}
                   className="px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-semibold cursor-pointer"

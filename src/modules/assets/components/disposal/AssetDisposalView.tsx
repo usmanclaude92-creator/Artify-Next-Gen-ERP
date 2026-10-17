@@ -5,6 +5,7 @@
 
 import React, { useState } from 'react';
 import { useAssetStore } from '../../services/assetStore';
+import { AssetDisposalRecord } from '../../types';
 import {
   Trash2,
   DollarSign,
@@ -31,7 +32,7 @@ export const AssetDisposalView: React.FC = () => {
     audits,
     insurancePolicies,
     currency,
-    postDisposal,
+    disposeAsset,
     addInsurancePolicy
   } = useAssetStore();
 
@@ -42,7 +43,7 @@ export const AssetDisposalView: React.FC = () => {
   // Disposal Form State
   const [dispForm, setDispForm] = useState({
     assetId: assets[0]?.id || '',
-    disposalType: 'SALE' as any,
+    disposalType: 'AUCTION' as AssetDisposalRecord['disposalType'],
     proceedsAmount: 180000,
     buyerName: 'Al-Madina Contractors Trading LLC',
     reason: 'Asset reached economic useful life threshold; superseded by modern CNC equipment.',
@@ -67,22 +68,20 @@ export const AssetDisposalView: React.FC = () => {
     const targetAsset = assets.find(a => a.id === dispForm.assetId) || assets[0];
     const gainOrLoss = Number(dispForm.proceedsAmount) - targetAsset.netBookValue;
 
-    postDisposal({
+    disposeAsset({
       assetId: targetAsset.id,
       assetTag: targetAsset.assetTag,
       assetName: targetAsset.name,
       disposalDate: new Date().toISOString().split('T')[0],
       disposalType: dispForm.disposalType,
-      grossCostAtDisposal: targetAsset.originalCost + targetAsset.additionalCosts,
-      accumulatedDeprAtDisposal: targetAsset.accumulatedDepreciation,
+      historicalCost: targetAsset.originalCost + targetAsset.additionalCosts,
+      accumulatedDepreciation: targetAsset.accumulatedDepreciation,
       netBookValueAtDisposal: targetAsset.netBookValue,
-      proceedsAmount: Number(dispForm.proceedsAmount),
-      gainLossAmount: gainOrLoss,
-      buyerName: dispForm.buyerName,
-      salesInvoiceNumber: dispForm.disposalType === 'SALE' ? `INV-DISP-${Math.floor(1000 + mockRandom() * 9000)}` : undefined,
-      reason: dispForm.reason,
-      status: 'APPROVED',
-      authorizedBy: dispForm.authorizedBy
+      salvageRealizedAmount: Number(dispForm.proceedsAmount),
+      netGainLossOnDisposal: gainOrLoss,
+      disposalReason: dispForm.reason,
+      approver: dispForm.authorizedBy,
+      status: 'APPROVED'
     });
 
     setShowDisposalModal(false);
@@ -92,16 +91,16 @@ export const AssetDisposalView: React.FC = () => {
     e.preventDefault();
     addInsurancePolicy({
       policyNumber: insForm.policyNumber,
-      insurerName: insForm.insurerName,
-      coverageType: insForm.coverageType,
-      coveredAssetIds: assets.map(a => a.id),
-      sumInsured: Number(insForm.sumInsured),
+      insuranceProvider: insForm.insurerName,
+      policyType: 'ALL_RISK',
+      coverageStartDate: insForm.startDate,
+      coverageEndDate: insForm.expiryDate,
+      totalInsuredValue: Number(insForm.sumInsured),
       annualPremium: Number(insForm.annualPremium),
-      startDate: insForm.startDate,
-      expiryDate: insForm.expiryDate,
       deductibleAmount: Number(insForm.deductibleAmount),
-      status: 'ACTIVE',
-      brokerContact: insForm.brokerContact
+      coveredAssetsCount: assets.length,
+      policyStatus: 'ACTIVE',
+      claims: []
     });
     setShowInsuranceModal(false);
   };
@@ -232,16 +231,16 @@ export const AssetDisposalView: React.FC = () => {
                       {currency} {disp.netBookValueAtDisposal.toLocaleString()}
                     </td>
                     <td className="py-3.5 px-4 text-right font-mono font-bold text-slate-900 dark:text-white">
-                      {currency} {disp.proceedsAmount.toLocaleString()}
+                      {currency} {disp.salvageRealizedAmount.toLocaleString()}
                     </td>
                     <td className="py-3.5 px-4 text-right font-mono font-black">
-                      {disp.gainLossAmount >= 0 ? (
-                        <span className="text-emerald-600 dark:text-emerald-400">+{currency} {disp.gainLossAmount.toLocaleString()}</span>
+                      {disp.netGainLossOnDisposal >= 0 ? (
+                        <span className="text-emerald-600 dark:text-emerald-400">+{currency} {disp.netGainLossOnDisposal.toLocaleString()}</span>
                       ) : (
-                        <span className="text-rose-600 dark:text-rose-400">({currency} {Math.abs(disp.gainLossAmount).toLocaleString()})</span>
+                        <span className="text-rose-600 dark:text-rose-400">({currency} {Math.abs(disp.netGainLossOnDisposal).toLocaleString()})</span>
                       )}
                     </td>
-                    <td className="py-3.5 px-4 font-mono text-cyan-600 dark:text-cyan-400">{disp.glDerecognitionJournalId}</td>
+                    <td className="py-3.5 px-4 font-mono text-cyan-600 dark:text-cyan-400">{disp.disposalNumber}</td>
                   </tr>
                 ))}
               </tbody>
@@ -259,18 +258,18 @@ export const AssetDisposalView: React.FC = () => {
                 <div>
                   <div className="flex items-center gap-2">
                     <span className="font-mono text-xs font-bold text-amber-700 dark:text-amber-400 bg-amber-50 dark:bg-amber-950 px-2.5 py-1 rounded border border-amber-200 dark:border-amber-800">
-                      {audit.auditNumber}
+                      {audit.auditReference}
                     </span>
                     <span className="text-xs font-bold text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950 px-2.5 py-1 rounded border border-emerald-200 dark:border-emerald-800">
-                      {audit.status}
+                      {audit.reconciliationStatus}
                     </span>
                   </div>
-                  <h4 className="text-base font-bold text-slate-900 dark:text-white mt-1.5">{audit.title}</h4>
-                  <p className="text-xs text-slate-600 dark:text-slate-400 font-mono">Location: {audit.locationName} • Lead Auditor: {audit.leadAuditor}</p>
+                  <h4 className="text-base font-bold text-slate-900 dark:text-white mt-1.5">{audit.locationName}</h4>
+                  <p className="text-xs text-slate-600 dark:text-slate-400 font-mono">Location: {audit.locationName} • Lead Auditor: {audit.auditorName}</p>
                 </div>
 
                 <button
-                  onClick={() => notify(`Generating reconciliation adjustments for Audit ${audit.auditNumber}...`)}
+                  onClick={() => notify(`Generating reconciliation adjustments for Audit ${audit.auditReference}...`)}
                   className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-amber-600 to-amber-700 hover:from-amber-500 hover:to-amber-600 text-white rounded-xl text-xs font-bold shadow-lg shadow-amber-600/20 transition-all cursor-pointer"
                 >
                   <FileCheck className="w-4 h-4" />
@@ -282,19 +281,19 @@ export const AssetDisposalView: React.FC = () => {
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-xs">
                 <div className="bg-slate-50 dark:bg-slate-950 p-4 rounded-xl border border-slate-200 dark:border-slate-800">
                   <div className="text-slate-500 dark:text-slate-400 font-semibold">Total Assets Expected</div>
-                  <div className="text-xl font-mono font-black text-slate-900 dark:text-white mt-1">{audit.totalAssetsInScope}</div>
+                  <div className="text-xl font-mono font-black text-slate-900 dark:text-white mt-1">{audit.totalExpectedAssets}</div>
                 </div>
                 <div className="bg-slate-50 dark:bg-slate-950 p-4 rounded-xl border border-slate-200 dark:border-slate-800">
                   <div className="text-emerald-600 dark:text-emerald-400 font-semibold">Verified / Found</div>
-                  <div className="text-xl font-mono font-black text-emerald-600 dark:text-emerald-400 mt-1">{audit.assetsFound}</div>
+                  <div className="text-xl font-mono font-black text-emerald-600 dark:text-emerald-400 mt-1">{audit.scannedAssetsCount}</div>
                 </div>
                 <div className="bg-slate-50 dark:bg-slate-950 p-4 rounded-xl border border-slate-200 dark:border-slate-800">
                   <div className="text-rose-600 dark:text-rose-400 font-semibold">Missing Items</div>
-                  <div className="text-xl font-mono font-black text-rose-600 dark:text-rose-400 mt-1">{audit.assetsMissing}</div>
+                  <div className="text-xl font-mono font-black text-rose-600 dark:text-rose-400 mt-1">{audit.missingAssetsCount}</div>
                 </div>
                 <div className="bg-slate-50 dark:bg-slate-950 p-4 rounded-xl border border-slate-200 dark:border-slate-800">
                   <div className="text-amber-700 dark:text-amber-400 font-semibold">Location Discrepancies</div>
-                  <div className="text-xl font-mono font-black text-amber-700 dark:text-amber-400 mt-1">{audit.assetsMisplaced}</div>
+                  <div className="text-xl font-mono font-black text-amber-700 dark:text-amber-400 mt-1">{audit.discrepantLocationCount}</div>
                 </div>
               </div>
             </div>
@@ -314,17 +313,17 @@ export const AssetDisposalView: React.FC = () => {
                       {pol.policyNumber}
                     </span>
                     <span className="text-xs font-bold text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950 px-2.5 py-1 rounded border border-emerald-200 dark:border-emerald-800">
-                      {pol.status}
+                      {pol.policyStatus}
                     </span>
                   </div>
-                  <h4 className="text-base font-bold text-slate-900 dark:text-white mt-1.5">{pol.insurerName}</h4>
-                  <p className="text-xs text-slate-600 dark:text-slate-400">{pol.coverageType.replace(/_/g, ' ')} • Broker: {pol.brokerContact}</p>
+                  <h4 className="text-base font-bold text-slate-900 dark:text-white mt-1.5">{pol.insuranceProvider}</h4>
+                  <p className="text-xs text-slate-600 dark:text-slate-400">{pol.policyType.replace(/_/g, ' ')}</p>
                 </div>
 
                 <div className="text-right">
                   <div className="text-[10px] text-slate-500 dark:text-slate-400 font-semibold uppercase">Total Sum Insured</div>
                   <div className="text-lg font-black font-mono text-emerald-600 dark:text-emerald-400">
-                    {currency} {pol.sumInsured.toLocaleString()}
+                    {currency} {pol.totalInsuredValue.toLocaleString()}
                   </div>
                 </div>
               </div>
@@ -336,7 +335,7 @@ export const AssetDisposalView: React.FC = () => {
                 </div>
                 <div className="bg-slate-50 dark:bg-slate-950 p-3 rounded-xl">
                   <div className="text-slate-500 dark:text-slate-400">Policy Period</div>
-                  <div className="font-mono text-slate-700 dark:text-slate-300 mt-0.5">{pol.startDate} to {pol.expiryDate}</div>
+                  <div className="font-mono text-slate-700 dark:text-slate-300 mt-0.5">{pol.coverageStartDate} to {pol.coverageEndDate}</div>
                 </div>
                 <div className="bg-slate-50 dark:bg-slate-950 p-3 rounded-xl">
                   <div className="text-slate-500 dark:text-slate-400">Excess / Deductible</div>
@@ -344,7 +343,7 @@ export const AssetDisposalView: React.FC = () => {
                 </div>
                 <div className="bg-slate-50 dark:bg-slate-950 p-3 rounded-xl">
                   <div className="text-slate-500 dark:text-slate-400">Covered Assets</div>
-                  <div className="font-bold text-amber-700 dark:text-amber-400 mt-0.5">{pol.coveredAssetIds.length} Registered Units</div>
+                  <div className="font-bold text-amber-700 dark:text-amber-400 mt-0.5">{pol.coveredAssetsCount} Registered Units</div>
                 </div>
               </div>
             </div>
@@ -427,9 +426,9 @@ export const AssetDisposalView: React.FC = () => {
                     onChange={e => setDispForm({ ...dispForm, disposalType: e.target.value as any })}
                     className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 text-slate-900 dark:text-white"
                   >
-                    <option value="SALE">Commercial Sale</option>
+                    <option value="AUCTION">Commercial Sale</option>
                     <option value="SCRAP">Scrap / Zero Value Write-off</option>
-                    <option value="THEFT_LOSS">Theft / Total Loss</option>
+                    <option value="WRITE_OFF">Theft / Total Loss</option>
                     <option value="DONATION">Charitable Donation</option>
                   </select>
                 </div>

@@ -166,14 +166,14 @@ export const DeliveryAndBillingView: React.FC<DeliveryAndBillingViewProps> = ({
                 {deliveryNotes.map((dn) => (
                   <tr key={dn.id} className="hover:bg-slate-50 dark:hover:bg-slate-800/40">
                     <td className="px-5 py-3.5">
-                      <div className="font-bold text-slate-900 dark:text-white">{dn.deliveryNoteNumber}</div>
+                      <div className="font-bold text-slate-900 dark:text-white">{(dn.deliveryNoteNumber ?? dn.dnNumber)}</div>
                       <div className="text-xs text-slate-500 dark:text-slate-400 flex items-center gap-1 mt-0.5">
                         <Building2 className="w-3 h-3 text-amber-500 dark:text-amber-400" />
                         <span>{dn.customerName}</span>
                       </div>
                     </td>
                     <td className="px-4 py-3.5 font-mono text-xs font-semibold text-slate-800 dark:text-slate-200">
-                      {dn.salesOrderNumber}
+                      {(dn.salesOrderNumber ?? dn.soNumber)}
                     </td>
                     <td className="px-4 py-3.5 text-xs text-slate-600 dark:text-slate-400">
                       <div>{dn.carrierName}</div>
@@ -269,14 +269,14 @@ export const DeliveryAndBillingView: React.FC<DeliveryAndBillingViewProps> = ({
                     <div className="flex items-center justify-between text-xs mt-2 pt-2 border-t border-slate-100 dark:border-slate-800">
                       <span className="text-slate-500 dark:text-slate-400">Invoice Total:</span>
                       <span className="font-bold text-slate-900 dark:text-white">
-                        OMR {inv.totalAmountOMR.toLocaleString()}
+                        OMR {(inv.totalAmountOMR ?? inv.grandTotalOMR).toLocaleString()}
                       </span>
                     </div>
 
                     <div className="flex items-center justify-between text-[11px] text-slate-600 dark:text-slate-400 mt-1">
-                      <span>Due: {inv.paymentDueDate}</span>
+                      <span>Due: {(inv.paymentDueDate ?? inv.dueDate)}</span>
                       <span className="font-semibold text-amber-600 dark:text-amber-400">
-                        Due: OMR {inv.amountDueOMR.toLocaleString()}
+                        Due: OMR {(inv.amountDueOMR ?? inv.balanceDueOMR).toLocaleString()}
                       </span>
                     </div>
                   </div>
@@ -304,7 +304,7 @@ export const DeliveryAndBillingView: React.FC<DeliveryAndBillingViewProps> = ({
                       Tax Invoice for {selectedInvoice.customerName}
                     </h3>
                     <div className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
-                      Client Tax ID: <span className="font-mono text-slate-700 dark:text-slate-300">{selectedInvoice.customerTaxId}</span> • DN Ref: <span className="font-mono text-slate-700 dark:text-slate-300">{selectedInvoice.deliveryNoteNumber}</span>
+                      Client Tax ID: <span className="font-mono text-slate-700 dark:text-slate-300">{(selectedInvoice.customerTaxId ?? selectedInvoice.customerVatNumber)}</span> • DN Ref: <span className="font-mono text-slate-700 dark:text-slate-300">{(selectedInvoice.deliveryNoteNumber ?? selectedInvoice.dnNumber)}</span>
                     </div>
                   </div>
 
@@ -338,7 +338,7 @@ export const DeliveryAndBillingView: React.FC<DeliveryAndBillingViewProps> = ({
                       <span className="font-semibold text-slate-900 dark:text-white">Seller VATIN:</span> OM-VAT-10008888 (Artify Industrial LLC)
                     </div>
                     <div>
-                      <span className="font-semibold text-slate-900 dark:text-white">Payment Due Date:</span> {selectedInvoice.paymentDueDate}
+                      <span className="font-semibold text-slate-900 dark:text-white">Payment Due Date:</span> {(selectedInvoice.paymentDueDate ?? selectedInvoice.dueDate)}
                     </div>
                   </div>
 
@@ -364,16 +364,16 @@ export const DeliveryAndBillingView: React.FC<DeliveryAndBillingViewProps> = ({
                       {selectedInvoice.lines.map((l) => (
                         <tr key={l.id}>
                           <td className="px-3.5 py-2.5 font-semibold text-slate-900 dark:text-white">
-                            {l.description}
+                            {(l.description ?? l.itemDescription)}
                           </td>
                           <td className="px-3 py-2.5 text-center font-bold">
-                            {l.quantityBilled} {l.uom}
+                            {(l.quantityBilled ?? l.invoicedQuantity)} {(l.uom ?? l.unitOfMeasure)}
                           </td>
                           <td className="px-3 py-2.5 text-right">
                             OMR {l.unitPriceOMR.toLocaleString()}
                           </td>
                           <td className="px-3 py-2.5 text-right font-bold text-slate-900 dark:text-white">
-                            OMR {l.lineTotalOMR.toLocaleString()}
+                            OMR {(l.lineTotalOMR ?? l.totalOMR).toLocaleString()}
                           </td>
                         </tr>
                       ))}
@@ -386,7 +386,7 @@ export const DeliveryAndBillingView: React.FC<DeliveryAndBillingViewProps> = ({
                   <div className="w-full sm:w-72 p-4 rounded-xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-800 space-y-2 text-xs">
                     <div className="flex justify-between text-slate-600 dark:text-slate-400">
                       <span>Taxable Net:</span>
-                      <span>OMR {selectedInvoice.subtotalAmountOMR.toLocaleString()}</span>
+                      <span>OMR {(selectedInvoice.subtotalAmountOMR ?? selectedInvoice.subtotalOMR).toLocaleString()}</span>
                     </div>
                     <div className="flex justify-between text-slate-600 dark:text-slate-400">
                       <span>Oman VAT (5%):</span>
@@ -395,7 +395,7 @@ export const DeliveryAndBillingView: React.FC<DeliveryAndBillingViewProps> = ({
                     <div className="pt-2 border-t border-slate-200 dark:border-slate-700 flex justify-between font-bold text-sm text-slate-900 dark:text-white">
                       <span>Grand Total:</span>
                       <span className="text-amber-600 dark:text-amber-400">
-                        OMR {selectedInvoice.totalAmountOMR.toLocaleString()}
+                        OMR {(selectedInvoice.totalAmountOMR ?? selectedInvoice.grandTotalOMR).toLocaleString()}
                       </span>
                     </div>
                   </div>
@@ -430,7 +430,7 @@ export const DeliveryAndBillingView: React.FC<DeliveryAndBillingViewProps> = ({
               >
                 <div className="flex items-center justify-between">
                   <span className="font-mono font-bold text-amber-600 dark:text-amber-400">
-                    {adv.receiptNumber}
+                    {(adv.receiptNumber ?? adv.advanceReceiptNumber)}
                   </span>
                   <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-100 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300">
                     {adv.status}
@@ -440,12 +440,12 @@ export const DeliveryAndBillingView: React.FC<DeliveryAndBillingViewProps> = ({
                   {adv.customerName}
                 </div>
                 <div className="text-slate-500 dark:text-slate-400">
-                  Ref SO: <span className="font-mono text-slate-700 dark:text-slate-300">{adv.salesOrderNumber}</span> • Bank: <span className="text-slate-700 dark:text-slate-300">{adv.bankAccount}</span>
+                  Ref SO: <span className="font-mono text-slate-700 dark:text-slate-300">{(adv.salesOrderNumber ?? adv.soNumber)}</span> • Bank: <span className="text-slate-700 dark:text-slate-300">{(adv.bankAccount ?? adv.bankReference)}</span>
                 </div>
                 <div className="pt-2 border-t border-slate-200 dark:border-slate-700 flex justify-between font-bold text-sm text-slate-900 dark:text-white">
                   <span>Advance Received:</span>
                   <span className="text-emerald-600 dark:text-emerald-400">
-                    OMR {adv.amountReceivedOMR.toLocaleString()}
+                    OMR {(adv.amountReceivedOMR ?? adv.depositAmountOMR).toLocaleString()}
                   </span>
                 </div>
               </div>

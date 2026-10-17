@@ -163,9 +163,17 @@ export interface Opportunity {
 // ==========================================
 // 06.04 SALES ACTIVITIES
 // ==========================================
-export type ActivityType = 'Phone Call' | 'Client Meeting' | 'Follow-up' | 'Task' | 'Site Inspection' | 'Product Demo';
+export type ActivityType = 'Phone Call' | 'Client Meeting' | 'Follow-up' | 'Task' | 'Site Inspection' | 'Product Demo' | 'Client In-Person Meeting' | 'Video Conference' | 'Follow-up Reminder' | 'Action Task / Proposal Draft';
 
 export interface SalesActivity {
+  customerId?: string;
+  customerName?: string;
+  contactName?: string;
+  assignedToName?: string;
+  dueDate?: string;
+  location?: string;
+  notes?: string;
+
   id: string;
   activityCode: string; // e.g. ACT-2026-0941
   type: ActivityType;
@@ -178,8 +186,8 @@ export interface SalesActivity {
   scheduledDate: string;
   scheduledTime: string;
   durationMinutes: number;
-  status: 'Scheduled' | 'Completed' | 'Cancelled' | 'Overdue';
-  priority: 'High' | 'Medium' | 'Low';
+  status: 'Scheduled' | 'Completed' | 'Cancelled' | 'Overdue' | 'Pending';
+  priority: 'High' | 'Medium' | 'Low' | 'Urgent';
   outcomeNotes?: string;
   nextFollowUpDate?: string;
   completedAt?: string;
@@ -196,9 +204,17 @@ export type QuotationStatus =
   | 'Accepted'
   | 'Revised'
   | 'Rejected'
-  | 'Expired';
+  | 'Expired'
+  | 'Pending Commercial Approval'
+  | 'Converted to Sales Order';
 
 export interface QuoteLineItem {
+  description?: string;
+  unitPriceOMR?: number;
+  uom?: string;
+  quotationId?: string;
+  costPriceOMR?: number;
+
   id: string;
   itemCode: string;
   itemDescription: string;
@@ -217,6 +233,17 @@ export interface QuoteLineItem {
 }
 
 export interface SalesQuotation {
+  customerVatNumber?: string;
+  deliveryLeadTime?: string;
+  discountAmountOMR?: number;
+  discountPercentage?: number;
+  grossMarginPercentage?: number;
+  requiresCommercialApproval?: boolean;
+  subtotalAmountOMR?: number;
+  taxableAmountOMR?: number;
+  totalAmountOMR?: number;
+  vatPercentage?: number;
+
   id: string;
   quotationNumber: string; // e.g. QUO-2026-00452
   revisionNumber: number; // e.g. 0, 1, 2
@@ -227,7 +254,7 @@ export interface SalesQuotation {
   quotationDate: string;
   validUntilDate: string;
   paymentTerms: string;
-  incoterms: 'DDP (Delivered Duty Paid)' | 'FOB (Free on Board)' | 'CIF (Cost, Insurance & Freight)' | 'EXW (Ex Works)';
+  incoterms: 'DDP (Delivered Duty Paid)' | 'FOB (Free on Board)' | 'CIF (Cost, Insurance & Freight)' | 'EXW (Ex Works)' | string;
   currency: CurrencyCode;
   exchangeRate: number;
   salesRepId: string;
@@ -259,9 +286,18 @@ export type SalesOrderStatus =
   | 'Partially Delivered'
   | 'Fully Delivered'
   | 'Completed & Billed'
-  | 'Cancelled';
+  | 'Cancelled'
+  | 'Confirmed'
+  | 'In Fulfillment'
+  | 'Dispatched'
+  | 'Invoiced';
 
 export interface SalesOrderLineItem {
+  description?: string;
+  quantityOrdered?: number;
+  quantityDelivered?: number;
+  uom?: string;
+
   id: string;
   itemCode: string;
   itemDescription: string;
@@ -281,6 +317,14 @@ export interface SalesOrderLineItem {
 }
 
 export interface SalesOrder {
+  orderNumber?: string;
+  totalAmountOMR?: number;
+  requestedDeliveryDate?: string;
+  deliveryAddress?: string;
+  taxableAmountOMR?: number;
+  paymentTerms?: string;
+  fulfillmentStatus?: string;
+
   id: string;
   soNumber: string; // e.g. SO-2026-00789
   customerPoNumber: string; // Client's official LPO reference
@@ -311,7 +355,7 @@ export interface SalesOrder {
 // ==========================================
 // 06.07 DELIVERY & BILLING
 // ==========================================
-export type DeliveryNoteStatus = 'Draft' | 'Ready for Dispatch' | 'Dispatched / In-Transit' | 'Delivered & Signed' | 'Cancelled';
+export type DeliveryNoteStatus = 'Draft' | 'Ready for Dispatch' | 'Dispatched / In-Transit' | 'Delivered & Signed' | 'Cancelled' | 'In Transit' | 'Delivered / Customer Signed';
 
 export interface DeliveryNoteLineItem {
   id: string;
@@ -325,6 +369,8 @@ export interface DeliveryNoteLineItem {
 }
 
 export interface DeliveryNote {
+  salesOrderNumber?: string;
+
   id: string;
   dnNumber: string; // e.g. DN-2026-01201
   deliveryNoteNumber?: string; // alias
@@ -351,6 +397,11 @@ export interface DeliveryNote {
 export type ARInvoiceStatus = 'Draft' | 'Posted' | 'Partially Paid' | 'Paid' | 'Overdue' | 'Voided';
 
 export interface ARInvoiceLineItem {
+  description?: string;
+  quantityBilled?: number;
+  uom?: string;
+  lineTotalOMR?: number;
+
   id: string;
   soLineId?: string;
   dnLineId?: string;
@@ -367,6 +418,10 @@ export interface ARInvoiceLineItem {
 }
 
 export interface ARInvoice {
+  customerTaxId?: string;
+  deliveryNoteNumber?: string;
+  subtotalAmountOMR?: number;
+
   id: string;
   invoiceNumber: string; // e.g. INV-2026-04981
   soId: string;
@@ -411,6 +466,11 @@ export interface CustomerCreditNote {
 }
 
 export interface CustomerAdvanceDeposit {
+  receiptNumber?: string;
+  salesOrderNumber?: string;
+  bankAccount?: string;
+  amountReceivedOMR?: number;
+
   id: string;
   advanceReceiptNumber: string; // e.g. ADV-2026-00342
   soId?: string;
@@ -431,9 +491,12 @@ export interface CustomerAdvanceDeposit {
 // 06.08 CUSTOMER SERVICE
 // ==========================================
 export type ComplaintUrgency = 'Critical / Emergency' | 'High' | 'Medium' | 'Low';
-export type ComplaintStatus = 'Open / Logged' | 'Under Investigation' | 'Corrective Action in Progress' | 'Resolved / Closed';
+export type ComplaintStatus = 'Open / Logged' | 'Under Investigation' | 'Corrective Action in Progress' | 'Resolved / Closed' | 'Resolved';
 
 export interface CustomerComplaint {
+  assignedEngineer?: string;
+  resolutionNotes?: string;
+
   id: string;
   ticketNumber: string; // e.g. SR-2026-00431
   customerId: string;

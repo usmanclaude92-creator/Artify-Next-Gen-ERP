@@ -103,7 +103,7 @@ export const SalesQuotationsView: React.FC<SalesQuotationsViewProps> = ({
     const matchesTab =
       activeTab === 'all' ||
       activeTab === 'create' ||
-      (activeTab === 'approvals' && (q.status === 'Pending Commercial Approval' || q.requiresCommercialApproval)) ||
+      (activeTab === 'approvals' && (q.status === 'Pending Commercial Approval' || (q.requiresCommercialApproval ?? q.requiresSpecialApproval))) ||
       (activeTab === 'discounts' && q.discountPercentage > 0) ||
       activeTab === 'pricing';
     return matchesSearch && matchesStatus && matchesTab;
@@ -188,9 +188,9 @@ export const SalesQuotationsView: React.FC<SalesQuotationsViewProps> = ({
 
   const handleConvertToOrder = (quote: Quotation) => {
     try {
-      const order = createSalesOrderFromQuotation(quote.id);
+      const order = createSalesOrderFromQuotation(quote.id, `LPO-${quote.quotationNumber}`);
       setOrderCreatedMsg(
-        `Sales Order ${order.orderNumber} successfully booked and confirmed for ${order.customerName} (Total: OMR ${order.totalAmountOMR.toLocaleString()})! Inventory reserved.`
+        `Sales Order ${(order.orderNumber ?? order.soNumber)} successfully booked and confirmed for ${order.customerName} (Total: OMR ${(order.totalAmountOMR ?? order.grandTotalOMR).toLocaleString()})! Inventory reserved.`
       );
       setTimeout(() => setOrderCreatedMsg(null), 7000);
     } catch (err: any) {
@@ -328,14 +328,14 @@ export const SalesQuotationsView: React.FC<SalesQuotationsViewProps> = ({
                   <div className="flex items-center justify-between text-xs mt-2 pt-2 border-t border-slate-100 dark:border-slate-800">
                     <span className="text-slate-500 dark:text-slate-400">Total (incl. 5% VAT):</span>
                     <span className="font-bold text-slate-900 dark:text-white">
-                      OMR {quote.totalAmountOMR.toLocaleString()}
+                      OMR {(quote.totalAmountOMR ?? quote.grandTotalOMR).toLocaleString()}
                     </span>
                   </div>
 
                   <div className="flex items-center justify-between text-[11px] text-slate-600 dark:text-slate-400 mt-1">
                     <span>Valid until: {quote.validUntilDate}</span>
                     <span className="font-semibold text-emerald-600 dark:text-emerald-400">
-                      Margin: {quote.grossMarginPercentage.toFixed(1)}%
+                      Margin: {(quote.grossMarginPercentage ?? quote.overallMarginPercentage).toFixed(1)}%
                     </span>
                   </div>
                 </div>
@@ -363,7 +363,7 @@ export const SalesQuotationsView: React.FC<SalesQuotationsViewProps> = ({
                     Commercial Proposal for {selectedQuote.customerName}
                   </h3>
                   <div className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
-                    Client VAT No: {selectedQuote.customerVatNumber} • Prepared by: {selectedQuote.salesRepName}
+                    Client VAT No: {(selectedQuote.customerVatNumber ?? '')} • Prepared by: {selectedQuote.salesRepName}
                   </div>
                 </div>
 
@@ -409,7 +409,7 @@ export const SalesQuotationsView: React.FC<SalesQuotationsViewProps> = ({
                 <div>
                   <span className="text-slate-600 dark:text-slate-400 block font-medium">Delivery Lead Time</span>
                   <span className="font-bold text-slate-900 dark:text-white mt-0.5 block">
-                    {selectedQuote.deliveryLeadTime}
+                    {(selectedQuote.deliveryLeadTime ?? selectedQuote.warrantyPeriod)}
                   </span>
                 </div>
                 <div>
@@ -439,14 +439,14 @@ export const SalesQuotationsView: React.FC<SalesQuotationsViewProps> = ({
                       {selectedQuote.lines.map((line) => (
                         <tr key={line.id}>
                           <td className="px-3.5 py-2.5">
-                            <div className="font-semibold text-slate-900 dark:text-white">{line.description}</div>
+                            <div className="font-semibold text-slate-900 dark:text-white">{(line.description ?? line.itemDescription)}</div>
                             <div className="text-[10px] text-slate-600 dark:text-slate-400 font-mono">{line.itemCode}</div>
                           </td>
                           <td className="px-3 py-2.5 text-center">
-                            {line.quantity} {line.uom}
+                            {line.quantity} {(line.uom ?? line.unitOfMeasure)}
                           </td>
                           <td className="px-3 py-2.5 text-right font-medium">
-                            {line.unitPriceOMR.toLocaleString()}
+                            {(line.unitPriceOMR ?? line.listPriceOMR).toLocaleString()}
                           </td>
                           <td className="px-3.5 py-2.5 text-right font-bold text-slate-900 dark:text-white">
                             {line.lineTotalOMR.toLocaleString()}
@@ -464,20 +464,20 @@ export const SalesQuotationsView: React.FC<SalesQuotationsViewProps> = ({
                   <div className="flex justify-between text-slate-600 dark:text-slate-400">
                     <span>Subtotal:</span>
                     <span className="font-semibold text-slate-900 dark:text-white">
-                      OMR {selectedQuote.subtotalAmountOMR.toLocaleString()}
+                      OMR {(selectedQuote.subtotalAmountOMR ?? selectedQuote.subtotalOMR).toLocaleString()}
                     </span>
                   </div>
 
-                  {selectedQuote.discountAmountOMR > 0 && (
+                  {(selectedQuote.discountAmountOMR ?? selectedQuote.totalDiscountOMR) > 0 && (
                     <div className="flex justify-between text-rose-600 dark:text-rose-400">
                       <span>Discount ({selectedQuote.discountPercentage}%):</span>
-                      <span>- OMR {selectedQuote.discountAmountOMR.toLocaleString()}</span>
+                      <span>- OMR {(selectedQuote.discountAmountOMR ?? selectedQuote.totalDiscountOMR).toLocaleString()}</span>
                     </div>
                   )}
 
                   <div className="flex justify-between text-slate-600 dark:text-slate-400">
                     <span>Taxable Base:</span>
-                    <span>OMR {selectedQuote.taxableAmountOMR.toLocaleString()}</span>
+                    <span>OMR {(selectedQuote.taxableAmountOMR ?? selectedQuote.subtotalOMR).toLocaleString()}</span>
                   </div>
 
                   <div className="flex justify-between text-slate-600 dark:text-slate-400">
@@ -488,7 +488,7 @@ export const SalesQuotationsView: React.FC<SalesQuotationsViewProps> = ({
                   <div className="pt-2 border-t border-slate-200 dark:border-slate-700 flex justify-between font-bold text-sm text-slate-900 dark:text-white">
                     <span>Grand Total:</span>
                     <span className="text-emerald-600 dark:text-emerald-400">
-                      OMR {selectedQuote.totalAmountOMR.toLocaleString()}
+                      OMR {(selectedQuote.totalAmountOMR ?? selectedQuote.grandTotalOMR).toLocaleString()}
                     </span>
                   </div>
                 </div>

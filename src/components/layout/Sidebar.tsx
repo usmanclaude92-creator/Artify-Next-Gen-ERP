@@ -21,6 +21,7 @@ import {
 import { ERP_MODULES } from '../../navigation/erpHierarchy';
 import { ERPRouteState, FavoriteItem, RecentItem } from '../../types/erp';
 import { IconRenderer } from '../common/IconRenderer';
+import { BrandLogo } from '../common/BrandLogo';
 
 interface SidebarProps {
   isCollapsed: boolean;
@@ -117,9 +118,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
             onClick={() => onNavigate({ view: 'dashboard' })}
             className="flex items-center gap-2.5 cursor-pointer group"
           >
-            <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-indigo-600 to-indigo-400 flex items-center justify-center text-white font-bold text-sm shadow-md shadow-indigo-500/20 group-hover:scale-105 transition-transform">
-              A
-            </div>
+            <BrandLogo className="h-10 w-auto shrink-0 group-hover:scale-105 transition-transform" alt="Artify logo" />
             <div>
               <div className="flex items-center gap-1.5">
                 <span className="font-extrabold text-sm tracking-tight text-white">ARTIFY</span>
@@ -135,9 +134,10 @@ export const Sidebar: React.FC<SidebarProps> = ({
         {isCollapsed && (
           <div
             onClick={() => onNavigate({ view: 'dashboard' })}
-            className="w-9 h-9 mx-auto rounded-xl bg-gradient-to-tr from-indigo-600 to-indigo-400 flex items-center justify-center text-white font-extrabold text-base cursor-pointer shadow-md shadow-indigo-500/20"
+            className="mx-auto cursor-pointer hover:scale-105 transition-transform"
+            title="Artify Financial Ecosystem"
           >
-            A
+            <BrandLogo className="h-8 w-auto" alt="Artify logo" />
           </div>
         )}
 

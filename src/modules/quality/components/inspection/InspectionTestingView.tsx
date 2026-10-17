@@ -334,7 +334,7 @@ export const InspectionTestingView: React.FC = () => {
                   </h4>
 
                   <div className="space-y-3">
-                    {selectedInspection.measurements.map((m, idx) => (
+                    {(selectedInspection.measurements ?? []).map((m, idx) => (
                       <div key={idx} className="p-4 bg-slate-50 dark:bg-slate-950 rounded-xl border border-slate-200 dark:border-slate-800 space-y-2">
                         <div className="flex items-center justify-between text-xs">
                           <span className="font-bold text-slate-900 dark:text-white">{m.parameter}</span>
@@ -350,7 +350,7 @@ export const InspectionTestingView: React.FC = () => {
 
                         <div className="flex items-center gap-1.5 overflow-x-auto pt-1">
                           <span className="text-[10px] text-slate-500 dark:text-slate-400 shrink-0">Sample Points:</span>
-                          {m.recordedValues.map((val, vIdx) => (
+                          {(m.recordedValues ?? []).map((val, vIdx) => (
                             <span
                               key={vIdx}
                               className={`px-2 py-0.5 rounded text-[10px] font-mono font-bold ${
@@ -495,7 +495,7 @@ export const InspectionTestingView: React.FC = () => {
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-slate-200/60 dark:divide-slate-800/60 font-mono">
-                      {selectedLabTest.chemicalComposition.map((elem, idx) => (
+                      {(selectedLabTest.chemicalComposition ?? []).map((elem, idx) => (
                         <tr key={idx} className="hover:bg-slate-100/70 dark:hover:bg-slate-800/30">
                           <td className="py-2 px-3 font-sans font-bold text-slate-900 dark:text-white">{elem.element}</td>
                           <td className="py-2 px-3 text-teal-600 dark:text-teal-400 font-bold">{elem.observedPct}%</td>

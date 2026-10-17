@@ -53,7 +53,7 @@ export const SalesOrdersView: React.FC<SalesOrdersViewProps> = ({
 
   const filteredOrders = salesOrders.filter((order) => {
     const matchesSearch =
-      order.orderNumber.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      (order.orderNumber ?? order.soNumber).toLowerCase().includes(searchQuery.toLowerCase()) ||
       order.customerName.toLowerCase().includes(searchQuery.toLowerCase()) ||
       order.customerPoNumber.toLowerCase().includes(searchQuery.toLowerCase());
     const matchesStatus = selectedStatus === 'ALL' || order.status === selectedStatus;
@@ -61,7 +61,7 @@ export const SalesOrdersView: React.FC<SalesOrdersViewProps> = ({
       activeTab === 'all' ||
       activeTab === 'booking' ||
       (activeTab === 'approvals' && (order.status === 'Draft' || order.status === 'Confirmed')) ||
-      (activeTab === 'fulfillment' && (order.fulfillmentStatus === 'Allocated in Warehouse' || order.fulfillmentStatus === 'Picking & Staging')) ||
+      (activeTab === 'fulfillment' && ((order.fulfillmentStatus ?? order.status) === 'Allocated in Warehouse' || (order.fulfillmentStatus ?? order.status) === 'Picking & Staging')) ||
       activeTab === 'tracking';
     return matchesSearch && matchesStatus && matchesTab;
   });
@@ -176,7 +176,7 @@ export const SalesOrdersView: React.FC<SalesOrdersViewProps> = ({
                   <div className="flex items-start justify-between">
                     <div>
                       <span className="text-[11px] font-mono font-bold text-cyan-600 dark:text-cyan-400">
-                        {order.orderNumber}
+                        {(order.orderNumber ?? order.soNumber)}
                       </span>
                       <h4 className="font-bold text-sm text-slate-900 dark:text-white mt-0.5">
                         {order.customerName}
@@ -202,13 +202,13 @@ export const SalesOrdersView: React.FC<SalesOrdersViewProps> = ({
                   <div className="flex items-center justify-between text-xs mt-2 pt-2 border-t border-slate-100 dark:border-slate-800">
                     <span className="text-slate-500 dark:text-slate-400">Order Value:</span>
                     <span className="font-bold text-slate-900 dark:text-white">
-                      OMR {order.totalAmountOMR.toLocaleString()}
+                      OMR {(order.totalAmountOMR ?? order.grandTotalOMR).toLocaleString()}
                     </span>
                   </div>
 
                   <div className="flex items-center justify-between text-[11px] text-slate-600 dark:text-slate-400 mt-1">
-                    <span>Fulfillment: <span className="text-cyan-600 dark:text-cyan-400 font-semibold">{order.fulfillmentStatus}</span></span>
-                    <span>Target: {order.requestedDeliveryDate}</span>
+                    <span>Fulfillment: <span className="text-cyan-600 dark:text-cyan-400 font-semibold">{(order.fulfillmentStatus ?? order.status)}</span></span>
+                    <span>Target: {(order.requestedDeliveryDate ?? order.expectedDeliveryDate)}</span>
                   </div>
                 </div>
               );
@@ -225,10 +225,10 @@ export const SalesOrdersView: React.FC<SalesOrdersViewProps> = ({
                 <div>
                   <div className="flex items-center gap-2">
                     <span className="text-sm font-mono font-bold text-cyan-600 dark:text-cyan-400">
-                      {selectedOrder.orderNumber}
+                      {(selectedOrder.orderNumber ?? selectedOrder.soNumber)}
                     </span>
                     <span className="px-2 py-0.5 rounded text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">
-                      {selectedOrder.fulfillmentStatus}
+                      {(selectedOrder.fulfillmentStatus ?? selectedOrder.status)}
                     </span>
                   </div>
                   <h3 className="text-lg font-bold text-slate-900 dark:text-white mt-1">
@@ -264,19 +264,19 @@ export const SalesOrdersView: React.FC<SalesOrdersViewProps> = ({
                 <div>
                   <span className="text-slate-600 dark:text-slate-400 block font-medium">Delivery Destination</span>
                   <span className="font-bold text-slate-900 dark:text-white mt-0.5 block truncate">
-                    {selectedOrder.deliveryAddress}
+                    {(selectedOrder.deliveryAddress ?? selectedOrder.shippingAddress)}
                   </span>
                 </div>
                 <div>
                   <span className="text-slate-600 dark:text-slate-400 block font-medium">Payment Terms</span>
                   <span className="font-bold text-slate-900 dark:text-white mt-0.5 block">
-                    {selectedOrder.paymentTerms}
+                    {(selectedOrder.paymentTerms ?? selectedOrder.incoterms)}
                   </span>
                 </div>
                 <div>
                   <span className="text-slate-600 dark:text-slate-400 block font-medium">Committed Delivery</span>
                   <span className="font-bold text-slate-900 dark:text-white mt-0.5 block">
-                    {selectedOrder.requestedDeliveryDate}
+                    {(selectedOrder.requestedDeliveryDate ?? selectedOrder.expectedDeliveryDate)}
                   </span>
                 </div>
               </div>
@@ -334,14 +334,14 @@ export const SalesOrdersView: React.FC<SalesOrdersViewProps> = ({
                       {selectedOrder.lines.map((line) => (
                         <tr key={line.id}>
                           <td className="px-3.5 py-2.5">
-                            <div className="font-semibold text-slate-900 dark:text-white">{line.description}</div>
+                            <div className="font-semibold text-slate-900 dark:text-white">{(line.description ?? line.itemDescription)}</div>
                             <div className="text-[10px] text-slate-600 dark:text-slate-400 font-mono">{line.itemCode}</div>
                           </td>
                           <td className="px-3 py-2.5 text-center font-bold">
-                            {line.quantityOrdered} {line.uom}
+                            {(line.quantityOrdered ?? line.orderedQuantity)} {(line.uom ?? line.unitOfMeasure)}
                           </td>
                           <td className="px-3 py-2.5 text-center text-emerald-600 dark:text-emerald-400 font-semibold">
-                            {line.quantityDelivered} {line.uom}
+                            {(line.quantityDelivered ?? line.deliveredQuantity)} {(line.uom ?? line.unitOfMeasure)}
                           </td>
                           <td className="px-3 py-2.5 text-right">
                             OMR {line.unitPriceOMR.toLocaleString()}
@@ -361,7 +361,7 @@ export const SalesOrdersView: React.FC<SalesOrdersViewProps> = ({
                 <div className="w-full sm:w-72 p-4 rounded-xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-800 space-y-2 text-xs">
                   <div className="flex justify-between text-slate-600 dark:text-slate-400">
                     <span>Taxable Base:</span>
-                    <span>OMR {selectedOrder.taxableAmountOMR.toLocaleString()}</span>
+                    <span>OMR {(selectedOrder.taxableAmountOMR ?? selectedOrder.subtotalOMR).toLocaleString()}</span>
                   </div>
                   <div className="flex justify-between text-slate-600 dark:text-slate-400">
                     <span>Oman VAT (5%):</span>
@@ -370,7 +370,7 @@ export const SalesOrdersView: React.FC<SalesOrdersViewProps> = ({
                   <div className="pt-2 border-t border-slate-200 dark:border-slate-700 flex justify-between font-bold text-sm text-slate-900 dark:text-white">
                     <span>Order Total:</span>
                     <span className="text-cyan-600 dark:text-cyan-400">
-                      OMR {selectedOrder.totalAmountOMR.toLocaleString()}
+                      OMR {(selectedOrder.totalAmountOMR ?? selectedOrder.grandTotalOMR).toLocaleString()}
                     </span>
                   </div>
                 </div>

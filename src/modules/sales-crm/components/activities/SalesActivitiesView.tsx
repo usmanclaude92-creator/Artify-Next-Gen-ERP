@@ -58,8 +58,8 @@ export const SalesActivitiesView: React.FC<SalesActivitiesViewProps> = ({
   const filteredActivities = activities.filter((act) => {
     const matchesSearch =
       act.subject.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      act.customerName.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      act.contactName.toLowerCase().includes(searchQuery.toLowerCase());
+      (act.customerName ?? act.relatedToName).toLowerCase().includes(searchQuery.toLowerCase()) ||
+      (act.contactName ?? '').toLowerCase().includes(searchQuery.toLowerCase());
     const matchesTab =
       activeTab === 'all' ||
       (activeTab === 'calls' && act.type === 'Phone Call') ||
@@ -215,21 +215,21 @@ export const SalesActivitiesView: React.FC<SalesActivitiesViewProps> = ({
                     <div className="flex flex-wrap items-center gap-2 text-xs text-slate-500 dark:text-slate-400">
                       <span className="flex items-center gap-1 font-medium text-slate-700 dark:text-slate-300">
                         <Building2 className="w-3.5 h-3.5 text-teal-500 dark:text-teal-400" />
-                        {act.customerName}
+                        {(act.customerName ?? act.relatedToName)}
                       </span>
                       <span>•</span>
-                      <span>Contact: {act.contactName}</span>
-                      {act.location && (
+                      <span>Contact: {(act.contactName ?? '')}</span>
+                      {(act.location ?? '') && (
                         <>
                           <span>•</span>
-                          <span>📍 {act.location}</span>
+                          <span>📍 {(act.location ?? '')}</span>
                         </>
                       )}
                     </div>
 
-                    {act.notes && (
+                    {(act.notes ?? act.outcomeNotes) && (
                       <p className="text-xs text-slate-600 dark:text-slate-400 mt-1 bg-slate-50 dark:bg-slate-800/40 p-2.5 rounded-lg border border-slate-100 dark:border-slate-800">
-                        {act.notes}
+                        {(act.notes ?? act.outcomeNotes)}
                       </p>
                     )}
                   </div>
@@ -238,9 +238,9 @@ export const SalesActivitiesView: React.FC<SalesActivitiesViewProps> = ({
                 <div className="text-right shrink-0 space-y-1">
                   <div className="flex items-center sm:justify-end gap-1.5 text-xs text-slate-600 dark:text-slate-400 font-medium">
                     <Calendar className="w-3.5 h-3.5 text-teal-500 dark:text-teal-400" />
-                    <span>Due: {act.dueDate}</span>
+                    <span>Due: {(act.dueDate ?? act.scheduledDate)}</span>
                   </div>
-                  <div className="text-[11px] text-slate-600 dark:text-slate-400">Owner: {act.assignedToName}</div>
+                  <div className="text-[11px] text-slate-600 dark:text-slate-400">Owner: {(act.assignedToName ?? act.assignedRepName)}</div>
                 </div>
               </div>
             </div>

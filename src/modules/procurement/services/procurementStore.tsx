@@ -16,7 +16,9 @@ import {
   SupplierDebitNote,
   SupplierMaster,
   SupplierContract,
-  SupplierEvaluationRecord
+  SupplierEvaluationRecord,
+  ServiceEntrySheet,
+  GRNLineItem
 } from '../types';
 import {
   initialSuppliers,
@@ -35,7 +37,8 @@ import {
   initialPurchaseReturns,
   initialDebitNotes,
   initialContracts,
-  initialEvaluations
+  initialEvaluations,
+  initialServiceEntrySheets
 } from '../data/initialData';
 import { mockRandom } from '@/src/utils/mockRandom';
 
@@ -83,6 +86,13 @@ interface ProcurementContextType {
   inspections: ReceiptInspectionRecord[];
   createGoodsReceipt: (grn: Omit<GoodsReceiptNote, 'id' | 'grnNumber'>) => GoodsReceiptNote;
   recordInspection: (insp: Omit<ReceiptInspectionRecord, 'id' | 'inspectionNumber'>) => void;
+  /** Physical goods receipts (alias of goodsReceipts for the receiving views). */
+  grns: GoodsReceiptNote[];
+  serviceSheets: ServiceEntrySheet[];
+  createGoodsReceiptNote: (grn: Omit<GoodsReceiptNote, 'id' | 'grnNumber' | 'grnType' | 'totalDeliveredValueOMR' | 'carrierOrTransporter' | 'receivedByWarehouseOfficer'> & Partial<GoodsReceiptNote> & { carrierName?: string; vehiclePlateNumber?: string; receivedBy?: string }) => GoodsReceiptNote;
+  createServiceEntrySheet: (ses: Omit<ServiceEntrySheet, 'id' | 'sesNumber'>) => ServiceEntrySheet;
+  approveServiceEntrySheet: (id: string, approverName: string) => void;
+  inspectGrnLine: (grnId: string, lineId: string, accepted: number, rejected: number, quarantined: number, result: string, notes: string) => void;
 
   // 05.07 Purchase Invoices & 3-Way Match
   invoices: PurchaseInvoice[];
@@ -95,6 +105,8 @@ interface ProcurementContextType {
   debitNotes: SupplierDebitNote[];
   createPurchaseReturn: (ret: Omit<PurchaseReturn, 'id' | 'returnNumber'>) => PurchaseReturn;
   generateDebitNoteFromReturn: (returnId: string, approverName: string) => SupplierDebitNote;
+  /** Alias of purchaseReturns for the returns view. */
+  returns: PurchaseReturn[];
 
   // 05.09 Supplier Management
   suppliers: SupplierMaster[];
@@ -104,6 +116,10 @@ interface ProcurementContextType {
   updateSupplier: (id: string, data: Partial<SupplierMaster>) => void;
   addContract: (contract: Omit<SupplierContract, 'id' | 'contractNumber'>) => void;
   recordEvaluation: (evalRecord: Omit<SupplierEvaluationRecord, 'id' | 'evaluationNumber' | 'totalScore' | 'evaluationGrade'>) => void;
+  /** Supplier scorecards (alias of evaluations) and helpers used by the supplier view. */
+  scorecards: SupplierEvaluationRecord[];
+  addScorecard: (sc: Omit<SupplierEvaluationRecord, 'id'>) => void;
+  updateSupplierRating: (id: string, rating: SupplierMaster['rating']) => void;
 
   // Global KPIs & AI Copilot Helper
   stats: {
@@ -169,6 +185,11 @@ export const ProcurementProvider: React.FC<{ children: React.ReactNode }> = ({ c
     return saved ? JSON.parse(saved) : initialBlanketPOs;
   });
 
+  const [serviceSheets, setServiceSheets] = useState<ServiceEntrySheet[]>(() => {
+    const saved = localStorage.getItem(`${STORAGE_KEY}_ses`);
+    return saved ? JSON.parse(saved) : initialServiceEntrySheets;
+  });
+
   const [goodsReceipts, setGoodsReceipts] = useState<GoodsReceiptNote[]>(() => {
     const saved = localStorage.getItem(`${STORAGE_KEY}_grns`);
     return saved ? JSON.parse(saved) : initialGoodsReceiptNotes;
@@ -222,6 +243,7 @@ export const ProcurementProvider: React.FC<{ children: React.ReactNode }> = ({ c
       localStorage.setItem(`${STORAGE_KEY}_pos`, JSON.stringify(purchaseOrders));
       localStorage.setItem(`${STORAGE_KEY}_blanket_pos`, JSON.stringify(blanketPOs));
       localStorage.setItem(`${STORAGE_KEY}_grns`, JSON.stringify(goodsReceipts));
+      localStorage.setItem(`${STORAGE_KEY}_ses`, JSON.stringify(serviceSheets));
       localStorage.setItem(`${STORAGE_KEY}_inspections`, JSON.stringify(inspections));
       localStorage.setItem(`${STORAGE_KEY}_invoices`, JSON.stringify(invoices));
       localStorage.setItem(`${STORAGE_KEY}_returns`, JSON.stringify(purchaseReturns));
@@ -734,6 +756,109 @@ export const ProcurementProvider: React.FC<{ children: React.ReactNode }> = ({ c
     );
   };
 
+  const createGoodsReceiptNote: ProcurementContextType['createGoodsReceiptNote'] = (g) => {
+    const lines: GRNLineItem[] = (g.lines || []).map((l, idx) => {
+      const ordered = l.orderedQty ?? (l as any).orderedQuantity ?? 0;
+      const delivered = l.deliveredQty ?? (l as any).receivedQuantity ?? ordered;
+      const accepted = l.acceptedQty ?? (l as any).acceptedQuantity ?? delivered;
+      const rejected = l.rejectedQty ?? (l as any).rejectedQuantity ?? 0;
+      const unitPrice = l.unitPrice ?? 0;
+      return {
+        ...l,
+        id: l.id || `grnline-${Date.now()}-${idx}`,
+        orderedQty: ordered,
+        previouslyReceivedQty: l.previouslyReceivedQty ?? 0,
+        deliveredQty: delivered,
+        acceptedQty: accepted,
+        rejectedQty: rejected,
+        unitPrice,
+        lineTotal: l.lineTotal ?? unitPrice * delivered,
+        batchNumber: l.batchNumber ?? (l as any).batchOrLotNumber,
+        storageWarehouseId: l.storageWarehouseId ?? 'WH-MAIN',
+        storageBinLocation: l.storageBinLocation ?? (l as any).warehouseLocationCode ?? g.warehouseLocation ?? '',
+        inspectionResult: l.inspectionResult ?? 'Pending'
+      };
+    });
+    return createGoodsReceipt({
+      ...g,
+      grnType: 'Physical Goods (GRN)',
+      carrierOrTransporter: g.carrierOrTransporter ?? g.carrierName ?? '',
+      vehicleNumber: g.vehicleNumber ?? g.vehiclePlateNumber,
+      receivedByWarehouseOfficer: g.receivedByWarehouseOfficer ?? g.receivedBy ?? '',
+      totalDeliveredValueOMR: lines.reduce((sum, l) => sum + l.lineTotal, 0),
+      lines
+    } as Omit<GoodsReceiptNote, 'id' | 'grnNumber'>);
+  };
+
+  const inspectGrnLine = (
+    grnId: string,
+    lineId: string,
+    accepted: number,
+    rejected: number,
+    quarantined: number,
+    result: string,
+    notes: string
+  ) => {
+    setGoodsReceipts((prev) =>
+      prev.map((g) => {
+        if (g.id !== grnId) return g;
+        const lines = g.lines.map((l) =>
+          l.id === lineId
+            ? {
+                ...l,
+                acceptedQty: accepted,
+                rejectedQty: rejected,
+                quarantineQty: quarantined,
+                inspectionResult: (rejected > 0 || quarantined > 0 ? 'Conditional' : 'Passed') as GRNLineItem['inspectionResult']
+              }
+            : l
+        );
+        return {
+          ...g,
+          lines,
+          overallQcStatus: result,
+          qcReportSummary: notes,
+          inspectionDate: new Date().toISOString().split('T')[0],
+          status: rejected > 0 || quarantined > 0 ? ('Discrepancy / Partial' as const) : ('Accepted' as const)
+        };
+      })
+    );
+  };
+
+  const createServiceEntrySheet = (ses: Omit<ServiceEntrySheet, 'id' | 'sesNumber'>): ServiceEntrySheet => {
+    const created: ServiceEntrySheet = {
+      ...ses,
+      id: `ses-${Date.now()}`,
+      sesNumber: `SES-2026-${String(serviceSheets.length + 1).padStart(4, '0')}`
+    };
+    setServiceSheets((prev) => [created, ...prev]);
+    return created;
+  };
+
+  const approveServiceEntrySheet = (id: string, approverName: string) => {
+    setServiceSheets((prev) =>
+      prev.map((s) =>
+        s.id === id ? { ...s, status: 'Verified & Approved' as const, supervisingEngineer: approverName } : s
+      )
+    );
+  };
+
+  const addScorecard = (sc: Omit<SupplierEvaluationRecord, 'id'>) => {
+    const created: SupplierEvaluationRecord = {
+      ...sc,
+      id: `eval-${Date.now()}`,
+      evaluationNumber: sc.evaluationNumber ?? `EVAL-2026-${String(evaluations.length + 5).padStart(2, '0')}`,
+      evaluatedDate: sc.evaluatedDate ?? new Date().toISOString().split('T')[0],
+      totalScore: sc.totalScore ?? sc.compositeScore,
+      evaluationGrade: sc.evaluationGrade ?? sc.performanceGrade
+    };
+    setEvaluations((prev) => [created, ...prev]);
+  };
+
+  const updateSupplierRating = (id: string, rating: SupplierMaster['rating']) => {
+    setSuppliers((prev) => prev.map((s) => (s.id === id ? { ...s, rating } : s)));
+  };
+
   // ==========================================
   // 05.07 PURCHASE INVOICE & 3-WAY MATCH
   // ==========================================
@@ -1047,6 +1172,12 @@ export const ProcurementProvider: React.FC<{ children: React.ReactNode }> = ({ c
         inspections,
         createGoodsReceipt,
         recordInspection,
+        grns: goodsReceipts,
+        serviceSheets,
+        createGoodsReceiptNote,
+        createServiceEntrySheet,
+        approveServiceEntrySheet,
+        inspectGrnLine,
 
         invoices,
         registerPurchaseInvoice,
@@ -1057,14 +1188,22 @@ export const ProcurementProvider: React.FC<{ children: React.ReactNode }> = ({ c
         debitNotes,
         createPurchaseReturn,
         generateDebitNoteFromReturn,
+        returns: purchaseReturns,
 
-        suppliers,
+        suppliers: suppliers.map((s) => ({
+          ...s,
+          spendYTD_OMR:
+            s.spendYTD_OMR ?? invoices.filter((i) => i.supplierId === s.id).reduce((sum, i) => sum + (i.totalInvoiceAmountOMR || 0), 0)
+        })),
         contracts,
         evaluations,
         addSupplier,
         updateSupplier,
         addContract,
         recordEvaluation,
+        scorecards: evaluations,
+        addScorecard,
+        updateSupplierRating,
 
         stats: {
           totalSpendYTD_OMR,

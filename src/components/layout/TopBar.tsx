@@ -24,6 +24,7 @@ import {
 import { ERPRouteState, ERPUserRole, ERPNotification } from '../../types/erp';
 import { ENTERPRISE_COMPANIES, ENTERPRISE_BRANCHES, MOCK_USER_ROLES, MOCK_SYSTEM_NOTIFICATIONS } from '../../navigation/erpHierarchy';
 import { useTheme } from '../../context/ThemeContext';
+import { BrandLogo } from '../common/BrandLogo';
 
 interface TopBarProps {
   currentRoute: ERPRouteState;
@@ -85,6 +86,7 @@ export const TopBar: React.FC<TopBarProps> = ({
         >
           <Menu className="w-4 h-4" />
         </button>
+        <BrandLogo className="h-7 w-auto shrink-0 lg:hidden" alt="Artify logo" />
         {/* Company Selector */}
         <div className="relative">
           <button

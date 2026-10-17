@@ -22,6 +22,7 @@ import {
   ScrapRecord,
   ByProductReceipt,
   ProductionCostSheet,
+  CostBreakdownItem,
   ManufacturingExecutiveStats,
   WorkOrderStatus,
   WorkOrderPriority,
@@ -1468,6 +1469,18 @@ interface ManufacturingContextType {
   scrapRecords: ScrapRecord[];
   byProducts: ByProductReceipt[];
   costSheets: ProductionCostSheet[];
+  costSummary: {
+    materialStandardCostOMR: number;
+    materialActualCostOMR: number;
+    laborStandardCostOMR: number;
+    laborActualCostOMR: number;
+    machineStandardCostOMR: number;
+    machineActualCostOMR: number;
+    totalStandardCostOMR: number;
+    totalActualCostOMR: number;
+    totalVarianceOMR: number;
+    variancePercentage: number;
+  };
   forecasts: ProductionForecast[];
   mpsPlans: MasterProductionScheduleItem[];
   stats: ManufacturingExecutiveStats;
@@ -1941,6 +1954,27 @@ export const ManufacturingProvider: React.FC<{ children: React.ReactNode }> = ({
         scrapRecords,
         byProducts,
         costSheets,
+        costSummary: (() => {
+          const sumBy = (cat: CostBreakdownItem['category'], key: 'standardCostOMR' | 'actualCostOMR') =>
+            costSheets.reduce(
+              (acc, sheet) => acc + sheet.costItems.filter((i) => i.category === cat).reduce((a, i) => a + i[key], 0),
+              0
+            );
+          const totalStd = costSheets.reduce((a, c) => a + c.totalStandardCostOMR, 0);
+          const totalAct = costSheets.reduce((a, c) => a + c.totalActualCostOMR, 0);
+          return {
+            materialStandardCostOMR: sumBy('DIRECT_MATERIAL', 'standardCostOMR'),
+            materialActualCostOMR: sumBy('DIRECT_MATERIAL', 'actualCostOMR'),
+            laborStandardCostOMR: sumBy('DIRECT_LABOR', 'standardCostOMR'),
+            laborActualCostOMR: sumBy('DIRECT_LABOR', 'actualCostOMR'),
+            machineStandardCostOMR: sumBy('MACHINE_OVERHEAD', 'standardCostOMR'),
+            machineActualCostOMR: sumBy('MACHINE_OVERHEAD', 'actualCostOMR'),
+            totalStandardCostOMR: totalStd,
+            totalActualCostOMR: totalAct,
+            totalVarianceOMR: totalAct - totalStd,
+            variancePercentage: totalStd ? ((totalAct - totalStd) / totalStd) * 100 : 0
+          };
+        })(),
         forecasts,
         mpsPlans,
         stats,

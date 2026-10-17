@@ -23,6 +23,7 @@ import {
 } from './navigation/erpHierarchy';
 import { Sidebar } from './components/layout/Sidebar';
 import { useMediaQuery } from './hooks/useMediaQuery';
+import { BrandLogo } from './components/common/BrandLogo';
 import { TopBar } from './components/layout/TopBar';
 import { Breadcrumbs } from './components/navigation/Breadcrumbs';
 import { GlobalSearchModal } from './components/navigation/GlobalSearchModal';
@@ -265,7 +266,7 @@ export default function App() {
         {/* Dynamic Viewport Container */}
         <main className="flex-1 overflow-y-auto py-6 sm:py-8">
           <div className="w-[90%] mx-auto">
-            <Suspense fallback={<div className="py-24 text-center text-sm text-slate-500 dark:text-slate-400">Loading module…</div>}>
+            <Suspense fallback={<div className="py-24 flex flex-col items-center gap-3 text-sm text-slate-500 dark:text-slate-400"><BrandLogo className="h-12 w-auto animate-pulse" alt="" /><span>Loading module…</span></div>}>
             {/* View 1: Executive Dashboard */}
             {routeState.view === 'dashboard' && (
               <DashboardView

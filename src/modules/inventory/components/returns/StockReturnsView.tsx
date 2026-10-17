@@ -26,7 +26,7 @@ export const StockReturnsView: React.FC<StockReturnsViewProps> = ({
   initialTab = 'all',
   onNavigate
 }) => {
-  const { returns, items, warehouses, createReturn, inspectReturn } = useInventoryStore();
+  const { returns, items, warehouses, createStockReturn, completeReturnInspection } = useInventoryStore();
 
   const [activeTab, setActiveTab] = useState<'all' | 'customer_rma' | 'vendor_returns' | 'qc_inspection'>(initialTab);
   const [searchTerm, setSearchTerm] = useState('');
@@ -37,11 +37,11 @@ export const StockReturnsView: React.FC<StockReturnsViewProps> = ({
   // QC Inspection Form State
   const [qcInspector, setQcInspector] = useState('Salim Al-Busaidi (Lead QC Inspector)');
   const [qcNotes, setQcNotes] = useState('');
-  const [qcDisposition, setQcDisposition] = useState<ReturnDisposition>('RESTOCK_PRISTINE');
+  const [qcDisposition, setQcDisposition] = useState<ReturnDisposition>('RESTOCK_PRIME');
 
   // Create Return Form State
-  const [returnType, setReturnType] = useState<ReturnType>('CUSTOMER_SALES_RETURN_RMA');
-  const [returnReason, setReturnReason] = useState<ReturnReason>('DEFECTIVE_OUT_OF_BOX');
+  const [returnType, setReturnType] = useState<ReturnType>('SALES_RETURN');
+  const [returnReason, setReturnReason] = useState<ReturnReason>('DEFECTIVE_PRODUCT');
   const [partnerName, setPartnerName] = useState('Petroleum Development Oman (PDO)');
   const [refDocNumber, setRefDocNumber] = useState('INV-2026-0812');
   const [warehouseId, setWarehouseId] = useState(warehouses[0]?.id || '');
@@ -52,12 +52,12 @@ export const StockReturnsView: React.FC<StockReturnsViewProps> = ({
     const matchesSearch =
       ret.returnNumber.toLowerCase().includes(searchTerm.toLowerCase()) ||
       ret.partnerName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      ret.originalDocNumber.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      ret.referenceDocNumber.toLowerCase().includes(searchTerm.toLowerCase()) ||
       ret.lines.some((l) => l.itemName.toLowerCase().includes(searchTerm.toLowerCase()) || l.sku.toLowerCase().includes(searchTerm.toLowerCase()));
 
-    if (activeTab === 'customer_rma') return matchesSearch && ret.returnType === 'CUSTOMER_SALES_RETURN_RMA';
-    if (activeTab === 'vendor_returns') return matchesSearch && ret.returnType === 'VENDOR_PURCHASE_RETURN';
-    if (activeTab === 'qc_inspection') return matchesSearch && ret.status === 'UNDER_QC_INSPECTION';
+    if (activeTab === 'customer_rma') return matchesSearch && ret.returnType === 'SALES_RETURN';
+    if (activeTab === 'vendor_returns') return matchesSearch && ret.returnType === 'PURCHASE_RETURN';
+    if (activeTab === 'qc_inspection') return matchesSearch && ret.status === 'PENDING_INSPECTION';
     return matchesSearch;
   });
 
@@ -68,30 +68,36 @@ export const StockReturnsView: React.FC<StockReturnsViewProps> = ({
 
     const total = returnQty * item.unitCostOMR;
 
-    createReturn({
+    const today = new Date().toISOString().split('T')[0];
+    createStockReturn({
       returnType,
+      status: 'PENDING_INSPECTION',
+      returnDate: today,
+      partnerId: '',
       partnerName,
-      originalDocNumber: refDocNumber,
+      referenceDocType: returnType === 'SALES_RETURN' ? 'DELIVERY_NOTE' : 'GOODS_RECEIPT_NOTE',
+      referenceDocNumber: refDocNumber,
       warehouseId,
       warehouseName: wh?.name || 'Warehouse',
-      reason: returnReason,
-      status: 'UNDER_QC_INSPECTION',
+      quarantineBinCode: 'QC-BAY-01',
       lines: [
         {
           id: `retline-${Date.now()}`,
           itemId: item.id,
           sku: item.sku,
           itemName: item.name,
-          quantityReturned: returnQty,
+          returnedQuantity: returnQty,
           uom: item.baseUom,
-          unitPriceOMR: item.sellingPriceOMR,
-          totalRefundOMR: total,
-          qcDisposition: 'QUARANTINE_HOLD',
-          conditionNotes: 'Awaiting laboratory dimensional & metallurgical inspection'
+          unitCostOMR: item.unitCostOMR,
+          totalCostOMR: total,
+          returnReason: returnReason,
+          inspectionNotes: 'Awaiting laboratory dimensional & metallurgical inspection'
         }
       ],
-      totalRefundAmountOMR: total,
-      qcInspectionNotes: 'Under quarantine in QC Bay 01'
+      totalQuantity: returnQty,
+      totalValueOMR: total,
+      notes: 'Under quarantine in QC Bay 01',
+      createdBy: 'Said Al-Rawahi'
     });
 
     setIsCreateModalOpen(false);
@@ -101,7 +107,17 @@ export const StockReturnsView: React.FC<StockReturnsViewProps> = ({
     e.preventDefault();
     if (!selectedReturn) return;
 
-    inspectReturn(selectedReturn.id, qcInspector, qcNotes, qcDisposition);
+    completeReturnInspection(
+      selectedReturn.id,
+      qcInspector,
+      selectedReturn.lines.map((l) => ({
+        lineId: l.id,
+        disposition: qcDisposition,
+        notes: qcNotes,
+        passedQty: qcDisposition === 'RESTOCK_PRIME' ? l.returnedQuantity : 0,
+        rejectedQty: qcDisposition === 'RESTOCK_PRIME' ? 0 : l.returnedQuantity
+      }))
+    );
     setIsInspectModalOpen(false);
     setSelectedReturn(null);
   };
@@ -219,30 +235,30 @@ export const StockReturnsView: React.FC<StockReturnsViewProps> = ({
                   </td>
                   <td className="py-3 px-3">
                     <span className="px-2 py-0.5 rounded text-[10px] font-mono font-semibold bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-800 dark:text-slate-200">
-                      {ret.returnType === 'CUSTOMER_SALES_RETURN_RMA' ? 'Customer RMA' : 'Vendor Return'}
+                      {ret.returnType === 'SALES_RETURN' ? 'Customer RMA' : 'Vendor Return'}
                     </span>
                   </td>
                   <td className="py-3 px-3">
                     <span className="font-medium text-slate-900 dark:text-white">{ret.partnerName}</span>
                   </td>
                   <td className="py-3 px-3">
-                    <span className="font-mono text-cyan-600 dark:text-cyan-400">{ret.originalDocNumber}</span>
+                    <span className="font-mono text-cyan-600 dark:text-cyan-400">{ret.referenceDocNumber}</span>
                   </td>
                   <td className="py-3 px-3">
                     <span className="text-slate-700 dark:text-slate-300">{ret.warehouseName}</span>
                   </td>
                   <td className="py-3 px-3">
-                    <span className="text-slate-700 dark:text-slate-300">{ret.reason.replace(/_/g, ' ')}</span>
+                    <span className="text-slate-700 dark:text-slate-300">{(ret.lines[0]?.returnReason ?? '').replace(/_/g, ' ')}</span>
                   </td>
                   <td className="py-3 px-3 text-right font-mono font-bold text-emerald-600 dark:text-emerald-400">
-                    OMR {ret.totalRefundAmountOMR.toFixed(2)}
+                    OMR {ret.totalValueOMR.toFixed(2)}
                   </td>
                   <td className="py-3 px-3">
                     <span
                       className={`px-2 py-0.5 rounded text-[10px] font-medium border ${
-                        ret.status === 'QC_PASSED_RESTOCKED'
+                        ret.status === 'RESTOCKED'
                           ? 'bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300 border-emerald-800/40'
-                          : ret.status === 'UNDER_QC_INSPECTION'
+                          : ret.status === 'PENDING_INSPECTION'
                           ? 'bg-amber-50 dark:bg-amber-950/60 text-amber-800 dark:text-amber-300 border-amber-800/40'
                           : 'bg-rose-50 dark:bg-rose-950/60 text-rose-700 dark:text-rose-300 border-rose-800/40'
                       }`}
@@ -251,7 +267,7 @@ export const StockReturnsView: React.FC<StockReturnsViewProps> = ({
                     </span>
                   </td>
                   <td className="py-3 px-4 text-center" onClick={(e) => e.stopPropagation()}>
-                    {ret.status === 'UNDER_QC_INSPECTION' ? (
+                    {ret.status === 'PENDING_INSPECTION' ? (
                       <button
                         onClick={() => {
                           setSelectedReturn(ret);
@@ -300,7 +316,7 @@ export const StockReturnsView: React.FC<StockReturnsViewProps> = ({
                 <div className="text-slate-600 dark:text-slate-400">Inspecting Return Items:</div>
                 {selectedReturn.lines.map((l, idx) => (
                   <div key={idx} className="font-semibold text-slate-900 dark:text-white">
-                    {l.quantityReturned} {l.uom} of {l.itemName} ({l.sku})
+                    {l.returnedQuantity} {l.uom} of {l.itemName} ({l.sku})
                   </div>
                 ))}
               </div>
@@ -323,10 +339,10 @@ export const StockReturnsView: React.FC<StockReturnsViewProps> = ({
                   onChange={(e) => setQcDisposition(e.target.value as ReturnDisposition)}
                   className="w-full bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-lg px-3 py-2 text-slate-900 dark:text-white font-medium"
                 >
-                  <option value="RESTOCK_PRISTINE">Pristine Condition — Restock to Prime Inventory</option>
-                  <option value="SCRAP_DESTROY">Irreparable Defect — Scrap & Destroy</option>
-                  <option value="REWORK_REPAIR">Repairable — Send to Internal Workshop Rework</option>
-                  <option value="RETURN_TO_VENDOR">Vendor Fault — Return to Supplier (Debit Note)</option>
+                  <option value="RESTOCK_PRIME">Pristine Condition — Restock to Prime Inventory</option>
+                  <option value="SCRAP_WRITEOFF">Irreparable Defect — Scrap & Destroy</option>
+                  <option value="REFURBISH_REWORK">Repairable — Send to Internal Workshop Rework</option>
+                  <option value="SUPPLIER_CLAIM">Vendor Fault — Return to Supplier (Debit Note)</option>
                 </select>
               </div>
 
@@ -390,8 +406,8 @@ export const StockReturnsView: React.FC<StockReturnsViewProps> = ({
                     onChange={(e) => setReturnType(e.target.value as ReturnType)}
                     className="w-full bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-lg px-3 py-2 text-slate-900 dark:text-white font-medium"
                   >
-                    <option value="CUSTOMER_SALES_RETURN_RMA">Customer Sales Return (RMA)</option>
-                    <option value="VENDOR_PURCHASE_RETURN">Vendor Purchase Return</option>
+                    <option value="SALES_RETURN">Customer Sales Return (RMA)</option>
+                    <option value="PURCHASE_RETURN">Vendor Purchase Return</option>
                   </select>
                 </div>
                 <div>
@@ -401,9 +417,9 @@ export const StockReturnsView: React.FC<StockReturnsViewProps> = ({
                     onChange={(e) => setReturnReason(e.target.value as ReturnReason)}
                     className="w-full bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-lg px-3 py-2 text-slate-900 dark:text-white"
                   >
-                    <option value="DEFECTIVE_OUT_OF_BOX">Defective / Non-Conforming</option>
-                    <option value="WRONG_SPECIFICATION_DELIVERED">Wrong Specification Delivered</option>
-                    <option value="PROJECT_SURPLUS">Project Surplus Cancellation</option>
+                    <option value="DEFECTIVE_PRODUCT">Defective / Non-Conforming</option>
+                    <option value="WRONG_SPECIFICATION">Wrong Specification Delivered</option>
+                    <option value="ORDER_CANCELLED">Project Surplus Cancellation</option>
                     <option value="TRANSIT_DAMAGE">Damaged In Road Transit</option>
                   </select>
                 </div>

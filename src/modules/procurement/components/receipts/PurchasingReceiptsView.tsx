@@ -67,14 +67,19 @@ export const PurchasingReceiptsView: React.FC = () => {
       poLineId: l.id,
       itemCode: l.itemCode,
       itemDescription: l.itemDescription,
-      orderedQuantity: l.orderedQuantity,
-      receivedQuantity: l.orderedQuantity, // Default to full delivery
-      acceptedQuantity: l.orderedQuantity,
-      rejectedQuantity: 0,
-      quarantineQuantity: 0,
+      orderedQty: l.orderedQuantity,
+      previouslyReceivedQty: l.receivedQuantity ?? 0,
+      deliveredQty: l.orderedQuantity, // Default to full delivery
+      acceptedQty: l.orderedQuantity,
+      rejectedQty: 0,
+      quarantineQty: 0,
       unitOfMeasure: l.unitOfMeasure,
-      batchOrLotNumber: `LOT-2026-${Math.floor(1000 + mockRandom() * 9000)}`,
-      warehouseLocationCode: warehouseLocation,
+      unitPrice: l.unitPrice ?? 0,
+      lineTotal: (l.unitPrice ?? 0) * l.orderedQuantity,
+      batchNumber: `LOT-2026-${Math.floor(1000 + mockRandom() * 9000)}`,
+      storageWarehouseId: 'WH-MAIN',
+      storageBinLocation: warehouseLocation,
+      inspectionResult: 'Pending',
       qcInspectionStatus: 'Pending Inspection'
     }));
 
@@ -233,12 +238,12 @@ export const PurchasingReceiptsView: React.FC = () => {
                     </td>
                     <td className="py-3 px-4">
                       <div className="font-medium text-slate-800 dark:text-slate-200">{grn.warehouseLocation}</div>
-                      <div className="text-[10px] text-slate-500 dark:text-slate-400">By: {grn.receivedBy}</div>
+                      <div className="text-[10px] text-slate-500 dark:text-slate-400">By: {grn.receivedByWarehouseOfficer}</div>
                     </td>
                     <td className="py-3 px-4">
                       <div className="font-semibold text-slate-900 dark:text-slate-100">{grn.lines.length} Line Item(s)</div>
                       <div className="text-[10px] text-slate-500 dark:text-slate-400 truncate max-w-xs">
-                        {grn.lines[0]?.itemDescription} ({grn.lines[0]?.acceptedQuantity} Accepted)
+                        {grn.lines[0]?.itemDescription} ({grn.lines[0]?.acceptedQty} Accepted)
                       </div>
                     </td>
                     <td className="py-3 px-4">
@@ -383,20 +388,20 @@ export const PurchasingReceiptsView: React.FC = () => {
                       {g.lines.map((l) => (
                         <tr key={l.id}>
                           <td className="p-2.5 font-medium text-slate-900 dark:text-slate-100">{l.itemDescription}</td>
-                          <td className="p-2.5 font-mono text-slate-600 dark:text-slate-400">{l.batchOrLotNumber || 'N/A'}</td>
+                          <td className="p-2.5 font-mono text-slate-600 dark:text-slate-400">{l.batchNumber || 'N/A'}</td>
                           <td className="p-2.5 text-right font-medium text-slate-800 dark:text-slate-200">
-                            {l.receivedQuantity} {l.unitOfMeasure}
+                            {l.deliveredQty} {l.unitOfMeasure}
                           </td>
-                          <td className="p-2.5 text-right font-bold text-emerald-600 dark:text-emerald-400">{l.acceptedQuantity}</td>
-                          <td className="p-2.5 text-right font-bold text-rose-600 dark:text-rose-400">{l.rejectedQuantity}</td>
-                          <td className="p-2.5 text-right font-bold text-amber-600 dark:text-amber-400">{l.quarantineQuantity}</td>
+                          <td className="p-2.5 text-right font-bold text-emerald-600 dark:text-emerald-400">{l.acceptedQty}</td>
+                          <td className="p-2.5 text-right font-bold text-rose-600 dark:text-rose-400">{l.rejectedQty}</td>
+                          <td className="p-2.5 text-right font-bold text-amber-600 dark:text-amber-400">{l.quarantineQty}</td>
                           <td className="p-2.5 text-right">
                             <button
                               onClick={() => {
                                 setSelectedGrnForInspect(g);
-                                setAcceptedQty(l.acceptedQuantity);
-                                setRejectedQty(l.rejectedQuantity);
-                                setQuarantineQty(l.quarantineQuantity);
+                                setAcceptedQty(l.acceptedQty);
+                                setRejectedQty(l.rejectedQty);
+                                setQuarantineQty(l.quarantineQty);
                               }}
                               className="px-2.5 py-1 rounded bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 font-semibold text-slate-700 dark:text-slate-300 cursor-pointer"
                             >

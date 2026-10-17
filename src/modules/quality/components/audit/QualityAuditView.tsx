@@ -219,7 +219,7 @@ export const QualityAuditView: React.FC = () => {
                       {selectedAudit.auditNumber}
                     </span>
                     <span className="text-xs font-bold px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">
-                      {selectedAudit.auditType.replace('_', ' ')}
+                      {(selectedAudit.auditType ?? '').replace('_', ' ')}
                     </span>
                   </div>
                   <h3 className="text-lg font-black text-slate-900 dark:text-white mt-1">{selectedAudit.standardScope}</h3>
@@ -258,7 +258,7 @@ export const QualityAuditView: React.FC = () => {
                 </h4>
 
                 <div className="space-y-2.5">
-                  {selectedAudit.findingsList.map(f => (
+                  {(selectedAudit.findingsList ?? selectedAudit.findings ?? []).map(f => (
                     <div key={f.findingId} className="p-4 bg-slate-50 dark:bg-slate-950 rounded-xl border border-slate-200 dark:border-slate-800 space-y-2 text-xs">
                       <div className="flex items-center justify-between">
                         <span className="font-bold text-teal-600 dark:text-teal-400">{f.clauseReference}</span>
@@ -308,7 +308,7 @@ export const QualityAuditView: React.FC = () => {
                         : 'bg-amber-50 dark:bg-amber-950 text-amber-700 dark:text-amber-400 border-amber-200 dark:border-amber-800'
                     }`}
                   >
-                    {vendor.qualificationStatus.replace('_', ' ')}
+                    {(vendor.qualificationStatus ?? '').replace('_', ' ')}
                   </span>
                 </div>
 
@@ -373,7 +373,7 @@ export const QualityAuditView: React.FC = () => {
                   <tr key={cert.id} className="hover:bg-slate-100/70 dark:hover:bg-slate-800/30 transition-colors">
                     <td className="py-3 px-3 font-mono font-bold text-teal-600 dark:text-teal-400">{cert.certificateNumber}</td>
                     <td className="py-3 px-3 font-bold text-slate-900 dark:text-white">{cert.title}</td>
-                    <td className="py-3 px-3 text-slate-600 dark:text-slate-400">{cert.type.replace('_', ' ')}</td>
+                    <td className="py-3 px-3 text-slate-600 dark:text-slate-400">{(cert.type ?? '').replace('_', ' ')}</td>
                     <td className="py-3 px-3 text-slate-700 dark:text-slate-300">{cert.issuingAuthority}</td>
                     <td className="py-3 px-3 font-mono text-slate-600 dark:text-slate-400">{cert.issuedDate}</td>
                     <td className="py-3 px-3 font-mono text-amber-700 dark:text-amber-400 font-bold">{cert.expiryDate}</td>

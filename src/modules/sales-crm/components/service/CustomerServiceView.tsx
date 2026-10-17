@@ -51,7 +51,7 @@ export const CustomerServiceView: React.FC<CustomerServiceViewProps> = ({
   // New ticket state
   const [ticketCustomer, setTicketCustomer] = useState(customers[0]?.id || '');
   const [ticketSubject, setTicketSubject] = useState('');
-  const [ticketCategory, setTicketCategory] = useState<CustomerComplaint['category']>('Technical / Product Defect');
+  const [ticketCategory, setTicketCategory] = useState<CustomerComplaint['category']>('Product Quality Defect');
   const [ticketUrgency, setTicketUrgency] = useState<ComplaintUrgency>('High');
   const [ticketDesc, setTicketDesc] = useState('');
 
@@ -93,7 +93,7 @@ export const CustomerServiceView: React.FC<CustomerServiceViewProps> = ({
 
   const handleConfirmResolve = (id: string) => {
     if (!resolveActionText) return;
-    resolveComplaint(id, resolveActionText);
+    resolveComplaint(id, resolveActionText, resolveActionText);
     setResolvingId(null);
     setResolveActionText('');
   };
@@ -244,9 +244,9 @@ export const CustomerServiceView: React.FC<CustomerServiceViewProps> = ({
                         {comp.description}
                       </p>
 
-                      {comp.resolutionNotes && (
+                      {(comp.resolutionNotes ?? comp.correctiveActionTaken) && (
                         <div className="text-xs text-emerald-700 dark:text-emerald-300 bg-emerald-50 dark:bg-emerald-950/40 p-2.5 rounded-xl border border-emerald-200 dark:border-emerald-800 mt-2">
-                          <span className="font-bold">Resolution Recorded:</span> {comp.resolutionNotes}
+                          <span className="font-bold">Resolution Recorded:</span> {(comp.resolutionNotes ?? comp.correctiveActionTaken)}
                         </div>
                       )}
                     </div>
@@ -255,7 +255,7 @@ export const CustomerServiceView: React.FC<CustomerServiceViewProps> = ({
                       <div className="text-xs text-slate-500 dark:text-slate-400">
                         Target: <span className="font-bold text-slate-900 dark:text-white">{comp.targetResolutionDate}</span>
                       </div>
-                      <div className="text-[11px] text-slate-600 dark:text-slate-400">Assigned: {comp.assignedEngineer}</div>
+                      <div className="text-[11px] text-slate-600 dark:text-slate-400">Assigned: {(comp.assignedEngineer ?? comp.assignedEngineerName)}</div>
 
                       {!isResolved ? (
                         <div>
@@ -422,7 +422,7 @@ export const CustomerServiceView: React.FC<CustomerServiceViewProps> = ({
                     onChange={(e) => setTicketCategory(e.target.value as any)}
                     className="w-full px-3 py-2 rounded-lg border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white focus:ring-2 focus:ring-rose-500 focus:outline-none"
                   >
-                    <option value="Technical / Product Defect">Technical / Defect</option>
+                    <option value="Product Quality Defect">Technical / Defect</option>
                     <option value="Delivery Delay">Delivery Delay</option>
                     <option value="Billing / Invoice Dispute">Billing / Invoice Dispute</option>
                     <option value="Documentation / Mill Test Certificate">Documentation / MTR</option>

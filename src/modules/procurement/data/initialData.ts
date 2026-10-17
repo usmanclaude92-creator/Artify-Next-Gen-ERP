@@ -15,7 +15,8 @@ import {
   SupplierDebitNote,
   SupplierMaster,
   SupplierContract,
-  SupplierEvaluationRecord
+  SupplierEvaluationRecord,
+  ServiceEntrySheet
 } from '../types';
 
 export const initialSuppliers: SupplierMaster[] = [
@@ -1133,5 +1134,40 @@ export const initialEvaluations: SupplierEvaluationRecord[] = [
     totalScore: 93.0,
     evaluationGrade: 'A - Excellent',
     recommendation: 'Maintains high SLA uptime. Recommended for upcoming cloud migration tenders.'
+  }
+];
+
+export const initialServiceEntrySheets: ServiceEntrySheet[] = [
+  {
+    id: 'ses-001',
+    sesNumber: 'SES-2026-0001',
+    sesTitle: 'ERP Rollout Milestone 2: Finance & Procurement Configuration',
+    poNumber: 'PO-2026-004',
+    supplierName: 'Bahwan IT Solutions LLC',
+    serviceStartDate: '2026-01-05',
+    serviceEndDate: '2026-01-31',
+    serviceHoursLogged: 240,
+    serviceAmountClaimedOMR: 14400,
+    serviceAmountApprovedOMR: 14400,
+    serviceProviderLead: 'Anand Sundaram (Principal Consultant)',
+    supervisingEngineer: 'Eng. Khalid Al-Farsi',
+    status: 'Verified & Approved',
+    verifiedDeliverables: 'GL, AP and AR configuration signed off; UAT scripts executed.'
+  },
+  {
+    id: 'ses-002',
+    sesNumber: 'SES-2026-0002',
+    sesTitle: 'Plant Instrumentation Calibration (Q1 Campaign)',
+    poNumber: 'PO-2026-006',
+    supplierName: 'Gulf Calibration & Metrology Services',
+    serviceStartDate: '2026-02-02',
+    serviceEndDate: '2026-02-20',
+    serviceHoursLogged: 96,
+    serviceAmountClaimedOMR: 5280,
+    serviceAmountApprovedOMR: 5280,
+    serviceProviderLead: 'Eng. Saeed Al-Hinai',
+    supervisingEngineer: 'Eng. Khalid Al-Farsi',
+    status: 'Pending Verification',
+    verifiedDeliverables: 'Calibration certificates issued for 38 of 40 instruments.'
   }
 ];

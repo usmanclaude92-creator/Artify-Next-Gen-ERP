@@ -69,24 +69,29 @@ export const AssetMaintenanceView: React.FC = () => {
   const handleCreateWO = (e: React.FormEvent) => {
     e.preventDefault();
     const targetAsset = assets.find(a => a.id === woForm.assetId) || assets[0];
+    const today = new Date().toISOString().split('T')[0];
+    const sparePartsCost = Number(woForm.sparePartsCost);
+    const laborCost = Number(woForm.laborCost);
+    const vendorServiceCost = Number(woForm.contractorCost);
     createWorkOrder({
+      type: woForm.isCapitalizedRepair ? 'OVERHAUL' : woForm.type,
+      priority: woForm.priority,
       assetId: targetAsset.id,
       assetTag: targetAsset.assetTag,
       assetName: targetAsset.name,
-      type: woForm.type,
-      priority: woForm.priority,
-      status: 'IN_PROGRESS',
-      title: woForm.title,
-      description: woForm.description,
-      scheduledStartDate: woForm.scheduledStartDate,
-      technicianName: woForm.technicianName,
-      isCapitalizedRepair: woForm.isCapitalizedRepair,
-      sparePartsCost: Number(woForm.sparePartsCost),
-      laborCost: Number(woForm.laborCost),
-      contractorCost: Number(woForm.contractorCost),
+      location: targetAsset.locationName ?? '',
+      reportedDate: today,
+      scheduledDate: woForm.scheduledStartDate,
+      problemDescription: woForm.title ? `${woForm.title} — ${woForm.description}` : woForm.description,
+      technician: woForm.technicianName,
+      sparePartsCost,
+      laborCost,
+      vendorServiceCost,
       sparePartsUsed: [
-        { partNumber: 'SPR-HYD-09', partName: 'Hydraulic Seal Kit & High Pressure Hose', quantity: 2, unitCost: 1200, totalCost: 2400 }
-      ]
+        { itemCode: 'SPR-HYD-09', description: 'Hydraulic Seal Kit & High Pressure Hose', quantity: 2, unitCost: 1200, total: 2400 }
+      ],
+      downTimeHours: 0,
+      status: 'IN_PROGRESS'
     });
     setShowWoModal(false);
   };
@@ -95,17 +100,19 @@ export const AssetMaintenanceView: React.FC = () => {
     e.preventDefault();
     const targetAsset = assets.find(a => a.id === pmForm.assetId) || assets[0];
     createPMPlan({
-      planCode: pmForm.planCode,
       assetId: targetAsset.id,
       assetTag: targetAsset.assetTag,
       assetName: targetAsset.name,
-      title: pmForm.title,
-      frequency: pmForm.frequency,
-      serviceIntervalHours: Number(pmForm.serviceIntervalHours),
-      lastCompletedDate: new Date().toISOString().split('T')[0],
-      nextScheduledDate: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
-      status: 'ACTIVE',
-      assignedVendor: pmForm.assignedVendor
+      planName: pmForm.title,
+      frequencyType: 'CALENDAR_DAYS',
+      frequencyInterval: pmForm.frequency === 'WEEKLY' ? 7 : pmForm.frequency === 'QUARTERLY' ? 90 : 30,
+      lastExecutedDate: new Date().toISOString().split('T')[0],
+      nextDueDate: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
+      tasksChecklist: [{ taskName: 'Standard inspection & lubrication', mandatory: true }],
+      estimatedLaborHours: Number(pmForm.serviceIntervalHours) / 25,
+      estimatedCost: 0,
+      assignedTechnician: pmForm.assignedVendor,
+      status: 'ACTIVE'
     });
     setShowPmModal(false);
   };
@@ -197,7 +204,7 @@ export const AssetMaintenanceView: React.FC = () => {
                     {wo.workOrderNumber}
                   </span>
                   <div>
-                    <h4 className="text-sm font-bold text-slate-900 dark:text-white">{wo.title}</h4>
+                    <h4 className="text-sm font-bold text-slate-900 dark:text-white">{wo.problemDescription}</h4>
                     <span className="font-mono text-xs text-slate-500 dark:text-slate-400">{wo.assetTag} • {wo.assetName}</span>
                   </div>
                 </div>
@@ -222,7 +229,7 @@ export const AssetMaintenanceView: React.FC = () => {
                   {wo.status !== 'COMPLETED' && (
                     <button
                       onClick={() => {
-                        completeWorkOrder(wo.id, 3.5);
+                        completeWorkOrder(wo.id, 'Completed and returned to service', wo.totalCost);
                         notify(`Work order ${wo.workOrderNumber} marked as completed and asset restored to IN_SERVICE!`);
                       }}
                       className="flex items-center gap-1.5 px-3 py-1 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl text-xs font-bold transition-colors cursor-pointer"
@@ -234,13 +241,13 @@ export const AssetMaintenanceView: React.FC = () => {
                 </div>
               </div>
 
-              <p className="text-xs text-slate-700 dark:text-slate-300">{wo.description}</p>
+              <p className="text-xs text-slate-700 dark:text-slate-300">{wo.actionTaken ?? wo.rootCauseAnalysis ?? wo.problemDescription}</p>
 
               {/* Cost & Technician Grid */}
               <div className="grid grid-cols-2 md:grid-cols-4 gap-3 text-xs">
                 <div className="bg-slate-50 dark:bg-slate-950 p-3 rounded-xl">
                   <div className="text-slate-500 dark:text-slate-400">Lead Technician</div>
-                  <div className="font-bold text-slate-900 dark:text-white mt-0.5">{wo.technicianName}</div>
+                  <div className="font-bold text-slate-900 dark:text-white mt-0.5">{wo.technician}</div>
                 </div>
                 <div className="bg-slate-50 dark:bg-slate-950 p-3 rounded-xl">
                   <div className="text-slate-500 dark:text-slate-400">Spares Cost</div>
@@ -248,12 +255,12 @@ export const AssetMaintenanceView: React.FC = () => {
                 </div>
                 <div className="bg-slate-50 dark:bg-slate-950 p-3 rounded-xl">
                   <div className="text-slate-500 dark:text-slate-400">Labor & Overhead</div>
-                  <div className="font-mono font-bold text-slate-700 dark:text-slate-300 mt-0.5">{currency} {(wo.laborCost + wo.contractorCost).toLocaleString()}</div>
+                  <div className="font-mono font-bold text-slate-700 dark:text-slate-300 mt-0.5">{currency} {(wo.laborCost + wo.vendorServiceCost).toLocaleString()}</div>
                 </div>
                 <div className="bg-slate-50 dark:bg-slate-950 p-3 rounded-xl">
                   <div className="text-slate-500 dark:text-slate-400">Accounting Treatment</div>
                   <div className="font-bold text-amber-700 dark:text-amber-400 mt-0.5">
-                    {wo.isCapitalizedRepair ? 'CAPITALIZED OVERHAUL' : 'EXPENSED REPAIR'}
+                    {wo.type === 'OVERHAUL' ? 'CAPITALIZED OVERHAUL' : 'EXPENSED REPAIR'}
                   </div>
                 </div>
               </div>
@@ -265,7 +272,7 @@ export const AssetMaintenanceView: React.FC = () => {
                   <div className="flex items-center gap-4 flex-wrap">
                     {wo.sparePartsUsed.map((p, idx) => (
                       <span key={idx} className="font-mono text-slate-700 dark:text-slate-300">
-                        • {p.partName} (Qty: {p.quantity}) — <span className="text-amber-700 dark:text-amber-400">{currency} {p.totalCost.toLocaleString()}</span>
+                        • {p.description} (Qty: {p.quantity}) — <span className="text-amber-700 dark:text-amber-400">{currency} {p.total.toLocaleString()}</span>
                       </span>
                     ))}
                   </div>
@@ -305,10 +312,10 @@ export const AssetMaintenanceView: React.FC = () => {
                       <div className="font-bold text-slate-900 dark:text-white">{pm.assetName}</div>
                       <div className="text-[10px] text-slate-500 dark:text-slate-400 font-mono">{pm.assetTag}</div>
                     </td>
-                    <td className="py-3.5 px-4 font-medium text-slate-900 dark:text-white">{pm.title}</td>
-                    <td className="py-3.5 px-4 font-mono">{pm.frequency} ({pm.serviceIntervalHours} Hrs)</td>
-                    <td className="py-3.5 px-4 font-mono text-cyan-600 dark:text-cyan-400 font-bold">{pm.nextScheduledDate}</td>
-                    <td className="py-3.5 px-4 text-slate-600 dark:text-slate-400">{pm.assignedVendor}</td>
+                    <td className="py-3.5 px-4 font-medium text-slate-900 dark:text-white">{pm.planName}</td>
+                    <td className="py-3.5 px-4 font-mono">{pm.frequencyType} ({pm.frequencyInterval} Days)</td>
+                    <td className="py-3.5 px-4 font-mono text-cyan-600 dark:text-cyan-400 font-bold">{pm.nextDueDate}</td>
+                    <td className="py-3.5 px-4 text-slate-600 dark:text-slate-400">{pm.assignedTechnician}</td>
                     <td className="py-3.5 px-4 text-center">
                       <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-50 dark:bg-emerald-950 text-emerald-600 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800">
                         {pm.status}
@@ -344,7 +351,7 @@ export const AssetMaintenanceView: React.FC = () => {
             <div className="bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-2xl p-5 space-y-2">
               <div className="text-slate-500 dark:text-slate-400 text-xs font-semibold uppercase">Expensed OPEX Repairs</div>
               <div className="text-2xl font-black font-mono text-amber-700 dark:text-amber-400">
-                {currency} {workOrders.filter(w => !w.isCapitalizedRepair).reduce((acc, w) => acc + w.totalCost, 0).toLocaleString()}
+                {currency} {workOrders.filter(w => w.type !== 'OVERHAUL').reduce((acc, w) => acc + w.totalCost, 0).toLocaleString()}
               </div>
               <p className="text-[11px] text-slate-500 dark:text-slate-400">Debited to P&L Machinery Maintenance Expense</p>
             </div>
@@ -352,7 +359,7 @@ export const AssetMaintenanceView: React.FC = () => {
             <div className="bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-2xl p-5 space-y-2">
               <div className="text-slate-500 dark:text-slate-400 text-xs font-semibold uppercase">Capitalized Major Overhauls</div>
               <div className="text-2xl font-black font-mono text-emerald-600 dark:text-emerald-400">
-                {currency} {workOrders.filter(w => w.isCapitalizedRepair).reduce((acc, w) => acc + w.totalCost, 0).toLocaleString()}
+                {currency} {workOrders.filter(w => w.type === 'OVERHAUL').reduce((acc, w) => acc + w.totalCost, 0).toLocaleString()}
               </div>
               <p className="text-[11px] text-slate-500 dark:text-slate-400">Debited to Fixed Asset Cost Basis & Depreciated</p>
             </div>

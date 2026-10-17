@@ -1285,6 +1285,8 @@ interface InventoryContextType {
   reservations: StockReservation[];
   counts: InventoryCount[];
   batches: BatchLot[];
+  createBatch: (b: Partial<BatchLot> & Pick<BatchLot, 'batchNumber' | 'itemId' | 'sku' | 'itemName'>) => BatchLot;
+  createSerial: (sn: Partial<SerialNumberRecord> & Pick<SerialNumberRecord, 'serialNumber' | 'itemId' | 'sku' | 'itemName'>) => SerialNumberRecord;
   serials: SerialNumberRecord[];
 
   // Analytics & Reports
@@ -1861,6 +1863,45 @@ export const InventoryProvider: React.FC<{ children: React.ReactNode }> = ({ chi
     );
   };
 
+  const createBatch = (b: Partial<BatchLot> & Pick<BatchLot, 'batchNumber' | 'itemId' | 'sku' | 'itemName'>): BatchLot => {
+    const today = new Date().toISOString().split('T')[0];
+    const onHand = b.quantityOnHand ?? b.currentQuantity ?? b.initialQuantity ?? 0;
+    const reserved = b.quantityReserved ?? b.allocatedQuantity ?? 0;
+    const created: BatchLot = {
+      warehouseId: warehouses[0]?.id ?? '',
+      warehouseName: warehouses[0]?.name ?? '',
+      binLocationCode: '',
+      manufacturingDate: today,
+      supplierBatchNumber: '',
+      supplierPoNumber: '',
+      uom: 'EA',
+      ...b,
+      id: `batch-${Date.now()}`,
+      initialQuantity: onHand,
+      currentQuantity: onHand,
+      allocatedQuantity: reserved,
+      availableQuantity: b.quantityAvailable ?? onHand - reserved,
+      qcStatus: b.qaApprovalStatus === 'PASSED' || !b.qcStatus ? 'APPROVED' : b.qcStatus
+    };
+    setBatches((prev) => [created, ...prev]);
+    return created;
+  };
+
+  const createSerial = (
+    sn: Partial<SerialNumberRecord> & Pick<SerialNumberRecord, 'serialNumber' | 'itemId' | 'sku' | 'itemName'>
+  ): SerialNumberRecord => {
+    const created: SerialNumberRecord = {
+      status: 'IN_STOCK',
+      supplierPoNumber: '',
+      grnNumber: '',
+      serviceHistoryCount: 0,
+      ...sn,
+      id: `sn-${Date.now()}`
+    };
+    setSerials((prev) => [created, ...prev]);
+    return created;
+  };
+
   return (
     <InventoryContext.Provider
       value={{
@@ -1874,8 +1915,17 @@ export const InventoryProvider: React.FC<{ children: React.ReactNode }> = ({ chi
         returns,
         reservations,
         counts,
-        batches,
-        serials,
+        batches: batches.map((b) => ({
+          ...b,
+          quantityOnHand: b.quantityOnHand ?? b.currentQuantity,
+          quantityReserved: b.quantityReserved ?? b.allocatedQuantity,
+          quantityAvailable: b.quantityAvailable ?? b.availableQuantity,
+          qaApprovalStatus: b.qaApprovalStatus ?? b.qcStatus,
+          heatNumber: b.heatNumber ?? b.millTestCertNumber
+        })),
+        serials: serials.map((sn) => ({ ...sn, warrantyExpiryDate: sn.warrantyExpiryDate ?? sn.warrantyEndDate })),
+        createBatch,
+        createSerial,
         agingBuckets,
         movements,
         stats,

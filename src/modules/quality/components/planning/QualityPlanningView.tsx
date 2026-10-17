@@ -296,7 +296,7 @@ export const QualityPlanningView: React.FC = () => {
                 </h4>
 
                 <div className="space-y-3">
-                  {selectedPlan.stages.map((stg, idx) => (
+                  {(selectedPlan.stages ?? []).map((stg, idx) => (
                     <div
                       key={idx}
                       className={`p-4 rounded-xl border flex flex-col sm:flex-row sm:items-center justify-between gap-3 ${
@@ -362,7 +362,7 @@ export const QualityPlanningView: React.FC = () => {
               <div className="p-4 rounded-xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 space-y-2 text-xs">
                 <div className="flex justify-between">
                   <span className="text-slate-600 dark:text-slate-400">Frequency:</span>
-                  <span className="font-bold text-slate-900 dark:text-white">{ip.frequency.replace('_', ' ')}</span>
+                  <span className="font-bold text-slate-900 dark:text-white">{(ip.frequency ?? '').replace('_', ' ')}</span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-slate-600 dark:text-slate-400">Sampling Formula:</span>
@@ -376,7 +376,7 @@ export const QualityPlanningView: React.FC = () => {
               <div className="space-y-1.5">
                 <div className="text-[11px] font-bold text-slate-600 dark:text-slate-400 uppercase tracking-wider">Mandatory Gauges & Tools:</div>
                 <div className="flex flex-wrap gap-1.5">
-                  {ip.mandatoryGauges.map((g, idx) => (
+                  {(ip.mandatoryGauges ?? []).map((g, idx) => (
                     <span key={idx} className="px-2.5 py-1 rounded-lg text-[11px] bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 border border-slate-300 dark:border-slate-700">
                       {g}
                     </span>
@@ -420,7 +420,7 @@ export const QualityPlanningView: React.FC = () => {
             </h4>
 
             <div className="divide-y divide-slate-200 dark:divide-slate-800 border border-slate-200 dark:border-slate-800 rounded-xl overflow-hidden bg-slate-50/60 dark:bg-slate-950/60">
-              {selectedChecklist.items.map((item, idx) => (
+              {(selectedChecklist.items ?? []).map((item, idx) => (
                 <div key={item.id} className="p-4 flex flex-col md:flex-row md:items-center justify-between gap-4 hover:bg-white/40 dark:hover:bg-slate-900/40 transition-colors">
                   <div className="space-y-1 max-w-xl">
                     <div className="flex items-center gap-2">

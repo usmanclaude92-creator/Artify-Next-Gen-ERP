@@ -35,7 +35,7 @@ export const WorkCentersView: React.FC<WorkCentersViewProps> = ({
   initialTab = 'centers',
   onNavigate
 }) => {
-  const { workCenters, workOrders, updateWorkCenterOee } = useManufacturingStore();
+  const { workCenters, workOrders } = useManufacturingStore();
   const [activeTab, setActiveTab] = useState<'centers' | 'oee' | 'labor' | 'scheduling'>(initialTab);
   const [selectedCenterId, setSelectedCenterId] = useState<string>(workCenters[0]?.id || '');
   const [searchQuery, setSearchQuery] = useState('');
@@ -169,7 +169,7 @@ export const WorkCentersView: React.FC<WorkCentersViewProps> = ({
                     <h3 className="text-base font-bold text-slate-900 dark:text-white mt-0.5">{selectedCenter.name}</h3>
                     <p className="text-xs text-slate-600 dark:text-slate-400">
                       Plant: <strong className="text-slate-800 dark:text-slate-200">{selectedCenter.plantLocation}</strong> • Department:{' '}
-                      <strong className="text-slate-800 dark:text-slate-200">{selectedCenter.department}</strong>
+                      <strong className="text-slate-800 dark:text-slate-200">{selectedCenter.plantLocation}</strong>
                     </p>
                   </div>
 
@@ -185,11 +185,11 @@ export const WorkCentersView: React.FC<WorkCentersViewProps> = ({
                 <div className="grid grid-cols-3 gap-3">
                   <div className="bg-slate-50 dark:bg-slate-950 p-3 rounded-lg border border-slate-200 dark:border-slate-800 text-center">
                     <div className="text-[10px] text-slate-600 dark:text-slate-400 uppercase font-medium">Shifts / Day</div>
-                    <div className="text-base font-bold text-slate-900 dark:text-white mt-0.5">{selectedCenter.shiftsPerDay} Shifts ({selectedCenter.hoursPerShift}h each)</div>
+                    <div className="text-base font-bold text-slate-900 dark:text-white mt-0.5">{selectedCenter.shiftsPerDay} Shifts ({selectedCenter.workingHoursPerShift}h each)</div>
                   </div>
                   <div className="bg-slate-50 dark:bg-slate-950 p-3 rounded-lg border border-slate-200 dark:border-slate-800 text-center">
                     <div className="text-[10px] text-slate-600 dark:text-slate-400 uppercase font-medium">Capacity Efficiency</div>
-                    <div className="text-base font-bold text-emerald-600 dark:text-emerald-400 mt-0.5">{selectedCenter.efficiencyRatingPct}%</div>
+                    <div className="text-base font-bold text-emerald-600 dark:text-emerald-400 mt-0.5">{selectedCenter.efficiencyFactorPct}%</div>
                   </div>
                   <div className="bg-slate-50 dark:bg-slate-950 p-3 rounded-lg border border-slate-200 dark:border-slate-800 text-center">
                     <div className="text-[10px] text-slate-600 dark:text-slate-400 uppercase font-medium">Weekly Effective Hrs</div>
@@ -206,20 +206,20 @@ export const WorkCentersView: React.FC<WorkCentersViewProps> = ({
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                     {selectedCenter.machines.map((m) => (
-                      <div key={m.id} className="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 text-xs space-y-2">
+                      <div key={m.machineId} className="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 text-xs space-y-2">
                         <div className="flex items-center justify-between">
-                          <span className="font-mono font-bold text-orange-700 dark:text-orange-400">{m.assetTag}</span>
+                          <span className="font-mono font-bold text-orange-700 dark:text-orange-400">{m.machineCode}</span>
                           <span className="px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 font-bold text-[10px]">
                             {m.status}
                           </span>
                         </div>
                         <h5 className="font-semibold text-slate-900 dark:text-white">{m.name}</h5>
                         <p className="text-slate-600 dark:text-slate-400 text-[11px]">
-                          Model: {m.manufacturer} {m.modelNumber} ({m.spindlePowerKw} kW)
+                          Model: {m.manufacturer} {m.model} ({m.powerRatingKw} kW)
                         </p>
                         <div className="flex justify-between text-[10px] text-slate-500 dark:text-slate-400 pt-1 border-t border-slate-200 dark:border-slate-800">
                           <span>Next PM: {m.nextPmDueDate}</span>
-                          <span>MTBF: {m.mtbfHours} hrs</span>
+                          <span>Op. cost: OMR {m.hourlyOperatingCostOMR}/hr</span>
                         </div>
                       </div>
                     ))}
@@ -285,7 +285,7 @@ export const WorkCentersView: React.FC<WorkCentersViewProps> = ({
 
                 <div className="flex justify-between items-center text-xs text-slate-600 dark:text-slate-400 pt-1">
                   <span>Hourly Machine Absorption:</span>
-                  <strong className="text-slate-900 dark:text-white font-mono">OMR {wc.standardMachineRatePerHourOMR.toFixed(2)}</strong>
+                  <strong className="text-slate-900 dark:text-white font-mono">OMR {wc.standardHourlyMachineRateOMR.toFixed(2)}</strong>
                 </div>
               </div>
             ))}
@@ -311,34 +311,29 @@ export const WorkCentersView: React.FC<WorkCentersViewProps> = ({
             <table className="w-full text-left text-xs">
               <thead className="bg-slate-50 dark:bg-slate-950 text-slate-600 dark:text-slate-400 font-semibold border-b border-slate-200 dark:border-slate-800">
                 <tr>
-                  <th className="p-3">Operator Name</th>
-                  <th className="p-3">Designation / Role</th>
-                  <th className="p-3">Direct Certifications</th>
+                  <th className="p-3">Skill / Role</th>
+                  <th className="p-3">Headcount</th>
+                  <th className="p-3">Required Certification</th>
                   <th className="p-3 text-center">Hourly Rate</th>
-                  <th className="p-3 text-center">Assigned Shift</th>
+                  <th className="p-3 text-center">Overtime</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-200 dark:divide-slate-800 text-slate-700 dark:text-slate-300">
-                {selectedCenter.qualifiedOperators.map((op) => (
-                  <tr key={op.id} className="hover:bg-slate-100/70 dark:hover:bg-slate-800/40">
-                    <td className="p-3 font-semibold text-slate-900 dark:text-white">{op.name}</td>
-                    <td className="p-3 text-slate-600 dark:text-slate-400">{op.role}</td>
+                {selectedCenter.laborSkills.map((op, idx) => (
+                  <tr key={idx} className="hover:bg-slate-100/70 dark:hover:bg-slate-800/40">
+                    <td className="p-3 font-semibold text-slate-900 dark:text-white">{op.roleTitle}</td>
+                    <td className="p-3 text-slate-600 dark:text-slate-400">{op.headcountAvailable} available</td>
                     <td className="p-3">
                       <div className="flex flex-wrap gap-1">
-                        {op.certifications.map((c, i) => (
-                          <span
-                            key={i}
-                            className="px-2 py-0.5 rounded bg-orange-500/10 text-orange-700 dark:text-orange-400 border border-orange-500/20 text-[10px] font-bold"
-                          >
-                            {c}
-                          </span>
-                        ))}
+                        <span className="px-2 py-0.5 rounded bg-orange-500/10 text-orange-700 dark:text-orange-400 border border-orange-500/20 text-[10px] font-bold">
+                          {op.requiredCertification}
+                        </span>
                       </div>
                     </td>
                     <td className="p-3 text-center font-mono font-bold text-emerald-600 dark:text-emerald-400">
-                      OMR {op.hourlyRateOMR.toFixed(2)}
+                      OMR {op.hourlyLaborRateOMR.toFixed(2)}
                     </td>
-                    <td className="p-3 text-center text-slate-700 dark:text-slate-300">{op.shift}</td>
+                    <td className="p-3 text-center text-slate-700 dark:text-slate-300">OT ×{op.overtimeMultiplier}</td>
                   </tr>
                 ))}
               </tbody>

@@ -63,8 +63,8 @@ export const SupplierManagementView: React.FC = () => {
   const [contractVal, setContractVal] = useState<number>(100000);
   const [contractExpiry, setContractExpiry] = useState('2027-12-31');
 
-  const formatOMR = (amt: number) =>
-    `OMR ${amt.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+  const formatOMR = (amt?: number) =>
+    `OMR ${(amt ?? 0).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
 
   const handleAddSupplierSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -406,7 +406,7 @@ export const SupplierManagementView: React.FC = () => {
                 <div className="grid grid-cols-3 gap-2 bg-slate-50 dark:bg-slate-800/50 p-2.5 rounded-xl">
                   <div>
                     <span className="text-[10px] uppercase text-slate-500 dark:text-slate-400 block">Total Value</span>
-                    <span className="font-bold text-slate-900 dark:text-slate-100">{formatOMR(c.contractValueOMR)}</span>
+                    <span className="font-bold text-slate-900 dark:text-slate-100">{formatOMR(c.contractValueOMR ?? c.valueOMR ?? 0)}</span>
                   </div>
                   <div>
                     <span className="text-[10px] uppercase text-slate-500 dark:text-slate-400 block">Start Date</span>

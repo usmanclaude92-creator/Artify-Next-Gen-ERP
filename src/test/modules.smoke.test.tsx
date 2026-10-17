@@ -1,6 +1,6 @@
 import React from 'react';
 import { describe, expect, it, vi } from 'vitest';
-import { render } from '@testing-library/react';
+import { render, fireEvent } from '@testing-library/react';
 import { ERP_MODULES } from '../navigation/erpHierarchy';
 import { SystemManagementModuleRunner } from '../modules/system-management/SystemManagementModuleRunner';
 import { BusinessIntelligenceModuleRunner } from '../modules/business-intelligence/BusinessIntelligenceModuleRunner';
@@ -64,5 +64,29 @@ describe.each(Object.entries(RUNNERS))('%s runner', (id, Runner) => {
       />
     );
     expect(container.childElementCount).toBeGreaterThan(0);
+  });
+});
+
+describe.each(Object.entries(RUNNERS))('%s runner tabs', (id, Runner) => {
+  it('renders every functional-area tab without throwing', () => {
+    const module = ERP_MODULES.find(m => m.id === id)!;
+    const { container } = render(
+      <Runner
+        module={module}
+        onNavigate={vi.fn()}
+        isFavorite={false}
+        onToggleFavorite={vi.fn()}
+        activeRole="Administrator"
+      />
+    );
+    const tabLabels = Array.from(container.querySelectorAll('button'))
+      .map(b => (b.textContent || '').trim())
+      .filter(t => /^\d{2}\.\d{2}/.test(t));
+    for (const label of [...new Set(tabLabels)]) {
+      const btn = Array.from(container.querySelectorAll('button')).find(b => (b.textContent || '').trim() === label);
+      if (!btn) continue; // sub-tab labels can disappear once another tab is active
+      fireEvent.click(btn);
+      expect(container.childElementCount, label).toBeGreaterThan(0);
+    }
   });
 });

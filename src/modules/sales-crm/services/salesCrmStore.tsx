@@ -6,6 +6,7 @@ import {
   Opportunity,
   SalesActivity,
   SalesQuotation,
+  QuoteLineItem,
   SalesOrder,
   DeliveryNote,
   ARInvoice,
@@ -1031,7 +1032,10 @@ interface SalesCrmContextType {
   updateOpportunity: (id: string, updates: Partial<Opportunity>) => void;
 
   // Actions — Sales Activities
-  addActivity: (act: Omit<SalesActivity, 'id' | 'activityCode'>) => SalesActivity;
+  addActivity: (act: Partial<Omit<SalesActivity, 'id' | 'activityCode'>> & Pick<SalesActivity, 'type' | 'subject'>) => SalesActivity;
+  updateActivityStatus: (id: string, status: SalesActivity['status']) => void;
+  updateSalesOrderStatus: (id: string, status: SalesOrder['status']) => void;
+  addQuotation: (quo: Partial<Omit<SalesQuotation, 'lines'>> & { customerId: string; lines: Partial<QuoteLineItem>[] }) => SalesQuotation;
   completeActivity: (id: string, outcomeNotes: string) => void;
 
   // Actions — Quotations (CPQ)
@@ -1421,14 +1425,97 @@ export const SalesCrmProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     setOpportunities((prev) => prev.map((o) => (o.id === id ? { ...o, ...updates } : o)));
   };
 
-  const addActivity = (actData: Omit<SalesActivity, 'id' | 'activityCode'>): SalesActivity => {
+  const addActivity = (
+    actData: Partial<Omit<SalesActivity, 'id' | 'activityCode'>> & Pick<SalesActivity, 'type' | 'subject'>
+  ): SalesActivity => {
     const newAct: SalesActivity = {
+      relatedToType: 'Customer',
+      relatedToId: actData.customerId ?? '',
+      relatedToName: actData.customerName ?? '',
+      assignedRepId: '',
+      assignedRepName: actData.assignedToName ?? '',
+      scheduledDate: actData.dueDate ?? new Date().toISOString().split('T')[0],
+      scheduledTime: '09:00',
+      durationMinutes: 30,
+      status: 'Scheduled',
+      priority: 'Medium',
       ...actData,
       id: `act-${Date.now()}`,
       activityCode: `ACT-2026-${Math.floor(1000 + mockRandom() * 9000)}`
     };
     setActivities((prev) => [newAct, ...prev]);
     return newAct;
+  };
+
+  const updateActivityStatus = (id: string, status: SalesActivity['status']) => {
+    setActivities((prev) =>
+      prev.map((a) =>
+        a.id === id
+          ? { ...a, status, completedAt: status === 'Completed' ? new Date().toISOString() : a.completedAt }
+          : a
+      )
+    );
+  };
+
+  const updateSalesOrderStatus = (id: string, status: SalesOrder['status']) => {
+    setSalesOrders((prev) => prev.map((so) => (so.id === id ? { ...so, status } : so)));
+  };
+
+  const addQuotation = (
+    q: Partial<Omit<SalesQuotation, 'lines'>> & { customerId: string; lines: Partial<QuoteLineItem>[] }
+  ): SalesQuotation => {
+    const today = new Date().toISOString().split('T')[0];
+    const grandTotal = q.grandTotalOMR ?? q.totalAmountOMR ?? 0;
+    const newQuo: SalesQuotation = {
+      customerName: '',
+      quotationDate: today,
+      validUntilDate: today,
+      paymentTerms: '',
+      incoterms: 'EXW (Ex Works)',
+      currency: 'OMR',
+      exchangeRate: 1,
+      salesRepId: '',
+      salesRepName: '',
+      deliveryLocation: '',
+      warrantyPeriod: q.deliveryLeadTime ?? '',
+      ...q,
+      lines: q.lines.map((l, idx) => {
+        const qty = l.quantity ?? 1;
+        const price = l.listPriceOMR ?? l.unitPriceOMR ?? 0;
+        const disc = l.discountPercentage ?? 0;
+        const net = price * (1 - disc / 100);
+        const sub = qty * net;
+        return {
+          id: l.id ?? `ql-${Date.now()}-${idx}`,
+          itemCode: l.itemCode ?? '',
+          itemDescription: l.itemDescription ?? l.description ?? '',
+          quantity: qty,
+          unitOfMeasure: (l.unitOfMeasure ?? l.uom ?? 'Units') as QuoteLineItem['unitOfMeasure'],
+          listPriceOMR: price,
+          discountPercentage: disc,
+          discountAmountOMR: qty * price - sub,
+          netUnitPriceOMR: net,
+          lineSubtotalOMR: sub,
+          vatPercentage: l.vatPercentage ?? 5,
+          vatAmountOMR: l.vatAmountOMR ?? sub * 0.05,
+          lineTotalOMR: l.lineTotalOMR ?? sub * 1.05,
+          estimatedDeliveryWeeks: l.estimatedDeliveryWeeks ?? 6,
+          marginPercentage: l.marginPercentage ?? 0
+        };
+      }),
+      id: `quo-${Date.now()}`,
+      quotationNumber: `QUO-2026-${Math.floor(10000 + mockRandom() * 90000)}`,
+      revisionNumber: 0,
+      subtotalOMR: q.subtotalOMR ?? q.subtotalAmountOMR ?? 0,
+      totalDiscountOMR: q.totalDiscountOMR ?? q.discountAmountOMR ?? 0,
+      vatAmountOMR: q.vatAmountOMR ?? 0,
+      grandTotalOMR: grandTotal,
+      overallMarginPercentage: q.overallMarginPercentage ?? q.grossMarginPercentage ?? 0,
+      requiresSpecialApproval: q.requiresSpecialApproval ?? q.requiresCommercialApproval ?? false,
+      status: q.status ?? 'Draft'
+    };
+    setQuotations((prev) => [newQuo, ...prev]);
+    return newQuo;
   };
 
   const completeActivity = (id: string, outcomeNotes: string) => {
@@ -1922,6 +2009,9 @@ export const SalesCrmProvider: React.FC<{ children: React.ReactNode }> = ({ chil
         updateOpportunityStage,
         updateOpportunity,
         addActivity,
+        updateActivityStatus,
+        updateSalesOrderStatus,
+        addQuotation,
         completeActivity,
         createQuotation,
         approveQuotation,

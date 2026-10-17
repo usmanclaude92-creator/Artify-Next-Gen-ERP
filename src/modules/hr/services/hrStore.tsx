@@ -2262,12 +2262,41 @@ export const HrProvider: React.FC<{ children: React.ReactNode }> = ({ children }
         publicHolidays,
         overtimeClaims,
         benefitPolicies,
-        benefitPackages: benefitPolicies,
+        benefitPackages: benefitPolicies.map((b) => ({
+          ...b,
+          name: b.name ?? b.benefitName,
+          code: b.code ?? b.id,
+          annualAllowanceValue: b.annualAllowanceValue ?? b.annualValue,
+          currency: b.currency ?? 'OMR',
+          inclusions: b.inclusions ?? [b.description]
+        })),
         loans,
-        employeeLoans: loans,
-        salaryAdvances,
+        employeeLoans: loans.map((l) => ({
+          ...l,
+          currency: l.currency ?? 'OMR',
+          interestRate: l.interestRate ?? l.interestRatePercent ?? 0,
+          reason: l.reason ?? l.loanType.replace(/_/g, ' ').toLowerCase()
+        })),
+        salaryAdvances: salaryAdvances.map((a) => ({
+          ...a,
+          requestNumber: a.requestNumber ?? a.advanceNumber ?? a.id,
+          amount: a.amount ?? a.requestedAmount ?? 0,
+          recoveryMonth: a.recoveryMonth ?? a.deductionPayrollMonth ?? '',
+          currency: a.currency ?? 'OMR',
+          department: a.department ?? employees.find((e) => e.id === a.employeeId)?.department ?? ''
+        })),
         insurancePlans,
-        insurancePolicies: insurancePlans,
+        insurancePolicies: insurancePlans.map((p) => ({
+          ...p,
+          provider: p.provider ?? p.providerName,
+          planCategory: p.planCategory ?? p.tierName,
+          annualLimitPerMember: p.annualLimitPerMember ?? p.annualCoverageLimit,
+          currency: p.currency ?? 'OMR',
+          totalMembersCovered: p.totalMembersCovered ?? p.enrolledEmployeesCount + p.enrolledDependentsCount,
+          networkTier: p.networkTier ?? p.coverageScope,
+          expiryDate: p.expiryDate ?? p.renewalDate,
+          status: p.status ?? 'Active'
+        })),
         performanceReviews,
         trainingCourses,
         trainingPrograms: trainingCourses,

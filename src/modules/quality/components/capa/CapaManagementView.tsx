@@ -213,7 +213,7 @@ export const CapaManagementView: React.FC = () => {
                       {capa.capaNumber}
                     </span>
                     <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">
-                      {capa.currentEightDStage.replace('_', ' ')}
+                      {(capa.currentEightDStage ?? 'D1_TEAM').replace('_', ' ')}
                     </span>
                   </div>
 
@@ -288,7 +288,7 @@ export const CapaManagementView: React.FC = () => {
                   <div className="space-y-2 text-xs">
                     <span className="text-slate-600 dark:text-slate-400 font-bold uppercase">Assigned 8D Problem Solving Team:</span>
                     <div className="flex flex-wrap gap-2 pt-1">
-                      {selectedCapa.d1Team.map((member, idx) => (
+                      {(selectedCapa.d1Team ?? []).map((member, idx) => (
                         <span key={idx} className="flex items-center gap-1.5 px-3 py-1.5 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl text-slate-900 dark:text-white font-medium">
                           <Users className="w-3.5 h-3.5 text-teal-600 dark:text-teal-400" />
                           <span>{member}</span>
@@ -382,7 +382,7 @@ export const CapaManagementView: React.FC = () => {
           </div>
 
           <div className="space-y-3">
-            {selectedCapa.fiveWhys.map((w, idx) => (
+            {(selectedCapa.fiveWhys ?? []).map((w, idx) => (
               <div
                 key={idx}
                 className={`p-4 rounded-xl border space-y-2 ${
@@ -436,14 +436,14 @@ export const CapaManagementView: React.FC = () => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            {selectedCapa.ishikawaCategories.map((cat, idx) => (
+            {(selectedCapa.ishikawaCategories ?? []).map((cat, idx) => (
               <div key={idx} className="bg-slate-50 dark:bg-slate-950 p-4 rounded-xl border border-slate-200 dark:border-slate-800 space-y-2">
                 <div className="text-xs font-bold text-teal-600 dark:text-teal-400 uppercase tracking-wider flex items-center justify-between">
                   <span>{cat.category}</span>
                   <span className="text-[10px] text-slate-500 dark:text-slate-400 font-mono">{cat.causes.length} Factors</span>
                 </div>
                 <ul className="space-y-1.5 text-xs text-slate-700 dark:text-slate-300">
-                  {cat.causes.map((c, cIdx) => (
+                  {(cat.causes ?? []).map((c, cIdx) => (
                     <li key={cIdx} className="flex items-start gap-1.5">
                       <span className="text-teal-600 dark:text-teal-500">•</span>
                       <span>{c}</span>

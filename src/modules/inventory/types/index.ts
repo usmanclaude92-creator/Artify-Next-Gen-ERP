@@ -388,6 +388,12 @@ export interface InventoryCount {
 // ==========================================
 
 export interface BatchLot {
+  heatNumber?: string;
+  qaApprovalStatus?: string;
+  quantityOnHand?: number;
+  quantityReserved?: number;
+  quantityAvailable?: number;
+
   id: string;
   batchNumber: string; // e.g. LOT-2026-VLV-8812
   itemId: string;
@@ -414,6 +420,9 @@ export interface BatchLot {
 }
 
 export interface SerialNumberRecord {
+  warrantyNumber?: string;
+  warrantyExpiryDate?: string;
+
   id: string;
   serialNumber: string; // e.g. SN-VSD-9948210
   itemId: string;
