@@ -57,7 +57,15 @@ export const MasterDataManagementView: React.FC<{ activeTab?: string }> = ({ act
 
   const handleCreateDupRule = (e: React.FormEvent) => {
     e.preventDefault();
-    addDuplicateRule(dupForm);
+    addDuplicateRule({
+      entityType: dupForm.entity,
+      ruleName: dupForm.ruleName,
+      fieldsChecked: dupForm.matchFields,
+      matchType: 'Exact Match',
+      similarityThresholdPercent: dupForm.thresholdScore,
+      actionOnMatch: dupForm.action === 'Block' ? 'Block Creation' : 'Flag for Review',
+      status: dupForm.status
+    });
     setIsDupModalOpen(false);
   };
 

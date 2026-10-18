@@ -117,6 +117,9 @@ export const WorkflowApprovalManagementView: React.FC<{ activeTab?: string }> = 
     if (!delegationForm.reason) return;
     addDelegation({
       ...delegationForm,
+      delegatorRole: '',
+      delegateRole: '',
+      scope: 'All Approvals',
       status: 'Active'
     });
     setIsDelegationModalOpen(false);
@@ -124,7 +127,18 @@ export const WorkflowApprovalManagementView: React.FC<{ activeTab?: string }> = 
 
   const handleCreateMatrix = (e: React.FormEvent) => {
     e.preventDefault();
-    addApprovalMatrixRule(matrixForm);
+    addApprovalMatrixRule({
+      companyId: 'comp-1',
+      departmentId: '',
+      module: matrixForm.module,
+      transactionType: matrixForm.documentType,
+      minAmount: matrixForm.minAmountOMR,
+      maxAmount: matrixForm.maxAmountOMR,
+      currency: 'OMR',
+      approvalLevels: Array.from({ length: Math.max(1, matrixForm.approverCountRequired) }, () => matrixForm.requiredRole),
+      effectiveDate: new Date().toISOString().split('T')[0],
+      status: 'Active'
+    });
     setIsMatrixModalOpen(false);
   };
 

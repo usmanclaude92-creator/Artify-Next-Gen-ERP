@@ -45,7 +45,10 @@ export const IntegrationsApiView: React.FC<{ activeTab?: string }> = ({ activeTa
   const handleCreateClient = (e: React.FormEvent) => {
     e.preventDefault();
     if (!clientForm.name) return;
-    addApiClient(clientForm);
+    addApiClient({
+      ...clientForm,
+      expiresAt: new Date(Date.now() + 365 * 86400000).toISOString().split('T')[0]
+    });
     setIsClientModalOpen(false);
   };
 

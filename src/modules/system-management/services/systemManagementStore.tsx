@@ -114,7 +114,7 @@ interface SystemManagementContextType {
   addCurrency: (currency: Omit<CurrencyDefinition, 'id'>) => { success: boolean; id?: string; error?: string };
   updateCurrency: (id: string, patch: Partial<CurrencyDefinition>) => { success: boolean; error?: string };
 
-  addCompany: (comp: Partial<Omit<Company, 'id' | 'createdAt' | 'updatedAt' | 'version'>>, user?: { id: string; name: string; role?: string }) => { success: boolean; id?: string; error?: string };
+  addCompany: (comp: Omit<Company, 'id' | 'createdAt' | 'updatedAt' | 'version'>, user?: { id: string; name: string; role?: string }) => { success: boolean; id?: string; error?: string };
   updateCompany: (id: string, comp: Partial<Company>, reason?: string, user?: { id: string; name: string; role?: string }) => { success: boolean; error?: string };
   archiveCompany: (id: string, user?: { id: string; name: string }) => { success: boolean; error?: string };
   submitCompanyForApproval: (id: string, user: { id: string; name: string; role: string }) => { success: boolean; error?: string };
@@ -128,7 +128,7 @@ interface SystemManagementContextType {
   generateCompanyProfileSummaryAI: (companyId: string) => Promise<string>;
 
   // 01.01.02 Group / Holding Company Operations
-  addGroup: (group: Partial<Omit<GroupMaster, 'id' | 'createdAt' | 'updatedAt' | 'version'>>, user?: { id: string; name: string; role?: string }) => { success: boolean; id?: string; error?: string };
+  addGroup: (group: Omit<GroupMaster, 'id' | 'createdAt' | 'updatedAt' | 'version' | 'createdBy' | 'updatedBy'>, user?: { id: string; name: string; role?: string }) => { success: boolean; id?: string; error?: string };
   updateGroup: (id: string, patch: Partial<GroupMaster>, user?: { id: string; name: string }) => { success: boolean; error?: string };
   archiveGroup: (id: string, user?: { id: string; name: string }) => { success: boolean; error?: string };
   submitGroupForApproval: (id: string, user: { id: string; name: string; role: string }) => { success: boolean; error?: string };
@@ -138,7 +138,7 @@ interface SystemManagementContextType {
   addGroupAttachment: (groupId: string, attachment: Omit<GroupAttachment, 'id' | 'uploadedAt'>) => void;
 
   // Group Memberships
-  addGroupMember: (member: Partial<Omit<GroupMembership, 'id' | 'createdAt' | 'updatedAt' | 'version'>>, user?: { id: string; name: string }) => { success: boolean; id?: string; error?: string };
+  addGroupMember: (member: Omit<GroupMembership, 'id' | 'createdAt' | 'updatedAt' | 'version' | 'createdBy' | 'updatedBy'>, user?: { id: string; name: string }) => { success: boolean; id?: string; error?: string };
   updateGroupMember: (id: string, patch: Partial<GroupMembership>, reason?: string, changedBy?: string) => { success: boolean; error?: string };
   removeGroupMember: (id: string, reason?: string, removedBy?: string) => { success: boolean; error?: string };
 
@@ -151,13 +151,13 @@ interface SystemManagementContextType {
   generateStructureExplanationAI: (groupId: string) => Promise<string>;
   validateStructureWithAI: (groupId: string) => Promise<{ score: number; recommendations: string[]; anomalies: string[] }>;
 
-  addBranch: (br: Partial<Omit<Branch, 'id' | 'createdAt'>>) => void;
+  addBranch: (br: Omit<Branch, 'id' | 'createdAt'>) => void;
   updateBranch: (id: string, br: Partial<Branch>) => void;
-  addDepartment: (dept: Partial<Omit<Department, 'id'>>) => void;
+  addDepartment: (dept: Omit<Department, 'id'>) => void;
   updateDepartment: (id: string, dept: Partial<Department>) => void;
   addLocation: (loc: Omit<Location, 'id'>) => void;
   updateLocation: (id: string, loc: Partial<Location>) => void;
-  addOperatingUnit: (ou: Partial<Omit<OperatingUnit, 'id'>>) => void;
+  addOperatingUnit: (ou: Omit<OperatingUnit, 'id'>) => void;
   updateOperatingUnit: (id: string, ou: Partial<OperatingUnit>) => void;
 
   // 01.02 User & Access
@@ -165,7 +165,7 @@ interface SystemManagementContextType {
   userGroups: UserGroup[];
   sodRules: SoDRule[];
   accessRestrictions: AccessRestriction[];
-  addUser: (usr: Partial<Omit<UserAccount, 'id' | 'createdAt'>>) => void;
+  addUser: (usr: Omit<UserAccount, 'id' | 'createdAt'>) => void;
   updateUser: (id: string, usr: Partial<UserAccount>) => void;
   toggleUserLock: (id: string) => void;
   resetUserPassword: (id: string) => void;
@@ -173,7 +173,7 @@ interface SystemManagementContextType {
   updateUserGroup: (id: string, grp: Partial<UserGroup>) => void;
   addSoDException: (ruleId: string, exception: { userId: string; userName: string; reason: string; expiresAt: string }) => void;
   toggleSoDRule: (ruleId: string) => void;
-  addAccessRestriction: (ar: Partial<Omit<AccessRestriction, 'id'>>) => void;
+  addAccessRestriction: (ar: Omit<AccessRestriction, 'id'>) => void;
   updateAccessRestriction: (id: string, ar: Partial<AccessRestriction>) => void;
 
   // 01.03 Workflow & Approval
@@ -182,15 +182,15 @@ interface SystemManagementContextType {
   delegations: DelegationOfAuthority[];
   approvalLimits: ApprovalLimit[];
   escalationRules: EscalationRule[];
-  addWorkflow: (wf: Partial<Omit<ApprovalWorkflow, 'id' | 'createdAt' | 'updatedAt'>>) => void;
+  addWorkflow: (wf: Omit<ApprovalWorkflow, 'id' | 'createdAt' | 'updatedAt'>) => void;
   updateWorkflow: (id: string, wf: Partial<ApprovalWorkflow>) => void;
-  addApprovalMatrixRule: (rule: Partial<Omit<ApprovalMatrixRule, 'id'>>) => void;
+  addApprovalMatrixRule: (rule: Omit<ApprovalMatrixRule, 'id'>) => void;
   updateApprovalMatrixRule: (id: string, rule: Partial<ApprovalMatrixRule>) => void;
-  addDelegation: (del: Partial<Omit<DelegationOfAuthority, 'id'>>) => void;
+  addDelegation: (del: Omit<DelegationOfAuthority, 'id'>) => void;
   revokeDelegation: (id: string) => void;
   addApprovalLimit: (limit: Omit<ApprovalLimit, 'id'>) => void;
   updateApprovalLimit: (id: string, limit: Partial<ApprovalLimit>) => void;
-  addEscalationRule: (rule: Partial<Omit<EscalationRule, 'id'>>) => void;
+  addEscalationRule: (rule: Omit<EscalationRule, 'id'>) => void;
   updateEscalationRule: (id: string, rule: Partial<EscalationRule>) => void;
 
   // 01.04 Financial & Period Controls
@@ -202,7 +202,7 @@ interface SystemManagementContextType {
   addFiscalYear: (fy: Omit<FiscalYear, 'id'>) => void;
   togglePostingPeriodSubLedger: (periodId: string, ledgerKey: 'gl' | 'ap' | 'ar' | 'inventory' | 'fixedAssets' | 'payroll', newStatus: 'Open' | 'Closed' | 'Locked') => void;
   lockOrUnlockPeriod: (periodId: string, action: 'lock' | 'unlock', reason: string) => void;
-  addDocumentSequence: (seq: Partial<Omit<DocumentSequence, 'id'>>) => void;
+  addDocumentSequence: (seq: Omit<DocumentSequence, 'id'>) => void;
   updateDocumentSequence: (id: string, seq: Partial<DocumentSequence>) => void;
   updatePostingControls: (ctrl: Partial<PostingControl>) => void;
   requestPeriodUnlock: (periodId: string, reason: string) => void;
@@ -213,9 +213,9 @@ interface SystemManagementContextType {
   duplicateRules: DuplicateRule[];
   validationRules: ValidationRule[];
   mdmApprovals: MasterDataApprovalRequest[];
-  addDuplicateRule: (rule: Partial<Omit<DuplicateRule, 'id'>>) => void;
+  addDuplicateRule: (rule: Omit<DuplicateRule, 'id'>) => void;
   updateDuplicateRule: (id: string, rule: Partial<DuplicateRule>) => void;
-  addValidationRule: (rule: Partial<Omit<ValidationRule, 'id'>>) => void;
+  addValidationRule: (rule: Omit<ValidationRule, 'id'>) => void;
   updateValidationRule: (id: string, rule: Partial<ValidationRule>) => void;
   processMdmApproval: (id: string, action: 'Approved' | 'Rejected', comments?: string) => void;
 
@@ -225,7 +225,7 @@ interface SystemManagementContextType {
   alerts: SystemAlertItem[];
   markAlertAsRead: (id: string) => void;
   markAllAlertsAsRead: () => void;
-  addNotificationTemplate: (tmpl: Partial<Omit<NotificationTemplate, 'id'>>) => void;
+  addNotificationTemplate: (tmpl: Omit<NotificationTemplate, 'id'>) => void;
   updateNotificationTemplate: (id: string, tmpl: Partial<NotificationTemplate>) => void;
 
   // 01.07 Audit Trail & Monitoring
@@ -237,7 +237,7 @@ interface SystemManagementContextType {
   apiClients: ApiClient[];
   integrations: ExternalIntegration[];
   integrationLogs: IntegrationLog[];
-  addApiClient: (client: Partial<Omit<ApiClient, 'id' | 'createdAt' | 'maskedSecret' | 'dailyRequestCount'>>) => void;
+  addApiClient: (client: Omit<ApiClient, 'id' | 'createdAt' | 'maskedSecret' | 'dailyRequestCount'>) => void;
   toggleApiClientStatus: (id: string) => void;
   triggerIntegrationSync: (id: string) => void;
 
@@ -657,7 +657,7 @@ export const SystemManagementProvider: React.FC<{ children: React.ReactNode }> =
   // 01.01.02 Group / Holding Master Operations
   // ─────────────────────────────────────────────────────────────
   const addGroup = (
-    groupData: Partial<Omit<GroupMaster, 'id' | 'createdAt' | 'updatedAt' | 'version'>>,
+    groupData: Omit<GroupMaster, 'id' | 'createdAt' | 'updatedAt' | 'version' | 'createdBy' | 'updatedBy'>,
     user?: { id: string; name: string; role?: string }
   ): { success: boolean; id?: string; error?: string } => {
     const trimmedCode = groupData.code.trim().toUpperCase();
@@ -672,7 +672,7 @@ export const SystemManagementProvider: React.FC<{ children: React.ReactNode }> =
 
     const newId = `grp-${Date.now().toString().slice(-4)}`;
     const dateStr = new Date().toISOString().split('T')[0];
-    const newGroup = {
+    const newGroup: GroupMaster = {
       ...groupData,
       id: newId,
       code: trimmedCode,
@@ -681,7 +681,7 @@ export const SystemManagementProvider: React.FC<{ children: React.ReactNode }> =
       updatedAt: dateStr,
       createdBy: user?.name || 'usr-admin',
       updatedBy: user?.name || 'usr-admin'
-    } as GroupMaster;
+    };
 
     setGroups(prev => [...prev, newGroup]);
     setSelectedGroupId(newId);
@@ -983,7 +983,7 @@ export const SystemManagementProvider: React.FC<{ children: React.ReactNode }> =
   // 01.01.02 Group Memberships & Shareholding Management
   // ─────────────────────────────────────────────────────────────
   const addGroupMember = (
-    memberData: Partial<Omit<GroupMembership, 'id' | 'createdAt' | 'updatedAt' | 'version'>>,
+    memberData: Omit<GroupMembership, 'id' | 'createdAt' | 'updatedAt' | 'version' | 'createdBy' | 'updatedBy'>,
     user?: { id: string; name: string }
   ): { success: boolean; id?: string; error?: string } => {
     const group = groups.find(g => g.id === memberData.groupId);
@@ -1016,7 +1016,7 @@ export const SystemManagementProvider: React.FC<{ children: React.ReactNode }> =
 
     const newId = `gmem-${Date.now().toString().slice(-4)}`;
     const dateStr = new Date().toISOString().split('T')[0];
-    const newMembership = {
+    const newMembership: GroupMembership = {
       ...memberData,
       id: newId,
       companyCode: comp.code,
@@ -1026,7 +1026,7 @@ export const SystemManagementProvider: React.FC<{ children: React.ReactNode }> =
       updatedAt: dateStr,
       createdBy: user?.name || 'usr-admin',
       updatedBy: user?.name || 'usr-admin'
-    } as GroupMembership;
+    };
 
     setGroupMemberships(prev => [...prev, newMembership]);
 
@@ -1309,7 +1309,7 @@ export const SystemManagementProvider: React.FC<{ children: React.ReactNode }> =
   };
 
   const addCompany = (
-    compData: Partial<Omit<Company, 'id' | 'createdAt' | 'updatedAt' | 'version'>>,
+    compData: Omit<Company, 'id' | 'createdAt' | 'updatedAt' | 'version'>,
     user?: { id: string; name: string; role?: string }
   ): { success: boolean; id?: string; error?: string } => {
     // 1. Mandatory Code validation
@@ -1371,7 +1371,7 @@ export const SystemManagementProvider: React.FC<{ children: React.ReactNode }> =
       }
     ];
 
-    const newCompany = {
+    const newCompany: Company = {
       ...compData,
       id: newId,
       code: cleanCode,
@@ -1381,7 +1381,7 @@ export const SystemManagementProvider: React.FC<{ children: React.ReactNode }> =
       status: compData.status || 'Active',
       createdAt: dateStr,
       updatedAt: dateStr
-    } as Company;
+    };
 
     setCompanies(prev => [...prev, newCompany]);
 
@@ -1947,13 +1947,13 @@ export const SystemManagementProvider: React.FC<{ children: React.ReactNode }> =
     return summary;
   };
 
-  const addBranch = (br: Partial<Omit<Branch, 'id' | 'createdAt'>>) => {
+  const addBranch = (br: Omit<Branch, 'id' | 'createdAt'>) => {
     const newId = `br-${branches.length + 1}`;
-    const newBranch = {
+    const newBranch: Branch = {
       ...br,
       id: newId,
       createdAt: new Date().toISOString().split('T')[0]
-    } as Branch;
+    };
     setBranches(prev => [...prev, newBranch]);
     logAuditEvent({
       userId: 'usr-admin',
@@ -1975,9 +1975,9 @@ export const SystemManagementProvider: React.FC<{ children: React.ReactNode }> =
     setBanner(`Branch ${id} updated.`);
   };
 
-  const addDepartment = (dept: Partial<Omit<Department, 'id'>>) => {
+  const addDepartment = (dept: Omit<Department, 'id'>) => {
     const newId = `dept-${departments.length + 1}`;
-    const newDept = { ...dept, id: newId } as Department;
+    const newDept: Department = { ...dept, id: newId };
     setDepartments(prev => [...prev, newDept]);
     logAuditEvent({
       userId: 'usr-admin',
@@ -2011,9 +2011,9 @@ export const SystemManagementProvider: React.FC<{ children: React.ReactNode }> =
     setBanner(`Location ${id} updated.`);
   };
 
-  const addOperatingUnit = (ou: Partial<Omit<OperatingUnit, 'id'>>) => {
+  const addOperatingUnit = (ou: Omit<OperatingUnit, 'id'>) => {
     const newId = `ou-${operatingUnits.length + 1}`;
-    const newOu = { ...ou, id: newId } as OperatingUnit;
+    const newOu: OperatingUnit = { ...ou, id: newId };
     setOperatingUnits(prev => [...prev, newOu]);
     setBanner(`Operating Unit "${newOu.name}" added.`);
   };
@@ -2024,13 +2024,13 @@ export const SystemManagementProvider: React.FC<{ children: React.ReactNode }> =
   };
 
   // 01.02 User & Access Handlers
-  const addUser = (usr: Partial<Omit<UserAccount, 'id' | 'createdAt'>>) => {
+  const addUser = (usr: Omit<UserAccount, 'id' | 'createdAt'>) => {
     const newId = `usr-${users.length + 1}`;
-    const newUser = {
+    const newUser: UserAccount = {
       ...usr,
       id: newId,
       createdAt: new Date().toISOString().split('T')[0]
-    } as UserAccount;
+    };
     setUsers(prev => [...prev, newUser]);
     logAuditEvent({
       userId: 'usr-admin',
@@ -2175,9 +2175,9 @@ export const SystemManagementProvider: React.FC<{ children: React.ReactNode }> =
     setBanner(`SoD enforcement rule policy toggled.`);
   };
 
-  const addAccessRestriction = (ar: Partial<Omit<AccessRestriction, 'id'>>) => {
+  const addAccessRestriction = (ar: Omit<AccessRestriction, 'id'>) => {
     const newId = `ar-${accessRestrictions.length + 1}`;
-    setAccessRestrictions(prev => [...prev, { ...ar, id: newId } as AccessRestriction]);
+    setAccessRestrictions(prev => [...prev, { ...ar, id: newId }]);
     setBanner(`Access policy rule added.`);
   };
 
@@ -2187,15 +2187,15 @@ export const SystemManagementProvider: React.FC<{ children: React.ReactNode }> =
   };
 
   // 01.03 Workflow Handlers
-  const addWorkflow = (wf: Partial<Omit<ApprovalWorkflow, 'id' | 'createdAt' | 'updatedAt'>>) => {
+  const addWorkflow = (wf: Omit<ApprovalWorkflow, 'id' | 'createdAt' | 'updatedAt'>) => {
     const newId = `wf-${workflows.length + 1}`;
     const dateStr = new Date().toISOString().split('T')[0];
-    const newWorkflow = {
+    const newWorkflow: ApprovalWorkflow = {
       ...wf,
       id: newId,
       createdAt: dateStr,
       updatedAt: dateStr
-    } as ApprovalWorkflow;
+    };
     setWorkflows(prev => [...prev, newWorkflow]);
     logAuditEvent({
       userId: 'usr-admin',
@@ -2217,9 +2217,9 @@ export const SystemManagementProvider: React.FC<{ children: React.ReactNode }> =
     setBanner(`Workflow definition updated.`);
   };
 
-  const addApprovalMatrixRule = (rule: Partial<Omit<ApprovalMatrixRule, 'id'>>) => {
+  const addApprovalMatrixRule = (rule: Omit<ApprovalMatrixRule, 'id'>) => {
     const newId = `am-${approvalMatrices.length + 1}`;
-    setApprovalMatrices(prev => [...prev, { ...rule, id: newId } as ApprovalMatrixRule]);
+    setApprovalMatrices(prev => [...prev, { ...rule, id: newId }]);
     setBanner(`Approval matrix threshold tier registered.`);
   };
 
@@ -2228,9 +2228,9 @@ export const SystemManagementProvider: React.FC<{ children: React.ReactNode }> =
     setBanner(`Approval matrix rule updated.`);
   };
 
-  const addDelegation = (del: Partial<Omit<DelegationOfAuthority, 'id'>>) => {
+  const addDelegation = (del: Omit<DelegationOfAuthority, 'id'>) => {
     const newId = `doa-${delegations.length + 1}`;
-    const newDoa = { ...del, id: newId } as DelegationOfAuthority;
+    const newDoa: DelegationOfAuthority = { ...del, id: newId };
     setDelegations(prev => [...prev, newDoa]);
     logAuditEvent({
       userId: 'usr-admin',
@@ -2275,9 +2275,9 @@ export const SystemManagementProvider: React.FC<{ children: React.ReactNode }> =
     setBanner(`Approval limit updated.`);
   };
 
-  const addEscalationRule = (rule: Partial<Omit<EscalationRule, 'id'>>) => {
+  const addEscalationRule = (rule: Omit<EscalationRule, 'id'>) => {
     const newId = `esc-${escalationRules.length + 1}`;
-    setEscalationRules(prev => [...prev, { ...rule, id: newId } as EscalationRule]);
+    setEscalationRules(prev => [...prev, { ...rule, id: newId }]);
     setBanner(`Workflow escalation SLA rule added.`);
   };
 
@@ -2382,9 +2382,9 @@ export const SystemManagementProvider: React.FC<{ children: React.ReactNode }> =
     setBanner(`Period ${periodId} successfully ${action === 'lock' ? 'locked' : 'unlocked'}.`);
   };
 
-  const addDocumentSequence = (seq: Partial<Omit<DocumentSequence, 'id'>>) => {
+  const addDocumentSequence = (seq: Omit<DocumentSequence, 'id'>) => {
     const newId = `seq-${documentSequences.length + 1}`;
-    setDocumentSequences(prev => [...prev, { ...seq, id: newId } as DocumentSequence]);
+    setDocumentSequences(prev => [...prev, { ...seq, id: newId }]);
     setBanner(`Numbering sequence for ${seq.documentTypeName} created.`);
   };
 
@@ -2481,9 +2481,9 @@ export const SystemManagementProvider: React.FC<{ children: React.ReactNode }> =
   };
 
   // 01.05 MDM Handlers
-  const addDuplicateRule = (rule: Partial<Omit<DuplicateRule, 'id'>>) => {
+  const addDuplicateRule = (rule: Omit<DuplicateRule, 'id'>) => {
     const newId = `dup-${duplicateRules.length + 1}`;
-    setDuplicateRules(prev => [...prev, { ...rule, id: newId } as DuplicateRule]);
+    setDuplicateRules(prev => [...prev, { ...rule, id: newId }]);
     setBanner(`Duplicate matching rule configured.`);
   };
 
@@ -2492,9 +2492,9 @@ export const SystemManagementProvider: React.FC<{ children: React.ReactNode }> =
     setBanner(`Duplicate control rule updated.`);
   };
 
-  const addValidationRule = (rule: Partial<Omit<ValidationRule, 'id'>>) => {
+  const addValidationRule = (rule: Omit<ValidationRule, 'id'>) => {
     const newId = `val-${validationRules.length + 1}`;
-    setValidationRules(prev => [...prev, { ...rule, id: newId } as ValidationRule]);
+    setValidationRules(prev => [...prev, { ...rule, id: newId }]);
     setBanner(`Validation schema rule created.`);
   };
 
@@ -2541,9 +2541,9 @@ export const SystemManagementProvider: React.FC<{ children: React.ReactNode }> =
     setBanner(`All system alerts marked as read.`);
   };
 
-  const addNotificationTemplate = (tmpl: Partial<Omit<NotificationTemplate, 'id'>>) => {
+  const addNotificationTemplate = (tmpl: Omit<NotificationTemplate, 'id'>) => {
     const newId = `tmpl-${notificationTemplates.length + 1}`;
-    setNotificationTemplates(prev => [...prev, { ...tmpl, id: newId } as NotificationTemplate]);
+    setNotificationTemplates(prev => [...prev, { ...tmpl, id: newId }]);
     setBanner(`Notification template "${tmpl.title}" created.`);
   };
 
@@ -2553,15 +2553,15 @@ export const SystemManagementProvider: React.FC<{ children: React.ReactNode }> =
   };
 
   // 01.08 Integration Handlers
-  const addApiClient = (client: Partial<Omit<ApiClient, 'id' | 'createdAt' | 'maskedSecret' | 'dailyRequestCount'>>) => {
+  const addApiClient = (client: Omit<ApiClient, 'id' | 'createdAt' | 'maskedSecret' | 'dailyRequestCount'>) => {
     const newId = `api-${apiClients.length + 1}`;
-    const newClient = {
+    const newClient: ApiClient = {
       ...client,
       id: newId,
       maskedSecret: 'sec_live_' + mockRandom().toString(36).substring(2, 8) + '*****************' + mockRandom().toString(36).substring(2, 6),
       dailyRequestCount: 0,
       createdAt: new Date().toISOString().split('T')[0]
-    } as ApiClient;
+    };
     setApiClients(prev => [...prev, newClient]);
     logAuditEvent({
       userId: 'usr-admin',

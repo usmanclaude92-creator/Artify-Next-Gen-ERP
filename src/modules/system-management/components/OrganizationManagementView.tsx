@@ -104,8 +104,29 @@ export const OrganizationManagementView: React.FC<{ activeTab?: string }> = ({ a
     e.preventDefault();
     if (!companyForm.code || !companyForm.legalName) return;
     addCompany({
-      ...companyForm,
-      isHolding: false
+      code: companyForm.code,
+      legalName: companyForm.legalName,
+      tradingName: companyForm.tradeName || companyForm.legalName,
+      companyType: 'Subsidiary',
+      industrySegment: companyForm.industrySegment,
+      registrationNumber: companyForm.registrationNumber,
+      taxNumber: companyForm.taxNumber,
+      country: companyForm.country,
+      state: '',
+      city: 'Muscat',
+      address: companyForm.address,
+      postalCode: '',
+      phone: companyForm.phone,
+      email: companyForm.email,
+      website: '',
+      currency: companyForm.currency,
+      fiscalYearStart: `${new Date().getFullYear()}-${String(companyForm.fiscalYearStartMonth).padStart(2, '0')}-01`,
+      fiscalYearStartMonth: companyForm.fiscalYearStartMonth,
+      timeZone: 'Asia/Muscat (UTC+4)',
+      dateFormat: 'DD/MM/YYYY',
+      status: companyForm.status,
+      isParent: false,
+      parentEntityId: companyForm.parentEntityId
     });
     setIsCompanyModalOpen(false);
     setCompanyForm({
@@ -131,8 +152,19 @@ export const OrganizationManagementView: React.FC<{ activeTab?: string }> = ({ a
     if (!branchForm.code || !branchForm.name) return;
     const selectedComp = companies.find(c => c.id === branchForm.companyId);
     addBranch({
-      ...branchForm,
-      companyName: selectedComp ? selectedComp.legalName : branchForm.companyName
+      code: branchForm.code,
+      name: branchForm.name,
+      companyId: branchForm.companyId,
+      companyName: selectedComp ? selectedComp.legalName : branchForm.companyName,
+      locationId: '',
+      locationName: `${branchForm.city}, ${branchForm.country}`,
+      manager: branchForm.managerName,
+      address: '',
+      phone: '',
+      email: '',
+      currency: selectedComp ? selectedComp.currency : 'OMR',
+      isTaxBranch: true,
+      status: branchForm.status
     });
     setIsBranchModalOpen(false);
   };
@@ -140,7 +172,19 @@ export const OrganizationManagementView: React.FC<{ activeTab?: string }> = ({ a
   const handleCreateDept = (e: React.FormEvent) => {
     e.preventDefault();
     if (!deptForm.code || !deptForm.name) return;
-    addDepartment(deptForm);
+    addDepartment({
+      code: deptForm.code,
+      name: deptForm.name,
+      companyId: deptForm.companyId,
+      companyName: companies.find(c => c.id === deptForm.companyId)?.legalName ?? '',
+      branchId: '',
+      branchName: '',
+      parentDepartmentId: deptForm.parentDeptId || undefined,
+      departmentHead: deptForm.headOfDepartment,
+      costCenterCode: deptForm.costCenterCode,
+      status: deptForm.status,
+      employeeCount: 0
+    });
     setIsDeptModalOpen(false);
   };
 
@@ -539,6 +583,11 @@ export const OrganizationManagementView: React.FC<{ activeTab?: string }> = ({ a
                 addOperatingUnit({
                   code: `OU-${operatingUnits.length + 1}`,
                   name: 'New Strategic Business Unit',
+                  companyId: companies[0]?.id ?? '',
+                  companyName: companies[0]?.legalName ?? '',
+                  branchId: '',
+                  departmentId: '',
+                  locationId: '',
                   unitType: 'Profit Center',
                   manager: 'General Manager',
                   status: 'Active'

@@ -61,7 +61,20 @@ export const FinancialPeriodControlsView: React.FC<{ activeTab?: string }> = ({ 
   const handleCreateSequence = (e: React.FormEvent) => {
     e.preventDefault();
     if (!seqForm.code || !seqForm.documentTypeName) return;
-    addDocumentSequence(seqForm);
+    addDocumentSequence({
+      documentType: seqForm.code,
+      documentTypeName: seqForm.documentTypeName,
+      companyId: 'comp-1',
+      companyName: 'Artify Global Holding Co.',
+      prefix: seqForm.prefix,
+      suffix: seqForm.suffix,
+      startingNumber: seqForm.nextNumber,
+      currentNumber: seqForm.nextNumber,
+      numberLength: seqForm.paddingDigits,
+      fiscalYearReset: seqForm.resetFrequency === 'Annual',
+      sampleFormatted: `${seqForm.prefix}${String(seqForm.nextNumber).padStart(seqForm.paddingDigits, '0')}${seqForm.suffix}`,
+      status: seqForm.status
+    });
     setIsSeqModalOpen(false);
   };
 
