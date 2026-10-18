@@ -219,7 +219,7 @@ export const DocumentManagementView: React.FC<DocumentManagementViewProps> = ({ 
                     key={doc.id}
                     onClick={() => setSelectedDoc(doc)}
                     className={`hover:bg-slate-50/70 dark:hover:bg-slate-800/70 cursor-pointer transition-colors ${
-                      selectedDoc?.id === doc.id ? 'bg-indigo-50/40 dark:bg-indigo-500/40' : ''
+                      selectedDoc?.id === doc.id ? 'bg-indigo-50/40 dark:bg-indigo-500/10' : ''
                     }`}
                   >
                     <td className="p-3.5 font-mono font-bold text-indigo-700 dark:text-indigo-300">

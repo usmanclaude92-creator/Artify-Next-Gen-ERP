@@ -170,7 +170,7 @@ export const InternalControlsView: React.FC = () => {
           onClick={() => setActiveTab('framework')}
           className={`px-5 py-3 text-sm font-semibold border-b-2 transition flex items-center gap-2 ${
             activeTab === 'framework'
-              ? 'border-emerald-600 text-emerald-700 dark:text-emerald-300 bg-emerald-50/50 dark:bg-emerald-500/50 rounded-t-xl'
+              ? 'border-emerald-600 text-emerald-700 dark:text-emerald-300 bg-emerald-50/50 dark:bg-emerald-500/10 rounded-t-xl'
               : 'border-transparent text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100'
           }`}
         >
@@ -180,7 +180,7 @@ export const InternalControlsView: React.FC = () => {
           onClick={() => setActiveTab('approval')}
           className={`px-5 py-3 text-sm font-semibold border-b-2 transition flex items-center gap-2 ${
             activeTab === 'approval'
-              ? 'border-emerald-600 text-emerald-700 dark:text-emerald-300 bg-emerald-50/50 dark:bg-emerald-500/50 rounded-t-xl'
+              ? 'border-emerald-600 text-emerald-700 dark:text-emerald-300 bg-emerald-50/50 dark:bg-emerald-500/10 rounded-t-xl'
               : 'border-transparent text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100'
           }`}
         >
@@ -190,7 +190,7 @@ export const InternalControlsView: React.FC = () => {
           onClick={() => setActiveTab('sod')}
           className={`px-5 py-3 text-sm font-semibold border-b-2 transition flex items-center gap-2 ${
             activeTab === 'sod'
-              ? 'border-emerald-600 text-emerald-700 dark:text-emerald-300 bg-emerald-50/50 dark:bg-emerald-500/50 rounded-t-xl'
+              ? 'border-emerald-600 text-emerald-700 dark:text-emerald-300 bg-emerald-50/50 dark:bg-emerald-500/10 rounded-t-xl'
               : 'border-transparent text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100'
           }`}
         >
@@ -200,7 +200,7 @@ export const InternalControlsView: React.FC = () => {
           onClick={() => setActiveTab('testing')}
           className={`px-5 py-3 text-sm font-semibold border-b-2 transition flex items-center gap-2 ${
             activeTab === 'testing'
-              ? 'border-emerald-600 text-emerald-700 dark:text-emerald-300 bg-emerald-50/50 dark:bg-emerald-500/50 rounded-t-xl'
+              ? 'border-emerald-600 text-emerald-700 dark:text-emerald-300 bg-emerald-50/50 dark:bg-emerald-500/10 rounded-t-xl'
               : 'border-transparent text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100'
           }`}
         >
@@ -396,7 +396,7 @@ export const InternalControlsView: React.FC = () => {
 
                   {/* Active Violations List */}
                   {sod.activeViolations.length > 0 ? (
-                    <div className="mt-3 p-3 rounded-xl bg-amber-50/70 dark:bg-amber-500/70 border border-amber-200 dark:border-amber-500/30 space-y-2">
+                    <div className="mt-3 p-3 rounded-xl bg-amber-50/70 dark:bg-amber-500/10 border border-amber-200 dark:border-amber-500/30 space-y-2">
                       <div className="flex items-center gap-1.5 text-xs font-bold text-amber-900 dark:text-amber-100">
                         <AlertTriangle className="w-4 h-4 text-amber-600 dark:text-amber-400" />
                         Active User Conflict Identified ({sod.activeViolations.length})

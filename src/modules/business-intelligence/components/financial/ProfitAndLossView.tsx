@@ -117,7 +117,7 @@ export const ProfitAndLossView: React.FC = () => {
                   <React.Fragment key={item.id}>
                     <tr
                       className={`hover:bg-slate-50/80 dark:hover:bg-slate-800/80 transition-colors ${
-                        isMajorTotal ? 'bg-indigo-50/50 dark:bg-indigo-500/50 font-bold text-indigo-950 border-t-2 border-slate-200 dark:border-slate-700' : ''
+                        isMajorTotal ? 'bg-indigo-50/50 dark:bg-indigo-500/10 font-bold text-indigo-950 border-t-2 border-slate-200 dark:border-slate-700' : ''
                       }`}
                     >
                       <td className="py-2.5 px-3">

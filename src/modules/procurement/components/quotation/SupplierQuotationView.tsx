@@ -225,7 +225,7 @@ export const SupplierQuotationView: React.FC = () => {
                       <tr
                         key={q.id}
                         className={`transition-colors ${
-                          isWinner ? 'bg-emerald-50/60 dark:bg-emerald-500/60 font-semibold' : 'hover:bg-slate-50/70 dark:hover:bg-slate-800/70'
+                          isWinner ? 'bg-emerald-50/60 dark:bg-emerald-500/10 font-semibold' : 'hover:bg-slate-50/70 dark:hover:bg-slate-800/70'
                         }`}
                       >
                         <td className="py-3 px-3 font-mono font-bold text-slate-900 dark:text-slate-100">{q.quotationNumber}</td>

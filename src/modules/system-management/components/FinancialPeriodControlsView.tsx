@@ -258,7 +258,7 @@ export const FinancialPeriodControlsView: React.FC<{ activeTab?: string }> = ({ 
                     <tr
                       key={p.id}
                       className={`hover:bg-slate-50/80 dark:hover:bg-slate-800/80 transition-colors ${
-                        isOpen ? 'bg-emerald-50/20 dark:bg-emerald-500/20' : isLocked ? 'bg-slate-50/40 dark:bg-slate-800/40' : ''
+                        isOpen ? 'bg-emerald-50/20 dark:bg-emerald-500/10' : isLocked ? 'bg-slate-50/40 dark:bg-slate-800/40' : ''
                       }`}
                     >
                       <td className="py-3.5 px-4">

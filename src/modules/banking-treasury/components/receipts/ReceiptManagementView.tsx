@@ -480,7 +480,7 @@ export const ReceiptManagementView: React.FC = () => {
                 </div>
               </div>
 
-              <div className="mt-3 p-3 rounded-lg bg-emerald-50/70 dark:bg-emerald-500/70 border border-emerald-100 dark:border-emerald-500/20 flex items-center justify-between">
+              <div className="mt-3 p-3 rounded-lg bg-emerald-50/70 dark:bg-emerald-500/10 border border-emerald-100 dark:border-emerald-500/20 flex items-center justify-between">
                 <span className="text-xs font-semibold text-emerald-950">Total Deposited:</span>
                 <span className="text-base font-bold text-emerald-700 dark:text-emerald-300">{formatCurrency(slip.grandTotalDeposit)}</span>
               </div>

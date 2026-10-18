@@ -735,7 +735,7 @@ export const PaymentManagementView: React.FC = () => {
                   </div>
                 </div>
 
-                <div className="mt-3 p-2.5 rounded-xl bg-indigo-50/60 dark:bg-indigo-500/60 border border-indigo-100 dark:border-indigo-500/20 text-xs flex items-center justify-between">
+                <div className="mt-3 p-2.5 rounded-xl bg-indigo-50/60 dark:bg-indigo-500/10 border border-indigo-100 dark:border-indigo-500/20 text-xs flex items-center justify-between">
                   <span className="text-indigo-900 dark:text-indigo-100 font-medium">Format: {batch.generatedFileFormat}</span>
                   <button
                     onClick={() => notify(`Simulated file export for ${batch.batchNumber} generated.`)}

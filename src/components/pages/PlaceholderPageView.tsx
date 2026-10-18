@@ -67,7 +67,7 @@ export const PlaceholderPageView: React.FC<PlaceholderPageViewProps> = ({
   return (
     <div className="space-y-6 animate-in fade-in duration-200">
       {/* Top Banner */}
-      <div className="bg-white rounded-2xl p-6 border border-slate-200 shadow-2xs">
+      <div className="bg-white dark:bg-slate-900 rounded-2xl p-6 border border-slate-200 dark:border-slate-700 shadow-2xs">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div>
             <div className="flex items-center gap-2 mb-2 flex-wrap">
@@ -80,27 +80,27 @@ export const PlaceholderPageView: React.FC<PlaceholderPageViewProps> = ({
                     processId: process.id
                   })
                 }
-                className="text-xs font-semibold text-indigo-600 hover:text-indigo-800 flex items-center gap-1"
+                className="text-xs font-semibold text-indigo-600 dark:text-indigo-400 hover:text-indigo-800 dark:hover:text-indigo-200 flex items-center gap-1"
               >
                 <ArrowLeft className="w-3.5 h-3.5" />
                 <span>Back to {process.name}</span>
               </button>
               <span className="text-slate-300">•</span>
-              <span className="font-mono text-xs font-bold text-slate-700 bg-slate-100 px-2 py-0.5 rounded">
+              <span className="font-mono text-xs font-bold text-slate-700 dark:text-slate-300 bg-slate-100 dark:bg-slate-800 px-2 py-0.5 rounded">
                 {transaction.code}
               </span>
-              <span className="text-[11px] font-bold bg-emerald-50 text-emerald-700 px-2 py-0.5 rounded-full border border-emerald-200">
+              <span className="text-[11px] font-bold bg-emerald-50 dark:bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 px-2 py-0.5 rounded-full border border-emerald-200 dark:border-emerald-500/30">
                 {transaction.phase}
               </span>
-              <span className="text-[11px] font-bold bg-indigo-50 text-indigo-700 px-2 py-0.5 rounded-full border border-indigo-200 flex items-center gap-1">
+              <span className="text-[11px] font-bold bg-indigo-50 dark:bg-indigo-500/10 text-indigo-700 dark:text-indigo-300 px-2 py-0.5 rounded-full border border-indigo-200 dark:border-indigo-500/30 flex items-center gap-1">
                 <Sparkles className="w-3 h-3" /> AI Co-Pilot Ready
               </span>
             </div>
 
-            <h1 className="text-xl sm:text-2xl font-extrabold text-slate-900">
+            <h1 className="text-xl sm:text-2xl font-extrabold text-slate-900 dark:text-slate-100">
               {transaction.name}
             </h1>
-            <p className="text-xs sm:text-sm text-slate-600 mt-1 max-w-3xl leading-relaxed">
+            <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 mt-1 max-w-3xl leading-relaxed">
               {transaction.description}
             </p>
           </div>
@@ -111,12 +111,12 @@ export const PlaceholderPageView: React.FC<PlaceholderPageViewProps> = ({
               title={isFavorite ? 'Remove from Favorites' : 'Add to Favorites'}
               className={`p-2.5 rounded-xl border text-xs font-semibold flex items-center gap-2 transition-all cursor-pointer ${
                 isFavorite
-                  ? 'bg-amber-50 border-amber-200 text-amber-700'
-                  : 'bg-white border-slate-200 text-slate-600 hover:bg-slate-50'
+                  ? 'bg-amber-50 dark:bg-amber-500/10 border-amber-200 dark:border-amber-500/30 text-amber-700 dark:text-amber-300'
+                  : 'bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800/50'
               }`}
             >
               <Star
-                className={`w-4 h-4 ${isFavorite ? 'text-amber-500 fill-amber-400' : 'text-slate-400'}`}
+                className={`w-4 h-4 ${isFavorite ? 'text-amber-500 dark:text-amber-400 fill-amber-400' : 'text-slate-400'}`}
               />
               <span>{isFavorite ? 'Favorited' : 'Add to Favorites'}</span>
             </button>
@@ -126,20 +126,20 @@ export const PlaceholderPageView: React.FC<PlaceholderPageViewProps> = ({
 
       {/* Action Trigger Banner */}
       {feedbackMessage && (
-        <div className="p-3 bg-emerald-50 border border-emerald-200 text-emerald-800 rounded-xl text-xs font-semibold flex items-center gap-2 animate-in fade-in slide-in-from-top-1">
-          <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+        <div className="p-3 bg-emerald-50 dark:bg-emerald-500/10 border border-emerald-200 dark:border-emerald-500/30 text-emerald-800 dark:text-emerald-200 rounded-xl text-xs font-semibold flex items-center gap-2 animate-in fade-in slide-in-from-top-1">
+          <CheckCircle2 className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0" />
           <span>{feedbackMessage}</span>
         </div>
       )}
 
       {/* Tab Navigation */}
-      <div className="flex items-center gap-2 border-b border-slate-200 pb-2">
+      <div className="flex items-center gap-2 border-b border-slate-200 dark:border-slate-700 pb-2">
         <button
           onClick={() => setActiveTab('workspace')}
           className={`px-4 py-2 rounded-xl text-xs font-bold transition-all ${
             activeTab === 'workspace'
               ? 'bg-indigo-600 text-white shadow-xs'
-              : 'bg-white text-slate-600 hover:bg-slate-100 border border-slate-200'
+              : 'bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-700'
           }`}
         >
           Interactive Transaction Workspace
@@ -149,7 +149,7 @@ export const PlaceholderPageView: React.FC<PlaceholderPageViewProps> = ({
           className={`px-4 py-2 rounded-xl text-xs font-bold transition-all ${
             activeTab === 'workflow'
               ? 'bg-indigo-600 text-white shadow-xs'
-              : 'bg-white text-slate-600 hover:bg-slate-100 border border-slate-200'
+              : 'bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-700'
           }`}
         >
           Workflow & SoD Governance Blueprint
@@ -159,7 +159,7 @@ export const PlaceholderPageView: React.FC<PlaceholderPageViewProps> = ({
           className={`px-4 py-2 rounded-xl text-xs font-bold transition-all ${
             activeTab === 'audit'
               ? 'bg-indigo-600 text-white shadow-xs'
-              : 'bg-white text-slate-600 hover:bg-slate-100 border border-slate-200'
+              : 'bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-700'
           }`}
         >
           Schema & Relational API Stubs
@@ -170,9 +170,9 @@ export const PlaceholderPageView: React.FC<PlaceholderPageViewProps> = ({
       {activeTab === 'workspace' && (
         <div className="space-y-6">
           {/* Action Bar */}
-          <div className="bg-white p-4 rounded-xl border border-slate-200 shadow-2xs flex flex-wrap items-center justify-between gap-3">
+          <div className="bg-white dark:bg-slate-900 p-4 rounded-xl border border-slate-200 dark:border-slate-700 shadow-2xs flex flex-wrap items-center justify-between gap-3">
             <div className="flex items-center gap-2">
-              <span className="font-mono text-xs font-semibold text-slate-500 bg-slate-100 px-2.5 py-1 rounded">
+              <span className="font-mono text-xs font-semibold text-slate-500 dark:text-slate-400 bg-slate-100 dark:bg-slate-800 px-2.5 py-1 rounded">
                 STATUS: DRAFT (UNPOSTED)
               </span>
               <span className="text-xs text-slate-400">Voucher Ref #ART-2026-9902</span>
@@ -182,7 +182,7 @@ export const PlaceholderPageView: React.FC<PlaceholderPageViewProps> = ({
               <button
                 disabled={!hasPermission('CREATE')}
                 onClick={() => triggerAction('Save Draft')}
-                className="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 disabled:opacity-40 text-slate-800 rounded-lg text-xs font-bold flex items-center gap-1.5"
+                className="px-3 py-1.5 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 disabled:opacity-40 text-slate-800 dark:text-slate-200 rounded-lg text-xs font-bold flex items-center gap-1.5"
               >
                 <Save className="w-3.5 h-3.5" />
                 <span>Save Draft</span>
@@ -209,7 +209,7 @@ export const PlaceholderPageView: React.FC<PlaceholderPageViewProps> = ({
               <button
                 disabled={!hasPermission('PRINT')}
                 onClick={() => triggerAction('Generate Official PDF & Print')}
-                className="p-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-xs"
+                className="p-1.5 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 rounded-lg text-xs"
                 title="Print Document"
               >
                 <Printer className="w-4 h-4" />
@@ -218,7 +218,7 @@ export const PlaceholderPageView: React.FC<PlaceholderPageViewProps> = ({
               <button
                 disabled={!hasPermission('EXPORT')}
                 onClick={() => triggerAction('Export to Excel & CSV')}
-                className="p-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-xs"
+                className="p-1.5 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 rounded-lg text-xs"
                 title="Export Data"
               >
                 <Download className="w-4 h-4" />
@@ -227,72 +227,72 @@ export const PlaceholderPageView: React.FC<PlaceholderPageViewProps> = ({
           </div>
 
           {/* Form Header Fields */}
-          <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-2xs space-y-4">
-            <h2 className="text-xs font-bold uppercase tracking-wider text-slate-400 pb-2 border-b border-slate-100">
+          <div className="bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-2xs space-y-4">
+            <h2 className="text-xs font-bold uppercase tracking-wider text-slate-400 pb-2 border-b border-slate-100 dark:border-slate-800">
               Voucher Header & Organization Scope
             </h2>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 text-xs">
               <div>
-                <label className="block text-slate-500 font-medium mb-1">Company Entity</label>
+                <label className="block text-slate-500 dark:text-slate-400 font-medium mb-1">Company Entity</label>
                 <input
                   type="text"
                   readOnly
                   value="Artify Global Holding Co. (HOLD-01)"
-                  className="w-full bg-slate-50 border border-slate-200 rounded-lg px-3 py-2 text-slate-800 font-semibold"
+                  className="w-full bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-lg px-3 py-2 text-slate-800 dark:text-slate-200 font-semibold"
                 />
               </div>
 
               <div>
-                <label className="block text-slate-500 font-medium mb-1">Operating Branch / Yard</label>
+                <label className="block text-slate-500 dark:text-slate-400 font-medium mb-1">Operating Branch / Yard</label>
                 <input
                   type="text"
                   readOnly
                   value="Muscat Global HQ (MCT-HQ)"
-                  className="w-full bg-slate-50 border border-slate-200 rounded-lg px-3 py-2 text-slate-800 font-semibold"
+                  className="w-full bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-lg px-3 py-2 text-slate-800 dark:text-slate-200 font-semibold"
                 />
               </div>
 
               <div>
-                <label className="block text-slate-500 font-medium mb-1">Accounting / Posting Date</label>
+                <label className="block text-slate-500 dark:text-slate-400 font-medium mb-1">Accounting / Posting Date</label>
                 <input
                   type="date"
                   defaultValue="2026-08-20"
-                  className="w-full bg-white border border-slate-200 rounded-lg px-3 py-2 text-slate-800 font-semibold"
+                  className="w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg px-3 py-2 text-slate-800 dark:text-slate-200 font-semibold"
                 />
               </div>
 
               <div>
-                <label className="block text-slate-500 font-medium mb-1">Base Currency</label>
+                <label className="block text-slate-500 dark:text-slate-400 font-medium mb-1">Base Currency</label>
                 <input
                   type="text"
                   readOnly
                   value="OMR (Omani Rial) • Rate: 1.0000"
-                  className="w-full bg-slate-50 border border-slate-200 rounded-lg px-3 py-2 text-slate-800 font-semibold font-mono"
+                  className="w-full bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-lg px-3 py-2 text-slate-800 dark:text-slate-200 font-semibold font-mono"
                 />
               </div>
             </div>
           </div>
 
           {/* Line Item Table */}
-          <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-2xs space-y-4">
-            <div className="flex items-center justify-between pb-2 border-b border-slate-100">
+          <div className="bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-2xs space-y-4">
+            <div className="flex items-center justify-between pb-2 border-b border-slate-100 dark:border-slate-800">
               <h2 className="text-xs font-bold uppercase tracking-wider text-slate-400">
                 Transaction Line Items & Ledger Allocation
               </h2>
               <button
                 onClick={() => triggerAction('Add Item Row')}
-                className="px-2.5 py-1 bg-indigo-50 text-indigo-700 hover:bg-indigo-100 rounded-lg text-xs font-semibold flex items-center gap-1"
+                className="px-2.5 py-1 bg-indigo-50 dark:bg-indigo-500/10 text-indigo-700 dark:text-indigo-300 hover:bg-indigo-100 dark:hover:bg-indigo-500/20 rounded-lg text-xs font-semibold flex items-center gap-1"
               >
                 <Plus className="w-3.5 h-3.5" />
                 <span>Add Line Item</span>
               </button>
             </div>
 
-            <div className="border border-slate-200 rounded-xl overflow-hidden shadow-2xs">
+            <div className="border border-slate-200 dark:border-slate-700 rounded-xl overflow-hidden shadow-2xs">
               <table className="w-full text-left text-xs border-collapse">
                 <thead>
-                  <tr className="bg-slate-100 text-slate-700 font-semibold border-b border-slate-200">
+                  <tr className="bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-semibold border-b border-slate-200 dark:border-slate-700">
                     <th className="py-2.5 px-3">#</th>
                     <th className="py-2.5 px-3">Account Code / Description</th>
                     <th className="py-2.5 px-3">Cost Center</th>
@@ -301,46 +301,46 @@ export const PlaceholderPageView: React.FC<PlaceholderPageViewProps> = ({
                     <th className="py-2.5 px-3">Tax Code</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-slate-100">
-                  <tr className="hover:bg-slate-50">
+                <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
+                  <tr className="hover:bg-slate-50 dark:hover:bg-slate-800/50">
                     <td className="py-2.5 px-3 font-mono font-bold text-slate-400">01</td>
                     <td className="py-2.5 px-3">
-                      <p className="font-semibold text-slate-900">11040 — Trade Operations Clearing</p>
+                      <p className="font-semibold text-slate-900 dark:text-slate-100">11040 — Trade Operations Clearing</p>
                       <p className="text-[11px] text-slate-400">Batch delivery ref #BD-991</p>
                     </td>
-                    <td className="py-2.5 px-3 font-mono text-slate-600">CC-MCT-OPS</td>
-                    <td className="py-2.5 px-3 text-right font-mono font-bold text-slate-900">
+                    <td className="py-2.5 px-3 font-mono text-slate-600 dark:text-slate-400">CC-MCT-OPS</td>
+                    <td className="py-2.5 px-3 text-right font-mono font-bold text-slate-900 dark:text-slate-100">
                       14,500.000
                     </td>
                     <td className="py-2.5 px-3 text-right font-mono text-slate-400">-</td>
-                    <td className="py-2.5 px-3 font-mono text-emerald-600">VAT-5% (Standard)</td>
+                    <td className="py-2.5 px-3 font-mono text-emerald-600 dark:text-emerald-400">VAT-5% (Standard)</td>
                   </tr>
-                  <tr className="hover:bg-slate-50">
+                  <tr className="hover:bg-slate-50 dark:hover:bg-slate-800/50">
                     <td className="py-2.5 px-3 font-mono font-bold text-slate-400">02</td>
                     <td className="py-2.5 px-3">
-                      <p className="font-semibold text-slate-900">21010 — Accounts Payable Vendor Control</p>
+                      <p className="font-semibold text-slate-900 dark:text-slate-100">21010 — Accounts Payable Vendor Control</p>
                       <p className="text-[11px] text-slate-400">Al-Maha Steel Mills LLC</p>
                     </td>
-                    <td className="py-2.5 px-3 font-mono text-slate-600">CC-CORP-FIN</td>
+                    <td className="py-2.5 px-3 font-mono text-slate-600 dark:text-slate-400">CC-CORP-FIN</td>
                     <td className="py-2.5 px-3 text-right font-mono text-slate-400">-</td>
-                    <td className="py-2.5 px-3 text-right font-mono font-bold text-slate-900">
+                    <td className="py-2.5 px-3 text-right font-mono font-bold text-slate-900 dark:text-slate-100">
                       14,500.000
                     </td>
                     <td className="py-2.5 px-3 font-mono text-slate-400">EXEMPT</td>
                   </tr>
                 </tbody>
                 <tfoot>
-                  <tr className="bg-slate-50 font-bold text-slate-900 border-t border-slate-200">
+                  <tr className="bg-slate-50 dark:bg-slate-800/50 font-bold text-slate-900 dark:text-slate-100 border-t border-slate-200 dark:border-slate-700">
                     <td colSpan={3} className="py-2.5 px-3 text-right uppercase tracking-wider text-xs">
                       Balanced Journal Total:
                     </td>
-                    <td className="py-2.5 px-3 text-right font-mono text-emerald-700">
+                    <td className="py-2.5 px-3 text-right font-mono text-emerald-700 dark:text-emerald-300">
                       14,500.000 OMR
                     </td>
-                    <td className="py-2.5 px-3 text-right font-mono text-emerald-700">
+                    <td className="py-2.5 px-3 text-right font-mono text-emerald-700 dark:text-emerald-300">
                       14,500.000 OMR
                     </td>
-                    <td className="py-2.5 px-3 text-xs text-emerald-600">✓ Balanced</td>
+                    <td className="py-2.5 px-3 text-xs text-emerald-600 dark:text-emerald-400">✓ Balanced</td>
                   </tr>
                 </tfoot>
               </table>
@@ -351,65 +351,65 @@ export const PlaceholderPageView: React.FC<PlaceholderPageViewProps> = ({
 
       {/* Tab 2: Workflow & Governance */}
       {activeTab === 'workflow' && (
-        <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-2xs space-y-5">
+        <div className="bg-white dark:bg-slate-900 p-6 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-2xs space-y-5">
           <div>
-            <h2 className="text-base font-bold text-slate-900">
+            <h2 className="text-base font-bold text-slate-900 dark:text-slate-100">
               End-to-End Approval Chain & Segregation of Duties (SoD)
             </h2>
-            <p className="text-xs text-slate-500 mt-0.5">
+            <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
               Strict multi-tier signatory thresholds configured for compliance with International Standards on Auditing (ISA).
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-            <div className="p-4 rounded-xl bg-slate-50 border border-slate-200 flex flex-col justify-between">
+            <div className="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 flex flex-col justify-between">
               <div>
-                <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">
+                <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-200 dark:border-emerald-500/30">
                   Step 1: Originator
                 </span>
-                <h4 className="font-bold text-sm text-slate-900 mt-2">Data Entry & Submission</h4>
-                <p className="text-xs text-slate-500 mt-1">Initiator verifies invoices, attachments, and purchase orders.</p>
+                <h4 className="font-bold text-sm text-slate-900 dark:text-slate-100 mt-2">Data Entry & Submission</h4>
+                <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">Initiator verifies invoices, attachments, and purchase orders.</p>
               </div>
-              <span className="text-xs text-slate-400 mt-3 pt-2 border-t border-slate-200">
+              <span className="text-xs text-slate-400 mt-3 pt-2 border-t border-slate-200 dark:border-slate-700">
                 Required Role: <strong>CREATE</strong>
               </span>
             </div>
 
-            <div className="p-4 rounded-xl bg-slate-50 border border-slate-200 flex flex-col justify-between">
+            <div className="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 flex flex-col justify-between">
               <div>
-                <span className="text-[10px] font-bold uppercase tracking-wider text-indigo-600 bg-indigo-50 px-2 py-0.5 rounded border border-indigo-200">
+                <span className="text-[10px] font-bold uppercase tracking-wider text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-500/10 px-2 py-0.5 rounded border border-indigo-200 dark:border-indigo-500/30">
                   Step 2: Department Head
                 </span>
-                <h4 className="font-bold text-sm text-slate-900 mt-2">Operational Verification</h4>
-                <p className="text-xs text-slate-500 mt-1">Confirms project delivery, receipt note, and budget availability.</p>
+                <h4 className="font-bold text-sm text-slate-900 dark:text-slate-100 mt-2">Operational Verification</h4>
+                <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">Confirms project delivery, receipt note, and budget availability.</p>
               </div>
-              <span className="text-xs text-slate-400 mt-3 pt-2 border-t border-slate-200">
+              <span className="text-xs text-slate-400 mt-3 pt-2 border-t border-slate-200 dark:border-slate-700">
                 Required Role: <strong>EDIT / APPROVE</strong>
               </span>
             </div>
 
-            <div className="p-4 rounded-xl bg-slate-50 border border-slate-200 flex flex-col justify-between">
+            <div className="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 flex flex-col justify-between">
               <div>
-                <span className="text-[10px] font-bold uppercase tracking-wider text-amber-600 bg-amber-50 px-2 py-0.5 rounded border border-amber-200">
+                <span className="text-[10px] font-bold uppercase tracking-wider text-amber-600 dark:text-amber-400 bg-amber-50 dark:bg-amber-500/10 px-2 py-0.5 rounded border border-amber-200 dark:border-amber-500/30">
                   Step 3: Executive CFO
                 </span>
-                <h4 className="font-bold text-sm text-slate-900 mt-2">Financial Authorization</h4>
-                <p className="text-xs text-slate-500 mt-1">Dual digital certificate signature required for amounts &gt;OMR 25,000.</p>
+                <h4 className="font-bold text-sm text-slate-900 dark:text-slate-100 mt-2">Financial Authorization</h4>
+                <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">Dual digital certificate signature required for amounts &gt;OMR 25,000.</p>
               </div>
-              <span className="text-xs text-slate-400 mt-3 pt-2 border-t border-slate-200">
+              <span className="text-xs text-slate-400 mt-3 pt-2 border-t border-slate-200 dark:border-slate-700">
                 Required Role: <strong>APPROVE</strong>
               </span>
             </div>
 
-            <div className="p-4 rounded-xl bg-slate-50 border border-slate-200 flex flex-col justify-between">
+            <div className="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 flex flex-col justify-between">
               <div>
-                <span className="text-[10px] font-bold uppercase tracking-wider text-blue-600 bg-blue-50 px-2 py-0.5 rounded border border-blue-200">
+                <span className="text-[10px] font-bold uppercase tracking-wider text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-500/10 px-2 py-0.5 rounded border border-blue-200 dark:border-blue-500/30">
                   Step 4: System GL Post
                 </span>
-                <h4 className="font-bold text-sm text-slate-900 mt-2">Immutable GL Commit</h4>
-                <p className="text-xs text-slate-500 mt-1">Automatic journal entry posted to general ledger with cryptographic hash.</p>
+                <h4 className="font-bold text-sm text-slate-900 dark:text-slate-100 mt-2">Immutable GL Commit</h4>
+                <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">Automatic journal entry posted to general ledger with cryptographic hash.</p>
               </div>
-              <span className="text-xs text-slate-400 mt-3 pt-2 border-t border-slate-200">
+              <span className="text-xs text-slate-400 mt-3 pt-2 border-t border-slate-200 dark:border-slate-700">
                 Required Role: <strong>POST</strong>
               </span>
             </div>
@@ -419,12 +419,12 @@ export const PlaceholderPageView: React.FC<PlaceholderPageViewProps> = ({
 
       {/* Tab 3: Schema & Relational API Stubs */}
       {activeTab === 'audit' && (
-        <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-2xs space-y-4">
+        <div className="bg-white dark:bg-slate-900 p-6 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-2xs space-y-4">
           <div>
-            <h2 className="text-base font-bold text-slate-900">
+            <h2 className="text-base font-bold text-slate-900 dark:text-slate-100">
               PostgreSQL Relational Schema & RESTful API Stubs
             </h2>
-            <p className="text-xs text-slate-500 mt-0.5">
+            <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
               Production database schema definitions, indices, foreign keys, and microservice endpoints.
             </p>
           </div>

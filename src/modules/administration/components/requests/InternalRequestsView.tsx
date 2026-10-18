@@ -244,7 +244,7 @@ export const InternalRequestsView: React.FC<InternalRequestsViewProps> = ({ acti
                     key={req.id}
                     onClick={() => setSelectedReq(req)}
                     className={`hover:bg-slate-50/80 dark:hover:bg-slate-800/80 cursor-pointer transition-colors ${
-                      selectedReq?.id === req.id ? 'bg-indigo-50/50 dark:bg-indigo-500/50' : ''
+                      selectedReq?.id === req.id ? 'bg-indigo-50/50 dark:bg-indigo-500/10' : ''
                     }`}
                   >
                     <td className="p-3.5 font-mono font-bold text-indigo-700 dark:text-indigo-300">{req.ticketNumber}</td>
@@ -352,11 +352,11 @@ export const InternalRequestsView: React.FC<InternalRequestsViewProps> = ({ acti
                       key={idx}
                       className={`p-2.5 rounded-xl border transition-all ${
                         appr.status === 'Approved'
-                          ? 'bg-emerald-50/60 dark:bg-emerald-500/60 border-emerald-200 dark:border-emerald-500/30'
+                          ? 'bg-emerald-50/60 dark:bg-emerald-500/10 border-emerald-200 dark:border-emerald-500/30'
                           : appr.status === 'Rejected'
-                          ? 'bg-rose-50/60 dark:bg-rose-500/60 border-rose-200 dark:border-rose-500/30'
+                          ? 'bg-rose-50/60 dark:bg-rose-500/10 border-rose-200 dark:border-rose-500/30'
                           : selectedReq.currentApprovalLevel === appr.level
-                          ? 'bg-indigo-50/80 dark:bg-indigo-500/80 border-indigo-300 dark:border-indigo-500/40 ring-1 ring-indigo-200 dark:ring-indigo-500/30'
+                          ? 'bg-indigo-50/80 dark:bg-indigo-500/10 border-indigo-300 dark:border-indigo-500/40 ring-1 ring-indigo-200 dark:ring-indigo-500/30'
                           : 'bg-slate-50 dark:bg-slate-800/50 border-slate-200 dark:border-slate-700 opacity-70'
                       }`}
                     >

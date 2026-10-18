@@ -317,7 +317,7 @@ export const ManagementDashboardView: React.FC = () => {
                 {widget.id === 'w-ai-radar' && (
                   <div className="w-full space-y-2">
                     {aiInsights.slice(0, 2).map(ins => (
-                      <div key={ins.id} className="p-2 rounded bg-indigo-50/50 dark:bg-indigo-500/50 border border-indigo-100 dark:border-indigo-500/20 text-xs">
+                      <div key={ins.id} className="p-2 rounded bg-indigo-50/50 dark:bg-indigo-500/10 border border-indigo-100 dark:border-indigo-500/20 text-xs">
                         <div className="font-bold text-indigo-950 truncate flex items-center gap-1">
                           <Sparkles className="w-3 h-3 text-indigo-600 dark:text-indigo-400 shrink-0" />
                           {ins.title}

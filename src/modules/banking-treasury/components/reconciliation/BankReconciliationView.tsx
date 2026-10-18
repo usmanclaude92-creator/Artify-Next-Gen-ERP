@@ -259,7 +259,7 @@ export const BankReconciliationView: React.FC = () => {
                 {statementLines.map((line) => (
                   <tr
                     key={line.id}
-                    className={`transition-colors ${line.isReconciled ? 'bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800/50' : 'bg-amber-50/40 dark:bg-amber-500/40 hover:bg-amber-50/70 dark:hover:bg-amber-500/70'}`}
+                    className={`transition-colors ${line.isReconciled ? 'bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800/50' : 'bg-amber-50/40 dark:bg-amber-500/10 hover:bg-amber-50/70 dark:hover:bg-amber-500/70'}`}
                   >
                     <td className="p-3.5 font-mono text-slate-700 dark:text-slate-300">{line.transactionDate}</td>
                     <td className="p-3.5">

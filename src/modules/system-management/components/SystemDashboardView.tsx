@@ -463,7 +463,7 @@ export const SystemDashboardView: React.FC<SystemDashboardViewProps> = ({ onNavi
             {alerts.slice(0, 4).map(alert => (
               <div
                 key={alert.id}
-                className="p-3 bg-amber-50/50 dark:bg-amber-500/50 border border-amber-200 dark:border-amber-500/30 rounded-lg text-xs flex items-start gap-2.5"
+                className="p-3 bg-amber-50/50 dark:bg-amber-500/10 border border-amber-200 dark:border-amber-500/30 rounded-lg text-xs flex items-start gap-2.5"
               >
                 <ShieldAlert className="w-4 h-4 text-amber-700 dark:text-amber-300 flex-shrink-0 mt-0.5" />
                 <div>

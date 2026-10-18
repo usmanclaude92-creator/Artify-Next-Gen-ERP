@@ -523,7 +523,7 @@ export const PettyCashView: React.FC = () => {
                   </div>
                 </div>
 
-                <div className="mt-3 p-3 rounded-lg bg-indigo-50/70 dark:bg-indigo-500/70 border border-indigo-100 dark:border-indigo-500/20 flex items-center justify-between text-xs">
+                <div className="mt-3 p-3 rounded-lg bg-indigo-50/70 dark:bg-indigo-500/10 border border-indigo-100 dark:border-indigo-500/20 flex items-center justify-between text-xs">
                   <span className="font-semibold text-indigo-950">Replenishment Cheque Requested:</span>
                   <span className="text-sm font-bold text-indigo-700 dark:text-indigo-300">
                     {formatCurrency(rec.replenishmentChequeRequestedOMR)}

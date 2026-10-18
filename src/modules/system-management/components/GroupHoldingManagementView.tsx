@@ -425,7 +425,7 @@ export const GroupHoldingManagementView: React.FC = () => {
       key: 'companyCode',
       header: 'Entity Code',
       accessor: item => (
-        <span className="font-mono font-bold text-indigo-700 dark:text-indigo-300 bg-indigo-50/70 dark:bg-indigo-500/70 px-2 py-0.5 rounded border border-indigo-200/60">
+        <span className="font-mono font-bold text-indigo-700 dark:text-indigo-300 bg-indigo-50/70 dark:bg-indigo-500/10 px-2 py-0.5 rounded border border-indigo-200/60">
           {item.companyCode || 'COMP'}
         </span>
       )
@@ -718,7 +718,7 @@ export const GroupHoldingManagementView: React.FC = () => {
         <div className="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200/80 dark:border-slate-700/80 flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div className="space-y-1">
             <div className="flex items-center gap-2.5">
-              <span className="font-mono text-xs font-bold text-indigo-700 dark:text-indigo-300 bg-indigo-100/70 dark:bg-indigo-500/70 px-2 py-0.5 rounded border border-indigo-200 dark:border-indigo-500/30">
+              <span className="font-mono text-xs font-bold text-indigo-700 dark:text-indigo-300 bg-indigo-100/70 dark:bg-indigo-500/10 px-2 py-0.5 rounded border border-indigo-200 dark:border-indigo-500/30">
                 {activeGroup.code}
               </span>
               <h2 className="text-base font-extrabold text-slate-900 dark:text-slate-100">{activeGroup.name}</h2>

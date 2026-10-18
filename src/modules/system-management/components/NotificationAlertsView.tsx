@@ -192,7 +192,7 @@ export const NotificationAlertsView: React.FC<{ activeTab?: string }> = ({ activ
                 onClick={() => markAlertAsRead(alert.id)}
                 className={`p-4 rounded-xl border transition-all cursor-pointer ${
                   !alert.read
-                    ? 'bg-amber-50/40 dark:bg-amber-500/40 border-amber-200 dark:border-amber-500/30 hover:bg-amber-50/70 dark:hover:bg-amber-500/70 shadow-2xs'
+                    ? 'bg-amber-50/40 dark:bg-amber-500/10 border-amber-200 dark:border-amber-500/30 hover:bg-amber-50/70 dark:hover:bg-amber-500/70 shadow-2xs'
                     : 'bg-slate-50/40 dark:bg-slate-800/40 border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800/50'
                 }`}
               >

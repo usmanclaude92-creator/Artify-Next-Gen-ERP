@@ -186,7 +186,7 @@ export const BackupRecoveryView: React.FC<{ activeTab?: string }> = ({ activeTab
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="border border-indigo-200 dark:border-indigo-500/30 bg-indigo-50/40 dark:bg-indigo-500/40 rounded-xl p-5 space-y-3">
+            <div className="border border-indigo-200 dark:border-indigo-500/30 bg-indigo-50/40 dark:bg-indigo-500/10 rounded-xl p-5 space-y-3">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
                   <Server className="w-5 h-5 text-indigo-700 dark:text-indigo-300" />
@@ -226,7 +226,7 @@ export const BackupRecoveryView: React.FC<{ activeTab?: string }> = ({ activeTab
           </div>
 
           {/* Drill info */}
-          <div className="p-4 border border-emerald-200 dark:border-emerald-500/30 bg-emerald-50/40 dark:bg-emerald-500/40 rounded-xl flex items-center justify-between">
+          <div className="p-4 border border-emerald-200 dark:border-emerald-500/30 bg-emerald-50/40 dark:bg-emerald-500/10 rounded-xl flex items-center justify-between">
             <div>
               <h4 className="text-xs font-bold text-emerald-900 dark:text-emerald-100">
                 Last Disaster Recovery Drill: {drStatus.lastDrDrillDate}

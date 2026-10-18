@@ -177,7 +177,7 @@ export const MeetingManagementView: React.FC = () => {
                 key={mtg.id}
                 onClick={() => setSelectedMeeting(mtg)}
                 className={`p-3.5 rounded-xl border transition-all cursor-pointer ${
-                  selectedMeeting?.id === mtg.id ? 'bg-indigo-50/60 dark:bg-indigo-500/60 border-indigo-300 dark:border-indigo-500/40 ring-1 ring-indigo-200 dark:ring-indigo-500/30' : 'bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-700 hover:border-slate-300 dark:hover:border-slate-600'
+                  selectedMeeting?.id === mtg.id ? 'bg-indigo-50/60 dark:bg-indigo-500/10 border-indigo-300 dark:border-indigo-500/40 ring-1 ring-indigo-200 dark:ring-indigo-500/30' : 'bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-700 hover:border-slate-300 dark:hover:border-slate-600'
                 }`}
               >
                 <div className="flex items-center justify-between text-[10px] mb-1.5">
@@ -273,7 +273,7 @@ export const MeetingManagementView: React.FC = () => {
                   <h4 className="text-xs font-bold text-slate-900 dark:text-slate-100 uppercase tracking-wider mb-2">Formal Decisions Adopted</h4>
                   <div className="space-y-1.5">
                     {selectedMeeting.decisions.map((dec, idx) => (
-                      <div key={idx} className="flex items-start gap-2 p-2.5 rounded-lg bg-emerald-50/50 dark:bg-emerald-500/50 border border-emerald-200 dark:border-emerald-500/30">
+                      <div key={idx} className="flex items-start gap-2 p-2.5 rounded-lg bg-emerald-50/50 dark:bg-emerald-500/10 border border-emerald-200 dark:border-emerald-500/30">
                         <CheckCircle2 className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0 mt-0.5" />
                         <span className="text-slate-800 dark:text-slate-200 font-medium">{dec}</span>
                       </div>

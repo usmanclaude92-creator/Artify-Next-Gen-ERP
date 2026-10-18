@@ -118,8 +118,8 @@ export const RiskManagementView: React.FC = () => {
   const renderHeatmapCell = (likelihood: number, impact: number) => {
     const cellScore = likelihood * impact;
     let bgColor = 'bg-emerald-50 dark:bg-emerald-500/10 text-emerald-800 dark:text-emerald-200 border-emerald-200 dark:border-emerald-500/30';
-    if (cellScore >= 15) bgColor = 'bg-rose-100/90 dark:bg-rose-500/90 text-rose-900 dark:text-rose-100 border-rose-300 dark:border-rose-500/40';
-    else if (cellScore >= 10) bgColor = 'bg-orange-100/80 dark:bg-orange-500/80 text-orange-900 dark:text-orange-100 border-orange-300 dark:border-orange-500/40';
+    if (cellScore >= 15) bgColor = 'bg-rose-100/90 dark:bg-rose-500/10 text-rose-900 dark:text-rose-100 border-rose-300 dark:border-rose-500/40';
+    else if (cellScore >= 10) bgColor = 'bg-orange-100/80 dark:bg-orange-500/10 text-orange-900 dark:text-orange-100 border-orange-300 dark:border-orange-500/40';
     else if (cellScore >= 5) bgColor = 'bg-amber-50 dark:bg-amber-500/10 text-amber-900 dark:text-amber-100 border-amber-200 dark:border-amber-500/30';
 
     // Find risks with matching inherent or residual positions
@@ -196,7 +196,7 @@ export const RiskManagementView: React.FC = () => {
           onClick={() => setActiveTab('register')}
           className={`px-5 py-3 text-sm font-semibold border-b-2 transition flex items-center gap-2 ${
             activeTab === 'register'
-              ? 'border-emerald-600 text-emerald-700 dark:text-emerald-300 bg-emerald-50/50 dark:bg-emerald-500/50 rounded-t-xl'
+              ? 'border-emerald-600 text-emerald-700 dark:text-emerald-300 bg-emerald-50/50 dark:bg-emerald-500/10 rounded-t-xl'
               : 'border-transparent text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100'
           }`}
         >
@@ -206,7 +206,7 @@ export const RiskManagementView: React.FC = () => {
           onClick={() => setActiveTab('heatmap')}
           className={`px-5 py-3 text-sm font-semibold border-b-2 transition flex items-center gap-2 ${
             activeTab === 'heatmap'
-              ? 'border-emerald-600 text-emerald-700 dark:text-emerald-300 bg-emerald-50/50 dark:bg-emerald-500/50 rounded-t-xl'
+              ? 'border-emerald-600 text-emerald-700 dark:text-emerald-300 bg-emerald-50/50 dark:bg-emerald-500/10 rounded-t-xl'
               : 'border-transparent text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100'
           }`}
         >
@@ -216,7 +216,7 @@ export const RiskManagementView: React.FC = () => {
           onClick={() => setActiveTab('mitigation')}
           className={`px-5 py-3 text-sm font-semibold border-b-2 transition flex items-center gap-2 ${
             activeTab === 'mitigation'
-              ? 'border-emerald-600 text-emerald-700 dark:text-emerald-300 bg-emerald-50/50 dark:bg-emerald-500/50 rounded-t-xl'
+              ? 'border-emerald-600 text-emerald-700 dark:text-emerald-300 bg-emerald-50/50 dark:bg-emerald-500/10 rounded-t-xl'
               : 'border-transparent text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100'
           }`}
         >

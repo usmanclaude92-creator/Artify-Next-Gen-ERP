@@ -16,7 +16,7 @@ export const DiffViewer: React.FC<DiffViewerProps> = ({ previousValue, newValue,
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-        <div className="bg-rose-50/60 dark:bg-rose-500/60 border border-rose-200 dark:border-rose-500/30 rounded-lg p-3">
+        <div className="bg-rose-50/60 dark:bg-rose-500/10 border border-rose-200 dark:border-rose-500/30 rounded-lg p-3">
           <div className="text-[10px] font-bold text-rose-700 dark:text-rose-300 uppercase tracking-wider mb-1">
             Previous State
           </div>
@@ -25,7 +25,7 @@ export const DiffViewer: React.FC<DiffViewerProps> = ({ previousValue, newValue,
           </pre>
         </div>
 
-        <div className="bg-emerald-50/60 dark:bg-emerald-500/60 border border-emerald-200 dark:border-emerald-500/30 rounded-lg p-3">
+        <div className="bg-emerald-50/60 dark:bg-emerald-500/10 border border-emerald-200 dark:border-emerald-500/30 rounded-lg p-3">
           <div className="text-[10px] font-bold text-emerald-700 dark:text-emerald-300 uppercase tracking-wider mb-1">
             Committed State
           </div>

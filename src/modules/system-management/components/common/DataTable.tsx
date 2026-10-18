@@ -350,7 +350,7 @@ export function DataTable<T extends Record<string, any>>({
                     key={id}
                     onClick={() => onRowClick && onRowClick(item)}
                     className={`hover:bg-slate-50/80 dark:hover:bg-slate-800/80 transition-colors ${
-                      isSelected ? 'bg-indigo-50/40 dark:bg-indigo-500/40' : ''
+                      isSelected ? 'bg-indigo-50/40 dark:bg-indigo-500/10' : ''
                     } ${onRowClick ? 'cursor-pointer' : ''}`}
                   >
                     {batchActions && (

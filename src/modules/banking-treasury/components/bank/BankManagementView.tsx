@@ -412,7 +412,7 @@ export const BankManagementView: React.FC = () => {
               </div>
 
               <div className="mt-3 space-y-2 text-xs">
-                <div className="p-2 rounded-lg bg-indigo-50/70 dark:bg-indigo-500/70 border border-indigo-100 dark:border-indigo-500/20 text-indigo-950">
+                <div className="p-2 rounded-lg bg-indigo-50/70 dark:bg-indigo-500/10 border border-indigo-100 dark:border-indigo-500/20 text-indigo-950">
                   <span className="text-[10px] font-semibold text-indigo-600 dark:text-indigo-400 block">Authority Tier</span>
                   <span className="font-bold">{sig.categoryTier}</span>
                 </div>

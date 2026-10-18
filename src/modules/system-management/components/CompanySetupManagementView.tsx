@@ -582,7 +582,7 @@ export const CompanySetupManagementView: React.FC<CompanySetupManagementViewProp
                     onClick={() => setSelectedCompanyId(comp.id)}
                     className={`p-4 transition-all cursor-pointer ${
                       isSelected
-                        ? 'bg-indigo-50/80 dark:bg-indigo-500/80 border-l-4 border-indigo-600'
+                        ? 'bg-indigo-50/80 dark:bg-indigo-500/10 border-l-4 border-indigo-600'
                         : 'hover:bg-slate-50 dark:hover:bg-slate-800/50 border-l-4 border-transparent'
                     }`}
                   >
@@ -1062,7 +1062,7 @@ export const CompanySetupManagementView: React.FC<CompanySetupManagementViewProp
             {inspectorTab === 'hierarchy' && (
               <div className="p-6 space-y-6">
                 {/* Header Banner */}
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-4 rounded-xl bg-purple-50/70 dark:bg-purple-500/70 border border-purple-200/80">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-4 rounded-xl bg-purple-50/70 dark:bg-purple-500/10 border border-purple-200/80">
                   <div className="flex items-start gap-3">
                     <div className="w-10 h-10 rounded-lg bg-purple-600 text-white flex items-center justify-center shrink-0 shadow-xs">
                       <GitFork className="w-5 h-5" />
@@ -1127,7 +1127,7 @@ export const CompanySetupManagementView: React.FC<CompanySetupManagementViewProp
                   </div>
 
                   {/* Anti-Circular Validation */}
-                  <div className="p-4 rounded-xl border border-emerald-200 dark:border-emerald-500/30 bg-emerald-50/40 dark:bg-emerald-500/40 space-y-2">
+                  <div className="p-4 rounded-xl border border-emerald-200 dark:border-emerald-500/30 bg-emerald-50/40 dark:bg-emerald-500/10 space-y-2">
                     <div className="flex items-center gap-1.5 text-emerald-800 dark:text-emerald-200 text-xs font-bold">
                       <CheckCircle2 className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
                       <span>Hierarchy Integrity Valid</span>
@@ -1162,7 +1162,7 @@ export const CompanySetupManagementView: React.FC<CompanySetupManagementViewProp
                         <div
                           key={mem.id}
                           className={`p-3.5 flex items-center justify-between text-xs transition-colors ${
-                            isCurrent ? 'bg-purple-50/60 dark:bg-purple-500/60 font-semibold' : 'hover:bg-slate-50 dark:hover:bg-slate-800/50'
+                            isCurrent ? 'bg-purple-50/60 dark:bg-purple-500/10 font-semibold' : 'hover:bg-slate-50 dark:hover:bg-slate-800/50'
                           }`}
                         >
                           <div className="flex items-center gap-3">

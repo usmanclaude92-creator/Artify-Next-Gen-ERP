@@ -500,7 +500,7 @@ export const UserAccessManagementView: React.FC<{ activeTab?: string }> = ({ act
                 r.exceptions.map(exc => (
                   <div
                     key={exc.id}
-                    className="border border-amber-200 dark:border-amber-500/30 bg-amber-50/50 dark:bg-amber-500/50 rounded-lg p-3.5 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs"
+                    className="border border-amber-200 dark:border-amber-500/30 bg-amber-50/50 dark:bg-amber-500/10 rounded-lg p-3.5 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs"
                   >
                     <div>
                       <div className="font-semibold text-slate-900 dark:text-slate-100">
