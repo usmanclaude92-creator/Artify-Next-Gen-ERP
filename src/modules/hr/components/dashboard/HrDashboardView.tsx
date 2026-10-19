@@ -68,19 +68,19 @@ export const HrDashboardView: React.FC<HrDashboardViewProps> = ({ onNavigate, ac
   return (
     <div className="space-y-6">
       {/* Top Banner with Quick Role Context */}
-      <div className="bg-gradient-to-r from-rose-950/40 via-slate-900 to-slate-900 border border-rose-900/30 rounded-2xl p-6 shadow-sm">
+      <div className="bg-gradient-to-r from-rose-50 dark:from-rose-950/40 via-slate-50 dark:via-slate-900 to-slate-50 dark:to-slate-900 border border-rose-900/30 rounded-2xl p-6 shadow-sm">
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
           <div className="space-y-2">
             <div className="flex items-center gap-2.5">
-              <span className="px-3 py-1 rounded-full text-xs font-semibold bg-rose-500/10 text-rose-400 border border-rose-500/20">
+              <span className="px-3 py-1 rounded-full text-xs font-semibold bg-rose-500/10 text-rose-600 dark:text-rose-400 border border-rose-500/20">
                 09 — HUMAN RESOURCES
               </span>
-              <span className="text-xs text-slate-400">Enterprise Talent & Workforce Management</span>
+              <span className="text-xs text-slate-600 dark:text-slate-400">Enterprise Talent & Workforce Management</span>
             </div>
-            <h1 className="text-2xl lg:text-3xl font-bold text-white tracking-tight">
+            <h1 className="text-2xl lg:text-3xl font-bold text-slate-900 dark:text-white tracking-tight">
               People Operations & Talent Command Center
             </h1>
-            <p className="text-sm text-slate-400 max-w-3xl leading-relaxed">
+            <p className="text-sm text-slate-600 dark:text-slate-400 max-w-3xl leading-relaxed">
               Real-time workforce intelligence spanning employee master records, ATS hiring pipelines, onboarding checklists, biometric time logs, benefits, performance reviews, and statutory End of Service settlements.
             </p>
           </div>

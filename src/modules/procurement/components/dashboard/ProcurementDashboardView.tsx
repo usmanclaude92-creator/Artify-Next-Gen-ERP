@@ -178,20 +178,20 @@ export const ProcurementDashboardView: React.FC<ProcurementDashboardViewProps> =
       </div>
 
       {/* AI Procurement Copilot & Strategy Assistant */}
-      <div className="bg-linear-to-r from-slate-900 via-slate-800 to-indigo-950 rounded-2xl p-5 text-white border border-slate-800 shadow-sm">
+      <div className="bg-linear-to-r from-slate-50 dark:from-slate-900 via-slate-100 dark:via-slate-800 to-indigo-50 dark:to-indigo-950 rounded-2xl p-5 text-slate-900 dark:text-white border border-slate-200 dark:border-slate-800 shadow-sm">
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-indigo-500/20 border border-indigo-400/30 flex items-center justify-center text-indigo-300">
+            <div className="w-10 h-10 rounded-xl bg-indigo-500/20 border border-indigo-400/30 flex items-center justify-center text-indigo-700 dark:text-indigo-300">
               <Sparkles className="w-5 h-5" />
             </div>
             <div>
               <h3 className="text-sm font-bold flex items-center gap-2">
                 <span>AI Procurement & Spend Intelligence Copilot</span>
-                <span className="px-2 py-0.5 rounded-full text-[10px] bg-indigo-500/30 text-indigo-200 font-medium">
+                <span className="px-2 py-0.5 rounded-full text-[10px] bg-indigo-500/30 text-indigo-800 dark:text-indigo-200 font-medium">
                   Live Enterprise Agent
                 </span>
               </h3>
-              <p className="text-xs text-slate-300">
+              <p className="text-xs text-slate-700 dark:text-slate-300">
                 Automated demand forecasting, 3-way matching tolerance checks, supplier risk scoring & price benchmarks.
               </p>
             </div>
@@ -200,13 +200,13 @@ export const ProcurementDashboardView: React.FC<ProcurementDashboardViewProps> =
           <div className="flex items-center gap-2 flex-wrap">
             <button
               onClick={() => handleRunAiCopilot('spend-optimization')}
-              className="px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-xs font-medium transition-colors cursor-pointer"
+              className="px-3 py-1.5 rounded-lg bg-slate-900/10 dark:bg-white/10 hover:bg-slate-900/20 dark:hover:bg-white/20 text-xs font-medium transition-colors cursor-pointer"
             >
               Analyze Spend Anomalies
             </button>
             <button
               onClick={() => handleRunAiCopilot('supplier-risk')}
-              className="px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-xs font-medium transition-colors cursor-pointer"
+              className="px-3 py-1.5 rounded-lg bg-slate-900/10 dark:bg-white/10 hover:bg-slate-900/20 dark:hover:bg-white/20 text-xs font-medium transition-colors cursor-pointer"
             >
               Supplier Risk & ESG
             </button>
@@ -220,14 +220,14 @@ export const ProcurementDashboardView: React.FC<ProcurementDashboardViewProps> =
         </div>
 
         {isAiLoading && (
-          <div className="mt-4 p-3 bg-white/5 rounded-xl border border-white/10 flex items-center gap-3 text-xs text-slate-300">
+          <div className="mt-4 p-3 bg-slate-900/5 dark:bg-white/5 rounded-xl border border-slate-900/10 dark:border-white/10 flex items-center gap-3 text-xs text-slate-700 dark:text-slate-300">
             <div className="w-4 h-4 border-2 border-indigo-400 border-t-transparent rounded-full animate-spin" />
             <span>AI Copilot evaluating enterprise procurement datasets, purchase commitments, and invoice variances...</span>
           </div>
         )}
 
         {aiInsightResult && !isAiLoading && (
-          <div className="mt-4 p-4 bg-white/10 rounded-xl border border-white/15 text-xs text-slate-100 font-mono whitespace-pre-line leading-relaxed">
+          <div className="mt-4 p-4 bg-slate-900/10 dark:bg-white/10 rounded-xl border border-slate-900/15 dark:border-white/15 text-xs text-slate-900 dark:text-slate-100 font-mono whitespace-pre-line leading-relaxed">
             {aiInsightResult}
           </div>
         )}

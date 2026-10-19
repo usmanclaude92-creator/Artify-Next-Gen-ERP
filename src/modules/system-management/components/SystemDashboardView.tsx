@@ -84,51 +84,51 @@ export const SystemDashboardView: React.FC<SystemDashboardViewProps> = ({ onNavi
   return (
     <div className="space-y-6">
       {/* Top Banner with AI Copilot Assistant */}
-      <div className="rounded-2xl bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 border border-indigo-800/40 p-6 text-white shadow-xl">
+      <div className="rounded-2xl bg-gradient-to-r from-slate-50 dark:from-slate-900 via-indigo-50 dark:via-indigo-950 to-slate-50 dark:to-slate-900 border border-indigo-800/40 p-6 text-slate-900 dark:text-white shadow-xl">
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
           <div className="space-y-2 max-w-2xl">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-500/20 border border-indigo-400/30 text-indigo-300 text-xs font-semibold">
-              <Sparkles className="w-3.5 h-3.5 text-indigo-400" />
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-500/20 border border-indigo-400/30 text-indigo-700 dark:text-indigo-300 text-xs font-semibold">
+              <Sparkles className="w-3.5 h-3.5 text-indigo-600 dark:text-indigo-400" />
               <span>Artify GenAI System Administrator Agent</span>
             </div>
-            <h2 className="text-2xl font-bold tracking-tight text-white">
+            <h2 className="text-2xl font-bold tracking-tight text-slate-900 dark:text-white">
               Module 01: System Governance & Master Administration
             </h2>
-            <p className="text-xs text-slate-300 leading-relaxed">
+            <p className="text-xs text-slate-700 dark:text-slate-300 leading-relaxed">
               Autonomous multi-entity organization engine, cryptographic audit trail, Segregation of Duties matrix, sub-ledger posting controls, and disaster recovery orchestration.
             </p>
           </div>
 
           <div className="flex items-center gap-4 flex-wrap">
-            <div className="bg-slate-800/80 border border-slate-700/80 rounded-xl p-3 text-center min-w-[110px]">
-              <div className="text-[10px] uppercase font-bold text-slate-400 tracking-wider">System Health</div>
-              <div className="text-lg font-bold text-emerald-400 mt-0.5">99.99%</div>
-              <div className="text-[10px] text-slate-400">Nominal</div>
+            <div className="bg-slate-100/80 dark:bg-slate-800/80 border border-slate-300/80 dark:border-slate-700/80 rounded-xl p-3 text-center min-w-[110px]">
+              <div className="text-[10px] uppercase font-bold text-slate-600 dark:text-slate-400 tracking-wider">System Health</div>
+              <div className="text-lg font-bold text-emerald-600 dark:text-emerald-400 mt-0.5">99.99%</div>
+              <div className="text-[10px] text-slate-600 dark:text-slate-400">Nominal</div>
             </div>
-            <div className="bg-slate-800/80 border border-slate-700/80 rounded-xl p-3 text-center min-w-[110px]">
-              <div className="text-[10px] uppercase font-bold text-slate-400 tracking-wider">DR Readiness</div>
-              <div className="text-lg font-bold text-indigo-400 mt-0.5">{drStatus.drReadinessScore}%</div>
-              <div className="text-[10px] text-slate-400">RPO: {drStatus.currentRpoMinutes}m</div>
+            <div className="bg-slate-100/80 dark:bg-slate-800/80 border border-slate-300/80 dark:border-slate-700/80 rounded-xl p-3 text-center min-w-[110px]">
+              <div className="text-[10px] uppercase font-bold text-slate-600 dark:text-slate-400 tracking-wider">DR Readiness</div>
+              <div className="text-lg font-bold text-indigo-600 dark:text-indigo-400 mt-0.5">{drStatus.drReadinessScore}%</div>
+              <div className="text-[10px] text-slate-600 dark:text-slate-400">RPO: {drStatus.currentRpoMinutes}m</div>
             </div>
-            <div className="bg-slate-800/80 border border-slate-700/80 rounded-xl p-3 text-center min-w-[110px]">
-              <div className="text-[10px] uppercase font-bold text-slate-400 tracking-wider">Data Quality</div>
-              <div className="text-lg font-bold text-emerald-400 mt-0.5">98.4%</div>
-              <div className="text-[10px] text-slate-400">Golden Records</div>
+            <div className="bg-slate-100/80 dark:bg-slate-800/80 border border-slate-300/80 dark:border-slate-700/80 rounded-xl p-3 text-center min-w-[110px]">
+              <div className="text-[10px] uppercase font-bold text-slate-600 dark:text-slate-400 tracking-wider">Data Quality</div>
+              <div className="text-lg font-bold text-emerald-600 dark:text-emerald-400 mt-0.5">98.4%</div>
+              <div className="text-[10px] text-slate-600 dark:text-slate-400">Golden Records</div>
             </div>
           </div>
         </div>
 
         {/* AI Query Bar */}
-        <div className="mt-6 pt-5 border-t border-slate-800/80">
+        <div className="mt-6 pt-5 border-t border-slate-200/80 dark:border-slate-800/80">
           <form onSubmit={handleCustomSubmit} className="flex gap-2">
             <div className="relative flex-1">
-              <Sparkles className="w-4 h-4 text-indigo-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
+              <Sparkles className="w-4 h-4 text-indigo-600 dark:text-indigo-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
               <input
                 type="text"
                 value={aiPrompt}
                 onChange={e => setAiPrompt(e.target.value)}
                 placeholder="Ask AI System Copilot: e.g. 'Audit SoD risks', 'Check fiscal period status', 'Review locked users'..."
-                className="w-full pl-10 pr-4 py-2.5 bg-slate-800/90 border border-slate-700 rounded-xl text-xs text-white placeholder-slate-400 focus:outline-hidden focus:ring-2 focus:ring-indigo-500 focus:bg-slate-800 transition-all"
+                className="w-full pl-10 pr-4 py-2.5 bg-slate-100/90 dark:bg-slate-800/90 border border-slate-300 dark:border-slate-700 rounded-xl text-xs text-slate-900 dark:text-white placeholder-slate-400 focus:outline-hidden focus:ring-2 focus:ring-indigo-500 focus:bg-slate-100 dark:focus:bg-slate-800 transition-all"
               />
             </div>
             <button
@@ -143,7 +143,7 @@ export const SystemDashboardView: React.FC<SystemDashboardViewProps> = ({ onNavi
 
           {/* Quick Prompts */}
           <div className="flex gap-2 flex-wrap mt-3">
-            <span className="text-[11px] text-slate-400 font-medium py-1">Recommended Inquiries:</span>
+            <span className="text-[11px] text-slate-600 dark:text-slate-400 font-medium py-1">Recommended Inquiries:</span>
             {quickPrompts.map((q, idx) => (
               <button
                 key={idx}
@@ -157,27 +157,27 @@ export const SystemDashboardView: React.FC<SystemDashboardViewProps> = ({ onNavi
 
           {/* AI Response Card */}
           {aiResponse && (
-            <div className="mt-4 p-4 rounded-xl bg-indigo-950/70 border border-indigo-800/70 text-xs text-slate-200 animate-in fade-in duration-200 space-y-3">
+            <div className="mt-4 p-4 rounded-xl bg-indigo-50 dark:bg-indigo-950/70 border border-indigo-800/70 text-xs text-slate-800 dark:text-slate-200 animate-in fade-in duration-200 space-y-3">
               <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2 font-semibold text-indigo-300">
-                  <Sparkles className="w-4 h-4 text-indigo-400" />
+                <div className="flex items-center gap-2 font-semibold text-indigo-700 dark:text-indigo-300">
+                  <Sparkles className="w-4 h-4 text-indigo-600 dark:text-indigo-400" />
                   <span>AI Diagnostic Report</span>
                 </div>
                 <button
                   onClick={() => setAiResponse(null)}
-                  className="text-xs text-slate-400 hover:text-slate-200"
+                  className="text-xs text-slate-600 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200"
                 >
                   Dismiss
                 </button>
               </div>
 
-              <div className="whitespace-pre-line leading-relaxed text-slate-200">
+              <div className="whitespace-pre-line leading-relaxed text-slate-800 dark:text-slate-200">
                 {aiResponse.answer}
               </div>
 
               {aiResponse.recommendedAction && (
-                <div className="pt-2 border-t border-indigo-900 flex items-center justify-between">
-                  <span className="text-slate-400">Recommended Next Step:</span>
+                <div className="pt-2 border-t border-indigo-200 dark:border-indigo-900 flex items-center justify-between">
+                  <span className="text-slate-600 dark:text-slate-400">Recommended Next Step:</span>
                   <button
                     onClick={() => {
                       if (aiResponse.targetRoute?.functionalAreaId) {
@@ -188,7 +188,7 @@ export const SystemDashboardView: React.FC<SystemDashboardViewProps> = ({ onNavi
                         );
                       }
                     }}
-                    className="inline-flex items-center gap-1 font-semibold text-indigo-300 hover:text-indigo-100 cursor-pointer"
+                    className="inline-flex items-center gap-1 font-semibold text-indigo-700 dark:text-indigo-300 hover:text-indigo-100 cursor-pointer"
                   >
                     <span>{aiResponse.recommendedAction}</span>
                     <ArrowRight className="w-3.5 h-3.5" />

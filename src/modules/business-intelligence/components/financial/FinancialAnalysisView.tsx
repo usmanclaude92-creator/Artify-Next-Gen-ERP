@@ -22,36 +22,36 @@ export const FinancialAnalysisView: React.FC = () => {
       <BiFilterBar />
 
       {/* DuPont Model Breakdown Banner */}
-      <div className="bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 rounded-2xl p-6 text-white shadow-xl">
+      <div className="bg-gradient-to-r from-slate-50 dark:from-slate-900 via-indigo-50 dark:via-indigo-950 to-slate-50 dark:to-slate-900 rounded-2xl p-6 text-slate-900 dark:text-white shadow-xl">
         <div className="flex items-center justify-between mb-4">
           <div>
-            <span className="text-[10px] uppercase tracking-wider font-mono font-bold text-indigo-300">
+            <span className="text-[10px] uppercase tracking-wider font-mono font-bold text-indigo-700 dark:text-indigo-300">
               Strategic Equity Decomposition
             </span>
-            <h3 className="text-base font-bold text-white mt-0.5">DuPont Model ROE Breakdown (14.0% Return on Equity)</h3>
+            <h3 className="text-base font-bold text-slate-900 dark:text-white mt-0.5">DuPont Model ROE Breakdown (14.0% Return on Equity)</h3>
           </div>
-          <span className="text-xs font-mono font-bold text-emerald-400 bg-emerald-950/60 border border-emerald-500/30 px-2.5 py-1 rounded-lg">
+          <span className="text-xs font-mono font-bold text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-500/30 px-2.5 py-1 rounded-lg">
             ROE Target: 12.0% (Exceeding +200 bps)
           </span>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
-          <div className="bg-white/10 p-4 rounded-xl border border-white/10 backdrop-blur-xs">
-            <span className="text-xs text-indigo-200 block">1. Net Profit Margin</span>
-            <span className="text-xl font-bold font-mono text-white mt-1 block">14.72%</span>
-            <span className="text-[11px] text-slate-300 mt-1 block">Operating profitability per OMR revenue</span>
+          <div className="bg-slate-900/10 dark:bg-white/10 p-4 rounded-xl border border-slate-900/10 dark:border-white/10 backdrop-blur-xs">
+            <span className="text-xs text-indigo-800 dark:text-indigo-200 block">1. Net Profit Margin</span>
+            <span className="text-xl font-bold font-mono text-slate-900 dark:text-white mt-1 block">14.72%</span>
+            <span className="text-[11px] text-slate-700 dark:text-slate-300 mt-1 block">Operating profitability per OMR revenue</span>
           </div>
 
-          <div className="bg-white/10 p-4 rounded-xl border border-white/10 backdrop-blur-xs">
-            <span className="text-xs text-indigo-200 block">2. Asset Turnover Ratio</span>
-            <span className="text-xl font-bold font-mono text-white mt-1 block">0.59x</span>
-            <span className="text-[11px] text-slate-300 mt-1 block">Revenue generated per asset invested</span>
+          <div className="bg-slate-900/10 dark:bg-white/10 p-4 rounded-xl border border-slate-900/10 dark:border-white/10 backdrop-blur-xs">
+            <span className="text-xs text-indigo-800 dark:text-indigo-200 block">2. Asset Turnover Ratio</span>
+            <span className="text-xl font-bold font-mono text-slate-900 dark:text-white mt-1 block">0.59x</span>
+            <span className="text-[11px] text-slate-700 dark:text-slate-300 mt-1 block">Revenue generated per asset invested</span>
           </div>
 
-          <div className="bg-white/10 p-4 rounded-xl border border-white/10 backdrop-blur-xs">
-            <span className="text-xs text-indigo-200 block">3. Financial Leverage Multiplier</span>
-            <span className="text-xl font-bold font-mono text-white mt-1 block">1.60x</span>
-            <span className="text-[11px] text-slate-300 mt-1 block">Assets / Equity equity multiplier</span>
+          <div className="bg-slate-900/10 dark:bg-white/10 p-4 rounded-xl border border-slate-900/10 dark:border-white/10 backdrop-blur-xs">
+            <span className="text-xs text-indigo-800 dark:text-indigo-200 block">3. Financial Leverage Multiplier</span>
+            <span className="text-xl font-bold font-mono text-slate-900 dark:text-white mt-1 block">1.60x</span>
+            <span className="text-[11px] text-slate-700 dark:text-slate-300 mt-1 block">Assets / Equity equity multiplier</span>
           </div>
         </div>
       </div>

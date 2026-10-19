@@ -89,20 +89,20 @@ const AssetDashboardContent: React.FC<{ activeSection?: string }> = ({ activeSec
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 p-4 lg:p-8 space-y-8">
       {/* Top Banner with Key Financial Metrics */}
-      <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 bg-gradient-to-r from-slate-900 via-slate-900 to-amber-950/40 border border-slate-800 rounded-3xl p-6 lg:p-8 shadow-2xl relative overflow-hidden">
+      <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 bg-gradient-to-r from-slate-50 dark:from-slate-900 via-slate-50 dark:via-slate-900 to-amber-50 dark:to-amber-950/40 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 lg:p-8 shadow-2xl relative overflow-hidden">
         <div className="space-y-2 relative z-10">
           <div className="flex items-center gap-3">
-            <div className="p-3 bg-amber-500/20 text-amber-400 border border-amber-500/30 rounded-2xl">
+            <div className="p-3 bg-amber-500/20 text-amber-700 dark:text-amber-400 border border-amber-500/30 rounded-2xl">
               <Building2 className="w-6 h-6" />
             </div>
             <div>
               <div className="flex items-center gap-2">
-                <span className="text-xs font-mono font-black text-amber-400 uppercase tracking-widest bg-amber-950/80 px-2.5 py-0.5 rounded-full border border-amber-800">
+                <span className="text-xs font-mono font-black text-amber-700 dark:text-amber-400 uppercase tracking-widest bg-amber-50 dark:bg-amber-950/80 px-2.5 py-0.5 rounded-full border border-amber-200 dark:border-amber-800">
                   MODULE 13
                 </span>
-                <h1 className="text-2xl lg:text-3xl font-black text-white tracking-tight">Fixed Asset Management</h1>
+                <h1 className="text-2xl lg:text-3xl font-black text-slate-900 dark:text-white tracking-tight">Fixed Asset Management</h1>
               </div>
-              <p className="text-xs lg:text-sm text-slate-400 mt-1">
+              <p className="text-xs lg:text-sm text-slate-600 dark:text-slate-400 mt-1">
                 Enterprise capital asset lifecycle, CWIP project tracking, IFRS/IAS 16 depreciation, maintenance work orders & RFID physical verification.
               </p>
             </div>
@@ -113,7 +113,7 @@ const AssetDashboardContent: React.FC<{ activeSection?: string }> = ({ activeSec
         <div className="flex items-center gap-4 relative z-10">
           <button
             onClick={() => setShowAiModal(true)}
-            className="flex items-center gap-2 px-5 py-3 bg-gradient-to-r from-amber-600 via-amber-700 to-amber-800 hover:from-amber-500 hover:to-amber-600 text-white font-black text-xs lg:text-sm rounded-2xl shadow-xl shadow-amber-600/30 transition-all hover:scale-[1.02] cursor-pointer"
+            className="flex items-center gap-2 px-5 py-3 bg-gradient-to-r from-amber-100 dark:from-amber-600 via-amber-100 dark:via-amber-700 to-amber-100 dark:to-amber-800 hover:from-amber-500 hover:to-amber-600 text-slate-900 dark:text-white font-black text-xs lg:text-sm rounded-2xl shadow-xl shadow-amber-600/30 transition-all hover:scale-[1.02] cursor-pointer"
           >
             <Sparkles className="w-4 h-4 animate-pulse" />
             <span>Asset AI Copilot</span>

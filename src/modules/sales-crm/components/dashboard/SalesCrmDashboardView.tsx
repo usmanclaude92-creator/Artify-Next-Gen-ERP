@@ -90,20 +90,20 @@ export const SalesCrmDashboardView: React.FC<SalesCrmDashboardViewProps> = ({
   return (
     <div className="space-y-6 pb-12">
       {/* Header Banner */}
-      <div className="bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 rounded-2xl p-6 sm:p-8 text-white border border-indigo-900/40 shadow-xl relative overflow-hidden">
+      <div className="bg-gradient-to-r from-slate-50 dark:from-slate-900 via-indigo-50 dark:via-indigo-950 to-slate-50 dark:to-slate-900 rounded-2xl p-6 sm:p-8 text-slate-900 dark:text-white border border-indigo-900/40 shadow-xl relative overflow-hidden">
         <div className="absolute top-0 right-0 w-96 h-96 bg-indigo-500/10 rounded-full blur-3xl pointer-events-none -mr-20 -mt-20"></div>
         <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
           <div>
             <div className="flex items-center gap-3">
-              <span className="px-3 py-1 rounded-full bg-indigo-500/20 text-indigo-300 text-xs font-semibold uppercase tracking-wider border border-indigo-500/30">
+              <span className="px-3 py-1 rounded-full bg-indigo-500/20 text-indigo-700 dark:text-indigo-300 text-xs font-semibold uppercase tracking-wider border border-indigo-500/30">
                 Phase 06 • Module 06
               </span>
-              <span className="text-xs text-slate-400 font-medium">Oman & GCC Commercial Edition</span>
+              <span className="text-xs text-slate-600 dark:text-slate-400 font-medium">Oman & GCC Commercial Edition</span>
             </div>
             <h1 className="text-2xl sm:text-3xl font-bold mt-2 tracking-tight">
               06 — Sales & CRM Operations Cockpit
             </h1>
-            <p className="text-slate-300 text-sm sm:text-base mt-1 max-w-2xl">
+            <p className="text-slate-700 dark:text-slate-300 text-sm sm:text-base mt-1 max-w-2xl">
               Omnichannel Lead Qualification, CPQ Quotation Engine, Sales Pipeline Kanban, Quote-to-Cash Execution, Delivery Notes & AR Tax Invoicing.
             </p>
           </div>

@@ -153,19 +153,19 @@ export const InventoryDashboardView: React.FC<InventoryDashboardViewProps> = ({
       </div>
 
       {/* Interactive Hub Quick Actions & AI Copilot Banner */}
-      <div className="bg-gradient-to-r from-cyan-950/40 via-slate-900/90 to-indigo-950/40 border border-cyan-500/20 rounded-xl p-5 relative overflow-hidden shadow-lg">
+      <div className="bg-gradient-to-r from-cyan-50 dark:from-cyan-950/40 via-slate-50 dark:via-slate-900/90 to-indigo-50 dark:to-indigo-950/40 border border-cyan-500/20 rounded-xl p-5 relative overflow-hidden shadow-lg">
         <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4 relative z-10">
           <div className="space-y-1">
             <div className="flex items-center gap-2">
-              <div className="p-1.5 rounded-md bg-cyan-500/20 text-cyan-400">
+              <div className="p-1.5 rounded-md bg-cyan-500/20 text-cyan-600 dark:text-cyan-400">
                 <Sparkles className="w-4 h-4" />
               </div>
-              <span className="text-xs font-semibold tracking-wider uppercase text-cyan-400">AI Inventory Copilot & Supply Optimization</span>
+              <span className="text-xs font-semibold tracking-wider uppercase text-cyan-600 dark:text-cyan-400">AI Inventory Copilot & Supply Optimization</span>
             </div>
-            <h3 className="text-lg font-semibold text-white">
+            <h3 className="text-lg font-semibold text-slate-900 dark:text-white">
               Autonomous Stock Replenishment & Multi-Warehouse Allocation
             </h3>
-            <p className="text-xs text-slate-300 max-w-2xl">
+            <p className="text-xs text-slate-700 dark:text-slate-300 max-w-2xl">
               AI actively monitors project reservation queues, lead times across Oman transport routes, and FEFO shelf-life limits to prevent stockouts and minimize warehouse picker transit travel time.
             </p>
           </div>
@@ -196,34 +196,34 @@ export const InventoryDashboardView: React.FC<InventoryDashboardViewProps> = ({
         </div>
 
         {/* AI Recommendations Inline Carousel */}
-        <div className="mt-4 pt-4 border-t border-slate-800/80 grid grid-cols-1 md:grid-cols-3 gap-3">
+        <div className="mt-4 pt-4 border-t border-slate-200/80 dark:border-slate-800/80 grid grid-cols-1 md:grid-cols-3 gap-3">
           {aiRecommendations.map((rec) => (
             <div
               key={rec.id}
               className={`p-3 rounded-lg border text-xs transition-all ${
                 rec.severity === 'CRITICAL'
-                  ? 'bg-rose-950/30 border-rose-800/50 text-rose-200'
+                  ? 'bg-rose-50 dark:bg-rose-950/30 border-rose-800/50 text-rose-800 dark:text-rose-200'
                   : rec.severity === 'WARNING'
-                  ? 'bg-amber-950/30 border-amber-800/50 text-amber-200'
-                  : 'bg-cyan-950/30 border-cyan-800/50 text-cyan-200'
+                  ? 'bg-amber-50 dark:bg-amber-950/30 border-amber-800/50 text-amber-900 dark:text-amber-200'
+                  : 'bg-cyan-50 dark:bg-cyan-950/30 border-cyan-800/50 text-cyan-800 dark:text-cyan-200'
               }`}
             >
               <div className="flex items-center justify-between font-semibold">
                 <span className="flex items-center gap-1">
-                  {rec.severity === 'CRITICAL' && <AlertTriangle className="w-3.5 h-3.5 text-rose-400" />}
-                  {rec.severity === 'WARNING' && <Clock className="w-3.5 h-3.5 text-amber-400" />}
-                  {rec.severity === 'OPPORTUNITY' && <Sparkles className="w-3.5 h-3.5 text-cyan-400" />}
+                  {rec.severity === 'CRITICAL' && <AlertTriangle className="w-3.5 h-3.5 text-rose-600 dark:text-rose-400" />}
+                  {rec.severity === 'WARNING' && <Clock className="w-3.5 h-3.5 text-amber-700 dark:text-amber-400" />}
+                  {rec.severity === 'OPPORTUNITY' && <Sparkles className="w-3.5 h-3.5 text-cyan-600 dark:text-cyan-400" />}
                   {rec.title}
                 </span>
-                <span className="px-1.5 py-0.5 rounded text-[10px] font-mono bg-slate-900/60 border border-slate-800">
+                <span className="px-1.5 py-0.5 rounded text-[10px] font-mono bg-white/60 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800">
                   {rec.confidenceScore}% conf
                 </span>
               </div>
-              <p className="mt-1 text-[11px] text-slate-300 line-clamp-2">
+              <p className="mt-1 text-[11px] text-slate-700 dark:text-slate-300 line-clamp-2">
                 {rec.description}
               </p>
               <div className="mt-2 flex items-center justify-between">
-                <span className="text-[10px] text-slate-400">
+                <span className="text-[10px] text-slate-600 dark:text-slate-400">
                   {rec.impactValueOMR ? `Impact: OMR ${rec.impactValueOMR.toLocaleString()}` : 'Efficiency Gain'}
                 </span>
                 <button

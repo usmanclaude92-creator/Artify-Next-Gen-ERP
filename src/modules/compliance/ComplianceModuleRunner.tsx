@@ -184,11 +184,11 @@ const InnerComplianceRunner: React.FC<ComplianceModuleRunnerProps> = ({
   return (
     <div className="space-y-6">
       {/* Top Banner with Stats Strip */}
-      <div className="bg-gradient-to-r from-slate-950 via-slate-900 to-indigo-950 text-white rounded-3xl p-6 md:p-8 shadow-xl border border-slate-800 relative overflow-hidden">
+      <div className="bg-gradient-to-r from-slate-50 dark:from-slate-950 via-slate-50 dark:via-slate-900 to-indigo-50 dark:to-indigo-950 text-slate-900 dark:text-white rounded-3xl p-6 md:p-8 shadow-xl border border-slate-200 dark:border-slate-800 relative overflow-hidden">
         <div className="relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-6">
           <div className="space-y-2 max-w-2xl">
             <div className="flex items-center gap-3">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-300 text-xs font-semibold border border-emerald-500/30">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-700 dark:text-emerald-300 text-xs font-semibold border border-emerald-500/30">
                 <ShieldCheck className="w-3.5 h-3.5" />
                 <span>Module 17 • Governance, Risk & Compliance (GRC)</span>
               </div>
@@ -198,8 +198,8 @@ const InnerComplianceRunner: React.FC<ComplianceModuleRunnerProps> = ({
                   onClick={onToggleFavorite}
                   className={`p-1.5 rounded-xl border transition cursor-pointer ${
                     isFavorite
-                      ? 'bg-amber-400/20 border-amber-400/40 text-amber-300'
-                      : 'bg-white/10 border-white/20 text-slate-300 hover:text-white'
+                      ? 'bg-amber-400/20 border-amber-400/40 text-amber-800 dark:text-amber-300'
+                      : 'bg-slate-900/10 dark:bg-white/10 border-slate-900/20 dark:border-white/20 text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white'
                   }`}
                   title={isFavorite ? 'Remove from favorites' : 'Add to favorites'}
                 >
@@ -211,14 +211,14 @@ const InnerComplianceRunner: React.FC<ComplianceModuleRunnerProps> = ({
             <h1 className="text-2xl md:text-3xl font-extrabold tracking-tight">
               Compliance, Enterprise Risk & Audit
             </h1>
-            <p className="text-sm text-slate-300 leading-relaxed">
+            <p className="text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
               Oman regulatory mandates, 5% VAT & Corporate Tax (CIT), COSO internal controls, Segregation of Duties (SoD), dynamic 5×5 ERM heatmap, internal/external audit workflows, CAPA remediation, and AI fraud detection.
             </p>
 
             {(functionalArea || process || transaction) && (
-              <div className="flex items-center gap-2 pt-2 text-xs font-mono text-emerald-400">
+              <div className="flex items-center gap-2 pt-2 text-xs font-mono text-emerald-600 dark:text-emerald-400">
                 <span>Direct Context:</span>
-                <span className="bg-emerald-950/60 px-2.5 py-0.5 rounded border border-emerald-500/30">
+                <span className="bg-emerald-50 dark:bg-emerald-950/60 px-2.5 py-0.5 rounded border border-emerald-500/30">
                   {transaction?.name || process?.name || functionalArea?.name}
                 </span>
               </div>
@@ -227,44 +227,44 @@ const InnerComplianceRunner: React.FC<ComplianceModuleRunnerProps> = ({
 
           {/* Quick Metrics */}
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-            <div className="bg-white/10 backdrop-blur-md p-3.5 rounded-2xl border border-white/10 text-center">
-              <span className="text-[10px] uppercase font-bold tracking-wider text-slate-300 block">
+            <div className="bg-slate-900/10 dark:bg-white/10 backdrop-blur-md p-3.5 rounded-2xl border border-slate-900/10 dark:border-white/10 text-center">
+              <span className="text-[10px] uppercase font-bold tracking-wider text-slate-700 dark:text-slate-300 block">
                 Statutory Health
               </span>
-              <strong className="text-xl font-bold font-mono text-emerald-400">
+              <strong className="text-xl font-bold font-mono text-emerald-600 dark:text-emerald-400">
                 {Math.round((compliantReqCount / (regulatoryRequirements.length || 1)) * 100)}%
               </strong>
-              <span className="text-[10px] text-slate-400 block mt-0.5">Compliant</span>
+              <span className="text-[10px] text-slate-600 dark:text-slate-400 block mt-0.5">Compliant</span>
             </div>
 
-            <div className="bg-white/10 backdrop-blur-md p-3.5 rounded-2xl border border-white/10 text-center">
-              <span className="text-[10px] uppercase font-bold tracking-wider text-slate-300 block">
+            <div className="bg-slate-900/10 dark:bg-white/10 backdrop-blur-md p-3.5 rounded-2xl border border-slate-900/10 dark:border-white/10 text-center">
+              <span className="text-[10px] uppercase font-bold tracking-wider text-slate-700 dark:text-slate-300 block">
                 Tax Filings
               </span>
-              <strong className="text-xl font-bold font-mono text-cyan-400">
+              <strong className="text-xl font-bold font-mono text-cyan-600 dark:text-cyan-400">
                 100%
               </strong>
-              <span className="text-[10px] text-slate-400 block mt-0.5">5% VAT Verified</span>
+              <span className="text-[10px] text-slate-600 dark:text-slate-400 block mt-0.5">5% VAT Verified</span>
             </div>
 
-            <div className="bg-white/10 backdrop-blur-md p-3.5 rounded-2xl border border-white/10 text-center">
-              <span className="text-[10px] uppercase font-bold tracking-wider text-slate-300 block">
+            <div className="bg-slate-900/10 dark:bg-white/10 backdrop-blur-md p-3.5 rounded-2xl border border-slate-900/10 dark:border-white/10 text-center">
+              <span className="text-[10px] uppercase font-bold tracking-wider text-slate-700 dark:text-slate-300 block">
                 Open Findings
               </span>
-              <strong className="text-xl font-bold font-mono text-amber-400">
+              <strong className="text-xl font-bold font-mono text-amber-700 dark:text-amber-400">
                 {openFindingsCount}
               </strong>
-              <span className="text-[10px] text-slate-400 block mt-0.5">Under CAPA</span>
+              <span className="text-[10px] text-slate-600 dark:text-slate-400 block mt-0.5">Under CAPA</span>
             </div>
 
-            <div className="bg-white/10 backdrop-blur-md p-3.5 rounded-2xl border border-white/10 text-center">
-              <span className="text-[10px] uppercase font-bold tracking-wider text-slate-300 block">
+            <div className="bg-slate-900/10 dark:bg-white/10 backdrop-blur-md p-3.5 rounded-2xl border border-slate-900/10 dark:border-white/10 text-center">
+              <span className="text-[10px] uppercase font-bold tracking-wider text-slate-700 dark:text-slate-300 block">
                 Fraud Flags
               </span>
-              <strong className="text-xl font-bold font-mono text-rose-400">
+              <strong className="text-xl font-bold font-mono text-rose-600 dark:text-rose-400">
                 {openFraudCount}
               </strong>
-              <span className="text-[10px] text-slate-400 block mt-0.5">Active Triage</span>
+              <span className="text-[10px] text-slate-600 dark:text-slate-400 block mt-0.5">Active Triage</span>
             </div>
           </div>
         </div>

@@ -111,28 +111,28 @@ const ConstructionDashboardContent: React.FC<{ activeSection?: string }> = ({ ac
   return (
     <div className="space-y-6">
       {/* Top Banner & Global KPI Header */}
-      <div className="bg-gradient-to-r from-slate-950 via-slate-900 to-orange-950/40 border border-slate-800 rounded-3xl p-6 shadow-2xl relative overflow-hidden">
+      <div className="bg-gradient-to-r from-slate-50 dark:from-slate-950 via-slate-50 dark:via-slate-900 to-orange-50 dark:to-orange-950/40 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-2xl relative overflow-hidden">
         <div className="absolute top-0 right-0 w-96 h-96 bg-orange-500/10 rounded-full blur-3xl pointer-events-none" />
 
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 relative z-10">
           <div className="space-y-2">
             <div className="flex items-center gap-2.5">
-              <div className="p-2.5 bg-orange-600/20 text-orange-400 rounded-2xl border border-orange-500/30">
+              <div className="p-2.5 bg-orange-600/20 text-orange-700 dark:text-orange-400 rounded-2xl border border-orange-500/30">
                 <HardHat className="w-6 h-6" />
               </div>
               <div>
                 <div className="flex items-center gap-2">
-                  <span className="text-[11px] font-bold uppercase tracking-widest text-orange-400 font-mono">
+                  <span className="text-[11px] font-bold uppercase tracking-widest text-orange-700 dark:text-orange-400 font-mono">
                     MODULE 15 • CONSTRUCTION & CONTRACT MANAGEMENT
                   </span>
-                  <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-orange-950 text-orange-400 border border-orange-800">
+                  <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-orange-50 dark:bg-orange-950 text-orange-700 dark:text-orange-400 border border-orange-200 dark:border-orange-800">
                     FIDIC Red / Yellow / Silver
                   </span>
                 </div>
-                <h1 className="text-2xl font-black text-white tracking-tight">Construction Lifecycle & FIDIC Contracts</h1>
+                <h1 className="text-2xl font-black text-slate-900 dark:text-white tracking-tight">Construction Lifecycle & FIDIC Contracts</h1>
               </div>
             </div>
-            <p className="text-xs text-slate-400 max-w-2xl leading-relaxed">
+            <p className="text-xs text-slate-600 dark:text-slate-400 max-w-2xl leading-relaxed">
               EPC project contract administration: hierarchical BOQ takeoff, digital daily site diaries (DSR), surveyor Interim Payment Certificates (IPC), retention escrow accounting, and FIDIC dispute resolution.
             </p>
           </div>
@@ -142,7 +142,7 @@ const ConstructionDashboardContent: React.FC<{ activeSection?: string }> = ({ ac
             <select
               value={selectedContractId}
               onChange={e => setSelectedContractId(e.target.value)}
-              className="bg-slate-800 text-slate-100 border border-slate-700 text-xs rounded-xl px-3.5 py-2.5 font-medium focus:ring-2 focus:ring-orange-500"
+              className="bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-slate-100 border border-slate-300 dark:border-slate-700 text-xs rounded-xl px-3.5 py-2.5 font-medium focus:ring-2 focus:ring-orange-500"
             >
               {contracts.map(c => (
                 <option key={c.id} value={c.id}>
@@ -153,7 +153,7 @@ const ConstructionDashboardContent: React.FC<{ activeSection?: string }> = ({ ac
 
             <button
               onClick={() => setShowAiModal(true)}
-              className="flex items-center gap-2 px-4 py-2.5 bg-gradient-to-r from-orange-600 to-amber-600 hover:from-orange-500 hover:to-amber-500 text-white text-xs font-bold rounded-2xl shadow-xl shadow-orange-600/20 transition-all cursor-pointer"
+              className="flex items-center gap-2 px-4 py-2.5 bg-gradient-to-r from-orange-100 dark:from-orange-600 to-amber-100 dark:to-amber-600 hover:from-orange-500 hover:to-amber-500 text-slate-900 dark:text-white text-xs font-bold rounded-2xl shadow-xl shadow-orange-600/20 transition-all cursor-pointer"
             >
               <Sparkles className="w-4 h-4" />
               <span>Construction AI Copilot</span>
@@ -162,28 +162,28 @@ const ConstructionDashboardContent: React.FC<{ activeSection?: string }> = ({ ac
         </div>
 
         {/* Global Summary KPI Pills */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-6 pt-6 border-t border-slate-800/80">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-6 pt-6 border-t border-slate-200/80 dark:border-slate-800/80">
           <div className="space-y-0.5">
-            <span className="text-[10px] text-slate-400 font-semibold uppercase tracking-wider">Total Active Portfolio Value</span>
-            <div className="text-xl font-black font-mono text-white">
+            <span className="text-[10px] text-slate-600 dark:text-slate-400 font-semibold uppercase tracking-wider">Total Active Portfolio Value</span>
+            <div className="text-xl font-black font-mono text-slate-900 dark:text-white">
               {currency} {((kpis?.totalPortfolioContractValue || 0) / 1000000).toFixed(1)}M
             </div>
           </div>
           <div className="space-y-0.5">
-            <span className="text-[10px] text-slate-400 font-semibold uppercase tracking-wider">Certified Work Executed</span>
-            <div className="text-xl font-black font-mono text-emerald-400">
+            <span className="text-[10px] text-slate-600 dark:text-slate-400 font-semibold uppercase tracking-wider">Certified Work Executed</span>
+            <div className="text-xl font-black font-mono text-emerald-600 dark:text-emerald-400">
               {currency} {((kpis?.totalCertifiedWipThisMonth || 0) / 1000000).toFixed(1)}M
             </div>
           </div>
           <div className="space-y-0.5">
-            <span className="text-[10px] text-slate-400 font-semibold uppercase tracking-wider">Retention Withheld in Escrow</span>
-            <div className="text-xl font-black font-mono text-amber-400">
+            <span className="text-[10px] text-slate-600 dark:text-slate-400 font-semibold uppercase tracking-wider">Retention Withheld in Escrow</span>
+            <div className="text-xl font-black font-mono text-amber-700 dark:text-amber-400">
               {currency} {((kpis?.cumulativeRetentionHeldInPortfolio || 0) / 1000000).toFixed(2)}M
             </div>
           </div>
           <div className="space-y-0.5">
-            <span className="text-[10px] text-slate-400 font-semibold uppercase tracking-wider">Active Performance Bonds</span>
-            <div className="text-xl font-black font-mono text-indigo-400">
+            <span className="text-[10px] text-slate-600 dark:text-slate-400 font-semibold uppercase tracking-wider">Active Performance Bonds</span>
+            <div className="text-xl font-black font-mono text-indigo-600 dark:text-indigo-400">
               {currency} {((kpis?.activeBondsExposureValue || 0) / 1000000).toFixed(2)}M
             </div>
           </div>

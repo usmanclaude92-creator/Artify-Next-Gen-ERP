@@ -195,32 +195,32 @@ const BankingTreasuryContentRunner: React.FC<BankingTreasuryModuleRunnerProps> =
       </div>
 
       {/* 2. High-Contrast Actor Simulation & Segregation of Duties (SoD) Bar */}
-      <div className="bg-slate-900 text-white rounded-2xl p-4 border border-slate-800 shadow-md">
+      <div className="bg-white dark:bg-slate-900 text-slate-900 dark:text-white rounded-2xl p-4 border border-slate-200 dark:border-slate-800 shadow-md">
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
           {/* Left: Active Simulated Actor */}
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-indigo-600/30 border border-indigo-400/40 text-indigo-300 flex items-center justify-center font-bold text-xs shrink-0">
+            <div className="w-10 h-10 rounded-xl bg-indigo-600/30 border border-indigo-400/40 text-indigo-700 dark:text-indigo-300 flex items-center justify-center font-bold text-xs shrink-0">
               <UserCheck className="w-5 h-5" />
             </div>
             <div>
               <div className="flex items-center gap-2 flex-wrap">
-                <span className="text-[10px] uppercase tracking-wider font-semibold text-slate-400">
+                <span className="text-[10px] uppercase tracking-wider font-semibold text-slate-600 dark:text-slate-400">
                   Simulated Active Actor:
                 </span>
-                <span className="text-sm font-bold text-white flex items-center gap-1.5">
+                <span className="text-sm font-bold text-slate-900 dark:text-white flex items-center gap-1.5">
                   {activeActor.name}
-                  <span className="text-[11px] font-normal text-slate-400">({activeActor.role})</span>
+                  <span className="text-[11px] font-normal text-slate-600 dark:text-slate-400">({activeActor.role})</span>
                 </span>
                 {activeActor.signatoryTier && (
-                  <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-amber-500/20 text-amber-300 border border-amber-500/30">
+                  <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-amber-500/20 text-amber-800 dark:text-amber-300 border border-amber-500/30">
                     {activeActor.signatoryTier}
                   </span>
                 )}
               </div>
-              <div className="flex items-center gap-3 text-xs text-slate-400 mt-0.5">
+              <div className="flex items-center gap-3 text-xs text-slate-600 dark:text-slate-400 mt-0.5">
                 <span>
                   Authority Limit:{' '}
-                  <strong className="text-emerald-400">
+                  <strong className="text-emerald-600 dark:text-emerald-400">
                     OMR {activeActor.approvalLimitOMR.toLocaleString()}
                   </strong>
                 </span>
@@ -234,8 +234,8 @@ const BankingTreasuryContentRunner: React.FC<BankingTreasuryModuleRunnerProps> =
 
           {/* Right: Quick Switcher & Policy Tools */}
           <div className="flex items-center gap-2 flex-wrap">
-            <div className="flex items-center bg-slate-800/90 rounded-xl p-1 border border-slate-700">
-              <span className="text-[10px] font-semibold text-slate-400 px-2">Switch Actor:</span>
+            <div className="flex items-center bg-slate-100/90 dark:bg-slate-800/90 rounded-xl p-1 border border-slate-300 dark:border-slate-700">
+              <span className="text-[10px] font-semibold text-slate-600 dark:text-slate-400 px-2">Switch Actor:</span>
               <div className="flex items-center gap-1 overflow-x-auto">
                 {availableActors.map((actor) => {
                   const isCurrent = actor.id === activeActor.id;
@@ -247,7 +247,7 @@ const BankingTreasuryContentRunner: React.FC<BankingTreasuryModuleRunnerProps> =
                       className={`px-2.5 py-1 rounded-lg text-[11px] font-semibold transition-all cursor-pointer whitespace-nowrap ${
                         isCurrent
                           ? 'bg-indigo-600 text-white shadow-xs'
-                          : 'text-slate-300 hover:text-white hover:bg-slate-700/60'
+                          : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-200 dark:hover:bg-slate-700/60'
                       }`}
                       title={`${actor.name} — ${actor.role} (Limit: OMR ${actor.approvalLimitOMR.toLocaleString()})`}
                     >
@@ -278,20 +278,20 @@ const BankingTreasuryContentRunner: React.FC<BankingTreasuryModuleRunnerProps> =
         </div>
 
         {/* Dynamic SoD Notice Banner */}
-        <div className="mt-3 pt-3 border-t border-slate-800/80 flex items-center justify-between text-[11px] text-slate-400">
+        <div className="mt-3 pt-3 border-t border-slate-200/80 dark:border-slate-800/80 flex items-center justify-between text-[11px] text-slate-600 dark:text-slate-400">
           <div className="flex items-center gap-2">
-            <Lock className="w-3.5 h-3.5 text-indigo-400 shrink-0" />
+            <Lock className="w-3.5 h-3.5 text-indigo-600 dark:text-indigo-400 shrink-0" />
             <span>
               <strong>Rule SOD-BNK-01 Active:</strong> Makers cannot approve their own vouchers. Dual sign-offs enforced for &gt; OMR 50,000.
             </span>
           </div>
           <div className="flex items-center gap-3">
             <span>
-              GL Vouchers Posted: <strong className="text-slate-200">{glJournalEntries.length}</strong>
+              GL Vouchers Posted: <strong className="text-slate-800 dark:text-slate-200">{glJournalEntries.length}</strong>
             </span>
             <span>•</span>
             <span>
-              Audit Trail Entries: <strong className="text-slate-200">{auditLogs.length}</strong>
+              Audit Trail Entries: <strong className="text-slate-800 dark:text-slate-200">{auditLogs.length}</strong>
             </span>
           </div>
         </div>

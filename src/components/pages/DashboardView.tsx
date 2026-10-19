@@ -37,20 +37,20 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
   return (
     <div className="space-y-6 animate-in fade-in duration-200">
       {/* Top Welcome Banner */}
-      <div className="bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 rounded-2xl p-6 text-white shadow-xl border border-slate-800 relative overflow-hidden">
+      <div className="bg-gradient-to-r from-slate-50 dark:from-slate-900 via-indigo-50 dark:via-indigo-950 to-slate-50 dark:to-slate-900 rounded-2xl p-6 text-slate-900 dark:text-white shadow-xl border border-slate-200 dark:border-slate-800 relative overflow-hidden">
         <BrandLogo className="pointer-events-none absolute -right-4 -bottom-6 h-44 w-auto opacity-10 hidden md:block" alt="" />
         <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div>
             <div className="flex items-center gap-2 mb-1.5">
-              <span className="px-2.5 py-0.5 rounded-full bg-indigo-500/30 text-indigo-300 text-[11px] font-mono font-bold border border-indigo-400/30">
+              <span className="px-2.5 py-0.5 rounded-full bg-indigo-500/30 text-indigo-700 dark:text-indigo-300 text-[11px] font-mono font-bold border border-indigo-400/30">
                 ARTIFY ENTERPRISE CORE
               </span>
-              <span className="text-slate-400 text-xs">• FY 2026 Consolidated View</span>
+              <span className="text-slate-600 dark:text-slate-400 text-xs">• FY 2026 Consolidated View</span>
             </div>
-            <h1 className="text-xl sm:text-2xl font-bold tracking-tight text-white">
+            <h1 className="text-xl sm:text-2xl font-bold tracking-tight text-slate-900 dark:text-white">
               Executive Directorate Dashboard
             </h1>
-            <p className="text-xs sm:text-sm text-slate-300 mt-1 max-w-2xl">
+            <p className="text-xs sm:text-sm text-slate-700 dark:text-slate-300 mt-1 max-w-2xl">
               Real-time multi-entity operations across 17 integrated modules, IFRS accounting standards, automated treasury feeds, and AI-driven predictive intelligence.
             </p>
           </div>

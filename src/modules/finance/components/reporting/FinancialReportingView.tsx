@@ -89,14 +89,14 @@ export const FinancialReportingView: React.FC<{ initialReport?: ReportId }> = ({
   return (
     <div className="space-y-6">
       {/* Top Banner */}
-      <div className="bg-slate-900 border border-slate-800 rounded-3xl p-6 text-white shadow-xl flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6">
+      <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 text-slate-900 dark:text-white shadow-xl flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6">
         <div className="space-y-2 max-w-2xl">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-rose-500/20 text-rose-400 text-xs font-semibold uppercase tracking-wider">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-rose-500/20 text-rose-600 dark:text-rose-400 text-xs font-semibold uppercase tracking-wider">
             <FileSpreadsheet className="w-3.5 h-3.5" />
             Module 16.08 — Financial Reporting & Statutory Statements
           </div>
           <h2 className="text-2xl font-bold tracking-tight">IFRS Statements, Trial Balance & Oman VAT Return</h2>
-          <p className="text-sm text-slate-400">
+          <p className="text-sm text-slate-600 dark:text-slate-400">
             Real-time automated Income Statement (P&L), Balance Sheet, Statement of Cash Flows (IAS 7), balanced Trial Balance, and statutory 5% VAT declaration.
           </p>
         </div>

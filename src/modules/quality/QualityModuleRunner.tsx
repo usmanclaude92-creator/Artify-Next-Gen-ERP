@@ -81,28 +81,28 @@ const QualityDashboardContent: React.FC<{ activeSection?: string }> = ({ activeS
   return (
     <div className="space-y-6">
       {/* Top Banner & KPI Bar */}
-      <div className="bg-gradient-to-r from-slate-900 via-slate-900 to-teal-950/40 border border-slate-800 rounded-3xl p-6 shadow-2xl relative overflow-hidden">
+      <div className="bg-gradient-to-r from-slate-50 dark:from-slate-900 via-slate-50 dark:via-slate-900 to-teal-50 dark:to-teal-950/40 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-2xl relative overflow-hidden">
         <div className="absolute top-0 right-0 w-96 h-96 bg-teal-500/10 rounded-full blur-3xl pointer-events-none" />
 
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 relative z-10">
           <div className="space-y-2">
             <div className="flex items-center gap-2.5">
-              <div className="p-2.5 bg-teal-600/20 text-teal-400 rounded-2xl border border-teal-500/30">
+              <div className="p-2.5 bg-teal-600/20 text-teal-600 dark:text-teal-400 rounded-2xl border border-teal-500/30">
                 <ShieldCheck className="w-6 h-6" />
               </div>
               <div>
                 <div className="flex items-center gap-2">
-                  <span className="text-[11px] font-bold uppercase tracking-widest text-teal-400 font-mono">
+                  <span className="text-[11px] font-bold uppercase tracking-widest text-teal-600 dark:text-teal-400 font-mono">
                     MODULE 14 • TOTAL QUALITY MANAGEMENT (QMS)
                   </span>
-                  <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-teal-950 text-teal-400 border border-teal-800">
+                  <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-teal-50 dark:bg-teal-950 text-teal-600 dark:text-teal-400 border border-teal-200 dark:border-teal-800">
                     ISO 9001:2015 & API Q1
                   </span>
                 </div>
-                <h1 className="text-2xl font-black text-white tracking-tight">Quality Assurance & Zero-Defect Control</h1>
+                <h1 className="text-2xl font-black text-slate-900 dark:text-white tracking-tight">Quality Assurance & Zero-Defect Control</h1>
               </div>
             </div>
-            <p className="text-xs text-slate-400 max-w-2xl leading-relaxed">
+            <p className="text-xs text-slate-600 dark:text-slate-400 max-w-2xl leading-relaxed">
               Closed-loop industrial quality ecosystem: sampling plans, digital inspections, lab spectrometry, MRB disposition quarantine, 8D problem solving, and supplier vendor ratings.
             </p>
           </div>
@@ -110,7 +110,7 @@ const QualityDashboardContent: React.FC<{ activeSection?: string }> = ({ activeS
           <div className="flex items-center gap-3 shrink-0">
             <button
               onClick={() => setShowAiModal(true)}
-              className="flex items-center gap-2 px-4 py-2.5 bg-gradient-to-r from-teal-600 to-emerald-600 hover:from-teal-500 hover:to-emerald-500 text-white text-xs font-bold rounded-2xl shadow-xl shadow-teal-600/20 transition-all cursor-pointer"
+              className="flex items-center gap-2 px-4 py-2.5 bg-gradient-to-r from-teal-100 dark:from-teal-600 to-emerald-100 dark:to-emerald-600 hover:from-teal-500 hover:to-emerald-500 text-slate-900 dark:text-white text-xs font-bold rounded-2xl shadow-xl shadow-teal-600/20 transition-all cursor-pointer"
             >
               <Sparkles className="w-4 h-4" />
               <span>Quality AI Copilot</span>
@@ -119,24 +119,24 @@ const QualityDashboardContent: React.FC<{ activeSection?: string }> = ({ activeS
         </div>
 
         {/* Global Summary KPI Pills */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-6 pt-6 border-t border-slate-800/80">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-6 pt-6 border-t border-slate-200/80 dark:border-slate-800/80">
           <div className="space-y-0.5">
-            <span className="text-[10px] text-slate-400 font-semibold uppercase tracking-wider">First Pass Yield (FPY)</span>
-            <div className="text-xl font-black font-mono text-emerald-400">{kpiMetrics.firstPassYieldPct}%</div>
+            <span className="text-[10px] text-slate-600 dark:text-slate-400 font-semibold uppercase tracking-wider">First Pass Yield (FPY)</span>
+            <div className="text-xl font-black font-mono text-emerald-600 dark:text-emerald-400">{kpiMetrics.firstPassYieldPct}%</div>
           </div>
           <div className="space-y-0.5">
-            <span className="text-[10px] text-slate-400 font-semibold uppercase tracking-wider">Open Non-Conformances</span>
-            <div className="text-xl font-black font-mono text-rose-400">
+            <span className="text-[10px] text-slate-600 dark:text-slate-400 font-semibold uppercase tracking-wider">Open Non-Conformances</span>
+            <div className="text-xl font-black font-mono text-rose-600 dark:text-rose-400">
               {ncrs.filter(n => n.status !== 'CLOSED').length} Lots on Hold
             </div>
           </div>
           <div className="space-y-0.5">
-            <span className="text-[10px] text-slate-400 font-semibold uppercase tracking-wider">Active 8D CAPA Cases</span>
-            <div className="text-xl font-black font-mono text-amber-400">{capas.length} In-Flight</div>
+            <span className="text-[10px] text-slate-600 dark:text-slate-400 font-semibold uppercase tracking-wider">Active 8D CAPA Cases</span>
+            <div className="text-xl font-black font-mono text-amber-700 dark:text-amber-400">{capas.length} In-Flight</div>
           </div>
           <div className="space-y-0.5">
-            <span className="text-[10px] text-slate-400 font-semibold uppercase tracking-wider">Vendor Quality Index</span>
-            <div className="text-xl font-black font-mono text-teal-400">{kpiMetrics.supplierQualityIndexScore}/100</div>
+            <span className="text-[10px] text-slate-600 dark:text-slate-400 font-semibold uppercase tracking-wider">Vendor Quality Index</span>
+            <div className="text-xl font-black font-mono text-teal-600 dark:text-teal-400">{kpiMetrics.supplierQualityIndexScore}/100</div>
           </div>
         </div>
       </div>

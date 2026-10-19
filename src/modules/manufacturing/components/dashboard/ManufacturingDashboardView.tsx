@@ -49,18 +49,18 @@ export const ManufacturingDashboardView: React.FC<ManufacturingDashboardViewProp
   return (
     <div className="space-y-6">
       {/* Header Banner */}
-      <div className="bg-gradient-to-r from-slate-900 via-orange-950/40 to-slate-900 border border-orange-500/20 rounded-2xl p-6 relative overflow-hidden">
+      <div className="bg-gradient-to-r from-slate-50 dark:from-slate-900 via-orange-50 dark:via-orange-950/40 to-slate-50 dark:to-slate-900 border border-orange-500/20 rounded-2xl p-6 relative overflow-hidden">
         <div className="absolute right-0 top-0 bottom-0 w-1/3 bg-gradient-to-l from-orange-500/10 to-transparent pointer-events-none" />
         <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div>
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-500/10 border border-orange-500/30 text-orange-400 text-xs font-semibold uppercase tracking-wider mb-2">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-500/10 border border-orange-500/30 text-orange-700 dark:text-orange-400 text-xs font-semibold uppercase tracking-wider mb-2">
               <Factory className="w-3.5 h-3.5" />
               Sohar Heavy Manufacturing Plant & Cleanroom Bay
             </div>
-            <h1 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
+            <h1 className="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white tracking-tight">
               Manufacturing & Production Cockpit
             </h1>
-            <p className="text-slate-400 text-sm mt-1 max-w-2xl">
+            <p className="text-slate-600 dark:text-slate-400 text-sm mt-1 max-w-2xl">
               Real-time shop floor execution, OEE plant analytics, multi-level BOM costing, finite capacity dispatching, and material requirements planning (MRP).
             </p>
           </div>
@@ -465,11 +465,11 @@ export const ManufacturingDashboardView: React.FC<ManufacturingDashboardViewProp
       {/* Tab 3: AI Insights */}
       {activeTab === 'ai_insights' && (
         <div className="space-y-4">
-          <div className="p-4 rounded-xl bg-gradient-to-r from-orange-950/30 to-slate-900 border border-orange-500/30 flex items-start gap-3">
+          <div className="p-4 rounded-xl bg-gradient-to-r from-orange-50 dark:from-orange-950/30 to-slate-50 dark:to-slate-900 border border-orange-500/30 flex items-start gap-3">
             <Sparkles className="w-5 h-5 text-orange-700 dark:text-orange-400 shrink-0 mt-0.5" />
             <div>
-              <h4 className="text-sm font-bold text-white">AI Production Scheduling & Capacity Optimizer</h4>
-              <p className="text-xs text-slate-300 mt-1">
+              <h4 className="text-sm font-bold text-slate-900 dark:text-white">AI Production Scheduling & Capacity Optimizer</h4>
+              <p className="text-xs text-slate-700 dark:text-slate-300 mt-1">
                 The AI Engine has analyzed open sales order delivery milestones against CNC Bay 1 spindle utilization and recommends batching 12" valve body forgings in consecutive runs to eliminate 3.5 hours of tooling changeover setup time.
               </p>
             </div>

@@ -239,24 +239,24 @@ export const OpportunityManagementView: React.FC<OpportunityManagementViewProps>
 
       {/* AI Prediction Flyout Banner */}
       {aiInsight && (
-        <div className="p-4 rounded-2xl bg-gradient-to-r from-purple-900/30 via-indigo-900/20 to-slate-900 border border-purple-500/30 text-xs sm:text-sm text-slate-200 shadow-md flex items-start justify-between gap-4 animate-fade-in">
+        <div className="p-4 rounded-2xl bg-gradient-to-r from-purple-50 dark:from-purple-900/30 via-indigo-50 dark:via-indigo-900/20 to-slate-50 dark:to-slate-900 border border-purple-500/30 text-xs sm:text-sm text-slate-800 dark:text-slate-200 shadow-md flex items-start justify-between gap-4 animate-fade-in">
           <div className="flex items-start gap-3">
-            <Sparkles className="w-5 h-5 text-purple-400 shrink-0 mt-0.5" />
+            <Sparkles className="w-5 h-5 text-purple-600 dark:text-purple-400 shrink-0 mt-0.5" />
             <div>
-              <div className="font-bold text-white">
+              <div className="font-bold text-slate-900 dark:text-white">
                 AI Win Probability Analysis: {aiInsight.oppCode}
               </div>
-              <div className="mt-1 text-slate-300">
-                <span className="font-bold text-purple-300">Win Score: {aiInsight.res.probability}%</span> — {aiInsight.res.rationale}
+              <div className="mt-1 text-slate-700 dark:text-slate-300">
+                <span className="font-bold text-purple-700 dark:text-purple-300">Win Score: {aiInsight.res.probability}%</span> — {aiInsight.res.rationale}
               </div>
-              <div className="mt-1 text-xs text-emerald-300">
+              <div className="mt-1 text-xs text-emerald-700 dark:text-emerald-300">
                 💡 <span className="font-semibold">Recommended Tactic:</span> {aiInsight.res.tacticalAdvice}
               </div>
             </div>
           </div>
           <button
             onClick={() => setAiInsight(null)}
-            className="text-slate-400 hover:text-white text-xs font-bold cursor-pointer"
+            className="text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white text-xs font-bold cursor-pointer"
           >
             ✕
           </button>

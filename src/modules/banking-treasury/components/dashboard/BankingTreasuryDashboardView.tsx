@@ -155,20 +155,20 @@ export const BankingTreasuryDashboardView: React.FC<DashboardProps> = ({ onNavig
       </div>
 
       {/* AI Treasury Copilot & Actionable Insights */}
-      <div className="bg-linear-to-r from-slate-900 via-slate-800 to-indigo-950 text-white rounded-2xl p-6 shadow-md relative overflow-hidden">
+      <div className="bg-linear-to-r from-slate-50 dark:from-slate-900 via-slate-100 dark:via-slate-800 to-indigo-50 dark:to-indigo-950 text-slate-900 dark:text-white rounded-2xl p-6 shadow-md relative overflow-hidden">
         <div className="absolute right-0 top-0 w-96 h-96 bg-indigo-500/10 rounded-full blur-3xl pointer-events-none" />
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 relative z-10">
           <div className="space-y-2 max-w-2xl">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-500/20 text-indigo-300 text-xs font-semibold border border-indigo-400/30">
-              <Sparkles className="w-3.5 h-3.5 text-indigo-400" />
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-500/20 text-indigo-700 dark:text-indigo-300 text-xs font-semibold border border-indigo-400/30">
+              <Sparkles className="w-3.5 h-3.5 text-indigo-600 dark:text-indigo-400" />
               <span>AI Autonomous Treasury Engine — Active</span>
             </div>
-            <h2 className="text-lg font-bold text-white">
+            <h2 className="text-lg font-bold text-slate-900 dark:text-white">
               Liquidity Optimization & Automated Cash Sweeping Briefing
             </h2>
-            <p className="text-xs text-slate-300 leading-relaxed">
-              Consolidated cash balance stands at <strong className="text-emerald-300">{formatCurrency(totalLiquidityOMR)}</strong>. 
-              The algorithm detects an overnight idle balance of OMR 1.2M in Bank Muscat operating account; sweeping to Sohar 30-day call account @ 5.15% pa will yield approximately <strong className="text-white">OMR 5,150</strong> monthly incremental interest with zero operational friction.
+            <p className="text-xs text-slate-700 dark:text-slate-300 leading-relaxed">
+              Consolidated cash balance stands at <strong className="text-emerald-700 dark:text-emerald-300">{formatCurrency(totalLiquidityOMR)}</strong>. 
+              The algorithm detects an overnight idle balance of OMR 1.2M in Bank Muscat operating account; sweeping to Sohar 30-day call account @ 5.15% pa will yield approximately <strong className="text-slate-900 dark:text-white">OMR 5,150</strong> monthly incremental interest with zero operational friction.
             </p>
           </div>
 
@@ -182,7 +182,7 @@ export const BankingTreasuryDashboardView: React.FC<DashboardProps> = ({ onNavig
             </button>
             <button
               onClick={() => onNavigateToSubView('04.07')}
-              className="px-4 py-2.5 rounded-xl bg-white/10 hover:bg-white/20 text-white text-xs font-bold transition-all border border-white/15 flex items-center justify-center gap-2 cursor-pointer"
+              className="px-4 py-2.5 rounded-xl bg-slate-900/10 dark:bg-white/10 hover:bg-slate-900/20 dark:hover:bg-white/20 text-slate-900 dark:text-white text-xs font-bold transition-all border border-slate-900/15 dark:border-white/15 flex items-center justify-center gap-2 cursor-pointer"
             >
               <Sliders className="w-4 h-4" />
               <span>13-Week Cash Simulator</span>

@@ -69,30 +69,30 @@ export const AdministrationDashboardView: React.FC<AdministrationDashboardViewPr
   return (
     <div className="space-y-6">
       {/* AI Daily Briefing Banner */}
-      <div className="bg-slate-900 text-white rounded-2xl p-6 shadow-md relative overflow-hidden">
-        <div className="absolute right-0 top-0 bottom-0 w-1/3 bg-gradient-to-l from-indigo-600/20 to-transparent pointer-events-none" />
+      <div className="bg-white dark:bg-slate-900 text-slate-900 dark:text-white rounded-2xl p-6 shadow-md relative overflow-hidden">
+        <div className="absolute right-0 top-0 bottom-0 w-1/3 bg-gradient-to-l from-indigo-100 dark:from-indigo-600/20 to-transparent pointer-events-none" />
         <div className="relative z-10 space-y-2 max-w-3xl">
-          <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-white/10 text-indigo-200 text-xs font-semibold">
-            <Sparkles className="w-3.5 h-3.5 text-indigo-300" />
+          <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-slate-900/10 dark:bg-white/10 text-indigo-800 dark:text-indigo-200 text-xs font-semibold">
+            <Sparkles className="w-3.5 h-3.5 text-indigo-700 dark:text-indigo-300" />
             <span>AI Executive Administration Intelligence</span>
           </div>
           <h2 className="text-xl font-bold tracking-tight">Corporate Administration Daily Operations Pulse</h2>
-          <p className="text-xs text-slate-300 leading-relaxed font-normal">
+          <p className="text-xs text-slate-700 dark:text-slate-300 leading-relaxed font-normal">
             {generateAdminBriefing()}
           </p>
         </div>
 
-        <div className="mt-5 pt-4 border-t border-slate-800/80 flex flex-wrap items-center gap-4 text-xs">
-          <div className="flex items-center gap-2 text-slate-300">
+        <div className="mt-5 pt-4 border-t border-slate-200/80 dark:border-slate-800/80 flex flex-wrap items-center gap-4 text-xs">
+          <div className="flex items-center gap-2 text-slate-700 dark:text-slate-300">
             <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
             <span>SLA Response Health: <strong>98.4%</strong></span>
           </div>
-          <div className="flex items-center gap-2 text-slate-300">
-            <Clock className="w-3.5 h-3.5 text-amber-400" />
+          <div className="flex items-center gap-2 text-slate-700 dark:text-slate-300">
+            <Clock className="w-3.5 h-3.5 text-amber-700 dark:text-amber-400" />
             <span>Avg Requisition Turnaround: <strong>{analyticsSummary.avgRequestResolutionDays} Days</strong></span>
           </div>
-          <div className="flex items-center gap-2 text-slate-300">
-            <ShieldCheck className="w-3.5 h-3.5 text-blue-400" />
+          <div className="flex items-center gap-2 text-slate-700 dark:text-slate-300">
+            <ShieldCheck className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" />
             <span>Document Vault Retention Compliance: <strong>100%</strong></span>
           </div>
         </div>

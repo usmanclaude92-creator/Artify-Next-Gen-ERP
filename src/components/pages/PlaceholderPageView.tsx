@@ -429,12 +429,12 @@ export const PlaceholderPageView: React.FC<PlaceholderPageViewProps> = ({
             </p>
           </div>
 
-          <div className="p-4 rounded-xl bg-slate-900 text-slate-300 font-mono text-xs overflow-x-auto space-y-3">
+          <div className="p-4 rounded-xl bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 font-mono text-xs overflow-x-auto space-y-3">
             <div>
-              <p className="text-indigo-400 font-bold text-[11px] uppercase tracking-wider">
+              <p className="text-indigo-600 dark:text-indigo-400 font-bold text-[11px] uppercase tracking-wider">
                 -- Database Table Structure: {(transaction?.code || 'TX').toLowerCase().replace(/[^a-z0-9]/g, '_')}
               </p>
-              <pre className="text-slate-300 mt-1">
+              <pre className="text-slate-700 dark:text-slate-300 mt-1">
 {`CREATE TABLE ${(transaction?.code || 'TX').toLowerCase().replace(/[^a-z0-9]/g, '_')}_records (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   voucher_no VARCHAR(64) UNIQUE NOT NULL,
@@ -453,11 +453,11 @@ export const PlaceholderPageView: React.FC<PlaceholderPageViewProps> = ({
               </pre>
             </div>
 
-            <div className="pt-2 border-t border-slate-800">
-              <p className="text-emerald-400 font-bold text-[11px] uppercase tracking-wider">
+            <div className="pt-2 border-t border-slate-200 dark:border-slate-800">
+              <p className="text-emerald-600 dark:text-emerald-400 font-bold text-[11px] uppercase tracking-wider">
                 -- API Microservice Endpoints:
               </p>
-              <p className="text-slate-400 mt-1">
+              <p className="text-slate-600 dark:text-slate-400 mt-1">
                 POST /api/v1/{module.id}/{transaction.id}/create<br />
                 PUT /api/v1/{module.id}/{transaction.id}/:id/submit-approval<br />
                 POST /api/v1/{module.id}/{transaction.id}/:id/gl-post<br />

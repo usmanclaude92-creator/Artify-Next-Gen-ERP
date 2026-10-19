@@ -260,15 +260,15 @@ export const TaxComplianceView: React.FC = () => {
               </div>
             </div>
 
-            <div className="bg-gradient-to-br from-slate-900 to-slate-800 text-white p-5 rounded-2xl border border-slate-700 shadow-sm flex items-center justify-between">
+            <div className="bg-gradient-to-br from-slate-50 dark:from-slate-900 to-slate-100 dark:to-slate-800 text-slate-900 dark:text-white p-5 rounded-2xl border border-slate-300 dark:border-slate-700 shadow-sm flex items-center justify-between">
               <div>
-                <span className="text-xs uppercase font-bold text-slate-400 block">Net VAT Settlement Position</span>
-                <strong className="text-xl font-bold font-mono text-emerald-400">
+                <span className="text-xs uppercase font-bold text-slate-600 dark:text-slate-400 block">Net VAT Settlement Position</span>
+                <strong className="text-xl font-bold font-mono text-emerald-600 dark:text-emerald-400">
                   OMR {netVatPayable.toLocaleString('en-US', { minimumFractionDigits: 2 })}
                 </strong>
-                <span className="text-[11px] text-slate-300 block mt-0.5">Payable to Oman Tax Authority</span>
+                <span className="text-[11px] text-slate-700 dark:text-slate-300 block mt-0.5">Payable to Oman Tax Authority</span>
               </div>
-              <div className="w-11 h-11 rounded-2xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center">
+              <div className="w-11 h-11 rounded-2xl bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 flex items-center justify-center">
                 <Receipt className="w-5 h-5" />
               </div>
             </div>

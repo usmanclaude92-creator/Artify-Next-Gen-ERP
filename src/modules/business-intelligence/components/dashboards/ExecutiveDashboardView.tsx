@@ -327,18 +327,18 @@ export const ExecutiveDashboardView: React.FC = () => {
       </div>
 
       {/* Row 5: AI Executive Insights & Diagnostic Alerts */}
-      <div className="bg-gradient-to-r from-indigo-900 via-indigo-950 to-slate-900 rounded-2xl p-6 text-white shadow-xl">
+      <div className="bg-gradient-to-r from-indigo-50 dark:from-indigo-900 via-indigo-50 dark:via-indigo-950 to-slate-50 dark:to-slate-900 rounded-2xl p-6 text-slate-900 dark:text-white shadow-xl">
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center gap-2.5">
-            <div className="p-2 rounded-xl bg-indigo-500/20 text-indigo-300 border border-indigo-400/30">
+            <div className="p-2 rounded-xl bg-indigo-500/20 text-indigo-700 dark:text-indigo-300 border border-indigo-400/30">
               <Sparkles className="w-5 h-5" />
             </div>
             <div>
-              <h3 className="text-base font-bold tracking-tight text-white">AI Executive Intelligence & Anomaly Radar</h3>
-              <p className="text-xs text-indigo-200">Real-time diagnostic telemetry, margin drivers, and variance alerts</p>
+              <h3 className="text-base font-bold tracking-tight text-slate-900 dark:text-white">AI Executive Intelligence & Anomaly Radar</h3>
+              <p className="text-xs text-indigo-800 dark:text-indigo-200">Real-time diagnostic telemetry, margin drivers, and variance alerts</p>
             </div>
           </div>
-          <span className="text-[10px] font-mono font-semibold bg-indigo-500/30 text-indigo-200 border border-indigo-400/30 px-2.5 py-1 rounded-full">
+          <span className="text-[10px] font-mono font-semibold bg-indigo-500/30 text-indigo-800 dark:text-indigo-200 border border-indigo-400/30 px-2.5 py-1 rounded-full">
             Autonomous Insights
           </span>
         </div>
@@ -347,31 +347,31 @@ export const ExecutiveDashboardView: React.FC = () => {
           {aiInsights.map(insight => (
             <div
               key={insight.id}
-              className="bg-white/10 hover:bg-white/15 border border-white/10 rounded-xl p-4 transition-all duration-200 flex flex-col justify-between backdrop-blur-xs"
+              className="bg-slate-900/10 dark:bg-white/10 hover:bg-slate-900/15 dark:hover:bg-white/15 border border-slate-900/10 dark:border-white/10 rounded-xl p-4 transition-all duration-200 flex flex-col justify-between backdrop-blur-xs"
             >
               <div>
                 <div className="flex items-center justify-between gap-2 mb-2">
-                  <span className="text-xs font-bold text-indigo-200 flex items-center gap-1.5">
-                    {insight.severity === 'positive' && <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />}
-                    {insight.severity === 'warning' && <AlertTriangle className="w-3.5 h-3.5 text-amber-400" />}
-                    {insight.severity === 'info' && <Clock className="w-3.5 h-3.5 text-blue-400" />}
+                  <span className="text-xs font-bold text-indigo-800 dark:text-indigo-200 flex items-center gap-1.5">
+                    {insight.severity === 'positive' && <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />}
+                    {insight.severity === 'warning' && <AlertTriangle className="w-3.5 h-3.5 text-amber-700 dark:text-amber-400" />}
+                    {insight.severity === 'info' && <Clock className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" />}
                     {insight.title}
                   </span>
-                  <span className="text-[10px] font-mono text-indigo-300 bg-indigo-900/50 px-1.5 py-0.5 rounded">
+                  <span className="text-[10px] font-mono text-indigo-700 dark:text-indigo-300 bg-indigo-50 dark:bg-indigo-900/50 px-1.5 py-0.5 rounded">
                     Score: {(insight.confidenceScore * 100).toFixed(0)}%
                   </span>
                 </div>
 
-                <p className="text-xs text-slate-200 leading-relaxed mb-3">{insight.summary}</p>
+                <p className="text-xs text-slate-800 dark:text-slate-200 leading-relaxed mb-3">{insight.summary}</p>
               </div>
 
-              <div className="pt-2 border-t border-white/10 flex items-center justify-between text-xs">
-                <span className="text-[11px] text-indigo-300 font-medium truncate max-w-[70%]">
+              <div className="pt-2 border-t border-slate-900/10 dark:border-white/10 flex items-center justify-between text-xs">
+                <span className="text-[11px] text-indigo-700 dark:text-indigo-300 font-medium truncate max-w-[70%]">
                   Action: {insight.actionableRecommendation}
                 </span>
                 <button
                   onClick={() => inspectExplainability(insight)}
-                  className="inline-flex items-center gap-1 text-[11px] font-semibold text-indigo-200 hover:text-white underline underline-offset-2 shrink-0"
+                  className="inline-flex items-center gap-1 text-[11px] font-semibold text-indigo-800 dark:text-indigo-200 hover:text-slate-900 dark:hover:text-white underline underline-offset-2 shrink-0"
                 >
                   Explain
                   <ArrowUpRight className="w-3 h-3" />
