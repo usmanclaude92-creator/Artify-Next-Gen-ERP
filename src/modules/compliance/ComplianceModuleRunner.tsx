@@ -185,8 +185,8 @@ const InnerComplianceRunner: React.FC<ComplianceModuleRunnerProps> = ({
   return (
     <div className="space-y-6">
       {/* Top Banner with Stats Strip */}
-      <div className="bg-gradient-to-r from-slate-50 dark:from-slate-950 via-slate-50 dark:via-slate-900 to-indigo-50 dark:to-indigo-950 text-slate-900 dark:text-white rounded-3xl p-6 md:p-8 shadow-xl border border-slate-200 dark:border-slate-800 relative overflow-hidden">
-<BrandWatermark />
+      <div className="bg-gradient-to-r from-slate-50 dark:from-slate-950 via-slate-50 dark:via-slate-900 to-indigo-50 dark:to-indigo-950 text-slate-900 dark:text-white rounded-3xl p-6 md:p-8 shadow-xl border border-slate-200 dark:border-slate-800 relative overflow-hidden isolate">
+<BrandWatermark variant="mark" />
         <div className="relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-6">
           <div className="space-y-2 max-w-2xl">
             <div className="flex items-center gap-3">

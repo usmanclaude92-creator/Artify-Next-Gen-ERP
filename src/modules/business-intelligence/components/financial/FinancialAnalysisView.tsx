@@ -23,8 +23,8 @@ export const FinancialAnalysisView: React.FC = () => {
       <BiFilterBar />
 
       {/* DuPont Model Breakdown Banner */}
-      <div className="bg-gradient-to-r from-slate-50 dark:from-slate-900 via-indigo-50 dark:via-indigo-950 to-slate-50 dark:to-slate-900 rounded-2xl p-6 text-slate-900 dark:text-white shadow-xl relative overflow-hidden">
-<BrandWatermark />
+      <div className="bg-gradient-to-r from-slate-50 dark:from-slate-900 via-indigo-50 dark:via-indigo-950 to-slate-50 dark:to-slate-900 rounded-2xl p-6 text-slate-900 dark:text-white shadow-xl relative overflow-hidden isolate">
+<BrandWatermark variant="mark" />
         <div className="flex items-center justify-between mb-4">
           <div>
             <span className="text-[10px] uppercase tracking-wider font-mono font-bold text-indigo-700 dark:text-indigo-300">

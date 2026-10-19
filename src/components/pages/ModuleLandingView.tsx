@@ -105,8 +105,8 @@ export const ModuleLandingView: React.FC<ModuleLandingViewProps> = ({
 
       {/* AI Assistant Suggestions */}
       {module.aiSuggestions && module.aiSuggestions.length > 0 && (
-        <div className="bg-gradient-to-r from-indigo-50/70 dark:from-indigo-500/10 via-slate-50 dark:via-slate-900 to-indigo-50/70 dark:to-indigo-500/10 p-4 rounded-2xl border border-indigo-100 dark:border-indigo-500/20 flex flex-col md:flex-row md:items-center justify-between gap-4 relative overflow-hidden">
-<BrandWatermark />
+        <div className="bg-gradient-to-r from-indigo-50/70 dark:from-indigo-500/10 via-slate-50 dark:via-slate-900 to-indigo-50/70 dark:to-indigo-500/10 p-4 rounded-2xl border border-indigo-100 dark:border-indigo-500/20 flex flex-col md:flex-row md:items-center justify-between gap-4 relative overflow-hidden isolate">
+<BrandWatermark variant="mark" />
           <div className="flex items-start gap-3">
             <div className="w-8 h-8 rounded-xl bg-indigo-600 text-white flex items-center justify-center shrink-0">
               <Sparkles className="w-4 h-4" />

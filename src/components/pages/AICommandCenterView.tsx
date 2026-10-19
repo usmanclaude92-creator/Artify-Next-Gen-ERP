@@ -186,8 +186,8 @@ WHERE inv.status = 'APPROVED' AND inv.discount_expiry_date >= CURRENT_DATE;`,
   return (
     <div className="space-y-6 animate-in fade-in duration-200">
       {/* Header Banner */}
-      <div className="bg-gradient-to-r from-indigo-50 dark:from-indigo-950 via-slate-50 dark:via-slate-900 to-indigo-50 dark:to-indigo-900 rounded-2xl p-6 text-slate-900 dark:text-white shadow-xl border border-indigo-900/60 relative overflow-hidden">
-<BrandWatermark />
+      <div className="bg-gradient-to-r from-indigo-50 dark:from-indigo-950 via-slate-50 dark:via-slate-900 to-indigo-50 dark:to-indigo-900 rounded-2xl p-6 text-slate-900 dark:text-white shadow-xl border border-indigo-900/60 relative overflow-hidden isolate">
+<BrandWatermark variant="mark" />
         <div className="relative z-10">
           <div className="flex items-center gap-2 mb-2">
             <div className="w-8 h-8 rounded-lg bg-indigo-500/20 text-indigo-700 dark:text-indigo-300 flex items-center justify-center border border-indigo-400/30">

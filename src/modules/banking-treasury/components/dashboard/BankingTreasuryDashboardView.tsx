@@ -156,8 +156,8 @@ export const BankingTreasuryDashboardView: React.FC<DashboardProps> = ({ onNavig
       </div>
 
       {/* AI Treasury Copilot & Actionable Insights */}
-      <div className="bg-linear-to-r from-slate-50 dark:from-slate-900 via-slate-100 dark:via-slate-800 to-indigo-50 dark:to-indigo-950 text-slate-900 dark:text-white rounded-2xl p-6 shadow-md relative overflow-hidden">
-<BrandWatermark />
+      <div className="bg-linear-to-r from-slate-50 dark:from-slate-900 via-slate-100 dark:via-slate-800 to-indigo-50 dark:to-indigo-950 text-slate-900 dark:text-white rounded-2xl p-6 shadow-md relative overflow-hidden isolate">
+<BrandWatermark variant="lockup" />
         <div className="absolute right-0 top-0 w-96 h-96 bg-indigo-500/10 rounded-full blur-3xl pointer-events-none" />
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 relative z-10">
           <div className="space-y-2 max-w-2xl">

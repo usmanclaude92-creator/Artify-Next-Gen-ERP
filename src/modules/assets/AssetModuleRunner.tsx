@@ -90,8 +90,8 @@ const AssetDashboardContent: React.FC<{ activeSection?: string }> = ({ activeSec
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 p-4 lg:p-8 space-y-8">
       {/* Top Banner with Key Financial Metrics */}
-      <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 bg-gradient-to-r from-slate-50 dark:from-slate-900 via-slate-50 dark:via-slate-900 to-amber-50 dark:to-amber-950/40 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 lg:p-8 shadow-2xl relative overflow-hidden">
-<BrandWatermark />
+      <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 bg-gradient-to-r from-slate-50 dark:from-slate-900 via-slate-50 dark:via-slate-900 to-amber-50 dark:to-amber-950/40 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 lg:p-8 shadow-2xl relative overflow-hidden isolate">
+<BrandWatermark variant="mark" />
         <div className="space-y-2 relative z-10">
           <div className="flex items-center gap-3">
             <div className="p-3 bg-amber-500/20 text-amber-700 dark:text-amber-400 border border-amber-500/30 rounded-2xl">

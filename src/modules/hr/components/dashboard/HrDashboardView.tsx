@@ -69,8 +69,8 @@ export const HrDashboardView: React.FC<HrDashboardViewProps> = ({ onNavigate, ac
   return (
     <div className="space-y-6">
       {/* Top Banner with Quick Role Context */}
-      <div className="bg-gradient-to-r from-rose-50 dark:from-rose-950/40 via-slate-50 dark:via-slate-900 to-slate-50 dark:to-slate-900 border border-rose-900/30 rounded-2xl p-6 shadow-sm relative overflow-hidden">
-<BrandWatermark />
+      <div className="bg-gradient-to-r from-rose-50 dark:from-rose-950/40 via-slate-50 dark:via-slate-900 to-slate-50 dark:to-slate-900 border border-rose-900/30 rounded-2xl p-6 shadow-sm relative overflow-hidden isolate">
+<BrandWatermark variant="mark" />
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
           <div className="space-y-2">
             <div className="flex items-center gap-2.5">

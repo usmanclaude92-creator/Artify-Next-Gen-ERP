@@ -328,8 +328,8 @@ export const ExecutiveDashboardView: React.FC = () => {
       </div>
 
       {/* Row 5: AI Executive Insights & Diagnostic Alerts */}
-      <div className="bg-gradient-to-r from-indigo-50 dark:from-indigo-900 via-indigo-50 dark:via-indigo-950 to-slate-50 dark:to-slate-900 rounded-2xl p-6 text-slate-900 dark:text-white shadow-xl relative overflow-hidden">
-<BrandWatermark />
+      <div className="bg-gradient-to-r from-indigo-50 dark:from-indigo-900 via-indigo-50 dark:via-indigo-950 to-slate-50 dark:to-slate-900 rounded-2xl p-6 text-slate-900 dark:text-white shadow-xl relative overflow-hidden isolate">
+<BrandWatermark variant="mark" />
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center gap-2.5">
             <div className="p-2 rounded-xl bg-indigo-500/20 text-indigo-700 dark:text-indigo-300 border border-indigo-400/30">

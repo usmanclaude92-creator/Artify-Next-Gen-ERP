@@ -240,8 +240,8 @@ export const OpportunityManagementView: React.FC<OpportunityManagementViewProps>
 
       {/* AI Prediction Flyout Banner */}
       {aiInsight && (
-        <div className="p-4 rounded-2xl bg-gradient-to-r from-purple-50 dark:from-purple-900/30 via-indigo-50 dark:via-indigo-900/20 to-slate-50 dark:to-slate-900 border border-purple-500/30 text-xs sm:text-sm text-slate-800 dark:text-slate-200 shadow-md flex items-start justify-between gap-4 animate-fade-in relative overflow-hidden">
-<BrandWatermark />
+        <div className="p-4 rounded-2xl bg-gradient-to-r from-purple-50 dark:from-purple-900/30 via-indigo-50 dark:via-indigo-900/20 to-slate-50 dark:to-slate-900 border border-purple-500/30 text-xs sm:text-sm text-slate-800 dark:text-slate-200 shadow-md flex items-start justify-between gap-4 animate-fade-in relative overflow-hidden isolate">
+<BrandWatermark variant="tile" />
           <div className="flex items-start gap-3">
             <Sparkles className="w-5 h-5 text-purple-600 dark:text-purple-400 shrink-0 mt-0.5" />
             <div>

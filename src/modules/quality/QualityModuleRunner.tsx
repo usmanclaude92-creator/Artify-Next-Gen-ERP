@@ -82,8 +82,8 @@ const QualityDashboardContent: React.FC<{ activeSection?: string }> = ({ activeS
   return (
     <div className="space-y-6">
       {/* Top Banner & KPI Bar */}
-      <div className="bg-gradient-to-r from-slate-50 dark:from-slate-900 via-slate-50 dark:via-slate-900 to-teal-50 dark:to-teal-950/40 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-2xl relative overflow-hidden">
-<BrandWatermark />
+      <div className="bg-gradient-to-r from-slate-50 dark:from-slate-900 via-slate-50 dark:via-slate-900 to-teal-50 dark:to-teal-950/40 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-2xl relative overflow-hidden isolate">
+<BrandWatermark variant="mark" />
         <div className="absolute top-0 right-0 w-96 h-96 bg-teal-500/10 rounded-full blur-3xl pointer-events-none" />
 
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 relative z-10">

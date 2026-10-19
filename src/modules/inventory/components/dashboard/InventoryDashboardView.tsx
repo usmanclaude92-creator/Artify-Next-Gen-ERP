@@ -154,8 +154,8 @@ export const InventoryDashboardView: React.FC<InventoryDashboardViewProps> = ({
       </div>
 
       {/* Interactive Hub Quick Actions & AI Copilot Banner */}
-      <div className="bg-gradient-to-r from-cyan-50 dark:from-cyan-950/40 via-slate-50 dark:via-slate-900/90 to-indigo-50 dark:to-indigo-950/40 border border-cyan-500/20 rounded-xl p-5 relative overflow-hidden shadow-lg">
-<BrandWatermark />
+      <div className="bg-gradient-to-r from-cyan-50 dark:from-cyan-950/40 via-slate-50 dark:via-slate-900/90 to-indigo-50 dark:to-indigo-950/40 border border-cyan-500/20 rounded-xl p-5 relative overflow-hidden shadow-lg isolate">
+<BrandWatermark variant="mark" />
         <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4 relative z-10">
           <div className="space-y-1">
             <div className="flex items-center gap-2">
