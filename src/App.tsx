@@ -265,12 +265,6 @@ export default function App() {
 
         {/* Dynamic Viewport Container */}
         <main className="flex-1 overflow-y-auto py-6 sm:py-8">
-          {/* Brand watermark: stays centred in the visible content area; low opacity so content remains readable in both themes */}
-          <div aria-hidden="true" className="sticky top-0 z-10 h-0 pointer-events-none select-none">
-            <div className="flex h-[calc(100vh-9rem)] items-center justify-center">
-              <BrandLogo className="w-[min(70%,560px)] max-h-[60vh] object-contain opacity-[0.06] dark:opacity-[0.07]" alt="" />
-            </div>
-          </div>
           <div className="w-[90%] mx-auto">
             <Suspense fallback={<div className="py-24 flex flex-col items-center gap-3 text-sm text-slate-500 dark:text-slate-400"><BrandLogo className="h-12 w-auto animate-pulse" alt="" /><span>Loading module…</span></div>}>
             {/* View 1: Executive Dashboard */}
