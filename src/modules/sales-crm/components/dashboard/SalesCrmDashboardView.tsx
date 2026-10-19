@@ -26,6 +26,7 @@ import {
 } from 'lucide-react';
 import { useSalesCrm } from '../../services/salesCrmStore';
 import { ERPUserRole } from '../../../../types/erp';
+import { BrandWatermark } from '@/src/components/common/BrandWatermark';
 
 interface SalesCrmDashboardViewProps {
   onNavigate: (route: {
@@ -91,6 +92,7 @@ export const SalesCrmDashboardView: React.FC<SalesCrmDashboardViewProps> = ({
     <div className="space-y-6 pb-12">
       {/* Header Banner */}
       <div className="bg-gradient-to-r from-slate-50 dark:from-slate-900 via-indigo-50 dark:via-indigo-950 to-slate-50 dark:to-slate-900 rounded-2xl p-6 sm:p-8 text-slate-900 dark:text-white border border-indigo-900/40 shadow-xl relative overflow-hidden">
+<BrandWatermark />
         <div className="absolute top-0 right-0 w-96 h-96 bg-indigo-500/10 rounded-full blur-3xl pointer-events-none -mr-20 -mt-20"></div>
         <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
           <div>
@@ -242,7 +244,8 @@ export const SalesCrmDashboardView: React.FC<SalesCrmDashboardViewProps> = ({
       </div>
 
       {/* AI Sales Copilot Assistant */}
-      <div className="bg-gradient-to-br from-indigo-900/10 via-slate-900/5 to-slate-900/20 dark:from-indigo-950/40 dark:via-slate-900/60 dark:to-slate-950 border border-indigo-200/70 dark:border-indigo-800/50 rounded-2xl p-6 shadow-sm">
+      <div className="bg-gradient-to-br from-indigo-900/10 via-slate-900/5 to-slate-900/20 dark:from-indigo-950/40 dark:via-slate-900/60 dark:to-slate-950 border border-indigo-200/70 dark:border-indigo-800/50 rounded-2xl p-6 shadow-sm relative overflow-hidden">
+<BrandWatermark />
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center gap-2.5">
             <div className="w-8 h-8 rounded-lg bg-indigo-600 text-white flex items-center justify-center shadow-md shadow-indigo-600/30">

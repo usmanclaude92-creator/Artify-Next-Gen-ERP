@@ -31,6 +31,7 @@ import {
   ChevronRight,
   Filter
 } from 'lucide-react';
+import { BrandWatermark } from '@/src/components/common/BrandWatermark';
 
 const ConstructionDashboardContent: React.FC<{ activeSection?: string }> = ({ activeSection = '15.01' }) => {
   const {
@@ -112,6 +113,7 @@ const ConstructionDashboardContent: React.FC<{ activeSection?: string }> = ({ ac
     <div className="space-y-6">
       {/* Top Banner & Global KPI Header */}
       <div className="bg-gradient-to-r from-slate-50 dark:from-slate-950 via-slate-50 dark:via-slate-900 to-orange-50 dark:to-orange-950/40 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-2xl relative overflow-hidden">
+<BrandWatermark />
         <div className="absolute top-0 right-0 w-96 h-96 bg-orange-500/10 rounded-full blur-3xl pointer-events-none" />
 
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 relative z-10">

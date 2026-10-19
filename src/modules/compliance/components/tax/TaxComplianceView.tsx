@@ -27,6 +27,7 @@ import {
   Send,
   X
 } from 'lucide-react';
+import { BrandWatermark } from '@/src/components/common/BrandWatermark';
 
 export const TaxComplianceView: React.FC = () => {
   const {
@@ -260,7 +261,8 @@ export const TaxComplianceView: React.FC = () => {
               </div>
             </div>
 
-            <div className="bg-gradient-to-br from-slate-50 dark:from-slate-900 to-slate-100 dark:to-slate-800 text-slate-900 dark:text-white p-5 rounded-2xl border border-slate-300 dark:border-slate-700 shadow-sm flex items-center justify-between">
+            <div className="bg-gradient-to-br from-slate-50 dark:from-slate-900 to-slate-100 dark:to-slate-800 text-slate-900 dark:text-white p-5 rounded-2xl border border-slate-300 dark:border-slate-700 shadow-sm flex items-center justify-between relative overflow-hidden">
+<BrandWatermark />
               <div>
                 <span className="text-xs uppercase font-bold text-slate-600 dark:text-slate-400 block">Net VAT Settlement Position</span>
                 <strong className="text-xl font-bold font-mono text-emerald-600 dark:text-emerald-400">

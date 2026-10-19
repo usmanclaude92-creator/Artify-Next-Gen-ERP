@@ -30,6 +30,7 @@ import {
   ChevronRight,
   Sparkles
 } from 'lucide-react';
+import { BrandWatermark } from '@/src/components/common/BrandWatermark';
 
 interface FinanceDashboardContentProps {
   activeSection?: string;
@@ -135,7 +136,8 @@ const FinanceDashboardContent: React.FC<FinanceDashboardContentProps> = ({
   return (
     <div className="space-y-6">
       {/* Enterprise Module Header Strip */}
-      <div className="bg-gradient-to-r from-slate-50 dark:from-slate-900 via-slate-100 dark:via-slate-800 to-slate-50 dark:to-slate-900 rounded-3xl p-6 text-slate-900 dark:text-white shadow-xl border border-slate-300/50 dark:border-slate-700/50">
+      <div className="bg-gradient-to-r from-slate-50 dark:from-slate-900 via-slate-100 dark:via-slate-800 to-slate-50 dark:to-slate-900 rounded-3xl p-6 text-slate-900 dark:text-white shadow-xl border border-slate-300/50 dark:border-slate-700/50 relative overflow-hidden">
+<BrandWatermark />
         <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6">
           <div className="space-y-2">
             <div className="flex items-center gap-2">

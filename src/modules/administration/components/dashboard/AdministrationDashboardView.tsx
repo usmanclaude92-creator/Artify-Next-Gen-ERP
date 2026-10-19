@@ -28,6 +28,7 @@ import {
   Pie,
   Cell
 } from 'recharts';
+import { BrandWatermark } from '@/src/components/common/BrandWatermark';
 
 interface AdministrationDashboardViewProps {
   onNavigateToSubView?: (viewId: string) => void;
@@ -70,6 +71,7 @@ export const AdministrationDashboardView: React.FC<AdministrationDashboardViewPr
     <div className="space-y-6">
       {/* AI Daily Briefing Banner */}
       <div className="bg-white dark:bg-slate-900 text-slate-900 dark:text-white rounded-2xl p-6 shadow-md relative overflow-hidden">
+<BrandWatermark />
         <div className="absolute right-0 top-0 bottom-0 w-1/3 bg-gradient-to-l from-indigo-100 dark:from-indigo-600/20 to-transparent pointer-events-none" />
         <div className="relative z-10 space-y-2 max-w-3xl">
           <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-slate-900/10 dark:bg-white/10 text-indigo-800 dark:text-indigo-200 text-xs font-semibold">

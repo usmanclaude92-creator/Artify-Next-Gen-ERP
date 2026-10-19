@@ -44,6 +44,7 @@ import { FormModal } from './common/FormModal';
 import { CompanyBrandingStudio } from './CompanyBrandingStudio';
 import { GroupHoldingManagementView } from './GroupHoldingManagementView';
 import { notify } from '@/src/components/common/Feedback';
+import { BrandWatermark } from '@/src/components/common/BrandWatermark';
 
 interface CompanySetupManagementViewProps {
   initialTransactionId?: string;
@@ -786,7 +787,8 @@ export const CompanySetupManagementView: React.FC<CompanySetupManagementViewProp
             {inspectorTab === 'profile' && (
               <div className="p-6 space-y-6">
                 {/* AI Executive Profile Assistant */}
-                <div className="bg-linear-to-r from-indigo-50/70 dark:from-indigo-500/10 via-purple-50/40 dark:via-purple-500/10 to-slate-50 dark:to-slate-900 border border-indigo-100 dark:border-indigo-500/20 rounded-xl p-4">
+                <div className="bg-linear-to-r from-indigo-50/70 dark:from-indigo-500/10 via-purple-50/40 dark:via-purple-500/10 to-slate-50 dark:to-slate-900 border border-indigo-100 dark:border-indigo-500/20 rounded-xl p-4 relative overflow-hidden">
+<BrandWatermark />
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2 text-xs font-bold text-indigo-900 dark:text-indigo-100">
                       <Sparkles className="w-4 h-4 text-indigo-600 dark:text-indigo-400" />

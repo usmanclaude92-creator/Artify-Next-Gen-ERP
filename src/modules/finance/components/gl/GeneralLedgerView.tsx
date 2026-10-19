@@ -27,6 +27,7 @@ import {
   Sliders,
   DollarSign
 } from 'lucide-react';
+import { BrandWatermark } from '@/src/components/common/BrandWatermark';
 
 export const GeneralLedgerView: React.FC = () => {
   const {
@@ -139,7 +140,8 @@ export const GeneralLedgerView: React.FC = () => {
   return (
     <div className="space-y-6">
       {/* Top Banner */}
-      <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 text-slate-900 dark:text-white shadow-xl flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6">
+      <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 text-slate-900 dark:text-white shadow-xl flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6 relative overflow-hidden">
+<BrandWatermark />
         <div className="space-y-2 max-w-2xl">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 text-xs font-semibold uppercase tracking-wider">
             <BookOpen className="w-3.5 h-3.5" />

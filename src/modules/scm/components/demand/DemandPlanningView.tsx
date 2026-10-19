@@ -26,6 +26,7 @@ import {
   Sliders,
   DollarSign
 } from 'lucide-react';
+import { BrandWatermark } from '@/src/components/common/BrandWatermark';
 
 export const DemandPlanningView: React.FC = () => {
   const {
@@ -98,7 +99,8 @@ export const DemandPlanningView: React.FC = () => {
   return (
     <div className="space-y-6 animate-fadeIn">
       {/* Top Banner & Sub-Tabs */}
-      <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 shadow-xl">
+      <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 shadow-xl relative overflow-hidden">
+<BrandWatermark />
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div>
             <div className="flex items-center gap-2">

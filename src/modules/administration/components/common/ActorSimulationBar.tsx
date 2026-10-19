@@ -1,12 +1,14 @@
 import React from 'react';
 import { useAdmin } from '../../services/administrationStore';
 import { UserCheck, Shield, ChevronDown, RefreshCw, KeyRound, AlertOctagon } from 'lucide-react';
+import { BrandWatermark } from '@/src/components/common/BrandWatermark';
 
 export const ActorSimulationBar: React.FC = () => {
   const { activeActor, setActiveActor, enterpriseActors, formatCurrency } = useAdmin();
 
   return (
-    <div className="bg-gradient-to-r from-slate-50 dark:from-slate-900 via-slate-100 dark:via-slate-800 to-indigo-50 dark:to-indigo-950 text-slate-900 dark:text-white rounded-2xl p-4 shadow-sm border border-slate-300/60 dark:border-slate-700/60">
+    <div className="bg-gradient-to-r from-slate-50 dark:from-slate-900 via-slate-100 dark:via-slate-800 to-indigo-50 dark:to-indigo-950 text-slate-900 dark:text-white rounded-2xl p-4 shadow-sm border border-slate-300/60 dark:border-slate-700/60 relative overflow-hidden">
+<BrandWatermark />
       <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
         {/* Left info badge */}
         <div className="flex items-center gap-3">

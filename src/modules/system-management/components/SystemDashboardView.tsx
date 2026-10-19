@@ -25,6 +25,7 @@ import {
 import { useSystemManagement } from '../services/systemManagementStore';
 import { MetricCard } from './common/MetricCard';
 import { StatusBadge } from './common/StatusBadge';
+import { BrandWatermark } from '@/src/components/common/BrandWatermark';
 
 interface SystemDashboardViewProps {
   onNavigate: (functionalAreaId: string, processId?: string, transactionId?: string) => void;
@@ -84,7 +85,8 @@ export const SystemDashboardView: React.FC<SystemDashboardViewProps> = ({ onNavi
   return (
     <div className="space-y-6">
       {/* Top Banner with AI Copilot Assistant */}
-      <div className="rounded-2xl bg-gradient-to-r from-slate-50 dark:from-slate-900 via-indigo-50 dark:via-indigo-950 to-slate-50 dark:to-slate-900 border border-indigo-800/40 p-6 text-slate-900 dark:text-white shadow-xl">
+      <div className="rounded-2xl bg-gradient-to-r from-slate-50 dark:from-slate-900 via-indigo-50 dark:via-indigo-950 to-slate-50 dark:to-slate-900 border border-indigo-800/40 p-6 text-slate-900 dark:text-white shadow-xl relative overflow-hidden">
+<BrandWatermark />
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
           <div className="space-y-2 max-w-2xl">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-500/20 border border-indigo-400/30 text-indigo-700 dark:text-indigo-300 text-xs font-semibold">

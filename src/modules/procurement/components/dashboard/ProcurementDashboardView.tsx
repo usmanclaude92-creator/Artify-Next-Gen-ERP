@@ -21,6 +21,7 @@ import {
   Calendar,
   FileText
 } from 'lucide-react';
+import { BrandWatermark } from '@/src/components/common/BrandWatermark';
 
 interface ProcurementDashboardViewProps {
   onNavigateToSubView: (faCodeOrId: string) => void;
@@ -178,7 +179,8 @@ export const ProcurementDashboardView: React.FC<ProcurementDashboardViewProps> =
       </div>
 
       {/* AI Procurement Copilot & Strategy Assistant */}
-      <div className="bg-linear-to-r from-slate-50 dark:from-slate-900 via-slate-100 dark:via-slate-800 to-indigo-50 dark:to-indigo-950 rounded-2xl p-5 text-slate-900 dark:text-white border border-slate-200 dark:border-slate-800 shadow-sm">
+      <div className="bg-linear-to-r from-slate-50 dark:from-slate-900 via-slate-100 dark:via-slate-800 to-indigo-50 dark:to-indigo-950 rounded-2xl p-5 text-slate-900 dark:text-white border border-slate-200 dark:border-slate-800 shadow-sm relative overflow-hidden">
+<BrandWatermark />
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-xl bg-indigo-500/20 border border-indigo-400/30 flex items-center justify-center text-indigo-700 dark:text-indigo-300">

@@ -12,6 +12,7 @@ import { useBI } from '../../services/biStore';
 import { BiFilterBar } from '../common/BiFilterBar';
 import { DemoDataBanner } from '../common/DemoDataBanner';
 import { BiMetricCard } from '../common/BiMetricCard';
+import { BrandWatermark } from '@/src/components/common/BrandWatermark';
 
 export const FinancialAnalysisView: React.FC = () => {
   const { financialRatios, formatCurrency } = useBI();
@@ -22,7 +23,8 @@ export const FinancialAnalysisView: React.FC = () => {
       <BiFilterBar />
 
       {/* DuPont Model Breakdown Banner */}
-      <div className="bg-gradient-to-r from-slate-50 dark:from-slate-900 via-indigo-50 dark:via-indigo-950 to-slate-50 dark:to-slate-900 rounded-2xl p-6 text-slate-900 dark:text-white shadow-xl">
+      <div className="bg-gradient-to-r from-slate-50 dark:from-slate-900 via-indigo-50 dark:via-indigo-950 to-slate-50 dark:to-slate-900 rounded-2xl p-6 text-slate-900 dark:text-white shadow-xl relative overflow-hidden">
+<BrandWatermark />
         <div className="flex items-center justify-between mb-4">
           <div>
             <span className="text-[10px] uppercase tracking-wider font-mono font-bold text-indigo-700 dark:text-indigo-300">

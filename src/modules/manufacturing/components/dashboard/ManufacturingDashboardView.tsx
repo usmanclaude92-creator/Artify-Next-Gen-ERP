@@ -29,6 +29,7 @@ import {
   RotateCcw,
   BarChart2
 } from 'lucide-react';
+import { BrandWatermark } from '@/src/components/common/BrandWatermark';
 
 interface ManufacturingDashboardViewProps {
   onNavigate: (route: ERPRouteState) => void;
@@ -50,6 +51,7 @@ export const ManufacturingDashboardView: React.FC<ManufacturingDashboardViewProp
     <div className="space-y-6">
       {/* Header Banner */}
       <div className="bg-gradient-to-r from-slate-50 dark:from-slate-900 via-orange-50 dark:via-orange-950/40 to-slate-50 dark:to-slate-900 border border-orange-500/20 rounded-2xl p-6 relative overflow-hidden">
+<BrandWatermark />
         <div className="absolute right-0 top-0 bottom-0 w-1/3 bg-gradient-to-l from-orange-500/10 to-transparent pointer-events-none" />
         <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div>
@@ -465,7 +467,8 @@ export const ManufacturingDashboardView: React.FC<ManufacturingDashboardViewProp
       {/* Tab 3: AI Insights */}
       {activeTab === 'ai_insights' && (
         <div className="space-y-4">
-          <div className="p-4 rounded-xl bg-gradient-to-r from-orange-50 dark:from-orange-950/30 to-slate-50 dark:to-slate-900 border border-orange-500/30 flex items-start gap-3">
+          <div className="p-4 rounded-xl bg-gradient-to-r from-orange-50 dark:from-orange-950/30 to-slate-50 dark:to-slate-900 border border-orange-500/30 flex items-start gap-3 relative overflow-hidden">
+<BrandWatermark />
             <Sparkles className="w-5 h-5 text-orange-700 dark:text-orange-400 shrink-0 mt-0.5" />
             <div>
               <h4 className="text-sm font-bold text-slate-900 dark:text-white">AI Production Scheduling & Capacity Optimizer</h4>

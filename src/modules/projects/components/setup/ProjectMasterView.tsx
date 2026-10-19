@@ -57,6 +57,7 @@ import {
 } from 'lucide-react';
 import { confirmAction } from '@/src/components/common/Feedback';
 import { mockRandom } from '@/src/utils/mockRandom';
+import { BrandWatermark } from '@/src/components/common/BrandWatermark';
 
 interface ProjectMasterViewProps {
   onNavigateToPlanning?: (projectId: string) => void;
@@ -578,6 +579,7 @@ export const ProjectMasterView: React.FC<ProjectMasterViewProps> = ({
 
       {/* Header Banner & Action Bar */}
       <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 shadow-xl relative overflow-hidden">
+<BrandWatermark />
         <div className="absolute top-0 right-0 w-96 h-96 bg-purple-600/5 rounded-full blur-3xl -mr-20 -mt-20 pointer-events-none" />
 
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 relative z-10">
